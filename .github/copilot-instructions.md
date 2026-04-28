@@ -466,6 +466,23 @@ All schema URLs and theme identifiers are defined as constants in `pbip_generato
 - Compare Tableau visuals vs Power BI
 - Refer to `docs/FAQ.md` for frequently asked questions
 
+## Interactive Migration Mode
+
+For guided, conversational migrations with review at every step, use the **interactive migration skill** in `.interactiveoverlay/`. This provides 22 hook points across 6 phases where you can pause, review, and override before proceeding.
+
+- **Skill definition**: `.interactiveoverlay/SKILL.md`
+- **Runner script**: `.interactiveoverlay/interactive_runner.py` — CLI with subcommands for each hook
+- **Reference docs**: `.interactiveoverlay/references/` — hook specs, DAX edit guide, visual type catalog
+
+Quick start:
+```bash
+python .interactiveoverlay/interactive_runner.py load path/to/workbook.twbx --output-dir artifacts/interactive
+python .interactiveoverlay/interactive_runner.py assess --output-dir artifacts/interactive
+python .interactiveoverlay/interactive_runner.py dax-preview --output-dir artifacts/interactive
+```
+
+When a user asks for "interactive migration", "guided migration", "step-by-step migration", or "migrate with review", load `.interactiveoverlay/SKILL.md` and follow the conversational workflow.
+
 ## Agent Architecture — 15-Agent Specialization Model
 
 This project uses a **15-agent specialization model** with scoped domain knowledge and file ownership. Four specialist agents (@dax, @wiring, @semantic, @visual) provide deep expertise, @converter and @generator remain as coordination layers, @tableau handles Tableau Server/Cloud interaction, and @web-designer owns the end-user UI surfaces.
