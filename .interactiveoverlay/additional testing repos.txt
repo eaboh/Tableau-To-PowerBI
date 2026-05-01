@@ -1,0 +1,8 @@
+this is just a note placeholder  not to be considered by llm testing
+
+https://github.com/aloth/tableau-book-resources/tree/main
+https://github.com/DataWithBaraa/tableau-ultimate-course
+https://github.com/moriahtaylor1/Case-Studies/tree/main/Final%20Case%20Study%20-%20NBA/Tableau
+https://github.com/moriahtaylor1/Case-Studies/tree/main/Case%20Study%202%20-%20World%20Happiness
+https://github.com/deepavadakan/Citibike-Analysis
+https://github.com/tableau/tabpy
