@@ -101,12 +101,14 @@ def _append_type_step(m_query, columns, prev_step='#"Promoted Headers"'):
 def _gen_m_excel(details, table_name, columns):
     filename = _file_basename(details.get('filename') or (table_name + '.xlsx'))
     file_path_bs = filename.replace('/', '\\')
+    sheet_name = details.get('_source_table', '') or table_name
+    sheet_name = sheet_name.rstrip('$')
     safe_step = '#"' + table_name + ' Sheet"'
 
     m_query = 'let\n'
     m_query += f'    // Source Excel: {filename}\n'
     m_query += f'    Source = Excel.Workbook(File.Contents(DataFolder & "\\{file_path_bs}"), null, true),\n'
-    m_query += f'    {safe_step} = Source{{[Item="{table_name}",Kind="Sheet"]}}[Data],\n'
+    m_query += f'    {safe_step} = Source{{[Item="{sheet_name}",Kind="Sheet"]}}[Data],\n'
     m_query += f'    #"Promoted Headers" = Table.PromoteHeaders({safe_step}, [PromoteAllScalars=true]),\n'
     return _append_type_step(m_query, columns)
 
@@ -409,6 +411,8 @@ def _gen_m_google_sheets(details, table_name, columns):
 def _gen_m_sharepoint(details, table_name, columns):
     site_url = details.get('site_url', 'https://contoso.sharepoint.com/sites/mysite')
     filename = details.get('filename', table_name + '.xlsx')
+    sheet_name = details.get('_source_table', '') or table_name
+    sheet_name = sheet_name.rstrip('$')
 
     m_query = 'let\n'
     m_query += f'    // Source SharePoint: {site_url}\n'
@@ -416,7 +420,7 @@ def _gen_m_sharepoint(details, table_name, columns):
     m_query += f'    FileRow = Table.SelectRows(Source, each [Name] = "{filename}"),\n'
     m_query += '    FileContent = FileRow{{0}}[Content],\n'
     m_query += '    Workbook = Excel.Workbook(FileContent, null, true),\n'
-    m_query += f'    Sheet = Workbook{{[Item="{table_name}",Kind="Sheet"]}}[Data],\n'
+    m_query += f'    Sheet = Workbook{{[Item="{sheet_name}",Kind="Sheet"]}}[Data],\n'
     m_query += '    #"Promoted Headers" = Table.PromoteHeaders(Sheet, [PromoteAllScalars=true]),\n'
     return _append_type_step(m_query, columns)
 
@@ -927,6 +931,11 @@ def generate_power_query_m(connection, table):
     details = connection.get('details', {})
     table_name = table.get('name', 'Table1')
     columns = table.get('columns', [])
+
+    source_table = table.get('source_table', '')
+    if source_table:
+        details = dict(details)
+        details['_source_table'] = source_table
 
     generator = _M_GENERATORS.get(conn_type)
     if generator:

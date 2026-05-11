@@ -1336,5 +1336,49 @@ class TestInjectMStepsDedup(unittest.TestCase):
         self.assertNotIn('#"Added Col 2"', result)
 
 
+class TestExcelSheetNameResolution(unittest.TestCase):
+    """Verify that Excel M queries use the original sheet name, not the
+    disambiguated table name, for the Item= navigation step."""
+
+    def test_source_table_used_for_item_navigation(self):
+        conn = {"type": "Excel", "details": {"filename": "data.xlsx"}}
+        table = {
+            "name": "Sheet1 (Sheet1 (MyWorkbook))",
+            "columns": [],
+            "source_table": "Sheet1$",
+        }
+        result = generate_power_query_m(conn, table)
+        self.assertIn('Item="Sheet1"', result)
+        self.assertNotIn('Item="Sheet1 (Sheet1 (MyWorkbook))"', result)
+
+    def test_source_table_dollar_stripped(self):
+        conn = {"type": "Excel", "details": {"filename": "f.xlsx"}}
+        table = {"name": "Data$", "columns": [], "source_table": "Data$"}
+        result = generate_power_query_m(conn, table)
+        self.assertIn('Item="Data"', result)
+
+    def test_fallback_when_no_source_table(self):
+        conn = {"type": "Excel", "details": {"filename": "f.xlsx"}}
+        table = {"name": "Sales", "columns": []}
+        result = generate_power_query_m(conn, table)
+        self.assertIn('Item="Sales"', result)
+
+    def test_sharepoint_uses_source_table(self):
+        conn = {
+            "type": "SharePoint",
+            "details": {
+                "site_url": "https://contoso.sharepoint.com/sites/s",
+                "filename": "report.xlsx",
+            },
+        }
+        table = {
+            "name": "Sheet1 (Sheet1 (report))",
+            "columns": [],
+            "source_table": "Sheet1$",
+        }
+        result = generate_power_query_m(conn, table)
+        self.assertIn('Item="Sheet1"', result)
+
+
 if __name__ == '__main__':
     unittest.main(verbosity=2)

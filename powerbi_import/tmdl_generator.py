@@ -358,6 +358,53 @@ def _dax_to_m_expression(dax_expr, table_name=''):
     return _quote_m_identifiers(result)
 
 
+_DATE_DATATYPES = frozenset({
+    'date', 'datetime', 'dateTime', 'Date', 'DateTime',
+})
+
+_RE_COL_SUBTRACTION = re.compile(
+    r'^\s*(\[#?"?[^\]"]+\"?\])\s*-\s*(\[#?"?[^\]"]+\"?\])\s*$'
+)
+
+
+def _wrap_date_subtraction_in_duration_days(m_expr, columns, col_metadata_map):
+    """Wrap bare date-column subtractions in Duration.Days() for M.
+
+    In Power Query M, subtracting two date/datetime values produces a
+    ``duration``, not an integer.  When the target column type is integer
+    or number, the result must be wrapped in ``Duration.Days()`` so that
+    Power BI can store it as a numeric value.
+    """
+    m = _RE_COL_SUBTRACTION.match(m_expr)
+    if not m:
+        return m_expr
+
+    col_type_map = {}
+    for c in (columns or []):
+        cn = c.get('name', '')
+        if cn:
+            col_type_map[cn] = c.get('datatype', '')
+    for cn, meta in (col_metadata_map or {}).items():
+        dt = meta.get('datatype', '')
+        if dt:
+            col_type_map[cn] = dt
+
+    def _extract_col_name(bracket_ref):
+        s = bracket_ref.strip().lstrip('[').rstrip(']')
+        s = s.lstrip('#').strip('"')
+        return s
+
+    left_name = _extract_col_name(m.group(1))
+    right_name = _extract_col_name(m.group(2))
+
+    left_dt = col_type_map.get(left_name, '')
+    right_dt = col_type_map.get(right_name, '')
+
+    if left_dt in _DATE_DATATYPES and right_dt in _DATE_DATATYPES:
+        return f'Duration.Days({m_expr.strip()})'
+    return m_expr
+
+
 def _inject_m_steps_into_partition(table, steps):
     """Inject M transformation steps into a table's M partition."""
     if not steps:
@@ -2565,6 +2612,9 @@ def _build_table(table, connection, calculations, columns_metadata, dax_context=
             if m_expr is not None:
                 m_type = _DAX_TO_M_TYPE.get(
                     map_tableau_to_powerbi_type(datatype), 'type text')
+                if m_type in ('Int64.Type', 'type number'):
+                    m_expr = _wrap_date_subtraction_in_duration_days(
+                        m_expr, columns, col_metadata_map)
                 new_step = m_transform_add_column(caption, f'each {m_expr}', m_type)
                 # Dedup: replace existing M step for the same column name
                 existing_m_idx = None

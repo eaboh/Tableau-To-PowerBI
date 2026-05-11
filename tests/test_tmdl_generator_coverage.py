@@ -50,6 +50,7 @@ from powerbi_import.tmdl_generator import (
     _write_hierarchy,
     _write_partition,
     _write_refresh_policy,
+    _wrap_date_subtraction_in_duration_days,
     _write_expressions_tmdl,
     detect_refresh_policy,
     _auto_date_hierarchies,
@@ -1745,6 +1746,59 @@ class TestSplitDaxArgsExtra(unittest.TestCase):
     def test_empty_string(self):
         result = _split_dax_args("")
         self.assertEqual(result, [""])
+
+
+class TestWrapDateSubtractionInDurationDays(unittest.TestCase):
+    """Verify that date-column subtractions are wrapped in Duration.Days()."""
+
+    _DATE_COLS = [
+        {"name": "StartDate", "datatype": "date"},
+        {"name": "EndDate", "datatype": "datetime"},
+        {"name": "Amount", "datatype": "real"},
+        {"name": "Qty", "datatype": "integer"},
+    ]
+
+    def test_date_subtraction_wrapped(self):
+        result = _wrap_date_subtraction_in_duration_days(
+            "[EndDate] - [StartDate]", self._DATE_COLS, {})
+        self.assertEqual(result, "Duration.Days([EndDate] - [StartDate])")
+
+    def test_date_subtraction_no_spaces(self):
+        result = _wrap_date_subtraction_in_duration_days(
+            "[EndDate]-[StartDate]", self._DATE_COLS, {})
+        self.assertEqual(result, "Duration.Days([EndDate]-[StartDate])")
+
+    def test_numeric_subtraction_not_wrapped(self):
+        result = _wrap_date_subtraction_in_duration_days(
+            "[Amount] - [Qty]", self._DATE_COLS, {})
+        self.assertEqual(result, "[Amount] - [Qty]")
+
+    def test_mixed_types_not_wrapped(self):
+        result = _wrap_date_subtraction_in_duration_days(
+            "[EndDate] - [Amount]", self._DATE_COLS, {})
+        self.assertEqual(result, "[EndDate] - [Amount]")
+
+    def test_non_subtraction_not_wrapped(self):
+        result = _wrap_date_subtraction_in_duration_days(
+            "[Amount] * [Qty]", self._DATE_COLS, {})
+        self.assertEqual(result, "[Amount] * [Qty]")
+
+    def test_complex_expression_not_wrapped(self):
+        result = _wrap_date_subtraction_in_duration_days(
+            "if [A] > 0 then [EndDate] - [StartDate] else 0",
+            self._DATE_COLS, {})
+        self.assertNotIn("Duration.Days", result)
+
+    def test_col_metadata_map_provides_types(self):
+        cols = [{"name": "A", "datatype": "string"}, {"name": "B", "datatype": "string"}]
+        meta = {"A": {"datatype": "date"}, "B": {"datatype": "datetime"}}
+        result = _wrap_date_subtraction_in_duration_days("[A] - [B]", cols, meta)
+        self.assertEqual(result, "Duration.Days([A] - [B])")
+
+    def test_datediff_m_not_double_wrapped(self):
+        result = _wrap_date_subtraction_in_duration_days(
+            "Duration.Days([EndDate] - [StartDate])", self._DATE_COLS, {})
+        self.assertNotIn("Duration.Days(Duration.Days", result)
 
 
 if __name__ == '__main__':
