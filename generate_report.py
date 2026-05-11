@@ -305,11 +305,12 @@ def generate_html(assessments, reports, metadata, lineage=None, pbi_validation=N
 
         approx_val = s.get('approximate', 0)
         unsup_val = s.get('unsupported', 0)
+        _em = "\u2014"
         mig_rows.append([
             f'<strong>{esc(name)}</strong>',
             fidelity_bar(fid),
             str(s.get('total_items', '\u2014')),
-            f'<span class="text-success fw-bold">{s.get("exact", "\u2014")}</span>',
+            f'<span class="text-success fw-bold">{s.get("exact", _em)}</span>',
             str(approx_val) if approx_val > 0 else '\u2014',
             str(unsup_val) if unsup_val > 0 else '\u2014',
             str(tmdl.get('tables', '\u2014')),

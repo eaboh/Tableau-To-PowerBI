@@ -105,6 +105,7 @@ class TestPathValidation:
         assert valid is False
         assert "null" in err.lower()
 
+    @pytest.mark.skipif(sys.platform != "win32", reason="Windows-only system path")
     def test_output_dir_system_directory(self):
         # Windows system dir
         valid, err = validate_output_dir("C:\\Windows\\System32")

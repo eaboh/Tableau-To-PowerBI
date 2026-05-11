@@ -144,7 +144,6 @@ def print_step(step_num, total_steps, text):
 
 def run_extraction(tableau_file, hyper_max_rows=None):
     """Run Tableau extraction with path validation."""
-    global _stats
     print_step(1, 2, "TABLEAU OBJECTS EXTRACTION")
 
     # Security: validate file path
@@ -230,7 +229,6 @@ def _run_fabric_generation(report_name=None, output_dir=None,
 
     Returns True on success, False on failure.
     """
-    global _stats
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'powerbi_import'))
     try:
         from fabric_project_generator import FabricProjectGenerator
@@ -297,7 +295,6 @@ def run_generation(report_name=None, output_dir=None, calendar_start=None,
         paginated: If True, generate paginated report layout alongside interactive report
         languages: Comma-separated additional locales (e.g. 'fr-FR,de-DE')
     """
-    global _stats
     print_step(2, 2, "POWER BI PROJECT GENERATION")
 
     # ── Fabric-native output format ──────────────────────────────
@@ -1046,10 +1043,10 @@ def _run_batch_config(args):
     print(f"  Entries:      {len(entries)}")
     print()
 
-    global _stats
     batch_start = datetime.now()
     results = {}
 
+    global _stats
     for i, entry in enumerate(entries, 1):
         raw_file = entry.get('file', '')
         if not raw_file:
