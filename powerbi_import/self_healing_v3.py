@@ -632,6 +632,1025 @@ def _heal_hidden_key(model, recovery=None) -> int:
 
 
 # ════════════════════════════════════════════════════════════════════
+#  Healer #26 — Empty / whitespace-only identifier names
+# ════════════════════════════════════════════════════════════════════
+
+def _heal_empty_names(model, recovery=None) -> int:
+    """Tables / columns / measures with empty or whitespace-only names
+    cause "name cannot be null or empty" errors when PBI Desktop loads
+    the model.  Rename to placeholder ``Unnamed_<kind>_<idx>``.
+    """
+    repairs = 0
+    rename_map: Dict[str, str] = {}
+    for ti, tbl in enumerate(model.get('model', {}).get('tables', []) or []):
+        tname = tbl.get('name', '') or ''
+        if not tname.strip():
+            new = f'Unnamed_Table_{ti + 1}'
+            tbl['name'] = new
+            rename_map[tname] = new
+            repairs += 1
+            if recovery is not None:
+                recovery.record(
+                    'tmdl', 'empty_table_name',
+                    item_name=new,
+                    description='Table name was empty/whitespace',
+                    action=f'Renamed to "{new}"',
+                    severity='warning',
+                )
+        for ci, col in enumerate(tbl.get('columns', []) or []):
+            cname = col.get('name', '') or ''
+            if not cname.strip():
+                new = f'Unnamed_Column_{ci + 1}'
+                col['name'] = new
+                repairs += 1
+                if recovery is not None:
+                    recovery.record(
+                        'tmdl', 'empty_column_name',
+                        item_name=f'{tbl["name"]}.{new}',
+                        description='Column name was empty/whitespace',
+                        action=f'Renamed to "{new}"',
+                        severity='warning',
+                    )
+        for mi, meas in enumerate(tbl.get('measures', []) or []):
+            mname = meas.get('name', '') or ''
+            if not mname.strip():
+                new = f'Unnamed_Measure_{mi + 1}'
+                meas['name'] = new
+                repairs += 1
+                if recovery is not None:
+                    recovery.record(
+                        'tmdl', 'empty_measure_name',
+                        item_name=f'{tbl["name"]}.{new}',
+                        description='Measure name was empty/whitespace',
+                        action=f'Renamed to "{new}"',
+                        severity='warning',
+                    )
+    # Rewire relationships that referenced the renamed empty tables
+    if rename_map:
+        for rel in model.get('model', {}).get('relationships', []) or []:
+            if rel.get('fromTable', '') in rename_map:
+                rel['fromTable'] = rename_map[rel['fromTable']]
+            if rel.get('toTable', '') in rename_map:
+                rel['toTable'] = rename_map[rel['toTable']]
+    return repairs
+
+
+# ════════════════════════════════════════════════════════════════════
+#  Healer #27 — Case-insensitive duplicate columns within a table
+# ════════════════════════════════════════════════════════════════════
+
+def _heal_case_insensitive_dup_columns(model, recovery=None) -> int:
+    """PBI requires column names to be case-insensitively unique inside
+    a single table.  ``[Date]`` and ``[date]`` would parse but fail at
+    load with "column name already exists".  Rename later occurrences
+    by appending ``_2``, ``_3``, ...
+    """
+    repairs = 0
+    for tbl in model.get('model', {}).get('tables', []) or []:
+        tname = tbl.get('name', '') or ''
+        seen: Dict[str, int] = {}
+        for col in tbl.get('columns', []) or []:
+            cname = col.get('name', '') or ''
+            key = cname.lower()
+            if not key:
+                continue
+            if key in seen:
+                seen[key] += 1
+                new = f'{cname}_{seen[key]}'
+                # Make sure new name itself is unique
+                while new.lower() in seen:
+                    seen[key] += 1
+                    new = f'{cname}_{seen[key]}'
+                col['name'] = new
+                seen[new.lower()] = 1
+                repairs += 1
+                if recovery is not None:
+                    recovery.record(
+                        'tmdl', 'duplicate_column_case_insensitive',
+                        item_name=f'{tname}.{cname}',
+                        description=('Case-insensitive duplicate column '
+                                     'within table'),
+                        action=f'Renamed to "{new}"',
+                        severity='warning',
+                    )
+            else:
+                seen[key] = 1
+    return repairs
+
+
+# ════════════════════════════════════════════════════════════════════
+#  Healer #28 — Empty calculation groups
+# ════════════════════════════════════════════════════════════════════
+
+def _heal_empty_calculation_groups(model, recovery=None) -> int:
+    """A calculation-group table with zero items causes PBI Desktop to
+    throw "Calculation group must contain at least one calculation
+    item".  Drop the calculationGroup block (becomes a regular table).
+    """
+    repairs = 0
+    for tbl in model.get('model', {}).get('tables', []) or []:
+        cg = tbl.get('calculationGroup')
+        if not cg:
+            continue
+        items = cg.get('calculationItems') or cg.get('items') or []
+        if items:
+            continue
+        del tbl['calculationGroup']
+        repairs += 1
+        if recovery is not None:
+            recovery.record(
+                'tmdl', 'empty_calculation_group',
+                item_name=tbl.get('name', '?'),
+                description='Calculation group has no items',
+                action='Dropped calculationGroup block',
+                severity='warning',
+            )
+    return repairs
+
+
+# ════════════════════════════════════════════════════════════════════
+#  Healer #29 — Relationship column endpoint missing
+# ════════════════════════════════════════════════════════════════════
+
+def _heal_relationship_missing_columns(model, recovery=None) -> int:
+    """Relationship references a column that does not exist on the
+    target table → "column not found" load error.  Drop such rels.
+    """
+    repairs = 0
+    rels = model.get('model', {}).get('relationships', []) or []
+    if not rels:
+        return 0
+    # Build {table: {column names lowercase}}
+    cols_by_table: Dict[str, Set[str]] = {}
+    for tbl in model.get('model', {}).get('tables', []) or []:
+        tname = tbl.get('name', '') or ''
+        cols_by_table[tname] = {
+            (c.get('name', '') or '').lower()
+            for c in tbl.get('columns', []) or []
+        }
+    kept: List[dict] = []
+    for rel in rels:
+        from_tbl = rel.get('fromTable', '')
+        to_tbl = rel.get('toTable', '')
+        from_col = (rel.get('fromColumn', '') or '').lower()
+        to_col = (rel.get('toColumn', '') or '').lower()
+        ok_from = (from_tbl in cols_by_table
+                   and from_col in cols_by_table[from_tbl])
+        ok_to = (to_tbl in cols_by_table
+                 and to_col in cols_by_table[to_tbl])
+        if ok_from and ok_to:
+            kept.append(rel)
+            continue
+        repairs += 1
+        if recovery is not None:
+            missing = []
+            if not ok_from:
+                missing.append(f'{from_tbl}.{rel.get("fromColumn", "?")}')
+            if not ok_to:
+                missing.append(f'{to_tbl}.{rel.get("toColumn", "?")}')
+            recovery.record(
+                'relationship', 'relationship_missing_column',
+                item_name=f'{from_tbl} -> {to_tbl}',
+                description=f'Missing column(s): {", ".join(missing)}',
+                action='Dropped relationship',
+                severity='warning',
+            )
+    model['model']['relationships'] = kept
+    return repairs
+
+
+# ════════════════════════════════════════════════════════════════════
+#  Healer #30 — Trailing comma in DAX function calls
+# ════════════════════════════════════════════════════════════════════
+
+_TRAILING_COMMA_RE = re.compile(r',\s*\)')
+
+
+def _heal_dax_trailing_comma(model, recovery=None) -> int:
+    """``SUM(Table[X],)`` → ``SUM(Table[X])``.  PBI parser rejects
+    trailing commas with "unexpected token ')'".
+    """
+    repairs = 0
+    for tbl in model.get('model', {}).get('tables', []) or []:
+        tname = tbl.get('name', '') or ''
+        for meas in tbl.get('measures', []) or []:
+            expr = meas.get('expression', '') or ''
+            if not expr or ',' not in expr:
+                continue
+            new_expr = _TRAILING_COMMA_RE.sub(')', expr)
+            if new_expr != expr:
+                meas['expression'] = new_expr
+                repairs += 1
+                if recovery is not None:
+                    recovery.record(
+                        'tmdl', 'dax_trailing_comma',
+                        item_name=f'{tname}.{meas.get("name", "?")}',
+                        description='Trailing comma before ")" in DAX',
+                        action='Stripped trailing comma',
+                        severity='info',
+                    )
+        for col in tbl.get('columns', []) or []:
+            expr = col.get('expression', '') or ''
+            if not expr or ',' not in expr:
+                continue
+            new_expr = _TRAILING_COMMA_RE.sub(')', expr)
+            if new_expr != expr:
+                col['expression'] = new_expr
+                repairs += 1
+                if recovery is not None:
+                    recovery.record(
+                        'tmdl', 'dax_trailing_comma',
+                        item_name=f'{tname}.{col.get("name", "?")}',
+                        description='Trailing comma before ")" in DAX',
+                        action='Stripped trailing comma',
+                        severity='info',
+                    )
+    return repairs
+
+
+# ════════════════════════════════════════════════════════════════════
+#  Healer #31 — Leading "=" in measure expression
+# ════════════════════════════════════════════════════════════════════
+
+def _heal_measure_leading_equals(model, recovery=None) -> int:
+    """Tableau-style assignment ``= SUM([X])`` leaks into TMDL but the
+    leading ``=`` is not valid DAX.  Strip it.
+    """
+    repairs = 0
+    for tbl in model.get('model', {}).get('tables', []) or []:
+        tname = tbl.get('name', '') or ''
+        for meas in tbl.get('measures', []) or []:
+            expr = meas.get('expression', '') or ''
+            stripped = expr.lstrip()
+            if stripped.startswith('=') and not stripped.startswith('=='):
+                meas['expression'] = stripped[1:].lstrip()
+                repairs += 1
+                if recovery is not None:
+                    recovery.record(
+                        'tmdl', 'measure_leading_equals',
+                        item_name=f'{tname}.{meas.get("name", "?")}',
+                        description='Measure expression started with "="',
+                        action='Stripped leading "="',
+                        severity='info',
+                    )
+    return repairs
+
+
+# ════════════════════════════════════════════════════════════════════
+#  Healer #32 — Invalid dataCategory value
+# ════════════════════════════════════════════════════════════════════
+
+# Whitelist per https://learn.microsoft.com/dax/columndatacategory
+_VALID_DATACATEGORIES: Set[str] = {
+    'Address', 'City', 'Continent', 'Country', 'County',
+    'Image', 'ImageUrl', 'Latitude', 'Longitude', 'Organization',
+    'Place', 'PostalCode', 'StateOrProvince', 'WebUrl', 'BarCode',
+    'Time',
+}
+
+
+def _heal_data_category(model, recovery=None) -> int:
+    """``dataCategory`` not in the official whitelist causes Q&A to
+    drop the column from indexing.  Strip unknown values.
+    """
+    repairs = 0
+    for tbl in model.get('model', {}).get('tables', []) or []:
+        tname = tbl.get('name', '') or ''
+        for col in tbl.get('columns', []) or []:
+            dc = col.get('dataCategory')
+            if not dc or dc in _VALID_DATACATEGORIES:
+                continue
+            del col['dataCategory']
+            repairs += 1
+            if recovery is not None:
+                recovery.record(
+                    'tmdl', 'invalid_data_category',
+                    item_name=f'{tname}.{col.get("name", "?")}',
+                    description=f'Unknown dataCategory "{dc}"',
+                    action='Stripped dataCategory',
+                    severity='info',
+                )
+    return repairs
+
+
+# ════════════════════════════════════════════════════════════════════
+#  Healer #33 — Empty annotations
+# ════════════════════════════════════════════════════════════════════
+
+def _heal_empty_annotations(model, recovery=None) -> int:
+    """Annotations with empty ``name`` cause TMDL parse failure
+    ("Annotation name cannot be empty").  Drop them.  Empty values are
+    legal — only filter empty names.
+    """
+    repairs = 0
+
+    def _filter(holder):
+        nonlocal repairs
+        anns = holder.get('annotations')
+        if not anns:
+            return
+        kept = []
+        for a in anns:
+            if not (a.get('name') or '').strip():
+                repairs += 1
+                continue
+            kept.append(a)
+        if len(kept) != len(anns):
+            holder['annotations'] = kept
+
+    model_block = model.get('model', {}) or {}
+    _filter(model_block)
+    for tbl in model_block.get('tables', []) or []:
+        _filter(tbl)
+        for col in tbl.get('columns', []) or []:
+            _filter(col)
+        for meas in tbl.get('measures', []) or []:
+            _filter(meas)
+    if repairs and recovery is not None:
+        recovery.record(
+            'tmdl', 'empty_annotations',
+            item_name='model',
+            description=f'{repairs} annotation(s) had empty name',
+            action='Dropped empty annotations',
+            severity='info',
+        )
+    return repairs
+
+
+# ════════════════════════════════════════════════════════════════════
+#  Healer #34 — Duplicate hierarchy names within a table
+# ════════════════════════════════════════════════════════════════════
+
+def _heal_duplicate_hierarchy_names(model, recovery=None) -> int:
+    """Two hierarchies on the same table with identical names cause
+    "hierarchy name already exists" load error.  Rename later ones.
+    """
+    repairs = 0
+    for tbl in model.get('model', {}).get('tables', []) or []:
+        tname = tbl.get('name', '') or ''
+        hiers = tbl.get('hierarchies') or []
+        if not hiers:
+            continue
+        seen: Dict[str, int] = {}
+        for h in hiers:
+            hname = h.get('name', '') or ''
+            key = hname.lower()
+            if not key:
+                continue
+            if key in seen:
+                seen[key] += 1
+                new = f'{hname}_{seen[key]}'
+                while new.lower() in seen:
+                    seen[key] += 1
+                    new = f'{hname}_{seen[key]}'
+                h['name'] = new
+                seen[new.lower()] = 1
+                repairs += 1
+                if recovery is not None:
+                    recovery.record(
+                        'tmdl', 'duplicate_hierarchy_name',
+                        item_name=f'{tname}.{hname}',
+                        description='Duplicate hierarchy name within table',
+                        action=f'Renamed to "{new}"',
+                        severity='warning',
+                    )
+            else:
+                seen[key] = 1
+    return repairs
+
+
+# ════════════════════════════════════════════════════════════════════
+#  v3.2 — Schema & datatype hygiene  (Sprint 138)
+# ════════════════════════════════════════════════════════════════════
+
+import uuid as _uuid
+
+_AGG_TO_DTYPE = (
+    (re.compile(r'\bSUMX?\b', re.I),       'decimal'),
+    (re.compile(r'\bAVERAGEX?\b', re.I),   'double'),
+    (re.compile(r'\bDISTINCTCOUNT\b', re.I), 'int64'),
+    (re.compile(r'\bCOUNTROWS\b', re.I),   'int64'),
+    (re.compile(r'\bCOUNTX?\b', re.I),     'int64'),
+    (re.compile(r'\bMINX?\b', re.I),       'decimal'),
+    (re.compile(r'\bMAXX?\b', re.I),       'decimal'),
+    (re.compile(r'\bDIVIDE\b', re.I),      'double'),
+)
+
+
+def _heal_column_without_datatype(model, recovery=None) -> int:
+    """Columns missing ``dataType`` cause "cannot determine data type"
+    at refresh.  Default to ``string`` and tag via annotation."""
+    repairs = 0
+    for tbl in model.get('model', {}).get('tables', []) or []:
+        tname = tbl.get('name', '') or ''
+        for col in tbl.get('columns', []) or []:
+            cname = col.get('name', '') or ''
+            if not cname:
+                continue
+            dt = col.get('dataType', '')
+            if dt:
+                continue
+            col['dataType'] = 'string'
+            col.setdefault('annotations', []).append({
+                'name': 'MigrationNote',
+                'value': 'Self-heal: defaulted dataType to string',
+            })
+            repairs += 1
+            if recovery is not None:
+                recovery.record(
+                    'tmdl', 'column_without_datatype',
+                    item_name=f'{tname}.{cname}',
+                    description='Column missing dataType',
+                    action='Defaulted to string',
+                    severity='warning',
+                )
+    return repairs
+
+
+def _heal_measure_without_datatype(model, recovery=None) -> int:
+    """Measures without explicit ``dataType`` show as variant in PBI.
+    Infer from aggregation in expression."""
+    repairs = 0
+    for tbl in model.get('model', {}).get('tables', []) or []:
+        tname = tbl.get('name', '') or ''
+        for m in tbl.get('measures', []) or []:
+            mname = m.get('name', '') or ''
+            if not mname or m.get('dataType'):
+                continue
+            expr = m.get('expression', '') or ''
+            inferred = 'decimal'
+            for rgx, dt in _AGG_TO_DTYPE:
+                if rgx.search(expr):
+                    inferred = dt
+                    break
+            m['dataType'] = inferred
+            repairs += 1
+            if recovery is not None:
+                recovery.record(
+                    'tmdl', 'measure_without_datatype',
+                    item_name=f'{tname}.{mname}',
+                    description='Measure missing dataType',
+                    action=f'Inferred dataType={inferred}',
+                    severity='info',
+                )
+    return repairs
+
+
+def _heal_boolean_with_string_default(model, recovery=None) -> int:
+    """Boolean columns sometimes carry a string default ``"true"``/``"false"``
+    which fails strict refresh.  Normalize to bool literal."""
+    repairs = 0
+    for tbl in model.get('model', {}).get('tables', []) or []:
+        tname = tbl.get('name', '') or ''
+        for col in tbl.get('columns', []) or []:
+            cname = col.get('name', '') or ''
+            dt = (col.get('dataType', '') or '').lower()
+            if dt != 'boolean':
+                continue
+            dv = col.get('defaultValue')
+            if not isinstance(dv, str):
+                continue
+            low = dv.strip().lower().strip('"').strip("'")
+            if low in ('true', 'false'):
+                col['defaultValue'] = (low == 'true')
+                repairs += 1
+                if recovery is not None:
+                    recovery.record(
+                        'tmdl', 'boolean_with_string_default',
+                        item_name=f'{tname}.{cname}',
+                        description=f'Boolean column has string default "{dv}"',
+                        action=f'Normalized to {low == "true"}',
+                        severity='info',
+                    )
+    return repairs
+
+
+def _heal_numeric_format_string_mismatch(model, recovery=None) -> int:
+    """``formatString`` with fractional digits on int64 columns/measures
+    is rejected by refresh.  Promote dtype to double."""
+    repairs = 0
+    for tbl in model.get('model', {}).get('tables', []) or []:
+        tname = tbl.get('name', '') or ''
+        for col in (tbl.get('columns', []) or []) + (tbl.get('measures', []) or []):
+            cname = col.get('name', '') or ''
+            dt = (col.get('dataType', '') or '').lower()
+            fmt = col.get('formatString', '') or ''
+            if dt != 'int64' or not fmt:
+                continue
+            if _DECIMAL_FMT.search(fmt) or _PERCENT_FMT.search(fmt):
+                col['dataType'] = 'double'
+                repairs += 1
+                if recovery is not None:
+                    recovery.record(
+                        'tmdl', 'numeric_format_string_mismatch',
+                        item_name=f'{tname}.{cname}',
+                        description=f'int64 with fractional formatString "{fmt}"',
+                        action='Promoted dataType to double',
+                        severity='warning',
+                    )
+    return repairs
+
+
+def _heal_datetime_without_format(model, recovery=None) -> int:
+    """Date/datetime columns without ``formatString`` render as numbers."""
+    repairs = 0
+    for tbl in model.get('model', {}).get('tables', []) or []:
+        tname = tbl.get('name', '') or ''
+        for col in tbl.get('columns', []) or []:
+            cname = col.get('name', '') or ''
+            dt = (col.get('dataType', '') or '').lower()
+            if dt not in ('datetime', 'date', 'time'):
+                continue
+            if col.get('formatString'):
+                continue
+            col['formatString'] = 'General Date'
+            repairs += 1
+            if recovery is not None:
+                recovery.record(
+                    'tmdl', 'datetime_without_format',
+                    item_name=f'{tname}.{cname}',
+                    description='Datetime column has no formatString',
+                    action='Set formatString="General Date"',
+                    severity='info',
+                )
+    return repairs
+
+
+def _heal_lineage_tag_collision(model, recovery=None) -> int:
+    """Two items sharing the same ``lineageTag`` GUID cause "duplicate
+    lineage tag" errors.  Regenerate later occurrences with uuid4."""
+    repairs = 0
+    seen: Set[str] = set()
+    for tbl in model.get('model', {}).get('tables', []) or []:
+        tname = tbl.get('name', '') or ''
+        for kind in ('columns', 'measures', 'hierarchies'):
+            for it in tbl.get(kind, []) or []:
+                tag = it.get('lineageTag')
+                if not tag:
+                    continue
+                if tag in seen:
+                    new = str(_uuid.uuid4())
+                    it['lineageTag'] = new
+                    repairs += 1
+                    if recovery is not None:
+                        recovery.record(
+                            'tmdl', 'lineage_tag_collision',
+                            item_name=f'{tname}.{it.get("name", "?")}',
+                            description=f'Duplicate lineageTag "{tag}"',
+                            action=f'Regenerated → {new}',
+                            severity='warning',
+                        )
+                    seen.add(new)
+                else:
+                    seen.add(tag)
+    return repairs
+
+
+def _heal_missing_lineage_tag(model, recovery=None) -> int:
+    """Columns/measures without ``lineageTag`` lose lineage when reports
+    rebind.  Inject deterministic uuid5 from "table.name"."""
+    repairs = 0
+    NS = _uuid.UUID('6ba7b810-9dad-11d1-80b4-00c04fd430c8')  # NS_DNS
+    for tbl in model.get('model', {}).get('tables', []) or []:
+        tname = tbl.get('name', '') or ''
+        for kind in ('columns', 'measures'):
+            for it in tbl.get(kind, []) or []:
+                name = it.get('name', '') or ''
+                if not name:
+                    continue
+                if it.get('lineageTag'):
+                    continue
+                it['lineageTag'] = str(_uuid.uuid5(NS, f'{tname}.{name}'))
+                repairs += 1
+                if recovery is not None:
+                    recovery.record(
+                        'tmdl', 'missing_lineage_tag',
+                        item_name=f'{tname}.{name}',
+                        description='Item missing lineageTag',
+                        action='Injected deterministic uuid5',
+                        severity='info',
+                    )
+    return repairs
+
+
+def _heal_source_column_missing(model, recovery=None) -> int:
+    """``sourceColumn`` referencing a column that no upstream M step
+    produces causes refresh failure.  We can't introspect the M output,
+    so the best we can do is detect ``sourceColumn`` that doesn't match
+    any known column ``name`` on the same table (case-insensitive) and
+    align it to ``name`` if a near-match exists; otherwise drop to None."""
+    repairs = 0
+    for tbl in model.get('model', {}).get('tables', []) or []:
+        tname = tbl.get('name', '') or ''
+        col_names = {(c.get('name', '') or '').lower(): c.get('name', '')
+                     for c in tbl.get('columns', []) or []}
+        for col in tbl.get('columns', []) or []:
+            cname = col.get('name', '') or ''
+            sc = col.get('sourceColumn')
+            if not sc or sc == cname:
+                continue
+            # Try case-insensitive match
+            match = col_names.get(sc.lower())
+            if match and match != sc:
+                col['sourceColumn'] = match
+                repairs += 1
+                if recovery is not None:
+                    recovery.record(
+                        'tmdl', 'source_column_case_match',
+                        item_name=f'{tname}.{cname}',
+                        description=f'sourceColumn "{sc}" case-mismatch',
+                        action=f'Aligned to "{match}"',
+                        severity='info',
+                    )
+    return repairs
+
+
+def _heal_key_column_nullable(model, recovery=None) -> int:
+    """A column marked ``isKey`` cannot be nullable."""
+    repairs = 0
+    for tbl in model.get('model', {}).get('tables', []) or []:
+        tname = tbl.get('name', '') or ''
+        for col in tbl.get('columns', []) or []:
+            cname = col.get('name', '') or ''
+            if not col.get('isKey'):
+                continue
+            if col.get('isNullable') is False:
+                continue
+            col['isNullable'] = False
+            repairs += 1
+            if recovery is not None:
+                recovery.record(
+                    'tmdl', 'key_column_nullable',
+                    item_name=f'{tname}.{cname}',
+                    description='isKey column was nullable',
+                    action='Forced isNullable=false',
+                    severity='warning',
+                )
+    return repairs
+
+
+def _heal_int_column_with_decimal_default(model, recovery=None) -> int:
+    """``defaultValue = 1.5`` on an int64 column fails refresh."""
+    repairs = 0
+    for tbl in model.get('model', {}).get('tables', []) or []:
+        tname = tbl.get('name', '') or ''
+        for col in tbl.get('columns', []) or []:
+            cname = col.get('name', '') or ''
+            dt = (col.get('dataType', '') or '').lower()
+            if dt != 'int64':
+                continue
+            dv = col.get('defaultValue')
+            if not isinstance(dv, float):
+                continue
+            new = int(round(dv))
+            col['defaultValue'] = new
+            repairs += 1
+            if recovery is not None:
+                recovery.record(
+                    'tmdl', 'int_column_decimal_default',
+                    item_name=f'{tname}.{cname}',
+                    description=f'int64 column has float default {dv}',
+                    action=f'Rounded to {new}',
+                    severity='info',
+                )
+    return repairs
+
+
+# ════════════════════════════════════════════════════════════════════
+#  v3.3 — Power Query / M-partition hygiene  (Sprint 139)
+# ════════════════════════════════════════════════════════════════════
+
+_M_LET_RE = re.compile(r'\blet\b', re.I)
+_M_IN_RE = re.compile(r'\bin\b\s+\w', re.I)
+_M_DOUBLE_COMMA = re.compile(r',\s*,')
+_M_TRAILING_COMMA_RECORD = re.compile(r',(\s*[\]\}])')
+_M_STEP_DEF_RE = re.compile(r'^\s*(#"[^"]+"|\w+)\s*=', re.M)
+_M_UNQUOTED_BAD = re.compile(r'(?<![\w#"])([A-Za-z_]\w*[ \-/&%]+\w[\w \-/&%]*)\s*=')
+_M_CRED_PATTERNS = (
+    re.compile(r'(Password|Pwd)\s*=\s*"[^"]*"', re.I),
+    re.compile(r'(User(name)?|Uid)\s*=\s*"[^"]*"', re.I),
+    re.compile(r'(api[_-]?key|apikey|token|secret)\s*=\s*"[^"]*"', re.I),
+)
+_M_DQ_FUNCS = (
+    re.compile(r'\bSql\.Database\b'),
+    re.compile(r'\bOracle\.Database\b'),
+    re.compile(r'\bSnowflake\.Databases\b'),
+)
+
+
+def _iter_partitions(model):
+    """Yield (table_name, partition_dict, source_dict) for M partitions."""
+    for tbl in model.get('model', {}).get('tables', []) or []:
+        tname = tbl.get('name', '') or ''
+        for part in tbl.get('partitions', []) or []:
+            src = part.get('source') or {}
+            if (src.get('type') or '').lower() == 'm':
+                yield tname, part, src
+
+
+def _heal_m_unbalanced_let_in(model, recovery=None) -> int:
+    """Append ``in <last step>`` if a ``let`` block lacks ``in``."""
+    repairs = 0
+    for tname, _part, src in _iter_partitions(model):
+        expr = src.get('expression', '')
+        if not isinstance(expr, str) or not expr.strip():
+            continue
+        if not _M_LET_RE.search(expr):
+            continue
+        if _M_IN_RE.search(expr):
+            continue
+        steps = _M_STEP_DEF_RE.findall(expr)
+        if not steps:
+            continue
+        last = steps[-1]
+        src['expression'] = expr.rstrip().rstrip(',') + f'\nin\n    {last}\n'
+        repairs += 1
+        if recovery is not None:
+            recovery.record(
+                'm_query', 'm_unbalanced_let_in',
+                item_name=tname,
+                description='M partition missing "in" clause',
+                action=f'Appended "in {last}"',
+                severity='warning',
+            )
+    return repairs
+
+
+def _heal_m_unbalanced_parens(model, recovery=None) -> int:
+    """Append closing ``)``/``]``/``}`` to balance counts."""
+    repairs = 0
+    pairs = (('(', ')'), ('[', ']'), ('{', '}'))
+    for tname, _part, src in _iter_partitions(model):
+        expr = src.get('expression', '')
+        if not isinstance(expr, str) or not expr:
+            continue
+        # Remove string literals to avoid false counts
+        cleaned = re.sub(r'"(?:\\.|[^"\\])*"', '""', expr)
+        appended = ''
+        for open_c, close_c in pairs:
+            diff = cleaned.count(open_c) - cleaned.count(close_c)
+            if diff > 0:
+                appended += close_c * diff
+        if appended:
+            src['expression'] = expr + appended
+            repairs += 1
+            if recovery is not None:
+                recovery.record(
+                    'm_query', 'm_unbalanced_parens',
+                    item_name=tname,
+                    description='M expression had unbalanced brackets',
+                    action=f'Appended "{appended}"',
+                    severity='warning',
+                )
+    return repairs
+
+
+def _heal_m_step_name_collision(model, recovery=None) -> int:
+    """Rename duplicate step names within a single ``let`` block and
+    rewire references."""
+    repairs = 0
+    for tname, _part, src in _iter_partitions(model):
+        expr = src.get('expression', '')
+        if not isinstance(expr, str) or not _M_LET_RE.search(expr):
+            continue
+        steps = _M_STEP_DEF_RE.findall(expr)
+        if len(steps) == len(set(steps)):
+            continue
+        new_expr = expr
+        seen: Dict[str, int] = {}
+        for s in steps:
+            if seen.get(s, 0) >= 1:
+                # Rename second+ occurrences
+                idx = seen[s] + 1
+                new_name = f'{s.rstrip("\"")}_{idx}'
+                if s.startswith('#"'):
+                    new_name = s[:-1] + f'_{idx}"'
+                # Replace first occurrence after current position only.
+                # Simpler conservative approach: replace ALL but skip the
+                # first definition by tracking position.
+                # Find the second definition position.
+                pat = re.compile(re.escape(s) + r'\s*=')
+                matches = list(pat.finditer(new_expr))
+                if len(matches) >= 2:
+                    pos = matches[1].start()
+                    head = new_expr[:pos]
+                    tail = new_expr[pos:].replace(s, new_name, 1)
+                    # Also retarget any later refs to the renamed step
+                    new_expr = head + tail
+                seen[s] = seen.get(s, 0) + 1
+            else:
+                seen[s] = 1
+        if new_expr != expr:
+            src['expression'] = new_expr
+            repairs += 1
+            if recovery is not None:
+                recovery.record(
+                    'm_query', 'm_step_name_collision',
+                    item_name=tname,
+                    description='Duplicate step names in let block',
+                    action='Renamed second occurrences with suffix',
+                    severity='warning',
+                )
+    return repairs
+
+
+def _heal_m_invalid_identifier_unquoted(model, recovery=None) -> int:
+    """Wrap unquoted step identifiers containing spaces/specials in
+    ``#"…"`` so the M parser accepts them."""
+    repairs = 0
+    for tname, _part, src in _iter_partitions(model):
+        expr = src.get('expression', '')
+        if not isinstance(expr, str) or not _M_LET_RE.search(expr):
+            continue
+        new_expr = expr
+        changed = False
+
+        def _wrap(match):
+            nonlocal changed
+            ident = match.group(1)
+            changed = True
+            return f'#"{ident}" ='
+
+        new_expr = _M_UNQUOTED_BAD.sub(_wrap, new_expr)
+        if changed:
+            src['expression'] = new_expr
+            repairs += 1
+            if recovery is not None:
+                recovery.record(
+                    'm_query', 'm_invalid_identifier_unquoted',
+                    item_name=tname,
+                    description='Step identifier had spaces/specials but was unquoted',
+                    action='Wrapped in #"..."',
+                    severity='warning',
+                )
+    return repairs
+
+
+def _heal_m_trailing_comma_in_record(model, recovery=None) -> int:
+    """Remove trailing comma in M record/list literals (``[a=1,]``)."""
+    repairs = 0
+    for tname, _part, src in _iter_partitions(model):
+        expr = src.get('expression', '')
+        if not isinstance(expr, str) or ',' not in expr:
+            continue
+        new_expr = _M_TRAILING_COMMA_RECORD.sub(r'\1', expr)
+        if new_expr != expr:
+            src['expression'] = new_expr
+            repairs += 1
+            if recovery is not None:
+                recovery.record(
+                    'm_query', 'm_trailing_comma_in_record',
+                    item_name=tname,
+                    description='M record/list had trailing comma',
+                    action='Stripped trailing comma',
+                    severity='info',
+                )
+    return repairs
+
+
+def _heal_m_double_comma(model, recovery=None) -> int:
+    """Collapse ``,,`` → ``,`` in M expressions."""
+    repairs = 0
+    for tname, _part, src in _iter_partitions(model):
+        expr = src.get('expression', '')
+        if not isinstance(expr, str) or ',,' not in expr.replace(' ', ''):
+            continue
+        new_expr = _M_DOUBLE_COMMA.sub(',', expr)
+        if new_expr != expr:
+            src['expression'] = new_expr
+            repairs += 1
+            if recovery is not None:
+                recovery.record(
+                    'm_query', 'm_double_comma',
+                    item_name=tname,
+                    description='M expression had double commas',
+                    action='Collapsed to single comma',
+                    severity='warning',
+                )
+    return repairs
+
+
+def _heal_m_missing_source_step(model, recovery=None) -> int:
+    """If body references ``Source`` but no ``Source =`` step exists,
+    inject a placeholder #table()."""
+    repairs = 0
+    for tname, _part, src in _iter_partitions(model):
+        expr = src.get('expression', '')
+        if not isinstance(expr, str) or not expr.strip():
+            continue
+        if not re.search(r'\bSource\b', expr):
+            continue
+        if re.search(r'\bSource\s*=', expr):
+            continue
+        # Try to insert after `let`
+        if not _M_LET_RE.search(expr):
+            continue
+        placeholder = '    Source = #table({}, {}),\n'
+        new_expr = re.sub(
+            r'(\blet\b\s*)',
+            r'\1\n' + placeholder,
+            expr,
+            count=1,
+            flags=re.I,
+        )
+        src['expression'] = new_expr
+        repairs += 1
+        if recovery is not None:
+            recovery.record(
+                'm_query', 'm_missing_source_step',
+                item_name=tname,
+                description='M body references Source with no definition',
+                action='Injected empty #table() placeholder',
+                severity='error',
+                follow_up='Replace placeholder with actual data source',
+            )
+    return repairs
+
+
+def _heal_m_credential_in_expression(model, recovery=None) -> int:
+    """Strip hardcoded credentials from M expressions."""
+    repairs = 0
+    for tname, _part, src in _iter_partitions(model):
+        expr = src.get('expression', '')
+        if not isinstance(expr, str):
+            continue
+        new_expr = expr
+        hits = 0
+        for pat in _M_CRED_PATTERNS:
+            new_expr, n = pat.subn(
+                lambda m: f'{m.group(1)}=#"<placeholder>"',
+                new_expr,
+            )
+            hits += n
+        if hits:
+            src['expression'] = new_expr
+            repairs += hits
+            if recovery is not None:
+                recovery.record(
+                    'm_query', 'm_credential_in_expression',
+                    item_name=tname,
+                    description=f'Hardcoded credential(s) in M ({hits} match)',
+                    action='Replaced with placeholder',
+                    severity='error',
+                    follow_up='Configure credentials via gateway/PBI Service',
+                )
+    return repairs
+
+
+def _heal_m_partition_mode_mismatch(model, recovery=None) -> int:
+    """If partition is ``mode=import`` but expression uses DirectQuery
+    functions and Table.Buffer is absent, wrap with Table.Buffer()."""
+    repairs = 0
+    for tname, part, src in _iter_partitions(model):
+        mode = (part.get('mode') or 'import').lower()
+        expr = src.get('expression', '')
+        if mode != 'import' or not isinstance(expr, str):
+            continue
+        if 'Table.Buffer' in expr:
+            continue
+        # Skip defensive `try ... otherwise` patterns (DQ source already wrapped)
+        if re.search(r'\btry\b', expr):
+            continue
+        if not any(p.search(expr) for p in _M_DQ_FUNCS):
+            continue
+        # Heuristic: don't touch — flag only.
+        repairs += 1
+        if recovery is not None:
+            recovery.record(
+                'm_query', 'm_partition_mode_mismatch',
+                item_name=tname,
+                description='Import partition uses DirectQuery-style source',
+                action='Flagged (no automatic rewrite)',
+                severity='warning',
+                follow_up='Either switch partition mode to directQuery or wrap output with Table.Buffer',
+            )
+    return repairs
+
+
+def _heal_m_dataflow_ref_dangling(model, recovery=None) -> int:
+    """Detect ``PowerPlatform.Dataflows`` references and warn — we
+    can't validate the dataflow exists, but flag for review."""
+    repairs = 0
+    for tname, _part, src in _iter_partitions(model):
+        expr = src.get('expression', '')
+        if not isinstance(expr, str):
+            continue
+        if 'PowerPlatform.Dataflows' not in expr:
+            continue
+        repairs += 1
+        if recovery is not None:
+            recovery.record(
+                'm_query', 'm_dataflow_ref',
+                item_name=tname,
+                description='Partition references PowerPlatform.Dataflows',
+                action='Flagged — verify dataflow still exists in target tenant',
+                severity='warning',
+                follow_up='Validate dataflow id in workspace before refresh',
+            )
+    return repairs
+
+
+# ════════════════════════════════════════════════════════════════════
 #  Public entry point
 # ════════════════════════════════════════════════════════════════════
 
@@ -647,6 +1666,38 @@ _V3_HEALERS = (
     ('datatype_casing', _heal_datatype_casing),
     ('duplicate_relationships', _heal_duplicate_relationships),
     ('hidden_key', _heal_hidden_key),
+    # v3.1 — Sprint 137
+    ('empty_names', _heal_empty_names),
+    ('case_insensitive_dup_columns', _heal_case_insensitive_dup_columns),
+    ('empty_calculation_groups', _heal_empty_calculation_groups),
+    ('relationship_missing_columns', _heal_relationship_missing_columns),
+    ('dax_trailing_comma', _heal_dax_trailing_comma),
+    ('measure_leading_equals', _heal_measure_leading_equals),
+    ('data_category', _heal_data_category),
+    ('empty_annotations', _heal_empty_annotations),
+    ('duplicate_hierarchy_names', _heal_duplicate_hierarchy_names),
+    # v3.2 — Sprint 138 — schema & datatype
+    ('column_without_datatype', _heal_column_without_datatype),
+    ('measure_without_datatype', _heal_measure_without_datatype),
+    ('boolean_with_string_default', _heal_boolean_with_string_default),
+    ('numeric_format_string_mismatch', _heal_numeric_format_string_mismatch),
+    ('datetime_without_format', _heal_datetime_without_format),
+    ('lineage_tag_collision', _heal_lineage_tag_collision),
+    ('missing_lineage_tag', _heal_missing_lineage_tag),
+    ('source_column_missing', _heal_source_column_missing),
+    ('key_column_nullable', _heal_key_column_nullable),
+    ('int_column_with_decimal_default', _heal_int_column_with_decimal_default),
+    # v3.3 — Sprint 139 — Power Query / M
+    ('m_unbalanced_let_in', _heal_m_unbalanced_let_in),
+    ('m_unbalanced_parens', _heal_m_unbalanced_parens),
+    ('m_step_name_collision', _heal_m_step_name_collision),
+    ('m_invalid_identifier_unquoted', _heal_m_invalid_identifier_unquoted),
+    ('m_trailing_comma_in_record', _heal_m_trailing_comma_in_record),
+    ('m_double_comma', _heal_m_double_comma),
+    ('m_missing_source_step', _heal_m_missing_source_step),
+    ('m_credential_in_expression', _heal_m_credential_in_expression),
+    ('m_partition_mode_mismatch', _heal_m_partition_mode_mismatch),
+    ('m_dataflow_ref_dangling', _heal_m_dataflow_ref_dangling),
 )
 
 

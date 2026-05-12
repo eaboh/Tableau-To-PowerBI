@@ -183,8 +183,8 @@ class TestTMDLSelfHealDuplicateTables(unittest.TestCase):
     def test_no_duplicate_no_repair(self):
         from powerbi_import.tmdl_generator import _self_heal_model
         model = self._make_model([
-            {'name': 'A', 'columns': [{'name': 'id', 'dataType': 'Int64'}], 'measures': []},
-            {'name': 'B', 'columns': [{'name': 'id', 'dataType': 'Int64'}], 'measures': []},
+            {'name': 'A', 'columns': [{'name': 'id', 'dataType': 'Int64', 'lineageTag': 'a-id'}], 'measures': []},
+            {'name': 'B', 'columns': [{'name': 'id', 'dataType': 'Int64', 'lineageTag': 'b-id'}], 'measures': []},
         ])
         repairs = _self_heal_model(model)
         self.assertEqual(repairs, 0)
@@ -325,7 +325,7 @@ class TestTMDLSelfHealRecoveryReport(unittest.TestCase):
         from powerbi_import.tmdl_generator import _self_heal_model
         from powerbi_import.recovery_report import RecoveryReport
         model = {'model': {
-            'tables': [{'name': 'T', 'columns': [{'name': 'id', 'dataType': 'Int64'}], 'measures': []}],
+            'tables': [{'name': 'T', 'columns': [{'name': 'id', 'dataType': 'Int64', 'lineageTag': 't-id'}], 'measures': []}],
             'relationships': [],
         }}
         recovery = RecoveryReport("Test")
@@ -572,8 +572,8 @@ class TestSelfHealIntegration(unittest.TestCase):
         model = {'model': {
             'tables': [{
                 'name': 'T',
-                'columns': [{'name': 'C'}],
-                'measures': [{'name': 'M', 'expression': 'SUM([C])'}],
+                'columns': [{'name': 'C', 'dataType': 'string', 'lineageTag': 't-c'}],
+                'measures': [{'name': 'M', 'expression': 'SUM([C])', 'dataType': 'decimal', 'lineageTag': 't-m'}],
                 'partitions': [{
                     'name': 'P',
                     'mode': 'import',

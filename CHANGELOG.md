@@ -1,5 +1,51 @@
 # Changelog
 
+## v31.2.0 — Sprints 138 + 139 — Self-Healing v3.2 + v3.3 (Schema/Datatype + Power Query/M)
+
+Adds **20 new healers** in two tiers, bringing the v3 self-healing engine to
+**40 healers** total. Both tiers wired into `_V3_HEALERS` and run via
+`run_v3_healers()` from `tmdl_generator._self_heal_model()`.
+
+### v3.2 — Schema & datatype hygiene (10 healers)
+
+| # | Healer | Failure mode caught |
+|---|--------|----------------------|
+| 35 | `column_without_datatype` | Missing `dataType` → "cannot determine data type" at refresh. Defaults to `string`. |
+| 36 | `measure_without_datatype` | Measure shown as variant in PBI. Inferred from aggregation in expression (SUM→decimal, COUNT→int64). |
+| 37 | `boolean_with_string_default` | `defaultValue="true"` on bool column → strict-type refresh failure. Normalized to bool literal. |
+| 38 | `numeric_format_string_mismatch` | `int64` with fractional `formatString` → fractional part lost. Promotes to `double`. |
+| 39 | `datetime_without_format` | Date columns rendered as raw numbers. Adds `formatString="General Date"`. |
+| 40 | `lineage_tag_collision` | Duplicate `lineageTag` GUID → "duplicate lineage tag" load error. Regenerates uuid4 for the second occurrence. |
+| 41 | `missing_lineage_tag` | Missing `lineageTag` → reports lose lineage on rebind. Injects deterministic uuid5 from `table.name`. |
+| 42 | `source_column_missing` | Case-mismatched `sourceColumn` → refresh failure. Aligns to canonical column name. |
+| 43 | `key_column_nullable` | `isKey=true` + nullable → load error. Forces `isNullable=false`. |
+| 44 | `int_column_with_decimal_default` | Float `defaultValue` on int64 column → coerce error. Rounds to nearest int. |
+
+### v3.3 — Power Query / M-partition hygiene (10 healers)
+
+| # | Healer | Failure mode caught |
+|---|--------|----------------------|
+| 45 | `m_unbalanced_let_in` | `let` block missing `in` → parse error. Appends `in <last step>`. |
+| 46 | `m_unbalanced_parens` | Unbalanced `()` `[]` `{}` (string-literal-aware). Appends closing brackets. |
+| 47 | `m_step_name_collision` | Two steps with the same name in one `let` → parse error. Renames second occurrence. |
+| 48 | `m_invalid_identifier_unquoted` | Step identifier with spaces/specials but no `#"…"` → parse error. Auto-wraps. |
+| 49 | `m_trailing_comma_in_record` | `[a=1, b=2,]` or `{1,2,}` → parse error. Strips trailing comma. |
+| 50 | `m_double_comma` | `Table.SelectRows(t,, …)` → parse error. Collapses to single comma. |
+| 51 | `m_missing_source_step` | Body references `Source` with no `Source =` definition. Injects `#table()` placeholder. |
+| 52 | `m_credential_in_expression` | Hardcoded `Password=`, `User=`, `api_key=` literals. Replaces with `#"<placeholder>"` (severity=error). |
+| 53 | `m_partition_mode_mismatch` | Import partition with DirectQuery-style source (`Sql.Database`, `Oracle.Database`, `Snowflake.Databases`) and no `Table.Buffer`. Flagged for review (skips defensive `try…otherwise` patterns). |
+| 54 | `m_dataflow_ref_dangling` | `PowerPlatform.Dataflows` reference. Flagged for tenant-side validation. |
+
+**Test coverage:** +51 tests in `tests/test_self_healing_v3.py` (and 3 fixture
+updates in `tests/test_self_healing.py`). Full grand-suite total: **7,542
+passing**, 55 skipped, 1 xfailed (zero regressions).
+
+**Roadmap deferral:** Sprint 140 (PBIR/visual-side healers) deferred — those
+require a separate healing engine on the report dict, since `self_healing_v3`
+operates exclusively on the TMDL model dict.
+
+---
+
 ## v31.0.0 — Sprint 136 — Self-Healing v3 (PBI Desktop load/refresh resilience)
 
 Major upgrade to the self-healing engine adding **11 new healers** that catch

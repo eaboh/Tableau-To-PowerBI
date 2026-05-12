@@ -20,10 +20,49 @@ from powerbi_import.self_healing_v3 import (
     _heal_datatype_casing,
     _heal_duplicate_relationships,
     _heal_hidden_key,
+    _heal_empty_names,
+    _heal_case_insensitive_dup_columns,
+    _heal_empty_calculation_groups,
+    _heal_relationship_missing_columns,
+    _heal_dax_trailing_comma,
+    _heal_measure_leading_equals,
+    _heal_data_category,
+    _heal_empty_annotations,
+    _heal_duplicate_hierarchy_names,
+    # v3.2
+    _heal_column_without_datatype,
+    _heal_measure_without_datatype,
+    _heal_boolean_with_string_default,
+    _heal_numeric_format_string_mismatch,
+    _heal_datetime_without_format,
+    _heal_lineage_tag_collision,
+    _heal_missing_lineage_tag,
+    _heal_source_column_missing,
+    _heal_key_column_nullable,
+    _heal_int_column_with_decimal_default,
+    # v3.3
+    _heal_m_unbalanced_let_in,
+    _heal_m_unbalanced_parens,
+    _heal_m_step_name_collision,
+    _heal_m_invalid_identifier_unquoted,
+    _heal_m_trailing_comma_in_record,
+    _heal_m_double_comma,
+    _heal_m_missing_source_step,
+    _heal_m_credential_in_expression,
+    _heal_m_partition_mode_mismatch,
+    _heal_m_dataflow_ref_dangling,
     _normalize_folder,
     run_v3_healers,
     _V3_HEALERS,
 )
+
+
+def _m_partition(expr, mode='import'):
+    return {'mode': mode, 'source': {'type': 'm', 'expression': expr}}
+
+
+def _table_with_m(name, expr, mode='import'):
+    return {'name': name, 'partitions': [_m_partition(expr, mode)]}
 
 
 def _model(tables=None, relationships=None):
@@ -575,17 +614,694 @@ class TestHiddenKeyConflict(unittest.TestCase):
 
 
 # ════════════════════════════════════════════════════════════════════
+#  #26 — Empty / whitespace-only identifier names
+# ════════════════════════════════════════════════════════════════════
+
+class TestEmptyNames(unittest.TestCase):
+
+    def test_empty_table_renamed(self):
+        m = _model([{'name': '', 'columns': []}])
+        self.assertEqual(_heal_empty_names(m), 1)
+        self.assertEqual(m['model']['tables'][0]['name'], 'Unnamed_Table_1')
+
+    def test_whitespace_table_renamed(self):
+        m = _model([{'name': '   ', 'columns': []}])
+        self.assertEqual(_heal_empty_names(m), 1)
+
+    def test_empty_column_renamed(self):
+        m = _model([{'name': 'T', 'columns': [{'name': ''}]}])
+        self.assertEqual(_heal_empty_names(m), 1)
+        self.assertEqual(m['model']['tables'][0]['columns'][0]['name'],
+                         'Unnamed_Column_1')
+
+    def test_empty_measure_renamed(self):
+        m = _model([{'name': 'T', 'measures': [{'name': '',
+                                                 'expression': '1'}]}])
+        self.assertEqual(_heal_empty_names(m), 1)
+
+    def test_clean_no_repair(self):
+        m = _model([{'name': 'T', 'columns': [{'name': 'X'}],
+                     'measures': [{'name': 'M', 'expression': '1'}]}])
+        self.assertEqual(_heal_empty_names(m), 0)
+
+    def test_relationship_rewired_after_table_rename(self):
+        m = _model(
+            tables=[
+                {'name': '', 'columns': [{'name': 'k'}]},
+                {'name': 'B', 'columns': [{'name': 'k'}]},
+            ],
+            relationships=[{'fromTable': '', 'fromColumn': 'k',
+                            'toTable': 'B', 'toColumn': 'k'}],
+        )
+        _heal_empty_names(m)
+        self.assertEqual(m['model']['relationships'][0]['fromTable'],
+                         'Unnamed_Table_1')
+
+
+# ════════════════════════════════════════════════════════════════════
+#  #27 — Case-insensitive duplicate columns
+# ════════════════════════════════════════════════════════════════════
+
+class TestCaseInsensitiveDupColumns(unittest.TestCase):
+
+    def test_unique_no_repair(self):
+        m = _model([{'name': 'T', 'columns': [
+            {'name': 'A'}, {'name': 'B'},
+        ]}])
+        self.assertEqual(_heal_case_insensitive_dup_columns(m), 0)
+
+    def test_case_insensitive_dup_renamed(self):
+        m = _model([{'name': 'T', 'columns': [
+            {'name': 'Date'}, {'name': 'date'},
+        ]}])
+        self.assertEqual(_heal_case_insensitive_dup_columns(m), 1)
+        names = [c['name'] for c in m['model']['tables'][0]['columns']]
+        self.assertEqual(names[0], 'Date')
+        self.assertEqual(names[1], 'date_2')
+
+    def test_three_dupes(self):
+        m = _model([{'name': 'T', 'columns': [
+            {'name': 'X'}, {'name': 'X'}, {'name': 'x'},
+        ]}])
+        self.assertEqual(_heal_case_insensitive_dup_columns(m), 2)
+
+    def test_dupes_across_tables_no_repair(self):
+        m = _model([
+            {'name': 'A', 'columns': [{'name': 'X'}]},
+            {'name': 'B', 'columns': [{'name': 'X'}]},
+        ])
+        self.assertEqual(_heal_case_insensitive_dup_columns(m), 0)
+
+
+# ════════════════════════════════════════════════════════════════════
+#  #28 — Empty calculation groups
+# ════════════════════════════════════════════════════════════════════
+
+class TestEmptyCalculationGroups(unittest.TestCase):
+
+    def test_no_calc_group_no_repair(self):
+        m = _model([{'name': 'T', 'columns': []}])
+        self.assertEqual(_heal_empty_calculation_groups(m), 0)
+
+    def test_calc_group_with_items_kept(self):
+        m = _model([{'name': 'T', 'calculationGroup': {
+            'calculationItems': [{'name': 'YTD', 'expression': '1'}],
+        }}])
+        self.assertEqual(_heal_empty_calculation_groups(m), 0)
+        self.assertIn('calculationGroup', m['model']['tables'][0])
+
+    def test_empty_calc_group_dropped(self):
+        m = _model([{'name': 'T', 'calculationGroup': {
+            'calculationItems': [],
+        }}])
+        self.assertEqual(_heal_empty_calculation_groups(m), 1)
+        self.assertNotIn('calculationGroup', m['model']['tables'][0])
+
+    def test_supports_items_alias(self):
+        m = _model([{'name': 'T', 'calculationGroup': {'items': []}}])
+        self.assertEqual(_heal_empty_calculation_groups(m), 1)
+
+
+# ════════════════════════════════════════════════════════════════════
+#  #29 — Relationship column endpoint missing
+# ════════════════════════════════════════════════════════════════════
+
+class TestRelationshipMissingColumns(unittest.TestCase):
+
+    def test_valid_kept(self):
+        m = _model(
+            tables=[
+                {'name': 'A', 'columns': [{'name': 'k'}]},
+                {'name': 'B', 'columns': [{'name': 'k'}]},
+            ],
+            relationships=[{'fromTable': 'A', 'fromColumn': 'k',
+                            'toTable': 'B', 'toColumn': 'k'}],
+        )
+        self.assertEqual(_heal_relationship_missing_columns(m), 0)
+        self.assertEqual(len(m['model']['relationships']), 1)
+
+    def test_missing_from_column_dropped(self):
+        m = _model(
+            tables=[
+                {'name': 'A', 'columns': [{'name': 'other'}]},
+                {'name': 'B', 'columns': [{'name': 'k'}]},
+            ],
+            relationships=[{'fromTable': 'A', 'fromColumn': 'k',
+                            'toTable': 'B', 'toColumn': 'k'}],
+        )
+        self.assertEqual(_heal_relationship_missing_columns(m), 1)
+        self.assertEqual(len(m['model']['relationships']), 0)
+
+    def test_missing_to_column_dropped(self):
+        m = _model(
+            tables=[
+                {'name': 'A', 'columns': [{'name': 'k'}]},
+                {'name': 'B', 'columns': [{'name': 'other'}]},
+            ],
+            relationships=[{'fromTable': 'A', 'fromColumn': 'k',
+                            'toTable': 'B', 'toColumn': 'k'}],
+        )
+        self.assertEqual(_heal_relationship_missing_columns(m), 1)
+
+    def test_case_insensitive_match_kept(self):
+        m = _model(
+            tables=[
+                {'name': 'A', 'columns': [{'name': 'Key'}]},
+                {'name': 'B', 'columns': [{'name': 'KEY'}]},
+            ],
+            relationships=[{'fromTable': 'A', 'fromColumn': 'key',
+                            'toTable': 'B', 'toColumn': 'Key'}],
+        )
+        self.assertEqual(_heal_relationship_missing_columns(m), 0)
+
+
+# ════════════════════════════════════════════════════════════════════
+#  #30 — DAX trailing comma
+# ════════════════════════════════════════════════════════════════════
+
+class TestDaxTrailingComma(unittest.TestCase):
+
+    def test_clean_dax_no_repair(self):
+        m = _model([{'name': 'T', 'measures': [
+            {'name': 'M', 'expression': 'SUM(T[X])'},
+        ]}])
+        self.assertEqual(_heal_dax_trailing_comma(m), 0)
+
+    def test_trailing_comma_stripped(self):
+        m = _model([{'name': 'T', 'measures': [
+            {'name': 'M', 'expression': 'SUM(T[X],)'},
+        ]}])
+        self.assertEqual(_heal_dax_trailing_comma(m), 1)
+        self.assertEqual(m['model']['tables'][0]['measures'][0]['expression'],
+                         'SUM(T[X])')
+
+    def test_trailing_comma_with_whitespace(self):
+        m = _model([{'name': 'T', 'measures': [
+            {'name': 'M', 'expression': 'SUM(T[X], )'},
+        ]}])
+        self.assertEqual(_heal_dax_trailing_comma(m), 1)
+
+    def test_calc_column_also_fixed(self):
+        m = _model([{'name': 'T', 'columns': [
+            {'name': 'C', 'expression': 'IF(TRUE(), 1, )'},
+        ]}])
+        self.assertEqual(_heal_dax_trailing_comma(m), 1)
+
+
+# ════════════════════════════════════════════════════════════════════
+#  #31 — Measure leading "="
+# ════════════════════════════════════════════════════════════════════
+
+class TestMeasureLeadingEquals(unittest.TestCase):
+
+    def test_clean_no_repair(self):
+        m = _model([{'name': 'T', 'measures': [
+            {'name': 'M', 'expression': 'SUM(T[X])'},
+        ]}])
+        self.assertEqual(_heal_measure_leading_equals(m), 0)
+
+    def test_leading_equals_stripped(self):
+        m = _model([{'name': 'T', 'measures': [
+            {'name': 'M', 'expression': '= SUM(T[X])'},
+        ]}])
+        self.assertEqual(_heal_measure_leading_equals(m), 1)
+        self.assertEqual(m['model']['tables'][0]['measures'][0]['expression'],
+                         'SUM(T[X])')
+
+    def test_double_equals_left_alone(self):
+        # "==" might be a typo but stripping a single "=" would be wrong
+        m = _model([{'name': 'T', 'measures': [
+            {'name': 'M', 'expression': '== SUM(T[X])'},
+        ]}])
+        self.assertEqual(_heal_measure_leading_equals(m), 0)
+
+    def test_leading_whitespace_then_equals(self):
+        m = _model([{'name': 'T', 'measures': [
+            {'name': 'M', 'expression': '  = SUM(T[X])'},
+        ]}])
+        self.assertEqual(_heal_measure_leading_equals(m), 1)
+
+
+# ════════════════════════════════════════════════════════════════════
+#  #32 — Invalid dataCategory
+# ════════════════════════════════════════════════════════════════════
+
+class TestInvalidDataCategory(unittest.TestCase):
+
+    def test_valid_kept(self):
+        m = _model([{'name': 'T', 'columns': [
+            {'name': 'X', 'dataCategory': 'City'},
+        ]}])
+        self.assertEqual(_heal_data_category(m), 0)
+        self.assertEqual(
+            m['model']['tables'][0]['columns'][0]['dataCategory'], 'City')
+
+    def test_invalid_stripped(self):
+        m = _model([{'name': 'T', 'columns': [
+            {'name': 'X', 'dataCategory': 'NotARealThing'},
+        ]}])
+        self.assertEqual(_heal_data_category(m), 1)
+        self.assertNotIn('dataCategory', m['model']['tables'][0]['columns'][0])
+
+    def test_no_data_category_no_repair(self):
+        m = _model([{'name': 'T', 'columns': [{'name': 'X'}]}])
+        self.assertEqual(_heal_data_category(m), 0)
+
+
+# ════════════════════════════════════════════════════════════════════
+#  #33 — Empty annotations
+# ════════════════════════════════════════════════════════════════════
+
+class TestEmptyAnnotations(unittest.TestCase):
+
+    def test_clean_no_repair(self):
+        m = _model([{'name': 'T', 'annotations': [
+            {'name': 'Foo', 'value': 'bar'},
+        ], 'columns': []}])
+        self.assertEqual(_heal_empty_annotations(m), 0)
+
+    def test_empty_name_dropped(self):
+        m = _model([{'name': 'T', 'annotations': [
+            {'name': '', 'value': 'x'},
+            {'name': 'Foo', 'value': 'bar'},
+        ], 'columns': []}])
+        self.assertEqual(_heal_empty_annotations(m), 1)
+        self.assertEqual(len(m['model']['tables'][0]['annotations']), 1)
+
+    def test_empty_value_kept(self):
+        # Empty value is legal in TMDL
+        m = _model([{'name': 'T', 'annotations': [
+            {'name': 'Foo', 'value': ''},
+        ], 'columns': []}])
+        self.assertEqual(_heal_empty_annotations(m), 0)
+
+    def test_column_and_measure_annotations_filtered(self):
+        m = _model([{
+            'name': 'T',
+            'columns': [{'name': 'X', 'annotations': [
+                {'name': '', 'value': 'a'},
+            ]}],
+            'measures': [{'name': 'M', 'expression': '1', 'annotations': [
+                {'name': '   ', 'value': 'b'},
+            ]}],
+        }])
+        self.assertEqual(_heal_empty_annotations(m), 2)
+
+
+# ════════════════════════════════════════════════════════════════════
+#  #34 — Duplicate hierarchy names
+# ════════════════════════════════════════════════════════════════════
+
+class TestDuplicateHierarchyNames(unittest.TestCase):
+
+    def test_unique_no_repair(self):
+        m = _model([{'name': 'T', 'hierarchies': [
+            {'name': 'H1'}, {'name': 'H2'},
+        ]}])
+        self.assertEqual(_heal_duplicate_hierarchy_names(m), 0)
+
+    def test_duplicate_renamed(self):
+        m = _model([{'name': 'T', 'hierarchies': [
+            {'name': 'Time'}, {'name': 'Time'},
+        ]}])
+        self.assertEqual(_heal_duplicate_hierarchy_names(m), 1)
+        names = [h['name'] for h in m['model']['tables'][0]['hierarchies']]
+        self.assertEqual(names, ['Time', 'Time_2'])
+
+    def test_case_insensitive(self):
+        m = _model([{'name': 'T', 'hierarchies': [
+            {'name': 'TIME'}, {'name': 'time'},
+        ]}])
+        self.assertEqual(_heal_duplicate_hierarchy_names(m), 1)
+
+
+# ════════════════════════════════════════════════════════════════════
+#  v3.2 — Schema & datatype hygiene
+# ════════════════════════════════════════════════════════════════════
+
+class TestColumnWithoutDatatype(unittest.TestCase):
+
+    def test_defaults_string(self):
+        m = _model([{'name': 'T', 'columns': [{'name': 'X'}]}])
+        self.assertEqual(_heal_column_without_datatype(m), 1)
+        self.assertEqual(m['model']['tables'][0]['columns'][0]['dataType'], 'string')
+
+    def test_existing_dtype_skipped(self):
+        m = _model([{'name': 'T', 'columns': [{'name': 'X', 'dataType': 'int64'}]}])
+        self.assertEqual(_heal_column_without_datatype(m), 0)
+
+    def test_records_to_recovery(self):
+        rec = RecoveryReport("v3.2")
+        m = _model([{'name': 'T', 'columns': [{'name': 'X'}]}])
+        _heal_column_without_datatype(m, recovery=rec)
+        self.assertEqual(len(rec.repairs), 1)
+
+
+class TestMeasureWithoutDatatype(unittest.TestCase):
+
+    def test_sum_inferred_decimal(self):
+        m = _model([{'name': 'T', 'measures': [{'name': 'M', 'expression': 'SUM(T[X])'}]}])
+        _heal_measure_without_datatype(m)
+        self.assertEqual(m['model']['tables'][0]['measures'][0]['dataType'], 'decimal')
+
+    def test_distinctcount_inferred_int64(self):
+        m = _model([{'name': 'T', 'measures': [{'name': 'M', 'expression': 'DISTINCTCOUNT(T[X])'}]}])
+        _heal_measure_without_datatype(m)
+        self.assertEqual(m['model']['tables'][0]['measures'][0]['dataType'], 'int64')
+
+    def test_existing_dtype_skipped(self):
+        m = _model([{'name': 'T', 'measures': [{'name': 'M', 'dataType': 'string', 'expression': 'X'}]}])
+        self.assertEqual(_heal_measure_without_datatype(m), 0)
+
+
+class TestBooleanWithStringDefault(unittest.TestCase):
+
+    def test_string_true_normalized(self):
+        m = _model([{'name': 'T', 'columns': [
+            {'name': 'X', 'dataType': 'boolean', 'defaultValue': 'true'},
+        ]}])
+        self.assertEqual(_heal_boolean_with_string_default(m), 1)
+        self.assertIs(m['model']['tables'][0]['columns'][0]['defaultValue'], True)
+
+    def test_already_bool_skipped(self):
+        m = _model([{'name': 'T', 'columns': [
+            {'name': 'X', 'dataType': 'boolean', 'defaultValue': True},
+        ]}])
+        self.assertEqual(_heal_boolean_with_string_default(m), 0)
+
+    def test_non_boolean_skipped(self):
+        m = _model([{'name': 'T', 'columns': [
+            {'name': 'X', 'dataType': 'string', 'defaultValue': 'true'},
+        ]}])
+        self.assertEqual(_heal_boolean_with_string_default(m), 0)
+
+
+class TestNumericFormatStringMismatch(unittest.TestCase):
+
+    def test_int64_with_decimal_format_promoted(self):
+        m = _model([{'name': 'T', 'columns': [
+            {'name': 'X', 'dataType': 'int64', 'formatString': '0.00'},
+        ]}])
+        self.assertEqual(_heal_numeric_format_string_mismatch(m), 1)
+        self.assertEqual(m['model']['tables'][0]['columns'][0]['dataType'], 'double')
+
+    def test_int64_with_percent_promoted(self):
+        m = _model([{'name': 'T', 'measures': [
+            {'name': 'M', 'dataType': 'int64', 'formatString': '0%'},
+        ]}])
+        self.assertEqual(_heal_numeric_format_string_mismatch(m), 1)
+
+    def test_int64_with_int_format_skipped(self):
+        m = _model([{'name': 'T', 'columns': [
+            {'name': 'X', 'dataType': 'int64', 'formatString': '#,##0'},
+        ]}])
+        self.assertEqual(_heal_numeric_format_string_mismatch(m), 0)
+
+
+class TestDatetimeWithoutFormat(unittest.TestCase):
+
+    def test_datetime_gets_default_format(self):
+        m = _model([{'name': 'T', 'columns': [{'name': 'D', 'dataType': 'dateTime'}]}])
+        self.assertEqual(_heal_datetime_without_format(m), 1)
+        self.assertEqual(m['model']['tables'][0]['columns'][0]['formatString'], 'General Date')
+
+    def test_existing_format_preserved(self):
+        m = _model([{'name': 'T', 'columns': [
+            {'name': 'D', 'dataType': 'dateTime', 'formatString': 'yyyy-mm-dd'},
+        ]}])
+        self.assertEqual(_heal_datetime_without_format(m), 0)
+
+    def test_string_skipped(self):
+        m = _model([{'name': 'T', 'columns': [{'name': 'D', 'dataType': 'string'}]}])
+        self.assertEqual(_heal_datetime_without_format(m), 0)
+
+
+class TestLineageTagCollision(unittest.TestCase):
+
+    def test_collision_regenerated(self):
+        m = _model([{'name': 'T', 'columns': [
+            {'name': 'A', 'lineageTag': 'shared-tag'},
+            {'name': 'B', 'lineageTag': 'shared-tag'},
+        ]}])
+        self.assertEqual(_heal_lineage_tag_collision(m), 1)
+        cols = m['model']['tables'][0]['columns']
+        self.assertNotEqual(cols[0]['lineageTag'], cols[1]['lineageTag'])
+
+    def test_unique_tags_no_repair(self):
+        m = _model([{'name': 'T', 'columns': [
+            {'name': 'A', 'lineageTag': 'a'},
+            {'name': 'B', 'lineageTag': 'b'},
+        ]}])
+        self.assertEqual(_heal_lineage_tag_collision(m), 0)
+
+
+class TestMissingLineageTag(unittest.TestCase):
+
+    def test_injects_uuid5(self):
+        m = _model([{'name': 'T', 'columns': [{'name': 'X'}]}])
+        self.assertEqual(_heal_missing_lineage_tag(m), 1)
+        self.assertTrue(m['model']['tables'][0]['columns'][0]['lineageTag'])
+
+    def test_deterministic_across_runs(self):
+        m1 = _model([{'name': 'T', 'columns': [{'name': 'X'}]}])
+        m2 = _model([{'name': 'T', 'columns': [{'name': 'X'}]}])
+        _heal_missing_lineage_tag(m1)
+        _heal_missing_lineage_tag(m2)
+        self.assertEqual(
+            m1['model']['tables'][0]['columns'][0]['lineageTag'],
+            m2['model']['tables'][0]['columns'][0]['lineageTag'],
+        )
+
+    def test_existing_preserved(self):
+        m = _model([{'name': 'T', 'columns': [{'name': 'X', 'lineageTag': 'keep'}]}])
+        self.assertEqual(_heal_missing_lineage_tag(m), 0)
+
+
+class TestSourceColumnMissing(unittest.TestCase):
+
+    def test_case_mismatch_aligned(self):
+        m = _model([{'name': 'T', 'columns': [
+            {'name': 'OrderId', 'sourceColumn': 'orderid'},
+        ]}])
+        self.assertEqual(_heal_source_column_missing(m), 1)
+        self.assertEqual(
+            m['model']['tables'][0]['columns'][0]['sourceColumn'], 'OrderId'
+        )
+
+    def test_no_match_left_alone(self):
+        m = _model([{'name': 'T', 'columns': [
+            {'name': 'OrderId', 'sourceColumn': 'totally_unrelated'},
+        ]}])
+        self.assertEqual(_heal_source_column_missing(m), 0)
+
+
+class TestKeyColumnNullable(unittest.TestCase):
+
+    def test_key_forced_not_null(self):
+        m = _model([{'name': 'T', 'columns': [
+            {'name': 'Id', 'isKey': True, 'isNullable': True},
+        ]}])
+        self.assertEqual(_heal_key_column_nullable(m), 1)
+        self.assertFalse(m['model']['tables'][0]['columns'][0]['isNullable'])
+
+    def test_non_key_unchanged(self):
+        m = _model([{'name': 'T', 'columns': [
+            {'name': 'X', 'isNullable': True},
+        ]}])
+        self.assertEqual(_heal_key_column_nullable(m), 0)
+
+
+class TestIntColumnDecimalDefault(unittest.TestCase):
+
+    def test_rounded(self):
+        m = _model([{'name': 'T', 'columns': [
+            {'name': 'X', 'dataType': 'int64', 'defaultValue': 1.5},
+        ]}])
+        self.assertEqual(_heal_int_column_with_decimal_default(m), 1)
+        self.assertEqual(m['model']['tables'][0]['columns'][0]['defaultValue'], 2)
+
+    def test_int_default_unchanged(self):
+        m = _model([{'name': 'T', 'columns': [
+            {'name': 'X', 'dataType': 'int64', 'defaultValue': 1},
+        ]}])
+        self.assertEqual(_heal_int_column_with_decimal_default(m), 0)
+
+
+# ════════════════════════════════════════════════════════════════════
+#  v3.3 — Power Query / M-partition hygiene
+# ════════════════════════════════════════════════════════════════════
+
+class TestMUnbalancedLetIn(unittest.TestCase):
+
+    def test_appends_in(self):
+        expr = 'let\n    Source = #table({}, {})'
+        m = _model([_table_with_m('T', expr)])
+        self.assertEqual(_heal_m_unbalanced_let_in(m), 1)
+        out = m['model']['tables'][0]['partitions'][0]['source']['expression']
+        self.assertIn('in', out.lower())
+        self.assertIn('Source', out)
+
+    def test_existing_in_skipped(self):
+        expr = 'let\n    Source = #table({}, {})\nin\n    Source'
+        m = _model([_table_with_m('T', expr)])
+        self.assertEqual(_heal_m_unbalanced_let_in(m), 0)
+
+    def test_non_let_skipped(self):
+        m = _model([_table_with_m('T', '#table({}, {})')])
+        self.assertEqual(_heal_m_unbalanced_let_in(m), 0)
+
+
+class TestMUnbalancedParens(unittest.TestCase):
+
+    def test_appends_close_paren(self):
+        m = _model([_table_with_m('T', 'let Source = Table.FromRows({{1}}\nin Source')])
+        self.assertEqual(_heal_m_unbalanced_parens(m), 1)
+        out = m['model']['tables'][0]['partitions'][0]['source']['expression']
+        self.assertGreaterEqual(out.count(')'), out.count('('))
+
+    def test_balanced_skipped(self):
+        m = _model([_table_with_m('T', 'let Source = #table({}, {}) in Source')])
+        self.assertEqual(_heal_m_unbalanced_parens(m), 0)
+
+    def test_string_literals_ignored(self):
+        m = _model([_table_with_m('T', 'let S = "((((" in S')])
+        self.assertEqual(_heal_m_unbalanced_parens(m), 0)
+
+
+class TestMStepNameCollision(unittest.TestCase):
+
+    def test_duplicate_step_renamed(self):
+        expr = 'let\n    A = 1,\n    A = 2\nin\n    A'
+        m = _model([_table_with_m('T', expr)])
+        self.assertEqual(_heal_m_step_name_collision(m), 1)
+
+    def test_unique_steps_skipped(self):
+        expr = 'let\n    A = 1,\n    B = 2\nin\n    B'
+        m = _model([_table_with_m('T', expr)])
+        self.assertEqual(_heal_m_step_name_collision(m), 0)
+
+
+class TestMInvalidIdentifierUnquoted(unittest.TestCase):
+
+    def test_wraps_step_with_space(self):
+        expr = 'let\n    Removed Columns = 1\nin\n    Source'
+        m = _model([_table_with_m('T', expr)])
+        self.assertEqual(_heal_m_invalid_identifier_unquoted(m), 1)
+        out = m['model']['tables'][0]['partitions'][0]['source']['expression']
+        # Identifier should be wrapped (allow trailing whitespace inside or outside quotes)
+        self.assertRegex(out, r'#"Removed Columns\s*"')
+
+    def test_clean_identifiers_unchanged(self):
+        expr = 'let\n    Source = 1\nin\n    Source'
+        m = _model([_table_with_m('T', expr)])
+        self.assertEqual(_heal_m_invalid_identifier_unquoted(m), 0)
+
+
+class TestMTrailingCommaInRecord(unittest.TestCase):
+
+    def test_record_trailing_comma_removed(self):
+        m = _model([_table_with_m('T', 'let R = [a=1, b=2,] in R')])
+        self.assertEqual(_heal_m_trailing_comma_in_record(m), 1)
+        out = m['model']['tables'][0]['partitions'][0]['source']['expression']
+        self.assertNotIn(',]', out)
+
+    def test_list_trailing_comma_removed(self):
+        m = _model([_table_with_m('T', 'let L = {1, 2, 3,} in L')])
+        self.assertEqual(_heal_m_trailing_comma_in_record(m), 1)
+
+    def test_clean_skipped(self):
+        m = _model([_table_with_m('T', 'let R = [a=1, b=2] in R')])
+        self.assertEqual(_heal_m_trailing_comma_in_record(m), 0)
+
+
+class TestMDoubleComma(unittest.TestCase):
+
+    def test_collapses(self):
+        m = _model([_table_with_m('T', 'let X = Table.SelectRows(t,, each true) in X')])
+        self.assertEqual(_heal_m_double_comma(m), 1)
+        out = m['model']['tables'][0]['partitions'][0]['source']['expression']
+        self.assertNotIn(',,', out)
+
+    def test_clean_skipped(self):
+        m = _model([_table_with_m('T', 'let X = 1 in X')])
+        self.assertEqual(_heal_m_double_comma(m), 0)
+
+
+class TestMMissingSourceStep(unittest.TestCase):
+
+    def test_injects_placeholder(self):
+        expr = 'let\n    Renamed = Table.RenameColumns(Source, {})\nin\n    Renamed'
+        m = _model([_table_with_m('T', expr)])
+        self.assertEqual(_heal_m_missing_source_step(m), 1)
+        out = m['model']['tables'][0]['partitions'][0]['source']['expression']
+        self.assertIn('Source = #table', out)
+
+    def test_existing_source_skipped(self):
+        expr = 'let\n    Source = #table({}, {})\nin\n    Source'
+        m = _model([_table_with_m('T', expr)])
+        self.assertEqual(_heal_m_missing_source_step(m), 0)
+
+
+class TestMCredentialInExpression(unittest.TestCase):
+
+    def test_password_replaced(self):
+        m = _model([_table_with_m('T', 'let X = Sql.Database("srv", [Password="secret"]) in X')])
+        n = _heal_m_credential_in_expression(m)
+        self.assertGreaterEqual(n, 1)
+        out = m['model']['tables'][0]['partitions'][0]['source']['expression']
+        self.assertNotIn('"secret"', out)
+        self.assertIn('placeholder', out)
+
+    def test_apikey_replaced(self):
+        m = _model([_table_with_m('T', 'let X = [api_key="abc123"] in X')])
+        n = _heal_m_credential_in_expression(m)
+        self.assertGreaterEqual(n, 1)
+
+    def test_clean_skipped(self):
+        m = _model([_table_with_m('T', 'let X = 1 in X')])
+        self.assertEqual(_heal_m_credential_in_expression(m), 0)
+
+
+class TestMPartitionModeMismatch(unittest.TestCase):
+
+    def test_dq_in_import_flagged(self):
+        m = _model([_table_with_m('T', 'let X = Sql.Database("s", "d") in X', mode='import')])
+        self.assertEqual(_heal_m_partition_mode_mismatch(m), 1)
+
+    def test_with_table_buffer_skipped(self):
+        m = _model([_table_with_m('T', 'let X = Table.Buffer(Sql.Database("s", "d")) in X')])
+        self.assertEqual(_heal_m_partition_mode_mismatch(m), 0)
+
+    def test_directquery_mode_skipped(self):
+        m = _model([_table_with_m('T', 'let X = Sql.Database("s", "d") in X', mode='directQuery')])
+        self.assertEqual(_heal_m_partition_mode_mismatch(m), 0)
+
+
+class TestMDataflowRefDangling(unittest.TestCase):
+
+    def test_dataflow_ref_flagged(self):
+        m = _model([_table_with_m('T', 'let X = PowerPlatform.Dataflows(null) in X')])
+        self.assertEqual(_heal_m_dataflow_ref_dangling(m), 1)
+
+    def test_no_dataflow_ref_skipped(self):
+        m = _model([_table_with_m('T', 'let X = 1 in X')])
+        self.assertEqual(_heal_m_dataflow_ref_dangling(m), 0)
+
+
+# ════════════════════════════════════════════════════════════════════
 #  Integration — run_v3_healers
 # ════════════════════════════════════════════════════════════════════
 
 class TestRunAllV3Healers(unittest.TestCase):
 
     def test_v3_healers_count(self):
-        # Sanity-check that all 11 healers are wired
-        self.assertEqual(len(_V3_HEALERS), 11)
+        # Sanity-check that all 40 healers (v3 + v3.1 + v3.2 + v3.3) are wired
+        self.assertEqual(len(_V3_HEALERS), 40)
 
     def test_runs_all_on_clean_model(self):
-        m = _model([{'name': 'T', 'columns': [{'name': 'X', 'dataType': 'string'}]}])
+        m = _model([{'name': 'T', 'columns': [
+            {'name': 'X', 'dataType': 'string', 'lineageTag': 't-x'},
+        ]}])
         self.assertEqual(run_v3_healers(m), 0)
 
     def test_runs_all_on_messy_model(self):
