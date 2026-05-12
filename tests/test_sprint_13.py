@@ -117,7 +117,7 @@ class TestCustomVisualGUIDs(unittest.TestCase):
         self.assertIsNone(guid_info)
 
     def test_approximation_map_all_entries(self):
-        self.assertEqual(len(APPROXIMATION_MAP), 15)
+        self.assertEqual(len(APPROXIMATION_MAP), 16)
         for key, (pbi_type, note) in APPROXIMATION_MAP.items():
             self.assertTrue(pbi_type, f"Empty pbi_type for {key}")
             self.assertTrue(note, f"Empty note for {key}")

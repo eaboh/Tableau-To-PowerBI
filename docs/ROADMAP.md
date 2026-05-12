@@ -1,4 +1,4 @@
-# Development Roadmap — v22.0.0 → v29.0.0
+# Development Roadmap — v22.0.0 → v31.0.0
 
 **Date:** 2026-04-23
 **Baseline:** v28.5.8 — 7,099 tests across 141+ test files, 0 failures
@@ -1575,3 +1575,113 @@ This v30.0.0 plan is **directly informed by the v28.5.x audit findings** (April 
 - doc drift across 8 files unnoticed → **Sprint 134.4 docs refresh as a release gate**
 
 The pattern: every silent failure mode caught in v28.5.x becomes a class of tests in v30.0.0.
+
+---
+
+## v31.0.0 — Visual Fidelity & Mapping Accuracy (Sprints 135–138)
+
+**Theme:** Close visual mapping gaps — eliminate approximations that lose Tableau semantics, add missing visual configs, improve layout and encoding fidelity.
+
+**Motivation:** The preceptorship loop (v30) exposed that while 118 Tableau mark types are mapped, ~15 are approximations that lose core visual semantics (butterfly symmetry, waffle grid, calendar heat colors, lollipop dot+line). Additionally, data role wiring, axis configs, and conditional formatting don't always transfer faithfully.
+
+---
+
+### Sprint 135 — Approximation Eliminations (@visual, @tester)
+
+**Goal:** Replace the worst approximations with proper PBI native or custom visual implementations. Target: reduce `APPROXIMATION_MAP` from 15 to ≤7 entries.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 135.1 | **Lollipop → clusteredBarChart + reference line** | @visual | `visual_generator.py`, `pbip_generator.py` | Medium | Generate a thin clustered bar with overlay circle markers via conditional formatting rules. Currently mapped to plain `clusteredBarChart` — loses the dot+line lollipop aesthetic. |
+| 135.2 | **Butterfly → mirrored bar chart** | @visual | `visual_generator.py`, `pbip_generator.py` | Medium | Generate two side-by-side bar charts (left negative, right positive) in a single page section with shared category axis, instead of a single `hundredPercentStackedBarChart`. Add NEGATE measure auto-generation. |
+| 135.3 | **Calendar Heat Map → matrix + conditional format rules** | @visual | `visual_generator.py`, `pbip_generator.py` | Medium | Auto-inject date-part columns (DayOfWeek, WeekNumber) as row/column and wire background-color conditional formatting rule. Currently `matrix` with no formatting — needs manual config. |
+| 135.4 | **Waffle → percentage label card** | @visual | `visual_generator.py` | Low | Map to `multiRowCard` with percentage computation measure instead of `hundredPercentStackedBarChart`. Closer to waffle intent (showing % of total). |
+| 135.5 | **Slope Chart → dumbbell visual config** | @visual | `visual_generator.py`, `pbip_generator.py` | Medium | Generate lineChart with exactly 2 data points on X-axis (period start/end), markers enabled, connecting line. Add migration note for manual fine-tuning. |
+| 135.6 | **Timeline → lineChart + shape markers** | @visual | `visual_generator.py` | Low | Enable shape markers on data points and add reference-line annotations for milestone events extracted from Tableau. |
+| 135.7 | **Tests** | @tester | `tests/test_visual_approximations.py` (new) | Medium | 40+ tests: one per eliminated approximation, round-trip extraction → generation → preceptor review. Assert migration notes are attached. |
+
+**Success:** 8 approximations eliminated or significantly improved. Preceptor visual_equivalence dimension passes on all non-custom-visual types.
+
+---
+
+### Sprint 136 — Data Role Wiring & Encoding Fidelity (@visual, @wiring)
+
+**Goal:** Ensure every field from Tableau mark encoding (color, size, tooltip, label, detail, path, angle) is wired to the correct PBI data role with proper aggregation.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 136.1 | **Encoding audit matrix** | @visual | `visual_generator.py` | High | Systematic audit: for each of the 18 major PBI visual types, verify that all Tableau mark encodings (rows, columns, color, size, label, tooltip, detail, path, angle, shape) map to the correct data role (`category`, `values`, `series`, `tooltips`, `size`, etc.). Build a validation table. |
+| 136.2 | **Color encoding → series binding** | @visual | `visual_generator.py`, `pbip_generator.py` | Medium | Ensure Tableau `color` shelf fields become PBI `series` / `legend` data role. Currently some visual types lose color-encoded dimension breakdowns. |
+| 136.3 | **Size encoding → bubble size role** | @visual | `visual_generator.py` | Medium | Ensure `size` shelf on scatter/bubble maps to PBI `size` data role. Verify auto-injection for packed bubble mark type. |
+| 136.4 | **Tooltip field passthrough** | @visual | `visual_generator.py`, `pbip_generator.py` | Low | Ensure all Tableau tooltip fields (including custom tooltip markup text) reach PBI `tooltips` data role. Handle multi-field tooltips. |
+| 136.5 | **Detail shelf → category grouping** | @visual | `visual_generator.py` | Low | Tableau `detail` shelf adds granularity. Map to additional `category` or `group` data role depending on visual type. |
+| 136.6 | **Dual-axis independent scales** | @visual | `visual_generator.py`, `pbip_generator.py` | High | Tableau dual-axis charts with independent Y-axis scales. Generate PBI combo chart with secondary Y-axis enabled and scale range from Tableau axis config. |
+| 136.7 | **M column classification for data roles** | @wiring | `calc_column_utils.py` | Medium | Ensure calculated columns used in mark encoding are correctly classified (dimension vs measure) so data roles bind to the right aggregation. |
+| 136.8 | **Tests** | @tester | `tests/test_data_role_wiring.py` (new) | High | 50+ tests: per-visual-type data role assertions. Extract a Tableau worksheet with color+size+tooltip+detail, generate, assert all fields appear in visual JSON query with correct data roles. |
+
+**Success:** Zero visual-level coaching items from preceptor for data role completeness on the standard test corpus.
+
+---
+
+### Sprint 137 — Axis, Legend & Formatting Transfer (@visual, @semantic)
+
+**Goal:** Transfer Tableau axis configuration (titles, ranges, tick marks, reversed axis, log scale) and legend positioning to PBI visual properties.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 137.1 | **Axis title extraction** | @visual | `visual_generator.py`, `extract_tableau_data.py` | Medium | Extract axis title text from Tableau `<run>` elements inside `<label>` under `<axis>`. Wire to PBI `categoryAxis.titleText` / `valueAxis.titleText`. |
+| 137.2 | **Axis range (min/max/tick)** | @visual | `visual_generator.py` | Medium | Extract Tableau `<range>` with `min`/`max` attributes. Set PBI axis `rangeStart`/`rangeEnd`. Transfer tick interval if specified. |
+| 137.3 | **Reversed axis** | @visual | `visual_generator.py` | Low | Detect Tableau `reversed="true"` on axis definition. Set PBI `categoryAxis.reversed = true`. |
+| 137.4 | **Log scale axis** | @visual | `visual_generator.py` | Low | Detect Tableau `<scale type="log">`. Set PBI `valueAxis.axisScale = "log"`. |
+| 137.5 | **Legend position extraction** | @visual | `visual_generator.py` | Low | Extract legend position (top, bottom, left, right) from Tableau `<legend>` element. Map to PBI `legend.position`. |
+| 137.6 | **Number format propagation to axes** | @semantic | `tmdl_generator.py` | Medium | Ensure Tableau number formats (currency, percent, decimal) on axis measures propagate to PBI `formatString` on the bound measure, so axis labels render correctly. |
+| 137.7 | **Reference line label format** | @visual | `visual_generator.py` | Low | Extract reference line label text and number format. Currently reference lines transfer value but not label formatting. |
+| 137.8 | **Tests** | @tester | `tests/test_axis_formatting.py` (new) | Medium | 35+ tests: axis title, range, reversed, log scale, legend position, reference line labels. |
+
+**Success:** Axis and legend properties transfer faithfully for bar, line, scatter, and combo chart types.
+
+---
+
+### Sprint 138 — v31.0.0 Release, Visual Preceptor Integration & Regression (All Agents)
+
+**Goal:** Version bump, integrate visual equivalence into CI, full visual regression sweep.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 138.1 | **Version bump** | @orchestrator | `pyproject.toml`, `CHANGELOG.md` | Low | `30.x` → `31.0.0`. Document Sprints 135–138. |
+| 138.2 | **Preceptor CI integration** | @reviewer | `preceptor.py`, `.github/workflows/ci.yml` | Medium | Run preceptor review on all generated test artifacts in CI. Fail build if any dimension scores <3★. Wire `--qa` flag to `migrate.py`. |
+| 138.3 | **Visual screenshot baseline** | @tester | `tests/fixtures/screenshots/` (new) | High | Capture baseline Tableau screenshots for the 27+ real-world workbooks. Store in `screenshots/source/`. Generate PBI screenshots via headless PBI Desktop (or manual capture). |
+| 138.4 | **Approximation map audit** | @assessor | `docs/GAP_ANALYSIS.md`, `docs/KNOWN_LIMITATIONS.md` | Low | Update gap analysis with remaining approximations. Target: ≤5 entries in `APPROXIMATION_MAP`. |
+| 138.5 | **Real-world re-validation** | @tester | `tests/test_real_world_e2e.py` | Medium | Re-run all 27+ workbooks. Assert all visual dimensions ≥4★ in preceptor. |
+| 138.6 | **PBIR visual schema upgrade** | @visual | `visual_generator.py`, `pbip_generator.py` | Low | Bump to latest PBIR visual container schema if Microsoft releases a newer version. |
+| 138.7 | **Docs refresh** | @orchestrator | `docs/*.md` | Medium | Update MAPPING_REFERENCE, KNOWN_LIMITATIONS, GAP_ANALYSIS with v31 improvements. |
+| 138.8 | **Test baseline** | @tester | — | — | Target: **7,600+** tests (from 7,400 baseline). |
+
+**Success:** Preceptor passes all 6 dimensions at ≥4★ for the full workbook corpus.
+
+---
+
+### v31.0.0 Success Criteria
+
+| Metric | Target | Owner |
+|--------|--------|-------|
+| Approximation map entries | ≤5 (from 15) | @visual |
+| Data role coverage | 100% of Tableau encoding shelves wired | @visual |
+| Axis/legend fidelity | Titles, ranges, log scale, reversed all transfer | @visual |
+| Preceptor visual_equivalence | ≥4★ on all 27+ real-world workbooks | @reviewer |
+| Visual coaching items | Zero data-role-missing coaching on standard corpus | @visual |
+| Dual-axis charts | Independent scales transfer to PBI secondary axis | @visual |
+| **Migration Confidence Score** | **≥98 (Grade A+)** | @assessor |
+| Tests | **7,600+** | @tester |
+
+### v31.0.0 Agent Ownership Matrix
+
+| Agent | Sprint 135 | Sprint 136 | Sprint 137 | Sprint 138 |
+|-------|-----------|-----------|-----------|-----------|
+| **@visual** | 135.1–135.6 | 136.1–136.6 | 137.1–137.5, 137.7 | 138.6 |
+| **@wiring** | — | 136.7 | — | — |
+| **@semantic** | — | — | 137.6 | — |
+| **@reviewer** | — | — | — | 138.2 |
+| **@assessor** | — | — | — | 138.4 |
+| **@orchestrator** | — | — | — | 138.1, 138.7 |
+| **@tester** | 135.7 | 136.8 | 137.8 | 138.3, 138.5, 138.8 |

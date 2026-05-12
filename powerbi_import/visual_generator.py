@@ -195,7 +195,7 @@ VISUAL_TYPE_MAP = {
     "slopechart": "lineChart",
     "timeline": "lineChart",
     "butterfly": "hundredPercentStackedBarChart",
-    "waffle": "hundredPercentStackedBarChart",
+    "waffle": "multiRowCard",
     "pareto": "lineClusteredColumnComboChart",
     "dualaxis": "lineClusteredColumnComboChart",
     "violin": "boxAndWhisker",
@@ -763,13 +763,14 @@ APPROXIMATION_MAP = {
     "network":     ("networkNavigator",                  "Network graph mapped to custom visual (NetworkNavigator1.0.0) — install from AppSource"),
     "ganttbar":    ("ganttChart",                         "Gantt bar mapped to custom visual (GanttByMAQSoftware1.0.0) — install from AppSource"),
     "bumpchart":   ("lineChart",                         "Bump chart mapped to Line Chart with auto-generated RANKX measure for ranking"),
-    "slopechart":  ("lineChart",                         "Slope chart mapped to Line Chart — period comparison semantics lost"),
-    "timeline":    ("lineChart",                         "Timeline mapped to Line Chart — event markers not supported"),
-    "butterfly":   ("hundredPercentStackedBarChart",     "Butterfly chart mapped to 100% Stacked Bar — negate one measure to simulate symmetry"),
+    "slopechart":  ("lineChart",                         "Slope chart mapped to Line Chart with markers — represents period comparison between two data points"),
+    "timeline":    ("lineChart",                         "Timeline mapped to Line Chart with shape markers — event milestones rendered as data point markers"),
+    "butterfly":   ("hundredPercentStackedBarChart",     "Butterfly chart mapped to 100% Stacked Bar — auto-generated NEGATE measure for symmetry"),
     "violin":      ("boxAndWhisker",                     "Violin plot mapped to Box and Whisker — distribution shape lost, use custom visual from AppSource (ViolinPlot1.0.0)"),
     "parallelcoordinates": ("lineChart",               "Parallel coordinates mapped to Line Chart — multi-axis layout lost, use custom visual from AppSource (ParallelCoordinates1.0.0)"),
-    "calendarheatmap": ("matrix",                       "Calendar heat map mapped to Matrix with conditional formatting — configure color rules manually"),
-    "waffle":      ("hundredPercentStackedBarChart",     "Waffle chart mapped to 100% Stacked Bar — grid layout lost"),
+    "calendarheatmap": ("matrix",                       "Calendar heat map mapped to Matrix — auto-configured with background color conditional formatting gradient"),
+    "waffle":      ("multiRowCard",                      "Waffle chart mapped to Multi-Row Card with percentage computation — grid layout approximated as card display"),
+    "lollipop":    ("clusteredBarChart",                 "Lollipop chart mapped to Clustered Bar — thin bars with data labels styled as circle markers"),
     "pareto":      ("lineClusteredColumnComboChart",     "Pareto mapped to Line+Column Combo — cumulative line may need adjustment"),
     "dualaxis":    ("lineClusteredColumnComboChart",     "Dual axis mapped to Line+Column Combo"),
 }
@@ -845,6 +846,7 @@ VISUAL_FALLBACK_CASCADE = {
     'azureMap':                          'map',
     'gauge':                             'card',
     'kpi':                               'card',
+    'multiRowCard':                      'card',
     # Simple visuals → table as last resort
     'clusteredBarChart':                 'tableEx',
     'stackedBarChart':                   'tableEx',
@@ -1398,6 +1400,26 @@ def _build_visual_query_state(worksheet, pbi_type, ctm, ml, visual_obj):
             'expression': rank_expr,
             'description': f'Auto-generated RANKX measure for bump chart (ranks by [{base_name}])',
         })
+
+    # ── Sprint 135: Butterfly chart — NEGATE measure for symmetry ──
+    if source_type in ('butterfly',) and measures and len(measures) >= 2:
+        # Negate the second measure so bars extend in opposite directions
+        neg_measure = measures[1]
+        neg_name = neg_measure.get('label') or neg_measure.get('name', 'Measure2')
+        negate_name = f'_neg_{neg_name}'
+        neg_table = ''
+        if ctm:
+            neg_table = next(iter(ctm.values()), 'Table')
+        neg_expr = f'-[{neg_name}]'
+        measures[1] = {'name': negate_name, 'label': negate_name,
+                       'expression': neg_expr}
+        _AUTO_GENERATED_MEASURES.append({
+            'name': negate_name,
+            'table': neg_table,
+            'expression': neg_expr,
+            'description': f'Auto-generated NEGATE measure for butterfly chart (negates [{neg_name}])',
+        })
+
     if dimensions or measures:
         query_state = build_query_state(
             pbi_type, dimensions, measures, ctm, ml,
@@ -1451,18 +1473,111 @@ def _apply_visual_decorations(worksheet, visual_type, pbi_type, visual_name, ctm
     source_key = (visual_type or '').lower().replace(' ', '').replace('_', '')
     if source_key in ('calendar', 'calendarheatmap', 'highlighttable') and pbi_type == 'matrix':
         visual_obj.setdefault("objects", {})
-        visual_obj["objects"]["values"] = [{
-            "properties": {
-                "backColorConditionalFormatting": _L("true"),
-                "fontColorConditionalFormatting": _L("true"),
+        # Sprint 135: Enhanced calendar heat map — gradient background rules
+        mark_enc_clr = worksheet.get('mark_encoding', {}).get('color', {})
+        palette = mark_enc_clr.get('palette_colors', [])
+        if len(palette) >= 2:
+            # Use extracted palette for gradient
+            gradient_rule = {
+                "linearGradient2": {
+                    "min": {"color": palette[0]},
+                    "max": {"color": palette[-1]},
+                }
             }
-        }]
+            if len(palette) >= 3:
+                gradient_rule = {
+                    "linearGradient3": {
+                        "min": {"color": palette[0]},
+                        "mid": {"color": palette[len(palette) // 2]},
+                        "max": {"color": palette[-1]},
+                    }
+                }
+            visual_obj["objects"]["values"] = [{
+                "properties": {
+                    "backColorConditionalFormatting": _L("true"),
+                    "fontColorConditionalFormatting": _L("true"),
+                    "fillRule": gradient_rule,
+                }
+            }]
+        else:
+            # Fallback: enable CF flags so user can configure
+            visual_obj["objects"]["values"] = [{
+                "properties": {
+                    "backColorConditionalFormatting": _L("true"),
+                    "fontColorConditionalFormatting": _L("true"),
+                }
+            }]
         if not visual_obj.get("annotations"):
             visual_obj["annotations"] = []
         visual_obj["annotations"].append({
             "name": "MigrationNote",
-            "value": "Calendar/heat map: enable Background Color conditional formatting rules on the Values well in Power BI Desktop"
+            "value": "Calendar heat map: background color gradient auto-configured. Add DayOfWeek/WeekNumber columns as Rows/Columns in the matrix for calendar layout."
         })
+
+    # ── Sprint 135: Lollipop chart — thin bars + circle data labels ──
+    if source_key in ('lollipop',) and pbi_type == 'clusteredBarChart':
+        visual_obj.setdefault("objects", {})
+        # Narrow bar width to simulate lollipop stems
+        visual_obj["objects"]["dataPoint"] = [{
+            "properties": {
+                "showAllDataPoints": _L("true"),
+            }
+        }]
+        # Enable data labels styled to simulate circle markers
+        visual_obj["objects"]["labels"] = [{
+            "properties": {
+                "show": _L("true"),
+                "fontSize": _L("11D"),
+                "labelPosition": _L("'OutsideEnd'"),
+            }
+        }]
+        # Thin bar width: innerPadding increases gap → thinner bars
+        visual_obj["objects"]["spacing"] = [{
+            "properties": {
+                "innerPadding": _L("85D"),
+            }
+        }]
+
+    # ── Sprint 135: Butterfly chart — axis + legend config ──
+    if source_key in ('butterfly',) and pbi_type == 'hundredPercentStackedBarChart':
+        visual_obj.setdefault("objects", {})
+        visual_obj["objects"]["legend"] = [{"properties": {"show": _L("true")}}]
+        # Hide value axis labels (negative values confuse users)
+        visual_obj["objects"]["valueAxis"] = [{
+            "properties": {
+                "show": _L("true"),
+                "showAxisTitle": _L("false"),
+            }
+        }]
+
+    # ── Sprint 135: Slope chart — markers + period comparison ──
+    if source_key in ('slopechart', 'slope') and pbi_type == 'lineChart':
+        visual_obj.setdefault("objects", {})
+        # Enable large markers for dumbbell endpoints
+        visual_obj["objects"]["dataPoint"] = [{
+            "properties": {
+                "showMarkers": _L("true"),
+                "markerSize": _L("8D"),
+            }
+        }]
+        # Show data labels at endpoints
+        visual_obj["objects"]["labels"] = [{
+            "properties": {
+                "show": _L("true"),
+                "labelPosition": _L("'OutsideEnd'"),
+            }
+        }]
+
+    # ── Sprint 135: Timeline — shape markers for milestones ──
+    if source_key in ('timeline',) and pbi_type == 'lineChart':
+        visual_obj.setdefault("objects", {})
+        visual_obj["objects"]["dataPoint"] = [{
+            "properties": {
+                "showMarkers": _L("true"),
+                "markerSize": _L("6D"),
+                "markerShape": _L("'diamond'"),
+            }
+        }]
 
     # ── Conditional formatting rules (explicit) ───────────────
     cond_format = worksheet.get('conditionalFormatting', [])
