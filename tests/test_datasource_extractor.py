@@ -26,6 +26,8 @@ sys.path.insert(0, os.path.join(ROOT, 'tableau_export'))
 from datasource_extractor import (
     _detect_csv_delimiter,
     _read_csv_header_from_twbx,
+  _extract_col_local_name_map,
+  _extract_col_type_map,
     _parse_connection_class,
     _build_connection_map,
     extract_connection_details,
@@ -661,6 +663,37 @@ class TestExtractDatasource(unittest.TestCase):
         self.assertGreater(len(ds['tables']), 0)
         self.assertGreater(len(ds['calculations']), 0)
         self.assertIn('connection_map', ds)
+
+    def test_none_datasource_is_safe(self):
+        ds = extract_datasource(None)
+        self.assertEqual(ds['name'], 'Unknown')
+        self.assertEqual(ds['caption'], 'Unknown')
+        self.assertEqual(ds['connection_map'], {})
+        self.assertEqual(ds['tables'], [])
+        self.assertEqual(ds['calculations'], [])
+        self.assertEqual(ds['relationships'], [])
+
+
+class TestDatasourceGuardHelpers(unittest.TestCase):
+    def test_local_name_map_none(self):
+        self.assertEqual(_extract_col_local_name_map(None), {})
+
+    def test_type_map_none(self):
+        self.assertEqual(_extract_col_type_map(None), {})
+
+    def test_local_name_map_malformed_object(self):
+        class BadElem:
+            def findall(self, *_args, **_kwargs):
+                raise AttributeError('broken')
+
+        self.assertEqual(_extract_col_local_name_map(BadElem()), {})
+
+    def test_type_map_malformed_object(self):
+        class BadElem:
+            def findall(self, *_args, **_kwargs):
+                raise AttributeError('broken')
+
+        self.assertEqual(_extract_col_type_map(BadElem()), {})
 
 
 # ═══════════════════════════════════════════════════════════════════

@@ -13,6 +13,10 @@ import csv
 import re
 import logging
 from dax_converter import _reverse_tableau_bracket_escape
+try:
+    from .safe_xml import safe_findall, safe_findtext, safe_get_attr
+except ImportError:
+    from safe_xml import safe_findall, safe_findtext, safe_get_attr
 
 logger = logging.getLogger(__name__)
 
@@ -87,10 +91,13 @@ def _extract_col_local_name_map(datasource_elem):
         dict mapping column local-name (without brackets) to parent table
         name, e.g. ``{'Opportunity ID': 'Opportunities'}``.
     """
+    if datasource_elem is None:
+        return {}
+
     result = {}
-    for mr in datasource_elem.findall('.//metadata-record[@class="column"]'):
-        local_name = (mr.findtext('local-name') or '').strip().strip('[]')
-        parent_name = (mr.findtext('parent-name') or '').strip().strip('[]')
+    for mr in safe_findall(datasource_elem, './/metadata-record[@class="column"]'):
+        local_name = (safe_findtext(mr, 'local-name', '') or '').strip().strip('[]')
+        parent_name = (safe_findtext(mr, 'parent-name', '') or '').strip().strip('[]')
         if local_name and parent_name and local_name not in result:
             result[local_name] = parent_name
     return result
@@ -107,10 +114,13 @@ def _extract_col_type_map(datasource_elem):
         dict mapping column local-name (without brackets) to Tableau
         datatype string, e.g. ``{'Probability (%)': 'real'}``.
     """
+    if datasource_elem is None:
+        return {}
+
     result = {}
-    for mr in datasource_elem.findall('.//metadata-record[@class="column"]'):
-        local_name = (mr.findtext('local-name') or '').strip().strip('[]')
-        local_type = (mr.findtext('local-type') or '').strip()
+    for mr in safe_findall(datasource_elem, './/metadata-record[@class="column"]'):
+        local_name = (safe_findtext(mr, 'local-name', '') or '').strip().strip('[]')
+        local_type = (safe_findtext(mr, 'local-type', '') or '').strip()
         if local_name and local_type and local_name not in result:
             result[local_name] = local_type
     return result
@@ -127,8 +137,22 @@ def extract_datasource(datasource_elem, twbx_path=None):
     Returns:
         dict with connection, tables, columns, calculations, relationships
     """
-    ds_name = datasource_elem.get('name', 'Unknown')
-    ds_caption = datasource_elem.get('caption', ds_name)
+    if datasource_elem is None:
+        return {
+            'name': 'Unknown',
+            'caption': 'Unknown',
+            'connection': {'type': 'Unknown', 'details': {}},
+            'connection_map': {},
+            'tables': [],
+            'calculations': [],
+            'columns': [],
+            'relationships': [],
+            'col_local_name_map': {},
+            'col_type_map': {},
+        }
+
+    ds_name = safe_get_attr(datasource_elem, 'name', 'Unknown')
+    ds_caption = safe_get_attr(datasource_elem, 'caption', ds_name)
     
     # Build the connection_name -> connection_details mapping
     connection_map = _build_connection_map(datasource_elem, twbx_path=twbx_path)

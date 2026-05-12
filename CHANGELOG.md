@@ -34,6 +34,13 @@ accessors and wiring them into core extractor paths.
     `safe_findtext`) to avoid hard failures on malformed structures.
   - `tests/test_pulse_extractor.py` now covers malformed root/metric objects
     and verifies graceful fallback behavior.
+- Extended datasource extractor resilience and tests:
+  - `tableau_export/datasource_extractor.py` now uses shared `safe_xml`
+    accessors in metadata map extraction and datasource naming paths.
+  - `extract_datasource(None)` now returns a safe empty datasource shape
+    instead of raising.
+  - `tests/test_datasource_extractor.py` now covers None/malformed datasource
+    and metadata-map helper fallback behavior.
 - Extraction regression suite remains green.
 
 ## v31.4.0 — Sprint 141 — Phase 1 of Zero-Error Roadmap (Pre-flight Rejection)

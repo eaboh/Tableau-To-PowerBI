@@ -248,8 +248,8 @@ Every sprint must:
 
 | Phase | Sprint | Version | Status | Zero-Touch % |
 |-------|--------|---------|--------|--------------|
-| 1 — Pre-flight | 141 | v31.4.0 | 🟡 In progress | _baseline ~70 %_ |
-| 2 — Extraction guards | 142 | v31.5.0 | ⏸ Planned | — |
+| 1 — Pre-flight | 141 | v31.4.0 | ✅ Shipped | _baseline ~70 %_ |
+| 2 — Extraction guards | 142 | v31.5.0 | 🟡 In progress | — |
 | 3 — Conversion guards | 143 | v31.6.0 | ⏸ Planned | — |
 | 4 — Self-Healing v3.5 | 144 | v31.7.0 | ⏸ Planned | — |
 | 5 — Self-Healing v3.6 | 145 | v31.8.0 | ⏸ Planned | — |
