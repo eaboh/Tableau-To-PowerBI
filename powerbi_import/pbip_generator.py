@@ -1492,7 +1492,20 @@ class PowerBIProjectGenerator:
             report_json["publicCustomVisuals"] = cv_classes
         
         _write_json(os.path.join(def_dir, 'report.json'), report_json)
-        
+
+        # Sprint 140 — Self-Healing v3.4: scan the freshly written .Report
+        # tree for layout/visual/filter/bookmark issues and patch in place.
+        try:
+            from powerbi_import.self_healing_report import heal_report
+            repaired = heal_report(report_dir)
+            if repaired:
+                logger.info(
+                    "Self-Healing v3.4 applied %d report-side repair(s)",
+                    repaired,
+                )
+        except Exception:  # never block migration
+            pass
+
         return report_dir
     
     def _generate_report_definition_content(self, report_dir, report_name,

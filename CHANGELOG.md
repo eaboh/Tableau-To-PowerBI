@@ -1,5 +1,58 @@
 # Changelog
 
+## v31.3.0 — Sprint 140 — Self-Healing v3.4 (PBIR / report-side) + Coverage uplift
+
+Two-pronged release:
+
+1. **New module `powerbi_import/self_healing_report.py`** — 11 PBIR-side
+   healers that run **after** `report.json`, page, and visual JSON files have
+   been written. Loads the on-disk `<Name>.Report/` tree into a state dict,
+   patches issues in place, and re-dumps only the files actually mutated.
+   Wired into `pbip_generator.create_report_structure()` (logged via
+   `logger.info` when any repair is applied; never blocks migration).
+
+| # | Healer | Failure mode caught |
+|---|--------|----------------------|
+| 1 | `visual_missing_position` | visual.json with no `position` block (PBI defaults to 0,0,0,0 → invisible) |
+| 2 | `visual_zero_size` | width/height ≤ 0 → reset to 480 × 280 |
+| 3 | `visual_off_canvas` | x/y/w/h pushes visual outside canvas → clamped (default canvas 1280 × 720) |
+| 4 | `visual_zindex_collision` | duplicate `z` on same page → reassigned sequentially |
+| 5 | `visual_missing_visualtype` | empty `visual.visualType` → defaulted to `tableEx` |
+| 6 | `visual_negative_zindex` | negative `z` → clamped to 0 |
+| 7 | `filter_dangling_field` | filter without `field`/`Expression` at any level → dropped |
+| 8 | `bookmark_dangling_page` | bookmark `targetPage`/`activeSection` references non-existent page → dropped |
+| 9 | `pagesmeta_orphan_pageorder` | `pages.json/pageOrder` lists ghosts / misses real pages → resynced |
+| 10 | `pagesmeta_missing_active` | empty/invalid `activePageName` → first valid page in pageOrder |
+| 11 | `visual_query_no_select` | empty `queryState` → tagged with `MigrationNote` annotation for follow-up |
+
+   - 43 unit tests in `tests/test_self_healing_report.py` cover every healer,
+     the loader/writer, RecoveryReport integration, and an end-to-end
+     load → heal → write → reload round-trip with idempotency check.
+   - Module ships at **92.5 %** line coverage on first release.
+
+2. **Sprint 140 coverage uplift** — 43 new tests in
+   `tests/test_coverage_sprint140.py` targeting the three lowest-coverage
+   modules identified by the Sprint 137 audit:
+
+   | Module | Before | After | Δ |
+   |--------|--------|-------|---|
+   | `api_server.py` | 58.8 % | **66.8 %** | +8.0 pts |
+   | `monitoring.py` | 74.1 % | **87.1 %** | +13.0 pts |
+   | `notebook_api.py` | 71.0 % | 71.0 % | _gated on full workbook load_ |
+
+   Coverage areas added: rate limiter, stale-job purge, `_run_migration`
+   failure path, multipart filename sanitisation, all 4 monitoring backends
+   (`_NoneBackend`, `_JsonBackend`, `_AzureMonitorBackend`,
+   `_PrometheusBackend`), `record_migration` 7-entry shape,
+   `_sanitize_metric_name`, `_escape_label_value`, OpenMetrics rendering,
+   `MigrationSession` config/override lifecycle and guard exceptions.
+
+### Aggregate
+
+- **+86 tests** (7,542 → **7,628 passing**, 0 regressions)
+- **Overall coverage**: 93.83 % → **94.0 %**
+- **Healer count**: 40 → **51** (40 model-side via v3 + 11 report-side via v3.4)
+
 ## v31.2.0 — Sprints 138 + 139 — Self-Healing v3.2 + v3.3 (Schema/Datatype + Power Query/M)
 
 Adds **20 new healers** in two tiers, bringing the v3 self-healing engine to
