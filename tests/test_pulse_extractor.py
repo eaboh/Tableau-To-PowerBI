@@ -60,6 +60,13 @@ class TestHasPulseMetrics(unittest.TestCase):
         root = _make_xml('<metrics><metric name="Profit"/></metrics>')
         self.assertTrue(has_pulse_metrics(root))
 
+    def test_malformed_root_object_returns_false(self):
+        class BadRoot:
+            def findall(self, _):
+                raise AttributeError('broken object')
+
+        self.assertFalse(has_pulse_metrics(BadRoot()))
+
 
 class TestParseMetricElement(unittest.TestCase):
     def test_basic_metric(self):
@@ -188,6 +195,22 @@ class TestParseMetricElement(unittest.TestCase):
             '<metric name="M1"><measure>[Cost]</measure></metric>')
         result = _parse_metric_element(elem)
         self.assertEqual(result['measure_field'], 'Cost')
+
+    def test_malformed_metric_object_returns_none(self):
+        class BadElem:
+            def get(self, *_args, **_kwargs):
+                raise AttributeError('broken element')
+
+            def findtext(self, *_args, **_kwargs):
+                raise AttributeError('broken element')
+
+            def findall(self, *_args, **_kwargs):
+                raise AttributeError('broken element')
+
+            def find(self, *_args, **_kwargs):
+                raise AttributeError('broken element')
+
+        self.assertIsNone(_parse_metric_element(BadElem()))
 
 
 class TestExtractPulseMetrics(unittest.TestCase):

@@ -10,8 +10,11 @@ Usage:
 """
 
 import xml.etree.ElementTree as ET
-import re
 import logging
+try:
+    from .safe_xml import safe_find, safe_findall, safe_findtext, safe_get_attr
+except ImportError:
+    from safe_xml import safe_find, safe_findall, safe_findtext, safe_get_attr
 
 logger = logging.getLogger(__name__)
 
@@ -48,9 +51,9 @@ def extract_pulse_metrics(root):
 
     # Search for <metric> and <pulse-metric> elements
     metric_elements = (
-        root.findall('.//metric') +
-        root.findall('.//pulse-metric') +
-        root.findall('.//metrics/metric')
+        safe_findall(root, './/metric') +
+        safe_findall(root, './/pulse-metric') +
+        safe_findall(root, './/metrics/metric')
     )
 
     seen_names = set()
@@ -76,57 +79,57 @@ def _parse_metric_element(elem):
         dict or None if the element doesn't represent a valid metric
     """
     name = (
-        elem.get('name', '') or
-        elem.get('caption', '') or
-        elem.findtext('.//name', '') or
-        elem.findtext('.//caption', '')
+        safe_get_attr(elem, 'name', '') or
+        safe_get_attr(elem, 'caption', '') or
+        safe_findtext(elem, './/name', '') or
+        safe_findtext(elem, './/caption', '')
     ).strip()
 
     if not name:
         return None
 
     description = (
-        elem.get('description', '') or
-        elem.findtext('.//description', '')
+        safe_get_attr(elem, 'description', '') or
+        safe_findtext(elem, './/description', '')
     ).strip()
 
     # Measure/KPI field
     measure_field = (
-        elem.get('measure', '') or
-        elem.get('column', '') or
-        elem.findtext('.//measure', '') or
-        elem.findtext('.//measure-field', '')
+        safe_get_attr(elem, 'measure', '') or
+        safe_get_attr(elem, 'column', '') or
+        safe_findtext(elem, './/measure', '') or
+        safe_findtext(elem, './/measure-field', '')
     ).strip().strip('[]')
 
     # Time dimension
     time_dim = (
-        elem.get('time-dimension', '') or
-        elem.findtext('.//time-dimension', '') or
-        elem.findtext('.//date-column', '')
+        safe_get_attr(elem, 'time-dimension', '') or
+        safe_findtext(elem, './/time-dimension', '') or
+        safe_findtext(elem, './/date-column', '')
     ).strip().strip('[]')
 
     # Time grain
     time_grain_raw = (
-        elem.get('time-grain', '') or
-        elem.get('granularity', '') or
-        elem.findtext('.//time-grain', '') or
-        elem.findtext('.//granularity', '')
+        safe_get_attr(elem, 'time-grain', '') or
+        safe_get_attr(elem, 'granularity', '') or
+        safe_findtext(elem, './/time-grain', '') or
+        safe_findtext(elem, './/granularity', '')
     ).strip().lower()
     time_grain = _TIME_GRAIN_MAP.get(time_grain_raw, 'Monthly')
 
     # Aggregation
     aggregation = (
-        elem.get('aggregation', '') or
-        elem.findtext('.//aggregation', '')
+        safe_get_attr(elem, 'aggregation', '') or
+        safe_findtext(elem, './/aggregation', '')
     ).strip().upper() or 'SUM'
 
     # Target
     target_value = None
     target_label = ''
-    target_elem = elem.find('.//target')
+    target_elem = safe_find(elem, './/target')
     if target_elem is not None:
-        target_label = target_elem.get('label', '') or target_elem.findtext('.//label', '')
-        raw_val = target_elem.get('value', '') or target_elem.text or ''
+        target_label = safe_get_attr(target_elem, 'label', '') or safe_findtext(target_elem, './/label', '')
+        raw_val = safe_get_attr(target_elem, 'value', '') or target_elem.text or ''
         try:
             target_value = float(raw_val) if raw_val else None
         except (ValueError, TypeError):
@@ -134,23 +137,23 @@ def _parse_metric_element(elem):
 
     # Definition formula (Tableau calculation)
     definition_formula = (
-        elem.get('formula', '') or
-        elem.findtext('.//formula', '') or
-        elem.findtext('.//definition', '')
+        safe_get_attr(elem, 'formula', '') or
+        safe_findtext(elem, './/formula', '') or
+        safe_findtext(elem, './/definition', '')
     ).strip()
 
     # Number format
     number_format = (
-        elem.get('number-format', '') or
-        elem.findtext('.//number-format', '')
+        safe_get_attr(elem, 'number-format', '') or
+        safe_findtext(elem, './/number-format', '')
     ).strip()
 
     # Filters
     filters = []
-    for filt_elem in elem.findall('.//filter'):
-        field = (filt_elem.get('column', '') or filt_elem.get('field', '')).strip('[]')
-        operator = filt_elem.get('type', 'categorical')
-        values = [v.text for v in filt_elem.findall('.//value') if v.text]
+    for filt_elem in safe_findall(elem, './/filter'):
+        field = (safe_get_attr(filt_elem, 'column', '') or safe_get_attr(filt_elem, 'field', '')).strip('[]')
+        operator = safe_get_attr(filt_elem, 'type', 'categorical')
+        values = [v.text for v in safe_findall(filt_elem, './/value') if v.text]
         if field:
             filters.append({
                 'field': field,
@@ -178,7 +181,7 @@ def has_pulse_metrics(root):
     if root is None:
         return False
     return bool(
-        root.findall('.//metric') or
-        root.findall('.//pulse-metric') or
-        root.findall('.//metrics/metric')
+        safe_findall(root, './/metric') or
+        safe_findall(root, './/pulse-metric') or
+        safe_findall(root, './/metrics/metric')
     )

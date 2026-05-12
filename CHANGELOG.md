@@ -28,6 +28,12 @@ accessors and wiring them into core extractor paths.
 - Added `tests/test_safe_xml.py` with 11 tests covering helper behavior,
   warning serialization, and extractor warning capture on unsafe `.twbx`
   members.
+- Extended Pulse extractor resilience and tests:
+  - `tableau_export/pulse_extractor.py` now uses shared `safe_xml` helpers
+    for all XML reads (`safe_get_attr`, `safe_find`, `safe_findall`,
+    `safe_findtext`) to avoid hard failures on malformed structures.
+  - `tests/test_pulse_extractor.py` now covers malformed root/metric objects
+    and verifies graceful fallback behavior.
 - Extraction regression suite remains green.
 
 ## v31.4.0 — Sprint 141 — Phase 1 of Zero-Error Roadmap (Pre-flight Rejection)
