@@ -844,6 +844,131 @@ def _gen_m_db2(details, table_name, columns):
                               'IBM DB2', 'DB2.Database', server, database, schema)
 
 
+# ── Sprint 155: New Cloud & SaaS Connectors ──────────────────────────────────
+
+def _gen_m_servicenow(details, table_name, columns):
+    """ServiceNow via OData REST API."""
+    instance = _m_escape_string(details.get('server', 'instance'))
+    if not instance.startswith('https://'):
+        instance = f'https://{instance}.service-now.com'
+    table = _m_escape_string(details.get('_source_table', '') or table_name)
+    m_query = 'let\n'
+    m_query += f'    // Source ServiceNow OData: {instance}\n'
+    m_query += f'    Source = OData.Feed("{instance}/api/now/table/{table}", null, '
+    m_query += '[Implementation="2.0"]),\n'
+    m_query += f'    Result = Source\nin\n    Result'
+    return m_query
+
+
+def _gen_m_databricks_unity(details, table_name, columns):
+    """Databricks Unity Catalog with catalog/schema/table navigation."""
+    host = _m_escape_string(details.get('server', 'adb-workspace.azuredatabricks.net'))
+    http_path = _m_escape_string(details.get('http_path', '/sql/1.0/warehouses/default'))
+    catalog = _m_escape_string(details.get('catalog', 'main'))
+    schema = _m_escape_string(details.get('schema', 'default'))
+    safe_table = _m_escape_string(table_name)
+    m_query = 'let\n'
+    m_query += f'    // Source Databricks Unity Catalog: {host}\n'
+    m_query += f'    Source = Databricks.Catalogs("{host}", "{http_path}", '
+    m_query += f'[Catalog="{catalog}", Database="{schema}"]),\n'
+    m_query += f'    #"{safe_table} Table" = Source{{[Name="{safe_table}"]}}[Data],\n'
+    m_query += f'    Result = #"{safe_table} Table"\nin\n    Result'
+    return m_query
+
+
+def _gen_m_denodo(details, table_name, columns):
+    """Denodo Data Virtualization via ODBC."""
+    server = _odbc_escape(details.get('server', 'localhost'))
+    port = details.get('port', '9999')
+    database = _odbc_escape(details.get('database', 'admin'))
+    safe_table = _m_escape_string(table_name)
+    m_query = 'let\n'
+    m_query += f'    // Source Denodo: {server}:{port}\n'
+    m_query += f'    Source = Odbc.DataSource("DRIVER={{DenodoODBC Unicode(x64)}};'
+    m_query += f'SERVER={server};PORT={port};DATABASE={database}"),\n'
+    m_query += f'    #"{safe_table} Table" = Source{{[Name="{safe_table}"]}}[Data],\n'
+    m_query += f'    Result = #"{safe_table} Table"\nin\n    Result'
+    return m_query
+
+
+def _gen_m_essbase(details, table_name, columns):
+    """Oracle Essbase / Hyperion via XMLA/ODBC bridge."""
+    server = _odbc_escape(details.get('server', 'localhost'))
+    application = _m_escape_string(details.get('application', details.get('database', 'Sample')))
+    cube = _m_escape_string(details.get('cube', table_name))
+    m_query = 'let\n'
+    m_query += f'    // Source Oracle Essbase: {server} (requires XMLA provider + gateway)\n'
+    m_query += f'    // NOTE: Essbase requires On-Premises Data Gateway with XMLA/ODBC provider\n'
+    m_query += f'    Source = Odbc.DataSource("DRIVER={{Essbase}};SERVER={server};'
+    m_query += f'APPLICATION={application}"),\n'
+    m_query += f'    #"{cube} Cube" = Source{{[Name="{cube}"]}}[Data],\n'
+    m_query += f'    Result = #"{cube} Cube"\nin\n    Result'
+    return m_query
+
+
+def _gen_m_splunk(details, table_name, columns):
+    """Splunk via REST API (Web.Contents)."""
+    server = _m_escape_string(details.get('server', 'localhost'))
+    port = details.get('port', '8089')
+    search_query = _m_escape_string(details.get('custom_sql', f'search index=main | table *'))
+    m_query = 'let\n'
+    m_query += f'    // Source Splunk: {server}:{port}\n'
+    m_query += f'    // NOTE: Requires Splunk credentials in data source settings\n'
+    m_query += f'    Source = Json.Document(Web.Contents("https://{server}:{port}'
+    m_query += f'/services/search/jobs/export", [\n'
+    m_query += f'        Content=Text.ToBinary("search={search_query}&output_mode=json"),\n'
+    m_query += f'        Headers=[#"Content-Type"="application/x-www-form-urlencoded"]\n'
+    m_query += f'    ])),\n'
+    m_query += f'    #"Converted" = Table.FromRecords(Source[results]),\n'
+    m_query += f'    Result = #"Converted"\nin\n    Result'
+    return m_query
+
+
+def _gen_m_sap_hana_depth(details, table_name, columns):
+    """SAP HANA with full schema/view navigation and MDX passthrough."""
+    server = _m_escape_string(details.get('server', 'hanaserver'))
+    port = details.get('port', '30015')
+    schema = _m_escape_string(details.get('schema', 'SYSTEM'))
+    safe_table = _m_escape_string(table_name)
+    custom_sql = details.get('custom_sql', '')
+
+    if custom_sql:
+        m_query = 'let\n'
+        m_query += f'    // Source SAP HANA (Custom SQL): {server}:{port}\n'
+        m_query += f'    Source = SapHana.Database("{server}:{port}", '
+        m_query += f'[Implementation="2.0"]),\n'
+        m_query += f'    #"Query" = Value.NativeQuery(Source, '
+        m_query += f'"{_m_escape_string(custom_sql)}", null, '
+        m_query += f'[EnableFolding=true]),\n'
+        m_query += f'    Result = #"Query"\nin\n    Result'
+    else:
+        m_query = 'let\n'
+        m_query += f'    // Source SAP HANA: {server}:{port}/{schema}\n'
+        m_query += f'    Source = SapHana.Database("{server}:{port}", '
+        m_query += f'[Implementation="2.0"]),\n'
+        m_query += f'    #"{schema}" = Source{{[Schema="{schema}"]}}[Data],\n'
+        m_query += f'    #"{safe_table} Table" = #"{schema}"{{[Name="{safe_table}"]}}[Data],\n'
+        m_query += f'    Result = #"{safe_table} Table"\nin\n    Result'
+    return m_query
+
+
+def _gen_m_redshift_depth(details, table_name, columns):
+    """Amazon Redshift with schema navigation and Spectrum support."""
+    server = _m_escape_string(details.get('server', 'cluster.region.redshift.amazonaws.com'))
+    port = details.get('port', '5439')
+    database = _m_escape_string(details.get('database', 'dev'))
+    schema = _m_escape_string(details.get('schema', 'public'))
+    safe_table = _m_escape_string(table_name)
+    m_query = 'let\n'
+    m_query += f'    // Source Amazon Redshift: {server}:{port}/{database}\n'
+    m_query += f'    Source = AmazonRedshift.Database("{server}:{port}", "{database}"),\n'
+    m_query += f'    #"{schema}" = Source{{[Name="{schema}"]}}[Data],\n'
+    m_query += f'    #"{safe_table} Table" = #"{schema}"{{[Name="{safe_table}"]}}[Data],\n'
+    m_query += f'    Result = #"{safe_table} Table"\nin\n    Result'
+    return m_query
+
+
+
 _M_GENERATORS = {
     'Excel':            _gen_m_excel,
     'SQL Server':       _gen_m_sql_server,
@@ -911,6 +1036,21 @@ _M_GENERATORS = {
     'IBM DB2':          _gen_m_db2,
     'DB2':              _gen_m_db2,
     'db2':              _gen_m_db2,
+    # Sprint 155: New Cloud & SaaS connectors
+    'ServiceNow':       _gen_m_servicenow,
+    'servicenow':       _gen_m_servicenow,
+    'Databricks Unity': _gen_m_databricks_unity,
+    'databricks-unity-catalog': _gen_m_databricks_unity,
+    'Denodo':           _gen_m_denodo,
+    'denodo':           _gen_m_denodo,
+    'Essbase':          _gen_m_essbase,
+    'Oracle Essbase':   _gen_m_essbase,
+    'Hyperion':         _gen_m_essbase,
+    'essbase':          _gen_m_essbase,
+    'Splunk':           _gen_m_splunk,
+    'splunk':           _gen_m_splunk,
+    'SAP HANA Deep':    _gen_m_sap_hana_depth,
+    'Redshift Deep':    _gen_m_redshift_depth,
 }
 
 

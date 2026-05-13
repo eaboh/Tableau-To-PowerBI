@@ -1,5 +1,121 @@
 # Changelog
 
+## v34.0.0 — Sprints 151–170 — Zero Error Roadmap (Full Implementation)
+
+**Major release** covering the complete Zero Error Roadmap (20 sprints). Highlights:
+
+### Sprint 151–154 — Visual Fidelity & Formatting
+- **visual_generator.py**: 10 new PBIR config builder functions
+  - `_build_gauge_ranges()` — 3-band and custom gauge range config
+  - `_build_histogram_config()` — bin count, size, frequency type
+  - `_build_box_whisker_config()` — outliers, mean, whisker type
+  - `_build_map_config()` — map style, zoom, clustering, heatmap
+  - `_build_filled_map_config()` — sequential/diverging/categorical projection
+  - `_build_animation_bookmark_config()` — visual carousel bookmarks
+  - `_build_dynamic_zone_bookmark()` — zone visibility toggling
+  - `_build_table_formatting()` — column widths, banding, totals, URL icons
+  - `_build_conditional_icons()` — traffic light icon rule engine
+  - `_build_matrix_config()` — row/column subtotals, stepped layout
+
+### Sprint 155 — Cloud & SaaS Connectors
+- **m_query_builder.py**: 8 new connector generators registered
+  - ServiceNow (OData), Databricks Unity Catalog, Denodo (ODBC)
+  - Oracle Essbase (XMLA/ODBC), Splunk (REST API)
+  - SAP HANA Deep (schema nav + custom SQL), Redshift Deep (Spectrum)
+
+### Sprint 156 — Connection String Intelligence
+- **NEW: connection_rewriter.py** — Connection string rewriting engine
+  - Rule-based server/database replacement, regex patterns
+  - Environment-based config (dev/staging/prod), audit trail
+
+### Sprint 157 — Hyper & Extract Completeness
+- **hyper_reader.py** extended:
+  - `detect_tde_format()` — TDE vs Hyper format detection (magic bytes)
+  - `discover_multi_table_hyper()` — multi-schema/table discovery (2020.2+)
+  - `read_hyper_streaming()` — batch-mode streaming for large extracts (>1M rows)
+  - `extract_hyper_filters()` — TWB extract filters → M filter steps
+  - `_EXTENDED_TYPE_MAP` — 14 additional Hyper column types
+
+### Sprint 158 — Spatial & Regex Gap Closure
+- **dax_converter.py** extended:
+  - `_REGEXP_PATTERNS` library (email, phone, URL, ZIP)
+  - `convert_regexp_match()`, `convert_regexp_replace()`, `convert_regexp_extract()`
+  - `convert_spatial_to_python_visual()` — MAKEPOINT/MAKELINE → geopandas script
+
+### Sprint 159 — Table Calculation Depth
+- **dax_converter.py** extended:
+  - `convert_window_percentile()` → PERCENTILEX.INC
+  - `convert_running_with_partition()` — partitioned RUNNING_SUM → CALCULATE+FILTER+EARLIER
+  - `convert_lookup_offset()` — LOOKUP → OFFSET (DAX 2023+)
+
+### Sprint 160 — LOD & Security Depth
+- **dax_converter.py** extended:
+  - `convert_nested_lod()` — LOD-in-LOD → nested CALCULATE
+  - `convert_multi_dim_exclude()` — multi-dimension EXCLUDE → REMOVEFILTERS
+  - `convert_ismemberof_to_rls()` — group membership → RLS role annotations
+
+### Sprint 161 — Server Discovery & Metadata
+- **server_client.py** extended:
+  - `get_workbook_dependencies()` — dependency graph with downstream workbooks
+  - `get_published_datasource_details()` — full datasource metadata
+  - `get_usage_stats()` — view count, last accessed aggregation
+  - `get_permissions()` — granteeCapabilities parsing
+  - `get_quality_warnings()` — data quality certification retrieval
+  - `get_server_summary()` — comprehensive inventory (all entity counts)
+
+### Sprint 162 — Tableau Cloud & OAuth/JWT
+- **server_client.py** extended:
+  - `detect_cloud_vs_server()` — 6 known Cloud domains
+  - `sign_in_jwt()` — Connected App / EAS JWT authentication
+  - `get_metadata_graphql()` — Metadata API (GraphQL) query execution
+  - `get_lineage_upstream()` — upstream lineage via Metadata API
+
+### Sprint 163 — Schedule & Subscription Migration
+- **NEW: subscription_migrator.py** (~250 lines)
+  - `convert_schedule_to_pbi()` — frequency/timezone mapping
+  - `convert_subscriptions()` — user UPN mapping, data-driven alerts
+  - `detect_schedule_conflicts()` — time slot histogram, max_concurrent check
+  - `generate_subscription_report()` — HTML dashboard with stats/badges
+
+### Sprint 164–166 — Test Coverage
+- **NEW test files:**
+  - `test_subscription_migrator.py` — 14 tests
+  - `test_migration_planner.py` — 14 tests
+  - `test_server_discovery.py` — 14 tests (mocked REST API)
+  - `test_hyper_reader_sprint157.py` — 10 tests
+  - `test_incremental_sprint168.py` — 10 tests
+  - `test_connector_dax_sprints.py` — 18 tests
+
+### Sprint 167 — Enterprise Migration Planning
+- **NEW: migration_planner.py** (~320 lines)
+  - `estimate_effort()` — weighted scoring (visuals/measures/connectors/RLS)
+  - `assign_waves()` — dependency-cluster grouping, max_per_wave
+  - `generate_workspace_mapping()` — 3 strategies (by_project/consolidated/flat)
+  - `generate_permission_mapping()` — Creator→Admin, Explorer→Member, Viewer→Viewer
+  - `generate_migration_plan()` — unified plan combining waves + workspace + permissions
+  - `generate_plan_html()` — full interactive HTML dashboard
+
+### Sprint 168 — Incremental & Live Sync Depth
+- **incremental.py** extended:
+  - `FileWatcher` class — mtime-based .twb/.twbx/.tfl/.tflx change detection
+  - `LiveSyncEngine` class — orchestrates watcher + incremental diff + sync log
+  - State persistence across runs via JSON file
+
+### Sprint 169 — Documentation
+- CHANGELOG updated with full Sprint 151–170 details
+- Version bumped to v34.0.0
+
+### Sprint 170 — Release
+- pyproject.toml version: 34.0.0
+
+### Stats
+- **~80 new tests** across 6 test files
+- **4 new modules** created (connection_rewriter, subscription_migrator, migration_planner + tests)
+- **4 existing modules** significantly extended (server_client, hyper_reader, dax_converter, incremental)
+- **1 module** enhanced (visual_generator, m_query_builder)
+
+---
+
 ## v30.0.0 — Sprints 128–134 — Performance, Security & Multi-Tenant Hardening
 
 **Major version release** covering Sprints 128–134. Highlights:

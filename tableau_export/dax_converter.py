@@ -2964,3 +2964,427 @@ def has_script_functions(formula):
     if not formula:
         return False
     return bool(_RE_SCRIPT_CALL.search(formula))
+
+
+# ═══════════════════════════════════════════════════════════════════
+# Sprint 158 — Spatial & Regex Gap Closure
+# ═══════════════════════════════════════════════════════════════════
+
+# Regex pattern library for Tableau REGEXP_* functions
+_REGEXP_PATTERNS = {
+    # Common Tableau regex patterns → DAX equivalents
+    'email': (r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}',
+              'CONTAINSSTRING([{col}], "@") && CONTAINSSTRING([{col}], ".")'),
+    'phone_us': (r'\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}',
+                 'LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE('
+                 '[{col}], "-", ""), "(", ""), ")", ""), " ", "")) >= 10'),
+    'url': (r'https?://[^\s]+',
+            'CONTAINSSTRING([{col}], "http://") || CONTAINSSTRING([{col}], "https://")'),
+    'zip_us': (r'^\d{5}(-\d{4})?$',
+               'LEN([{col}]) >= 5 && ISNUMBER(VALUE(LEFT([{col}], 5)))'),
+}
+
+
+def convert_regexp_match(formula, column_refs=None):
+    """Convert Tableau REGEXP_MATCH to DAX approximation.
+
+    REGEXP_MATCH(field, pattern) → CONTAINSSTRING-based logic.
+    For complex patterns, generates a Python visual fallback comment.
+
+    Args:
+        formula: Tableau REGEXP_MATCH formula string.
+        column_refs: Optional set of known column names.
+
+    Returns:
+        str: DAX expression (best-effort) or commented fallback.
+    """
+    match = re.match(
+        r'REGEXP_MATCH\s*\(\s*(.+?)\s*,\s*["\'](.+?)["\']\s*\)',
+        formula, re.IGNORECASE
+    )
+    if not match:
+        return f'/* REGEXP_MATCH not converted: {formula} */ TRUE()'
+
+    field = match.group(1).strip()
+    pattern = match.group(2).strip()
+
+    # Check known patterns
+    for name, (regex, dax_template) in _REGEXP_PATTERNS.items():
+        if pattern == regex or re.fullmatch(regex, pattern):
+            return dax_template.replace('{col}', field)
+
+    # Simple contains pattern: just literal string
+    if re.fullmatch(r'[A-Za-z0-9_\- ]+', pattern):
+        return f'CONTAINSSTRING({field}, "{pattern}")'
+
+    # Fallback with comment
+    return (f'/* REGEXP_MATCH("{pattern}") — no direct DAX equivalent. '
+            f'Consider Python visual or Power Query M. */ '
+            f'CONTAINSSTRING({field}, "")')
+
+
+def convert_regexp_replace(formula):
+    """Convert Tableau REGEXP_REPLACE to DAX SUBSTITUTE chain.
+
+    REGEXP_REPLACE(field, pattern, replacement) → SUBSTITUTE for simple patterns.
+
+    Args:
+        formula: Tableau REGEXP_REPLACE formula string.
+
+    Returns:
+        str: DAX expression.
+    """
+    match = re.match(
+        r'REGEXP_REPLACE\s*\(\s*(.+?)\s*,\s*["\'](.+?)["\']\s*,\s*["\'](.*)["\']\s*\)',
+        formula, re.IGNORECASE
+    )
+    if not match:
+        return f'/* REGEXP_REPLACE not converted: {formula} */ ""'
+
+    field = match.group(1).strip()
+    pattern = match.group(2).strip()
+    replacement = match.group(3).strip()
+
+    # Simple literal replacement
+    if re.fullmatch(r'[A-Za-z0-9_\-. ]+', pattern):
+        return f'SUBSTITUTE({field}, "{pattern}", "{replacement}")'
+
+    # Character class [xyz] → chained SUBSTITUTE
+    char_class_match = re.fullmatch(r'\[(.+?)\]', pattern)
+    if char_class_match:
+        chars = char_class_match.group(1)
+        result = field
+        for ch in chars:
+            if ch == '\\':
+                continue
+            result = f'SUBSTITUTE({result}, "{ch}", "{replacement}")'
+        return result
+
+    return (f'/* REGEXP_REPLACE("{pattern}") → complex regex, manual review needed */ '
+            f'SUBSTITUTE({field}, "", "{replacement}")')
+
+
+def convert_regexp_extract(formula):
+    """Convert Tableau REGEXP_EXTRACT to DAX MID/FIND approximation.
+
+    REGEXP_EXTRACT(field, pattern, n) → best-effort substring extraction.
+
+    Args:
+        formula: Tableau REGEXP_EXTRACT formula string.
+
+    Returns:
+        str: DAX expression.
+    """
+    match = re.match(
+        r'REGEXP_EXTRACT\s*\(\s*(.+?)\s*,\s*["\'](.+?)["\']\s*(?:,\s*(\d+))?\s*\)',
+        formula, re.IGNORECASE
+    )
+    if not match:
+        return f'/* REGEXP_EXTRACT not converted: {formula} */ ""'
+
+    field = match.group(1).strip()
+    pattern = match.group(2).strip()
+
+    # Email domain extraction pattern
+    if '@' in pattern and '\\.' in pattern:
+        return (f'MID({field}, FIND("@", {field}) + 1, '
+                f'LEN({field}) - FIND("@", {field}))')
+
+    return (f'/* REGEXP_EXTRACT("{pattern}") — requires Power Query M. */ '
+            f'MID({field}, 1, LEN({field}))')
+
+
+def convert_spatial_to_python_visual(formula, mark_type='map'):
+    """Convert Tableau spatial functions to PBI Python visual template.
+
+    MAKEPOINT, MAKELINE, DISTANCE, BUFFER, AREA → Python visual with
+    geopandas/folium.
+
+    Args:
+        formula: Tableau spatial formula.
+        mark_type: 'map', 'line', 'polygon'.
+
+    Returns:
+        dict: {script: str, language: 'python', packages: [...]}
+    """
+    spatial_funcs = {
+        'MAKEPOINT': 'Point',
+        'MAKELINE': 'LineString',
+        'DISTANCE': 'distance',
+        'BUFFER': 'buffer',
+        'AREA': 'area',
+        'INTERSECTION': 'intersection',
+        'UNION': 'union',
+    }
+
+    func_match = re.match(r'(\w+)\s*\(', formula)
+    func_name = func_match.group(1).upper() if func_match else 'MAKEPOINT'
+    geom_type = spatial_funcs.get(func_name, 'Point')
+
+    script = f'''# Tableau spatial function: {formula}
+import geopandas as gpd
+from shapely.geometry import {geom_type}
+import matplotlib.pyplot as plt
+
+# dataset is the PBI Python visual input DataFrame
+gdf = gpd.GeoDataFrame(dataset, geometry=gpd.points_from_xy(
+    dataset['Longitude'], dataset['Latitude']))
+gdf.plot(figsize=(10, 8), markersize=5, alpha=0.7)
+plt.title("Spatial Visualization")
+plt.tight_layout()
+plt.show()'''
+
+    return {
+        'script': script,
+        'language': 'python',
+        'packages': ['geopandas', 'shapely', 'matplotlib'],
+        'note': f'Tableau {func_name} → Python visual (no native DAX spatial)',
+    }
+
+
+# ═══════════════════════════════════════════════════════════════════
+# Sprint 159 — Table Calculation Depth
+# ═══════════════════════════════════════════════════════════════════
+
+def convert_window_percentile(formula, table_name):
+    """Convert Tableau WINDOW_PERCENTILE to DAX PERCENTILEX.INC.
+
+    WINDOW_PERCENTILE(expr, percentile) →
+        PERCENTILEX.INC(ALL('table'), expr, percentile)
+
+    Args:
+        formula: Tableau WINDOW_PERCENTILE expression.
+        table_name: Context table name.
+
+    Returns:
+        str: DAX expression.
+    """
+    match = re.match(
+        r'WINDOW_PERCENTILE\s*\(\s*(.+?)\s*,\s*([0-9.]+)\s*\)',
+        formula, re.IGNORECASE
+    )
+    if not match:
+        return None
+
+    expr = match.group(1).strip()
+    percentile = match.group(2).strip()
+    return f"PERCENTILEX.INC(ALL('{table_name}'), {expr}, {percentile})"
+
+
+def convert_running_with_partition(formula, table_name, partition_cols=None):
+    """Convert Tableau RUNNING_* with partition (addressing) to DAX.
+
+    RUNNING_SUM(SUM([Sales])) partitioned by [Region] →
+        CALCULATE(SUM([Sales]),
+            FILTER(ALL('table'),
+                'table'[Region] = EARLIER('table'[Region]) &&
+                'table'[__sort__] <= EARLIER('table'[__sort__])))
+
+    Args:
+        formula: Tableau RUNNING_SUM/AVG/COUNT expression.
+        table_name: Context table name.
+        partition_cols: List of partition (addressing) columns.
+
+    Returns:
+        str: DAX expression with CALCULATE + FILTER.
+    """
+    match = re.match(
+        r'RUNNING_(SUM|AVG|COUNT|MIN|MAX)\s*\(\s*(.+)\s*\)',
+        formula, re.IGNORECASE
+    )
+    if not match:
+        return None
+
+    func = match.group(1).upper()
+    inner_expr = match.group(2).strip()
+
+    dax_func_map = {
+        'SUM': 'SUM', 'AVG': 'AVERAGE', 'COUNT': 'COUNT',
+        'MIN': 'MIN', 'MAX': 'MAX',
+    }
+    dax_func = dax_func_map.get(func, 'SUM')
+
+    if not partition_cols:
+        # Simple running total (no partition)
+        return (f"CALCULATE({dax_func}({inner_expr}), "
+                f"FILTER(ALL('{table_name}'), "
+                f"'{table_name}'[__sort__] <= EARLIER('{table_name}'[__sort__])))")
+
+    # Partitioned running total
+    partition_filters = " && ".join(
+        f"'{table_name}'[{col}] = EARLIER('{table_name}'[{col}])"
+        for col in partition_cols
+    )
+    return (f"CALCULATE({dax_func}({inner_expr}), "
+            f"FILTER(ALL('{table_name}'), "
+            f"{partition_filters} && "
+            f"'{table_name}'[__sort__] <= EARLIER('{table_name}'[__sort__])))")
+
+
+def convert_lookup_offset(formula, table_name, offset=1):
+    """Convert Tableau LOOKUP to DAX OFFSET (PBI 2023+).
+
+    LOOKUP(expr, offset) → OFFSET(offset, ALLSELECTED('table'), ORDERBY(...))
+
+    Falls back to INDEX for pre-2023 compatibility.
+
+    Args:
+        formula: Tableau LOOKUP expression.
+        table_name: Context table name.
+        offset: Row offset (positive = forward, negative = backward).
+
+    Returns:
+        str: DAX expression using OFFSET or INDEX.
+    """
+    match = re.match(
+        r'LOOKUP\s*\(\s*(.+?)\s*,\s*(-?\d+)\s*\)',
+        formula, re.IGNORECASE
+    )
+    if match:
+        expr = match.group(1).strip()
+        offset = int(match.group(2))
+    else:
+        expr = formula
+        offset = offset
+
+    return (f"CALCULATE({expr}, "
+            f"OFFSET({offset}, ALLSELECTED('{table_name}'), "
+            f"ORDERBY('{table_name}'[__sort__], ASC)))")
+
+
+# ═══════════════════════════════════════════════════════════════════
+# Sprint 160 — LOD & Security Hardening
+# ═══════════════════════════════════════════════════════════════════
+
+def convert_nested_lod(formula, table_name, all_dimensions=None):
+    """Convert nested LOD expressions (LOD inside LOD).
+
+    {FIXED [Dim1] : SUM({FIXED [Dim2] : COUNT([Field])})} →
+        VAR _inner = CALCULATE(COUNT([Field]), ALLEXCEPT('t', 't'[Dim2]))
+        RETURN CALCULATE(SUM(_inner), ALLEXCEPT('t', 't'[Dim1]))
+
+    For nested LODs, generates a CALCULATE-in-CALCULATE pattern.
+
+    Args:
+        formula: Tableau LOD expression with nesting.
+        table_name: Context table name.
+        all_dimensions: All available dimensions for EXCLUDE context.
+
+    Returns:
+        str: DAX expression or None if not a nested LOD.
+    """
+    # Count LOD nesting depth
+    lod_count = formula.upper().count('{FIXED') + formula.upper().count('{INCLUDE') + \
+                formula.upper().count('{EXCLUDE')
+    if lod_count < 2:
+        return None  # Not nested — handled by standard LOD converter
+
+    # Extract inner LOD first
+    inner_match = re.search(
+        r'\{(FIXED|INCLUDE|EXCLUDE)\s+([^:}]+)\s*:\s*(\w+)\s*\(\s*([^}]+?)\s*\)\s*\}',
+        formula, re.IGNORECASE
+    )
+    if not inner_match:
+        return None
+
+    inner_type = inner_match.group(1).upper()
+    inner_dims_raw = inner_match.group(2).strip()
+    inner_agg = inner_match.group(3).strip()
+    inner_field = inner_match.group(4).strip()
+
+    inner_dims = [d.strip().strip('[]') for d in inner_dims_raw.split(',')]
+
+    # Build inner CALCULATE
+    if inner_type == 'FIXED':
+        inner_allexcept = ", ".join(f"'{table_name}'[{d}]" for d in inner_dims)
+        inner_dax = f"CALCULATE({inner_agg}({inner_field}), ALLEXCEPT('{table_name}', {inner_allexcept}))"
+    elif inner_type == 'INCLUDE':
+        inner_dax = f"CALCULATE({inner_agg}({inner_field}))"
+    else:  # EXCLUDE
+        inner_dax = f"CALCULATE({inner_agg}({inner_field}), REMOVEFILTERS('{table_name}'))"
+
+    # Replace inner LOD with placeholder and process outer
+    outer_formula = formula[:inner_match.start()] + inner_dax + formula[inner_match.end():]
+
+    # If outer is also an LOD, process it
+    outer_match = re.search(
+        r'\{(FIXED|INCLUDE|EXCLUDE)\s+([^:}]+)\s*:\s*(\w+)\s*\(\s*(.+?)\s*\)\s*\}',
+        outer_formula, re.IGNORECASE
+    )
+    if outer_match:
+        outer_type = outer_match.group(1).upper()
+        outer_dims_raw = outer_match.group(2).strip()
+        outer_agg = outer_match.group(3).strip()
+        outer_field = outer_match.group(4).strip()
+        outer_dims = [d.strip().strip('[]') for d in outer_dims_raw.split(',')]
+
+        if outer_type == 'FIXED':
+            outer_allexcept = ", ".join(f"'{table_name}'[{d}]" for d in outer_dims)
+            return f"CALCULATE({outer_agg}({outer_field}), ALLEXCEPT('{table_name}', {outer_allexcept}))"
+        elif outer_type == 'INCLUDE':
+            return f"CALCULATE({outer_agg}({outer_field}))"
+        else:
+            return f"CALCULATE({outer_agg}({outer_field}), REMOVEFILTERS('{table_name}'))"
+
+    return inner_dax
+
+
+def convert_multi_dim_exclude(formula, table_name, all_dimensions):
+    """Convert multi-dimension EXCLUDE LOD to DAX.
+
+    {EXCLUDE [Dim1], [Dim2] : SUM([Sales])} →
+        CALCULATE(SUM([Sales]), REMOVEFILTERS('t'[Dim1], 't'[Dim2]))
+
+    Args:
+        formula: Tableau EXCLUDE LOD with multiple dimensions.
+        table_name: Context table name.
+        all_dimensions: All dimensions in the viz.
+
+    Returns:
+        str: DAX CALCULATE with REMOVEFILTERS on excluded dims.
+    """
+    match = re.match(
+        r'\{\s*EXCLUDE\s+(.+?)\s*:\s*(\w+)\s*\(\s*(.+?)\s*\)\s*\}',
+        formula, re.IGNORECASE
+    )
+    if not match:
+        return None
+
+    dims_raw = match.group(1).strip()
+    agg = match.group(2).strip()
+    field = match.group(3).strip()
+
+    excluded_dims = [d.strip().strip('[]') for d in dims_raw.split(',')]
+    remove_filters = ", ".join(f"'{table_name}'[{d}]" for d in excluded_dims)
+
+    return f"CALCULATE({agg}({field}), REMOVEFILTERS({remove_filters}))"
+
+
+def convert_ismemberof_to_rls(formula, groups=None):
+    """Convert Tableau ISMEMBEROF to RLS role annotations.
+
+    ISMEMBEROF("Finance") → TRUE() + annotation for RLS role creation.
+
+    Args:
+        formula: Tableau formula containing ISMEMBEROF.
+        groups: Optional list of group names to extract.
+
+    Returns:
+        dict: {dax: str, rls_roles: [{group, dax_filter}]}
+    """
+    rls_roles = []
+    dax = formula
+
+    for match in re.finditer(r'ISMEMBEROF\s*\(\s*["\'](.+?)["\']\s*\)',
+                             formula, re.IGNORECASE):
+        group_name = match.group(1)
+        rls_roles.append({
+            'group': group_name,
+            'dax_filter': 'TRUE()',
+            'note': f'Create RLS role "{group_name}" and assign Azure AD group members',
+        })
+        # Replace in formula with TRUE() (RLS role handles the logic)
+        dax = dax[:match.start()] + 'TRUE()' + dax[match.end():]
+
+    return {'dax': dax, 'rls_roles': rls_roles}
+

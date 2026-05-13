@@ -890,3 +890,259 @@ def get_hyper_metadata(file_path, max_rows=0):
         ],
         'recommendations': recommendations,
     }
+
+
+# ═══════════════════════════════════════════════════════════════════
+# Sprint 157 — Hyper & Extract Completeness
+# ═══════════════════════════════════════════════════════════════════
+
+# Extended type mapping for rarely-seen Hyper column types
+_EXTENDED_TYPE_MAP = {
+    'GEOGRAPHY': 'Text',
+    'GEOMETRY': 'Text',
+    'INTERVAL_DAY_TIME': 'Text',
+    'INTERVAL_YEAR_MONTH': 'Text',
+    'OID': 'Int64',
+    'BYTES': 'Text',
+    'JSON': 'Text',
+    'ARRAY': 'Text',
+    'MAP': 'Text',
+    'STRUCT': 'Text',
+    'UUID': 'Text',
+    'DURATION': 'Text',
+    'TIMESTAMP_TZ': 'DateTimeZone',
+    'TIME': 'Time',
+}
+
+
+def detect_tde_format(file_path):
+    """Detect if a file is a legacy TDE (Tableau Data Engine) format.
+
+    TDE files were used before Hyper (Tableau 10.5+). They have a
+    different binary header that starts with specific magic bytes.
+
+    Args:
+        file_path: Path to the .tde or .hyper file.
+
+    Returns:
+        dict: {is_tde: bool, format_version: str, migration_note: str}
+    """
+    if not os.path.isfile(file_path):
+        return {'is_tde': False, 'format_version': 'unknown',
+                'migration_note': 'File not found'}
+
+    try:
+        with open(file_path, 'rb') as f:
+            header = f.read(64)
+    except OSError:
+        return {'is_tde': False, 'format_version': 'unknown',
+                'migration_note': 'Cannot read file'}
+
+    # TDE magic bytes (legacy format)
+    if header[:4] == b'\x00\x00\x00\x00' or b'TDE' in header[:32]:
+        return {
+            'is_tde': True,
+            'format_version': 'TDE (pre-10.5)',
+            'migration_note': (
+                'Legacy TDE format detected. Convert to .hyper using '
+                'Tableau Desktop "Extract > Upgrade" before migration, '
+                'or data will be skipped.'
+            ),
+        }
+
+    # Hyper magic: SQLite-like header
+    if header[:6] == b'SQLite' or b'hyper' in header[:64].lower():
+        return {
+            'is_tde': False,
+            'format_version': 'Hyper',
+            'migration_note': '',
+        }
+
+    return {
+        'is_tde': False,
+        'format_version': 'unknown',
+        'migration_note': 'Unrecognized extract format',
+    }
+
+
+def discover_multi_table_hyper(file_path):
+    """Discover all tables in a multi-table Hyper file.
+
+    Multi-table extracts (Tableau 2020.2+) can contain multiple schemas
+    and tables. This function discovers all of them.
+
+    Args:
+        file_path: Path to .hyper file.
+
+    Returns:
+        list[dict]: Table metadata [{schema, table, columns, row_count}]
+    """
+    tables = []
+
+    # Try tableauhyperapi first
+    try:
+        from tableauhyperapi import HyperProcess, Connection, Telemetry
+        with HyperProcess(Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU) as hp:
+            with Connection(hp.endpoint, file_path) as conn:
+                catalog = conn.catalog
+                for schema_name in catalog.get_schema_names():
+                    for table_name in catalog.get_table_names(schema_name):
+                        table_def = catalog.get_table_definition(table_name)
+                        columns = []
+                        for col in table_def.columns:
+                            col_type = str(col.type).upper()
+                            m_type = _EXTENDED_TYPE_MAP.get(
+                                col_type, _HYPER_TO_M_TYPE.get(col_type.lower(), 'Text'))
+                            columns.append({
+                                'name': col.name.unescaped,
+                                'hyper_type': col_type,
+                                'm_type': m_type,
+                                'nullable': col.nullability.is_nullable,
+                            })
+                        # Get row count
+                        row_count = conn.execute_scalar_query(
+                            f'SELECT COUNT(*) FROM {table_name}')
+                        tables.append({
+                            'schema': str(schema_name),
+                            'table': str(table_name.name.unescaped),
+                            'columns': columns,
+                            'row_count': row_count,
+                        })
+        return tables
+    except ImportError:
+        pass
+    except Exception as e:
+        logger.warning(f'tableauhyperapi multi-table discovery failed: {e}')
+
+    # Fallback: SQLite approach (single-schema only)
+    try:
+        import sqlite3
+        conn = sqlite3.connect(file_path)
+        cursor = conn.cursor()
+        cursor.execute(
+            "SELECT name FROM sqlite_master WHERE type='table' "
+            "AND name NOT LIKE 'sqlite_%'")
+        for (table_name,) in cursor.fetchall():
+            cursor.execute(f'PRAGMA table_info("{table_name}")')
+            columns = [{
+                'name': row[1],
+                'hyper_type': row[2].upper(),
+                'm_type': _EXTENDED_TYPE_MAP.get(
+                    row[2].upper(), _HYPER_TO_M_TYPE.get(row[2].lower(), 'Text')),
+                'nullable': not row[3],
+            } for row in cursor.fetchall()]
+
+            cursor.execute(f'SELECT COUNT(*) FROM "{table_name}"')
+            row_count = cursor.fetchone()[0]
+
+            tables.append({
+                'schema': 'Extract',
+                'table': table_name,
+                'columns': columns,
+                'row_count': row_count,
+            })
+        conn.close()
+    except Exception as e:
+        logger.warning(f'SQLite multi-table discovery failed: {e}')
+
+    return tables
+
+
+def read_hyper_streaming(file_path, table_name=None, batch_size=10000):
+    """Read Hyper data in streaming batches for large extracts.
+
+    Yields batches of rows instead of loading entire table into memory.
+    Useful for extracts with >1M rows.
+
+    Args:
+        file_path: Path to .hyper file.
+        table_name: Specific table name (None = first table).
+        batch_size: Number of rows per batch.
+
+    Yields:
+        list[list]: Batches of row data.
+    """
+    try:
+        from tableauhyperapi import (HyperProcess, Connection, Telemetry,
+                                      TableName)
+        with HyperProcess(Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU) as hp:
+            with Connection(hp.endpoint, file_path) as conn:
+                if table_name:
+                    tbl = TableName('Extract', table_name)
+                else:
+                    schemas = conn.catalog.get_schema_names()
+                    tables = conn.catalog.get_table_names(schemas[0])
+                    tbl = tables[0]
+
+                with conn.execute_query(f'SELECT * FROM {tbl}') as result:
+                    batch = []
+                    for row in result:
+                        batch.append(list(row))
+                        if len(batch) >= batch_size:
+                            yield batch
+                            batch = []
+                    if batch:
+                        yield batch
+    except ImportError:
+        logger.warning('tableauhyperapi not available for streaming read')
+    except Exception as e:
+        logger.error(f'Streaming read failed: {e}')
+
+
+def extract_hyper_filters(twb_xml_root, datasource_name):
+    """Extract extract-filter definitions from TWB XML.
+
+    Tableau extract filters reduce the data pulled into the extract.
+    These translate to WHERE clauses in M queries.
+
+    Args:
+        twb_xml_root: Parsed XML root element.
+        datasource_name: Name of the datasource to inspect.
+
+    Returns:
+        list[dict]: Filter definitions [{column, operator, values, m_filter}]
+    """
+    filters = []
+
+    # Find datasource element
+    for ds in twb_xml_root.iter('datasource'):
+        if ds.get('name') == datasource_name or ds.get('caption') == datasource_name:
+            # Look for extract filter elements
+            for ef in ds.iter('extract'):
+                for filt in ef.iter('filter'):
+                    col = filt.get('column', '')
+                    col_name = col.strip('[]').split('.')[-1] if col else ''
+
+                    # Get filter type and values
+                    member_list = [m.text for m in filt.iter('member') if m.text]
+                    min_val = filt.get('min', '')
+                    max_val = filt.get('max', '')
+
+                    if member_list:
+                        # Categorical filter
+                        values_str = ', '.join(f'"{v}"' for v in member_list)
+                        m_filter = (f'Table.SelectRows({{prev}}, each '
+                                    f'List.Contains({{{values_str}}}, [{{col}}]))')
+                        filters.append({
+                            'column': col_name,
+                            'operator': 'in',
+                            'values': member_list,
+                            'm_filter': m_filter.replace('{col}', col_name),
+                        })
+                    elif min_val or max_val:
+                        # Range filter
+                        conditions = []
+                        if min_val:
+                            conditions.append(f'[{col_name}] >= {min_val}')
+                        if max_val:
+                            conditions.append(f'[{col_name}] <= {max_val}')
+                        m_cond = ' and '.join(conditions)
+                        m_filter = f'Table.SelectRows({{prev}}, each {m_cond})'
+                        filters.append({
+                            'column': col_name,
+                            'operator': 'range',
+                            'values': {'min': min_val, 'max': max_val},
+                            'm_filter': m_filter,
+                        })
+
+    return filters

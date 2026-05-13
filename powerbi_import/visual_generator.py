@@ -454,8 +454,402 @@ def _build_sparkline_config(measure_name, table_name, date_column='Date',
 
 
 # ═══════════════════════════════════════════════════════════════════
-# Data Role Definitions per Visual Type
+# Sprint 151 — Advanced Visual Configuration Builders
 # ═══════════════════════════════════════════════════════════════════
+
+def _build_gauge_ranges(min_val=0, max_val=100, ranges=None):
+    """Build gauge visual range band configuration.
+
+    Args:
+        min_val: Gauge minimum value.
+        max_val: Gauge maximum value.
+        ranges: Optional list of dicts with keys: start, end, color, label.
+                If None, creates default 3-band (red/yellow/green).
+
+    Returns:
+        dict: PBIR gauge axis + target configuration with range colors.
+    """
+    if not ranges:
+        third = (max_val - min_val) / 3
+        ranges = [
+            {'start': min_val, 'end': min_val + third, 'color': '#F44336'},
+            {'start': min_val + third, 'end': min_val + 2 * third, 'color': '#FF9800'},
+            {'start': min_val + 2 * third, 'end': max_val, 'color': '#4CAF50'},
+        ]
+
+    return {
+        "objects": {
+            "axis": [{"properties": {
+                "min": _L(f"{int(min_val)}L"),
+                "max": _L(f"{int(max_val)}L"),
+            }}],
+            "target": [{"properties": {"show": _L("true")}}],
+            "range1": [{"properties": {
+                "startValue": _L(f"{ranges[0]['start']}D"),
+                "endValue": _L(f"{ranges[0]['end']}D"),
+                "fill": {"solid": {"color": ranges[0]['color']}},
+            }}] if len(ranges) > 0 else [],
+            "range2": [{"properties": {
+                "startValue": _L(f"{ranges[1]['start']}D"),
+                "endValue": _L(f"{ranges[1]['end']}D"),
+                "fill": {"solid": {"color": ranges[1]['color']}},
+            }}] if len(ranges) > 1 else [],
+            "range3": [{"properties": {
+                "startValue": _L(f"{ranges[2]['start']}D"),
+                "endValue": _L(f"{ranges[2]['end']}D"),
+                "fill": {"solid": {"color": ranges[2]['color']}},
+            }}] if len(ranges) > 2 else [],
+        }
+    }
+
+
+def _build_histogram_config(bin_count=10, bin_size=None, frequency_type='count'):
+    """Build histogram visual configuration.
+
+    Histogram in PBI uses clusteredColumnChart with special binning.
+    Generates the M step for bin creation and visual config.
+
+    Args:
+        bin_count: Number of bins (default 10).
+        bin_size: Explicit bin width (overrides bin_count if set).
+        frequency_type: 'count' or 'percent'.
+
+    Returns:
+        dict: Configuration for histogram visual with bin settings.
+    """
+    config = {
+        "objects": {
+            "xAxis": [{"properties": {
+                "show": _L("true"),
+                "labelDisplayUnits": _L("0L"),
+            }}],
+            "yAxis": [{"properties": {
+                "show": _L("true"),
+                "showAxisTitle": _L("true"),
+            }}],
+            "dataPoint": [{"properties": {
+                "fill": {"solid": {"color": "#4472C4"}},
+            }}],
+        },
+        "histogram": {
+            "binCount": bin_count,
+            "binSize": bin_size,
+            "frequencyType": frequency_type,
+        },
+    }
+    return config
+
+
+def _build_box_whisker_config(show_outliers=True, show_mean=True,
+                               orientation='vertical', whisker_type='minmax'):
+    """Build box-and-whisker configuration with outlier/mean markers.
+
+    Args:
+        show_outliers: Show individual outlier dots.
+        show_mean: Show mean marker (diamond).
+        orientation: 'vertical' or 'horizontal'.
+        whisker_type: 'minmax' (full range) or 'iqr' (1.5×IQR).
+
+    Returns:
+        dict: PBIR box-and-whisker visual configuration.
+    """
+    return {
+        "objects": {
+            "general": [{"properties": {
+                "orientation": _L(f"'{orientation.capitalize()}'"),
+            }}],
+            "dataPoint": [{"properties": {
+                "showAllDataPoints": _L("true"),
+            }}],
+            "outliers": [{"properties": {
+                "show": _L(str(show_outliers).lower()),
+            }}],
+            "meanLine": [{"properties": {
+                "show": _L(str(show_mean).lower()),
+            }}],
+            "whiskerType": whisker_type,
+        }
+    }
+
+
+# ═══════════════════════════════════════════════════════════════════
+# Sprint 152 — Map & Spatial Configuration Builders
+# ═══════════════════════════════════════════════════════════════════
+
+def _build_map_config(map_style='road', zoom_level=None, center_lat=None,
+                      center_lon=None, cluster_points=False,
+                      heat_intensity=0.5, bubble_size_range=None):
+    """Build map visual configuration with style, zoom, clustering.
+
+    Args:
+        map_style: 'road', 'aerial', 'dark', 'grayscale_light', 'grayscale_dark'.
+        zoom_level: Initial zoom level (1-19). None = auto-fit.
+        center_lat: Center latitude. None = auto-fit.
+        center_lon: Center longitude. None = auto-fit.
+        cluster_points: Enable point clustering for dense data.
+        heat_intensity: Heat map intensity (0-1).
+        bubble_size_range: (min_size, max_size) tuple for bubble maps.
+
+    Returns:
+        dict: PBIR map visual configuration.
+    """
+    style_map = {
+        'road': 'road',
+        'aerial': 'aerial',
+        'dark': 'road_dark',
+        'grayscale_light': 'grayscale_light',
+        'grayscale_dark': 'grayscale_dark',
+    }
+
+    config = {
+        "objects": {
+            "legend": [{"properties": {"show": _L("true")}}],
+            "mapControls": [{"properties": {
+                "mapStyle": _L(f"'{style_map.get(map_style, 'road')}'"),
+                "autoZoom": _L("true" if not zoom_level else "false"),
+            }}],
+        },
+    }
+
+    if zoom_level:
+        config["objects"]["mapControls"][0]["properties"]["zoomLevel"] = _L(f"{zoom_level}L")
+
+    if center_lat is not None and center_lon is not None:
+        config["objects"]["mapControls"][0]["properties"]["latitude"] = _L(f"{center_lat}D")
+        config["objects"]["mapControls"][0]["properties"]["longitude"] = _L(f"{center_lon}D")
+
+    if cluster_points:
+        config["objects"]["clusters"] = [{"properties": {
+            "show": _L("true"),
+            "clusterRadius": _L("50L"),
+        }}]
+
+    if bubble_size_range:
+        config["objects"]["bubbles"] = [{"properties": {
+            "minSize": _L(f"{bubble_size_range[0]}D"),
+            "maxSize": _L(f"{bubble_size_range[1]}D"),
+        }}]
+
+    return config
+
+
+def _build_filled_map_config(color_scheme='sequential', diverging_center=None,
+                              projection='mercator'):
+    """Build filled/choropleth map configuration.
+
+    Args:
+        color_scheme: 'sequential', 'diverging', or 'categorical'.
+        diverging_center: Center value for diverging schemes.
+        projection: 'mercator' or 'equirectangular'.
+
+    Returns:
+        dict: PBIR filled map configuration.
+    """
+    config = {
+        "objects": {
+            "legend": [{"properties": {"show": _L("true")}}],
+            "dataPoint": [{"properties": {"showAllDataPoints": _L("true")}}],
+        },
+    }
+
+    if color_scheme == 'diverging' and diverging_center is not None:
+        config["objects"]["dataPoint"][0]["properties"]["diverging"] = _L("true")
+        config["objects"]["dataPoint"][0]["properties"]["centerValue"] = _L(
+            f"{diverging_center}D")
+
+    return config
+
+
+# ═══════════════════════════════════════════════════════════════════
+# Sprint 153 — Rich Formatting Builders
+# ═══════════════════════════════════════════════════════════════════
+
+def _build_animation_bookmark_config(visual_ids, frame_duration_ms=2000):
+    """Build bookmark carousel config for Tableau animation page migration.
+
+    Tableau animations → PBI bookmark carousel (auto-play bookmarks
+    showing different filtered states).
+
+    Args:
+        visual_ids: List of visual container IDs to toggle.
+        frame_duration_ms: Time per frame in milliseconds.
+
+    Returns:
+        list[dict]: Bookmark objects forming the animation carousel.
+    """
+    bookmarks = []
+    for i, vid in enumerate(visual_ids):
+        bookmarks.append({
+            "$schema": "report/definition/bookmark/1.1.0/schema.json",
+            "name": f"animation_frame_{i + 1}",
+            "displayName": f"Frame {i + 1}",
+            "explorationState": {
+                "version": "1.0",
+                "activeSection": None,  # filled by caller
+                "filters": {
+                    "byVisual": {vid: {"isHidden": False}},
+                },
+            },
+            "options": {
+                "targetVisualIds": [vid],
+            },
+        })
+    return bookmarks
+
+
+def _build_dynamic_zone_bookmark(zone_name, visible_visuals, hidden_visuals):
+    """Build bookmark for Tableau dynamic zone → PBI bookmark toggle.
+
+    Args:
+        zone_name: Name of the dynamic zone (becomes bookmark displayName).
+        visible_visuals: List of visual IDs to show.
+        hidden_visuals: List of visual IDs to hide.
+
+    Returns:
+        dict: Bookmark definition toggling visual visibility.
+    """
+    by_visual = {}
+    for vid in visible_visuals:
+        by_visual[vid] = {"isHidden": False}
+    for vid in hidden_visuals:
+        by_visual[vid] = {"isHidden": True}
+
+    return {
+        "$schema": "report/definition/bookmark/1.1.0/schema.json",
+        "name": f"zone_{zone_name.replace(' ', '_').lower()}",
+        "displayName": zone_name,
+        "explorationState": {
+            "version": "1.0",
+            "filters": {"byVisual": by_visual},
+        },
+    }
+
+
+# ═══════════════════════════════════════════════════════════════════
+# Sprint 154 — Table & Matrix Configuration Builders
+# ═══════════════════════════════════════════════════════════════════
+
+def _build_table_formatting(column_widths=None, banding=True, totals='bottom',
+                             word_wrap=False, url_icon_columns=None):
+    """Build table/matrix formatting configuration.
+
+    Args:
+        column_widths: Dict of {column_name: width_px} or None for auto.
+        banding: Enable alternating row banding.
+        totals: 'top', 'bottom', 'both', or 'none'.
+        word_wrap: Enable word wrap in cells.
+        url_icon_columns: List of column names to render as URL hyperlinks.
+
+    Returns:
+        dict: PBIR table/matrix visual configuration objects.
+    """
+    config = {
+        "objects": {
+            "grid": [{"properties": {
+                "gridVertical": _L("true"),
+                "gridHorizontal": _L("true"),
+                "rowPadding": _L("3L"),
+            }}],
+            "columnFormatting": [{"properties": {
+                "wordWrap": _L(str(word_wrap).lower()),
+            }}],
+        },
+    }
+
+    if banding:
+        config["objects"]["values"] = [{"properties": {
+            "backColorAlternate": {"solid": {"color": "#F5F5F5"}},
+        }}]
+
+    show_totals = totals not in ('none', None)
+    config["objects"]["total"] = [{"properties": {
+        "show": _L(str(show_totals).lower()),
+    }}]
+    if totals == 'top':
+        config["objects"]["total"][0]["properties"]["position"] = _L("'Top'")
+
+    if column_widths:
+        config["columnWidths"] = column_widths
+
+    if url_icon_columns:
+        config["urlColumns"] = url_icon_columns
+
+    return config
+
+
+def _build_conditional_icons(column_name, table_name, thresholds=None):
+    """Build conditional formatting with icon sets for table/matrix.
+
+    Args:
+        column_name: Column to apply icons to.
+        table_name: Source table.
+        thresholds: List of {value, icon, color} dicts (ascending).
+                    Default: 3-level traffic light.
+
+    Returns:
+        dict: Conditional formatting rule for icon set.
+    """
+    if not thresholds:
+        thresholds = [
+            {'value': 0, 'icon': 'circle_red', 'color': '#F44336'},
+            {'value': 50, 'icon': 'circle_yellow', 'color': '#FF9800'},
+            {'value': 75, 'icon': 'circle_green', 'color': '#4CAF50'},
+        ]
+
+    rules = []
+    for i, t in enumerate(thresholds):
+        rules.append({
+            "inputValue": t.get('value', i * 33),
+            "icon": t.get('icon', f'circle_{i}'),
+            "iconColor": t.get('color', '#666666'),
+        })
+
+    return {
+        "type": "icons",
+        "field": {
+            "Column": {
+                "Expression": {"SourceRef": {"Entity": table_name}},
+                "Property": column_name,
+            }
+        },
+        "rules": rules,
+    }
+
+
+def _build_matrix_config(row_subtotals=True, column_subtotals=True,
+                          stepped_layout=True, expand_collapse=True):
+    """Build matrix visual configuration with subtotals and layout.
+
+    Args:
+        row_subtotals: Show row subtotals.
+        column_subtotals: Show column subtotals.
+        stepped_layout: Use stepped layout (indented hierarchy).
+        expand_collapse: Show expand/collapse (+/-) icons.
+
+    Returns:
+        dict: PBIR matrix visual configuration.
+    """
+    return {
+        "objects": {
+            "rowHeaders": [{"properties": {
+                "steppedLayoutIndentation": _L("20L") if stepped_layout else _L("0L"),
+            }}],
+            "subTotals": [{"properties": {
+                "rowSubtotals": _L(str(row_subtotals).lower()),
+                "columnSubtotals": _L(str(column_subtotals).lower()),
+            }}],
+            "general": [{"properties": {
+                "showExpandCollapseButtons": _L(str(expand_collapse).lower()),
+            }}],
+            "grid": [{"properties": {
+                "gridVertical": _L("true"),
+                "gridHorizontal": _L("true"),
+            }}],
+        }
+    }
+
+
+
 
 VISUAL_DATA_ROLES = {
     # (dimension_roles, measure_roles)

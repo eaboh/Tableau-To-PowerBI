@@ -581,3 +581,573 @@ class TableauServerClient:
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.sign_out()
         return False
+
+    # ═══════════════════════════════════════════════════════════════
+    # Sprint 161 — Server Discovery & Metadata
+    # ═══════════════════════════════════════════════════════════════
+
+    def get_workbook_dependencies(self, workbook_id):
+        """Get dependency graph for a workbook (datasources, views).
+
+        Args:
+            workbook_id: Workbook LUID.
+
+        Returns:
+            dict: {datasources: [ids], views: [ids], downstream: [wb_ids]}
+        """
+        # Connections show which datasources this workbook uses
+        connections = self.get_workbook_connections(workbook_id)
+        ds_ids = list({
+            c.get('datasource', {}).get('id', '')
+            for c in connections if c.get('datasource', {}).get('id')
+        })
+
+        # Find other workbooks using the same datasources
+        downstream = set()
+        all_workbooks = self.list_workbooks()
+        for wb in all_workbooks:
+            if wb.get('id') == workbook_id:
+                continue
+            try:
+                wb_conns = self.get_workbook_connections(wb['id'])
+                wb_ds_ids = {c.get('datasource', {}).get('id', '') for c in wb_conns}
+                if wb_ds_ids & set(ds_ids):
+                    downstream.add(wb['id'])
+            except Exception:
+                pass  # Skip workbooks we can't access
+
+        return {
+            'datasources': ds_ids,
+            'views': [v.get('id') for v in (self.list_views() or [])
+                      if v.get('workbook', {}).get('id') == workbook_id],
+            'downstream_workbooks': list(downstream),
+        }
+
+    def get_published_datasource_details(self, datasource_id):
+        """Get full metadata for a published datasource.
+
+        Args:
+            datasource_id: Datasource LUID.
+
+        Returns:
+            dict: Datasource metadata (name, type, connections, tables, owner).
+        """
+        url = f'{self.site_url}/datasources/{datasource_id}'
+        resp = self._request(url)
+        return resp.get('datasource', {})
+
+    def get_usage_stats(self, workbook_id, days=30):
+        """Get workbook usage statistics (view count, last access).
+
+        Args:
+            workbook_id: Workbook LUID.
+            days: Number of days to look back.
+
+        Returns:
+            dict: {totalViews, recentViews, lastAccessed, favorites}
+        """
+        # Views for this workbook
+        views = self.list_views()
+        wb_views = [v for v in (views or [])
+                    if v.get('workbook', {}).get('id') == workbook_id]
+
+        total_views = sum(v.get('usage', {}).get('totalViewCount', 0)
+                         for v in wb_views)
+
+        return {
+            'totalViews': total_views,
+            'viewCount': len(wb_views),
+            'lastAccessed': max(
+                (v.get('updatedAt', '') for v in wb_views), default=''),
+        }
+
+    def get_permissions(self, workbook_id):
+        """Get workbook permissions (users, groups, capabilities).
+
+        Args:
+            workbook_id: Workbook LUID.
+
+        Returns:
+            list[dict]: Permission entries with granteeType, capabilities.
+        """
+        url = f'{self.site_url}/workbooks/{workbook_id}/permissions'
+        resp = self._request(url)
+        perms_data = resp.get('permissions', {})
+        grant_list = perms_data.get('granteeCapabilities', [])
+
+        permissions = []
+        for grant in grant_list:
+            grantee = grant.get('user') or grant.get('group', {})
+            grantee_type = 'user' if 'user' in grant else 'group'
+            capabilities = {}
+            for cap in grant.get('capabilities', {}).get('capability', []):
+                capabilities[cap.get('name', '')] = cap.get('mode', '')
+
+            permissions.append({
+                'granteeType': grantee_type,
+                'granteeName': grantee.get('name', ''),
+                'granteeId': grantee.get('id', ''),
+                'capabilities': capabilities,
+            })
+
+        return permissions
+
+    def get_quality_warnings(self, content_type='workbook', content_id=None):
+        """Get data quality warnings/certifications for content.
+
+        Args:
+            content_type: 'workbook', 'datasource', or 'table'.
+            content_id: Content LUID (optional — returns all if None).
+
+        Returns:
+            list[dict]: Quality warning metadata.
+        """
+        url = f'{self.site_url}/dataQualityWarnings'
+        if content_id:
+            url = (f'{self.site_url}/{content_type}s/{content_id}'
+                   f'/dataQualityWarnings')
+        try:
+            resp = self._request(url)
+            return resp.get('dataQualityWarnings', {}).get(
+                'dataQualityWarning', [])
+        except Exception:
+            return []  # API may not be available on older servers
+
+    def get_server_summary(self):
+        """Get comprehensive server inventory summary.
+
+        Returns:
+            dict: {workbooks, datasources, users, groups, projects, schedules,
+                   prep_flows, site_info}
+        """
+        return {
+            'site_info': self.get_site_info(),
+            'workbook_count': len(self.list_workbooks() or []),
+            'datasource_count': len(self.list_datasources() or []),
+            'user_count': len(self.list_users() or []),
+            'group_count': len(self.list_groups() or []),
+            'project_count': len(self.list_projects() or []),
+            'schedule_count': len(self.list_schedules() or []),
+            'prep_flow_count': len(self.list_prep_flows() or []),
+        }
+
+    # ═══════════════════════════════════════════════════════════════
+    # Sprint 162 — Tableau Cloud & OAuth/JWT Authentication
+    # ═══════════════════════════════════════════════════════════════
+
+    def detect_cloud_vs_server(self):
+        """Detect if connected to Tableau Cloud or Tableau Server.
+
+        Returns:
+            str: 'cloud' or 'server'
+        """
+        if not self.server_url:
+            return 'server'
+        cloud_domains = [
+            'online.tableau.com',
+            '10ax.online.tableau.com',
+            'prod-useast-a.online.tableau.com',
+            'prod-useast-b.online.tableau.com',
+            'eu-west-1a.online.tableau.com',
+            'prod-apnortheast-a.online.tableau.com',
+        ]
+        for domain in cloud_domains:
+            if domain in self.server_url.lower():
+                return 'cloud'
+        return 'server'
+
+    def sign_in_jwt(self, jwt_token, site_name=''):
+        """Authenticate using JWT (Connected App or EAS).
+
+        Tableau Cloud and Server 2021.4+ support JWT-based authentication
+        via Connected Apps or External Authorization Server (EAS).
+
+        Args:
+            jwt_token: Pre-signed JWT token string.
+            site_name: Site content URL (empty for default site).
+
+        Returns:
+            bool: True if authentication succeeded.
+        """
+        url = f'{self.server_url}/api/{self.api_version}/auth/signin'
+        payload = json.dumps({
+            'credentials': {
+                'jwt': jwt_token,
+                'site': {'contentUrl': site_name or self.site_id},
+            }
+        })
+
+        try:
+            resp = self._request(url, method='POST', data=payload,
+                                 skip_auth=True)
+            creds = resp.get('credentials', {})
+            self._auth_token = creds.get('token', '')
+            site_data = creds.get('site', {})
+            self._site_luid = site_data.get('id', '')
+            logger.info(f'JWT sign-in successful (site: {self._site_luid})')
+            return True
+        except Exception as e:
+            logger.error(f'JWT sign-in failed: {e}')
+            return False
+
+    def get_metadata_graphql(self, query, variables=None):
+        """Execute a Metadata API (GraphQL) query.
+
+        Tableau Server 2019.3+ and Tableau Cloud expose a GraphQL-based
+        Metadata API for lineage, schema, and quality information.
+
+        Args:
+            query: GraphQL query string.
+            variables: Optional dict of query variables.
+
+        Returns:
+            dict: GraphQL response data.
+        """
+        url = f'{self.server_url}/api/metadata/graphql'
+        payload = json.dumps({
+            'query': query,
+            'variables': variables or {},
+        })
+
+        try:
+            resp = self._request(url, method='POST', data=payload)
+            return resp.get('data', {})
+        except Exception as e:
+            logger.error(f'Metadata GraphQL query failed: {e}')
+            return {}
+
+    def get_lineage_upstream(self, workbook_id):
+        """Get upstream lineage for a workbook using Metadata API.
+
+        Returns tables, databases, and datasources that feed this workbook.
+
+        Args:
+            workbook_id: Workbook LUID.
+
+        Returns:
+            dict: {databases: [...], tables: [...], datasources: [...]}
+        """
+        query = '''
+        query GetWorkbookLineage($id: String!) {
+            workbooks(filter: {luid: $id}) {
+                upstreamDatasources {
+                    name
+                    id
+                    upstreamTables {
+                        name
+                        fullName
+                        database { name connectionType }
+                    }
+                }
+                upstreamTables {
+                    name
+                    fullName
+                    database { name connectionType }
+                }
+            }
+        }'''
+        data = self.get_metadata_graphql(query, {'id': workbook_id})
+        workbooks = data.get('workbooks', [])
+        if not workbooks:
+            return {'databases': [], 'tables': [], 'datasources': []}
+
+        wb = workbooks[0]
+        tables = wb.get('upstreamTables', [])
+        datasources = wb.get('upstreamDatasources', [])
+
+        databases = list({
+            t.get('database', {}).get('name', '')
+            for t in tables if t.get('database')
+        })
+
+        return {
+            'databases': databases,
+            'tables': tables,
+            'datasources': datasources,
+        }
+
+
+    # ═══════════════════════════════════════════════════════════════
+    # Sprint 161 — Server Discovery & Metadata
+    # ═══════════════════════════════════════════════════════════════
+
+    def get_workbook_dependencies(self, workbook_id):
+        """Get dependency graph for a workbook (datasources, views).
+
+        Args:
+            workbook_id: Workbook LUID.
+
+        Returns:
+            dict: {datasources: [ids], views: [ids], downstream: [wb_ids]}
+        """
+        # Connections show which datasources this workbook uses
+        connections = self.get_workbook_connections(workbook_id)
+        ds_ids = list({
+            c.get('datasource', {}).get('id', '')
+            for c in connections if c.get('datasource', {}).get('id')
+        })
+
+        # Find other workbooks using the same datasources
+        downstream = set()
+        all_workbooks = self.list_workbooks()
+        for wb in all_workbooks:
+            if wb.get('id') == workbook_id:
+                continue
+            try:
+                wb_conns = self.get_workbook_connections(wb['id'])
+                wb_ds_ids = {c.get('datasource', {}).get('id', '') for c in wb_conns}
+                if wb_ds_ids & set(ds_ids):
+                    downstream.add(wb['id'])
+            except Exception:
+                pass  # Skip workbooks we can't access
+
+        return {
+            'datasources': ds_ids,
+            'views': [v.get('id') for v in (self.list_views() or [])
+                      if v.get('workbook', {}).get('id') == workbook_id],
+            'downstream_workbooks': list(downstream),
+        }
+
+    def get_published_datasource_details(self, datasource_id):
+        """Get full metadata for a published datasource.
+
+        Args:
+            datasource_id: Datasource LUID.
+
+        Returns:
+            dict: Datasource metadata (name, type, connections, tables, owner).
+        """
+        url = f'{self.site_url}/datasources/{datasource_id}'
+        resp = self._request(url)
+        return resp.get('datasource', {})
+
+    def get_usage_stats(self, workbook_id, days=30):
+        """Get workbook usage statistics (view count, last access).
+
+        Args:
+            workbook_id: Workbook LUID.
+            days: Number of days to look back.
+
+        Returns:
+            dict: {totalViews, recentViews, lastAccessed, favorites}
+        """
+        # Views for this workbook
+        views = self.list_views()
+        wb_views = [v for v in (views or [])
+                    if v.get('workbook', {}).get('id') == workbook_id]
+
+        total_views = sum(v.get('usage', {}).get('totalViewCount', 0)
+                         for v in wb_views)
+
+        return {
+            'totalViews': total_views,
+            'viewCount': len(wb_views),
+            'lastAccessed': max(
+                (v.get('updatedAt', '') for v in wb_views), default=''),
+        }
+
+    def get_permissions(self, workbook_id):
+        """Get workbook permissions (users, groups, capabilities).
+
+        Args:
+            workbook_id: Workbook LUID.
+
+        Returns:
+            list[dict]: Permission entries with granteeType, capabilities.
+        """
+        url = f'{self.site_url}/workbooks/{workbook_id}/permissions'
+        resp = self._request(url)
+        perms_data = resp.get('permissions', {})
+        grant_list = perms_data.get('granteeCapabilities', [])
+
+        permissions = []
+        for grant in grant_list:
+            grantee = grant.get('user') or grant.get('group', {})
+            grantee_type = 'user' if 'user' in grant else 'group'
+            capabilities = {}
+            for cap in grant.get('capabilities', {}).get('capability', []):
+                capabilities[cap.get('name', '')] = cap.get('mode', '')
+
+            permissions.append({
+                'granteeType': grantee_type,
+                'granteeName': grantee.get('name', ''),
+                'granteeId': grantee.get('id', ''),
+                'capabilities': capabilities,
+            })
+
+        return permissions
+
+    def get_quality_warnings(self, content_type='workbook', content_id=None):
+        """Get data quality warnings/certifications for content.
+
+        Args:
+            content_type: 'workbook', 'datasource', or 'table'.
+            content_id: Content LUID (optional — returns all if None).
+
+        Returns:
+            list[dict]: Quality warning metadata.
+        """
+        url = f'{self.site_url}/dataQualityWarnings'
+        if content_id:
+            url = (f'{self.site_url}/{content_type}s/{content_id}'
+                   f'/dataQualityWarnings')
+        try:
+            resp = self._request(url)
+            return resp.get('dataQualityWarnings', {}).get(
+                'dataQualityWarning', [])
+        except Exception:
+            return []  # API may not be available on older servers
+
+    def get_server_summary(self):
+        """Get comprehensive server inventory summary.
+
+        Returns:
+            dict: {workbooks, datasources, users, groups, projects, schedules,
+                   prep_flows, site_info}
+        """
+        return {
+            'site_info': self.get_site_info(),
+            'workbook_count': len(self.list_workbooks() or []),
+            'datasource_count': len(self.list_datasources() or []),
+            'user_count': len(self.list_users() or []),
+            'group_count': len(self.list_groups() or []),
+            'project_count': len(self.list_projects() or []),
+            'schedule_count': len(self.list_schedules() or []),
+            'prep_flow_count': len(self.list_prep_flows() or []),
+        }
+
+    # ═══════════════════════════════════════════════════════════════
+    # Sprint 162 — Tableau Cloud & OAuth/JWT Authentication
+    # ═══════════════════════════════════════════════════════════════
+
+    def detect_cloud_vs_server(self):
+        """Detect if connected to Tableau Cloud or Tableau Server.
+
+        Returns:
+            str: 'cloud' or 'server'
+        """
+        if not self.server_url:
+            return 'server'
+        cloud_domains = [
+            'online.tableau.com',
+            '10ax.online.tableau.com',
+            'prod-useast-a.online.tableau.com',
+            'prod-useast-b.online.tableau.com',
+            'eu-west-1a.online.tableau.com',
+            'prod-apnortheast-a.online.tableau.com',
+        ]
+        for domain in cloud_domains:
+            if domain in self.server_url.lower():
+                return 'cloud'
+        return 'server'
+
+    def sign_in_jwt(self, jwt_token, site_name=''):
+        """Authenticate using JWT (Connected App or EAS).
+
+        Tableau Cloud and Server 2021.4+ support JWT-based authentication
+        via Connected Apps or External Authorization Server (EAS).
+
+        Args:
+            jwt_token: Pre-signed JWT token string.
+            site_name: Site content URL (empty for default site).
+
+        Returns:
+            bool: True if authentication succeeded.
+        """
+        url = f'{self.server_url}/api/{self.api_version}/auth/signin'
+        payload = json.dumps({
+            'credentials': {
+                'jwt': jwt_token,
+                'site': {'contentUrl': site_name or self.site_id},
+            }
+        })
+
+        try:
+            resp = self._request(url, method='POST', data=payload,
+                                 skip_auth=True)
+            creds = resp.get('credentials', {})
+            self._auth_token = creds.get('token', '')
+            site_data = creds.get('site', {})
+            self._site_luid = site_data.get('id', '')
+            logger.info(f'JWT sign-in successful (site: {self._site_luid})')
+            return True
+        except Exception as e:
+            logger.error(f'JWT sign-in failed: {e}')
+            return False
+
+    def get_metadata_graphql(self, query, variables=None):
+        """Execute a Metadata API (GraphQL) query.
+
+        Tableau Server 2019.3+ and Tableau Cloud expose a GraphQL-based
+        Metadata API for lineage, schema, and quality information.
+
+        Args:
+            query: GraphQL query string.
+            variables: Optional dict of query variables.
+
+        Returns:
+            dict: GraphQL response data.
+        """
+        url = f'{self.server_url}/api/metadata/graphql'
+        payload = json.dumps({
+            'query': query,
+            'variables': variables or {},
+        })
+
+        try:
+            resp = self._request(url, method='POST', data=payload)
+            return resp.get('data', {})
+        except Exception as e:
+            logger.error(f'Metadata GraphQL query failed: {e}')
+            return {}
+
+    def get_lineage_upstream(self, workbook_id):
+        """Get upstream lineage for a workbook using Metadata API.
+
+        Returns tables, databases, and datasources that feed this workbook.
+
+        Args:
+            workbook_id: Workbook LUID.
+
+        Returns:
+            dict: {databases: [...], tables: [...], datasources: [...]}
+        """
+        query = '''
+        query GetWorkbookLineage($id: String!) {
+            workbooks(filter: {luid: $id}) {
+                upstreamDatasources {
+                    name
+                    id
+                    upstreamTables {
+                        name
+                        fullName
+                        database { name connectionType }
+                    }
+                }
+                upstreamTables {
+                    name
+                    fullName
+                    database { name connectionType }
+                }
+            }
+        }'''
+        data = self.get_metadata_graphql(query, {'id': workbook_id})
+        workbooks = data.get('workbooks', [])
+        if not workbooks:
+            return {'databases': [], 'tables': [], 'datasources': []}
+
+        wb = workbooks[0]
+        tables = wb.get('upstreamTables', [])
+        datasources = wb.get('upstreamDatasources', [])
+
+        databases = list({
+            t.get('database', {}).get('name', '')
+            for t in tables if t.get('database')
+        })
+
+        return {
+            'databases': databases,
+            'tables': tables,
+            'datasources': datasources,
+        }
+

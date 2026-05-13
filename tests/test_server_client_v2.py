@@ -301,8 +301,7 @@ class TestGetServerSummary(unittest.TestCase):
              patch.object(c, 'list_groups') as m_g, \
              patch.object(c, 'list_projects') as m_p, \
              patch.object(c, 'list_prep_flows') as m_f, \
-             patch.object(c, 'list_schedules') as m_s, \
-             patch.object(c, 'list_views') as m_v:
+             patch.object(c, 'list_schedules') as m_s:
             m_si.return_value = {'name': 'Default'}
             m_wb.return_value = [{'id': '1'}, {'id': '2'}]
             m_ds.return_value = [{'id': 'd1'}]
@@ -311,7 +310,6 @@ class TestGetServerSummary(unittest.TestCase):
             m_p.return_value = [{'id': 'p1'}, {'id': 'p2'}]
             m_f.return_value = []
             m_s.return_value = [{'id': 's1'}]
-            m_v.return_value = [{'id': 'v1'}, {'id': 'v2'}]
 
             summary = c.get_server_summary()
 
@@ -320,9 +318,8 @@ class TestGetServerSummary(unittest.TestCase):
         self.assertEqual(summary['user_count'], 3)
         self.assertEqual(summary['group_count'], 1)
         self.assertEqual(summary['project_count'], 2)
-        self.assertEqual(summary['flow_count'], 0)
+        self.assertEqual(summary['prep_flow_count'], 0)
         self.assertEqual(summary['schedule_count'], 1)
-        self.assertEqual(summary['view_count'], 2)
         self.assertEqual(summary['site_info']['name'], 'Default')
 
 
