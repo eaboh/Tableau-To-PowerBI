@@ -45,6 +45,11 @@ import re
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
 
+try:
+    from .credential_vault import CredentialVault
+except ImportError:
+    CredentialVault = None  # type: ignore[misc]
+
 logger = logging.getLogger(__name__)
 
 
@@ -288,25 +293,106 @@ class MultiTenantDeploymentResult:
             print(f"    {r.tenant_name}: {status}")
 
 
+def _pre_deploy_validate(
+    tenant: TenantConfig,
+    model_dir: str,
+    credential_vault: Optional['CredentialVault'] = None,
+) -> List[str]:
+    """Pre-deploy validation gate for a single tenant.
+
+    Checks:
+    1. All ``${TENANT_*}`` placeholders in overrides have values
+       (either explicit or resolvable via vault).
+    2. model_dir exists and contains expected files.
+    3. No unresolved ``${TENANT_*}`` patterns remain in override values.
+    4. Credential values pass security validation.
+
+    Returns:
+        List of error strings (empty if valid).
+    """
+    errors = []
+
+    # 1. Model directory exists
+    if not os.path.isdir(model_dir):
+        errors.append(f"Model directory does not exist: {model_dir}")
+        return errors  # can't proceed
+
+    # 2. Model dir has content
+    has_content = False
+    for _root, _dirs, files in os.walk(model_dir):
+        if files:
+            has_content = True
+            break
+    if not has_content:
+        errors.append(f"Model directory is empty: {model_dir}")
+
+    # 3. Check placeholders have values
+    for placeholder, value in tenant.connection_overrides.items():
+        # Placeholder key must match ${UPPER_NAME}
+        if not re.match(r'^\$\{[A-Z_][A-Z0-9_]*\}$', placeholder):
+            errors.append(f"Invalid placeholder: '{placeholder}'")
+            continue
+
+        if value in ('${VAULT}', ''):
+            # Needs vault resolution
+            if credential_vault is None:
+                errors.append(
+                    f"Placeholder '{placeholder}' requires vault lookup "
+                    "but no credential_vault is configured"
+                )
+            else:
+                key = placeholder.strip('${}')
+                if not credential_vault.has(tenant.name, key):
+                    errors.append(
+                        f"Missing credential in vault: "
+                        f"tenant='{tenant.name}', key='{key}'"
+                    )
+        else:
+            # Explicit value — check for injection
+            if '\x00' in value:
+                errors.append(
+                    f"Override value for '{placeholder}' contains null bytes"
+                )
+            if any(ord(c) < 32 and c not in '\n\r\t' for c in value):
+                errors.append(
+                    f"Override value for '{placeholder}' contains "
+                    "control characters"
+                )
+            # Check for nested unresolved placeholders
+            nested = re.findall(r'\$\{[A-Z_][A-Z0-9_]*\}', value)
+            if nested:
+                errors.append(
+                    f"Override value for '{placeholder}' contains "
+                    f"unresolved placeholders: {nested}"
+                )
+
+    return errors
+
+
 def deploy_multi_tenant(
     model_dir: str,
     config: MultiTenantConfig,
     refresh: bool = False,
     overwrite: bool = False,
+    credential_vault: Optional['CredentialVault'] = None,
+    dry_run: bool = False,
 ) -> MultiTenantDeploymentResult:
     """Deploy a shared semantic model to multiple tenant workspaces.
 
     For each tenant:
-        1. Copy model to a temp directory
-        2. Apply connection string overrides (template substitution)
-        3. Deploy via BundleDeployer to the tenant's workspace
-        4. Record result
+        1. Validate credentials and placeholders (pre-deploy gate)
+        2. Copy model to a temp directory
+        3. Apply connection string overrides (template substitution)
+        4. Deploy via BundleDeployer to the tenant's workspace
+        5. Record result
 
     Args:
         model_dir: Path to the shared model output directory.
         config: Multi-tenant configuration.
         refresh: Whether to trigger a refresh after deployment.
         overwrite: Whether to overwrite existing artifacts.
+        credential_vault: Optional CredentialVault for resolving ${VAULT} values.
+        dry_run: If True, validate only — do not actually deploy.
 
     Returns:
         Aggregate deployment result.
@@ -324,7 +410,48 @@ def deploy_multi_tenant(
 
     aggregate = MultiTenantDeploymentResult()
 
+    # ── Pre-deploy validation gate ───────────────────────────────────────
     for tenant in config.tenants:
+        pre_errors = _pre_deploy_validate(tenant, model_dir, credential_vault)
+        if pre_errors:
+            tenant_result = TenantDeploymentResult(
+                tenant_name=tenant.name,
+                workspace_id=tenant.workspace_id,
+                error='; '.join(pre_errors),
+            )
+            aggregate.results.append(tenant_result)
+            logger.error(
+                "Tenant '%s' failed pre-deploy validation: %s",
+                tenant.name, '; '.join(pre_errors),
+            )
+            continue
+
+        if dry_run:
+            tenant_result = TenantDeploymentResult(
+                tenant_name=tenant.name,
+                workspace_id=tenant.workspace_id,
+                success=True,
+            )
+            aggregate.results.append(tenant_result)
+            logger.info("Tenant '%s': dry-run OK", tenant.name)
+            continue
+
+        # ── Resolve vault credentials ────────────────────────────────────
+        overrides = tenant.connection_overrides
+        if credential_vault:
+            try:
+                overrides = credential_vault.resolve_overrides(
+                    tenant.name, tenant.connection_overrides
+                )
+            except ValueError as e:
+                tenant_result = TenantDeploymentResult(
+                    tenant_name=tenant.name,
+                    workspace_id=tenant.workspace_id,
+                    error=f"Credential resolution failed: {e}",
+                )
+                aggregate.results.append(tenant_result)
+                continue
+
         tenant_result = TenantDeploymentResult(
             tenant_name=tenant.name,
             workspace_id=tenant.workspace_id,
@@ -335,7 +462,7 @@ def deploy_multi_tenant(
             # Create tenant-specific copy with overrides
             temp_dir = tempfile.mkdtemp(prefix=f'tenant_{tenant.name}_')
             tenant_model_dir = os.path.join(temp_dir, os.path.basename(model_dir))
-            _apply_connection_overrides(model_dir, tenant.connection_overrides,
+            _apply_connection_overrides(model_dir, overrides,
                                         tenant_model_dir)
 
             # Deploy

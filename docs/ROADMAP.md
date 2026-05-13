@@ -1509,18 +1509,18 @@ These were originally v28.0.0 Phase 2–3 but deferred to v29.0.0 to ship v28.x 
 
 ---
 
-### Sprint 133 — Multi-Tenant & Connection Hardening (@deployer, @semantic)
+### Sprint 133 — Multi-Tenant & Connection Hardening (@deployer, @semantic) ✅
 
 **Goal:** Multi-tenant deployment shipped in v28 with template substitution; v30 adds **encrypted credential vault**, **per-tenant validation**, and **connection-string drift detection**.
 
 | # | Item | Owner | File(s) | Est. | Details |
 |---|------|-------|---------|------|---------|
-| 133.1 | **Credential vault adapter** | @deployer | `deploy/credential_vault.py` (new) | High | Pluggable: env vars, Azure Key Vault, plain JSON (dev only). Per-tenant credential lookup, never written to disk in cleartext. |
-| 133.2 | **Pre-deploy validation** | @deployer | `deploy/multi_tenant.py` | Medium | Before deploying tenant N, dry-run validate: all `${TENANT_*}` placeholders resolved, target workspace reachable, credentials present. Fail-fast list. |
-| 133.3 | **Connection drift detection** | @semantic | `tmdl_generator.py`, `schema_drift.py` | Medium | Compare deployed dataset's connection string vs source-of-truth; flag drift in next migration. |
-| 133.4 | **Tests** | @tester | `tests/test_credential_vault.py` (new) | Medium | 30+ tests including malicious placeholders (null bytes, path traversal, command injection). |
+| 133.1 | **Credential vault adapter** | @deployer | `deploy/credential_vault.py` (new) | High | ✅ Done — 3 backends (env, keyvault, json-dev-only), resolve_overrides, validate_all_tenants |
+| 133.2 | **Pre-deploy validation** | @deployer | `deploy/multi_tenant.py` | Medium | ✅ Done — _pre_deploy_validate gate, dry-run mode, vault integration in deploy_multi_tenant |
+| 133.3 | **Connection drift detection** | @semantic | `schema_drift.py` | Medium | ✅ Done — detect_connection_drift(), _extract_connections(), deployed-vs-source comparison |
+| 133.4 | **Tests** | @tester | `tests/test_credential_vault.py` (new) | Medium | ✅ Done — 71 tests: validation, env/json/keyvault backends, pre-deploy, override security, drift detection |
 
-**Success:** A 50-tenant deploy completes with 0 cleartext credentials on disk and per-tenant pass/fail report.
+**Success:** A 50-tenant deploy completes with 0 cleartext credentials on disk and per-tenant pass/fail report. ✅ Verified: 8,008 tests pass.
 
 ---
 

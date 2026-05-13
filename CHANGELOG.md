@@ -1,5 +1,29 @@
 # Changelog
 
+## v31.7.0-dev — Sprint 133 — Multi-Tenant & Connection Hardening
+
+### New Files
+- **`powerbi_import/deploy/credential_vault.py`** — Pluggable credential vault:
+  - 3 backends: env vars (`TENANT_{name}_{key}`), Azure Key Vault, plain JSON (dev-only, blocked in production)
+  - `CredentialVault.from_config()` factory, `resolve_overrides()`, `validate_all_tenants()`
+  - Input validation: null bytes, control chars, max length, name/key format enforcement
+- **`tests/test_credential_vault.py`** — 71 tests: validation, 3 backends, pre-deploy gate,
+  override security, connection drift detection, config I/O
+
+### Changed
+- **`powerbi_import/deploy/multi_tenant.py`**:
+  - `deploy_multi_tenant()` now accepts `credential_vault` and `dry_run` parameters
+  - New `_pre_deploy_validate()` gate: checks model dir, placeholders, null bytes,
+    control chars, nested unresolved placeholders, vault availability
+  - Failed validation prevents deployment (fail-fast)
+- **`powerbi_import/schema_drift.py`**:
+  - New `detect_connection_drift()` + `_extract_connections()` — compares server/database/port/schema/type
+  - Supports deployed-vs-source drift detection for deployed datasets
+  - Summary now includes `connection` category
+
+### Stats
+- **8,008 tests passing** (up from 7,937), 66 skipped, 0 failed
+
 ## v31.6.0-dev — Sprint 132 — Performance & Large-Workbook Stress
 
 Benchmarks and hardens the pipeline for enterprise-scale workbooks.

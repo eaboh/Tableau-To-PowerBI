@@ -89,7 +89,7 @@ class SchemaDriftReport:
             return 'No schema drift detected.'
         lines = [f'Schema drift detected ({len(self.entries)} changes):']
         for cat in ('table', 'column', 'measure', 'relationship', 'worksheet',
-                    'parameter', 'filter', 'calculation'):
+                    'parameter', 'filter', 'calculation', 'connection'):
             items = self.by_category(cat)
             if items:
                 added = sum(1 for e in items if e.change_type == 'added')
@@ -434,3 +434,122 @@ def save_snapshot(extracted_data, output_dir):
         path = os.path.join(output_dir, f'{key}.json')
         with open(path, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=2, default=str)
+
+
+# ── Connection string drift detection ────────────────────────────────────────
+
+def _extract_connections(datasources):
+    """Extract connection metadata from datasource list.
+
+    Returns:
+        dict mapping datasource_name → {server, database, type, details...}
+    """
+    connections = {}
+    for ds in datasources:
+        ds_name = ds.get('name', '') or ds.get('caption', '')
+        if not ds_name:
+            continue
+
+        conn_info = {}
+        # Try connection_map first (modern extraction)
+        conn_map = ds.get('connection_map', {})
+        if conn_map:
+            conn_info = {
+                'type': conn_map.get('type', ''),
+                'server': conn_map.get('server', ''),
+                'database': conn_map.get('dbname', '') or conn_map.get('database', ''),
+                'port': conn_map.get('port', ''),
+                'schema': conn_map.get('schema', ''),
+            }
+        else:
+            # Fallback to top-level connection keys
+            conn_info = {
+                'type': ds.get('connection_type', ''),
+                'server': ds.get('server', ''),
+                'database': ds.get('database', ''),
+                'port': ds.get('port', ''),
+                'schema': ds.get('schema', ''),
+            }
+
+        # Filter out empty values
+        conn_info = {k: v for k, v in conn_info.items() if v}
+        if conn_info:
+            connections[ds_name] = conn_info
+
+    return connections
+
+
+def detect_connection_drift(
+    current_datasources,
+    previous_datasources,
+    deployed_connections=None,
+):
+    """Detect connection string drift between extraction snapshots.
+
+    Compares server, database, port, schema, and connection type across
+    two extraction snapshots. Optionally also compares against a deployed
+    dataset's connection info.
+
+    Args:
+        current_datasources: Current datasources list.
+        previous_datasources: Previous datasources list.
+        deployed_connections: Optional dict of deployed connection info
+            (datasource_name → {server, database, ...}).
+
+    Returns:
+        SchemaDriftReport with connection-specific drift entries.
+    """
+    entries = []
+
+    curr_conns = _extract_connections(current_datasources)
+    prev_conns = _extract_connections(previous_datasources)
+
+    # Compare current vs previous
+    for ds_name, curr_info in curr_conns.items():
+        prev_info = prev_conns.get(ds_name, {})
+        if not prev_info:
+            entries.append(SchemaDriftEntry(
+                'connection', SchemaDriftEntry.ADDED, ds_name,
+                detail=f"new connection: {curr_info.get('type', 'unknown')}",
+            ))
+            continue
+
+        for field in ('server', 'database', 'port', 'schema', 'type'):
+            prev_val = prev_info.get(field, '')
+            curr_val = curr_info.get(field, '')
+            if prev_val and curr_val and prev_val != curr_val:
+                entries.append(SchemaDriftEntry(
+                    'connection', SchemaDriftEntry.MODIFIED, ds_name,
+                    detail=f"{field} changed: {prev_val} → {curr_val}",
+                ))
+
+    for ds_name in prev_conns:
+        if ds_name not in curr_conns:
+            entries.append(SchemaDriftEntry(
+                'connection', SchemaDriftEntry.REMOVED, ds_name,
+                detail=f"connection removed: {prev_conns[ds_name].get('type', '')}",
+            ))
+
+    # Compare against deployed connections if provided
+    if deployed_connections:
+        for ds_name, deployed_info in deployed_connections.items():
+            curr_info = curr_conns.get(ds_name, {})
+            if not curr_info:
+                continue
+            for field in ('server', 'database', 'port', 'schema'):
+                deployed_val = deployed_info.get(field, '')
+                source_val = curr_info.get(field, '')
+                if deployed_val and source_val and deployed_val != source_val:
+                    entries.append(SchemaDriftEntry(
+                        'connection', SchemaDriftEntry.MODIFIED,
+                        f"{ds_name} (deployed)",
+                        detail=(
+                            f"{field} drift: source={source_val}, "
+                            f"deployed={deployed_val}"
+                        ),
+                    ))
+
+    return SchemaDriftReport(
+        entries=entries,
+        source_name='connection_drift',
+    )
