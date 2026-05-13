@@ -1,9 +1,9 @@
 table Machines
-	lineageTag: c07cd0b5-10c6-4a3a-8781-adbd807eb185
+	lineageTag: cc0ba634-c5c5-428f-97da-666e4a4c9be8
 
 	column machine_id
 		dataType: int64
-		lineageTag: d1e3643f-326a-41e1-ab01-d561ddfe576a
+		lineageTag: 76bc4466-9592-4787-88e2-d75b39b05ddb
 		summarizeBy: sum
 		sourceColumn: machine_id
 		annotation Copilot_Hidden = true
@@ -12,7 +12,7 @@ table Machines
 
 	column machine_name
 		dataType: string
-		lineageTag: fafe9d70-a377-4f96-a866-377dbb1e8fe7
+		lineageTag: d77bb5e5-fe42-4275-aa13-82368bc81389
 		summarizeBy: none
 		sourceColumn: machine_name
 
@@ -20,7 +20,7 @@ table Machines
 
 	column machine_type
 		dataType: string
-		lineageTag: 5515fa9b-75fd-4493-a34c-8e0966f32e1c
+		lineageTag: 76c1e2e3-d64b-4abb-b315-97638de98079
 		summarizeBy: none
 		sourceColumn: machine_type
 
@@ -29,16 +29,15 @@ table Machines
 	column install_date
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: 2777b6cb-88fa-47d1-97d1-8b647bc08d5e
+		lineageTag: 351fda30-7f26-4ba6-85a4-e7ea8c0b3b7f
 		summarizeBy: none
 		sourceColumn: install_date
-		dataCategory: DateTime
 
 		annotation SummarizationSetBy = Automatic
 
 	column location
 		dataType: string
-		lineageTag: f0ca232a-3843-4761-b713-e931b7f63793
+		lineageTag: ade864b3-0d8e-423e-bc84-70cec10f4641
 		summarizeBy: none
 		sourceColumn: location
 
@@ -46,7 +45,7 @@ table Machines
 
 	column line_id
 		dataType: string
-		lineageTag: 6af58adc-b1e6-44b8-9956-2a69b373130a
+		lineageTag: d8b0df2e-e836-4de8-9613-1ca9afe7618d
 		summarizeBy: none
 		sourceColumn: line_id
 		annotation Copilot_Hidden = true
@@ -56,13 +55,13 @@ table Machines
 	column rated_capacity
 		dataType: double
 		formatString: #,0.00
-		lineageTag: c0bead18-ebfe-40c2-8bad-3815bbeb3a72
+		lineageTag: 2d9e8076-c792-4f53-82c0-02cc5e685e71
 		summarizeBy: sum
 		sourceColumn: rated_capacity
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Machines-17bb6f8a-1b42-4cea-a7c6-297ba8238a4f' = m
+	partition 'Machines-b0916756-e8ad-4146-b21d-2d115fc7fb69' = m
 		mode: import
 		source =
 				let

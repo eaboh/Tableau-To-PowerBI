@@ -6,12 +6,15 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["customer_feedback_data.json","Extract"]
+annotation PBI_QueryOrder = ["customer_feedback_data.json","Extract","Calendar"]
 
 ref table 'customer_feedback_data.json'
 ref table Extract
+ref table Calendar
 
-ref relationship 25dda690-1fb7-4c02-8a6e-68a3076c8ac9
+ref relationship e73eb390-64a3-46d9-9956-b26eeabd41a8
+ref relationship 0a4fa235-cdee-4c67-8da4-90803eb27003
+ref relationship 3f03f4a0-d0dd-45d7-81e4-4add6550ea79
 
 ref expression DataFolder
 

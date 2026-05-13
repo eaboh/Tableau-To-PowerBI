@@ -1567,7 +1567,7 @@ class TestCreateVisualFilters(unittest.TestCase):
         self.assertEqual(len(result), 1)
         # Should keep the first one (min=10)
         filt_str = json.dumps(result)
-        self.assertIn("'10'", filt_str)
+        self.assertIn("10L", filt_str)
 
     def test_dedup_different_fields_kept(self):
         """Different fields are NOT deduplicated."""

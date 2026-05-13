@@ -1,0 +1,62 @@
+{
+  "tables": [
+    {
+      "tableau_datasource": "federated.10vks1203pgcxf1bkw5yk1bwzy2f",
+      "tableau_table": "Sheet1",
+      "pbi_table": "Sheet1"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Rebounds",
+      "pbi_table": "Rebounds"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Rebounds CalcGroup",
+      "pbi_table": "Rebounds CalcGroup"
+    }
+  ],
+  "calculations": [
+    {
+      "tableau_calculation": "CASE [Parameters].[Parameter 1]\nWhen 1 then avg([DEF])\nWhen 2 then AVG([OFF])\nWhen 3 then avg([REB])\nEND",
+      "pbi_table": "Sheet1",
+      "pbi_object": "p. Rebounds",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "min(1)",
+      "pbi_table": "Sheet1",
+      "pbi_object": "min(1)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "1.",
+      "pbi_table": "Rebounds",
+      "pbi_object": "Rebounds",
+      "pbi_type": "measure"
+    }
+  ],
+  "relationships": [],
+  "worksheets": [
+    {
+      "tableau_worksheet": "Average Points per Game",
+      "pbi_page": "Average Points per Game"
+    },
+    {
+      "tableau_worksheet": "Player Stats",
+      "pbi_page": "Player Stats"
+    },
+    {
+      "tableau_worksheet": "Players Headshot",
+      "pbi_page": "Players Headshot"
+    },
+    {
+      "tableau_worksheet": "Rebounds per Game",
+      "pbi_page": "Rebounds per Game"
+    },
+    {
+      "tableau_worksheet": "Teams",
+      "pbi_page": "Teams"
+    }
+  ]
+}

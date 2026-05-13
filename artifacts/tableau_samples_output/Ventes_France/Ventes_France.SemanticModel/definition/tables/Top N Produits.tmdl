@@ -1,20 +1,20 @@
 table 'Top N Produits'
-	lineageTag: 20f0e3a6-5e3a-44d3-ac3a-b52f13053908
+	lineageTag: 25760e05-4849-4ca7-a292-5732c3a7f6f8
 
 	measure 'Top N Produits' = SELECTEDVALUE('Top N Produits'[Value], 10)
-		lineageTag: 046b3060-6a21-40ab-9b0a-a1007743f9ac
+		lineageTag: 0c12d7d2-6439-4475-9b6e-ff9a60468512
 		annotation Copilot_Description = DAX: SELECTEDVALUE('Top N Produits'[Value], 10)
 
 	column Value
 		dataType: int64
-		lineageTag: ac026fb4-cf5c-485f-90f0-228662c5d22d
+		lineageTag: 7f47e3e8-a697-4a73-b37e-047915da515e
 		summarizeBy: none
 		sourceColumn: Value
 		annotation displayFolder = Parameters
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Top N Produits-cb2630a3-0c7e-4998-a5de-aef5439726bc' = calculated
+	partition 'Top N Produits-282c790a-6306-48ff-9683-232cf3ba4e47' = calculated
 		mode: import
 		source = GENERATESERIES(1, 50, 1)
 

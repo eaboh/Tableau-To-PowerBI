@@ -1,0 +1,97 @@
+{
+  "tables": [
+    {
+      "tableau_datasource": "Sample - Superstore",
+      "tableau_table": "Orders$",
+      "pbi_table": "Orders$"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Calendar",
+      "pbi_table": "Calendar"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Top Customers",
+      "pbi_table": "Top Customers"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Profit Bin Size",
+      "pbi_table": "Profit Bin Size"
+    }
+  ],
+  "calculations": [
+    {
+      "tableau_calculation": "SUM([Profit])/SUM([Sales])",
+      "pbi_table": "Orders$",
+      "pbi_object": "Profit Ratio",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "1",
+      "pbi_table": "Orders$",
+      "pbi_object": "Number of Records",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Year To Date",
+      "pbi_table": "Calendar",
+      "pbi_object": "Year To Date",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Previous Year",
+      "pbi_table": "Calendar",
+      "pbi_object": "Previous Year",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Year Over Year %",
+      "pbi_table": "Calendar",
+      "pbi_object": "Year Over Year %",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "5",
+      "pbi_table": "Top Customers",
+      "pbi_object": "Top Customers",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "200",
+      "pbi_table": "Profit Bin Size",
+      "pbi_object": "Profit Bin Size",
+      "pbi_type": "measure"
+    }
+  ],
+  "relationships": [
+    {
+      "from": "Orders$[Order Date]",
+      "to": "Calendar[Date]",
+      "cardinality": "oneDirection"
+    }
+  ],
+  "worksheets": [
+    {
+      "tableau_worksheet": "Sheet 1",
+      "pbi_page": "Sheet 1"
+    },
+    {
+      "tableau_worksheet": "Sheet 2",
+      "pbi_page": "Sheet 2"
+    },
+    {
+      "tableau_worksheet": "Sheet 3",
+      "pbi_page": "Sheet 3"
+    },
+    {
+      "tableau_worksheet": "Sheet 4",
+      "pbi_page": "Sheet 4"
+    },
+    {
+      "tableau_worksheet": "Sheet 5",
+      "pbi_page": "Sheet 5"
+    }
+  ]
+}

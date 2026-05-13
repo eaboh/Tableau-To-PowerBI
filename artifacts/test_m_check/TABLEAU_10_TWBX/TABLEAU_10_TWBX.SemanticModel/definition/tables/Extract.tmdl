@@ -1,13 +1,14 @@
 table Extract
-	lineageTag: c5d6268c-8ea1-4558-8224-c911b173c914
+	lineageTag: acbc7e41-ddc6-40d8-8095-f7d3cb774b17
 
-	measure '[Number of Records]' = 1
+	measure 'Number of Records' = 1
 		displayFolder: Measures
-		lineageTag: 805d32ce-be46-4993-8aa2-d01b4b229a1e
+		lineageTag: fc2ab8e3-7326-4b1f-a819-14c935957810
+		annotation Copilot_Description = Migrated from Tableau: 1 | DAX: 1
 
 	column 'Number of Records'
 		dataType: int64
-		lineageTag: 8ad89c98-46c5-4430-ab50-e51ae72e5787
+		lineageTag: 418ed55a-092c-434d-bf89-9113d1f4558c
 		summarizeBy: sum
 		sourceColumn: 'Number of Records'
 
@@ -15,7 +16,7 @@ table Extract
 
 	column a
 		dataType: string
-		lineageTag: d78ff530-a1b1-4825-ab84-fcca58b05160
+		lineageTag: fdd9e320-b07d-45c0-8372-e0e6961748e7
 		summarizeBy: none
 		sourceColumn: a
 
@@ -23,7 +24,7 @@ table Extract
 
 	column x
 		dataType: int64
-		lineageTag: 18ff0f09-b2d9-43b7-8395-0812d4522ef5
+		lineageTag: 597942a7-78ae-4fef-af68-44cd70a64003
 		summarizeBy: sum
 		sourceColumn: x
 
@@ -31,13 +32,13 @@ table Extract
 
 	column y
 		dataType: int64
-		lineageTag: 34da4c14-a3a3-4f15-9a36-e9ac3ab6685f
+		lineageTag: e15e02df-fd80-424c-ad5c-3544e02616d0
 		summarizeBy: sum
 		sourceColumn: y
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Extract-82c921af-098b-44da-bc0f-e435f7eb6b0a' = m
+	partition 'Extract-afb4a341-2ffe-4f7c-afe5-d358b8301d2b' = m
 		mode: import
 		source =
 				let
@@ -61,4 +62,5 @@ table Extract
 				    Result
 
 	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 4 columns and 1 measures: Number of Records, a, x, y.
 

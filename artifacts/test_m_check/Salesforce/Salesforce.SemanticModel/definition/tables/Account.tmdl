@@ -1,0 +1,2027 @@
+table Account
+	lineageTag: a86fdc7a-eb13-46a1-a036-dcfd8a06405d
+
+	column 'Account Fax'
+		dataType: string
+		lineageTag: fbc3508b-6847-413d-91ab-72ec837412be
+		summarizeBy: none
+		sourceColumn: 'Account Fax'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account Name'
+		dataType: string
+		lineageTag: b7b09ab5-2df8-4df0-a884-69fc36ac3952
+		summarizeBy: none
+		sourceColumn: 'Account Name'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account Number'
+		dataType: string
+		lineageTag: 8a0c8e6b-1a46-4b69-9839-f879a97e9e9b
+		summarizeBy: none
+		sourceColumn: 'Account Number'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account Phone'
+		dataType: string
+		lineageTag: 5c6f476f-ee64-40eb-87fb-8b8716a55a14
+		summarizeBy: none
+		sourceColumn: 'Account Phone'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account Rating'
+		dataType: string
+		lineageTag: ea81cd3b-ba7f-4b10-bd5c-d19a7ba346d5
+		summarizeBy: none
+		sourceColumn: 'Account Rating'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account Site'
+		dataType: string
+		lineageTag: be03367b-cdb2-4e59-a61f-208a2a5cbcf8
+		summarizeBy: none
+		sourceColumn: 'Account Site'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account Source'
+		dataType: string
+		lineageTag: 1fb3fe3a-809e-43fa-9759-c3c4c15d40ca
+		summarizeBy: none
+		sourceColumn: 'Account Source'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account Type'
+		dataType: string
+		lineageTag: 8848df8c-a724-43bc-826a-221eeb80e87c
+		summarizeBy: none
+		sourceColumn: 'Account Type'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Account_Plan_Quip
+		dataType: string
+		lineageTag: 1b6cfef1-e41e-4b32-a497-1933a502b991
+		summarizeBy: none
+		sourceColumn: Account_Plan_Quip
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Active Leads'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 3165e340-34eb-4618-87fa-1e6e5d9094b5
+		summarizeBy: sum
+		sourceColumn: 'Active Leads'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Annual Income'
+		dataType: double
+		formatString: C1033%
+		lineageTag: b325c9f8-eac5-4dc5-838a-faa9f06148b7
+		summarizeBy: sum
+		sourceColumn: 'Annual Income'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Annual Revenue'
+		dataType: double
+		formatString: C1033%
+		lineageTag: 3588684f-3ce8-442d-b5b3-4b4508a0ab3e
+		summarizeBy: sum
+		sourceColumn: 'Annual Revenue'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Application Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f4635609-b8bd-483b-ba4c-1c34de418c0f
+		summarizeBy: none
+		sourceColumn: 'Application Date'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Assistant
+		dataType: string
+		lineageTag: 308b9e93-84eb-42bc-885c-edd940e4b8a5
+		summarizeBy: none
+		sourceColumn: Assistant
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Asst. Phone'
+		dataType: string
+		lineageTag: 1a10a0d0-4451-46ae-b416-c24a4da42c11
+		summarizeBy: none
+		sourceColumn: 'Asst. Phone'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Auto Order?'
+		dataType: boolean
+		lineageTag: ac4f2a13-83d3-42ac-a8d6-7813ce1c094c
+		summarizeBy: none
+		sourceColumn: 'Auto Order?'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'B2B Total Order Amount'
+		dataType: double
+		formatString: C1033%
+		lineageTag: e8004383-6b94-4d31-bb7c-5199b3a0f4dd
+		summarizeBy: sum
+		sourceColumn: 'B2B Total Order Amount'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billing City'
+		dataType: string
+		lineageTag: d39c2f34-856f-4eb4-ab98-a24914abb623
+		summarizeBy: none
+		sourceColumn: 'Billing City'
+		isHidden
+		dataCategory: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billing Country'
+		dataType: string
+		lineageTag: b89b4de6-a9ab-43c6-9447-c997c3af5a48
+		summarizeBy: none
+		sourceColumn: 'Billing Country'
+		isHidden
+		dataCategory: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billing Geocode Accuracy'
+		dataType: string
+		lineageTag: 83a09884-4493-426a-82d9-94d04d43d562
+		summarizeBy: none
+		sourceColumn: 'Billing Geocode Accuracy'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billing Latitude'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 185a3ffc-0e91-4251-b530-27a7208db16b
+		summarizeBy: sum
+		sourceColumn: 'Billing Latitude'
+		isHidden
+		dataCategory: Latitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billing Longitude'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 65d810e6-6ff2-46f8-9fd3-b8d946a09114
+		summarizeBy: sum
+		sourceColumn: 'Billing Longitude'
+		isHidden
+		dataCategory: Longitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billing State/Province'
+		dataType: string
+		lineageTag: d818e293-8045-4cbc-9043-69d4771c806b
+		summarizeBy: none
+		sourceColumn: 'Billing State/Province'
+		isHidden
+		dataCategory: StateOrProvince
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billing Street'
+		dataType: string
+		lineageTag: ca1dcc77-7014-44da-bc22-28458099b88a
+		summarizeBy: none
+		sourceColumn: 'Billing Street'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billing Zip/Postal Code'
+		dataType: string
+		lineageTag: d2d19ab2-052e-416a-a214-2100c0480d3c
+		summarizeBy: none
+		sourceColumn: 'Billing Zip/Postal Code'
+		isHidden
+		dataCategory: PostalCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Birthdate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0eb655ff-d7e2-4f1a-a509-b232aa18fabe
+		summarizeBy: none
+		sourceColumn: Birthdate
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Buying Relationship'
+		dataType: string
+		lineageTag: 42b05044-a162-4d0b-b2e2-af4469f9a7fc
+		summarizeBy: none
+		sourceColumn: 'Buying Relationship'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Certification Level'
+		dataType: string
+		lineageTag: a76199f8-8135-4982-b8e0-da9b70c69760
+		summarizeBy: none
+		sourceColumn: 'Certification Level'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Channel Program Level Name'
+		dataType: string
+		lineageTag: dcf575a0-fa8c-4605-99e5-d6ccdfc17d1f
+		summarizeBy: none
+		sourceColumn: 'Channel Program Level Name'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Channel Program Name'
+		dataType: string
+		lineageTag: 09a18a97-9a53-4ff6-aaf8-3a464de12471
+		summarizeBy: none
+		sourceColumn: 'Channel Program Name'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Chronos Bot Service Territory'
+		dataType: string
+		lineageTag: b1a93ac2-8763-4f27-aeac-875e1f3a7b25
+		summarizeBy: none
+		sourceColumn: 'Chronos Bot Service Territory'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Churn Risk'
+		dataType: boolean
+		lineageTag: 7e4e5a29-2d01-4d25-9585-6dc39d13ea85
+		summarizeBy: none
+		sourceColumn: 'Churn Risk'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Closed Opportunities'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 89243cc1-373a-4b96-81ca-63d716f72dff
+		summarizeBy: sum
+		sourceColumn: 'Closed Opportunities'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Co-Termination Event'
+		dataType: string
+		lineageTag: 305f4b73-08fa-41ae-97cf-b43badee18e0
+		summarizeBy: none
+		sourceColumn: 'Co-Termination Event'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Collections Agent'
+		dataType: string
+		lineageTag: b3c1190f-c567-41a9-a386-96c2d3528556
+		summarizeBy: none
+		sourceColumn: 'Collections Agent'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Collections Plan Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5ec43e56-bce5-4f35-8ace-afa383e2bea5
+		summarizeBy: none
+		sourceColumn: 'Collections Plan Date'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Collections Status'
+		dataType: string
+		lineageTag: bf3e7ed6-1aff-4d1d-a0c9-ab237617f9ce
+		summarizeBy: none
+		sourceColumn: 'Collections Status'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Combine Asset Quantities'
+		dataType: boolean
+		lineageTag: 7374f967-5574-487d-9d2c-8d81d98ef296
+		summarizeBy: none
+		sourceColumn: 'Combine Asset Quantities'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Combine Co-Termed Contracts'
+		dataType: boolean
+		lineageTag: 04950083-d159-4cab-9217-575fd03d2716
+		summarizeBy: none
+		sourceColumn: 'Combine Co-Termed Contracts'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ConnectionReceivedId (Account)'
+		dataType: string
+		lineageTag: 67bb4c1d-cc10-48d2-9653-ff84d97bdb7b
+		summarizeBy: none
+		sourceColumn: 'ConnectionReceivedId (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ConnectionSentId (Account)'
+		dataType: string
+		lineageTag: fe169e0f-5748-4782-9a36-b74dd44b5d2d
+		summarizeBy: none
+		sourceColumn: 'ConnectionSentId (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contract Co-Termination'
+		dataType: string
+		lineageTag: e2cbe24a-4581-47e1-8130-b5e17ac90f37
+		summarizeBy: none
+		sourceColumn: 'Contract Co-Termination'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contract Signed'
+		dataType: boolean
+		lineageTag: 382eaa6f-3632-4094-87fb-7b9d1571d0c3
+		summarizeBy: none
+		sourceColumn: 'Contract Signed'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Converted Leads'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 0a22666a-89b8-4b63-8fde-1054cd8bf3cb
+		summarizeBy: sum
+		sourceColumn: 'Converted Leads'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CreatedById (Account)'
+		dataType: string
+		lineageTag: ee7d4e90-427a-47aa-9255-b112cc71070a
+		summarizeBy: none
+		sourceColumn: 'CreatedById (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CreatedDate (Account)'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 481415e3-de7b-4e4e-bf48-b26329ea86ff
+		summarizeBy: none
+		sourceColumn: 'CreatedDate (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Current Year Revenue Goal'
+		dataType: double
+		formatString: C1033%
+		lineageTag: ca26ddd7-338a-460f-b514-80aa08aa9626
+		summarizeBy: sum
+		sourceColumn: 'Current Year Revenue Goal'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cust360 CSAT'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: ef2ebf82-e1e0-4dbb-8af6-7fd843dc1f37
+		summarizeBy: sum
+		sourceColumn: 'Cust360 CSAT'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cust360 Contact Picture URL'
+		dataType: string
+		lineageTag: 21fb4f52-4b16-40a3-b9f9-ceeee7c1f004
+		summarizeBy: none
+		sourceColumn: 'Cust360 Contact Picture URL'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cust360 Id'
+		dataType: string
+		lineageTag: 844b199b-ce96-447c-a7e0-5fd6610f534d
+		summarizeBy: none
+		sourceColumn: 'Cust360 Id'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cust360 Metric 1'
+		dataType: string
+		lineageTag: 5b16d926-df30-4575-83c9-e15fd067499a
+		summarizeBy: none
+		sourceColumn: 'Cust360 Metric 1'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cust360 Metric 2'
+		dataType: string
+		lineageTag: 5f55b89f-8ac5-4b7a-a70a-53a0a94f53a9
+		summarizeBy: none
+		sourceColumn: 'Cust360 Metric 2'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Account #'
+		dataType: string
+		lineageTag: 1e37edec-a999-414a-a52d-95b7d4e057f8
+		summarizeBy: none
+		sourceColumn: 'Customer Account #'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Portal Account'
+		dataType: boolean
+		lineageTag: 3fc319fb-3a56-4764-9aaa-07ee06c2daf9
+		summarizeBy: none
+		sourceColumn: 'Customer Portal Account'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Satisfaction Index'
+		dataType: string
+		lineageTag: f09ede47-d9b3-44be-b197-6c3ada0bd0c1
+		summarizeBy: none
+		sourceColumn: 'Customer Satisfaction Index'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DB1
+		dataType: boolean
+		lineageTag: 2371e25e-4b50-495e-b638-bbf5a6105074
+		summarizeBy: none
+		sourceColumn: DB1
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data.com Key'
+		dataType: string
+		lineageTag: 805802d5-74e8-48ee-afa7-fb609f678b34
+		summarizeBy: none
+		sourceColumn: 'Data.com Key'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Default Field Entitlement'
+		dataType: string
+		lineageTag: edebb59d-960e-4cb8-962d-9856b8de9e24
+		summarizeBy: none
+		sourceColumn: 'Default Field Entitlement'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Default Location'
+		dataType: string
+		lineageTag: 0f593e4a-ba97-49ff-834b-ebe1bb13d90a
+		summarizeBy: none
+		sourceColumn: 'Default Location'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Default Opportunity'
+		dataType: string
+		lineageTag: e130b315-bba6-4e9f-afcb-c22b69dd73bb
+		summarizeBy: none
+		sourceColumn: 'Default Opportunity'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Default Price Book'
+		dataType: string
+		lineageTag: 07bfa560-b1d5-4f33-87a8-d3b89f2abc13
+		summarizeBy: none
+		sourceColumn: 'Default Price Book'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Default for FSL Snap-Ins'
+		dataType: boolean
+		lineageTag: 002ab55f-146d-4913-a34c-5f187dd00589
+		summarizeBy: none
+		sourceColumn: 'Default for FSL Snap-Ins'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Do Not Call'
+		dataType: boolean
+		lineageTag: d2df7107-b94d-45fc-85a6-9daf96ae920c
+		summarizeBy: none
+		sourceColumn: 'Do Not Call'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dunning Method'
+		dataType: string
+		lineageTag: d4eb1872-1c22-4f5e-af2f-11c8294b140d
+		summarizeBy: none
+		sourceColumn: 'Dunning Method'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'EDY_ORGCUSTOM__DB__c (Account)'
+		dataType: boolean
+		lineageTag: 214b9f61-2442-412c-82fe-49138c5cb6b9
+		summarizeBy: none
+		sourceColumn: 'EDY_ORGCUSTOM__DB__c (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Email Bounced Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4e105f21-7560-4613-8e8b-c55ce38acbdc
+		summarizeBy: none
+		sourceColumn: 'Email Bounced Date'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Email Bounced Reason'
+		dataType: string
+		lineageTag: 7a0c0eb7-de5e-47e0-85e7-a2047ecf2bf0
+		summarizeBy: none
+		sourceColumn: 'Email Bounced Reason'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Email Opt Out'
+		dataType: boolean
+		lineageTag: cb7281e4-1b7d-4456-8e18-86d6885d61ef
+		summarizeBy: none
+		sourceColumn: 'Email Opt Out'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Employees
+		dataType: int64
+		lineageTag: 11b77b9f-384d-4a42-96d7-47d301fa38a4
+		summarizeBy: sum
+		sourceColumn: Employees
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Exclude from territory assignment rules'
+		dataType: boolean
+		lineageTag: 0873e8a5-a533-42c8-9eb4-9c9755d8d503
+		summarizeBy: none
+		sourceColumn: 'Exclude from territory assignment rules'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'External ID1'
+		dataType: string
+		lineageTag: 14d19fff-092a-4aad-8f31-c3c18cbcdd69
+		summarizeBy: none
+		sourceColumn: 'External ID1'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'External_ID__c (Account)'
+		dataType: string
+		lineageTag: 31b1c71b-e121-4c31-8809-8c0e87f913be
+		summarizeBy: none
+		sourceColumn: 'External_ID__c (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fax Opt Out'
+		dataType: boolean
+		lineageTag: be59cca8-5b77-4522-8521-bb58b6fc0d6c
+		summarizeBy: none
+		sourceColumn: 'Fax Opt Out'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'FirstName (Account)'
+		dataType: string
+		lineageTag: a28a5339-9510-4aae-8e89-d47f302673c8
+		summarizeBy: none
+		sourceColumn: 'FirstName (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Former Account Name'
+		dataType: string
+		lineageTag: 763aed4c-d201-467d-92cb-7acddf0a7171
+		summarizeBy: none
+		sourceColumn: 'Former Account Name'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Google Analytics Campaign'
+		dataType: string
+		lineageTag: af54d81b-e96e-4d1e-8930-c1795ffd5855
+		summarizeBy: none
+		sourceColumn: 'Google Analytics Campaign'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Google Analytics Content'
+		dataType: string
+		lineageTag: 42d8b6bc-8cca-4ce1-8fe2-d2934028ebf5
+		summarizeBy: none
+		sourceColumn: 'Google Analytics Content'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Google Analytics Medium'
+		dataType: string
+		lineageTag: eca4d26e-993c-445f-9190-483f5067436d
+		summarizeBy: none
+		sourceColumn: 'Google Analytics Medium'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Google Analytics Source'
+		dataType: string
+		lineageTag: 489b5c08-ce78-40a9-b833-1923037b2c56
+		summarizeBy: none
+		sourceColumn: 'Google Analytics Source'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Google Analytics Term'
+		dataType: string
+		lineageTag: 53c9cdfd-1000-45d7-8f82-28064e3023b1
+		summarizeBy: none
+		sourceColumn: 'Google Analytics Term'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Home Phone'
+		dataType: string
+		lineageTag: ede68381-986e-4b46-b317-e798cce3f87e
+		summarizeBy: none
+		sourceColumn: 'Home Phone'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Id (Account)'
+		dataType: string
+		lineageTag: af40e7c6-9190-452d-b8c0-f4fb08df89ab
+		summarizeBy: none
+		sourceColumn: 'Id (Account)'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ignore Parent Contracted Prices'
+		dataType: boolean
+		lineageTag: 1b6f8f8b-cdef-4ca3-acee-854f8f70a67d
+		summarizeBy: none
+		sourceColumn: 'Ignore Parent Contracted Prices'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Industry
+		dataType: string
+		lineageTag: f1aa8f3b-92e2-4a3f-a5e4-e6cb53f9c956
+		summarizeBy: none
+		sourceColumn: Industry
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Person Account'
+		dataType: boolean
+		lineageTag: f999e218-8b57-475d-8a71-229f0b9e8105
+		summarizeBy: none
+		sourceColumn: 'Is Person Account'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'IsDeleted (Account)'
+		dataType: boolean
+		lineageTag: 192637f9-fdfd-4953-8939-4412371872f4
+		summarizeBy: none
+		sourceColumn: 'IsDeleted (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'IsLocked (Account)'
+		dataType: boolean
+		lineageTag: 9934f4ca-e938-4dba-8706-77f28b3d4fc3
+		summarizeBy: none
+		sourceColumn: 'IsLocked (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'IsPartner (Account)'
+		dataType: boolean
+		lineageTag: 0c2df7da-8379-453b-9e77-ba74045d56c9
+		summarizeBy: none
+		sourceColumn: 'IsPartner (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Jigsaw Company ID'
+		dataType: string
+		lineageTag: a90451e6-e4e6-4c53-9ac3-472b66d9aed0
+		summarizeBy: none
+		sourceColumn: 'Jigsaw Company ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Stay-in-Touch Request Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 40840225-aac0-4bf3-b596-53315359af79
+		summarizeBy: none
+		sourceColumn: 'Last Stay-in-Touch Request Date'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Stay-in-Touch Save Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8aaab640-1253-45d8-9d91-2792332b5fcf
+		summarizeBy: none
+		sourceColumn: 'Last Stay-in-Touch Save Date'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'LastActivityDate (Account)'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 78988e8a-5ae6-4139-a3ad-5a93d72a53c3
+		summarizeBy: none
+		sourceColumn: 'LastActivityDate (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'LastModifiedById (Account)'
+		dataType: string
+		lineageTag: 0487e139-5bca-4950-982d-d93097d37918
+		summarizeBy: none
+		sourceColumn: 'LastModifiedById (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'LastModifiedDate (Account)'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 47951c92-1e16-4757-b0e2-39b6a23196c2
+		summarizeBy: none
+		sourceColumn: 'LastModifiedDate (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'LastName (Account)'
+		dataType: string
+		lineageTag: 9055e6e3-c200-4239-bf69-0f0df1cea001
+		summarizeBy: none
+		sourceColumn: 'LastName (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'LastReferencedDate (Account)'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 13318e73-ed26-4074-8553-ebc1623ccd7a
+		summarizeBy: none
+		sourceColumn: 'LastReferencedDate (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'LastViewedDate (Account)'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d290ac72-2b53-4236-8d9f-0e787eab9f33
+		summarizeBy: none
+		sourceColumn: 'LastViewedDate (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Latest Sentiment'
+		dataType: string
+		lineageTag: 0dc335c6-fdd7-4b76-8014-d2f25db337c8
+		summarizeBy: none
+		sourceColumn: 'Latest Sentiment'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Liabilities
+		dataType: double
+		formatString: C1033%
+		lineageTag: f92ea910-361a-4193-924d-bc9a978fbe32
+		summarizeBy: sum
+		sourceColumn: Liabilities
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Lifetime Spending'
+		dataType: double
+		formatString: C1033%
+		lineageTag: 29ff0978-2787-4c23-915f-fa619c0d8f44
+		summarizeBy: sum
+		sourceColumn: 'Lifetime Spending'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Lost Opportunities'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: db4cecb7-a9b7-49ec-86d2-afc28352ec58
+		summarizeBy: sum
+		sourceColumn: 'Lost Opportunities'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mailing City'
+		dataType: string
+		lineageTag: 6ce9bb09-cbf7-464d-87f4-e2ab62b05a34
+		summarizeBy: none
+		sourceColumn: 'Mailing City'
+		isHidden
+		dataCategory: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mailing Country'
+		dataType: string
+		lineageTag: d038d48a-8e6e-491a-a28e-4084e7036556
+		summarizeBy: none
+		sourceColumn: 'Mailing Country'
+		isHidden
+		dataCategory: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mailing Geocode Accuracy'
+		dataType: string
+		lineageTag: 30fdfbff-dca5-4f0c-9ae2-80d4ced51489
+		summarizeBy: none
+		sourceColumn: 'Mailing Geocode Accuracy'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mailing Latitude'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: c6b7851d-50bf-4fb8-9770-81a37c707c25
+		summarizeBy: sum
+		sourceColumn: 'Mailing Latitude'
+		isHidden
+		dataCategory: Latitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mailing Longitude'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: a15c1a64-a560-46ef-b63f-eb9968afa91d
+		summarizeBy: sum
+		sourceColumn: 'Mailing Longitude'
+		isHidden
+		dataCategory: Longitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mailing State/Province'
+		dataType: string
+		lineageTag: b75a7300-4b37-4848-bf70-febee5bc6b25
+		summarizeBy: none
+		sourceColumn: 'Mailing State/Province'
+		isHidden
+		dataCategory: StateOrProvince
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mailing Street'
+		dataType: string
+		lineageTag: f94f5e07-c528-423c-aa8e-ef6ee6e9ed8c
+		summarizeBy: none
+		sourceColumn: 'Mailing Street'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mailing Zip/Postal Code'
+		dataType: string
+		lineageTag: fb89458f-f789-47cb-b6bb-668bc6c15267
+		summarizeBy: none
+		sourceColumn: 'Mailing Zip/Postal Code'
+		isHidden
+		dataCategory: PostalCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Maps - User Territory'
+		dataType: string
+		lineageTag: 2e3a0f46-9940-4ddf-8b7f-7026aff0e2ab
+		summarizeBy: none
+		sourceColumn: 'Maps - User Territory'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Maps Assignment Rule'
+		dataType: string
+		lineageTag: 69420e3f-bc3c-47b5-89e2-0f67af1dfb5c
+		summarizeBy: none
+		sourceColumn: 'Maps Assignment Rule'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Master Record ID'
+		dataType: string
+		lineageTag: 6db93678-a85c-4612-9895-03fcfaf4d663
+		summarizeBy: none
+		sourceColumn: 'Master Record ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MayEdit (Account)'
+		dataType: boolean
+		lineageTag: 78fd8648-e99e-48a7-af77-feae0477225c
+		summarizeBy: none
+		sourceColumn: 'MayEdit (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mobile Country Code'
+		dataType: string
+		lineageTag: b2e97392-7c24-4ca6-bbc6-615d4b907a4f
+		summarizeBy: none
+		sourceColumn: 'Mobile Country Code'
+		isHidden
+		dataCategory: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mobile Opt Out'
+		dataType: boolean
+		lineageTag: 8c089afd-2144-47c2-ac32-bb33404bee19
+		summarizeBy: none
+		sourceColumn: 'Mobile Opt Out'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month of Birth'
+		dataType: string
+		lineageTag: c5bd027a-6033-432d-bcc3-ebf563424d88
+		summarizeBy: none
+		sourceColumn: 'Month of Birth'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Needs Score Synced'
+		dataType: boolean
+		lineageTag: a6df2b9d-1fab-46f6-bdd0-127d198a7701
+		summarizeBy: none
+		sourceColumn: 'Needs Score Synced'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Old Name'
+		dataType: string
+		lineageTag: 5a4fafb8-caea-4d8d-867f-d9b25a6f5801
+		summarizeBy: none
+		sourceColumn: 'Old Name'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Old Title'
+		dataType: string
+		lineageTag: 5c0ba84a-ab92-46b6-9652-cebc425b5ddd
+		summarizeBy: none
+		sourceColumn: 'Old Title'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Open Opportunities'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: f9f6dc89-496a-4829-84b9-1de48e9552b2
+		summarizeBy: sum
+		sourceColumn: 'Open Opportunities'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Operating Hour ID'
+		dataType: string
+		lineageTag: 03d82f65-b71f-40e8-a7ca-9c904e1a29f0
+		summarizeBy: none
+		sourceColumn: 'Operating Hour ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Operating Hours'
+		dataType: string
+		lineageTag: 39e718a9-484b-4c1a-b2f5-4c7e1204b066
+		summarizeBy: none
+		sourceColumn: 'Operating Hours'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Other City'
+		dataType: string
+		lineageTag: 6e7d451c-767e-4ef0-9214-fe9973112664
+		summarizeBy: none
+		sourceColumn: 'Other City'
+		isHidden
+		dataCategory: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Other Country'
+		dataType: string
+		lineageTag: 83a2a524-11c9-4bfa-9577-7e25a3f4f3d7
+		summarizeBy: none
+		sourceColumn: 'Other Country'
+		isHidden
+		dataCategory: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Other Geocode Accuracy'
+		dataType: string
+		lineageTag: 98d5a1ce-adad-43b5-a40b-9b2f8d1f251c
+		summarizeBy: none
+		sourceColumn: 'Other Geocode Accuracy'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Other Income'
+		dataType: double
+		formatString: C1033%
+		lineageTag: d201b73c-04e2-4a3c-ac46-7a30efba5d64
+		summarizeBy: sum
+		sourceColumn: 'Other Income'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Other Latitude'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 7cbc2079-0209-43bf-bb8f-bfa36c5efa36
+		summarizeBy: sum
+		sourceColumn: 'Other Latitude'
+		isHidden
+		dataCategory: Latitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Other Longitude'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 93f61461-535e-4278-a3eb-8649949eef3e
+		summarizeBy: sum
+		sourceColumn: 'Other Longitude'
+		isHidden
+		dataCategory: Longitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Other Phone'
+		dataType: string
+		lineageTag: 63551d12-7fd9-4c02-9568-6382e6d69829
+		summarizeBy: none
+		sourceColumn: 'Other Phone'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Other State/Province'
+		dataType: string
+		lineageTag: 8e526b2e-f6ff-4cf9-840a-b6969142def6
+		summarizeBy: none
+		sourceColumn: 'Other State/Province'
+		isHidden
+		dataCategory: StateOrProvince
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Other Street'
+		dataType: string
+		lineageTag: 0753009a-3de0-46a7-8c22-c3e42e8f7a64
+		summarizeBy: none
+		sourceColumn: 'Other Street'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Other Zip/Postal Code'
+		dataType: string
+		lineageTag: ada984ba-a09d-4df9-bf66-ebd565ec2a60
+		summarizeBy: none
+		sourceColumn: 'Other Zip/Postal Code'
+		isHidden
+		dataCategory: PostalCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OwnerId (Account)'
+		dataType: string
+		lineageTag: 12e74f9d-6a71-4fee-a76d-abf7ed39896c
+		summarizeBy: none
+		sourceColumn: 'OwnerId (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ownership
+		dataType: string
+		lineageTag: 50f3b0b8-8293-4532-9eef-e855b5b60bea
+		summarizeBy: none
+		sourceColumn: Ownership
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pardot Campaign'
+		dataType: string
+		lineageTag: 84dfce8e-26f0-4007-b3f1-24fd886a6d4a
+		summarizeBy: none
+		sourceColumn: 'Pardot Campaign'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pardot Conversion Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d5a10f03-be3e-4abe-8649-63ff6b5aaf34
+		summarizeBy: none
+		sourceColumn: 'Pardot Conversion Date'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pardot Conversion Object Name'
+		dataType: string
+		lineageTag: 58d3e53a-4de4-4091-934d-5b9a2348953f
+		summarizeBy: none
+		sourceColumn: 'Pardot Conversion Object Name'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pardot Conversion Object Type'
+		dataType: string
+		lineageTag: 71e9d7cf-5247-4f3d-a8fe-fc1198822312
+		summarizeBy: none
+		sourceColumn: 'Pardot Conversion Object Type'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pardot Created Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e205bd4d-880f-4ae2-88e9-65d9d6e30318
+		summarizeBy: none
+		sourceColumn: 'Pardot Created Date'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pardot First Activity'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d7d18bc4-7aac-4d7b-b589-21299bcda591
+		summarizeBy: none
+		sourceColumn: 'Pardot First Activity'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pardot First Referrer Query'
+		dataType: string
+		lineageTag: d8a3b2cd-609f-4763-8bb2-dc446dca497b
+		summarizeBy: none
+		sourceColumn: 'Pardot First Referrer Query'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pardot First Referrer Type'
+		dataType: string
+		lineageTag: 3a47bcdd-3820-4a36-a614-030c6bf82fc4
+		summarizeBy: none
+		sourceColumn: 'Pardot First Referrer Type'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pardot Grade'
+		dataType: string
+		lineageTag: 6f4d0e57-ceeb-458a-a966-31a4b3982660
+		summarizeBy: none
+		sourceColumn: 'Pardot Grade'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pardot Hard Bounced'
+		dataType: boolean
+		lineageTag: 9681816c-4f1d-4744-8de6-b3a40a9d3e06
+		summarizeBy: none
+		sourceColumn: 'Pardot Hard Bounced'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pardot Last Activity'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: bfef6003-a1d3-477b-ad39-e575fc6f4a63
+		summarizeBy: none
+		sourceColumn: 'Pardot Last Activity'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pardot Last Scored At'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 86e3bd0c-3286-4ac3-ba00-b6058b37fd3c
+		summarizeBy: none
+		sourceColumn: 'Pardot Last Scored At'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pardot Score'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: f32fdfb8-4071-4078-b646-ce1c5f4396d6
+		summarizeBy: sum
+		sourceColumn: 'Pardot Score'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pardot URL'
+		dataType: string
+		lineageTag: 6eb9d756-22ec-40cb-879c-5a1ac8e31eae
+		summarizeBy: none
+		sourceColumn: 'Pardot URL'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parent Account ID'
+		dataType: string
+		lineageTag: d11d9e3b-b5e7-4169-b6ba-f4721355df5a
+		summarizeBy: none
+		sourceColumn: 'Parent Account ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Partner Certification'
+		dataType: string
+		lineageTag: e56ff279-caf4-4283-87cd-d0a27b568f5a
+		summarizeBy: none
+		sourceColumn: 'Partner Certification'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Partner Geographic Coverage'
+		dataType: string
+		lineageTag: 6635ff91-3314-45c2-bb80-b475b711c86d
+		summarizeBy: none
+		sourceColumn: 'Partner Geographic Coverage'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Partner Program Level'
+		dataType: string
+		lineageTag: 832947d7-e3fb-4661-82cd-a2ee6f3b31a7
+		summarizeBy: none
+		sourceColumn: 'Partner Program Level'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Partner Type'
+		dataType: string
+		lineageTag: 8b39d7fa-d11f-40fa-98d7-7ffb5d7bbe75
+		summarizeBy: none
+		sourceColumn: 'Partner Type'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Partnership Status'
+		dataType: string
+		lineageTag: f011d94f-ca0f-4b67-8cfc-8a28fca4ca29
+		summarizeBy: none
+		sourceColumn: 'Partnership Status'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PersonContactId (Account)'
+		dataType: string
+		lineageTag: 29109124-396e-4e2f-8a2c-3a9ced2c90a8
+		summarizeBy: none
+		sourceColumn: 'PersonContactId (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PersonDepartment (Account)'
+		dataType: string
+		lineageTag: cb16e82c-b2f4-43e6-87c5-f5aecab81823
+		summarizeBy: none
+		sourceColumn: 'PersonDepartment (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PersonEmail (Account)'
+		dataType: string
+		lineageTag: 3df622c5-2eab-4596-a053-95e848c1a31e
+		summarizeBy: none
+		sourceColumn: 'PersonEmail (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PersonIndividualId (Account)'
+		dataType: string
+		lineageTag: 5bccf5ca-2de1-4267-8b36-c3c91fe1d8a0
+		summarizeBy: none
+		sourceColumn: 'PersonIndividualId (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PersonLeadSource (Account)'
+		dataType: string
+		lineageTag: d0fe7673-571c-46f7-a366-75b8d265c68a
+		summarizeBy: none
+		sourceColumn: 'PersonLeadSource (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PersonMobilePhone (Account)'
+		dataType: string
+		lineageTag: 30b21981-d0ad-425d-9954-1e10e37f8b16
+		summarizeBy: none
+		sourceColumn: 'PersonMobilePhone (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PersonTitle (Account)'
+		dataType: string
+		lineageTag: 832eb725-e547-4b99-aefd-39573bfb4bbc
+		summarizeBy: none
+		sourceColumn: 'PersonTitle (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Personal Assets'
+		dataType: double
+		formatString: C1033%
+		lineageTag: aff2274b-b2e3-4c0b-a0b6-69e8ef92b9ab
+		summarizeBy: sum
+		sourceColumn: 'Personal Assets'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Photo URL'
+		dataType: string
+		lineageTag: 461d4b60-2f29-443d-946d-3b358f7f1b4d
+		summarizeBy: none
+		sourceColumn: 'Photo URL'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Preferred Contact Channel'
+		dataType: string
+		lineageTag: 9852d4f6-2f1b-43ec-87df-d2bbe3a8cfbe
+		summarizeBy: none
+		sourceColumn: 'Preferred Contact Channel'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Preferred Name'
+		dataType: string
+		lineageTag: e99f8c1f-c397-4398-aea7-21a86b949601
+		summarizeBy: none
+		sourceColumn: 'Preferred Name'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Preferred Pronoun'
+		dataType: string
+		lineageTag: 6c234947-1a47-456e-a0b6-96111de985aa
+		summarizeBy: none
+		sourceColumn: 'Preferred Pronoun'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Preserve Bundle Structure'
+		dataType: boolean
+		lineageTag: d01a3aef-99d2-4121-aeb1-9b471c32a7e0
+		summarizeBy: none
+		sourceColumn: 'Preserve Bundle Structure'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Price Hold End'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1c16368d-1d85-4bbf-873b-a2a44d2c1388
+		summarizeBy: none
+		sourceColumn: 'Price Hold End'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Primary Messaging User'
+		dataType: string
+		lineageTag: 4030da37-dc84-4636-bac3-721bbf14b871
+		summarizeBy: none
+		sourceColumn: 'Primary Messaging User'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Projected Lifetime Value'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 64095fb0-9e27-4446-a69e-fe3b66ff9b3e
+		summarizeBy: sum
+		sourceColumn: 'Projected Lifetime Value'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'RecordTypeId (Account)'
+		dataType: string
+		lineageTag: 823c2c29-cb71-4ef6-8f60-6d2a4bdca196
+		summarizeBy: none
+		sourceColumn: 'RecordTypeId (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: 72e8f0e5-8bed-40cd-a408-12b7006d8597
+		summarizeBy: none
+		sourceColumn: Region
+		isHidden
+		dataCategory: StateOrProvince
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Renewal Model'
+		dataType: string
+		lineageTag: f27fc039-4b9e-436c-80aa-e32d0024b98b
+		summarizeBy: none
+		sourceColumn: 'Renewal Model'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Renewal Pricing Method'
+		dataType: string
+		lineageTag: 5e263615-00fd-489c-aa46-f5d1f4c29914
+		summarizeBy: none
+		sourceColumn: 'Renewal Pricing Method'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Rider Context'
+		dataType: string
+		lineageTag: e428bad9-733b-45c3-9a63-22ff464a6ce6
+		summarizeBy: none
+		sourceColumn: 'Rider Context'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Rider Enabled'
+		dataType: boolean
+		lineageTag: c7adedda-4b67-49c9-94f6-247474476bff
+		summarizeBy: none
+		sourceColumn: 'Rider Enabled'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Rider Service Territory'
+		dataType: string
+		lineageTag: 7306cc2f-8429-4695-a2f2-90606837bcf2
+		summarizeBy: none
+		sourceColumn: 'Rider Service Territory'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Risk of Churn'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 570aca06-6ad9-4783-bfa6-134223fdbe5f
+		summarizeBy: sum
+		sourceColumn: 'Risk of Churn'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SDO Maps TAM'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 16f50708-9712-4eff-864d-697afbebeb05
+		summarizeBy: sum
+		sourceColumn: 'SDO Maps TAM'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SDO_Quip_URL__c (Account)'
+		dataType: string
+		lineageTag: af4d41d4-b0f8-48e4-8ce7-3526b5be37d2
+		summarizeBy: none
+		sourceColumn: 'SDO_Quip_URL__c (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SIC Code'
+		dataType: string
+		lineageTag: 7253320a-cbd4-496f-a7f1-ecb2d9cd23dd
+		summarizeBy: none
+		sourceColumn: 'SIC Code'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SIC Description'
+		dataType: string
+		lineageTag: a8986fc2-1bab-4256-9f97-0b261c266273
+		summarizeBy: none
+		sourceColumn: 'SIC Description'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SLA
+		dataType: string
+		lineageTag: 28927ad4-0cfd-4422-b55e-a62ba547e689
+		summarizeBy: none
+		sourceColumn: SLA
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SMS Message'
+		dataType: string
+		lineageTag: 35a4a4fe-876e-4231-b891-4163101022e7
+		summarizeBy: none
+		sourceColumn: 'SMS Message'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Salutation
+		dataType: string
+		lineageTag: f69405c0-697c-4eab-acd0-aaf307a1feac
+		summarizeBy: none
+		sourceColumn: Salutation
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Service Territory'
+		dataType: string
+		lineageTag: b191463c-d3d4-4975-a6b8-4869b367ec52
+		summarizeBy: none
+		sourceColumn: 'Service Territory'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Shipping City'
+		dataType: string
+		lineageTag: 18696266-5579-4262-bdd5-8ba6c09661a9
+		summarizeBy: none
+		sourceColumn: 'Shipping City'
+		isHidden
+		dataCategory: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Shipping Country'
+		dataType: string
+		lineageTag: 99735a9e-5577-4f29-9e3a-3d90d88922e8
+		summarizeBy: none
+		sourceColumn: 'Shipping Country'
+		isHidden
+		dataCategory: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Shipping Geocode Accuracy'
+		dataType: string
+		lineageTag: 155d9bc9-5c11-4200-ad98-5695e7910322
+		summarizeBy: none
+		sourceColumn: 'Shipping Geocode Accuracy'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Shipping Latitude'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: d4681bd2-d8fe-4ca4-bd57-3ad51ce244e2
+		summarizeBy: sum
+		sourceColumn: 'Shipping Latitude'
+		isHidden
+		dataCategory: Latitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Shipping Longitude'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 5be4dbcf-10e3-4151-9eed-0b424b9a51b9
+		summarizeBy: sum
+		sourceColumn: 'Shipping Longitude'
+		isHidden
+		dataCategory: Longitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Shipping State/Province'
+		dataType: string
+		lineageTag: a7fe3e44-c52d-4b06-93d7-3200ba88ef2f
+		summarizeBy: none
+		sourceColumn: 'Shipping State/Province'
+		isHidden
+		dataCategory: StateOrProvince
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Shipping Street'
+		dataType: string
+		lineageTag: d08d0568-101a-45df-879a-f1e6e107ef0c
+		summarizeBy: none
+		sourceColumn: 'Shipping Street'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Shipping Zip/Postal Code'
+		dataType: string
+		lineageTag: 08552aaf-2065-4ad4-8d5c-d75a52dba446
+		summarizeBy: none
+		sourceColumn: 'Shipping Zip/Postal Code'
+		isHidden
+		dataCategory: PostalCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ShippingGeo (Latitude)'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 7a7554b4-670b-49f4-9b6a-27434d9f726a
+		summarizeBy: sum
+		sourceColumn: 'ShippingGeo (Latitude)'
+		isHidden
+		dataCategory: Latitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ShippingGeo (Longitude)'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: c435dd9f-0ee2-4354-ad91-300812e97af0
+		summarizeBy: sum
+		sourceColumn: 'ShippingGeo (Longitude)'
+		isHidden
+		dataCategory: Longitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SystemModstamp (Account)'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8f0f55fc-e02b-428a-9e31-c7d7ef01c663
+		summarizeBy: none
+		sourceColumn: 'SystemModstamp (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TDD / TTY Required'
+		dataType: boolean
+		lineageTag: 4bde4055-5751-4c9d-ba4d-4341216665e0
+		summarizeBy: none
+		sourceColumn: 'TDD / TTY Required'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tax-Exempt'
+		dataType: string
+		lineageTag: e1d7403b-ee30-4680-9207-55d9ab3e3aca
+		summarizeBy: none
+		sourceColumn: 'Tax-Exempt'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ticker Symbol'
+		dataType: string
+		lineageTag: d49ffb85-a236-4074-bf9c-b95791886d11
+		summarizeBy: none
+		sourceColumn: 'Ticker Symbol'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total # of Activities'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 234bdc3b-55f7-4f5e-a88b-98d11d29f515
+		summarizeBy: sum
+		sourceColumn: 'Total # of Activities'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Leads'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: d4bb9f26-0dda-4d77-8966-097367afcd13
+		summarizeBy: sum
+		sourceColumn: 'Total Leads'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Upsell Opportunity'
+		dataType: string
+		lineageTag: 75f53fed-7134-4789-af69-6a47b618a300
+		summarizeBy: none
+		sourceColumn: 'Upsell Opportunity'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Value Closed Won Opportunities'
+		dataType: double
+		formatString: C1033%
+		lineageTag: 70257fd1-2bf9-4b4c-b386-4fdfb8643439
+		summarizeBy: sum
+		sourceColumn: 'Value Closed Won Opportunities'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Value of Open Opportunities'
+		dataType: double
+		formatString: C1033%
+		lineageTag: 816f47b1-d57a-4134-bdbe-cb66d47e2ab7
+		summarizeBy: sum
+		sourceColumn: 'Value of Open Opportunities'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: double
+		formatString: #,0.00
+		lineageTag: a375cc8f-7010-437d-8ccc-1832b9f03224
+		summarizeBy: sum
+		sourceColumn: Value
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Website
+		dataType: string
+		lineageTag: 8d923797-aafa-46a6-b390-f8f81144af51
+		summarizeBy: none
+		sourceColumn: Website
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Won Opportunities'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 08c04bb3-98ee-42f7-a96a-fedb85b7d890
+		summarizeBy: sum
+		sourceColumn: 'Won Opportunities'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Work Type for Quote Creation'
+		dataType: string
+		lineageTag: 76a5111a-bd30-4806-8bae-c50f69e5ab20
+		summarizeBy: none
+		sourceColumn: 'Work Type for Quote Creation'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Work Type'
+		dataType: string
+		lineageTag: 492c7721-5253-4ffc-a331-df3177f7290c
+		summarizeBy: none
+		sourceColumn: 'Work Type'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'YTD Revenue Generated'
+		dataType: double
+		formatString: C1033%
+		lineageTag: 41702d14-76c4-4c39-8bc3-37c719d759b7
+		summarizeBy: sum
+		sourceColumn: 'YTD Revenue Generated'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year of Birth'
+		dataType: string
+		lineageTag: c31261ab-6ce8-480c-81f3-a2d8ed2a616b
+		summarizeBy: none
+		sourceColumn: 'Year of Birth'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'analyticsdemo_batch_id__c (Account)'
+		dataType: string
+		lineageTag: 785603c6-e479-4d14-ab22-28964743fd66
+		summarizeBy: none
+		sourceColumn: 'analyticsdemo_batch_id__c (Account)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column analyticsdemo_batch_id__c1
+		dataType: string
+		lineageTag: 908d2dee-c8a7-496e-9616-bd4b894ed9b1
+		summarizeBy: none
+		sourceColumn: analyticsdemo_batch_id__c1
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Account-f2fdbe6a-f331-4960-b205-c6f374878b01' = m
+		mode: import
+		source =
+				let
+				    // TODO: Configure the data source for connector type: SALESFORCE
+				    // Replace the sample table below with the actual source expression.
+				    Source = Table.PromoteHeaders(Csv.Document(File.Contents(DataFolder & "\Account.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]), [PromoteAllScalars=true])
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 214 columns: Account Fax, Account Name, Account Number, Account Phone, Account Rating, Account Site, Account Source, Account Type, ... (214 columns total).
+

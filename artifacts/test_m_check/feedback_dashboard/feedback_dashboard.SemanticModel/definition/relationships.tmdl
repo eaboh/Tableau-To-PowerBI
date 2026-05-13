@@ -1,4 +1,17 @@
-relationship 25dda690-1fb7-4c02-8a6e-68a3076c8ac9
+relationship e73eb390-64a3-46d9-9956-b26eeabd41a8
+	fromColumn: 'customer_feedback_data.json'.date
+	toColumn: Calendar.Date
+	crossFilteringBehavior: bothDirections
+
+relationship 0a4fa235-cdee-4c67-8da4-90803eb27003
+	fromColumn: Extract.date
+	toColumn: Calendar.Date
+	fromCardinality: many
+	toCardinality: many
+	crossFilteringBehavior: bothDirections
+	isActive: false
+
+relationship 3f03f4a0-d0dd-45d7-81e4-4add6550ea79
 	fromColumn: 'customer_feedback_data.json'.customer_id
 	toColumn: Extract.customer_id
 	fromCardinality: many

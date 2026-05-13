@@ -1,29 +1,45 @@
 table Calendar
-	lineageTag: faf7b2bb-d204-4fea-b8f6-da45ae005fb0
+	lineageTag: bb355475-a0c7-4734-8728-8f9c61116aef
+
+	measure 'Year To Date' = TOTALYTD([Is My Account], 'Calendar'[Date])
+		formatString: #,0.00
+		displayFolder: Time Intelligence
+		lineageTag: d001944b-f683-49da-ac0a-dc27334f4e6b
+		annotation Copilot_Description = DAX: TOTALYTD([Is My Account], 'Calendar'[Date])
+
+	measure 'Previous Year' = CALCULATE([Is My Account], SAMEPERIODLASTYEAR('Calendar'[Date]))
+		formatString: #,0.00
+		displayFolder: Time Intelligence
+		lineageTag: 09a20a9d-848d-41ba-a2c8-1ec2f58b9093
+		annotation Copilot_Description = DAX: CALCULATE([Is My Account], SAMEPERIODLASTYEAR('Calendar'[Date]))
+
+	measure 'Year Over Year %' = DIVIDE([Year To Date] - [Previous Year], [Previous Year], 0)
+		formatString: 0.00%
+		displayFolder: Time Intelligence
+		lineageTag: 1670699c-e31d-41f1-8cd0-f5aaaf387006
+		annotation Copilot_Description = DAX: DIVIDE([Year To Date] - [Previous Year], [Previous Year], 0)
 
 	column Date
 		dataType: dateTime
 		formatString: dd/mm/yyyy
-		lineageTag: d4ce5ea4-c1fd-4c25-a3b6-7761ce1b8d65
+		lineageTag: 3641284d-08f7-40dd-9d07-cf9503f386ff
 		summarizeBy: none
 		sourceColumn: Date
 		isKey
-		dataCategory: DateTime
 
 		annotation SummarizationSetBy = Automatic
 
 	column Year
 		dataType: int64
-		lineageTag: 111a6c12-49e3-48b9-8436-8c0855ea3589
+		lineageTag: e3a356c5-930f-4926-870d-a057cadaa0cd
 		summarizeBy: none
 		sourceColumn: Year
-		dataCategory: Years
 
 		annotation SummarizationSetBy = Automatic
 
 	column Quarter
 		dataType: string
-		lineageTag: a033ce9c-0b60-469d-b1c2-f00ee6221ed9
+		lineageTag: 0bc74b5d-c3d7-4502-8070-aef8da83d10a
 		summarizeBy: none
 		sourceColumn: Quarter
 
@@ -31,16 +47,15 @@ table Calendar
 
 	column Month
 		dataType: int64
-		lineageTag: 35d1a0a4-cf11-4a61-a496-e824b0fd5161
+		lineageTag: 1d047ac2-f05b-4f01-8381-a561a57c1aef
 		summarizeBy: none
 		sourceColumn: Month
-		dataCategory: Months
 
 		annotation SummarizationSetBy = Automatic
 
 	column MonthName
 		dataType: string
-		lineageTag: d789f2ee-c478-4d72-8531-c92be39700ec
+		lineageTag: eeb90df2-e460-4164-a452-8f2a497e7979
 		summarizeBy: none
 		sourceColumn: MonthName
 		sortByColumn: Month
@@ -49,16 +64,15 @@ table Calendar
 
 	column Day
 		dataType: int64
-		lineageTag: d4ebe2cc-84e3-474a-bd8f-78a2fb53f010
+		lineageTag: 315e68b5-7376-4c79-a099-2ebacf2d3686
 		summarizeBy: none
 		sourceColumn: Day
-		dataCategory: Days
 
 		annotation SummarizationSetBy = Automatic
 
 	column DayOfWeek
 		dataType: int64
-		lineageTag: b9db73dc-dbfc-43a9-9ed7-3aa9d474a08d
+		lineageTag: c46a22c7-6c1d-4942-85a7-39b33dea9263
 		summarizeBy: none
 		sourceColumn: DayOfWeek
 
@@ -66,7 +80,7 @@ table Calendar
 
 	column DayName
 		dataType: string
-		lineageTag: e741f31a-e8bd-4166-a678-c46cfb9f1e13
+		lineageTag: fb974793-e76d-4dc7-a336-6361b0b8f4ff
 		summarizeBy: none
 		sourceColumn: DayName
 		sortByColumn: DayOfWeek
@@ -74,30 +88,30 @@ table Calendar
 		annotation SummarizationSetBy = Automatic
 
 	hierarchy 'Date Hierarchy'
-		lineageTag: 7a1617e8-8888-40dc-9565-6a21029e5ad3
+		lineageTag: c7ce3daf-e008-48c5-b09f-f033b29d08dc
 
 		level Year
 			ordinal: 0
 			column: Year
-			lineageTag: 278da773-7c28-4048-bcca-ddae8026ed13
+			lineageTag: 44ec5793-71ca-46f6-b879-e648877e70b9
 
 		level Quarter
 			ordinal: 1
 			column: Quarter
-			lineageTag: 302e2d77-bc7f-4556-a546-33bf70c73eaf
+			lineageTag: 5e8bd87d-b444-43d1-9e7c-a2e491d7f7a9
 
 		level Month
 			ordinal: 2
 			column: MonthName
-			lineageTag: 15bdbbb4-e30b-4ce7-bf62-b895e5f6245e
+			lineageTag: 3629577b-3f62-4cde-944f-93b90b2b41ac
 
 		level Day
 			ordinal: 3
 			column: Day
-			lineageTag: 1ac195c2-f4e0-4e49-a6df-acc9b43ac846
+			lineageTag: 5704c473-f9c1-4a67-a1f6-a5012e09163d
 
 
-	partition 'Calendar-b4bd8205-5d94-41f5-9bc3-36941d1c1f43' = m
+	partition 'Calendar-fdfa1a4b-ad2a-4e55-9b41-9e085d7d2afe' = m
 		mode: import
 		source =
 				let
@@ -119,5 +133,5 @@ table Calendar
 
 	annotation PBI_ResultType = Table
 	annotation Copilot_DateTable = true
-	annotation Copilot_TableDescription = Contains 8 columns: Date, Year, Quarter, Month, MonthName, Day, DayOfWeek, DayName.
+	annotation Copilot_TableDescription = Contains 8 columns and 3 measures: Date, Year, Quarter, Month, MonthName, Day, DayOfWeek, DayName.
 

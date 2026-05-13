@@ -1,0 +1,23 @@
+table 'Select Indicator'
+	lineageTag: dfa96fd7-4dae-4113-a6a6-4c531694c0e7
+
+	measure 'Select Indicator' = SELECTEDVALUE('Select Indicator'[Value], "Avg Deal Size (won)")
+		lineageTag: e0219eba-2bef-40fc-8e04-85b54b47bc34
+		annotation Copilot_Description = DAX: SELECTEDVALUE('Select Indicator'[Value], "Avg Deal Size (won)")
+
+	column Value
+		dataType: string
+		lineageTag: ab8a7c59-c330-4fdc-bb64-72e1ee697c7c
+		summarizeBy: none
+		sourceColumn: Value
+		annotation displayFolder = Parameters
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Select Indicator-8f33f0ba-6157-4d5e-ae20-f7ac4a3e6c02' = calculated
+		mode: import
+		source = DATATABLE("Value", STRING, {{"Avg Deal Size (won)"}, {"Avg Opportunity Size"}, {"Avg Probability"}, {"Conversion Rate"}, {"Nb of Closed Opportunities"}, {"Nb of Lost Opportunities"}, {"Nb of Open Opportunities"}, {"Nb of Opportunities"}, {"Nb of Owners"}, {"Nb of Won Opportunities"}, {"Pipeline Generated"}, {"Pipeline Value"}, {"Sales Cycle"}, {"Sales Cycle (lost)"}, {"Sales Cycle (won)"}, {"Sales Velocity"}, {"Total Closed Opportunities Amount"}, {"Total Sales"}, {"Weighted Pipeline Value"}, {"Won/Lost Rate"}})
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 1 columns and 1 measures: Value.
+

@@ -1,9 +1,9 @@
 table dim_customer
-	lineageTag: a7252255-357a-47ff-9423-201c05a3bee7
+	lineageTag: af84fa9d-4742-4b96-8e72-4ada7ce5b69d
 
 	column customer_key
 		dataType: int64
-		lineageTag: e3391049-4f8a-439f-b27d-357c930da9bd
+		lineageTag: 72607aa8-da4f-495d-8d20-9793ff7dfc67
 		summarizeBy: sum
 		sourceColumn: customer_key
 		annotation Copilot_Hidden = true
@@ -12,7 +12,7 @@ table dim_customer
 
 	column customer_id
 		dataType: string
-		lineageTag: 9b6e8db7-83b0-4983-835d-39a2d8a65431
+		lineageTag: d7490792-b0da-4716-9eff-4de136d1f808
 		summarizeBy: none
 		sourceColumn: customer_id
 		annotation Copilot_Hidden = true
@@ -21,7 +21,7 @@ table dim_customer
 
 	column customer_name
 		dataType: string
-		lineageTag: 857b142f-0082-4062-aed0-669309a2da67
+		lineageTag: 8843ddfd-d7b0-49e4-bb21-c49981766923
 		summarizeBy: none
 		sourceColumn: customer_name
 
@@ -29,7 +29,7 @@ table dim_customer
 
 	column email
 		dataType: string
-		lineageTag: bdec573c-3360-4995-8b6f-93e400ecc539
+		lineageTag: 96e63195-a80e-45f7-bba9-216241dc3321
 		summarizeBy: none
 		sourceColumn: email
 
@@ -37,7 +37,7 @@ table dim_customer
 
 	column phone
 		dataType: string
-		lineageTag: 86331a6d-0fcb-497b-a14f-09e7f596cf81
+		lineageTag: 8b87a7bb-9da5-4ea8-b244-9734b8dc97c7
 		summarizeBy: none
 		sourceColumn: phone
 
@@ -45,7 +45,7 @@ table dim_customer
 
 	column segment
 		dataType: string
-		lineageTag: bb7e9973-be4f-42b7-9648-4f9c1bbab5e4
+		lineageTag: 2b5cae9d-f56b-4ec2-bda0-073a622464db
 		summarizeBy: none
 		sourceColumn: segment
 
@@ -53,7 +53,7 @@ table dim_customer
 
 	column industry
 		dataType: string
-		lineageTag: 83a0b961-fd98-4531-afb8-34b0bf728465
+		lineageTag: 881599a5-722a-4fc8-bf0f-5abc28d9041a
 		summarizeBy: none
 		sourceColumn: industry
 
@@ -61,7 +61,7 @@ table dim_customer
 
 	column company_size
 		dataType: string
-		lineageTag: 10731c94-97bc-4d83-8e63-eaccfcffa69d
+		lineageTag: 84ac5403-f6ca-4389-bfaa-6b0c258bc968
 		summarizeBy: none
 		sourceColumn: company_size
 
@@ -70,17 +70,16 @@ table dim_customer
 	column first_order_date
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: 3b14afe3-8d40-4c7e-ac87-0b250af0f047
+		lineageTag: a712f5da-c837-4ab1-9fce-4d21745fd7e4
 		summarizeBy: none
 		sourceColumn: first_order_date
-		dataCategory: DateTime
 
 		annotation SummarizationSetBy = Automatic
 
 	column credit_limit
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 2e1a916f-d36a-44cc-bbbb-459693956a71
+		lineageTag: 95179180-2df1-4b3f-88f9-d9783eaaaf72
 		summarizeBy: sum
 		sourceColumn: credit_limit
 
@@ -88,7 +87,7 @@ table dim_customer
 
 	column account_manager
 		dataType: string
-		lineageTag: 042c9d9f-75ae-40af-931e-a8385c31360a
+		lineageTag: 256f45d6-96ff-486c-a89a-05cf65da8959
 		summarizeBy: none
 		sourceColumn: account_manager
 
@@ -96,13 +95,13 @@ table dim_customer
 
 	column is_active
 		dataType: boolean
-		lineageTag: fcd79a4a-4685-479c-9237-e4f225c3dd7e
+		lineageTag: e329a9d5-9e5e-4f2c-aeb3-336ab07d14ee
 		summarizeBy: none
 		sourceColumn: is_active
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'dim_customer-02e0f659-82f7-4034-99cc-b77a9a83da7e' = m
+	partition 'dim_customer-787528f2-0367-4dc2-92f6-7328f545cd8e' = m
 		mode: import
 		source =
 				let

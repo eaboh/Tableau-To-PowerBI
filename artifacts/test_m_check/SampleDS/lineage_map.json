@@ -1,0 +1,19 @@
+{
+  "tables": [
+    {
+      "tableau_datasource": "Unknown",
+      "tableau_table": "xy",
+      "pbi_table": "xy"
+    }
+  ],
+  "calculations": [
+    {
+      "tableau_calculation": "1",
+      "pbi_table": "xy",
+      "pbi_object": "Number of Records",
+      "pbi_type": "measure"
+    }
+  ],
+  "relationships": [],
+  "worksheets": []
+}

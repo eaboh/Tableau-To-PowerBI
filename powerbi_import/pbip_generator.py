@@ -155,6 +155,15 @@ def _filter_literal(v, date_part_prefix='', boundary='min'):
         except (ValueError, TypeError):
             pass
 
+    # Numeric — PBI expects 123L (integer) or 1.5D (decimal)
+    try:
+        float_val = float(v_str)
+        if '.' in v_str or 'e' in v_str.lower():
+            return f"{float_val}D"
+        return f"{int(float_val)}L"
+    except (ValueError, TypeError):
+        pass
+
     return f"'{v_str}'"
 
 
@@ -336,6 +345,7 @@ class PowerBIProjectGenerator:
             'user_filters': converted_objects.get('user_filters', []),
             '_datasources': converted_objects.get('datasources', []),
             '_worksheets': converted_objects.get('worksheets', []),
+            'calculations': converted_objects.get('calculations', []),
             'hyper_files': converted_objects.get('hyper_files', []),
         }
         
@@ -3249,6 +3259,11 @@ class PowerBIProjectGenerator:
             # Resolve Entity (table) and Property (column) via mapping
             ds_ref = f.get('datasource', '')
             entity, prop = self._resolve_field_entity(clean_field, datasource=ds_ref)
+
+            # Determine if the field is a measure (requires Measure wrapper, not Column)
+            _bim_measures = getattr(self, '_bim_measure_names', set())
+            _is_measure = prop in _bim_measures
+            _field_kind = "Measure" if _is_measure else "Column"
             
             filter_type = f.get('type', 'categorical')
             filter_mode = f.get('filter_mode', '')
@@ -3299,12 +3314,17 @@ class PowerBIProjectGenerator:
                 pass  # fall through to categorical handling below
 
             if filter_type == 'range' or f.get('min') is not None:
+                # PBI does not support Advanced/range filters on measures
+                # at report or page level — skip them entirely.
+                if _is_measure:
+                    continue
+
                 # Range filter (dates, numbers)
                 pbi_filter = {
                     "name": f"Filter_{uuid.uuid4().hex[:12]}",
                     "type": "Advanced",
                     "field": {
-                        "Column": {
+                        _field_kind: {
                             "Expression": {"SourceRef": {"Entity": entity}},
                             "Property": prop
                         }
@@ -3316,19 +3336,19 @@ class PowerBIProjectGenerator:
                     }
                 }
                 conditions = []
-                if f.get('min') is not None:
+                if f.get('min') is not None and str(f['min']).strip():
                     conditions.append({
                         "Comparison": {
                             "ComparisonKind": 2,  # >=
-                            "Left": {"Column": {"Expression": {"SourceRef": {"Source": "t"}}, "Property": prop}},
+                            "Left": {_field_kind: {"Expression": {"SourceRef": {"Source": "t"}}, "Property": prop}},
                             "Right": {"Literal": {"Value": _filter_literal(f['min'], _date_part_prefix, 'min')}}
                         }
                     })
-                if f.get('max') is not None:
+                if f.get('max') is not None and str(f['max']).strip():
                     conditions.append({
                         "Comparison": {
                             "ComparisonKind": 3,  # <=
-                            "Left": {"Column": {"Expression": {"SourceRef": {"Source": "t"}}, "Property": prop}},
+                            "Left": {_field_kind: {"Expression": {"SourceRef": {"Source": "t"}}, "Property": prop}},
                             "Right": {"Literal": {"Value": _filter_literal(f['max'], _date_part_prefix, 'max')}}
                         }
                     })
@@ -3348,7 +3368,7 @@ class PowerBIProjectGenerator:
                     "name": f"Filter_{uuid.uuid4().hex[:12]}",
                     "type": "Categorical",
                     "field": {
-                        "Column": {
+                        _field_kind: {
                             "Expression": {"SourceRef": {"Entity": entity}},
                             "Property": prop
                         }
@@ -3362,7 +3382,7 @@ class PowerBIProjectGenerator:
                 
                 condition = {
                     "In": {
-                        "Expressions": [{"Column": {"Expression": {"SourceRef": {"Source": "t"}}, "Property": prop}}],
+                        "Expressions": [{_field_kind: {"Expression": {"SourceRef": {"Source": "t"}}, "Property": prop}}],
                         "Values": [[{"Literal": {"Value": _pbi_literal(v)}}] for v in values]
                     }
                 }
@@ -3378,7 +3398,7 @@ class PowerBIProjectGenerator:
         seen_keys = {}
         deduped = []
         for flt in visual_filters:
-            col_info = flt.get('field', {}).get('Column', {})
+            col_info = flt.get('field', {}).get('Column') or flt.get('field', {}).get('Measure', {})
             entity = col_info.get('Expression', {}).get('SourceRef', {}).get('Entity', '')
             prop = col_info.get('Property', '')
             key = (entity, prop)

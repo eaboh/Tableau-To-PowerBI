@@ -1,112 +1,112 @@
 table Orders
-	lineageTag: 565f0f74-7518-4593-9b81-0a1da85553a3
+	lineageTag: ad5a79a3-b6a0-4aac-9af3-a8029c6e6a27
 
 	measure 'Gross Revenue' = SUMX('Orders', 'Orders'[quantity] * 'Orders'[unit_price])
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: 1f19d06f-2ed9-497a-a942-d91f6afc0593
+		lineageTag: c300650a-6213-4e16-8e9d-cbbfcad7b8c8
 		annotation Copilot_Description = Migrated from Tableau: SUM([quantity] * [unit_price]) | DAX: SUMX('Orders', 'Orders'[quantity] * 'Orders'[unit_price])
 
 	measure 'Net Revenue' = SUMX('Orders', IF('Orders'[order_status] <> "Cancelled", 'Orders'[quantity] * 'Orders'[unit_price] * (1 - 'Orders'[discount]), 0))
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: 69311267-b647-4af5-bdc9-5ffc2f555745
-		annotation Copilot_Description = Migrated from Tableau: SUM(IF [order_status] != "Cancelled" THEN [quantity] * [unit_price] * (1 - [discount]) ELSE 0 END) | DAX: SUMX('Orders', IF('Orders'[order_status] <> "Cancelled", 'Orders'[quantity] * 'Orders'[unit_price] * (1 - 'Orders'[disco...
+		lineageTag: 3ea1437a-2074-4608-9ac4-50d2cbdab016
+		annotation Copilot_Description = Migrated from Tableau: SUM(IF [order_status] != "Cancelled" THEN [quantity] * [unit_price] * (1 - [discount]) ELSE 0 END) | DAX: SUMX('Orders', IF('Orders'[order_status] <> "Cancelled", 'Orders'[quantity] * 'Orders'[unit_price] * (1 - 'Orders'[discount]), 0))
 
 	measure 'Total Discount' = SUMX('Orders', 'Orders'[quantity] * 'Orders'[unit_price] * 'Orders'[discount])
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: b58b182f-ff6c-47f7-8dc1-e0eed454025c
+		lineageTag: 20d392b8-7d61-4fc1-a2bc-29d74423a6db
 		annotation Copilot_Description = Migrated from Tableau: SUM([quantity] * [unit_price] * [discount]) | DAX: SUMX('Orders', 'Orders'[quantity] * 'Orders'[unit_price] * 'Orders'[discount])
 
 	measure Profit = SUMX('Orders', IF('Orders'[order_status] <> "Cancelled", ('Orders'[quantity] * 'Orders'[unit_price] * (1 - 'Orders'[discount])) - 'Orders'[shipping_cost], 0))
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: 29df145e-1f5f-442b-ad8e-937351998051
-		annotation Copilot_Description = Migrated from Tableau: SUM(IF [order_status] != "Cancelled" THEN ([quantity] * [unit_price] * (1 - [discount])) - [shipping_cost] ELSE 0 END) | DAX: SUMX('Orders', IF('Orders'[order_status] <> "Cancelled", ('Orders'[quantity] * 'Orders'[unit_price] * (1 - 'Orders'[disc...
+		lineageTag: c3752f37-0064-4e17-8e13-3b7b98e90fe2
+		annotation Copilot_Description = Migrated from Tableau: SUM(IF [order_status] != "Cancelled" THEN ([quantity] * [unit_price] * (1 - [discount])) - [shipping_cost] ELSE 0 END) | DAX: SUMX('Orders', IF('Orders'[order_status] <> "Cancelled", ('Orders'[quantity] * 'Orders'[unit_price] * (1 - 'Orders'[discount])) - 'Orders'[shipping_cost], 0))
 
 	measure 'Profit Margin %' = [Profit] / [Net Revenue]
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: d015923f-c9e1-4c52-9f59-b746f7fdc7a6
+		lineageTag: c905f266-5d12-42a5-a2f9-8be493a2fcee
 		annotation Copilot_Description = Migrated from Tableau: [Calc_Profit] / [Calc_NetRevenue] | DAX: [Profit] / [Net Revenue]
 
 	measure 'Revenue per Customer' = CALCULATE(SUMX('Orders', 'Orders'[quantity] * 'Orders'[unit_price]), ALLEXCEPT('Orders', 'Orders'[customer_id]))
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: 2397e297-5d52-4563-afd3-0df7db3ea8c9
+		lineageTag: 5df49297-fd00-49fd-9b04-347170359f84
 		annotation Copilot_Description = Migrated from Tableau: {FIXED [customer_id] : SUM([quantity] * [unit_price])} | DAX: CALCULATE(SUMX('Orders', 'Orders'[quantity] * 'Orders'[unit_price]), ALLEXCEPT('Orders', 'Orders'[customer_id]))
 
 	measure 'Regional Channel Revenue' = CALCULATE(SUMX('Orders', 'Orders'[quantity] * 'Orders'[unit_price]), ALLEXCEPT('Orders', 'Orders'[region], 'Orders'[channel]))
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: a55bb6f7-2ac9-49e4-94c9-7cb0ea5aafe3
-		annotation Copilot_Description = Migrated from Tableau: {FIXED [region], [channel] : SUM([quantity] * [unit_price])} | DAX: CALCULATE(SUMX('Orders', 'Orders'[quantity] * 'Orders'[unit_price]), ALLEXCEPT('Orders', 'Orders'[region], 'Orders'[chan...
+		lineageTag: cca76cd2-30d1-41cd-9eb1-a54a13cc3456
+		annotation Copilot_Description = Migrated from Tableau: {FIXED [region], [channel] : SUM([quantity] * [unit_price])} | DAX: CALCULATE(SUMX('Orders', 'Orders'[quantity] * 'Orders'[unit_price]), ALLEXCEPT('Orders', 'Orders'[region], 'Orders'[channel]))
 
 	measure 'Revenue Excl Category' = CALCULATE(SUMX('Orders', 'Orders'[quantity] * 'Orders'[unit_price]), REMOVEFILTERS('Orders'[channel]))
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: 18531ca5-4ade-4af8-b2ff-593e7170b409
+		lineageTag: e0eaf276-4b6d-4ca7-90a1-49ee37371a7c
 		annotation Copilot_Description = Migrated from Tableau: {EXCLUDE [channel] : SUM([quantity] * [unit_price])} | DAX: CALCULATE(SUMX('Orders', 'Orders'[quantity] * 'Orders'[unit_price]), REMOVEFILTERS('Orders'[channel]))
 
 	measure 'Moving Avg Revenue' = CALCULATE(SUMX('Orders', 'Orders'[quantity] * 'Orders'[unit_price]), ALL('Orders'))
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: e7beaf88-437e-4536-936c-1cd886db81cf
+		lineageTag: 4395d6e6-7438-4a98-8069-663bb5f79bd0
 		annotation Copilot_Description = Migrated from Tableau: WINDOW_AVG(SUM([quantity] * [unit_price])) | DAX: CALCULATE(SUMX('Orders', 'Orders'[quantity] * 'Orders'[unit_price]), ALL('Orders'))
 
-	measure 'Running Total Revenue' = CALCULATE(SUMX('Orders', 'Orders'[quantity] * 'Orders'[unit_price]), FILTER(ALLSELECTED('Orders'), TRUE())) /* RUNNING_SUM: converted to cumulative — verify window scope */
+	measure 'Running Total Revenue' = /* TODO: DAX conversion validation failed for Calc_RunTotal: unconverted Tableau function token detected in DAX output */ BLANK()
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: c888b2ce-c313-46ec-aa96-94fb3a1a8d48
-		annotation Copilot_Description = Migrated from Tableau: RUNNING_SUM(SUM([quantity] * [unit_price])) | DAX: CALCULATE(SUMX('Orders', 'Orders'[quantity] * 'Orders'[unit_price]), FILTER(ALLSELECTED('Orders'), TRUE())) /* RUNNING_S...
+		lineageTag: 9b08369a-784e-4854-913a-1ef6e99a5339
+		annotation Copilot_Description = Migrated from Tableau: RUNNING_SUM(SUM([quantity] * [unit_price])) | DAX: /* TODO: DAX conversion validation failed for Calc_RunTotal: unconverted Tableau function token detected in DAX output */ BLANK()
 
 	measure 'Revenue Rank' = RANKX(ALL('Orders'), SUMX('Orders', 'Orders'[quantity] * 'Orders'[unit_price]))
 		displayFolder: Measures
-		lineageTag: 526855e6-c23a-482b-b482-5796ad8b5d66
+		lineageTag: 6b6bbf3d-b7f1-4a12-9f3d-3ab33bdb9951
 		annotation Copilot_Description = Migrated from Tableau: RANK(SUM([quantity] * [unit_price])) | DAX: RANKX(ALL('Orders'), SUMX('Orders', 'Orders'[quantity] * 'Orders'[unit_price]))
 
 	measure 'YTD Revenue' = CALCULATE(SUMX('Orders', IF(YEAR('Orders'[order_date]) = YEAR(TODAY()), 'Orders'[quantity] * 'Orders'[unit_price], 0)), ALL('Orders'))
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: 8b58c629-d26e-4cdc-b414-52a7552e6535
-		annotation Copilot_Description = Migrated from Tableau: {FIXED : SUM(IF YEAR([order_date]) = YEAR(TODAY()) THEN [quantity] * [unit_price] ELSE 0 END)} | DAX: CALCULATE(SUMX('Orders', IF(YEAR('Orders'[order_date]) = YEAR(TODAY()), 'Orders'[quantity] * 'Orders'[unit_price], 0)), ...
+		lineageTag: 01e80459-c3bd-425d-802e-3cbcac6d1fc3
+		annotation Copilot_Description = Migrated from Tableau: {FIXED : SUM(IF YEAR([order_date]) = YEAR(TODAY()) THEN [quantity] * [unit_price] ELSE 0 END)} | DAX: CALCULATE(SUMX('Orders', IF(YEAR('Orders'[order_date]) = YEAR(TODAY()), 'Orders'[quantity] * 'Orders'[unit_price], 0)), ALL('Orders'))
 
 	measure 'Customer Tier' = IF([Revenue per Customer] > 10000, "Platinum", IF([Revenue per Customer] > 5000, "Gold", IF([Revenue per Customer] > 1000, "Silver", "Bronze")))
 		displayFolder: Dimensions
-		lineageTag: 02037442-7590-42f6-8844-342ef5170ba5
-		annotation Copilot_Description = Migrated from Tableau: IF [Calc_RevPerCustomer] > 10000 THEN "Platinum" ELSEIF [Calc_RevPerCustomer] > 5000 THEN "Gold" ELSEIF [Calc_RevPerCustomer] > 1000 THEN "Silver" ELSE "Bronze" END | DAX: IF([Revenue per Customer] > 10000, "Platinum", IF([Revenue per Customer] > 5000, "Gold", IF([Revenue per Customer] > 100...
+		lineageTag: 7142e6a6-e159-40a7-ac55-3cfec5f7510d
+		annotation Copilot_Description = Migrated from Tableau: IF [Calc_RevPerCustomer] > 10000 THEN "Platinum" ELSEIF [Calc_RevPerCustomer] > 5000 THEN "Gold" ELSEIF [Calc_RevPerCustomer] > 1000 THEN "Silver" ELSE "Bronze" END | DAX: IF([Revenue per Customer] > 10000, "Platinum", IF([Revenue per Customer] > 5000, "Gold", IF([Revenue per Customer] > 1000, "Silver", "Bronze")))
 
 	measure 'Unique Customers' = DISTINCTCOUNT('Orders'[customer_id])
 		displayFolder: Measures
-		lineageTag: 53642727-bcce-4177-95f2-24bf5e66f742
+		lineageTag: e68f7bbc-3734-43f5-8c70-b8cb4153aa04
 		annotation Copilot_Description = Migrated from Tableau: COUNTD([customer_id]) | DAX: DISTINCTCOUNT('Orders'[customer_id])
 
 	measure 'AOV Completed' = AVERAGEX('Orders', IF('Orders'[order_status] = "Completed", 'Orders'[quantity] * 'Orders'[unit_price], 0))
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: a627025a-46e1-402b-b97b-6e4fd1882ae5
+		lineageTag: 8182e4c4-f67e-4e17-86dc-823dd065d21b
 		annotation Copilot_Description = Migrated from Tableau: AVG(IF [order_status] = "Completed" THEN [quantity] * [unit_price] ELSE 0 END) | DAX: AVERAGEX('Orders', IF('Orders'[order_status] = "Completed", 'Orders'[quantity] * 'Orders'[unit_price], 0))
 
-	measure 'Revenue StdDev' = STDEVX.S('Orders', 'Orders'[quantity] * 'Orders'[unit_price])
+	measure 'Revenue StdDev' = STDEVX.S('Orders', MAX('Orders'[quantity]) * MAX('Orders'[unit_price]))
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: f42515e7-97e6-47ce-b07d-a7fc9e05897b
-		annotation Copilot_Description = Migrated from Tableau: STDEV(SUM([quantity] * [unit_price])) | DAX: STDEVX.S('Orders', 'Orders'[quantity] * 'Orders'[unit_price])
+		lineageTag: 60ef02f1-6dc0-4ef3-9178-785ccea69449
+		annotation Copilot_Description = Migrated from Tableau: STDEV(SUM([quantity] * [unit_price])) | DAX: STDEVX.S('Orders', MAX('Orders'[quantity]) * MAX('Orders'[unit_price]))
 
-	measure 'Is My Account' = 'Customers'[customer_email] = USERPRINCIPALNAME()
+	measure 'Is My Account' = SUM('Customers'[customer_email]) = USERPRINCIPALNAME()
 		formatString: True/False
 		displayFolder: Dimensions
-		lineageTag: 69ce6a09-88c0-4e43-a61e-7fbd16b1c795
-		annotation Copilot_Description = Migrated from Tableau: [customer_email] = USERNAME() | DAX: 'Customers'[customer_email] = USERPRINCIPALNAME()
+		lineageTag: 2a77ebe2-a4bb-4d45-897b-e881503dd4ad
+		annotation Copilot_Description = Migrated from Tableau: [customer_email] = USERNAME() | DAX: SUM('Customers'[customer_email]) = USERPRINCIPALNAME()
 
 	measure 'Date Range Start' = DATE(2024, 1, 1)
-		lineageTag: fc752961-916d-4fac-9dec-29e312025871
+		lineageTag: c5e04bf4-46d1-4841-a814-4bd0bf0413be
 		annotation Copilot_Description = DAX: DATE(2024, 1, 1)
 
 	column order_id
 		dataType: int64
-		lineageTag: 63e31629-ae76-4dce-aab6-57951f8fdb9b
+		lineageTag: f8b9beed-cf7c-49fc-ae99-7e9e793a7a40
 		summarizeBy: sum
 		sourceColumn: order_id
 		annotation Copilot_Hidden = true
@@ -116,16 +116,15 @@ table Orders
 	column order_date
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: 2504849b-5460-4fd7-b5e5-6703d5f586a7
+		lineageTag: 4925bcd8-6e44-4f7c-aa71-570e4d4d8b7f
 		summarizeBy: none
 		sourceColumn: order_date
-		dataCategory: DateTime
 
 		annotation SummarizationSetBy = Automatic
 
 	column customer_id
 		dataType: int64
-		lineageTag: 829562b1-65b3-455d-9f5c-e2ec6ab22886
+		lineageTag: 331038ff-5315-4a7a-a3c8-bb5c1f6d015a
 		summarizeBy: sum
 		sourceColumn: customer_id
 		annotation Copilot_Hidden = true
@@ -134,7 +133,7 @@ table Orders
 
 	column product_id
 		dataType: int64
-		lineageTag: 878cbb38-a188-4b32-897e-4ea54acb35ab
+		lineageTag: 855d1c3f-4cef-443d-95b4-5834de3498f5
 		summarizeBy: sum
 		sourceColumn: product_id
 		annotation Copilot_Hidden = true
@@ -143,7 +142,7 @@ table Orders
 
 	column region
 		dataType: string
-		lineageTag: 0bc3989d-15b6-4026-bef3-90c884b201fd
+		lineageTag: 686f2c0b-e717-4030-bdb9-4d4c3b876fc1
 		summarizeBy: none
 		sourceColumn: region
 		dataCategory: StateOrProvince
@@ -152,7 +151,7 @@ table Orders
 
 	column channel
 		dataType: string
-		lineageTag: 6c9e3975-1fe4-48e9-bdf9-4ad220113ab6
+		lineageTag: 5e7fb1e5-c069-45c8-be06-99b39b2b5a51
 		summarizeBy: none
 		sourceColumn: channel
 
@@ -161,7 +160,7 @@ table Orders
 	column quantity
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 873329ba-b284-4435-88c9-24df10132d50
+		lineageTag: c45170a3-c1d7-45b4-bc35-39f51543627b
 		summarizeBy: sum
 		sourceColumn: quantity
 
@@ -170,7 +169,7 @@ table Orders
 	column unit_price
 		dataType: double
 		formatString: #,0.00
-		lineageTag: bac01468-3d84-46a2-af09-a09ceaae4cb3
+		lineageTag: bf958793-d884-42fb-a816-462be4e57da9
 		summarizeBy: sum
 		sourceColumn: unit_price
 
@@ -179,7 +178,7 @@ table Orders
 	column discount
 		dataType: double
 		formatString: #,0.00
-		lineageTag: c6f702e3-dd21-4078-a4eb-a03563c74087
+		lineageTag: 4a8ff7da-0f6c-49eb-ba00-d28c5dd7359d
 		summarizeBy: sum
 		sourceColumn: discount
 
@@ -188,7 +187,7 @@ table Orders
 	column shipping_cost
 		dataType: double
 		formatString: #,0.00
-		lineageTag: ee544754-06c5-4702-82f2-a9529a8f9fdd
+		lineageTag: 6d0e6bad-4efd-4915-b85a-3d5b58ace85d
 		summarizeBy: sum
 		sourceColumn: shipping_cost
 
@@ -196,7 +195,7 @@ table Orders
 
 	column order_status
 		dataType: string
-		lineageTag: 97fc75a9-7a39-45ff-8d5f-92b69309da99
+		lineageTag: 9809461f-dcf5-4d47-9682-9f1703aac654
 		summarizeBy: none
 		sourceColumn: order_status
 
@@ -204,7 +203,7 @@ table Orders
 
 	column sales_rep
 		dataType: string
-		lineageTag: 3ab54f34-a06e-4f6a-9c86-875d75c3a5f1
+		lineageTag: 044e0173-a84d-41a1-be98-a35fe6624609
 		summarizeBy: none
 		sourceColumn: sales_rep
 
@@ -212,15 +211,15 @@ table Orders
 
 	column territory
 		dataType: string
-		lineageTag: 3c8cc44a-aa8e-4c5b-9e7b-34515e22d2fd
+		lineageTag: c21af9ca-b281-4482-a197-a87f88e246fb
 		summarizeBy: none
 		sourceColumn: territory
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Customer Tenure Days' = DATEDIFF(LOOKUPVALUE(Customers[first_purchase_date], Customers[customer_id], Orders[customer_id]), TODAY(), DAY)
+	column 'Customer Tenure Days' = DATEDIFF(CALCULATE(SELECTEDVALUE(Customers[first_purchase_date])), TODAY(), DAY)
 		dataType: int64
-		lineageTag: f8f78c72-481f-42ea-a3e6-b5be072086dd
+		lineageTag: 9683febf-bdd3-4069-938e-761b476a09b9
 		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
@@ -228,35 +227,35 @@ table Orders
 	column 'Safe Discount Rate'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 56095f54-aa98-442b-aca7-5cf125f773a1
+		lineageTag: 24042115-4c29-4ecd-b61d-8f1a6f934c4d
 		summarizeBy: none
 		sourceColumn: 'Safe Discount Rate'
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Full Location' = UPPER(LOOKUPVALUE(Customers[city], Customers[customer_id], Orders[customer_id])) & ", " & LOOKUPVALUE(Customers[state], Customers[customer_id], Orders[customer_id]) & " (" & LOOKUPVALUE(Customers[country], Customers[customer_id], Orders[customer_id]) & ")"
+	column 'Full Location' = UPPER(CALCULATE(SELECTEDVALUE(Customers[city]))) & ", " & CALCULATE(SELECTEDVALUE(Customers[state])) & " (" & CALCULATE(SELECTEDVALUE(Customers[country])) & ")"
 		dataType: string
-		lineageTag: ac0ccbe6-de15-404f-803c-3267584f50bc
+		lineageTag: 833093c7-95f8-4829-ad39-a0af9ecd06f3
 		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Customer Segment Label' = "Segment: " & LOOKUPVALUE(Customers[segment], Customers[customer_id], Orders[customer_id])
+	column 'Customer Segment Label' = "Segment: " & CALCULATE(SELECTEDVALUE(Customers[segment]))
 		dataType: string
-		lineageTag: b8414079-aa84-467a-807c-d54d179a648b
+		lineageTag: 961c34ce-2953-49b8-bfe9-c676bac24af5
 		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Discount Category'
 		dataType: string
-		lineageTag: b37e0c09-4b3e-4961-98cf-cc7fbc7c8171
+		lineageTag: 117f1711-7eae-40d4-852b-6c93b23a225a
 		summarizeBy: none
 		sourceColumn: 'Discount Category'
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Orders-a2d0de2d-f8a9-4780-865c-7b9f125df864' = m
+	partition 'Orders-1a88bc73-fea8-4447-9f68-5babb040edb5' = m
 		mode: import
 		source =
 				let

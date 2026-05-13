@@ -1,0 +1,188 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "e01ebd48700649e3b290",
+  "position": {
+    "x": 26,
+    "y": 211,
+    "z": 9000,
+    "height": 59,
+    "width": 487,
+    "tabOrder": 9000
+  },
+  "visual": {
+    "visualType": "table",
+    "drillFilterOtherVisuals": true,
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Owned By"
+                    }
+                  },
+                  "Property": "Label DONE - Closed WON - Nb of Opp"
+                }
+              },
+              "queryRef": "Owned By.Label DONE - Closed WON - Nb of Opp",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Owned By"
+                    }
+                  },
+                  "Property": "Label DONE - Closed WON - Opp Amount"
+                }
+              },
+              "queryRef": "Owned By.Label DONE - Closed WON - Opp Amount",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Owned By"
+                    }
+                  },
+                  "Property": "Currency"
+                }
+              },
+              "queryRef": "Owned By.Currency",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Owned By"
+                    }
+                  },
+                  "Property": "Label DONE - Closed WON - Nb of Clients"
+                }
+              },
+              "queryRef": "Owned By.Label DONE - Closed WON - Nb of Clients",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Owned By"
+                    }
+                  },
+                  "Property": "Label DONE - Closed WON - Nb of Clients (Existing)"
+                }
+              },
+              "queryRef": "Owned By.Label DONE - Closed WON - Nb of Clients (Existing)",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Owned By"
+                    }
+                  },
+                  "Property": "Label DONE - Closed WON - Nb of Clients (New)"
+                }
+              },
+              "queryRef": "Owned By.Label DONE - Closed WON - Nb of Clients (New)",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Closed Opp - WON'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#F2F2F2'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

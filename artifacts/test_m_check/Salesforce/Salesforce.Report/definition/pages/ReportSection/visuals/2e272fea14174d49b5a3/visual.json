@@ -1,0 +1,50 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "2e272fea14174d49b5a3",
+  "position": {
+    "x": 581,
+    "y": 186,
+    "z": 7000,
+    "height": 534,
+    "width": 699,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Which <",
+                    "textStyle": {
+                      "color": "#2b5c8a",
+                      "fontSize": "10.0pt"
+                    }
+                  },
+                  {
+                    "value": "[Parameters].[LinPack_093258324044640973]",
+                    "textStyle": {
+                      "color": "#2b5c8a",
+                      "fontSize": "10.0pt"
+                    }
+                  },
+                  {
+                    "value": ">(s) drive our ability to convert opportunities?",
+                    "textStyle": {
+                      "color": "#2b5c8a",
+                      "fontSize": "10.0pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

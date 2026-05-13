@@ -1,35 +1,36 @@
 table Orders
-	lineageTag: eaa8439a-9ab1-454a-8b0d-a2144bbce0a2
+	lineageTag: 45acc393-1342-4697-aec9-0f5cbebff748
 
 	column 'Row ID'
 		dataType: int64
-		lineageTag: 603772da-ad19-4956-a096-91d7958b9adb
+		lineageTag: 669b0378-c791-494a-86b5-f20fe2a65899
 		summarizeBy: sum
 		sourceColumn: 'Row ID'
+		annotation Copilot_Hidden = true
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Order ID'
 		dataType: int64
-		lineageTag: 758a2a23-958c-4084-93ce-c8eac52ee761
+		lineageTag: 46468870-ff6f-4fcb-80ff-7f682e288da4
 		summarizeBy: sum
 		sourceColumn: 'Order ID'
+		annotation Copilot_Hidden = true
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Order Date'
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: c2b7da88-000d-485f-85c3-7db0fcb8d8e7
+		lineageTag: 2d1df837-bffa-4c61-8d63-df7708964886
 		summarizeBy: none
 		sourceColumn: 'Order Date'
-		dataCategory: DateTime
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Order Priority'
 		dataType: string
-		lineageTag: 545e139d-6ab6-4be6-96fb-d1db441c12bd
+		lineageTag: b05d2c72-2057-482c-863a-f92c2f997894
 		summarizeBy: none
 		sourceColumn: 'Order Priority'
 
@@ -37,7 +38,7 @@ table Orders
 
 	column 'Order Quantity'
 		dataType: int64
-		lineageTag: 37c68e59-9941-40ea-856a-90997775257f
+		lineageTag: ea959879-fa64-4df7-b705-198adec29ea7
 		summarizeBy: sum
 		sourceColumn: 'Order Quantity'
 
@@ -46,7 +47,7 @@ table Orders
 	column Sales
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 63fd1dae-d902-410e-8414-953f3466e62e
+		lineageTag: bac4dbd1-f421-4f48-a12c-fcd2c57b4ce0
 		summarizeBy: sum
 		sourceColumn: Sales
 
@@ -55,7 +56,7 @@ table Orders
 	column Discount
 		dataType: double
 		formatString: #,0.00
-		lineageTag: d6e8d6c7-8b16-4b79-93e3-b31ff4240430
+		lineageTag: 26d79d53-4a9d-4564-b5d9-82bd43d6e238
 		summarizeBy: sum
 		sourceColumn: Discount
 
@@ -63,7 +64,7 @@ table Orders
 
 	column 'Ship Mode'
 		dataType: string
-		lineageTag: e4bf7826-f716-430a-9f05-67de94cdbb7d
+		lineageTag: ad1bd537-ec9e-4a2d-b736-59d62bb550a6
 		summarizeBy: none
 		sourceColumn: 'Ship Mode'
 
@@ -72,7 +73,7 @@ table Orders
 	column Profit
 		dataType: double
 		formatString: #,0.00
-		lineageTag: f8f6f1ef-80ac-4564-9169-f70d40fcadd8
+		lineageTag: 8f811d13-e3af-45ce-aa6b-b5009e667cae
 		summarizeBy: sum
 		sourceColumn: Profit
 
@@ -81,7 +82,7 @@ table Orders
 	column 'Unit Price'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: c8b48c97-b4f8-433e-84f2-d92b886aa560
+		lineageTag: 35564c7f-6a56-46f5-90bf-33c3cdce1c01
 		summarizeBy: sum
 		sourceColumn: 'Unit Price'
 
@@ -90,7 +91,7 @@ table Orders
 	column 'Shipping Cost'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 88fa5e43-a908-4177-9511-4b3505d75118
+		lineageTag: 333499fb-ef24-4e0a-a70a-0fd23ef415cd
 		summarizeBy: sum
 		sourceColumn: 'Shipping Cost'
 
@@ -98,7 +99,7 @@ table Orders
 
 	column 'Customer Name'
 		dataType: string
-		lineageTag: fa84efc1-a62c-4d41-a6d9-ebbbfc4ee63f
+		lineageTag: cab4a25d-4a53-4e8c-a1cd-574ad8ad867e
 		summarizeBy: none
 		sourceColumn: 'Customer Name'
 
@@ -106,7 +107,7 @@ table Orders
 
 	column City
 		dataType: string
-		lineageTag: 4921147c-8577-410c-8a7b-5ed8594c2ec4
+		lineageTag: 154d419b-c638-4817-a501-a5f9f3699fd3
 		summarizeBy: none
 		sourceColumn: City
 		dataCategory: City
@@ -115,7 +116,7 @@ table Orders
 
 	column 'Zip Code'
 		dataType: string
-		lineageTag: 6783c48b-1187-4606-b95c-f763383c7355
+		lineageTag: 474ff2d1-6e95-4efa-a0a4-3e8fafdea0a4
 		summarizeBy: none
 		sourceColumn: 'Zip Code'
 		dataCategory: PostalCode
@@ -124,7 +125,7 @@ table Orders
 
 	column State
 		dataType: string
-		lineageTag: 0f47b813-8b0d-45aa-8adb-fde0bb72ca45
+		lineageTag: a40086cc-4298-4b12-9ab5-5025c0228cdc
 		summarizeBy: none
 		sourceColumn: State
 		dataCategory: StateOrProvince
@@ -133,7 +134,7 @@ table Orders
 
 	column Region
 		dataType: string
-		lineageTag: f9c34903-9080-431b-888c-51625d5f006d
+		lineageTag: 13cea8f4-4506-4bb8-89aa-fb530229243e
 		summarizeBy: none
 		sourceColumn: Region
 		dataCategory: StateOrProvince
@@ -142,7 +143,7 @@ table Orders
 
 	column 'Customer Segment'
 		dataType: string
-		lineageTag: fbae200c-4f2c-4efb-8eef-72b50a1b5141
+		lineageTag: d9f051ab-e668-417e-8e72-d25c3b5ffa80
 		summarizeBy: none
 		sourceColumn: 'Customer Segment'
 
@@ -150,7 +151,7 @@ table Orders
 
 	column 'Product Category'
 		dataType: string
-		lineageTag: bef32f71-4246-41bb-a5d3-c069c19a303f
+		lineageTag: bca60637-aed2-4cdc-ae00-71981d015138
 		summarizeBy: none
 		sourceColumn: 'Product Category'
 
@@ -158,7 +159,7 @@ table Orders
 
 	column 'Product Sub-Category'
 		dataType: string
-		lineageTag: b0cbc14e-fca8-4f5d-a903-63edeac47ef2
+		lineageTag: 6dad2cd7-3a06-436e-83d1-c0807bb06590
 		summarizeBy: none
 		sourceColumn: 'Product Sub-Category'
 
@@ -166,7 +167,7 @@ table Orders
 
 	column 'Product Name'
 		dataType: string
-		lineageTag: 3970a073-2d0a-4d8d-89c3-624ab7517a74
+		lineageTag: 444e6512-6798-4624-bdb4-691ffa6a0f40
 		summarizeBy: none
 		sourceColumn: 'Product Name'
 
@@ -174,7 +175,7 @@ table Orders
 
 	column 'Product Container'
 		dataType: string
-		lineageTag: 68629167-17fc-4f9a-b23b-20cc8f4d85ad
+		lineageTag: 8f679c9c-58d5-4ab6-9adf-a1c1d8f3996b
 		summarizeBy: none
 		sourceColumn: 'Product Container'
 
@@ -183,7 +184,7 @@ table Orders
 	column 'Product Base Margin'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 2a6ec9b9-a281-4f26-bd7c-f2d9ec6e8354
+		lineageTag: a3c985c8-a484-40cc-8643-c56899252c1b
 		summarizeBy: sum
 		sourceColumn: 'Product Base Margin'
 
@@ -192,16 +193,15 @@ table Orders
 	column 'Ship Date'
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: 2ad75aa1-6939-44d9-a1cd-140b40e00aa6
+		lineageTag: 95819938-34c2-461c-8bc7-85c0868bdba2
 		summarizeBy: none
 		sourceColumn: 'Ship Date'
-		dataCategory: DateTime
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Grouping Based on Unit Price'
 		dataType: string
-		lineageTag: 1cc4c54f-87c6-4b89-ae39-a9ae8fa43d46
+		lineageTag: ea23b599-5b26-433d-a8ed-0b4645f73a6e
 		summarizeBy: none
 		sourceColumn: 'Grouping Based on Unit Price'
 
@@ -209,31 +209,19 @@ table Orders
 
 	column 'Action (Region)'
 		dataType: string
-		lineageTag: 2863612b-c5b2-43b0-acaf-bd724315a514
+		lineageTag: b8cad16a-28a2-4fec-a3d8-8902d6693632
 		summarizeBy: none
 		sourceColumn: 'Action (Region)'
 		displayFolder: Groups
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Orders-21d64458-0ea2-4fea-8bf9-6a200a611ac4' = m
+	partition 'Orders-87eac49b-4286-4f7d-bb0c-1f04a927d3a3' = m
 		mode: import
 		source =
 				let
 				    // Source Excel: Orders.xlsx
-				    Source = try
-				
-				        let
-				
-				            _src = Excel.Workbook(File.Contents(DataFolder & "\Orders.xlsx"), null, true),
-				
-				            _nav = _src{[Item="Orders",Kind="Sheet"]}[Data]
-				
-				        in _nav
-				
-				    otherwise
-				
-				        #table({"Row ID", "Order ID", "Order Date", "Order Priority", "Order Quantity", "Sales", "Discount", "Ship Mode", "Profit", "Unit Price", "Shipping Cost", "Customer Name", "City", "Zip Code", "State", "Region", "Customer Segment", "Product Category", "Product Sub-Category", "Product Name", "Product Container", "Product Base Margin", "Ship Date"}, {}),
+				    Source = Csv.Document(File.Contents(DataFolder & "\Extract.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
 				    #"Changed Types" = Table.TransformColumnTypes(#"Promoted Headers", {
 				        {"Row ID", Int64.Type},
@@ -260,11 +248,12 @@ table Orders
 				        {"Product Base Margin", type number},
 				        {"Ship Date", type date}
 				    }),
-				    #"Added Grouping Based on Unit Price" = Table.AddColumn(#"Changed Types", "Grouping Based on Unit Price", each if [Unit Price] <= 2500 then "A" else if [Unit Price] <=5000 then "B" else "C", type text),
+				    #"Added Grouping Based on Unit Price" = Table.AddColumn(#"Changed Types", "Grouping Based on Unit Price", each if [Unit Price] <= 2500 then "A" else if [Unit Price] <= 5000 then "B" else "C", type text),
 				    #"Added Action (Region)" = Table.AddColumn(#"Added Grouping Based on Unit Price", "Action (Region)", each Text.From([#"Region"]), type text),
 				    Result = #"Added Action (Region)"
 				in
 				    Result
 
 	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 25 columns: Row ID, Order ID, Order Date, Order Priority, Order Quantity, Sales, Discount, Ship Mode, ... (25 columns total).
 

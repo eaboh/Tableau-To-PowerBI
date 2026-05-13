@@ -1,0 +1,112 @@
+{
+  "tables": [
+    {
+      "tableau_datasource": "dataengine.42019.622799629629",
+      "tableau_table": "Extract",
+      "pbi_table": "Extract"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Calendar",
+      "pbi_table": "Calendar"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Base Salary",
+      "pbi_table": "Base Salary"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Commission Rate",
+      "pbi_table": "Commission Rate"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "New Quota",
+      "pbi_table": "New Quota"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Sort by",
+      "pbi_table": "Sort by"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "New Business Growth",
+      "pbi_table": "New Business Growth"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Churn Rate",
+      "pbi_table": "Churn Rate"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "State",
+      "pbi_table": "State"
+    }
+  ],
+  "calculations": [
+    {
+      "tableau_calculation": "Number of Records",
+      "pbi_table": "Extract",
+      "pbi_object": "Number of Records",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "50000",
+      "pbi_table": "Base Salary",
+      "pbi_object": "Base Salary",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "18.400000000000002",
+      "pbi_table": "Commission Rate",
+      "pbi_object": "Commission Rate",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "500000",
+      "pbi_table": "New Quota",
+      "pbi_object": "New Quota",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Names\"",
+      "pbi_table": "Sort by",
+      "pbi_object": "Sort by",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "0.59999999999999998",
+      "pbi_table": "New Business Growth",
+      "pbi_object": "New Business Growth",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "0.064000000000000001",
+      "pbi_table": "Churn Rate",
+      "pbi_object": "Churn Rate",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Alabama\"",
+      "pbi_table": "State",
+      "pbi_object": "State",
+      "pbi_type": "measure"
+    }
+  ],
+  "relationships": [
+    {
+      "from": "Extract[Order Date]",
+      "to": "Calendar[Date]",
+      "cardinality": "bothDirections"
+    }
+  ],
+  "worksheets": [
+    {
+      "tableau_worksheet": "Sheet 21",
+      "pbi_page": "Sheet 21"
+    }
+  ]
+}

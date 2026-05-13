@@ -1,9 +1,9 @@
 table 'customer_feedback_data.json'
-	lineageTag: ec0eac60-6257-4dd1-bc11-504aa954e4de
+	lineageTag: 2ea0fed2-fe3d-4bfa-9226-aca65ee1b820
 
 	column 'Document Index (generated)'
 		dataType: int64
-		lineageTag: 9ef4b23c-10f0-4e96-aeb6-b5cbc63f40e6
+		lineageTag: c02685c2-cd2f-478d-990d-170eafea846b
 		summarizeBy: sum
 		sourceColumn: 'Document Index (generated)'
 
@@ -11,7 +11,7 @@ table 'customer_feedback_data.json'
 
 	column category
 		dataType: string
-		lineageTag: dabe72ae-2b11-4dd7-9a53-3e2f4282b7b0
+		lineageTag: 113e7778-7d80-40b1-ac28-e19941d2791a
 		summarizeBy: none
 		sourceColumn: category
 
@@ -19,15 +19,17 @@ table 'customer_feedback_data.json'
 
 	column customer_id
 		dataType: string
-		lineageTag: dd54332c-7f36-4a22-922a-76fd366c46cc
+		lineageTag: 3d296f9f-d780-4990-a54e-97731ef163ba
 		summarizeBy: none
 		sourceColumn: customer_id
+		annotation Copilot_Hidden = true
 
 		annotation SummarizationSetBy = Automatic
 
 	column date
-		dataType: string
-		lineageTag: 59cf1534-c588-4100-b872-494c600426a4
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3dfd8ef6-1a43-4b9f-ad87-e3ce4accb002
 		summarizeBy: none
 		sourceColumn: date
 
@@ -35,7 +37,7 @@ table 'customer_feedback_data.json'
 
 	column email
 		dataType: string
-		lineageTag: 2ce568e3-2445-47fa-bf9f-cf5fe4821f06
+		lineageTag: 54f084f4-eaa4-4bec-bf47-96ab2d7e473f
 		summarizeBy: none
 		sourceColumn: email
 
@@ -44,7 +46,7 @@ table 'customer_feedback_data.json'
 	column feedback_score
 		dataType: double
 		formatString: #,0.00
-		lineageTag: dbe51611-ad20-4830-ada2-ee959082dbbe
+		lineageTag: 384511e1-4d1c-4884-a8d0-6ad9b305eb82
 		summarizeBy: sum
 		sourceColumn: feedback_score
 
@@ -52,7 +54,7 @@ table 'customer_feedback_data.json'
 
 	column feedback_text
 		dataType: string
-		lineageTag: 3bcbc951-6590-4a7d-bbd2-85625b117fb9
+		lineageTag: 11e1673b-8295-4565-abcb-3f60ce04b934
 		summarizeBy: none
 		sourceColumn: feedback_text
 
@@ -60,7 +62,7 @@ table 'customer_feedback_data.json'
 
 	column name
 		dataType: string
-		lineageTag: 8ec8535b-3339-454a-bb83-69566b312f7e
+		lineageTag: d19ee0e5-d138-42ea-93f2-796133342d98
 		summarizeBy: none
 		sourceColumn: name
 
@@ -68,7 +70,7 @@ table 'customer_feedback_data.json'
 
 	column sentiment
 		dataType: string
-		lineageTag: c8a8d8ee-da93-47ec-915a-15aa027cc5d6
+		lineageTag: 3e8c8dec-b821-42cc-9cea-f92039e76236
 		summarizeBy: none
 		sourceColumn: sentiment
 
@@ -76,7 +78,7 @@ table 'customer_feedback_data.json'
 
 	column Promoter
 		dataType: int64
-		lineageTag: af103985-91bc-4a24-88e0-7c4314640ca2
+		lineageTag: e6b4bba8-0cbc-4f41-8b4d-68ac1da1b06c
 		summarizeBy: none
 		sourceColumn: Promoter
 
@@ -84,7 +86,7 @@ table 'customer_feedback_data.json'
 
 	column 'Action (Category)'
 		dataType: string
-		lineageTag: 1b418848-4ae1-4f77-b42b-858ccdacf440
+		lineageTag: acaf8601-4a63-4b9b-bd72-b4464cfb2a3b
 		summarizeBy: none
 		sourceColumn: 'Action (Category)'
 		displayFolder: Groups
@@ -93,14 +95,14 @@ table 'customer_feedback_data.json'
 
 	column 'Action (Sentiment)'
 		dataType: string
-		lineageTag: bcb0322d-c74f-4c5c-979b-9c53d7ae20da
+		lineageTag: b48f0b1b-cf61-4335-a164-fc9c554c0bcd
 		summarizeBy: none
 		sourceColumn: 'Action (Sentiment)'
 		displayFolder: Groups
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'customer_feedback_data.json-70f38630-871d-455a-b0d2-f1980142234d' = m
+	partition 'customer_feedback_data.json-b9f4ace4-8dbc-46da-a88d-41ffe36377c6' = m
 		mode: import
 		source =
 				let
@@ -110,14 +112,14 @@ table 'customer_feedback_data.json'
 				        #table(
 				            {"Document Index (generated)", "category", "customer_id", "date", "email", "feedback_score", "feedback_text", "name", "sentiment"},
 				            {
-				                {1, "Sample 2", "Sample 3", "Sample 4", "Sample 5", 6, "Sample 7", "Sample 8", "Sample 9"},
-				                {2, "Sample 3", "Sample 4", "Sample 5", "Sample 6", 7, "Sample 8", "Sample 9", "Sample 10"}
+				                {1, "Sample 2", "Sample 3", 4, "Sample 5", 6, "Sample 7", "Sample 8", "Sample 9"},
+				                {2, "Sample 3", "Sample 4", 5, "Sample 6", 7, "Sample 8", "Sample 9", "Sample 10"}
 				            }
 				        )
 				    otherwise
 				        #table({"Document Index (generated)", "category", "customer_id", "date", "email", "feedback_score", "feedback_text", "name", "sentiment"}, {}),
 				    #"Renamed Columns" = Table.RenameColumns(Source, {{"category", "Category"}, {"customer_id", "Customer Id"}, {"date", "Date"}, {"email", "Email"}, {"feedback_score", "Feedback Score"}, {"feedback_text", "Feedback Text"}, {"name", "Name"}, {"sentiment", "Sentiment"}}),
-				    #"Added Promoter" = Table.AddColumn(#"Renamed Columns", "Promoter", each if [feedback_score]>=9 then 1 else 0, Int64.Type),
+				    #"Added Promoter" = Table.AddColumn(#"Renamed Columns", "Promoter", each if [feedback_score] >= 9 then 1 else 0, Int64.Type),
 				    #"Added Action (Category)" = Table.AddColumn(#"Added Promoter", "Action (Category)", each Text.From([#"category"]), type text),
 				    #"Added Action (Sentiment)" = Table.AddColumn(#"Added Action (Category)", "Action (Sentiment)", each Text.From([#"sentiment"]), type text),
 				    Result = #"Added Action (Sentiment)"
@@ -125,4 +127,5 @@ table 'customer_feedback_data.json'
 				    Result
 
 	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 12 columns: Document Index (generated), category, customer_id, date, email, feedback_score, feedback_text, name, ... (12 columns total).
 

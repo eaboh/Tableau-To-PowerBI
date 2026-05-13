@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-23T14:58:15.033798",
+  "generated_at": "2026-05-13T17:35:32.227036",
   "source": "Tableau Migration",
   "report_name": "multiple_connections",
   "objects_converted": {
@@ -28,9 +28,9 @@
     }
   },
   "tmdl_stats": {
-    "tables": 3,
+    "tables": 2,
     "measures": 0,
-    "columns": 0,
+    "columns": 2,
     "relationships": 0
   },
   "visual_type_mappings": {},

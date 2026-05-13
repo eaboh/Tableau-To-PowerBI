@@ -1,18 +1,18 @@
-relationship 1d28d35c-eb6f-45f8-b119-515d9ffc3acb
+relationship 709f6950-0bc2-4826-b479-5800fb7debf6
 	fromColumn: fact_sales.product_key
 	toColumn: dim_product.product_key
 	fromCardinality: many
 	toCardinality: many
 	crossFilteringBehavior: bothDirections
 
-relationship 0667618d-17a0-423a-90d9-211ec67e752d
+relationship 6c987c85-1317-4fbf-8eb9-bd71ac84dd7c
 	fromColumn: fact_sales.customer_key
 	toColumn: dim_customer.customer_key
 	fromCardinality: many
 	toCardinality: many
 	crossFilteringBehavior: bothDirections
 
-relationship 3b6aa98f-8f94-4313-a63c-9afda71ef29a
+relationship 137c8728-78d0-4026-9948-5ced71782ca2
 	fromColumn: fact_sales.date_key
 	toColumn: dim_date.date_key
 	fromCardinality: many

@@ -1,0 +1,623 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "f324f065fb8c49648024",
+  "position": {
+    "x": 220,
+    "y": 26,
+    "z": 22000,
+    "height": 628,
+    "width": 1060,
+    "tabOrder": 22000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "All Tableau Accelerators can be found on Tableau Exchange: ",
+                    "textStyle": {
+                      "fontStyle": "italic",
+                      "color": "#2b5c8a",
+                      "fontSize": "7.0pt"
+                    }
+                  },
+                  {
+                    "value": "https://exchange.tableau.com/accelerators",
+                    "textStyle": {
+                      "fontStyle": "italic",
+                      "color": "#2b5c8a",
+                      "fontSize": "7.0pt"
+                    }
+                  },
+                  {
+                    "value": "Æ"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "RELATED ACCELERATORS",
+                    "textStyle": {
+                      "color": "#2b5c8a",
+                      "fontSize": "12.0pt"
+                    }
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "In addition to this Accelerator, you will probably be interested in other Tableau Accelerators in the same field:"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Sales Cloud",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "color": "#2b5c8a",
+                      "fontSize": "10.0pt"
+                    }
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Salesforce Sales Cloud - Weighted Pipeline",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": "
+                  },
+                  {
+                    "value": "https://exchange.tableau.com/products/636"
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Salesforce Sales Cloud - Sales Pipeline",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": "
+                  },
+                  {
+                    "value": "https://exchange.tableau.com/products/637"
+                  },
+                  {
+                    "value": "Æ"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "  "
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Service Cloud",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "color": "#2b5c8a",
+                      "fontSize": "10.0pt"
+                    }
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Salesforce Service Cloud - Voice Call",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": "
+                  },
+                  {
+                    "value": "https://exchange.tableau.com/products/645"
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Salesforce Service Cloud - Service Desk",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": "
+                  },
+                  {
+                    "value": "https://exchange.tableau.com/products/646"
+                  },
+                  {
+                    "value": "Æ"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Non-Profit Cloud",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "color": "#2b5c8a",
+                      "fontSize": "10.0pt"
+                    }
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Salesforce Nonprofit Cloud - Donations",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": "
+                  },
+                  {
+                    "value": "https://exchange.tableau.com/products/648"
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Salesforce Nonprofit Cloud - Grant Management",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": "
+                  },
+                  {
+                    "value": "https://exchange.tableau.com/products/647"
+                  },
+                  {
+                    "value": "Æ"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Consummer Goods Cloud",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "color": "#2b5c8a",
+                      "fontSize": "10.0pt"
+                    }
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Salesforce Consumer Goods Cloud - Key Account Management",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": "
+                  },
+                  {
+                    "value": "https://exchange.tableau.com/products/822"
+                  },
+                  {
+                    "value": "Æ"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Education Cloud",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "color": "#2b5c8a",
+                      "fontSize": "10.0pt"
+                    }
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Salesforce Education Cloud - Academic Admissions",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": "
+                  },
+                  {
+                    "value": "https://exchange.tableau.com/products/818"
+                  },
+                  {
+                    "value": "Æ"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Data Cloud",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "color": "#2b5c8a",
+                      "fontSize": "10.0pt"
+                    }
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Salesforce Data Cloud - Email Marketing Campaigns",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": "
+                  },
+                  {
+                    "value": "https://exchange.tableau.com/products/688"
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Salesforce Data Cloud - Identity Resolution",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": "
+                  },
+                  {
+                    "value": "https://exchange.tableau.com/products/624"
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Salesforce Data Cloud - Customer Engagement",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": "
+                  },
+                  {
+                    "value": "https://exchange.tableau.com/products/727"
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Salesforce Data Cloud - Retail Sales",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": "
+                  },
+                  {
+                    "value": "https://exchange.tableau.com/products/897"
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Salesforce Data Cloud - Sales",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": "
+                  },
+                  {
+                    "value": "https://exchange.tableau.com/products/901"
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Salesforce Data Cloud - Sales Pipeline",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": "
+                  },
+                  {
+                    "value": "https://exchange.tableau.com/products/896"
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Salesforce Data Cloud - Weighted Sales Pipeline",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": "
+                  },
+                  {
+                    "value": "https://exchange.tableau.com/products/898"
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Salesforce Data Cloud - Sales vs Quota",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": "
+                  },
+                  {
+                    "value": "https://exchange.tableau.com/products/900"
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Salesforce Data Cloud - Service Desk",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": "
+                  },
+                  {
+                    "value": "https://exchange.tableau.com/products/899"
+                  },
+                  {
+                    "value": "Æ"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Other",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "color": "#2b5c8a",
+                      "fontSize": "10.0pt"
+                    }
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Salesforce - Admin Insights",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": "
+                  },
+                  {
+                    "value": "https://exchange.tableau.com/products/631"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

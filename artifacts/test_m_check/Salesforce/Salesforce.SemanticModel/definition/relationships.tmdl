@@ -1,0 +1,108 @@
+relationship b8272009-c4ca-483a-8e59-39b6aabac889
+	fromColumn: Account.'CreatedById (Account)'
+	toColumn: 'Account Created By'.'Id (Account Created By)'
+	fromCardinality: many
+	toCardinality: many
+	crossFilteringBehavior: bothDirections
+
+relationship 0bfcf2ca-bef4-4ed0-9b91-e9084b6a0c8c
+	fromColumn: Account.'OwnerId (Account)'
+	toColumn: 'Account Owned By'.'Id (Account Owned By)'
+	fromCardinality: many
+	toCardinality: many
+	crossFilteringBehavior: bothDirections
+
+relationship 1fb30ef5-f6be-48c2-a017-7f3789bfd892
+	fromColumn: Opportunities.AccountId
+	toColumn: Account.'Id (Account)'
+	fromCardinality: many
+	toCardinality: many
+	crossFilteringBehavior: bothDirections
+
+relationship 76259c49-247b-408a-9c2d-b451f1062227
+	fromColumn: Opportunities.CreatedById
+	toColumn: 'Created By'.'Id (Created By)'
+	fromCardinality: many
+	toCardinality: many
+	crossFilteringBehavior: bothDirections
+
+relationship 600afc2c-5e82-41f5-a4e2-29d6dc05cb23
+	fromColumn: Opportunities.OwnerId
+	toColumn: 'Owned By'.Id
+	fromCardinality: many
+	toCardinality: many
+	crossFilteringBehavior: bothDirections
+
+relationship 47b579f8-a8cd-4623-98ea-973479dbfe24
+	fromColumn: Opportunities.'Close Date'
+	toColumn: Calendar.Date
+	crossFilteringBehavior: bothDirections
+
+relationship 21e8c015-9d0a-45dd-803f-5580ced30f2f
+	fromColumn: 'Owned By'.'CreatedDate (Owned By)'
+	toColumn: Calendar.Date
+	crossFilteringBehavior: bothDirections
+	isActive: false
+
+relationship 2c964c91-784b-4d98-bf7f-99b989bfee1b
+	fromColumn: 'Created By'.'CreatedDate (Created By)'
+	toColumn: Calendar.Date
+	crossFilteringBehavior: bothDirections
+	isActive: false
+
+relationship cfde0108-4eb8-4bdc-a970-bfcab3209a5f
+	fromColumn: Account.'Application Date'
+	toColumn: Calendar.Date
+	crossFilteringBehavior: bothDirections
+	isActive: false
+
+relationship 85d9550c-e899-473a-92fe-0448eca0f096
+	fromColumn: 'Account Owned By'.'CreatedDate (Account Owned By)'
+	toColumn: Calendar.Date
+	crossFilteringBehavior: bothDirections
+	isActive: false
+
+relationship 0b9611c6-66fc-47e0-9940-57667fe1d23e
+	fromColumn: 'Account Created By'.'CreatedDate (Account Created By)'
+	toColumn: Calendar.Date
+	crossFilteringBehavior: bothDirections
+	isActive: false
+
+relationship bfeb12d1-e411-4d1f-aa0e-f952d05c9b0b
+	fromColumn: 'Owned By'.'analyticsdemo_batch_id__c (Owned By)'
+	toColumn: Account.'analyticsdemo_batch_id__c (Account)'
+	fromCardinality: many
+	toCardinality: many
+	crossFilteringBehavior: bothDirections
+	isActive: false
+
+relationship da58c931-bc6c-4196-bcd9-2062662a8864
+	fromColumn: 'Owned By'.'analyticsdemo_batch_id__c (Owned By)'
+	toColumn: 'Created By'.'analyticsdemo_batch_id__c (Created By)'
+	fromCardinality: many
+	toCardinality: many
+	crossFilteringBehavior: bothDirections
+	isActive: false
+
+relationship 4d5676b9-d061-45fa-934a-b7371148490a
+	fromColumn: Opportunities.Name
+	toColumn: 'Last x Days'.Name
+	fromCardinality: many
+	toCardinality: many
+	crossFilteringBehavior: bothDirections
+
+relationship 9aba7d9f-b551-440f-8ba2-1f86cca14c51
+	fromColumn: Opportunities.Name
+	toColumn: 'Next x Days'.Name
+	fromCardinality: many
+	toCardinality: many
+	crossFilteringBehavior: bothDirections
+
+relationship fdba5a63-ada9-4387-8a6e-fa8c119d3c52
+	fromColumn: 'Last x Days'.Name
+	toColumn: 'Next x Days'.Name
+	fromCardinality: many
+	toCardinality: many
+	crossFilteringBehavior: bothDirections
+	isActive: false
+

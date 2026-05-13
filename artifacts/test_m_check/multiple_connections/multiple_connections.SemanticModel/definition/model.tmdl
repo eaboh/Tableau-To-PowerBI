@@ -6,11 +6,12 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["sqlproxy","xy","xy1"]
+annotation PBI_QueryOrder = ["xy","xy1"]
 
-ref table sqlproxy
 ref table xy
 ref table xy1
+
+ref relationship f5e117d2-a8ae-4c00-9a4b-50d970ffbbea
 
 ref expression DataFolder
 

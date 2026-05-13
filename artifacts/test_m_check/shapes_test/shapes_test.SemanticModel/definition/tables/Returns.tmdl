@@ -1,9 +1,9 @@
 table Returns
-	lineageTag: cf941f9a-03fe-4f68-a66f-c4f8fa97ed2d
+	lineageTag: e296390e-9c52-49f8-ba4a-8fdc930fd79c
 
 	column Returned
 		dataType: string
-		lineageTag: 4859d744-7ad2-4544-8f96-b0425daaf0d2
+		lineageTag: 81e10dbe-376e-4125-bda9-1450a6480d21
 		summarizeBy: none
 		sourceColumn: Returned
 
@@ -11,22 +11,23 @@ table Returns
 
 	column 'Order ID'
 		dataType: string
-		lineageTag: a0294d52-1542-4894-9296-2d33b6e651a8
+		lineageTag: 674b1676-4702-4534-8255-5c69314cfd0b
 		summarizeBy: none
 		sourceColumn: 'Order ID'
+		annotation Copilot_Hidden = true
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Returns-f578e96d-2f15-4b86-a1a7-3291f41f4acb' = m
+	partition 'Returns-a5e080b5-41ae-4c2b-b31a-4f052bd4d7e3' = m
 		mode: import
 		source =
 				let
-				    // Source Excel: /Users/mkorotchenkov/Documents/My Tableau Repository/Datasources/2021.2/en_US-US/Sample - Superstore.xls
+				    // Source Excel: Sample - Superstore.xls
 				    Source = try
 				
 				        let
 				
-				            _src = Excel.Workbook(File.Contents(DataFolder & "\\Users\mkorotchenkov\Documents\My Tableau Repository\Datasources\2021.2\en_US-US\Sample - Superstore.xls"), null, true),
+				            _src = Excel.Workbook(File.Contents(DataFolder & "\Sample - Superstore.xls"), null, true),
 				
 				            _nav = _src{[Item="Returns",Kind="Sheet"]}[Data]
 				
@@ -45,4 +46,5 @@ table Returns
 				    Result
 
 	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 2 columns: Returned, Order ID.
 

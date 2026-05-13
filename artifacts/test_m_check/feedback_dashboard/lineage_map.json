@@ -1,0 +1,67 @@
+{
+  "tables": [
+    {
+      "tableau_datasource": "federated.1hzlzhe1y3esow1d9tg131a7pbp2",
+      "tableau_table": "customer_feedback_data.json",
+      "pbi_table": "customer_feedback_data.json"
+    },
+    {
+      "tableau_datasource": "federated.1hzlzhe1y3esow1d9tg131a7pbp2",
+      "tableau_table": "Extract",
+      "pbi_table": "Extract"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Calendar",
+      "pbi_table": "Calendar"
+    }
+  ],
+  "calculations": [],
+  "relationships": [
+    {
+      "from": "customer_feedback_data.json[date]",
+      "to": "Calendar[Date]",
+      "cardinality": "bothDirections"
+    },
+    {
+      "from": "Extract[date]",
+      "to": "Calendar[Date]",
+      "cardinality": "bothDirections"
+    },
+    {
+      "from": "customer_feedback_data.json[customer_id]",
+      "to": "Extract[customer_id]",
+      "cardinality": "bothDirections"
+    }
+  ],
+  "worksheets": [
+    {
+      "tableau_worksheet": "KPI",
+      "pbi_page": "KPI"
+    },
+    {
+      "tableau_worksheet": "avg fdbck score",
+      "pbi_page": "avg fdbck score"
+    },
+    {
+      "tableau_worksheet": "cnt of custmrs",
+      "pbi_page": "cnt of custmrs"
+    },
+    {
+      "tableau_worksheet": "fdback in days",
+      "pbi_page": "fdback in days"
+    },
+    {
+      "tableau_worksheet": "no.of fdbk by cstmr",
+      "pbi_page": "no.of fdbk by cstmr"
+    },
+    {
+      "tableau_worksheet": "prmtr by ctgr",
+      "pbi_page": "prmtr by ctgr"
+    },
+    {
+      "tableau_worksheet": "sentiment",
+      "pbi_page": "sentiment"
+    }
+  ]
+}

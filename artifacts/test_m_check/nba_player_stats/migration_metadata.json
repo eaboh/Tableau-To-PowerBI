@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-23T14:58:15.545481",
+  "generated_at": "2026-05-13T17:35:51.510316",
   "source": "Tableau Migration",
   "report_name": "nba_player_stats",
   "objects_converted": {
@@ -56,7 +56,7 @@
     {
       "worksheet": "Player Stats",
       "tableau_mark": "Automatic",
-      "pbi_visual": "scatterChart",
+      "pbi_visual": "clusteredBarChart",
       "dimensions": [
         "Player"
       ],
@@ -70,7 +70,7 @@
     {
       "worksheet": "Players Headshot",
       "tableau_mark": "Automatic",
-      "pbi_visual": "scatterChart",
+      "pbi_visual": "multiRowCard",
       "dimensions": [
         "Player",
         "Player"
@@ -97,7 +97,7 @@
     {
       "worksheet": "Teams",
       "tableau_mark": "Automatic",
-      "pbi_visual": "scatterChart",
+      "pbi_visual": "table",
       "dimensions": [
         "Player",
         "TM",

@@ -148,7 +148,7 @@ class SLATracker:
         if min_fidelity > 0 and fidelity < min_fidelity:
             result.fidelity_compliant = False
             result.breaches.append(
-                f"Fidelity {fidelity:.1f}% below threshold {min_fidelity}%"
+                f"Extraction {fidelity:.1f}% below threshold {min_fidelity}%"
             )
 
         # Validation compliance

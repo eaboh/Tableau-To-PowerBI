@@ -1586,6 +1586,22 @@ class TestExtractAllowableValues(unittest.TestCase):
         self.assertEqual(len(vals), 2)
         self.assertEqual(vals[0]['alias'], 'A')
 
+    def test_old_format_strips_surrounding_quotes(self):
+        """Old-format string parameter values with surrounding quotes must be stripped."""
+        param = ET.fromstring('''
+        <column param-domain-type="list">
+            <members>
+                <member value="&quot;Alabama&quot;" alias="&quot;Alabama&quot;"/>
+                <member value="&quot;Arizona&quot;"/>
+            </members>
+        </column>''')
+        vals = self.ext.extract_allowable_values(param)
+        self.assertEqual(len(vals), 2)
+        self.assertEqual(vals[0]['value'], 'Alabama')
+        self.assertEqual(vals[0]['alias'], 'Alabama')
+        self.assertEqual(vals[1]['value'], 'Arizona')
+        self.assertEqual(vals[1]['alias'], 'Arizona')
+
     def test_new_format_domain(self):
         param = ET.fromstring('''
         <parameter>

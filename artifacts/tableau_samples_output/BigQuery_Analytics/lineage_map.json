@@ -16,7 +16,68 @@
       "pbi_table": "Calendar"
     }
   ],
-  "calculations": [],
+  "calculations": [
+    {
+      "tableau_calculation": "COUNT([session_id])",
+      "pbi_table": "sessions",
+      "pbi_object": "Total Sessions",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD([user_id])",
+      "pbi_table": "sessions",
+      "pbi_object": "Unique Visitors",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM(IF [converted] THEN 1 ELSE 0 END) / COUNT([session_id])",
+      "pbi_table": "sessions",
+      "pbi_object": "Conversion Rate",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "AVG([session_duration])",
+      "pbi_table": "sessions",
+      "pbi_object": "Avg Session Duration",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM([revenue])",
+      "pbi_table": "sessions",
+      "pbi_object": "Total Revenue",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM([revenue]) / COUNT([session_id])",
+      "pbi_table": "sessions",
+      "pbi_object": "Revenue per Session",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "{FIXED [channel] : SUM([revenue])}",
+      "pbi_table": "sessions",
+      "pbi_object": "Revenue by Channel",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Year To Date",
+      "pbi_table": "Calendar",
+      "pbi_object": "Year To Date",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Previous Year",
+      "pbi_table": "Calendar",
+      "pbi_object": "Previous Year",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Year Over Year %",
+      "pbi_table": "Calendar",
+      "pbi_object": "Year Over Year %",
+      "pbi_type": "measure"
+    }
+  ],
   "relationships": [
     {
       "from": "sessions[user_id]",
@@ -26,7 +87,7 @@
     {
       "from": "sessions[session_date]",
       "to": "Calendar[Date]",
-      "cardinality": "oneDirection"
+      "cardinality": "bothDirections"
     },
     {
       "from": "users[signup_date]",
@@ -34,5 +95,22 @@
       "cardinality": "bothDirections"
     }
   ],
-  "worksheets": []
+  "worksheets": [
+    {
+      "tableau_worksheet": "Sessions by Channel",
+      "pbi_page": "Sessions by Channel"
+    },
+    {
+      "tableau_worksheet": "Revenue Trend",
+      "pbi_page": "Revenue Trend"
+    },
+    {
+      "tableau_worksheet": "Conversion by Device",
+      "pbi_page": "Conversion by Device"
+    },
+    {
+      "tableau_worksheet": "User Engagement",
+      "pbi_page": "User Engagement"
+    }
+  ]
 }

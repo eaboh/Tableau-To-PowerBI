@@ -12,9 +12,9 @@ ref table sessions
 ref table users
 ref table Calendar
 
-ref relationship f0a561d1-3a33-404f-8e4a-25ea5a516069
-ref relationship 1b2f6e37-d712-4daa-983d-f99e9674abfc
-ref relationship 99e375a0-8fce-4d8b-b76c-e4198cf17200
+ref relationship e3d4cfd9-d822-49aa-aa75-49181db89d75
+ref relationship 20e30a59-d803-49ef-81da-7bec49e5b9e1
+ref relationship 8aacd147-404e-4873-b29c-ca9999a6b24d
 
 ref expression DataFolder
 

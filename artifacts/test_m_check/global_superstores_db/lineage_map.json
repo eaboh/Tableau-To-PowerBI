@@ -11,7 +11,38 @@
       "pbi_table": "Calendar"
     }
   ],
-  "calculations": [],
+  "calculations": [
+    {
+      "tableau_calculation": "SUM([Profit])/SUM([Sales])",
+      "pbi_table": "Orders",
+      "pbi_object": "Margin",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "1",
+      "pbi_table": "Orders",
+      "pbi_object": "Number of Records",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Year To Date",
+      "pbi_table": "Calendar",
+      "pbi_object": "Year To Date",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Previous Year",
+      "pbi_table": "Calendar",
+      "pbi_object": "Previous Year",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Year Over Year %",
+      "pbi_table": "Calendar",
+      "pbi_object": "Year Over Year %",
+      "pbi_type": "measure"
+    }
+  ],
   "relationships": [
     {
       "from": "Orders[Order Date]",
@@ -19,5 +50,86 @@
       "cardinality": "oneDirection"
     }
   ],
-  "worksheets": []
+  "worksheets": [
+    {
+      "tableau_worksheet": "AnalyticsBasic",
+      "pbi_page": "AnalyticsBasic"
+    },
+    {
+      "tableau_worksheet": "Bar 1",
+      "pbi_page": "Bar 1"
+    },
+    {
+      "tableau_worksheet": "Bar2",
+      "pbi_page": "Bar2"
+    },
+    {
+      "tableau_worksheet": "Heat Map",
+      "pbi_page": "Heat Map"
+    },
+    {
+      "tableau_worksheet": "Histogram",
+      "pbi_page": "Histogram"
+    },
+    {
+      "tableau_worksheet": "Line-Area",
+      "pbi_page": "Line-Area"
+    },
+    {
+      "tableau_worksheet": "Line-Forecast",
+      "pbi_page": "Line-Forecast"
+    },
+    {
+      "tableau_worksheet": "Product Sales",
+      "pbi_page": "Product Sales"
+    },
+    {
+      "tableau_worksheet": "Profit",
+      "pbi_page": "Profit"
+    },
+    {
+      "tableau_worksheet": "Profit Map",
+      "pbi_page": "Profit Map"
+    },
+    {
+      "tableau_worksheet": "Profit and Sales",
+      "pbi_page": "Profit and Sales"
+    },
+    {
+      "tableau_worksheet": "Profit and Sales Relationship",
+      "pbi_page": "Profit and Sales Relationship"
+    },
+    {
+      "tableau_worksheet": "Profit and Sales by Sub Categories",
+      "pbi_page": "Profit and Sales by Sub Categories"
+    },
+    {
+      "tableau_worksheet": "ScatterPlot",
+      "pbi_page": "ScatterPlot"
+    },
+    {
+      "tableau_worksheet": "ShelvesCard",
+      "pbi_page": "ShelvesCard"
+    },
+    {
+      "tableau_worksheet": "Shipping Cost",
+      "pbi_page": "Shipping Cost"
+    },
+    {
+      "tableau_worksheet": "ShippingCostToMarkets",
+      "pbi_page": "ShippingCostToMarkets"
+    },
+    {
+      "tableau_worksheet": "South Map",
+      "pbi_page": "South Map"
+    },
+    {
+      "tableau_worksheet": "World's Profit and Sales Reln",
+      "pbi_page": "World's Profit and Sales Reln"
+    },
+    {
+      "tableau_worksheet": "YOY Profit",
+      "pbi_page": "YOY Profit"
+    }
+  ]
 }

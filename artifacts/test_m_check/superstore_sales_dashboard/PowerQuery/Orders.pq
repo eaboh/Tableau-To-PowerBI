@@ -1,0 +1,34 @@
+let
+    // Source Excel: Orders.xlsx
+    Source = Csv.Document(File.Contents(DataFolder & "\Extract.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Changed Types" = Table.TransformColumnTypes(#"Promoted Headers", {
+        {"Row ID", Int64.Type},
+        {"Order ID", Int64.Type},
+        {"Order Date", type date},
+        {"Order Priority", type text},
+        {"Order Quantity", Int64.Type},
+        {"Sales", type number},
+        {"Discount", type number},
+        {"Ship Mode", type text},
+        {"Profit", type number},
+        {"Unit Price", type number},
+        {"Shipping Cost", type number},
+        {"Customer Name", type text},
+        {"City", type text},
+        {"Zip Code", type text},
+        {"State", type text},
+        {"Region", type text},
+        {"Customer Segment", type text},
+        {"Product Category", type text},
+        {"Product Sub-Category", type text},
+        {"Product Name", type text},
+        {"Product Container", type text},
+        {"Product Base Margin", type number},
+        {"Ship Date", type date}
+    }),
+    #"Added Grouping Based on Unit Price" = Table.AddColumn(#"Changed Types", "Grouping Based on Unit Price", each if [Unit Price] <= 2500 then "A" else if [Unit Price] <= 5000 then "B" else "C", type text),
+    #"Added Action (Region)" = Table.AddColumn(#"Added Grouping Based on Unit Price", "Action (Region)", each Text.From([#"Region"]), type text),
+    Result = #"Added Action (Region)"
+in
+    Result

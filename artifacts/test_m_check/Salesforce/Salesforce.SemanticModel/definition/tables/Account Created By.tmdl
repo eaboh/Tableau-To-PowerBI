@@ -1,0 +1,2197 @@
+table 'Account Created By'
+	lineageTag: 48c6b8f9-4ba1-4012-b2d6-b05de601b30d
+
+	column 'AboutMe (Account Created By)'
+		dataType: string
+		lineageTag: 52ec825a-f7a4-4b6f-b7d9-93c8e3e21bdf
+		summarizeBy: none
+		sourceColumn: 'AboutMe (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'AccountID__c (Account Created By)'
+		dataType: string
+		lineageTag: a14ca518-56b8-4302-89ad-aa251d05d494
+		summarizeBy: none
+		sourceColumn: 'AccountID__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'AccountId (Account Created By)'
+		dataType: string
+		lineageTag: d683dd11-2919-47a2-8ee4-70bae9074296
+		summarizeBy: none
+		sourceColumn: 'AccountId (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'AccountName2__c (Account Created By)'
+		dataType: string
+		lineageTag: 9aecc801-c43d-4272-a43b-18db5466259e
+		summarizeBy: none
+		sourceColumn: 'AccountName2__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Admin_User__c (Account Created By)'
+		dataType: boolean
+		lineageTag: 087df9f7-b7d3-4bcd-bb2f-3472e45dd56e
+		summarizeBy: none
+		sourceColumn: 'Admin_User__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Alias (Account Created By)'
+		dataType: string
+		lineageTag: f2e3d772-ea8b-4b45-ad85-668411162839
+		summarizeBy: none
+		sourceColumn: 'Alias (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'BadgeText (Account Created By)'
+		dataType: string
+		lineageTag: 965e6ed8-3df7-4ba1-acc6-2bc47c4fc4b8
+		summarizeBy: none
+		sourceColumn: 'BadgeText (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'BannerPhotoUrl (Account Created By)'
+		dataType: string
+		lineageTag: 04e9d8e1-a044-4c76-9f5d-ea87c7e5318a
+		summarizeBy: none
+		sourceColumn: 'BannerPhotoUrl (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Branding_Template__c (Account Created By)'
+		dataType: string
+		lineageTag: 3c731f00-314a-4364-bf2a-f15109e2bef7
+		summarizeBy: none
+		sourceColumn: 'Branding_Template__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CallCenterId (Account Created By)'
+		dataType: string
+		lineageTag: 537f1580-dd24-4d34-8dc0-4e57b5228f46
+		summarizeBy: none
+		sourceColumn: 'CallCenterId (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'City (Account Created By)'
+		dataType: string
+		lineageTag: c3a01e95-a244-4722-a298-b78353aaf463
+		summarizeBy: none
+		sourceColumn: 'City (Account Created By)'
+		isHidden
+		dataCategory: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Closed_Credit_Account__c (Account Created By)'
+		dataType: boolean
+		lineageTag: 5142696f-020c-4269-b09c-2a89b44669fc
+		summarizeBy: none
+		sourceColumn: 'Closed_Credit_Account__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CommunityNickname (Account Created By)'
+		dataType: string
+		lineageTag: f77b9bef-e0dc-4357-a888-8f0d42a89360
+		summarizeBy: none
+		sourceColumn: 'CommunityNickname (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CompanyName (Account Created By)'
+		dataType: string
+		lineageTag: 4cbfee8f-a843-4b6f-aac5-da6bca72294f
+		summarizeBy: none
+		sourceColumn: 'CompanyName (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Consumer_User__c (Account Created By)'
+		dataType: boolean
+		lineageTag: 49324ecf-3e98-4e16-afd5-a62cc528f4a3
+		summarizeBy: none
+		sourceColumn: 'Consumer_User__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ContactId (Account Created By)'
+		dataType: string
+		lineageTag: caa383b6-d9ed-46f9-9cf9-e2d7ea223d05
+		summarizeBy: none
+		sourceColumn: 'ContactId (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Country (Account Created By)'
+		dataType: string
+		lineageTag: cede2b33-0494-4ae9-9bcc-4cee9249f833
+		summarizeBy: none
+		sourceColumn: 'Country (Account Created By)'
+		isHidden
+		dataCategory: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CreatedById (Account Created By)'
+		dataType: string
+		lineageTag: d10f5875-b053-463b-9c62-d35a377ab3a4
+		summarizeBy: none
+		sourceColumn: 'CreatedById (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CreatedDate (Account Created By)'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: be4f561c-8197-4b0d-8a19-85688003bf4b
+		summarizeBy: none
+		sourceColumn: 'CreatedDate (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DefaultGroupNotificationFrequency (Account Created By)'
+		dataType: string
+		lineageTag: 6431b04e-3b88-4d77-a98f-68a904a3c2c3
+		summarizeBy: none
+		sourceColumn: 'DefaultGroupNotificationFrequency (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DelegatedApproverId (Account Created By)'
+		dataType: string
+		lineageTag: 6746abee-ee03-46e6-8a4a-3fddbf2fe220
+		summarizeBy: none
+		sourceColumn: 'DelegatedApproverId (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Department (Account Created By)'
+		dataType: string
+		lineageTag: dd910fc4-861d-447d-9304-1d39cf4affbf
+		summarizeBy: none
+		sourceColumn: 'Department (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DigestFrequency (Account Created By)'
+		dataType: string
+		lineageTag: a52d8056-e03f-42d8-9d79-2d0e65376eda
+		summarizeBy: none
+		sourceColumn: 'DigestFrequency (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Division (Account Created By)'
+		dataType: string
+		lineageTag: e56c10ab-e200-4cf8-82ca-ddd607556e2b
+		summarizeBy: none
+		sourceColumn: 'Division (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'EDY_ORGCUSTOM__DB__c (Account Created By)'
+		dataType: boolean
+		lineageTag: aaec7912-7426-4489-912f-3120343369cd
+		summarizeBy: none
+		sourceColumn: 'EDY_ORGCUSTOM__DB__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'EDY_ORGCUSTOM__Old_First_Name__c (Account Created By)'
+		dataType: string
+		lineageTag: 28b1de54-2b5d-4ca3-b8bf-9ed7a6698aa4
+		summarizeBy: none
+		sourceColumn: 'EDY_ORGCUSTOM__Old_First_Name__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'EDY_ORGCUSTOM__Old_Last_Name__c (Account Created By)'
+		dataType: string
+		lineageTag: 1c567c9f-3f4b-4a6c-8c2e-810a1ddef59a
+		summarizeBy: none
+		sourceColumn: 'EDY_ORGCUSTOM__Old_Last_Name__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Email (Account Created By)'
+		dataType: string
+		lineageTag: a8462665-5a9d-4b68-96ac-1649411be1cd
+		summarizeBy: none
+		sourceColumn: 'Email (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'EmailEncodingKey (Account Created By)'
+		dataType: string
+		lineageTag: 3ed6328c-e5aa-48d7-8eb9-21fb51ed92fa
+		summarizeBy: none
+		sourceColumn: 'EmailEncodingKey (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'EmailPreferencesAutoBcc (Account Created By)'
+		dataType: boolean
+		lineageTag: b3fc30ad-f1fd-44b3-af86-94673bd028d1
+		summarizeBy: none
+		sourceColumn: 'EmailPreferencesAutoBcc (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'EmailPreferencesAutoBccStayInTouch (Account Created By)'
+		dataType: boolean
+		lineageTag: d8e3a96a-005e-4629-a93a-bf1f88311a5b
+		summarizeBy: none
+		sourceColumn: 'EmailPreferencesAutoBccStayInTouch (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'EmailPreferencesStayInTouchReminder (Account Created By)'
+		dataType: boolean
+		lineageTag: 8f1a7047-4143-4f63-9a12-36fc4200dbdd
+		summarizeBy: none
+		sourceColumn: 'EmailPreferencesStayInTouchReminder (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'EmployeeNumber (Account Created By)'
+		dataType: string
+		lineageTag: caa23996-e131-4f3d-b4e8-c7e3ca5357fa
+		summarizeBy: none
+		sourceColumn: 'EmployeeNumber (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Employee_Number__c (Account Created By)'
+		dataType: string
+		lineageTag: f808d2f4-108c-423e-8263-230056c9286a
+		summarizeBy: none
+		sourceColumn: 'Employee_Number__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Extension (Account Created By)'
+		dataType: string
+		lineageTag: 4965a803-a8bc-48d8-9391-f66abea08d81
+		summarizeBy: none
+		sourceColumn: 'Extension (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'External_ID__c (Account Created By)'
+		dataType: string
+		lineageTag: 26f02f5a-f0de-4881-bdc6-992a154dcbe7
+		summarizeBy: none
+		sourceColumn: 'External_ID__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fax (Account Created By)'
+		dataType: string
+		lineageTag: 8797ef3f-d3a5-4fcf-a1d4-995f4e3a22d5
+		summarizeBy: none
+		sourceColumn: 'Fax (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'FederationIdentifier (Account Created By)'
+		dataType: string
+		lineageTag: 24451d93-0568-431a-9037-3a815dc944e6
+		summarizeBy: none
+		sourceColumn: 'FederationIdentifier (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Field_Service_User__c (Account Created By)'
+		dataType: boolean
+		lineageTag: 54aff068-d747-4ff2-b3fc-b0c219c779d7
+		summarizeBy: none
+		sourceColumn: 'Field_Service_User__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'FirstName (Account Created By)'
+		dataType: string
+		lineageTag: 7aebf88e-d375-4f67-aafa-99a177b4499d
+		summarizeBy: none
+		sourceColumn: 'FirstName (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ForecastEnabled (Account Created By)'
+		dataType: boolean
+		lineageTag: 57f3e800-e01b-4b12-baed-9749571817cc
+		summarizeBy: none
+		sourceColumn: 'ForecastEnabled (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'FullPhotoUrl (Account Created By)'
+		dataType: string
+		lineageTag: 0064a957-5c39-4bfc-a95e-c8eb61b0e8bb
+		summarizeBy: none
+		sourceColumn: 'FullPhotoUrl (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GeocodeAccuracy (Account Created By)'
+		dataType: string
+		lineageTag: 8ec689d0-f7d3-45d8-baad-11cc858bbd34
+		summarizeBy: none
+		sourceColumn: 'GeocodeAccuracy (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Id (Account Created By)'
+		dataType: string
+		lineageTag: 03f8371b-8488-4c0d-872c-695cfad75c63
+		summarizeBy: none
+		sourceColumn: 'Id (Account Created By)'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'IndividualId (Account Created By)'
+		dataType: string
+		lineageTag: c5ff86e0-257f-41de-bf44-e1f874576dc8
+		summarizeBy: none
+		sourceColumn: 'IndividualId (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'IsActive (Account Created By)'
+		dataType: boolean
+		lineageTag: 27c729ce-f257-4ce5-b00d-acd0ce43d4e2
+		summarizeBy: none
+		sourceColumn: 'IsActive (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'IsExtIndicatorVisible (Account Created By)'
+		dataType: boolean
+		lineageTag: ab69e26a-f1a9-4d86-8956-57bf1f681759
+		summarizeBy: none
+		sourceColumn: 'IsExtIndicatorVisible (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'IsPortalEnabled (Account Created By)'
+		dataType: boolean
+		lineageTag: bd2834cc-bc3f-4c17-a274-58a44529f688
+		summarizeBy: none
+		sourceColumn: 'IsPortalEnabled (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'IsPortalSelfRegistered (Account Created By)'
+		dataType: boolean
+		lineageTag: d2fdf630-1a59-4c6f-9080-a5c1691f722c
+		summarizeBy: none
+		sourceColumn: 'IsPortalSelfRegistered (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'IsPrmSuperUser (Account Created By)'
+		dataType: boolean
+		lineageTag: aee982fc-192d-4aa0-8f11-4ff3ccd180c0
+		summarizeBy: none
+		sourceColumn: 'IsPrmSuperUser (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'IsProfilePhotoActive (Account Created By)'
+		dataType: boolean
+		lineageTag: 43da16ba-9a5d-4f00-bef6-a59089d3de51
+		summarizeBy: none
+		sourceColumn: 'IsProfilePhotoActive (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Key_User__c (Account Created By)'
+		dataType: boolean
+		lineageTag: 02678243-6665-4df6-835f-399f16f169f1
+		summarizeBy: none
+		sourceColumn: 'Key_User__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'LanguageLocaleKey (Account Created By)'
+		dataType: string
+		lineageTag: cff63840-01db-48c9-8fce-208e65ad73d5
+		summarizeBy: none
+		sourceColumn: 'LanguageLocaleKey (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'LastLoginDate (Account Created By)'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ac3a88a0-0fc4-4bef-a979-e03e3d331c87
+		summarizeBy: none
+		sourceColumn: 'LastLoginDate (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'LastModifiedById (Account Created By)'
+		dataType: string
+		lineageTag: 5676bd43-59f3-4a81-adfb-37bd9c87d931
+		summarizeBy: none
+		sourceColumn: 'LastModifiedById (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'LastModifiedDate (Account Created By)'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5e440444-edb3-46b7-abfe-5a5611d9ba24
+		summarizeBy: none
+		sourceColumn: 'LastModifiedDate (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'LastName (Account Created By)'
+		dataType: string
+		lineageTag: b7abf04d-2b3d-48ec-bab0-8e78615dfe4e
+		summarizeBy: none
+		sourceColumn: 'LastName (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'LastPasswordChangeDate (Account Created By)'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 96b13cf8-412f-47d4-8777-453038bbd98d
+		summarizeBy: none
+		sourceColumn: 'LastPasswordChangeDate (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'LastReferencedDate (Account Created By)'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1292dfd8-3f77-429d-b8c2-cd5297ad313e
+		summarizeBy: none
+		sourceColumn: 'LastReferencedDate (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'LastViewedDate (Account Created By)'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 00712e58-74dd-4ec7-ad7c-139a48c19b38
+		summarizeBy: none
+		sourceColumn: 'LastViewedDate (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Latitude (Account Created By)'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 67ed48eb-67e1-4d2e-98be-562f4aea9577
+		summarizeBy: sum
+		sourceColumn: 'Latitude (Account Created By)'
+		isHidden
+		dataCategory: Latitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Lightning_Scheduler_User__c (Account Created By)'
+		dataType: boolean
+		lineageTag: 295a3fb7-d0a9-4555-a7da-7a12a484725f
+		summarizeBy: none
+		sourceColumn: 'Lightning_Scheduler_User__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'LocaleSidKey (Account Created By)'
+		dataType: string
+		lineageTag: beb03520-9e7e-4eff-a8a0-4942c698b178
+		summarizeBy: none
+		sourceColumn: 'LocaleSidKey (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Longitude (Account Created By)'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: fc08be2d-fcc3-4dd1-9530-7e53460ef920
+		summarizeBy: sum
+		sourceColumn: 'Longitude (Account Created By)'
+		isHidden
+		dataCategory: Longitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ManagerId (Account Created By)'
+		dataType: string
+		lineageTag: 1c099c68-c575-4d6a-ab2d-a9495cceddae
+		summarizeBy: none
+		sourceColumn: 'ManagerId (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Manager_PTO__c (Account Created By)'
+		dataType: string
+		lineageTag: 80e8983a-1a49-4332-b564-adab115ac2e1
+		summarizeBy: none
+		sourceColumn: 'Manager_PTO__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MediumBannerPhotoUrl (Account Created By)'
+		dataType: string
+		lineageTag: 29bd8e1a-a2a8-4382-a0d2-bc0440dda207
+		summarizeBy: none
+		sourceColumn: 'MediumBannerPhotoUrl (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MediumPhotoUrl (Account Created By)'
+		dataType: string
+		lineageTag: ef67d775-f691-4137-bf79-b8bcbcaf7f18
+		summarizeBy: none
+		sourceColumn: 'MediumPhotoUrl (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MobilePhone (Account Created By)'
+		dataType: string
+		lineageTag: 9f7b321b-48ed-4a1a-bd14-3fa3b59c4425
+		summarizeBy: none
+		sourceColumn: 'MobilePhone (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Name (Account Created By)'
+		dataType: string
+		lineageTag: 329e9b36-ff8f-4e8b-bcc2-bc654b884e1f
+		summarizeBy: none
+		sourceColumn: 'Name (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'NumberOfFailedLogins (Account Created By)'
+		dataType: int64
+		lineageTag: 0ee11f3a-465d-4a3c-955d-f2ba8c826c44
+		summarizeBy: sum
+		sourceColumn: 'NumberOfFailedLogins (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OfflinePdaTrialExpirationDate (Account Created By)'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 63fe97b6-198d-4646-b246-d4b4ffc62516
+		summarizeBy: none
+		sourceColumn: 'OfflinePdaTrialExpirationDate (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OfflineTrialExpirationDate (Account Created By)'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d51f0984-1f4e-491c-8cac-948e58a3d0c2
+		summarizeBy: none
+		sourceColumn: 'OfflineTrialExpirationDate (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Omni_Supervisor__c (Account Created By)'
+		dataType: boolean
+		lineageTag: d3aa2a94-dd22-419a-a454-fdffc1c352f4
+		summarizeBy: none
+		sourceColumn: 'Omni_Supervisor__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OutOfOfficeMessage (Account Created By)'
+		dataType: string
+		lineageTag: 15c24845-3610-425f-b53c-efef1d209310
+		summarizeBy: none
+		sourceColumn: 'OutOfOfficeMessage (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Phone (Account Created By)'
+		dataType: string
+		lineageTag: c72a5761-9304-43cf-9c72-c610a9861c2a
+		summarizeBy: none
+		sourceColumn: 'Phone (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PortalRole (Account Created By)'
+		dataType: string
+		lineageTag: 7a0d1bb2-3df2-4b8a-9aa9-2008fef617cf
+		summarizeBy: none
+		sourceColumn: 'PortalRole (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PostalCode (Account Created By)'
+		dataType: string
+		lineageTag: 218755f8-285e-4f65-8c25-9171e98d002d
+		summarizeBy: none
+		sourceColumn: 'PostalCode (Account Created By)'
+		isHidden
+		dataCategory: PostalCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Primary_Role__c (Account Created By)'
+		dataType: string
+		lineageTag: 06ef2335-7e7c-4a0f-9091-e363f6ef2606
+		summarizeBy: none
+		sourceColumn: 'Primary_Role__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ProfileId (Account Created By)'
+		dataType: string
+		lineageTag: bffb9890-1ae8-4a4f-bb76-c260c07b26d2
+		summarizeBy: none
+		sourceColumn: 'ProfileId (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ReceivesAdminInfoEmails (Account Created By)'
+		dataType: boolean
+		lineageTag: 5dd3b142-8177-426e-b5ed-42299a64952a
+		summarizeBy: none
+		sourceColumn: 'ReceivesAdminInfoEmails (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ReceivesInfoEmails (Account Created By)'
+		dataType: boolean
+		lineageTag: 3d677615-1d20-47cb-89e1-c55654059c0b
+		summarizeBy: none
+		sourceColumn: 'ReceivesInfoEmails (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SBQQ__DefaultProductLookupTab__c (Account Created By)'
+		dataType: string
+		lineageTag: 5fe59c19-eaad-48ea-8349-6e85781bee86
+		summarizeBy: none
+		sourceColumn: 'SBQQ__DefaultProductLookupTab__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SBQQ__DiagnosticToolEnabled__c (Account Created By)'
+		dataType: boolean
+		lineageTag: 1190187a-d900-497f-85d5-27342e4c2d91
+		summarizeBy: none
+		sourceColumn: 'SBQQ__DiagnosticToolEnabled__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SBQQ__OutputFormatChangeAllowed__c (Account Created By)'
+		dataType: boolean
+		lineageTag: ba993c6f-df31-4550-9cb5-a9345dbf3db1
+		summarizeBy: none
+		sourceColumn: 'SBQQ__OutputFormatChangeAllowed__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SBQQ__ProductSortPreference__c (Account Created By)'
+		dataType: string
+		lineageTag: d6f2e4d1-98ce-4a05-b210-79441f3e5c6f
+		summarizeBy: none
+		sourceColumn: 'SBQQ__ProductSortPreference__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SBQQ__ResetProductLookup__c (Account Created By)'
+		dataType: boolean
+		lineageTag: 1e54fe47-42ac-4f78-b5c6-faf3a13affad
+		summarizeBy: none
+		sourceColumn: 'SBQQ__ResetProductLookup__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SBQQ__Theme__c (Account Created By)'
+		dataType: string
+		lineageTag: 408286a9-7f27-4481-ae65-e61cfecd3dbd
+		summarizeBy: none
+		sourceColumn: 'SBQQ__Theme__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SenderEmail (Account Created By)'
+		dataType: string
+		lineageTag: 83284bc1-cd04-479f-9f5f-ad33bf3b36b6
+		summarizeBy: none
+		sourceColumn: 'SenderEmail (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SenderName (Account Created By)'
+		dataType: string
+		lineageTag: fd50f397-524d-4246-a6ca-733822c8cb85
+		summarizeBy: none
+		sourceColumn: 'SenderName (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Show_on_Checkin_Map__c (Account Created By)'
+		dataType: boolean
+		lineageTag: d5554863-d6ad-4662-9955-17a8882a91d5
+		summarizeBy: none
+		sourceColumn: 'Show_on_Checkin_Map__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Signature (Account Created By)'
+		dataType: string
+		lineageTag: 8d6c4b37-c4a9-45cc-a6b6-f5a507eb2e4e
+		summarizeBy: none
+		sourceColumn: 'Signature (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Single_Time_Setup__c (Account Created By)'
+		dataType: boolean
+		lineageTag: e0fd3a4d-39ab-4752-a672-2b19298f41e0
+		summarizeBy: none
+		sourceColumn: 'Single_Time_Setup__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SmallBannerPhotoUrl (Account Created By)'
+		dataType: string
+		lineageTag: 7edad3a7-fe6c-44a2-b035-1b9b9689afbb
+		summarizeBy: none
+		sourceColumn: 'SmallBannerPhotoUrl (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SmallPhotoUrl (Account Created By)'
+		dataType: string
+		lineageTag: efc71174-7f99-4a9e-ba55-69aa5c9424e3
+		summarizeBy: none
+		sourceColumn: 'SmallPhotoUrl (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'State (Account Created By)'
+		dataType: string
+		lineageTag: 461264a7-80ae-44f1-9c4c-cb635cb98e38
+		summarizeBy: none
+		sourceColumn: 'State (Account Created By)'
+		isHidden
+		dataCategory: StateOrProvince
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'StayInTouchNote (Account Created By)'
+		dataType: string
+		lineageTag: 81528811-706b-4b0a-8e61-ef77b0e6bf82
+		summarizeBy: none
+		sourceColumn: 'StayInTouchNote (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'StayInTouchSignature (Account Created By)'
+		dataType: string
+		lineageTag: 371f9e58-d780-4a56-9f3d-69be1696078c
+		summarizeBy: none
+		sourceColumn: 'StayInTouchSignature (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'StayInTouchSubject (Account Created By)'
+		dataType: string
+		lineageTag: 1e3661b7-a7ec-43a3-a0c1-436ef0966a8b
+		summarizeBy: none
+		sourceColumn: 'StayInTouchSubject (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Street (Account Created By)'
+		dataType: string
+		lineageTag: 0e557f52-4bb6-40d4-93e8-c9cb2d9ba6d0
+		summarizeBy: none
+		sourceColumn: 'Street (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SystemModstamp (Account Created By)'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1ff5bd5f-1173-4492-bddb-79b2477db928
+		summarizeBy: none
+		sourceColumn: 'SystemModstamp (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TimeZoneSidKey (Account Created By)'
+		dataType: string
+		lineageTag: a754b8b5-21d5-4b27-b463-e3ee9b179f26
+		summarizeBy: none
+		sourceColumn: 'TimeZoneSidKey (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Title (Account Created By)'
+		dataType: string
+		lineageTag: f4f67ab6-8540-4a17-9b2a-7d93ea959321
+		summarizeBy: none
+		sourceColumn: 'Title (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TrialforceDate__c (Account Created By)'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2ef0d638-0262-4941-b00d-84b128672818
+		summarizeBy: none
+		sourceColumn: 'TrialforceDate__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPermissionsAvantgoUser (Account Created By)'
+		dataType: boolean
+		lineageTag: 1a35c0d0-d90c-47c4-af78-f5badd174c22
+		summarizeBy: none
+		sourceColumn: 'UserPermissionsAvantgoUser (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPermissionsCallCenterAutoLogin (Account Created By)'
+		dataType: boolean
+		lineageTag: 8fbb4a1b-58d2-47e8-8871-433cba818146
+		summarizeBy: none
+		sourceColumn: 'UserPermissionsCallCenterAutoLogin (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPermissionsInteractionUser (Account Created By)'
+		dataType: boolean
+		lineageTag: 1f8a7657-d771-4384-a6fb-9c382b69af88
+		summarizeBy: none
+		sourceColumn: 'UserPermissionsInteractionUser (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPermissionsKnowledgeUser (Account Created By)'
+		dataType: boolean
+		lineageTag: a2055a5c-0074-489d-8a12-a13fb5d26a47
+		summarizeBy: none
+		sourceColumn: 'UserPermissionsKnowledgeUser (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPermissionsLiveAgentUser (Account Created By)'
+		dataType: boolean
+		lineageTag: c116d7cb-65f4-44e8-8c57-2df2b6cedebc
+		summarizeBy: none
+		sourceColumn: 'UserPermissionsLiveAgentUser (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPermissionsMarketingUser (Account Created By)'
+		dataType: boolean
+		lineageTag: e38d30c8-9779-49ff-a874-ad6927045dc4
+		summarizeBy: none
+		sourceColumn: 'UserPermissionsMarketingUser (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPermissionsOfflineUser (Account Created By)'
+		dataType: boolean
+		lineageTag: 9165e02e-679f-47cf-a340-dad17cf485e5
+		summarizeBy: none
+		sourceColumn: 'UserPermissionsOfflineUser (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPermissionsSFContentUser (Account Created By)'
+		dataType: boolean
+		lineageTag: a585cc83-3f17-42c3-8801-7b5d3d813a5b
+		summarizeBy: none
+		sourceColumn: 'UserPermissionsSFContentUser (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPermissionsSiteforceContributorUser (Account Created By)'
+		dataType: boolean
+		lineageTag: 19b32434-0ab1-4793-b1f3-78f160ce1507
+		summarizeBy: none
+		sourceColumn: 'UserPermissionsSiteforceContributorUser (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPermissionsSiteforcePublisherUser (Account Created By)'
+		dataType: boolean
+		lineageTag: 1c47c7d3-1d02-4710-98ff-1e4f9a258313
+		summarizeBy: none
+		sourceColumn: 'UserPermissionsSiteforcePublisherUser (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPermissionsSupportUser (Account Created By)'
+		dataType: boolean
+		lineageTag: d1fbb230-9c07-4848-bea9-791d7a89eb53
+		summarizeBy: none
+		sourceColumn: 'UserPermissionsSupportUser (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPermissionsWorkDotComUserFeature (Account Created By)'
+		dataType: boolean
+		lineageTag: 9666c1a1-e1d9-411f-b4e7-d7dfd9886999
+		summarizeBy: none
+		sourceColumn: 'UserPermissionsWorkDotComUserFeature (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesActivityRemindersPopup (Account Created By)'
+		dataType: boolean
+		lineageTag: 55a22532-559d-4bec-8e05-cb87240f9e37
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesActivityRemindersPopup (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesAgentGdprConsent (Account Created By)'
+		dataType: boolean
+		lineageTag: 1364dfc7-5c7b-4dc3-8501-26050f96ce49
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesAgentGdprConsent (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesApexPagesDeveloperMode (Account Created By)'
+		dataType: boolean
+		lineageTag: 38ba0a1c-6a50-4ad3-8d4f-f095bd6d3af6
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesApexPagesDeveloperMode (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesCacheDiagnostics (Account Created By)'
+		dataType: boolean
+		lineageTag: 23ef6bd6-6046-4119-bf4a-01d3beb98466
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesCacheDiagnostics (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesContentEmailAsAndWhen (Account Created By)'
+		dataType: boolean
+		lineageTag: c580d86f-680f-4972-8441-48146b03b0be
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesContentEmailAsAndWhen (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesContentNoEmail (Account Created By)'
+		dataType: boolean
+		lineageTag: bca4e82e-0c07-4697-a5fd-9f0dabf5de45
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesContentNoEmail (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesCreateLEXAppsWTShown (Account Created By)'
+		dataType: boolean
+		lineageTag: 04bb9f0e-33e7-4155-8379-4787d078c56c
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesCreateLEXAppsWTShown (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesDisCommentAfterLikeEmail (Account Created By)'
+		dataType: boolean
+		lineageTag: e430e8f0-30e7-42a3-9445-2ad5b87414ff
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesDisCommentAfterLikeEmail (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesDisMentionsCommentEmail (Account Created By)'
+		dataType: boolean
+		lineageTag: 9ceb6d79-e996-4156-938f-9ef98bb77389
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesDisMentionsCommentEmail (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesDisProfPostCommentEmail (Account Created By)'
+		dataType: boolean
+		lineageTag: 4dc2fd51-0d38-4bf5-94c9-40ca5a32b091
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesDisProfPostCommentEmail (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesDisableAllFeedsEmail (Account Created By)'
+		dataType: boolean
+		lineageTag: 5362abd8-780e-4876-8fb6-045baa9cfb4b
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesDisableAllFeedsEmail (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesDisableBookmarkEmail (Account Created By)'
+		dataType: boolean
+		lineageTag: 0c1ef455-6628-4e4c-ac62-0f689483d48d
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesDisableBookmarkEmail (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesDisableChangeCommentEmail (Account Created By)'
+		dataType: boolean
+		lineageTag: 5e42929b-b5a8-4762-a4da-3054b0be167d
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesDisableChangeCommentEmail (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesDisableEndorsementEmail (Account Created By)'
+		dataType: boolean
+		lineageTag: 4d76fc34-6ce1-4e97-b668-8384f4c4a592
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesDisableEndorsementEmail (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesDisableFileShareNotificationsForApi (Account Created By)'
+		dataType: boolean
+		lineageTag: da130637-87ff-423d-9c53-9f9be13e54fb
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesDisableFileShareNotificationsForApi (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesDisableFollowersEmail (Account Created By)'
+		dataType: boolean
+		lineageTag: 1ad53441-1a44-4845-8e30-534a045c1d94
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesDisableFollowersEmail (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesDisableLaterCommentEmail (Account Created By)'
+		dataType: boolean
+		lineageTag: c4722324-5e14-49b6-ab03-6df3f79b8127
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesDisableLaterCommentEmail (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesDisableLikeEmail (Account Created By)'
+		dataType: boolean
+		lineageTag: 5a667ba0-7e3a-4983-9898-2f4efec03f4d
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesDisableLikeEmail (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesDisableMentionsPostEmail (Account Created By)'
+		dataType: boolean
+		lineageTag: a082b625-4ee4-4d75-b701-d71727f91e5c
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesDisableMentionsPostEmail (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesDisableMessageEmail (Account Created By)'
+		dataType: boolean
+		lineageTag: 50bc2674-440e-4c09-b044-003df7f72b1f
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesDisableMessageEmail (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesDisableProfilePostEmail (Account Created By)'
+		dataType: boolean
+		lineageTag: 052d3c08-7d19-45d6-9941-c8018a0adf8a
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesDisableProfilePostEmail (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesDisableSharePostEmail (Account Created By)'
+		dataType: boolean
+		lineageTag: df107e9f-bd79-4332-842a-8b64365421ea
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesDisableSharePostEmail (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesEnableAutoSubForFeeds (Account Created By)'
+		dataType: boolean
+		lineageTag: b9b64cd9-2064-4534-b641-a63ca38412e8
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesEnableAutoSubForFeeds (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesEventRemindersCheckboxDefault (Account Created By)'
+		dataType: boolean
+		lineageTag: 8fe33409-8061-45aa-8d4f-e5f40caa9729
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesEventRemindersCheckboxDefault (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesExcludeMailAppAttachments (Account Created By)'
+		dataType: boolean
+		lineageTag: 5705de8d-8354-43fd-bdc9-506a7a011408
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesExcludeMailAppAttachments (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesFavoritesShowTopFavorites (Account Created By)'
+		dataType: boolean
+		lineageTag: 271860b9-a099-43ca-bb07-e436b71d743d
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesFavoritesShowTopFavorites (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesFavoritesWTShown (Account Created By)'
+		dataType: boolean
+		lineageTag: eda92d36-9595-4aab-bf45-4669cfecf3b1
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesFavoritesWTShown (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesGlobalNavBarWTShown (Account Created By)'
+		dataType: boolean
+		lineageTag: 2c208639-58d1-49a7-a0b1-8deb1d0f9ccd
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesGlobalNavBarWTShown (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesGlobalNavGridMenuWTShown (Account Created By)'
+		dataType: boolean
+		lineageTag: c4efcb55-37ae-41cf-bfaa-3e3dd44fba84
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesGlobalNavGridMenuWTShown (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesHasCelebrationBadge (Account Created By)'
+		dataType: boolean
+		lineageTag: dc50d88a-f318-4b69-845b-9c9878a5561a
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesHasCelebrationBadge (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesHasSentWarningEmail (Account Created By)'
+		dataType: boolean
+		lineageTag: bc9404ab-10e3-42dc-b3ce-0b2f8c36b2d1
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesHasSentWarningEmail (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesHideBiggerPhotoCallout (Account Created By)'
+		dataType: boolean
+		lineageTag: ac79e901-3563-41ff-bcaf-3e2d4f19b4b1
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesHideBiggerPhotoCallout (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesHideBrowseProductRedirectConfirmation (Account Created By)'
+		dataType: boolean
+		lineageTag: 27a1f142-5afb-416a-b004-5c343475d5b6
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesHideBrowseProductRedirectConfirmation (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesHideCSNDesktopTask (Account Created By)'
+		dataType: boolean
+		lineageTag: f26636b0-c36d-424a-809b-219ca4ee63e8
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesHideCSNDesktopTask (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesHideCSNGetChatterMobileTask (Account Created By)'
+		dataType: boolean
+		lineageTag: a233f8af-4094-4ff2-b0b3-ef3fbb9380eb
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesHideCSNGetChatterMobileTask (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesHideChatterOnboardingSplash (Account Created By)'
+		dataType: boolean
+		lineageTag: c6297d8a-998e-4bae-9499-8637e6d20808
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesHideChatterOnboardingSplash (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesHideEndUserOnboardingAssistantModal (Account Created By)'
+		dataType: boolean
+		lineageTag: cca13e6c-3bdf-40fb-b999-36f0c8426d3d
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesHideEndUserOnboardingAssistantModal (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesHideLightningMigrationModal (Account Created By)'
+		dataType: boolean
+		lineageTag: 3ae999eb-9f80-435d-86f6-b0469b435d79
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesHideLightningMigrationModal (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesHideOnlineSalesAppWelcomeMat (Account Created By)'
+		dataType: boolean
+		lineageTag: c82a00a7-d80d-4868-9e37-e99fa19bcc89
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesHideOnlineSalesAppWelcomeMat (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesHideS1BrowserUI (Account Created By)'
+		dataType: boolean
+		lineageTag: 44728f35-0527-4e65-8cb1-96c5403039f7
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesHideS1BrowserUI (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesHideSecondChatterOnboardingSplash (Account Created By)'
+		dataType: boolean
+		lineageTag: 4d416f36-fb8f-45f0-bdfc-8ca136e67835
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesHideSecondChatterOnboardingSplash (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesHideSfxWelcomeMat (Account Created By)'
+		dataType: boolean
+		lineageTag: 005416cc-9312-446b-8093-3b92bd90c198
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesHideSfxWelcomeMat (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesLightningExperiencePreferred (Account Created By)'
+		dataType: boolean
+		lineageTag: 67f25b9a-0936-49f8-8d0e-93adc020ca18
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesLightningExperiencePreferred (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesMyS1WelcomeSplashShown (Account Created By)'
+		dataType: boolean
+		lineageTag: 26a53319-5f80-4f60-a0f7-3905973bccd0
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesMyS1WelcomeSplashShown (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesNativeEmailClient (Account Created By)'
+		dataType: boolean
+		lineageTag: 54732245-0ce0-4e59-8147-025b9cfc387e
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesNativeEmailClient (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesNewLightningReportRunPageEnabled (Account Created By)'
+		dataType: boolean
+		lineageTag: 7a0fcc6d-5133-4c79-af2c-69598b68e48b
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesNewLightningReportRunPageEnabled (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesPathAssistantCollapsed (Account Created By)'
+		dataType: boolean
+		lineageTag: 22adf836-d390-489f-a4ac-dbc03040dc6d
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesPathAssistantCollapsed (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesPreviewCustomTheme (Account Created By)'
+		dataType: boolean
+		lineageTag: 2eb5b528-03ad-4608-91a1-69d360151dbd
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesPreviewCustomTheme (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesPreviewLightning (Account Created By)'
+		dataType: boolean
+		lineageTag: 57ce705d-7682-4521-b19b-af6c7f270499
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesPreviewLightning (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesReceiveNoNotificationsAsApprover (Account Created By)'
+		dataType: boolean
+		lineageTag: 74a30cb1-0351-44af-a395-de945bc0453b
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesReceiveNoNotificationsAsApprover (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesReceiveNotificationsAsDelegatedApprover (Account Created By)'
+		dataType: boolean
+		lineageTag: 245fa4c2-e5c2-4749-8975-035491356028
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesReceiveNotificationsAsDelegatedApprover (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesRecordHomeReservedWTShown (Account Created By)'
+		dataType: boolean
+		lineageTag: f39f05b8-e693-43b9-8073-544ea2d84e1a
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesRecordHomeReservedWTShown (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesRecordHomeSectionCollapseWTShown (Account Created By)'
+		dataType: boolean
+		lineageTag: f01109e5-be09-4fc4-800c-875d3343534f
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesRecordHomeSectionCollapseWTShown (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesReminderSoundOff (Account Created By)'
+		dataType: boolean
+		lineageTag: 63051798-fc2c-439a-88b0-780146a0ee44
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesReminderSoundOff (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesReverseOpenActivitiesView (Account Created By)'
+		dataType: boolean
+		lineageTag: 9b7330ae-11b6-4b61-8e26-1ea0b011353d
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesReverseOpenActivitiesView (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesSRHOverrideActivities (Account Created By)'
+		dataType: boolean
+		lineageTag: e8eeae67-4fe2-47ae-b1bd-e4a66b19bbae
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesSRHOverrideActivities (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowCityToExternalUsers (Account Created By)'
+		dataType: boolean
+		lineageTag: cf5fc937-1077-4480-87f4-9fdf92634d7f
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowCityToExternalUsers (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowCityToGuestUsers (Account Created By)'
+		dataType: boolean
+		lineageTag: 2ab4ee25-9a68-4d3b-aa3e-a053eda8d9cf
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowCityToGuestUsers (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowCountryToExternalUsers (Account Created By)'
+		dataType: boolean
+		lineageTag: fb161417-bca2-418d-8a53-9256853b9494
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowCountryToExternalUsers (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowCountryToGuestUsers (Account Created By)'
+		dataType: boolean
+		lineageTag: dc7f572b-b88b-47d4-8e78-cef92bed0c13
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowCountryToGuestUsers (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowEmailToExternalUsers (Account Created By)'
+		dataType: boolean
+		lineageTag: 5c3cba22-571b-4635-af15-01ca13b092b1
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowEmailToExternalUsers (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowEmailToGuestUsers (Account Created By)'
+		dataType: boolean
+		lineageTag: c5f4ca22-1ffe-4138-8b77-2c7f3306cb02
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowEmailToGuestUsers (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowFaxToExternalUsers (Account Created By)'
+		dataType: boolean
+		lineageTag: 62b2852f-8d95-4ba0-b10f-9cedc93b765a
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowFaxToExternalUsers (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowFaxToGuestUsers (Account Created By)'
+		dataType: boolean
+		lineageTag: c4bd1cb1-c8ca-40dc-81ca-beb4ba32ec8e
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowFaxToGuestUsers (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowForecastingChangeSignals (Account Created By)'
+		dataType: boolean
+		lineageTag: a31cb0bc-6872-4ae2-9375-4078facfedca
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowForecastingChangeSignals (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowManagerToExternalUsers (Account Created By)'
+		dataType: boolean
+		lineageTag: 2d35e8b7-c309-427b-a30b-a56a2192306d
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowManagerToExternalUsers (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowManagerToGuestUsers (Account Created By)'
+		dataType: boolean
+		lineageTag: f387b579-47ce-4a76-8b74-9e498e839c16
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowManagerToGuestUsers (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowMobilePhoneToExternalUsers (Account Created By)'
+		dataType: boolean
+		lineageTag: 119604a5-dd38-4871-b14d-9f0f40e70b42
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowMobilePhoneToExternalUsers (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowMobilePhoneToGuestUsers (Account Created By)'
+		dataType: boolean
+		lineageTag: 6d4c9f85-02fd-4f85-a10d-54b48aa10be7
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowMobilePhoneToGuestUsers (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowPostalCodeToExternalUsers (Account Created By)'
+		dataType: boolean
+		lineageTag: da908a36-f9b0-4483-91b0-eb72cc8f9d12
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowPostalCodeToExternalUsers (Account Created By)'
+		isHidden
+		dataCategory: PostalCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowPostalCodeToGuestUsers (Account Created By)'
+		dataType: boolean
+		lineageTag: 6e30d71b-d558-4b25-a885-d142dc4200db
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowPostalCodeToGuestUsers (Account Created By)'
+		isHidden
+		dataCategory: PostalCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowProfilePicToGuestUsers (Account Created By)'
+		dataType: boolean
+		lineageTag: 3bcf658b-0fb9-40a0-8d56-1cbb9f2db2b3
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowProfilePicToGuestUsers (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowStateToExternalUsers (Account Created By)'
+		dataType: boolean
+		lineageTag: 92994e88-9029-4dc0-8edd-a2c71aca35d7
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowStateToExternalUsers (Account Created By)'
+		isHidden
+		dataCategory: StateOrProvince
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowStateToGuestUsers (Account Created By)'
+		dataType: boolean
+		lineageTag: cbc7622c-a9ac-47cd-b612-cb4dff5d011f
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowStateToGuestUsers (Account Created By)'
+		isHidden
+		dataCategory: StateOrProvince
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowStreetAddressToExternalUsers (Account Created By)'
+		dataType: boolean
+		lineageTag: 9aa5ded9-796f-4980-a9d4-4b6ddf8b6e67
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowStreetAddressToExternalUsers (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowStreetAddressToGuestUsers (Account Created By)'
+		dataType: boolean
+		lineageTag: b4a61566-92f5-4042-a19a-919fe9cfa9a7
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowStreetAddressToGuestUsers (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowTerritoryTimeZoneShifts (Account Created By)'
+		dataType: boolean
+		lineageTag: 9dc7d60e-2d81-488a-84fd-7423d315112f
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowTerritoryTimeZoneShifts (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowTitleToExternalUsers (Account Created By)'
+		dataType: boolean
+		lineageTag: d5834409-4d9b-44ca-8e0a-38883dd0e84e
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowTitleToExternalUsers (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowTitleToGuestUsers (Account Created By)'
+		dataType: boolean
+		lineageTag: 3dd3760c-0e78-4ad9-8451-16597aca4da7
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowTitleToGuestUsers (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowWorkPhoneToExternalUsers (Account Created By)'
+		dataType: boolean
+		lineageTag: 535c2614-4447-4fc7-aa1b-05c9e2e6e2ea
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowWorkPhoneToExternalUsers (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesShowWorkPhoneToGuestUsers (Account Created By)'
+		dataType: boolean
+		lineageTag: 7da1d960-09fc-4bc5-8a6d-e1ca2f55d0af
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesShowWorkPhoneToGuestUsers (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesSortFeedByComment (Account Created By)'
+		dataType: boolean
+		lineageTag: c1828397-323b-430c-8b0b-5462c565453a
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesSortFeedByComment (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesSuppressEventSFXReminders (Account Created By)'
+		dataType: boolean
+		lineageTag: 030ea31f-9125-49d7-b452-426ed397d098
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesSuppressEventSFXReminders (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesSuppressTaskSFXReminders (Account Created By)'
+		dataType: boolean
+		lineageTag: 2c7206c9-7c5b-4dab-8c74-76f967b181f5
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesSuppressTaskSFXReminders (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesTaskRemindersCheckboxDefault (Account Created By)'
+		dataType: boolean
+		lineageTag: 08738d70-f324-4362-9c18-699562498ffa
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesTaskRemindersCheckboxDefault (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserPreferencesUserDebugModePref (Account Created By)'
+		dataType: boolean
+		lineageTag: c87d1b7a-7dea-4548-ac4e-57789b178b21
+		summarizeBy: none
+		sourceColumn: 'UserPreferencesUserDebugModePref (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserRoleId (Account Created By)'
+		dataType: string
+		lineageTag: c5309b25-2a67-4904-afc6-bad35081af64
+		summarizeBy: none
+		sourceColumn: 'UserRoleId (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UserType (Account Created By)'
+		dataType: string
+		lineageTag: cf415b90-cb61-4b26-b90e-fd0e1394ba3b
+		summarizeBy: none
+		sourceColumn: 'UserType (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Username (Account Created By)'
+		dataType: string
+		lineageTag: 594362c7-1b1c-40d0-b48f-1fabae680e12
+		summarizeBy: none
+		sourceColumn: 'Username (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Work_com_Points__c (Account Created By)'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 1e3ab94b-2e93-4f27-999b-6f2feceba710
+		summarizeBy: sum
+		sourceColumn: 'Work_com_Points__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'analyticsdemo_batch_id__c (Account Created By)'
+		dataType: string
+		lineageTag: 198ae0d2-91f8-4ea2-b1c6-cbebec85ce94
+		summarizeBy: none
+		sourceColumn: 'analyticsdemo_batch_id__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'et4ae5__Default_ET_Page__c (Account Created By)'
+		dataType: string
+		lineageTag: 3024c076-c748-451e-b302-26036dab4020
+		summarizeBy: none
+		sourceColumn: 'et4ae5__Default_ET_Page__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'et4ae5__Default_MID__c (Account Created By)'
+		dataType: string
+		lineageTag: f4728f7f-c0f5-4f28-8573-a968759df34a
+		summarizeBy: none
+		sourceColumn: 'et4ae5__Default_MID__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'et4ae5__ExactTargetForAppExchangeAdmin__c (Account Created By)'
+		dataType: boolean
+		lineageTag: dfd8dd6e-16da-46c4-b11f-b454dd631d08
+		summarizeBy: none
+		sourceColumn: 'et4ae5__ExactTargetForAppExchangeAdmin__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'et4ae5__ExactTargetForAppExchangeUser__c (Account Created By)'
+		dataType: boolean
+		lineageTag: db130a38-da5f-4200-9b15-4f978977f1b4
+		summarizeBy: none
+		sourceColumn: 'et4ae5__ExactTargetForAppExchangeUser__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'et4ae5__ExactTargetUsername__c (Account Created By)'
+		dataType: string
+		lineageTag: cb6040d3-0039-4c44-8c3e-a80b5d7a6211
+		summarizeBy: none
+		sourceColumn: 'et4ae5__ExactTargetUsername__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'et4ae5__ExactTarget_OAuth_Token__c (Account Created By)'
+		dataType: string
+		lineageTag: 810e24fa-5749-4f68-8f14-17dbbf63ad9f
+		summarizeBy: none
+		sourceColumn: 'et4ae5__ExactTarget_OAuth_Token__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'et4ae5__ValidExactTargetAdmin__c (Account Created By)'
+		dataType: boolean
+		lineageTag: c452f328-9ca5-4cf4-b5a0-70061627685d
+		summarizeBy: none
+		sourceColumn: 'et4ae5__ValidExactTargetAdmin__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'et4ae5__ValidExactTargetUser__c (Account Created By)'
+		dataType: boolean
+		lineageTag: 4a8aa2a2-c81c-43a7-8dcf-d3cf1b579d29
+		summarizeBy: none
+		sourceColumn: 'et4ae5__ValidExactTargetUser__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'inov8__Is_PMT_User_consider_for_Availability__c (Account Created By)'
+		dataType: boolean
+		lineageTag: 5d2ff29c-1306-4f98-970b-e511c5b729d0
+		summarizeBy: none
+		sourceColumn: 'inov8__Is_PMT_User_consider_for_Availability__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'maps__AllowMapsExports__c (Account Created By)'
+		dataType: boolean
+		lineageTag: d8dda679-ef25-45f7-a118-205d0134d8b1
+		summarizeBy: none
+		sourceColumn: 'maps__AllowMapsExports__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'maps__BetaTester__c (Account Created By)'
+		dataType: boolean
+		lineageTag: 7172c4fb-b692-452f-8524-59da482d56b3
+		summarizeBy: none
+		sourceColumn: 'maps__BetaTester__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'maps__DefaultLatitude__c (Account Created By)'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 39371031-0027-46d3-97e9-c884778e63ec
+		summarizeBy: sum
+		sourceColumn: 'maps__DefaultLatitude__c (Account Created By)'
+		isHidden
+		dataCategory: Latitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'maps__DefaultLongitude__c (Account Created By)'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 8b7709c8-aa39-452b-87a4-244ba1f2a38d
+		summarizeBy: sum
+		sourceColumn: 'maps__DefaultLongitude__c (Account Created By)'
+		isHidden
+		dataCategory: Longitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'maps__DefaultProximityRadius__c (Account Created By)'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: fa32151a-9efc-4fc1-986d-8865ef9ab840
+		summarizeBy: sum
+		sourceColumn: 'maps__DefaultProximityRadius__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'maps__DefaultType__c (Account Created By)'
+		dataType: string
+		lineageTag: feee7599-b3f7-49b0-b787-66b7d069637a
+		summarizeBy: none
+		sourceColumn: 'maps__DefaultType__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'maps__DefaultZoomLevel__c (Account Created By)'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: e89c2af8-3fbd-4811-8699-a78c7e2c657e
+		summarizeBy: sum
+		sourceColumn: 'maps__DefaultZoomLevel__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'maps__EditMapsOrgWideQueries__c (Account Created By)'
+		dataType: boolean
+		lineageTag: f273c32c-62dc-4bf9-adaf-e6cd54a9ec5f
+		summarizeBy: none
+		sourceColumn: 'maps__EditMapsOrgWideQueries__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'maps__FinishedAdvRouteSetup__c (Account Created By)'
+		dataType: boolean
+		lineageTag: 540044b7-2b9f-471b-b3bc-c714c4844fef
+		summarizeBy: none
+		sourceColumn: 'maps__FinishedAdvRouteSetup__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'maps__MaxExportSize__c (Account Created By)'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 2ff2d702-8c3e-43f2-871b-a3465fd050b5
+		summarizeBy: sum
+		sourceColumn: 'maps__MaxExportSize__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'maps__MaxQuerySize__c (Account Created By)'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 1399df3d-ac3c-4323-b674-a48946a7fc0b
+		summarizeBy: sum
+		sourceColumn: 'maps__MaxQuerySize__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'maps__PreferredTypeOfMeasurement__c (Account Created By)'
+		dataType: string
+		lineageTag: 2df1c448-29b9-45fa-8802-28f5ae3c01d9
+		summarizeBy: none
+		sourceColumn: 'maps__PreferredTypeOfMeasurement__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'maps__ReceiveBatchExceptionEmails__c (Account Created By)'
+		dataType: boolean
+		lineageTag: c0131298-6f43-4e9b-919a-beddd0e2a7fb
+		summarizeBy: none
+		sourceColumn: 'maps__ReceiveBatchExceptionEmails__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'maps__TPApprover__c (Account Created By)'
+		dataType: boolean
+		lineageTag: bb1af459-32f4-4c97-a2e2-f25e0e8f6cc0
+		summarizeBy: none
+		sourceColumn: 'maps__TPApprover__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'maps__TestUserLookup__c (Account Created By)'
+		dataType: string
+		lineageTag: d536dc31-e45a-4173-97b8-2690047cbf91
+		summarizeBy: none
+		sourceColumn: 'maps__TestUserLookup__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'maps__Version__c (Account Created By)'
+		dataType: string
+		lineageTag: 22f962d7-9e82-45c4-bbb3-009a5ee132da
+		summarizeBy: none
+		sourceColumn: 'maps__Version__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'pi__Can_View_Not_Assigned_Prospects__c (Account Created By)'
+		dataType: boolean
+		lineageTag: 132519eb-2df3-4c48-b958-8bb21a19f0df
+		summarizeBy: none
+		sourceColumn: 'pi__Can_View_Not_Assigned_Prospects__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'pi__Pardot_Api_Key__c (Account Created By)'
+		dataType: string
+		lineageTag: 27b0f090-55f8-425c-b73a-5eca5eb12685
+		summarizeBy: none
+		sourceColumn: 'pi__Pardot_Api_Key__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'pi__Pardot_Api_Version__c (Account Created By)'
+		dataType: string
+		lineageTag: a4e6e8de-f46d-408c-9722-126bf122b6f1
+		summarizeBy: none
+		sourceColumn: 'pi__Pardot_Api_Version__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'pi__Pardot_User_Id__c (Account Created By)'
+		dataType: string
+		lineageTag: 8068317d-0112-4463-a3b2-0c3af8dbeba0
+		summarizeBy: none
+		sourceColumn: 'pi__Pardot_User_Id__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'pi__Pardot_User_Key__c (Account Created By)'
+		dataType: string
+		lineageTag: f13efc77-3e7c-4f87-ae84-adcffef20706
+		summarizeBy: none
+		sourceColumn: 'pi__Pardot_User_Key__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'pi__Pardot_User_Role__c (Account Created By)'
+		dataType: string
+		lineageTag: 7f049fc4-32c4-4733-97b5-ca1468b25c3f
+		summarizeBy: none
+		sourceColumn: 'pi__Pardot_User_Role__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'sales_management__c (Account Created By)'
+		dataType: string
+		lineageTag: ea48ccdf-c6e9-4f96-a612-c0e36ada5a45
+		summarizeBy: none
+		sourceColumn: 'sales_management__c (Account Created By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Account Created By-2d5f3c1e-0a25-4899-8563-0e67545cabb7' = m
+		mode: import
+		source =
+				let
+				    // TODO: Configure the data source for connector type: SALESFORCE
+				    // Replace the sample table below with the actual source expression.
+				    Source = Table.PromoteHeaders(Csv.Document(File.Contents(DataFolder & "\Account Created By.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]), [PromoteAllScalars=true])
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 239 columns: AboutMe (Account Created By), AccountID__c (Account Created By), AccountId (Account Created By), AccountName2__c (Account Created By), Admin_User__c (Account Created By), Alias (Account Created By), BadgeText (Account Created By), BannerPhotoUrl (Account Created By), ... (239 columns total).
+

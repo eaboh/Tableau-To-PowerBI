@@ -1,9 +1,9 @@
 table dim_product
-	lineageTag: 41b79756-d547-418c-8d29-31166e4ecdcf
+	lineageTag: c673230a-7f94-499f-b14a-98cfe244aab1
 
 	column product_key
 		dataType: int64
-		lineageTag: d3765a7f-bf6b-4cec-90e2-92a7f947fbbf
+		lineageTag: 7ee355e2-66c9-4b8f-a76a-21b6d4d6d10d
 		summarizeBy: sum
 		sourceColumn: product_key
 		annotation Copilot_Hidden = true
@@ -12,7 +12,7 @@ table dim_product
 
 	column product_id
 		dataType: string
-		lineageTag: ab1ee99e-2ae8-4817-baad-522634f5eaa4
+		lineageTag: 8e3e0c40-b052-4de2-953c-617ba3584541
 		summarizeBy: none
 		sourceColumn: product_id
 		annotation Copilot_Hidden = true
@@ -21,7 +21,7 @@ table dim_product
 
 	column product_name
 		dataType: string
-		lineageTag: 83ba9ae1-791a-45bf-b98f-4e4bd418fffe
+		lineageTag: 7d046398-a71e-4bc6-ab26-912e7b23a895
 		summarizeBy: none
 		sourceColumn: product_name
 
@@ -29,7 +29,7 @@ table dim_product
 
 	column category
 		dataType: string
-		lineageTag: 0b328846-7b40-492e-9608-0eed274ea7e2
+		lineageTag: e2f0b792-b940-4671-b992-f5485877d0c8
 		summarizeBy: none
 		sourceColumn: category
 
@@ -37,7 +37,7 @@ table dim_product
 
 	column subcategory
 		dataType: string
-		lineageTag: b0360505-98ff-48c1-a68e-6bd1513fda09
+		lineageTag: 686e7b26-d866-469c-b6a4-6a07d06eaeb0
 		summarizeBy: none
 		sourceColumn: subcategory
 
@@ -45,7 +45,7 @@ table dim_product
 
 	column brand
 		dataType: string
-		lineageTag: 10a1348c-907e-40f6-8789-d483799f6d12
+		lineageTag: d7eeb279-c513-47a4-bbf5-2f0c6f26d3a9
 		summarizeBy: none
 		sourceColumn: brand
 
@@ -53,7 +53,7 @@ table dim_product
 
 	column supplier
 		dataType: string
-		lineageTag: 255d865c-237e-4df8-8415-9ada3e9304bf
+		lineageTag: 6617bdfe-308b-4684-a40c-346e9a2f3406
 		summarizeBy: none
 		sourceColumn: supplier
 
@@ -62,7 +62,7 @@ table dim_product
 	column weight_kg
 		dataType: double
 		formatString: #,0.00
-		lineageTag: ebf03b32-c56e-4bba-b7f8-f1382cec4efc
+		lineageTag: 5e4e7e0c-6e21-4ae3-bd39-e7eeddc78548
 		summarizeBy: sum
 		sourceColumn: weight_kg
 
@@ -70,7 +70,7 @@ table dim_product
 
 	column is_perishable
 		dataType: boolean
-		lineageTag: 4b5a4752-3fbd-4359-b317-8b02179c265b
+		lineageTag: 12505ad6-043b-4169-9793-5bd76dff7128
 		summarizeBy: none
 		sourceColumn: is_perishable
 
@@ -79,14 +79,13 @@ table dim_product
 	column launch_date
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: 48ee8891-417d-4a62-a46a-96c3524c18df
+		lineageTag: d1d4342b-77f4-4647-9ca4-38f40e8e544d
 		summarizeBy: none
 		sourceColumn: launch_date
-		dataCategory: DateTime
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'dim_product-ce9a16c0-6ea0-4e4a-9a8f-6966a297a519' = m
+	partition 'dim_product-ffbb1ff3-bdd5-4137-a958-6446ac66d646' = m
 		mode: import
 		source =
 				let

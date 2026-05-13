@@ -1,21 +1,23 @@
 table 'Sort by'
-	lineageTag: 5229708f-4826-4020-b981-5785a23e35d5
+	lineageTag: 457019cc-dde5-4d95-a02f-a898e2e7b850
 
 	measure 'Sort by' = SELECTEDVALUE('Sort by'[Value], "Names")
-		lineageTag: 1f4792ab-f444-4f77-aca5-ee6946f6c316
+		lineageTag: eba07f23-f035-4c0b-b372-52a2ada540ca
+		annotation Copilot_Description = DAX: SELECTEDVALUE('Sort by'[Value], "Names")
 
 	column Value
 		dataType: string
-		lineageTag: fae70518-49e5-4040-9ba2-f732a1801403
+		lineageTag: 3d8e4e92-62b1-4914-a7f3-50777d01aebb
 		summarizeBy: none
 		sourceColumn: Value
 		annotation displayFolder = Parameters
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Sort by-c94f8b9e-2d98-4cf6-b7ae-dba936a2b68e' = calculated
+	partition 'Sort by-79a38b0b-c599-44cc-89ca-b6106f8ec7db' = calculated
 		mode: import
-		source = DATATABLE("Value", STRING, {{""\% quota ascending""}, {""\% quota descending""}, {""Names""}})
+		source = DATATABLE("Value", STRING, {{"\% quota ascending"}, {"\% quota descending"}, {"Names"}})
 
 	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 1 columns and 1 measures: Value.
 

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-23T14:58:17.115160",
+  "generated_at": "2026-05-13T17:36:19.616933",
   "source": "Tableau Migration",
   "report_name": "superstore_sales_dashboard",
   "objects_converted": {
@@ -86,12 +86,14 @@
       "worksheet": "Scatter Plot",
       "tableau_mark": "Automatic",
       "pbi_visual": "scatterChart",
-      "dimensions": [],
+      "dimensions": [
+        "Customer Name"
+      ],
       "measures": [
         "Sales",
         "Profit"
       ],
-      "field_count": 2
+      "field_count": 3
     }
   ],
   "approximations": []

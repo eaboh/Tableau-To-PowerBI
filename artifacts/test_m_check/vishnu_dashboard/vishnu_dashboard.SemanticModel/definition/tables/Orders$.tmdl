@@ -1,54 +1,56 @@
 table 'Orders$'
-	lineageTag: a4d0cafa-e5f0-49cc-9571-743fd696c8eb
+	lineageTag: 92c3b437-6234-4dda-afd0-6849657737dc
 
 	measure 'Profit Ratio' = SUM('Orders$'[Profit])/SUM('Orders$'[Sales])
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: 63a58554-ec9b-4b3e-8a72-66049218be14
+		lineageTag: 79e67f59-7544-4276-ba2a-e83a9b8417d4
+		annotation Copilot_Description = Migrated from Tableau: SUM([Profit])/SUM([Sales]) | DAX: SUM('Orders$'[Profit])/SUM('Orders$'[Sales])
 
-	measure '[Number of Records]' = 1
+	measure 'Number of Records' = 1
 		displayFolder: Measures
-		lineageTag: dc1c5f43-091f-470f-b7e3-2dc340dafc84
+		lineageTag: 4ba697b4-a9ee-4809-836c-7a7e0891e676
+		annotation Copilot_Description = Migrated from Tableau: 1 | DAX: 1
 
 	column 'Row ID'
 		dataType: int64
-		lineageTag: ed2005e7-f2ea-4dd1-a526-4f6ce08766d2
+		lineageTag: bbd37baa-7ef5-45d6-bc83-fb37e60a26a5
 		summarizeBy: sum
 		sourceColumn: 'Row ID'
+		annotation Copilot_Hidden = true
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Order ID'
 		dataType: string
-		lineageTag: 38ff13d5-708f-4e87-9416-91566c620735
+		lineageTag: 4f395ed1-2e57-48c6-a435-78f5e772b86e
 		summarizeBy: none
 		sourceColumn: 'Order ID'
+		annotation Copilot_Hidden = true
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Order Date'
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: d007d01d-ac97-4550-80a4-484ff36e2c8c
+		lineageTag: 84161d19-8a86-4e42-b8ff-a4f825918b49
 		summarizeBy: none
 		sourceColumn: 'Order Date'
-		dataCategory: DateTime
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Ship Date'
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: 192399a1-a9e1-467c-9125-e007d83cef17
+		lineageTag: 2f3a7bfe-0e57-4789-912c-f79f1f042ca5
 		summarizeBy: none
 		sourceColumn: 'Ship Date'
-		dataCategory: DateTime
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Ship Mode'
 		dataType: string
-		lineageTag: f0dfab2a-4748-4563-9cdb-20c516de93e9
+		lineageTag: aff5ade3-e226-4bdf-aa71-94268b06904b
 		summarizeBy: none
 		sourceColumn: 'Ship Mode'
 
@@ -56,15 +58,16 @@ table 'Orders$'
 
 	column 'Customer ID'
 		dataType: string
-		lineageTag: 1de0a7cf-be99-4d3b-8069-99b0a7537817
+		lineageTag: ac16a386-669b-4477-9f86-9f8be4cb0f9d
 		summarizeBy: none
 		sourceColumn: 'Customer ID'
+		annotation Copilot_Hidden = true
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Customer Name'
 		dataType: string
-		lineageTag: 511ac919-416b-4741-b5c9-4ba75dde2c15
+		lineageTag: e75233fa-c68d-40ae-b82e-fc3706bb6753
 		summarizeBy: none
 		sourceColumn: 'Customer Name'
 
@@ -72,7 +75,7 @@ table 'Orders$'
 
 	column Segment
 		dataType: string
-		lineageTag: fdba34a7-63e1-4205-853d-89059b1c9565
+		lineageTag: e9fe0019-74de-4c8f-a11a-f52cdf1dc976
 		summarizeBy: none
 		sourceColumn: Segment
 
@@ -80,7 +83,7 @@ table 'Orders$'
 
 	column 'Country/Region'
 		dataType: string
-		lineageTag: 4f7a8d1f-e265-4ff2-ad1c-7a40ea188500
+		lineageTag: 283f09d9-f2c5-4737-b059-b2f774b862b9
 		summarizeBy: none
 		sourceColumn: 'Country/Region'
 		dataCategory: StateOrProvince
@@ -89,7 +92,7 @@ table 'Orders$'
 
 	column City
 		dataType: string
-		lineageTag: 8634c78b-57ab-4a29-b9aa-11466e1d2344
+		lineageTag: 6adf0539-c00f-4087-bc98-1d2066bbcd23
 		summarizeBy: none
 		sourceColumn: City
 		dataCategory: City
@@ -98,7 +101,7 @@ table 'Orders$'
 
 	column State
 		dataType: string
-		lineageTag: 7b5e22d4-0f4f-4a32-89b0-7d8471f4eb0a
+		lineageTag: f2e59edc-1d8a-4f0d-aea0-c335e7ad9684
 		summarizeBy: none
 		sourceColumn: State
 		dataCategory: StateOrProvince
@@ -107,7 +110,7 @@ table 'Orders$'
 
 	column 'Postal Code'
 		dataType: int64
-		lineageTag: 4d17bcbb-54d0-4d77-bb41-45a5e0629b7e
+		lineageTag: ec4bde21-68a4-4969-93e3-00e415e35445
 		summarizeBy: sum
 		sourceColumn: 'Postal Code'
 		dataCategory: PostalCode
@@ -116,7 +119,7 @@ table 'Orders$'
 
 	column Region
 		dataType: string
-		lineageTag: 91e4a987-22b2-41f5-bab0-93fc1d777dab
+		lineageTag: 132314be-82f5-499d-ae1b-b3df46114d83
 		summarizeBy: none
 		sourceColumn: Region
 		dataCategory: StateOrProvince
@@ -125,15 +128,16 @@ table 'Orders$'
 
 	column 'Product ID'
 		dataType: string
-		lineageTag: 70b1c4b3-a8db-4c72-b8d9-b677a6ad032b
+		lineageTag: ede79109-f22d-4590-a91d-c33be5a1bb82
 		summarizeBy: none
 		sourceColumn: 'Product ID'
+		annotation Copilot_Hidden = true
 
 		annotation SummarizationSetBy = Automatic
 
 	column Category
 		dataType: string
-		lineageTag: 3b1ff38f-64de-410a-a8da-9d3754d4575b
+		lineageTag: 298d8500-4a15-407a-924e-afe065dd4276
 		summarizeBy: none
 		sourceColumn: Category
 
@@ -141,7 +145,7 @@ table 'Orders$'
 
 	column 'Sub-Category'
 		dataType: string
-		lineageTag: 160fa135-5c8e-423f-9c46-b54cc54e0cf5
+		lineageTag: 4431e8a4-0839-4d4a-8ef8-ceb300f37c8e
 		summarizeBy: none
 		sourceColumn: 'Sub-Category'
 
@@ -149,7 +153,7 @@ table 'Orders$'
 
 	column 'Product Name'
 		dataType: string
-		lineageTag: b99cc651-fad8-4e10-ab73-f5b21dae1243
+		lineageTag: a0a84167-be0c-4c8b-b984-fdb8f03070a7
 		summarizeBy: none
 		sourceColumn: 'Product Name'
 
@@ -158,7 +162,7 @@ table 'Orders$'
 	column Sales
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 7635a249-76d9-434c-8c27-24d69ab946d8
+		lineageTag: 2dd49eb6-de0c-4570-bc4d-9482deb1959e
 		summarizeBy: sum
 		sourceColumn: Sales
 
@@ -166,7 +170,7 @@ table 'Orders$'
 
 	column Quantity
 		dataType: int64
-		lineageTag: 53581fa8-4194-4c30-bb89-5df7a96d11c8
+		lineageTag: 0cad84e6-182d-4055-97a4-9db971788ac6
 		summarizeBy: sum
 		sourceColumn: Quantity
 
@@ -175,7 +179,7 @@ table 'Orders$'
 	column Discount
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 5bf7eadc-60d3-4891-946d-6804cdca99c7
+		lineageTag: d1abfb55-a45d-4623-96d2-d3a8891cf586
 		summarizeBy: sum
 		sourceColumn: Discount
 
@@ -184,7 +188,7 @@ table 'Orders$'
 	column Profit
 		dataType: double
 		formatString: #,0.00
-		lineageTag: e8ccb10f-0f65-41cc-9a11-0da7a4618768
+		lineageTag: 31b75ecc-7069-4c89-b401-6be521c8f5c4
 		summarizeBy: sum
 		sourceColumn: Profit
 
@@ -192,7 +196,7 @@ table 'Orders$'
 
 	column 'Profit (bin)'
 		dataType: int64
-		lineageTag: 98108cef-c680-454f-94cc-ca89d172df93
+		lineageTag: 848f0f3a-177e-4004-8162-7914b806eb6e
 		summarizeBy: none
 		sourceColumn: 'Profit (bin)'
 
@@ -200,7 +204,7 @@ table 'Orders$'
 
 	column 'Sales (bin)'
 		dataType: int64
-		lineageTag: 76ba8362-2be7-420b-a695-b7cbe0247a2b
+		lineageTag: 420ea260-c836-4f1e-b0ca-981d96211ec1
 		summarizeBy: none
 		sourceColumn: 'Sales (bin)'
 
@@ -208,7 +212,7 @@ table 'Orders$'
 
 	column 'Top Customers by Profit'
 		dataType: string
-		lineageTag: 23f51654-4ce7-457f-8356-a3ccacef03b5
+		lineageTag: 2f751989-875c-4cee-b7cb-a3cefe74a7fe
 		summarizeBy: none
 		sourceColumn: 'Top Customers by Profit'
 		displayFolder: Groups
@@ -217,7 +221,7 @@ table 'Orders$'
 
 	column 'Product Name (group)'
 		dataType: string
-		lineageTag: 5ad56d81-711d-492e-89bc-698762c10ef3
+		lineageTag: a4a1b726-89e6-42ac-998e-87d41861d6e5
 		summarizeBy: none
 		sourceColumn: 'Product Name (group)'
 		displayFolder: Groups
@@ -226,25 +230,25 @@ table 'Orders$'
 
 	column Manufacturer
 		dataType: double
-		lineageTag: 378ec9d4-1806-4848-a840-9e7bb5cf90f2
+		lineageTag: e0e86ded-5717-4e95-a5f7-5f43148ee38a
 		summarizeBy: none
 		sourceColumn: Manufacturer
 		displayFolder: Bins
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Orders$-c06d602d-9a56-48df-8b57-d946e3519413' = m
+	partition 'Orders$-dc853d5f-187e-4f95-97e1-bf103adc5cd4' = m
 		mode: import
 		source =
 				let
-				    // Source Excel: C:/Users/91740/Documents/My Tableau Repository/Datasources/2019.4/en_US-US/Sample - Superstore.xls
+				    // Source Excel: Sample - Superstore.xls
 				    Source = try
 				
 				        let
 				
-				            _src = Excel.Workbook(File.Contents(DataFolder & "\C:\Users\91740\Documents\My Tableau Repository\Datasources\2019.4\en_US-US\Sample - Superstore.xls"), null, true),
+				            _src = Excel.Workbook(File.Contents(DataFolder & "\Sample - Superstore.xls"), null, true),
 				
-				            _nav = _src{[Item="Orders$",Kind="Sheet"]}[Data]
+				            _nav = _src{[Item="Orders",Kind="Sheet"]}[Data]
 				
 				        in _nav
 				
@@ -287,4 +291,5 @@ table 'Orders$'
 				    Result
 
 	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 26 columns and 2 measures: Row ID, Order ID, Order Date, Ship Date, Ship Mode, Customer ID, Customer Name, Segment, ... (26 columns total).
 

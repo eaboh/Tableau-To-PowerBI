@@ -1321,7 +1321,7 @@ def _heal_int_column_with_decimal_default(model, recovery=None) -> int:
 # ════════════════════════════════════════════════════════════════════
 
 _M_LET_RE = re.compile(r'\blet\b', re.I)
-_M_IN_RE = re.compile(r'\bin\b\s+\w', re.I)
+_M_IN_RE = re.compile(r'\bin\b\s+[#\w]', re.I)
 _M_DOUBLE_COMMA = re.compile(r',\s*,')
 _M_TRAILING_COMMA_RECORD = re.compile(r',(\s*[\]\}])')
 _M_STEP_DEF_RE = re.compile(r'^\s*(#"[^"]+"|\w+)\s*=', re.M)
@@ -1357,7 +1357,10 @@ def _heal_m_unbalanced_let_in(model, recovery=None) -> int:
             continue
         if not _M_LET_RE.search(expr):
             continue
-        if _M_IN_RE.search(expr):
+        # Count actual let vs in keywords (exclude occurrences inside strings)
+        let_count = len(_M_LET_RE.findall(expr))
+        in_count = len(re.findall(r'(?:^|\n)\s*in\b', expr, re.I))
+        if in_count >= let_count:
             continue
         steps = _M_STEP_DEF_RE.findall(expr)
         if not steps:
@@ -1371,6 +1374,30 @@ def _heal_m_unbalanced_let_in(model, recovery=None) -> int:
                 item_name=tname,
                 description='M partition missing "in" clause',
                 action=f'Appended "in {last}"',
+                severity='warning',
+            )
+    return repairs
+
+
+def _heal_m_duplicate_in(model, recovery=None) -> int:
+    """Remove duplicate trailing ``in <step>`` blocks."""
+    repairs = 0
+    dup_re = re.compile(r'(\n\s*in\s*\n\s*(?:#"[^"]+?"|\w+)\s*)\1+$')
+    for tname, _part, src in _iter_partitions(model):
+        expr = src.get('expression', '')
+        if not isinstance(expr, str) or not expr.strip():
+            continue
+        m = dup_re.search(expr)
+        if not m:
+            continue
+        src['expression'] = expr[:m.start()] + m.group(1)
+        repairs += 1
+        if recovery is not None:
+            recovery.record(
+                'm_query', 'm_duplicate_in',
+                item_name=tname,
+                description='M partition has duplicate "in" clause',
+                action='Removed duplicate "in" block',
                 severity='warning',
             )
     return repairs
@@ -1986,6 +2013,109 @@ def _heal_rls_missing_table_permission(model, recovery=None) -> int:
 
 
 # ════════════════════════════════════════════════════════════════════
+#  Healer — Calc column to measure promotion
+# ════════════════════════════════════════════════════════════════════
+
+# Aggregation pattern — calc columns whose DAX expression contains these
+# functions are likely misclassified and should be measures instead.
+# We specifically look for CALCULATE + ALLEXCEPT (LOD-derived) or
+# standalone aggregation functions wrapping column refs.
+_CC_AGG_RE = re.compile(
+    r'\b(SUM|AVERAGE|MIN|MAX|COUNT|COUNTA|COUNTBLANK|DISTINCTCOUNT|'
+    r'SUMX|AVERAGEX|MINX|MAXX|COUNTX|COUNTAX|CALCULATE|'
+    r'RANKX|TOTALYTD|SAMEPERIODLASTYEAR)\s*\(',
+    re.IGNORECASE,
+)
+
+
+def _heal_calc_col_to_measure(model, recovery=None) -> int:
+    """Promote calculated columns whose DAX expression contains aggregation
+    functions (CALCULATE, SUM, RANKX, etc.) to measures.
+
+    LOD expressions in Tableau ({FIXED dim: AGG}) produce DAX like
+    ``CALCULATE([Measure], ALLEXCEPT(...))``.  When the upstream
+    classifier misses the LOD syntax, these end up as calculated columns
+    with aggregation context — invalid in PBI because calc columns
+    evaluate row-by-row and cannot use filter-modifying functions that
+    reference measures.
+
+    The healer scans every calc column for aggregation patterns.  To
+    avoid false positives (e.g. ``CALCULATE(SELECTEDVALUE(...))`` which
+    is a valid scalar lookup in a calc column), we skip expressions
+    that only use SELECTEDVALUE/LOOKUPVALUE inside CALCULATE.
+    """
+    repairs = 0
+    _selectedvalue_only = re.compile(
+        r'^CALCULATE\s*\(\s*(SELECTEDVALUE|LOOKUPVALUE)\s*\(', re.IGNORECASE
+    )
+    for t in model.get('model', {}).get('tables', []):
+        tname = t.get('name', '')
+        # Build set of measure names in this table for reference detection
+        local_measures = {m.get('name', '') for m in t.get('measures', []) if m.get('name')}
+        cols_to_promote = []
+        for i, col in enumerate(t.get('columns', [])):
+            expr = col.get('expression', '')
+            if not expr:
+                continue  # Not a DAX calculated column
+            # Must have aggregation functions in the expression
+            if not _CC_AGG_RE.search(expr):
+                continue
+            # Skip CALCULATE(SELECTEDVALUE(...)) / CALCULATE(LOOKUPVALUE(...))
+            # patterns — these are valid scalar lookups in calc columns
+            expr_stripped = expr.strip()
+            if _selectedvalue_only.match(expr_stripped):
+                continue
+            # Also skip if SELECTEDVALUE/LOOKUPVALUE appears and NO measure
+            # reference is present (pure cross-table scalar lookup)
+            if re.search(r'\b(SELECTEDVALUE|LOOKUPVALUE)\s*\(', expr, re.IGNORECASE):
+                # Check if expression references any measure from this table
+                refs_measures = False
+                for mname in local_measures:
+                    if f'[{mname}]' in expr:
+                        refs_measures = True
+                        break
+                if not refs_measures:
+                    continue
+            cols_to_promote.append(i)
+        # Promote in reverse order to preserve indices
+        for i in reversed(cols_to_promote):
+            col = t['columns'].pop(i)
+            cname = col.get('name', '?')
+            # Create measure from the calc column
+            new_measure = {
+                'name': cname,
+                'expression': col['expression'],
+            }
+            # Carry over formatting, description, annotations
+            if col.get('formatString'):
+                new_measure['formatString'] = col['formatString']
+            if col.get('description'):
+                new_measure['description'] = col['description']
+            if col.get('isHidden'):
+                new_measure['isHidden'] = col['isHidden']
+            if col.get('displayFolder'):
+                new_measure['displayFolder'] = col['displayFolder']
+            for ann in col.get('annotations', []):
+                new_measure.setdefault('annotations', []).append(ann)
+            new_measure.setdefault('annotations', []).append({
+                'name': 'MigrationNote',
+                'value': 'Self-heal: Promoted from calculated column (contains aggregation context)',
+            })
+            t.setdefault('measures', []).append(new_measure)
+            repairs += 1
+            print(f"  \u2695 Self-heal: Promoted calc column '{cname}' to measure in '{tname}'")
+            if recovery:
+                recovery.record(
+                    'tmdl', 'calc_col_promoted_to_measure',
+                    item_name=cname,
+                    description=f"Calc column '{cname}' in '{tname}' contains aggregation (CALCULATE/SUM/etc.)",
+                    action='Promoted to measure',
+                    severity='info',
+                )
+    return repairs
+
+
+# ════════════════════════════════════════════════════════════════════
 #  Public entry point
 # ════════════════════════════════════════════════════════════════════
 
@@ -2024,6 +2154,7 @@ _V3_HEALERS = (
     ('int_column_with_decimal_default', _heal_int_column_with_decimal_default),
     # v3.3 — Sprint 139 — Power Query / M
     ('m_unbalanced_let_in', _heal_m_unbalanced_let_in),
+    ('m_duplicate_in', _heal_m_duplicate_in),
     ('m_unbalanced_parens', _heal_m_unbalanced_parens),
     ('m_step_name_collision', _heal_m_step_name_collision),
     ('m_invalid_identifier_unquoted', _heal_m_invalid_identifier_unquoted),
@@ -2044,6 +2175,8 @@ _V3_HEALERS = (
     ('partition_empty_m', _heal_partition_empty_m),
     ('parameter_default_out_of_domain', _heal_parameter_default_out_of_domain),
     ('rls_missing_table_permission', _heal_rls_missing_table_permission),
+    # v3.6 — Calc column / measure classification
+    ('calc_col_to_measure', _heal_calc_col_to_measure),
 )
 
 

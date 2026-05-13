@@ -1,18 +1,20 @@
 table Sheet1
-	lineageTag: ca86bdfa-6cdc-48e4-b629-2a3c9a34e451
+	lineageTag: cc6df538-420a-42cf-bb15-b026c859ddf4
 
 	measure 'p. Rebounds' = SWITCH([Rebounds], 1, AVERAGE('Sheet1'[DEF]), 2, AVERAGE('Sheet1'[OFF]), 3, AVERAGE('Sheet1'[REB]))
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: 3c807e1b-2400-4fbb-a516-b126633bb20c
+		lineageTag: a4b0528c-3cb1-4635-b7d3-d1fe4ba4a837
+		annotation Copilot_Description = Migrated from Tableau: CASE [Parameters].[Parameter 1] When 1 then avg([DEF]) When 2 then AVG([OFF]) When 3 then avg([REB]) END | DAX: SWITCH([Rebounds], 1, AVERAGE('Sheet1'[DEF]), 2, AVERAGE('Sheet1'[OFF]), 3, AVERAGE('Sheet1'[REB]))
 
 	measure 'min(1)' = MINX('Sheet1', 1)
 		displayFolder: Measures
-		lineageTag: 456f4d01-70c1-4324-90a0-19b8a41e2245
+		lineageTag: 8702b778-4156-46ef-831b-32bf8a31e44c
+		annotation Copilot_Description = Migrated from Tableau: min(1) | DAX: MINX('Sheet1', 1)
 
 	column Player
 		dataType: string
-		lineageTag: 193c3716-578f-4eed-8393-4e64a3d939a9
+		lineageTag: 19d4b82d-750c-4915-ae9a-22c1195a3f68
 		summarizeBy: none
 		sourceColumn: Player
 
@@ -20,7 +22,7 @@ table Sheet1
 
 	column YR
 		dataType: int64
-		lineageTag: 8d02684d-20a8-4548-a731-073c02396278
+		lineageTag: f66aa18c-11ef-477b-8eda-c22327f8eb61
 		summarizeBy: sum
 		sourceColumn: YR
 
@@ -28,7 +30,7 @@ table Sheet1
 
 	column TM
 		dataType: string
-		lineageTag: 114b8481-3b74-46ac-8d98-789c41ffc692
+		lineageTag: abc7f12c-6226-40ab-9458-e5220defe73b
 		summarizeBy: none
 		sourceColumn: TM
 
@@ -36,7 +38,7 @@ table Sheet1
 
 	column GP
 		dataType: int64
-		lineageTag: 55f6d7a9-8960-48e4-b463-509cb95a5dd4
+		lineageTag: 944b4cb9-f7dc-4ec4-8ba4-42a9b464b658
 		summarizeBy: sum
 		sourceColumn: GP
 
@@ -45,7 +47,7 @@ table Sheet1
 	column MIN
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 15fbd0e9-76e6-4043-91d6-e1e92067303b
+		lineageTag: c7c5fe75-5eb4-4845-8198-03dba2fc1b72
 		summarizeBy: sum
 		sourceColumn: MIN
 
@@ -54,7 +56,7 @@ table Sheet1
 	column FGM
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 1c58c30e-1478-4631-8d69-dc74736e57e9
+		lineageTag: c832a6ce-3fa6-465b-bc0a-a65a33b65574
 		summarizeBy: sum
 		sourceColumn: FGM
 
@@ -63,7 +65,7 @@ table Sheet1
 	column FGA
 		dataType: double
 		formatString: #,0.00
-		lineageTag: c02d0189-14a1-4c24-99b7-83641a27e83c
+		lineageTag: e53d4fab-d80f-45cc-86ac-11b1457092e5
 		summarizeBy: sum
 		sourceColumn: FGA
 
@@ -72,7 +74,7 @@ table Sheet1
 	column 'FG%'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 45d77c4d-2c2a-4b2a-96e6-4d4acae599f7
+		lineageTag: a83519e1-3088-4709-9919-ab3f18fc8e3a
 		summarizeBy: sum
 		sourceColumn: 'FG%'
 
@@ -81,7 +83,7 @@ table Sheet1
 	column '3PT%'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 0861b961-077b-4233-a1e3-743499117235
+		lineageTag: 5ad8c001-97f6-4164-9401-1406ef01b99a
 		summarizeBy: sum
 		sourceColumn: '3PT%'
 
@@ -90,7 +92,7 @@ table Sheet1
 	column 'FT%'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 4780c1a3-4802-4ecb-a3e9-3f31bd08a531
+		lineageTag: 335111e6-9c9d-48b1-869b-52ce24f2dfce
 		summarizeBy: sum
 		sourceColumn: 'FT%'
 
@@ -99,7 +101,7 @@ table Sheet1
 	column OFF
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 34c928e3-0274-489a-bcc2-cbbe44559b83
+		lineageTag: a73ccb41-11c7-4228-99d0-822d048facbf
 		summarizeBy: sum
 		sourceColumn: OFF
 
@@ -108,7 +110,7 @@ table Sheet1
 	column DEF
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 215a14b0-9038-4990-90b6-77beda46da85
+		lineageTag: 475a8206-5b94-4761-8b24-aa0cb8b2e6b2
 		summarizeBy: sum
 		sourceColumn: DEF
 
@@ -117,7 +119,7 @@ table Sheet1
 	column REB
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 364c5d20-409c-4e83-b385-25f5b354b2df
+		lineageTag: 0ce1a516-d30b-4c60-81c4-9bfc4e2bf9e6
 		summarizeBy: sum
 		sourceColumn: REB
 
@@ -126,7 +128,7 @@ table Sheet1
 	column ASST
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 6509e457-2231-4c48-9655-11e7440ca05f
+		lineageTag: 3294d721-e1a7-4c5f-897d-5c1a3d402426
 		summarizeBy: sum
 		sourceColumn: ASST
 
@@ -135,7 +137,7 @@ table Sheet1
 	column STL
 		dataType: double
 		formatString: #,0.00
-		lineageTag: daf98c4e-c4f0-4047-8e54-de4863585eff
+		lineageTag: 4dceb30e-ec9c-41ce-89e7-83ed77250c2f
 		summarizeBy: sum
 		sourceColumn: STL
 
@@ -144,7 +146,7 @@ table Sheet1
 	column BLK
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 24a703e1-5bbc-422a-9359-8717eb5de0b1
+		lineageTag: 1e524f63-83f8-4b55-9ce8-1e231ac27f04
 		summarizeBy: sum
 		sourceColumn: BLK
 
@@ -153,7 +155,7 @@ table Sheet1
 	column TO
 		dataType: double
 		formatString: #,0.00
-		lineageTag: cf43645a-df02-4f54-9ac4-f467cffd4665
+		lineageTag: a5a6efdf-2852-4631-badc-d2b0683ae4e8
 		summarizeBy: sum
 		sourceColumn: TO
 
@@ -162,7 +164,7 @@ table Sheet1
 	column PF
 		dataType: double
 		formatString: #,0.00
-		lineageTag: a46ddd7b-91ed-46f5-b5cb-f49715cdddf6
+		lineageTag: c1c8b9b9-8f0a-41e5-86a1-035e29ba455e
 		summarizeBy: sum
 		sourceColumn: PF
 
@@ -171,7 +173,7 @@ table Sheet1
 	column PTS
 		dataType: double
 		formatString: #,0.00
-		lineageTag: f9c0d26a-6612-47cb-aa77-e2acc9a50caa
+		lineageTag: d00e7062-9aa0-478c-8033-978093ca1afc
 		summarizeBy: sum
 		sourceColumn: PTS
 
@@ -179,23 +181,23 @@ table Sheet1
 
 	column 'Action (Player)'
 		dataType: string
-		lineageTag: 2d2c5a49-6e00-4a0f-9797-9756c61c933b
+		lineageTag: 6fbeff64-b70f-40c7-a895-3b37ec35945d
 		summarizeBy: none
 		sourceColumn: 'Action (Player)'
 		displayFolder: Groups
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Sheet1-cbf23661-c554-479c-b54e-c804e97864b0' = m
+	partition 'Sheet1-4b10ba28-70e9-4882-a635-e38aa52381e4' = m
 		mode: import
 		source =
 				let
-				    // Source Excel: Data/Datasets/nba_players.xlsx
+				    // Source Excel: nba_players.xlsx
 				    Source = try
 				
 				        let
 				
-				            _src = Excel.Workbook(File.Contents(DataFolder & "\Data\Datasets\nba_players.xlsx"), null, true),
+				            _src = Excel.Workbook(File.Contents(DataFolder & "\nba_players.xlsx"), null, true),
 				
 				            _nav = _src{[Item="Sheet1",Kind="Sheet"]}[Data]
 				
@@ -232,4 +234,5 @@ table Sheet1
 				    Result
 
 	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 20 columns and 2 measures: Player, YR, TM, GP, MIN, FGM, FGA, FG%, ... (20 columns total).
 

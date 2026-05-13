@@ -1,0 +1,1072 @@
+table Opportunities
+	lineageTag: 40c8e732-ea1b-41be-a767-6d6594278cd1
+
+	column 'Account ID'
+		dataType: string
+		lineageTag: f74042e5-4ba2-462d-97a1-148ba2574da8
+		summarizeBy: none
+		sourceColumn: 'Account ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Amended Contract'
+		dataType: string
+		lineageTag: 67981641-3b36-4017-bd09-0ffa0ca2cd8d
+		summarizeBy: none
+		sourceColumn: 'Amended Contract'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Amount
+		dataType: double
+		formatString: C1033%
+		lineageTag: 8d43d549-865b-44e7-bd7a-51082128ca41
+		summarizeBy: sum
+		sourceColumn: Amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Approval Status'
+		dataType: string
+		lineageTag: 458f2126-7ae4-432e-8bfd-da20bfabf193
+		summarizeBy: none
+		sourceColumn: 'Approval Status'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Approval Step'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: fa9a82c5-a7ca-4213-9afe-c5f484b1e6f2
+		summarizeBy: sum
+		sourceColumn: 'Approval Step'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Approver
+		dataType: string
+		lineageTag: bfcc2132-ea03-4942-838e-fb55bc9ea15d
+		summarizeBy: none
+		sourceColumn: Approver
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AutoNumber
+		dataType: string
+		lineageTag: 7c89c304-9194-4457-bf3a-e4571d3969db
+		summarizeBy: none
+		sourceColumn: AutoNumber
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Campaign ID'
+		dataType: string
+		lineageTag: 0401fb11-92ed-483c-b311-811fd7dbebeb
+		summarizeBy: none
+		sourceColumn: 'Campaign ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column Case
+		dataType: string
+		lineageTag: f8ded7a2-4786-479a-872a-436a8ef24aa6
+		summarizeBy: none
+		sourceColumn: Case
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Close Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c10e6e27-7c78-4f83-98e7-788439bc45bf
+		summarizeBy: none
+		sourceColumn: 'Close Date'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CloseDate db days'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 168e9dbc-245c-4ef2-a59d-eb75e1cf4068
+		summarizeBy: sum
+		sourceColumn: 'CloseDate db days'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Close_Plan_Quip
+		dataType: string
+		lineageTag: 6ea5cdd7-70c8-4f1c-bd34-e78c97214cb5
+		summarizeBy: none
+		sourceColumn: Close_Plan_Quip
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Closed
+		dataType: boolean
+		lineageTag: e7132b69-a90f-4f7f-8948-869c6d9bbe97
+		summarizeBy: none
+		sourceColumn: Closed
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Competition
+		dataType: string
+		lineageTag: 0b42105e-d679-4366-8085-ff95ab225bdf
+		summarizeBy: none
+		sourceColumn: Competition
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Competitor
+		dataType: string
+		lineageTag: ba36dcb5-a3e4-4835-918f-12b5d6a868ad
+		summarizeBy: none
+		sourceColumn: Competitor
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Complete ROI Analysis'
+		dataType: boolean
+		lineageTag: a0d7a676-1f41-4ec6-9e25-a23cb5ee96a1
+		summarizeBy: none
+		sourceColumn: 'Complete ROI Analysis'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contact ID'
+		dataType: string
+		lineageTag: 933eadb2-5d3f-4cc3-822d-9a6e15f2a9de
+		summarizeBy: none
+		sourceColumn: 'Contact ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contract ID'
+		dataType: string
+		lineageTag: e17bd434-856b-4cdc-a4c2-a4c5a81697b4
+		summarizeBy: none
+		sourceColumn: 'Contract ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contract Terms'
+		dataType: string
+		lineageTag: feac5ec4-14ad-45e4-bbaf-d49ecd44cf1d
+		summarizeBy: none
+		sourceColumn: 'Contract Terms'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Contracted
+		dataType: boolean
+		lineageTag: eafbfb00-cd8b-449b-9c2b-7ff00a98a980
+		summarizeBy: none
+		sourceColumn: Contracted
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Create Contracted Prices'
+		dataType: boolean
+		lineageTag: 304c6f0e-808c-45fb-b295-db0655ab791b
+		summarizeBy: none
+		sourceColumn: 'Create Contracted Prices'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Created By ID'
+		dataType: string
+		lineageTag: 9e2b3527-afad-4b73-a6f1-ad9f195acaa6
+		summarizeBy: none
+		sourceColumn: 'Created By ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Created Date1'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b9f7362d-85c4-4741-b7c8-c9d84eeaf760
+		summarizeBy: none
+		sourceColumn: 'Created Date1'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Created Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2bae9937-c621-4b13-b948-f6551ba43652
+		summarizeBy: none
+		sourceColumn: 'Created Date'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DB Amount'
+		dataType: double
+		formatString: C1033%
+		lineageTag: 26eee3ae-8836-44a5-a469-4a8e438ed22f
+		summarizeBy: sum
+		sourceColumn: 'DB Amount'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DB Days'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 371b67ed-9ca5-43b0-b31e-794168c9c59d
+		summarizeBy: sum
+		sourceColumn: 'DB Days'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Deal Approved Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ac6872fe-f4a3-4a7d-82a0-1969f6792cf3
+		summarizeBy: none
+		sourceColumn: 'Deal Approved Date'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Deal ID'
+		dataType: string
+		lineageTag: 3ef10728-6406-43b3-ab0c-a83438c13f89
+		summarizeBy: none
+		sourceColumn: 'Deal ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Deal Source'
+		dataType: string
+		lineageTag: ebae6bfc-02ba-4b4e-8b5d-80ffe33bb990
+		summarizeBy: none
+		sourceColumn: 'Deal Source'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Decision Role'
+		dataType: string
+		lineageTag: d25092a2-e6a8-4394-923c-e768bb291a1b
+		summarizeBy: none
+		sourceColumn: 'Decision Role'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Deleted
+		dataType: boolean
+		lineageTag: 375e9053-ae4c-4595-a7bf-f3cfc5ae5cd6
+		summarizeBy: none
+		sourceColumn: Deleted
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Discount %'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 9ac0b113-9e58-42fc-b44a-a4d4e7271f84
+		summarizeBy: sum
+		sourceColumn: 'Discount %'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Discount Approved'
+		dataType: string
+		lineageTag: d58fdc14-db2c-4e9a-be92-13227c187db6
+		summarizeBy: none
+		sourceColumn: 'Discount Approved'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Distributor
+		dataType: string
+		lineageTag: 55938c49-4e28-4f82-8ba9-cdd9c5a7bea2
+		summarizeBy: none
+		sourceColumn: Distributor
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ED Predicted Time to Close'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 82307d6c-c1c4-4e8e-89df-0a1fd94529cb
+		summarizeBy: sum
+		sourceColumn: 'ED Predicted Time to Close'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Exclude from the territory assignment filter logic'
+		dataType: boolean
+		lineageTag: dc668ac0-318e-493c-b4d9-be9ef4d3a2cc
+		summarizeBy: none
+		sourceColumn: 'Exclude from the territory assignment filter logic'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Executive Meeting'
+		dataType: boolean
+		lineageTag: 074ff9ad-6cd1-41c2-86e2-a0945485cf16
+		summarizeBy: none
+		sourceColumn: 'Executive Meeting'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Expected Amount'
+		dataType: double
+		formatString: C1033%
+		lineageTag: 00ff5d24-d9b7-4502-88fd-8138852126d9
+		summarizeBy: sum
+		sourceColumn: 'Expected Amount'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'External ID'
+		dataType: string
+		lineageTag: ba084958-e3e2-4048-bcda-605006d8ed02
+		summarizeBy: none
+		sourceColumn: 'External ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Period'
+		dataType: string
+		lineageTag: 33b16575-7247-4489-b5eb-d4e54435788e
+		summarizeBy: none
+		sourceColumn: 'Fiscal Period'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Quarter'
+		dataType: int64
+		lineageTag: 0a56b9b5-1e68-4300-850f-3fd16664b0cd
+		summarizeBy: sum
+		sourceColumn: 'Fiscal Quarter'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Year'
+		dataType: int64
+		lineageTag: a81b71f7-fddd-452f-93f1-65342550d887
+		summarizeBy: sum
+		sourceColumn: 'Fiscal Year'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Forecast Category1'
+		dataType: string
+		lineageTag: 3ffddebd-db36-4768-ba54-d8411dd23db5
+		summarizeBy: none
+		sourceColumn: 'Forecast Category1'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Forecast Category'
+		dataType: string
+		lineageTag: 64e3ea29-5bfb-4aac-b029-2b6a7fd03742
+		summarizeBy: none
+		sourceColumn: 'Forecast Category'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Forwarded Lead ID'
+		dataType: string
+		lineageTag: bb1384b6-8a4d-41f9-9a70-83fa6cf9633f
+		summarizeBy: none
+		sourceColumn: 'Forwarded Lead ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Has Line Item'
+		dataType: boolean
+		lineageTag: ea5635d0-686b-473d-9245-e0c253dd8822
+		summarizeBy: none
+		sourceColumn: 'Has Line Item'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Has Open Activity'
+		dataType: boolean
+		lineageTag: 8569db54-6831-402b-bb69-8a48602f3aea
+		summarizeBy: none
+		sourceColumn: 'Has Open Activity'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Has Overdue Task'
+		dataType: boolean
+		lineageTag: 7052ded4-2c09-4e6d-b7c6-368377cdf834
+		summarizeBy: none
+		sourceColumn: 'Has Overdue Task'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Initial Estimated Close Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 47841785-a59f-436d-a697-df66ea68ff49
+		summarizeBy: none
+		sourceColumn: 'Initial Estimated Close Date'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Interactive Demo'
+		dataType: boolean
+		lineageTag: a5b66179-f0a0-4eb9-9974-91529065aaf8
+		summarizeBy: none
+		sourceColumn: 'Interactive Demo'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is B2BMA Plus Data'
+		dataType: boolean
+		lineageTag: 3a223e68-7b3c-4943-a4c2-a4f2eda9fc5c
+		summarizeBy: none
+		sourceColumn: 'Is B2BMA Plus Data'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Locked'
+		dataType: boolean
+		lineageTag: 3f6b760c-eb62-4ebe-ae68-c11c4efb629c
+		summarizeBy: none
+		sourceColumn: 'Is Locked'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Split'
+		dataType: boolean
+		lineageTag: 689d99f0-4ac5-443a-88d8-f3e4eb6da049
+		summarizeBy: none
+		sourceColumn: 'Is Split'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Activity1'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1c470133-669f-4cc2-b90e-7131bffdf20a
+		summarizeBy: none
+		sourceColumn: 'Last Activity1'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Activity'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 083aacdd-70d3-466e-b321-e76a39bf3a14
+		summarizeBy: none
+		sourceColumn: 'Last Activity'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Modified By ID'
+		dataType: string
+		lineageTag: 887d7aae-e2f2-4177-bf9d-4c367072daad
+		summarizeBy: none
+		sourceColumn: 'Last Modified By ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Modified Date1'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 6d793f4e-8097-4d7f-a737-bbece8413aea
+		summarizeBy: none
+		sourceColumn: 'Last Modified Date1'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Modified Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d7c71c2c-a1be-489a-9917-051c061bb826
+		summarizeBy: none
+		sourceColumn: 'Last Modified Date'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Referenced Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 54838bfd-4f56-4014-9012-bbd1997a2b39
+		summarizeBy: none
+		sourceColumn: 'Last Referenced Date'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Stage Change Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 969f4534-719a-442d-a4f8-ee5e77f24642
+		summarizeBy: none
+		sourceColumn: 'Last Stage Change Date'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Viewed Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7d214ac7-fb5d-429a-89d1-2855dd0679ff
+		summarizeBy: none
+		sourceColumn: 'Last Viewed Date'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Lead Source'
+		dataType: string
+		lineageTag: 76cf1093-8eb8-45b5-b8f5-1093df2e1a84
+		summarizeBy: none
+		sourceColumn: 'Lead Source'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'May Edit'
+		dataType: boolean
+		lineageTag: 66d9835a-3a81-4f3b-a65c-5a2750891d5d
+		summarizeBy: none
+		sourceColumn: 'May Edit'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: a28cfb25-c355-4698-8dc2-f307e114121f
+		summarizeBy: none
+		sourceColumn: Name
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Next Step'
+		dataType: string
+		lineageTag: 6105b7ed-67dc-49c7-b17a-fd40dd69185d
+		summarizeBy: none
+		sourceColumn: 'Next Step'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Next Steps'
+		dataType: string
+		lineageTag: c528b90f-0ac1-4b9d-b90e-06e7a54513d0
+		summarizeBy: none
+		sourceColumn: 'Next Steps'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity History ID1'
+		dataType: string
+		lineageTag: 542ad475-8668-43e0-a636-e39a472fc139
+		summarizeBy: none
+		sourceColumn: 'Opportunity History ID1'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity History ID'
+		dataType: string
+		lineageTag: a4f4ae6d-cff0-4cea-842f-d1b14a0aef6a
+		summarizeBy: none
+		sourceColumn: 'Opportunity History ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity ID'
+		dataType: string
+		lineageTag: 3abbc0f6-4453-4d92-9c3a-84b73798b713
+		summarizeBy: none
+		sourceColumn: 'Opportunity ID'
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Score'
+		dataType: int64
+		lineageTag: 839debde-af94-455f-b5ff-cf5efba39344
+		summarizeBy: sum
+		sourceColumn: 'Opportunity Score'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Type'
+		dataType: string
+		lineageTag: 0c13f7a5-6b5b-45b3-af90-fe3144f61160
+		summarizeBy: none
+		sourceColumn: 'Opportunity Type'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Group ID'
+		dataType: string
+		lineageTag: cebe3fd9-e921-4189-ba1e-85473f87d8ab
+		summarizeBy: none
+		sourceColumn: 'Order Group ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordered
+		dataType: boolean
+		lineageTag: d8b191ba-a2df-411d-bcc5-7c1e49b4f22f
+		summarizeBy: none
+		sourceColumn: Ordered
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Owner ID'
+		dataType: string
+		lineageTag: 42493123-e83c-44d3-857c-753e5a72de22
+		summarizeBy: none
+		sourceColumn: 'Owner ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Partner Owner'
+		dataType: string
+		lineageTag: c20759d4-ccf5-4105-8eb1-514fed4677e3
+		summarizeBy: none
+		sourceColumn: 'Partner Owner'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Partner/Relationship Account'
+		dataType: string
+		lineageTag: 81adc62c-0bbf-4014-afd6-b2e963804113
+		summarizeBy: none
+		sourceColumn: 'Partner/Relationship Account'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Price Book ID'
+		dataType: string
+		lineageTag: 92a759ad-72ad-486b-8fee-7356bab9ff50
+		summarizeBy: none
+		sourceColumn: 'Price Book ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Primary Contact'
+		dataType: string
+		lineageTag: a332a5fc-1d4b-4239-b09a-9cf3267688c7
+		summarizeBy: none
+		sourceColumn: 'Primary Contact'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Primary Quote'
+		dataType: string
+		lineageTag: 22f6767c-f9de-4358-ad8a-696cea1e0eb3
+		summarizeBy: none
+		sourceColumn: 'Primary Quote'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Private
+		dataType: boolean
+		lineageTag: 4f3bf9e1-e1d9-4220-b430-b23448cf7aa9
+		summarizeBy: none
+		sourceColumn: Private
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Probability (%)'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 03f7a232-92de-4c07-ae4b-5af59b6588c9
+		summarizeBy: sum
+		sourceColumn: 'Probability (%)'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product
+		dataType: string
+		lineageTag: 13370059-b6b5-40c5-95eb-578d37a15143
+		summarizeBy: none
+		sourceColumn: Product
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Budget'
+		dataType: double
+		formatString: C1033%
+		lineageTag: 620c1b96-3402-44fe-ab65-6739fb560f90
+		summarizeBy: sum
+		sourceColumn: 'Project Budget'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Budgeted?'
+		dataType: boolean
+		lineageTag: 1ebca31c-0d1f-4b8f-a888-f0198c633b36
+		summarizeBy: none
+		sourceColumn: 'Project Budgeted?'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Manager Contact'
+		dataType: string
+		lineageTag: 38b162e9-f521-432b-808a-5252d4045bb2
+		summarizeBy: none
+		sourceColumn: 'Project Manager Contact'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Push Count'
+		dataType: int64
+		lineageTag: 9e0e524e-914f-4aeb-847c-f95b4d4790b9
+		summarizeBy: sum
+		sourceColumn: 'Push Count'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Push Counter'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: aa3d7bc7-4a4d-44a6-8a9b-68f62ca49105
+		summarizeBy: sum
+		sourceColumn: 'Push Counter'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantity
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 56c132e3-0821-4632-93c9-71fc63d6438a
+		summarizeBy: sum
+		sourceColumn: Quantity
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quip URL'
+		dataType: string
+		lineageTag: b613b4bf-56db-40ad-b117-fa20a8f7c5ad
+		summarizeBy: none
+		sourceColumn: 'Quip URL'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quote ID'
+		dataType: string
+		lineageTag: 03780c96-aac5-4cd8-891c-f0bc6483c89a
+		summarizeBy: none
+		sourceColumn: 'Quote ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quote Pricebook Id'
+		dataType: string
+		lineageTag: e1a1433d-49eb-49d1-85ad-375c4a17047a
+		summarizeBy: none
+		sourceColumn: 'Quote Pricebook Id'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Reason Lost'
+		dataType: string
+		lineageTag: bfa5889c-b325-4193-9024-07cb2a29a787
+		summarizeBy: none
+		sourceColumn: 'Reason Lost'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Received Connection ID'
+		dataType: string
+		lineageTag: 1169f811-eb32-438d-be67-e449730be48a
+		summarizeBy: none
+		sourceColumn: 'Received Connection ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Record Type ID'
+		dataType: string
+		lineageTag: 7f2880de-ab95-4f02-920a-3cc0d30d3792
+		summarizeBy: none
+		sourceColumn: 'Record Type ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Registration Expiration'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0fcd1abc-fdef-4be7-9ac5-d990d97efa2d
+		summarizeBy: none
+		sourceColumn: 'Registration Expiration'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Renewal
+		dataType: boolean
+		lineageTag: 61209206-3097-41cb-a081-77ecf0c27284
+		summarizeBy: none
+		sourceColumn: Renewal
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Renewed Contract'
+		dataType: string
+		lineageTag: 0bfd7495-6b27-490a-85a5-659c02b302a6
+		summarizeBy: none
+		sourceColumn: 'Renewed Contract'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sent Connection ID'
+		dataType: string
+		lineageTag: 02060077-331a-4735-8543-6a3bbe02bebb
+		summarizeBy: none
+		sourceColumn: 'Sent Connection ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column Stage
+		dataType: string
+		lineageTag: 277d78ac-a78f-4ee2-8b9c-580040f2914f
+		summarizeBy: none
+		sourceColumn: Stage
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Stalled Opportunity'
+		dataType: boolean
+		lineageTag: 60aa2040-3927-4e49-b5b4-a16b2c3c8ce7
+		summarizeBy: none
+		sourceColumn: 'Stalled Opportunity'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Step Approved'
+		dataType: boolean
+		lineageTag: 89dc7462-cd4b-496a-9484-07116a1093f8
+		summarizeBy: none
+		sourceColumn: 'Step Approved'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Submitted Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 94af11d1-3d5e-4d6e-9a97-faacc8dccec7
+		summarizeBy: none
+		sourceColumn: 'Submitted Date'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Submitted User'
+		dataType: string
+		lineageTag: b0f69e22-c39c-4a8b-b199-2391e7e6dbdb
+		summarizeBy: none
+		sourceColumn: 'Submitted User'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'System Modstamp'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f71fec9a-8607-4052-be7a-b2ec4dce2d45
+		summarizeBy: none
+		sourceColumn: 'System Modstamp'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Territory ID'
+		dataType: string
+		lineageTag: d1963686-701c-48bc-bc09-e9cb80289727
+		summarizeBy: none
+		sourceColumn: 'Territory ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Top Insight ID'
+		dataType: string
+		lineageTag: 1d542225-8dbc-460d-8193-3d61afa3e9d4
+		summarizeBy: none
+		sourceColumn: 'Top Insight ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Winning Competitor'
+		dataType: string
+		lineageTag: 0f78915b-b589-484c-8429-2c100b9570ac
+		summarizeBy: none
+		sourceColumn: 'Winning Competitor'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Won
+		dataType: boolean
+		lineageTag: 7e4370d0-63c2-47c3-a9de-1b4b04b8d5bf
+		summarizeBy: none
+		sourceColumn: Won
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Work Order'
+		dataType: string
+		lineageTag: ecbd571b-8fdc-4672-acb5-de621655e8bb
+		summarizeBy: none
+		sourceColumn: 'Work Order'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column analyticsdemo_batch_id__c
+		dataType: string
+		lineageTag: 920fdca9-a1bc-4ac2-ad04-23f3a809266b
+		summarizeBy: none
+		sourceColumn: analyticsdemo_batch_id__c
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccountId
+		dataType: string
+		lineageTag: 64056a46-a238-4a1b-aa3d-b91bc28a1150
+		summarizeBy: none
+		sourceColumn: AccountId
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreatedById
+		dataType: string
+		lineageTag: 48980372-f4a9-41c8-b1d8-cbd02cf9dfe8
+		summarizeBy: none
+		sourceColumn: CreatedById
+
+		annotation SummarizationSetBy = Automatic
+
+	column OwnerId
+		dataType: string
+		lineageTag: 500513c8-4498-4870-a940-cc57ce901026
+		summarizeBy: none
+		sourceColumn: OwnerId
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Opportunities-da44ab96-1647-4e00-ad6e-82655d768faa' = m
+		mode: import
+		source =
+				let
+				    // TODO: Configure the data source for connector type: SALESFORCE
+				    // Replace the sample table below with the actual source expression.
+				    Source = Table.PromoteHeaders(Csv.Document(File.Contents(DataFolder & "\Opportunities.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]), [PromoteAllScalars=true])
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 113 columns: Account ID, Amended Contract, Amount, Approval Status, Approval Step, Approver, AutoNumber, Campaign ID, ... (113 columns total).
+

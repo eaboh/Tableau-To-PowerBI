@@ -1,13 +1,14 @@
 table TestData
-	lineageTag: 7b14c098-deaa-4e23-b418-63cfc419fece
+	lineageTag: 48bc2dfb-0865-48a7-83fc-2d0db3b3f105
 
 	measure 'Number of Records' = COUNTROWS('TestData')
 		displayFolder: Measures
-		lineageTag: a8a1924a-782d-4690-b80e-ee43bb024aa8
+		lineageTag: 093bdaaf-5b48-4114-944f-539296d56f69
+		annotation Copilot_Description = DAX: COUNTROWS('TestData')
 
 	column 'Account Account Name'
 		dataType: string
-		lineageTag: f22ac1a3-7d04-4869-a432-cf76cf76d871
+		lineageTag: a37af9f8-9060-48d1-bb68-d4c11c73eb0b
 		summarizeBy: none
 		sourceColumn: 'Account Account Name'
 
@@ -16,7 +17,7 @@ table TestData
 	column 'Account Number'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: c6d07b66-5a98-4aea-961b-ad4cc69afd49
+		lineageTag: c48a68c9-e193-4284-b457-fa5c751e643f
 		summarizeBy: sum
 		sourceColumn: 'Account Number'
 
@@ -24,7 +25,7 @@ table TestData
 
 	column 'Account Number Burst Out Account'
 		dataType: string
-		lineageTag: 0b966074-b1f3-416b-a244-d5694bb343a7
+		lineageTag: 2b428b1b-e412-4b2f-9fa9-71af6984deec
 		summarizeBy: none
 		sourceColumn: 'Account Number Burst Out Account'
 
@@ -32,7 +33,7 @@ table TestData
 
 	column 'Acct Name'
 		dataType: string
-		lineageTag: 8b650596-9540-4653-b107-399ff266c1fe
+		lineageTag: 462030ed-3f51-4df2-88cd-8f81f5be1a88
 		summarizeBy: none
 		sourceColumn: 'Acct Name'
 
@@ -40,7 +41,7 @@ table TestData
 
 	column 'Burst Out'
 		dataType: string
-		lineageTag: 7d038d16-5517-4a23-a03f-a6a4e3e22e04
+		lineageTag: e3e76795-11a4-41e9-99ac-168e70dca2b5
 		summarizeBy: none
 		sourceColumn: 'Burst Out'
 
@@ -48,17 +49,16 @@ table TestData
 
 	column 'Burst Out Join'
 		dataType: string
-		lineageTag: 12e8e3bf-8bcd-4692-be3c-1cebae920f0e
+		lineageTag: a1b447fe-f2d6-4be0-aca5-d8217fe17286
 		summarizeBy: none
 		sourceColumn: 'Burst Out Join'
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Burst Out Set list'
-		dataType: double
-		formatString: #,0.00
-		lineageTag: 1c43e047-2d6f-4dec-80c9-5c6fa26495db
-		summarizeBy: sum
+		dataType: string
+		lineageTag: f8c3f4ad-e0e4-4245-bc56-b46d7e88ec8e
+		summarizeBy: none
 		sourceColumn: 'Burst Out Set list'
 
 		annotation SummarizationSetBy = Automatic
@@ -66,7 +66,7 @@ table TestData
 	column 'Burst Out View'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: a75f1bac-83b1-4bf1-8fb4-51838a217e46
+		lineageTag: 43241c9b-d196-4d0c-8766-47e7d09e9880
 		summarizeBy: sum
 		sourceColumn: 'Burst Out View'
 
@@ -75,7 +75,7 @@ table TestData
 	column 'Count JE Number'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 3f12501f-f19e-490c-ab80-9839142e5e50
+		lineageTag: 14d2527d-4054-4550-80c1-12e453d7cedf
 		summarizeBy: sum
 		sourceColumn: 'Count JE Number'
 
@@ -83,16 +83,17 @@ table TestData
 
 	column 'Entity ID'
 		dataType: string
-		lineageTag: 677834c4-2732-4c4a-ac24-238c0b16e9c5
+		lineageTag: 09c7cf3e-4cfc-4bec-bd7c-1877affbd05b
 		summarizeBy: none
 		sourceColumn: 'Entity ID'
+		annotation Copilot_Hidden = true
 
 		annotation SummarizationSetBy = Automatic
 
 	column Filter
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 85f85d08-4920-4eba-9c7d-354473f98e62
+		lineageTag: 497294fb-0e3f-49f9-985f-668bd17988ae
 		summarizeBy: sum
 		sourceColumn: Filter
 
@@ -100,7 +101,7 @@ table TestData
 
 	column 'Fiscal Year'
 		dataType: string
-		lineageTag: c29f7835-8b30-41c6-846f-23456d124601
+		lineageTag: 391b2b7b-077f-4e36-ae75-7b5cc36eb46f
 		summarizeBy: none
 		sourceColumn: 'Fiscal Year'
 
@@ -108,7 +109,7 @@ table TestData
 
 	column Flag
 		dataType: boolean
-		lineageTag: ccb2688b-3f7e-4533-9038-8aaad5a94a38
+		lineageTag: 1f27fe62-c011-4408-a668-dda5c0b98baf
 		summarizeBy: none
 		sourceColumn: Flag
 
@@ -116,7 +117,7 @@ table TestData
 
 	column Flag__copy_
 		dataType: boolean
-		lineageTag: 898ef520-ca44-44a8-8e1f-ffc83a065d37
+		lineageTag: 3c414013-73a5-41cd-84fc-881910bc56b0
 		summarizeBy: none
 		sourceColumn: Flag__copy_
 
@@ -125,7 +126,7 @@ table TestData
 	column 'FS Line'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: c12e1431-37bc-41ca-8f59-af331615703c
+		lineageTag: f80e4c80-e6fe-4c26-acf0-d062444b78f7
 		summarizeBy: sum
 		sourceColumn: 'FS Line'
 
@@ -133,7 +134,7 @@ table TestData
 
 	column 'FS Line Burst Out Account'
 		dataType: string
-		lineageTag: 52acd7f0-fa14-44e5-9942-01c628a33a80
+		lineageTag: 7407f4c8-da7f-4e9e-82a7-28c960eecb5a
 		summarizeBy: none
 		sourceColumn: 'FS Line Burst Out Account'
 
@@ -142,7 +143,7 @@ table TestData
 	column 'Group By'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: c34a331e-c618-4ba4-adf0-e5c79b11d777
+		lineageTag: 188a5de1-9e7d-4012-bbe0-a7b0a0d14ae2
 		summarizeBy: sum
 		sourceColumn: 'Group By'
 
@@ -150,7 +151,7 @@ table TestData
 
 	column Image
 		dataType: string
-		lineageTag: b0395357-83ef-4240-a38a-5ef0b6746658
+		lineageTag: 5ed8b3b9-ebc4-43d1-af04-dce95be5d164
 		summarizeBy: none
 		sourceColumn: Image
 
@@ -159,7 +160,7 @@ table TestData
 	column 'Note Line'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 86bc61b5-b2a6-404e-a392-0be25a3e983d
+		lineageTag: 86126fbe-d14b-4469-b500-41455809d1dd
 		summarizeBy: sum
 		sourceColumn: 'Note Line'
 
@@ -167,7 +168,7 @@ table TestData
 
 	column 'Note Line Burst Out Account'
 		dataType: string
-		lineageTag: 33e35b8d-2e89-40db-b971-15fb90b2b06d
+		lineageTag: d9e10f76-ee14-4469-ac37-f50f19527125
 		summarizeBy: none
 		sourceColumn: 'Note Line Burst Out Account'
 
@@ -176,23 +177,22 @@ table TestData
 	column Selection
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 2551250b-e9be-44a8-a46b-ff1aa11d04f5
+		lineageTag: 4b245a29-cd60-41de-bf1b-531e5321b6b0
 		summarizeBy: sum
 		sourceColumn: Selection
 
 		annotation SummarizationSetBy = Automatic
 
-	column SHOW
+	column SHOW = IF('TestData'[BurstoutSet], "Selected", "Not Selected")
 		dataType: string
-		lineageTag: 6ccfbb58-eaa2-40c9-adf0-74202895e104
+		lineageTag: 4f716646-20d4-43bc-bfb0-df2c2fa704a3
 		summarizeBy: none
-		sourceColumn: SHOW
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Show Cycle Based'
 		dataType: string
-		lineageTag: 8bd97b93-a10a-44d4-ab07-7ab4949f4a5c
+		lineageTag: 4a8f4080-276f-4574-9e67-f2b04011ebe6
 		summarizeBy: none
 		sourceColumn: 'Show Cycle Based'
 
@@ -201,7 +201,7 @@ table TestData
 	column 'Sub Class'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: b364bba9-0a16-4883-8da7-0d8007c0333b
+		lineageTag: a2cb83ca-e548-487c-92f9-53a2f2480d7e
 		summarizeBy: sum
 		sourceColumn: 'Sub Class'
 
@@ -209,7 +209,7 @@ table TestData
 
 	column 'SubClass Burst Out Account'
 		dataType: string
-		lineageTag: dc77b8a1-fb25-4721-8e2f-025a4da5b7ad
+		lineageTag: 1b6df112-1b25-441c-8daf-b53d971ba61e
 		summarizeBy: none
 		sourceColumn: 'SubClass Burst Out Account'
 
@@ -217,7 +217,7 @@ table TestData
 
 	column Type
 		dataType: string
-		lineageTag: dfbef28f-b5f4-49ba-bfc5-c19e53ec054f
+		lineageTag: 6cae6274-b6e8-440c-9100-93fa4ab80df8
 		summarizeBy: none
 		sourceColumn: Type
 
@@ -225,7 +225,7 @@ table TestData
 
 	column Amount
 		dataType: string
-		lineageTag: 31d68cb5-58a8-4aab-ac7c-037fb303734f
+		lineageTag: 5ab484a7-edfd-4fd5-a2d0-5446217727f7
 		summarizeBy: none
 		sourceColumn: Amount
 
@@ -233,7 +233,7 @@ table TestData
 
 	column Amount1
 		dataType: string
-		lineageTag: d2ca5846-09da-496c-a972-14a33d8b7ed8
+		lineageTag: d1a486eb-eca7-4a87-87d6-871198db0e0e
 		summarizeBy: none
 		sourceColumn: Amount1
 
@@ -242,7 +242,7 @@ table TestData
 	column 'Count of Amount Calculation'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: f1404708-82e2-48b2-9340-46e58bac0a82
+		lineageTag: 38fbbd04-5ac5-4e01-bddf-95e1e3a7c18d
 		summarizeBy: sum
 		sourceColumn: 'Count of Amount Calculation'
 
@@ -251,7 +251,7 @@ table TestData
 	column 'Number of Records'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 36568e11-9477-427f-9bf3-3bb290e6ef64
+		lineageTag: 14b67ab8-cd97-4538-b405-8d5239f84f30
 		summarizeBy: sum
 		sourceColumn: 'Number of Records'
 
@@ -260,7 +260,7 @@ table TestData
 	column 'Number of Records1'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: b110466c-5cc8-4021-822c-916cd54a14d1
+		lineageTag: 39e14d84-44c3-4a80-a588-fd071dff6caa
 		summarizeBy: sum
 		sourceColumn: 'Number of Records1'
 
@@ -269,7 +269,7 @@ table TestData
 	column 'Select Burst Out'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 9a4f9df1-910e-4372-87ec-ddf53f2612ff
+		lineageTag: b21b7ddb-7073-4b79-bf0d-b0337ceee51e
 		summarizeBy: sum
 		sourceColumn: 'Select Burst Out'
 
@@ -278,7 +278,7 @@ table TestData
 	column 'Select Transaction Analysis view'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 0648b131-f02f-4b97-bb5a-a8d055276652
+		lineageTag: 38c87441-284b-47e8-a09f-98acde80362b
 		summarizeBy: sum
 		sourceColumn: 'Select Transaction Analysis view'
 
@@ -287,7 +287,7 @@ table TestData
 	column 'Sum Cy'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: af30df9a-f06d-44b5-ab21-1e9ab4781a40
+		lineageTag: 9f1da1e2-6145-4822-a090-799925410c75
 		summarizeBy: sum
 		sourceColumn: 'Sum Cy'
 
@@ -296,7 +296,7 @@ table TestData
 	column 'Sum Py1'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: fa44312b-a9e5-49f3-a411-2e02dca400e5
+		lineageTag: 628a8bf0-dfad-41f3-a541-fcb711f81f7c
 		summarizeBy: sum
 		sourceColumn: 'Sum Py1'
 
@@ -305,7 +305,7 @@ table TestData
 	column 'Sum Py2'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: b61a4760-1fbd-4dd2-8f84-e605aef9bde7
+		lineageTag: fff2431b-44f1-4a53-8f4e-362c7e2ccb15
 		summarizeBy: sum
 		sourceColumn: 'Sum Py2'
 
@@ -314,7 +314,7 @@ table TestData
 	column 'Sum Py3'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: d108c3e4-793a-4f87-96ec-bcb29fb46f0f
+		lineageTag: ce15e004-192b-4a7f-aecb-4a873fe8cb95
 		summarizeBy: sum
 		sourceColumn: 'Sum Py3'
 
@@ -323,7 +323,7 @@ table TestData
 	column 'Sum Py4'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 9558dba8-fc23-4b72-b322-976a45011550
+		lineageTag: f5f7b243-47a3-4c3c-937d-8a271319e6ba
 		summarizeBy: sum
 		sourceColumn: 'Sum Py4'
 
@@ -332,7 +332,7 @@ table TestData
 	column 'Total Credits'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 2e3016f0-5829-4830-98cf-95437a2e405f
+		lineageTag: 9f933dc2-ccb6-4c14-a39f-012b2828d50c
 		summarizeBy: sum
 		sourceColumn: 'Total Credits'
 
@@ -341,7 +341,7 @@ table TestData
 	column 'Total Debits'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 08cfa153-d32e-429d-a59d-c2cc20c06fe1
+		lineageTag: 60adeee6-baca-4b05-92cc-f496ccc8798a
 		summarizeBy: sum
 		sourceColumn: 'Total Debits'
 
@@ -349,14 +349,14 @@ table TestData
 
 	column BurstoutSet
 		dataType: string
-		lineageTag: ffdd1c19-0f5b-46e1-b3c8-88b65b66205c
+		lineageTag: c50277c2-e321-42e5-86a7-aa721ed0dc54
 		summarizeBy: none
 		sourceColumn: BurstoutSet
 		displayFolder: Groups
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'TestData-afba3b4f-05bb-4f53-b1c5-3afeabe42183' = m
+	partition 'TestData-b36390d5-5884-4e54-ab0c-e419f465d5f0' = m
 		mode: import
 		source =
 				let
@@ -375,11 +375,11 @@ table TestData
 				
 				        #table({"Account Account Name", "Account Number", "Account Number Burst Out Account", "Acct Name", "Burst Out", "Burst Out Join", "Burst Out Set list", "Burst Out View", "Count JE Number", "Entity ID", "Filter", "Fiscal Year", "Flag", "Flag__copy_", "FS Line", "FS Line Burst Out Account", "Group By", "Image", "Note Line", "Note Line Burst Out Account", "Selection", "show", "Show Cycle Based", "Sub Class", "SubClass Burst Out Account", "Type", "Amount", "Amount1", "Count of Amount Calculation", "Number of Records", "Number of Records1", "Select Burst Out", "Select Transaction Analysis view", "Sum Cy", "Sum Py1", "Sum Py2", "Sum Py3", "Sum Py4", "Total Credits", "Total Debits"}, {}),
 				    #"Renamed Columns" = Table.RenameColumns(Source, {{"show", "Show"}}),
-				    #"Added SHOW" = Table.AddColumn(#"Renamed Columns", "SHOW", each if [BurstoutSet] then "Selected" else "Not Selected", type text),
-				    #"Added BurstoutSet" = Table.AddColumn(#"Added SHOW", "BurstoutSet", each "", type text),
+				    #"Added BurstoutSet" = Table.AddColumn(#"Renamed Columns", "BurstoutSet", each "", type text),
 				    Result = #"Added BurstoutSet"
 				in
 				    Result
 
 	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 41 columns and 1 measures: Account Account Name, Account Number, Account Number Burst Out Account, Acct Name, Burst Out, Burst Out Join, Burst Out Set list, Burst Out View, ... (41 columns total).
 

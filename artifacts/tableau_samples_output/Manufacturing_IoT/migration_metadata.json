@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-02T14:07:02.735653",
+  "generated_at": "2026-05-13T17:41:21.427745",
   "source": "Tableau Migration",
   "report_name": "Manufacturing_IoT",
   "objects_converted": {
@@ -20,7 +20,7 @@
   },
   "generated_output": {
     "pages": 2,
-    "visuals": 10,
+    "visuals": 8,
     "theme_applied": false,
     "theme_detail": {
       "status": "skipped",

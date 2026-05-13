@@ -1,29 +1,27 @@
 table Calendar
-	lineageTag: 09c8fbec-5c0f-4cf1-99a1-64d2e5b463f7
+	lineageTag: b51494c6-5ff3-4422-9833-9bdeb6e16803
 
 	column Date
 		dataType: dateTime
 		formatString: dd/mm/yyyy
-		lineageTag: 7438ab64-2b69-43cf-b436-6ff9d3fa8d7a
+		lineageTag: acd9fccb-3b9f-4202-8e62-3186890746f6
 		summarizeBy: none
 		sourceColumn: Date
 		isKey
-		dataCategory: DateTime
 
 		annotation SummarizationSetBy = Automatic
 
 	column Year
 		dataType: int64
-		lineageTag: 349c1cde-4618-45f4-a7d3-ee7f8c8b64b6
+		lineageTag: ea51c6d7-1b68-4558-85f7-b0b1940c6a3a
 		summarizeBy: none
 		sourceColumn: Year
-		dataCategory: Years
 
 		annotation SummarizationSetBy = Automatic
 
 	column Quarter
 		dataType: string
-		lineageTag: 85829768-1713-4930-abb4-0d95abdbc448
+		lineageTag: 53c496fc-87dd-4442-91f5-d46ec391092f
 		summarizeBy: none
 		sourceColumn: Quarter
 
@@ -31,16 +29,15 @@ table Calendar
 
 	column Month
 		dataType: int64
-		lineageTag: 447ecb89-a366-44d8-8357-7ffbd094c945
+		lineageTag: 50d3eae1-e0ed-4ab4-859f-a967be93108f
 		summarizeBy: none
 		sourceColumn: Month
-		dataCategory: Months
 
 		annotation SummarizationSetBy = Automatic
 
 	column MonthName
 		dataType: string
-		lineageTag: 8951de38-8e9e-42b8-884b-64974970475c
+		lineageTag: 0d9a4168-bb3a-4f70-8252-1bb0d02e8cd2
 		summarizeBy: none
 		sourceColumn: MonthName
 		sortByColumn: Month
@@ -49,16 +46,15 @@ table Calendar
 
 	column Day
 		dataType: int64
-		lineageTag: 168a3289-3a34-44eb-a4c0-ebb2951efcc7
+		lineageTag: 52859a73-fc7d-4460-8ac2-03416334dac8
 		summarizeBy: none
 		sourceColumn: Day
-		dataCategory: Days
 
 		annotation SummarizationSetBy = Automatic
 
 	column DayOfWeek
 		dataType: int64
-		lineageTag: babade8e-2415-4f94-b787-aaa4270e1c95
+		lineageTag: 1812e49e-beb3-4689-955d-858a670de2c0
 		summarizeBy: none
 		sourceColumn: DayOfWeek
 
@@ -66,7 +62,7 @@ table Calendar
 
 	column DayName
 		dataType: string
-		lineageTag: 073b74d1-867f-48b1-a2fd-5fd2491c9812
+		lineageTag: 63ff7e32-301f-46dc-a683-d4caf317736f
 		summarizeBy: none
 		sourceColumn: DayName
 		sortByColumn: DayOfWeek
@@ -74,30 +70,30 @@ table Calendar
 		annotation SummarizationSetBy = Automatic
 
 	hierarchy 'Date Hierarchy'
-		lineageTag: 79998cf5-c075-4d05-b095-78ced504d57f
+		lineageTag: 4553371e-8a95-4e43-a939-6f9100c0d8fa
 
 		level Year
 			ordinal: 0
 			column: Year
-			lineageTag: 48d51a15-2d5b-4a69-b926-d7403534f232
+			lineageTag: ba4d5e26-c6b1-4b49-ba67-2dfd8f6593d8
 
 		level Quarter
 			ordinal: 1
 			column: Quarter
-			lineageTag: e380076a-a3f2-430b-9289-f3a83a41fbde
+			lineageTag: ea56f461-7716-42f0-a4b9-0cdb2b3e2af1
 
 		level Month
 			ordinal: 2
 			column: MonthName
-			lineageTag: 3d9cd301-a59a-4593-8024-f12076dc037c
+			lineageTag: 22a7ac05-d6d3-4853-9a52-2b4059453e83
 
 		level Day
 			ordinal: 3
 			column: Day
-			lineageTag: bc20f7dc-4927-414a-8b9f-a72b5bb5f311
+			lineageTag: 78b7cabb-dd0b-4f10-94ec-6c1ed0cd24b2
 
 
-	partition 'Calendar-51205d63-d80a-4e11-a862-037bd0e91908' = m
+	partition 'Calendar-aa2f2427-a369-42be-98c5-94a99dbcc4bb' = m
 		mode: import
 		source =
 				let
@@ -110,12 +106,14 @@ table Calendar
 				    #"Added Year" = Table.AddColumn(#"Changed Type", "Year", each Date.Year([Date]), Int64.Type),
 				    #"Added Quarter" = Table.AddColumn(#"Added Year", "Quarter", each "Q" & Text.From(Date.QuarterOfYear([Date]))),
 				    #"Added Month" = Table.AddColumn(#"Added Quarter", "Month", each Date.Month([Date]), Int64.Type),
-				    #"Added MonthName" = Table.AddColumn(#"Added Month", "MonthName", each Date.MonthName([Date])),
+				    #"Added MonthName" = Table.AddColumn(#"Added Month", "MonthName", each Date.MonthName([Date], "en-US")),
 				    #"Added Day" = Table.AddColumn(#"Added MonthName", "Day", each Date.Day([Date]), Int64.Type),
 				    #"Added DayOfWeek" = Table.AddColumn(#"Added Day", "DayOfWeek", each Date.DayOfWeek([Date], Day.Monday) + 1, Int64.Type),
-				    #"Added DayName" = Table.AddColumn(#"Added DayOfWeek", "DayName", each Date.DayOfWeekName([Date]))
+				    #"Added DayName" = Table.AddColumn(#"Added DayOfWeek", "DayName", each Date.DayOfWeekName([Date], "en-US"))
 				in
 				    #"Added DayName"
 
 	annotation PBI_ResultType = Table
+	annotation Copilot_DateTable = true
+	annotation Copilot_TableDescription = Contains 8 columns: Date, Year, Quarter, Month, MonthName, Day, DayOfWeek, DayName.
 

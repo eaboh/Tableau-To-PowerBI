@@ -1,15 +1,15 @@
-relationship b477ca7d-0887-43ec-9bad-73dbc6dbb1a6
+relationship 6eb6cfcb-3ddb-4b33-ba91-b36aead5149c
 	fromColumn: Orders.'Order Date'
 	toColumn: Calendar.Date
-	crossFilteringBehavior: oneDirection
+	crossFilteringBehavior: bothDirections
 
-relationship eb2063b4-9858-4cb2-9694-ebb5f166ee0f
+relationship 6603d7d8-f75e-4a5a-9b93-bc0183dc6a2e
 	fromColumn: Extract.'Order Date'
 	toColumn: Calendar.Date
-	crossFilteringBehavior: oneDirection
+	crossFilteringBehavior: bothDirections
 	isActive: false
 
-relationship 09fb1359-c521-4d24-8408-7ae8ac305e8c
+relationship fd346dde-17e6-4479-8d4f-479d6e5be990
 	fromColumn: Orders.'Row ID'
 	toColumn: Extract.'Row ID'
 	fromCardinality: many

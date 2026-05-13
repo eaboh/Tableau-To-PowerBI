@@ -1,13 +1,14 @@
 table Extract
-	lineageTag: 5b7a6050-10fd-4624-8ce2-261b6fd54ded
+	lineageTag: ad2154be-e153-45ec-9020-b84ae6889824
 
 	measure 'Number of Records' = COUNTROWS('Extract')
 		displayFolder: Measures
-		lineageTag: 03741aed-a199-4d9b-904a-038ee31435c3
+		lineageTag: be02626a-7a11-40b7-afd7-0cd03b05d05e
+		annotation Copilot_Description = DAX: COUNTROWS('Extract')
 
 	column Category
 		dataType: string
-		lineageTag: 61815191-ee4b-41de-b95a-b09afef3f266
+		lineageTag: 98e149bf-57c8-4d1a-ab72-5785c17d58db
 		summarizeBy: none
 		sourceColumn: Category
 
@@ -15,7 +16,7 @@ table Extract
 
 	column 'Number of Records'
 		dataType: int64
-		lineageTag: ef3c2ffd-c1a7-46b7-b036-bf3ae6d0b181
+		lineageTag: 8f5f074b-9e1c-4d05-a494-41b08e6bd3da
 		summarizeBy: sum
 		sourceColumn: 'Number of Records'
 
@@ -24,17 +25,16 @@ table Extract
 	column 'Order Date'
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: 8cfce04c-a45e-47b9-b59e-a0629469e613
+		lineageTag: e3cd017c-a781-4b5c-a81d-0c847d3e7166
 		summarizeBy: none
 		sourceColumn: 'Order Date'
-		dataCategory: DateTime
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Sales Target'
 		dataType: int64
 		formatString: c"$"#,#0;("$"#,#0)
-		lineageTag: a10a4c5a-f76f-410f-ad4e-4917d562e852
+		lineageTag: 2b84bd07-e1da-4fce-b41b-cdb6129a60af
 		summarizeBy: sum
 		sourceColumn: 'Sales Target'
 
@@ -42,13 +42,13 @@ table Extract
 
 	column Segment
 		dataType: string
-		lineageTag: 2895de57-3915-459b-80b8-268ef9f9a302
+		lineageTag: a75afbb8-80b6-4879-99cb-b3f4c98863a1
 		summarizeBy: none
 		sourceColumn: Segment
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Extract-1ba878f5-c3f1-46ad-8fee-ed0421c4a866' = m
+	partition 'Extract-cf935411-b5fd-42a3-89f1-124c983eaf1c' = m
 		mode: import
 		source =
 				let
@@ -68,4 +68,5 @@ table Extract
 				    Source
 
 	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 5 columns and 1 measures: Category, Number of Records, Order Date, Sales Target, Segment.
 

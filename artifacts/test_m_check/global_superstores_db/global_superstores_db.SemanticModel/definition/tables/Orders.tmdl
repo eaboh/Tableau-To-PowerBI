@@ -1,18 +1,20 @@
 table Orders
-	lineageTag: ff0362b1-c436-4f8b-8722-4e7d246b9dc1
+	lineageTag: e748b070-cf49-4c83-8480-26b35827fb42
 
 	measure Margin = SUM('Orders'[Profit])/SUM('Orders'[Sales])
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: f03df0e3-ab2b-4037-929d-3a94eabe656a
+		lineageTag: 6ac64f4b-d25c-421b-86a7-17f1721d858e
+		annotation Copilot_Description = Migrated from Tableau: SUM([Profit])/SUM([Sales]) | DAX: SUM('Orders'[Profit])/SUM('Orders'[Sales])
 
-	measure '[Number of Records]' = 1
+	measure 'Number of Records' = 1
 		displayFolder: Measures
-		lineageTag: e2719ad8-24dc-4318-bf53-700e625d281f
+		lineageTag: 55c638d3-0f59-4804-862d-0cf9e8bb56b4
+		annotation Copilot_Description = Migrated from Tableau: 1 | DAX: 1
 
 	column 'Row ID'
 		dataType: int64
-		lineageTag: 45500e02-4bd1-467a-b344-f3666784e8a5
+		lineageTag: c4f12c59-2c60-49d9-b773-6786ebb01704
 		summarizeBy: sum
 		sourceColumn: 'Row ID'
 		annotation Copilot_Hidden = true
@@ -21,7 +23,7 @@ table Orders
 
 	column 'Order ID'
 		dataType: string
-		lineageTag: 0e2f020a-b991-4e20-816d-7f8312a28735
+		lineageTag: 8eaa7b22-6f2d-4082-a349-eb5058ff9803
 		summarizeBy: none
 		sourceColumn: 'Order ID'
 		annotation Copilot_Hidden = true
@@ -31,26 +33,24 @@ table Orders
 	column 'Order Date'
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: 7c71266c-ba5f-49a2-8d0b-f252f6a3493c
+		lineageTag: c8e5ecb2-fe07-45db-8731-b57034018b4b
 		summarizeBy: none
 		sourceColumn: 'Order Date'
-		dataCategory: DateTime
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Ship Date'
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: 0828e468-d5f8-4c10-9503-d9e921e6cfee
+		lineageTag: 036079e7-53f3-4958-b5f9-cd48af7cafdb
 		summarizeBy: none
 		sourceColumn: 'Ship Date'
-		dataCategory: DateTime
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Ship Mode'
 		dataType: string
-		lineageTag: f173b41a-a4f0-45c1-9e98-9cf4323fa61a
+		lineageTag: 4fdc1577-391d-48a0-9098-432705d9f498
 		summarizeBy: none
 		sourceColumn: 'Ship Mode'
 
@@ -58,7 +58,7 @@ table Orders
 
 	column 'Customer ID'
 		dataType: string
-		lineageTag: ca5150cf-e858-42f2-bfb9-536420565a86
+		lineageTag: ae0eceee-b4c5-4bf4-8c2d-6ac0e626979a
 		summarizeBy: none
 		sourceColumn: 'Customer ID'
 		annotation Copilot_Hidden = true
@@ -67,7 +67,7 @@ table Orders
 
 	column 'Customer Name'
 		dataType: string
-		lineageTag: ee5b9c50-b846-46cb-b07d-c35364ba2b6e
+		lineageTag: f9a58bc9-b744-4fd4-b4f5-d91e9d2b80ac
 		summarizeBy: none
 		sourceColumn: 'Customer Name'
 
@@ -75,7 +75,7 @@ table Orders
 
 	column Segment
 		dataType: string
-		lineageTag: a2976f44-8fae-4027-ad9b-f586da83032e
+		lineageTag: dfb8a061-80e3-408e-80e0-e09b2b290e01
 		summarizeBy: none
 		sourceColumn: Segment
 
@@ -83,7 +83,7 @@ table Orders
 
 	column City
 		dataType: string
-		lineageTag: 38b7e076-40df-4dd0-8e3c-72bc6cf6c2f1
+		lineageTag: ae0b9042-4799-4be0-97c6-096cc7c73431
 		summarizeBy: none
 		sourceColumn: City
 		dataCategory: City
@@ -92,7 +92,7 @@ table Orders
 
 	column State
 		dataType: string
-		lineageTag: f3872d02-bf5f-4dd2-b586-9026ab369a40
+		lineageTag: e785beee-0788-43c8-95f5-d8415f68190f
 		summarizeBy: none
 		sourceColumn: State
 		dataCategory: StateOrProvince
@@ -101,7 +101,7 @@ table Orders
 
 	column Country
 		dataType: string
-		lineageTag: f03f9b54-1412-47d4-a688-91a56bf78284
+		lineageTag: 997a22e5-fae8-487a-b800-b242f3d0aaee
 		summarizeBy: none
 		sourceColumn: Country
 		dataCategory: Country
@@ -110,7 +110,7 @@ table Orders
 
 	column 'Postal Code'
 		dataType: string
-		lineageTag: 0e866a6b-1e9d-49e5-92a2-e68339c1c9c6
+		lineageTag: eb330b3f-1dfa-469c-8449-431ef4d46b15
 		summarizeBy: none
 		sourceColumn: 'Postal Code'
 		dataCategory: PostalCode
@@ -119,7 +119,7 @@ table Orders
 
 	column Market
 		dataType: string
-		lineageTag: f3926a9a-1ad1-4a49-b8df-1e1fe831c386
+		lineageTag: e8f284de-1c3a-41d5-85ae-258df8b97105
 		summarizeBy: none
 		sourceColumn: Market
 
@@ -127,7 +127,7 @@ table Orders
 
 	column Region
 		dataType: string
-		lineageTag: 669655c1-77f8-4968-aee6-07824c6ab1c1
+		lineageTag: bf46ec1b-e65e-4e0e-8743-072e3e99aea9
 		summarizeBy: none
 		sourceColumn: Region
 		dataCategory: StateOrProvince
@@ -136,7 +136,7 @@ table Orders
 
 	column 'Product ID'
 		dataType: string
-		lineageTag: fe668e7b-549b-488e-88fb-3ceaea0a3509
+		lineageTag: 07212877-fb59-4e85-9755-c4c91e711b09
 		summarizeBy: none
 		sourceColumn: 'Product ID'
 		annotation Copilot_Hidden = true
@@ -145,7 +145,7 @@ table Orders
 
 	column Category
 		dataType: string
-		lineageTag: 580245d9-44ca-4c91-8d7c-864d212087cc
+		lineageTag: 87341093-cdd5-46d3-8cdb-ff2844d76183
 		summarizeBy: none
 		sourceColumn: Category
 
@@ -153,7 +153,7 @@ table Orders
 
 	column 'Sub-Category'
 		dataType: string
-		lineageTag: 0a31d245-a324-4d82-930c-230087c1009a
+		lineageTag: c99dd63a-8f50-41a2-bc25-26c78bc21507
 		summarizeBy: none
 		sourceColumn: 'Sub-Category'
 
@@ -161,7 +161,7 @@ table Orders
 
 	column 'Product Name'
 		dataType: string
-		lineageTag: 116c353c-7774-4796-ae11-0f722af78582
+		lineageTag: 02a24ae5-8595-48bc-890a-532fb94268b6
 		summarizeBy: none
 		sourceColumn: 'Product Name'
 
@@ -170,7 +170,7 @@ table Orders
 	column Sales
 		dataType: double
 		formatString: #,0.00
-		lineageTag: e1afb9d3-c941-4ea7-bd5a-2217aefae99e
+		lineageTag: ecaa0c5f-6414-4acb-85cc-d1fb2069441d
 		summarizeBy: sum
 		sourceColumn: Sales
 
@@ -178,7 +178,7 @@ table Orders
 
 	column Quantity
 		dataType: int64
-		lineageTag: 02605edb-ed31-4e69-8c68-0e5c30e3dcd8
+		lineageTag: 3bc3fd3f-adec-449a-80b0-8845cfa96413
 		summarizeBy: sum
 		sourceColumn: Quantity
 
@@ -187,7 +187,7 @@ table Orders
 	column Discount
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 855de4a2-edd8-4afa-a1c8-2ce1ba4b8d71
+		lineageTag: 54381297-94d2-42c5-9235-3f66e350fd91
 		summarizeBy: sum
 		sourceColumn: Discount
 
@@ -196,7 +196,7 @@ table Orders
 	column Profit
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 0478e02f-6ff0-469c-895b-60842bd4b095
+		lineageTag: 4574a8e3-9e63-4e38-a30b-07549f7fd69f
 		summarizeBy: sum
 		sourceColumn: Profit
 
@@ -205,7 +205,7 @@ table Orders
 	column 'Shipping Cost'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 552c633a-c586-49a2-b2f8-ea6fc7070919
+		lineageTag: 12312704-67dd-48bd-b82a-5d15adf72c8f
 		summarizeBy: sum
 		sourceColumn: 'Shipping Cost'
 
@@ -213,23 +213,23 @@ table Orders
 
 	column 'Order Priority'
 		dataType: string
-		lineageTag: c91c5840-e352-481b-9028-c6570bfd6705
+		lineageTag: 7aaacf5f-4825-45cf-9614-7da4c23cfaf3
 		summarizeBy: none
 		sourceColumn: 'Order Priority'
 
 		annotation SummarizationSetBy = Automatic
 
-	column '[Discount (bin)]'
+	column 'Discount (bin)'
 		dataType: int64
-		lineageTag: e4df3c78-e89f-4030-8613-6ed622e5944f
+		lineageTag: 493bac1b-c84c-4668-b85f-0361165bc2cf
 		summarizeBy: none
-		sourceColumn: '[Discount (bin)]'
+		sourceColumn: 'Discount (bin)'
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Action (Discount (bin))'
 		dataType: string
-		lineageTag: b715434d-0a21-49be-ad61-2a8bb06327cb
+		lineageTag: 21a9e593-7a4f-488c-9cea-2ae4826ab0b0
 		summarizeBy: none
 		sourceColumn: 'Action (Discount (bin))'
 		displayFolder: Groups
@@ -238,7 +238,7 @@ table Orders
 
 	column 'Action (Segment)'
 		dataType: string
-		lineageTag: 0dc109ad-e292-42c7-9e4e-adc751c91db5
+		lineageTag: 5205530c-05c6-4418-9a48-3c29accdb755
 		summarizeBy: none
 		sourceColumn: 'Action (Segment)'
 		displayFolder: Groups
@@ -247,7 +247,7 @@ table Orders
 
 	column 'Action (State)'
 		dataType: string
-		lineageTag: 20195e66-5f6b-48d5-8535-8af0e2aadf30
+		lineageTag: b77b6a97-be21-4607-817f-e84b988c4953
 		summarizeBy: none
 		sourceColumn: 'Action (State)'
 		displayFolder: Groups
@@ -256,7 +256,7 @@ table Orders
 
 	column 'Action (YEAR(Order Date))'
 		dataType: string
-		lineageTag: ee90ab69-e438-406b-b7eb-94755e4ddbc2
+		lineageTag: 5f939976-ce6f-4ca9-b064-79889c7accad
 		summarizeBy: none
 		sourceColumn: 'Action (YEAR(Order Date))'
 		displayFolder: Groups
@@ -265,14 +265,14 @@ table Orders
 
 	column 'Sub-Category (group)'
 		dataType: string
-		lineageTag: 53bc12cb-6a67-49c9-aaf0-f379e21f2eca
+		lineageTag: 98286f11-bce6-4aa5-985c-22167f4dc587
 		summarizeBy: none
 		sourceColumn: 'Sub-Category (group)'
 		displayFolder: Groups
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Orders-bf29abcc-bbb0-44eb-8ebc-4d98a197d5d8' = m
+	partition 'Orders-14130f7d-0559-4314-bd90-136b3a08ffef' = m
 		mode: import
 		source =
 				let
@@ -317,12 +317,12 @@ table Orders
 				        {"Shipping Cost", type number},
 				        {"Order Priority", type text}
 				    }),
-				    #"Added [Discount (bin)]" = Table.AddColumn(#"Changed Types", "[Discount (bin)]", each [Discount], Int64.Type),
-				    #"Added Action (Discount (bin))" = Table.AddColumn(#"Added [Discount (bin)]", "Action (Discount (bin))", each Text.From([#"[Discount (bin)]"]), type text),
+				    #"Added Discount (bin)" = Table.AddColumn(#"Changed Types", "Discount (bin)", each [Discount], Int64.Type),
+				    #"Added Action (Discount (bin))" = Table.AddColumn(#"Added Discount (bin)", "Action (Discount (bin))", each Text.From([#"Discount (bin)"]), type text),
 				    #"Added Action (Segment)" = Table.AddColumn(#"Added Action (Discount (bin))", "Action (Segment)", each Text.From([#"Segment"]), type text),
 				    #"Added Action (State)" = Table.AddColumn(#"Added Action (Segment)", "Action (State)", each Text.From([#"State"]), type text),
 				    #"Added Action (YEAR(Order Date))" = Table.AddColumn(#"Added Action (State)", "Action (YEAR(Order Date))", each Text.From(Date.Year([#"Order Date"])), type text),
-				    #"Added Sub-Category (group)" = Table.AddColumn(#"Added Action (YEAR(Order Date))", "Sub-Category (group)", each if [Sub-Category] = "Art" then "Miscellaneous_Office_Supplies" else if [Sub-Category] = "Binders" then "Miscellaneous_Office_Supplies" else if [Sub-Category] = "Envelopes" then "Miscellaneous_Office_Supplies" else if [Sub-Category] = "Fasteners" then "Miscellaneous_Office_Supplies" else if [Sub-Category] = "Labels" then "Miscellaneous_Office_Supplies" else if [Sub-Category] = "Paper" then "Miscellaneous_Office_Supplies" else if [Sub-Category] = "Supplies" then "Miscellaneous_Office_Supplies" else "Other", type text),
+				    #"Added Sub-Category (group)" = Table.AddColumn(#"Added Action (YEAR(Order Date))", "Sub-Category (group)", each if [#"Sub-Category"] = "Art" then "Miscellaneous_Office_Supplies" else if [#"Sub-Category"] = "Binders" then "Miscellaneous_Office_Supplies" else if [#"Sub-Category"] = "Envelopes" then "Miscellaneous_Office_Supplies" else if [#"Sub-Category"] = "Fasteners" then "Miscellaneous_Office_Supplies" else if [#"Sub-Category"] = "Labels" then "Miscellaneous_Office_Supplies" else if [#"Sub-Category"] = "Paper" then "Miscellaneous_Office_Supplies" else if [#"Sub-Category"] = "Supplies" then "Miscellaneous_Office_Supplies" else "Other", type text),
 				    Result = #"Added Sub-Category (group)"
 				in
 				    Result

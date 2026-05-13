@@ -1,0 +1,20 @@
+{
+  "updated_at": "2026-05-13T17:36:04.586070",
+  "summary": {
+    "total": 1,
+    "success": 1,
+    "failed": 0,
+    "zero_touch_rate": 100.0,
+    "top_failure_modes": []
+  },
+  "records": [
+    {
+      "workbook": "Cache",
+      "timestamp": "2026-05-13T17:36:04.585565",
+      "success": true,
+      "failure_mode": "",
+      "verdict_severity": "info",
+      "issues_count": 0
+    }
+  ]
+}

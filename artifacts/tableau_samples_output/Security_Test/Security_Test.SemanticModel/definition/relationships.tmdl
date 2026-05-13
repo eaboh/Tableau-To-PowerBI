@@ -1,11 +1,11 @@
-relationship 46be746c-426c-45d6-baae-eee77c8718d9
+relationship 07b0267d-5355-438b-8669-3f47a356b161
 	fromColumn: Orders.OrderDate
 	toColumn: Calendar.Date
 	fromCardinality: many
 	toCardinality: many
 	crossFilteringBehavior: bothDirections
 
-relationship e497ea55-1c16-48e2-906c-370f054db636
+relationship 444872c1-735b-426d-81e0-dbfff8c45099
 	fromColumn: Orders.Region
 	toColumn: Regions.RegionName
 	fromCardinality: many

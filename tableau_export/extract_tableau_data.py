@@ -1691,13 +1691,22 @@ class TableauExtractor:
         Handles both old (<members><member>) and new (<domain><member>) formats.
         """
         result = []
+
+        def _strip_outer_quotes(s):
+            """Strip one layer of surrounding double quotes from Tableau string values."""
+            if len(s) >= 2 and s[0] == '"' and s[-1] == '"':
+                return s[1:-1]
+            return s
         
         # List values — old format: <members><member>
         for member in param.findall('.//members/member'):
             val = member.get('value', '')
             alias = member.get('alias', val)
             if val:
-                result.append({'value': val, 'alias': alias})
+                # Strip surrounding quotes from string values (e.g., '"All"' → 'All')
+                clean_val = _strip_outer_quotes(val)
+                clean_alias = _strip_outer_quotes(alias) if alias else clean_val
+                result.append({'value': clean_val, 'alias': clean_alias})
         
         # List values — new format: <domain><member>
         for member in param.findall('.//domain/member'):
@@ -1705,8 +1714,8 @@ class TableauExtractor:
             alias = member.get('alias', val)
             if val:
                 # Strip surrounding quotes from string values (e.g., '"All"' → 'All')
-                clean_val = val.strip('"')
-                clean_alias = alias.strip('"') if alias else clean_val
+                clean_val = _strip_outer_quotes(val)
+                clean_alias = _strip_outer_quotes(alias) if alias else clean_val
                 result.append({'value': clean_val, 'alias': clean_alias})
         
         # Range (min/max/step)

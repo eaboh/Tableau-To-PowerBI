@@ -1,0 +1,7 @@
+relationship f5e117d2-a8ae-4c00-9a4b-50d970ffbbea
+	fromColumn: xy.a
+	toColumn: xy1.a
+	fromCardinality: many
+	toCardinality: many
+	crossFilteringBehavior: bothDirections
+

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "c847b76e6a9e4c1b8517",
+  "position": {
+    "x": 1518,
+    "y": 545,
+    "z": 39000,
+    "height": 40,
+    "width": 80,
+    "tabOrder": 39000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "High sales",
+                    "textStyle": {
+                      "color": "#a0cbe8",
+                      "fontSize": "7.0pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

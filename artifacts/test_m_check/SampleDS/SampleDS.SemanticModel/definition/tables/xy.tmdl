@@ -1,13 +1,14 @@
 table xy
-	lineageTag: e03d635a-247d-40cd-8cd3-9ef3de715bf8
+	lineageTag: 9b52daa9-17ea-4658-b94e-0d8a3a8accae
 
-	measure '[Number of Records]' = 1
+	measure 'Number of Records' = 1
 		displayFolder: Measures
-		lineageTag: a32f62e8-fb57-4477-8414-56da280c76ba
+		lineageTag: 2d1bdbed-2835-4557-9070-c8ff007853c2
+		annotation Copilot_Description = Migrated from Tableau: 1 | DAX: 1
 
 	column a
 		dataType: string
-		lineageTag: 0fb6127c-720c-47b5-b6c6-388de947af72
+		lineageTag: 749cfa4c-2397-42e9-b41e-5faf40035113
 		summarizeBy: none
 		sourceColumn: a
 
@@ -15,7 +16,7 @@ table xy
 
 	column 'Today''s Date'
 		dataType: string
-		lineageTag: fdfa624b-23fc-43a9-8505-ea7f0ce4b801
+		lineageTag: 9e8126b3-28a7-461e-bb7a-e611ab3fd09f
 		summarizeBy: none
 		sourceColumn: 'Today''s Date'
 
@@ -23,7 +24,7 @@ table xy
 
 	column x
 		dataType: int64
-		lineageTag: 07dee468-138f-4fcd-b30a-eeb838925db0
+		lineageTag: 65d63c52-0875-4ef5-b6da-31b88e64d8ac
 		summarizeBy: sum
 		sourceColumn: x
 
@@ -31,13 +32,13 @@ table xy
 
 	column y
 		dataType: int64
-		lineageTag: e0fb57c0-bf7d-4023-b70d-7b9def9b3044
+		lineageTag: eb1112bd-7135-4275-86ad-7bfacd8de7cf
 		summarizeBy: sum
 		sourceColumn: y
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'xy-470bb227-7cd3-44db-94a8-521f1672bbd5' = m
+	partition 'xy-039dd7b3-1b9c-4f3a-be60-c9f3a37610a2' = m
 		mode: import
 		source =
 				let
@@ -61,4 +62,5 @@ table xy
 				    Result
 
 	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 4 columns and 1 measures: a, Today's Date, x, y.
 

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "09479ff108394d08aaf7",
+  "position": {
+    "x": 16,
+    "y": 186,
+    "z": 4000,
+    "height": 343,
+    "width": 430,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "What is the size of our Sales Pipeline?",
+                    "textStyle": {
+                      "color": "#2b5c8a",
+                      "fontSize": "10.0pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

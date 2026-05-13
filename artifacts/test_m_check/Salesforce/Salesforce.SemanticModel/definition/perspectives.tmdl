@@ -1,0 +1,16 @@
+perspective 'Full Model'
+	perspectiveTable Opportunities
+	perspectiveTable 'Owned By'
+	perspectiveTable 'Created By'
+	perspectiveTable Account
+	perspectiveTable 'Account Owned By'
+	perspectiveTable 'Account Created By'
+	perspectiveTable Calendar
+	perspectiveTable 'Select Dimension'
+	perspectiveTable 'Select Indicator'
+	perspectiveTable pPlaceholder
+	perspectiveTable pPlaceholder_1
+	perspectiveTable 'Last x Days'
+	perspectiveTable 'Next x Days'
+	perspectiveTable 'Select Indicator CalcGroup'
+	perspectiveTable 'Select Dimension FieldParam'

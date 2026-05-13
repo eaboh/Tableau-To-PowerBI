@@ -1,20 +1,20 @@
 table 'Min Budget'
-	lineageTag: 50a86410-94c6-48a2-a5c6-d1d0a3b17202
+	lineageTag: a73d9af9-22c4-4d88-b928-fee91a85c304
 
 	measure 'Min Budget' = SELECTEDVALUE('Min Budget'[Value], 5000)
-		lineageTag: 30d2ed66-55b2-4772-846b-532a9943a6a6
+		lineageTag: 94a28a4b-ffbe-4e36-ba0b-6a493704011d
 		annotation Copilot_Description = DAX: SELECTEDVALUE('Min Budget'[Value], 5000)
 
 	column Value
 		dataType: double
-		lineageTag: 57b933d1-67fa-4f11-8a76-df76dac8b029
+		lineageTag: ac142c11-f967-4cb1-8810-9c63cb7da897
 		summarizeBy: none
 		sourceColumn: Value
 		annotation displayFolder = Parameters
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Min Budget-49594195-5073-40dc-8d17-ecec3650d053' = calculated
+	partition 'Min Budget-ddc841cf-f6fd-4019-9429-70823b77d1f7' = calculated
 		mode: import
 		source = GENERATESERIES(0, 100000, 1000)
 

@@ -1,0 +1,23 @@
+table 'Select Dimension'
+	lineageTag: 6ae9d320-fa72-4364-b70d-c9c46c0a7d66
+
+	measure 'Select Dimension' = SELECTEDVALUE('Select Dimension'[Value], "Account")
+		lineageTag: 16b0a9c2-b8e0-477f-af13-7e43cfe5be7a
+		annotation Copilot_Description = DAX: SELECTEDVALUE('Select Dimension'[Value], "Account")
+
+	column Value
+		dataType: string
+		lineageTag: bacfa6d7-7486-42bf-9db6-5121081ae0cd
+		summarizeBy: none
+		sourceColumn: Value
+		annotation displayFolder = Parameters
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Select Dimension-52fd026e-c1f3-43d4-9a72-6b3771644cba' = calculated
+		mode: import
+		source = DATATABLE("Value", STRING, {{"Account"}, {"Open Flag"}, {"Opportunity Owner"}, {"Opportunity Stage"}, {"Opportunity Type"}, {"Won Flag"}})
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 1 columns and 1 measures: Value.
+

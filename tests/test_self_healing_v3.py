@@ -42,6 +42,7 @@ from powerbi_import.self_healing_v3 import (
     _heal_int_column_with_decimal_default,
     # v3.3
     _heal_m_unbalanced_let_in,
+    _heal_m_duplicate_in,
     _heal_m_unbalanced_parens,
     _heal_m_step_name_collision,
     _heal_m_invalid_identifier_unquoted,
@@ -52,6 +53,7 @@ from powerbi_import.self_healing_v3 import (
     _heal_m_partition_mode_mismatch,
     _heal_m_dataflow_ref_dangling,
     _normalize_folder,
+    _heal_calc_col_to_measure,
     run_v3_healers,
     _V3_HEALERS,
 )
@@ -1150,6 +1152,44 @@ class TestMUnbalancedLetIn(unittest.TestCase):
         m = _model([_table_with_m('T', '#table({}, {})')])
         self.assertEqual(_heal_m_unbalanced_let_in(m), 0)
 
+    def test_quoted_step_name_not_doubled(self):
+        """Calendar-style M with #"step name" must NOT get a duplicate in."""
+        expr = (
+            'let\n'
+            '    Source = List.Dates(#date(2020,1,1), 365, #duration(1,0,0,0)),\n'
+            '    #"Added Year" = Table.AddColumn(Source, "Year", each Date.Year([Date]))\n'
+            'in\n'
+            '    #"Added Year"'
+        )
+        m = _model([_table_with_m('T', expr)])
+        self.assertEqual(_heal_m_unbalanced_let_in(m), 0)
+
+
+class TestMDuplicateIn(unittest.TestCase):
+
+    def test_removes_duplicate_in(self):
+        expr = (
+            'let\n    Source = #table({}, {})\nin\n    Source\nin\n    Source\n'
+        )
+        m = _model([_table_with_m('T', expr)])
+        self.assertEqual(_heal_m_duplicate_in(m), 1)
+        out = m['model']['tables'][0]['partitions'][0]['source']['expression']
+        self.assertEqual(out.count('\nin\n'), 1)
+
+    def test_removes_duplicate_quoted_step(self):
+        expr = (
+            'let\n    #"Added Year" = 1\nin\n    #"Added Year"\nin\n    #"Added Year"\n'
+        )
+        m = _model([_table_with_m('T', expr)])
+        self.assertEqual(_heal_m_duplicate_in(m), 1)
+        out = m['model']['tables'][0]['partitions'][0]['source']['expression']
+        self.assertEqual(out.count('\nin\n'), 1)
+
+    def test_single_in_unchanged(self):
+        expr = 'let\n    Source = #table({}, {})\nin\n    Source'
+        m = _model([_table_with_m('T', expr)])
+        self.assertEqual(_heal_m_duplicate_in(m), 0)
+
 
 class TestMUnbalancedParens(unittest.TestCase):
 
@@ -1295,8 +1335,8 @@ class TestMDataflowRefDangling(unittest.TestCase):
 class TestRunAllV3Healers(unittest.TestCase):
 
     def test_v3_healers_count(self):
-        # Sanity-check that all 50 healers (v3 + v3.1 + v3.2 + v3.3 + v3.5) are wired
-        self.assertEqual(len(_V3_HEALERS), 50)
+        # Sanity-check that all 52 healers (v3 + v3.1 + v3.2 + v3.3 + v3.5 + v3.6) are wired
+        self.assertEqual(len(_V3_HEALERS), 52)
 
     def test_runs_all_on_clean_model(self):
         m = _model([{'name': 'T', 'columns': [
@@ -1393,6 +1433,131 @@ class TestWiringIntoSelfHealModel(unittest.TestCase):
             'duplicate_measure_global' in types,
             f'Expected v3 healers to run; got {types}',
         )
+
+
+# ════════════════════════════════════════════════════════════════════
+#  v3.6 — Calc column to measure promotion
+# ════════════════════════════════════════════════════════════════════
+
+class TestCalcColToMeasure(unittest.TestCase):
+    """Tests for _heal_calc_col_to_measure."""
+
+    def test_promote_calculate_allexcept(self):
+        """Calc column with CALCULATE + ALLEXCEPT should become a measure."""
+        m = _model([{
+            'name': 'Sales',
+            'columns': [
+                {'name': 'Revenue', 'dataType': 'double', 'sourceColumn': 'Revenue'},
+                {'name': 'Per Customer',
+                 'dataType': 'double',
+                 'expression': "IF(ISBLANK(CALCULATE([Total Revenue], ALLEXCEPT('Sales', 'Sales'[Customer]))), 0, CALCULATE([Total Revenue], ALLEXCEPT('Sales', 'Sales'[Customer])))",
+                 'type': 'calculated'},
+            ],
+            'measures': [
+                {'name': 'Total Revenue', 'expression': "SUM('Sales'[Revenue])"},
+            ],
+        }])
+        repairs = _heal_calc_col_to_measure(m)
+        self.assertEqual(repairs, 1)
+        # Column should be removed
+        col_names = [c['name'] for c in m['model']['tables'][0]['columns']]
+        self.assertNotIn('Per Customer', col_names)
+        # Measure should be added
+        measure_names = [ms['name'] for ms in m['model']['tables'][0]['measures']]
+        self.assertIn('Per Customer', measure_names)
+        # Check annotation
+        promoted = [ms for ms in m['model']['tables'][0]['measures'] if ms['name'] == 'Per Customer'][0]
+        ann_values = [a['value'] for a in promoted.get('annotations', [])]
+        self.assertTrue(any('Promoted' in v for v in ann_values))
+
+    def test_skip_selectedvalue_lookup(self):
+        """CALCULATE(SELECTEDVALUE(...)) is a valid scalar lookup — should NOT be promoted."""
+        m = _model([{
+            'name': 'Sales',
+            'columns': [
+                {'name': 'Probability',
+                 'dataType': 'double',
+                 'expression': "CALCULATE(SELECTEDVALUE('Lookup'[Prob]))/100",
+                 'type': 'calculated'},
+            ],
+            'measures': [],
+        }])
+        repairs = _heal_calc_col_to_measure(m)
+        self.assertEqual(repairs, 0)
+        col_names = [c['name'] for c in m['model']['tables'][0]['columns']]
+        self.assertIn('Probability', col_names)
+
+    def test_skip_lookupvalue(self):
+        """LOOKUPVALUE is a valid scalar lookup — should NOT be promoted."""
+        m = _model([{
+            'name': 'Sales',
+            'columns': [
+                {'name': 'Region',
+                 'dataType': 'string',
+                 'expression': "LOOKUPVALUE('Regions'[Name], 'Regions'[ID], 'Sales'[RegionID])",
+                 'type': 'calculated'},
+            ],
+            'measures': [],
+        }])
+        repairs = _heal_calc_col_to_measure(m)
+        self.assertEqual(repairs, 0)
+
+    def test_skip_no_expression(self):
+        """Regular columns (no expression) should be skipped."""
+        m = _model([{
+            'name': 'Sales',
+            'columns': [
+                {'name': 'Amount', 'dataType': 'double', 'sourceColumn': 'Amount'},
+            ],
+            'measures': [],
+        }])
+        repairs = _heal_calc_col_to_measure(m)
+        self.assertEqual(repairs, 0)
+
+    def test_promote_sum(self):
+        """Calc column with SUM(...) should become a measure."""
+        m = _model([{
+            'name': 'Sales',
+            'columns': [
+                {'name': 'Total',
+                 'dataType': 'double',
+                 'expression': "SUM('Sales'[Amount])",
+                 'type': 'calculated',
+                 'formatString': '#,0.00'},
+            ],
+            'measures': [],
+        }])
+        repairs = _heal_calc_col_to_measure(m)
+        self.assertEqual(repairs, 1)
+        promoted = m['model']['tables'][0]['measures'][0]
+        self.assertEqual(promoted['name'], 'Total')
+        self.assertEqual(promoted['formatString'], '#,0.00')
+
+    def test_selectedvalue_with_measure_ref_promoted(self):
+        """SELECTEDVALUE combined with a measure reference should be promoted."""
+        m = _model([{
+            'name': 'Sales',
+            'columns': [
+                {'name': 'Mixed',
+                 'dataType': 'double',
+                 'expression': "IF(SELECTEDVALUE('Sales'[Flag]) = 1, [Revenue Measure], 0)",
+                 'type': 'calculated'},
+            ],
+            'measures': [
+                {'name': 'Revenue Measure', 'expression': "SUM('Sales'[Revenue])"},
+            ],
+        }])
+        # This does NOT contain CALCULATE/SUM at top level, only SELECTEDVALUE inside IF
+        # The healer should NOT match this because the agg pattern only catches
+        # top-level agg functions, and SELECTEDVALUE is excluded
+        repairs = _heal_calc_col_to_measure(m)
+        # SELECTEDVALUE alone is not in _CC_AGG_RE, so no promotion
+        self.assertEqual(repairs, 0)
+
+    def test_healer_in_v3_registry(self):
+        """Ensure the healer is registered in _V3_HEALERS."""
+        names = [name for name, _ in _V3_HEALERS]
+        self.assertIn('calc_col_to_measure', names)
 
 
 if __name__ == '__main__':

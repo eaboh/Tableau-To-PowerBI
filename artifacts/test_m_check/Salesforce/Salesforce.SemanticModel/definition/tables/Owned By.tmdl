@@ -1,0 +1,3324 @@
+table 'Owned By'
+	lineageTag: 13ce7e8f-a9ff-4ca6-9659-fb1d31a2b26e
+
+	measure 'Avg Probability (Open Opp.)' = AVERAGEX('Owned By', IF('Owned By'[Is Open Opportunity?], 'Owned By'[_Avg Probability (Expression)], BLANK()))
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: c3410cd6-059e-43d7-ab0e-e43a35f64327
+		annotation Copilot_Description = Migrated from Tableau: AVG(if [Calculation_1142225515624624133] then [LinPack_574638457904073940] end) | DAX: AVERAGEX('Owned By', IF('Owned By'[Is Open Opportunity?], 'Owned By'[_Avg Probability (Expression)], BLANK()))
+
+	measure 'Sales Cycle Won (Display)' = IF([Sales Cycle (won)] <= 30, FORMAT(ROUND([Sales Cycle (won)], 0), "0") & " d", IF([Sales Cycle (won)] <= 365, FORMAT(ROUND([Sales Cycle (won)]/30.25,1), "0") & " mo", FORMAT(ROUND([Sales Cycle (won)]/30.25,0), "0") & " mo"))
+		displayFolder: Calculations
+		lineageTag: 11be4439-f596-4198-a03d-52755374aa17
+		annotation Copilot_Description = Migrated from Tableau: IF      [LinPack_858688450507045362]<=30  then str(ROUND([LinPack_858688450507045362])) + ' d' ELSEIF  [LinPack_858688450507045362]<=365 then str(ROUND([LinPack_858688450507045362]/30.25,1)) + ' mo' ELSE                                 str(ROUND([LinPack_858688450507045362]/30.25,0)) + ' mo' END | DAX: IF([Sales Cycle (won)] <= 30, FORMAT(ROUND([Sales Cycle (won)], 0), "0") & " d", IF([Sales Cycle (won)] <= 365, FORMAT(ROUND([Sales Cycle (won)]/30.25,1), "0") & " mo", FORMAT(ROUND([Sales Cycle (won)]))))...
+
+	measure 'Days to Close (avg)' = AVERAGE('Owned By'[Days to Close])
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: 7e6397a4-e6f3-4bf5-b063-7ed1be7666d2
+		annotation Copilot_Description = Migrated from Tableau: avg([Calculation_680325065948213248]) | DAX: AVERAGE('Owned By'[Days to Close])
+
+	measure One = MAXX('Owned By', 1)
+		displayFolder: Measures
+		lineageTag: c7b41625-bb5e-4262-89bd-9fa6a1f96f4e
+		annotation Copilot_Description = Migrated from Tableau: max(1) | DAX: MAXX('Owned By', 1)
+
+	measure 'Pipeline Profile - Average Deal Size (Star)' = SUBSTITUTE(REPT(" ", [Pipeline Profile - Average Deal Size (num)])," ","★") & SUBSTITUTE(REPT(" ", 5-[Pipeline Profile - Average Deal Size (num)])," ","☆")
+		displayFolder: Dimensions
+		lineageTag: 2cf3c4a4-47fb-41aa-a376-144f479faf27
+		annotation Copilot_Description = Migrated from Tableau: REPLACE(SPACE([Pipeline Profile - Average Deal Size (description) (copy)_995858528069312525])," ","★") + REPLACE(SPACE(5-[Pipeline Profile - Average Deal Size (description) (copy)_995858528069312525])," ","☆") | DAX: SUBSTITUTE(REPT(" ", [Pipeline Profile - Average Deal Size (num)])," ","★") & SUBSTITUTE(REPT(" ", 5-[Pipeline Profile - Average Deal Size (num)])," ","☆")
+
+	measure 'First Time Closed Won by Account' = CALCULATE(MINX('Owned By', IF('Owned By'[Won Flag]="Y", 'Owned By'[Opportunity Close Date], BLANK())), ALLEXCEPT('Owned By', 'Owned By'[Account]))
+		formatString: Short Date
+		displayFolder: Dimensions
+		lineageTag: 9e28334e-ab13-486a-b730-0ffa352b0374
+		annotation Copilot_Description = Migrated from Tableau: {fixed [Calculation_711568759570489345]: min (IF [Calculation_711568759572299783]="Y" THEN [Calculation_822751375422500864]  END)} | DAX: CALCULATE(MINX('Owned By', IF('Owned By'[Won Flag]="Y", 'Owned By'[Opportunity Close Date], BLANK())), ALLEXCEPT('Owned By', 'Owned By'[Account]))
+
+	measure 'Label DONE - Closed WON - Nb of Clients (Existing)' = [Label DONE - Closed WON - Nb of Clients] - [Label DONE - Closed WON - Nb of Clients (New)]
+		displayFolder: Measures
+		lineageTag: fd44a09b-dc13-415f-ac92-329dfac9b8ec
+		annotation Copilot_Description = Migrated from Tableau: [Label DONE - Closed WON - Nb of Opp (copy)_614178463390113796] - [Label DONE - Closed WON - Nb of Clients (copy)_614178463392415753] | DAX: [Label DONE - Closed WON - Nb of Clients] - [Label DONE - Closed WON - Nb of Clients (New)]
+
+	measure 'Probability (bucket)' = IF(SUM('Owned By'[_Avg Probability (Expression)]) < 0.25, "0-25%", IF(SUM('Owned By'[_Avg Probability (Expression)]) < 0.50, "25-50%", IF(SUM('Owned By'[_Avg Probability (Expression)]) < 0.75, "50-75%", "75-100%")))
+		displayFolder: Dimensions
+		lineageTag: 54916753-f39b-455b-8139-3f0a91154dba
+		annotation Copilot_Description = Migrated from Tableau: IF [LinPack_574638457904073940]<0.25 THEN "0-25%" ELSEIF [LinPack_574638457904073940]<0.50 THEN "25-50%" ELSEIF [LinPack_574638457904073940]<0.75 THEN "50-75%" ELSE "75-100%" END | DAX: IF(SUM('Owned By'[_Avg Probability (Expression)]) < 0.25, "0-25%", IF(SUM('Owned By'[_Avg Probability (Expression)]) < 0.50, "25-50%", IF(SUM('Owned By'[_Avg Probability (Expression)]) < 0.75, "50-75%)))...
+
+	measure 'Rank Sales Value (for selected Opp Owner)' = /* TODO: DAX conversion validation failed for Calculation_703968976541376514: unterminated double-quoted string literal */ BLANK()
+		displayFolder: Measures
+		lineageTag: 1a9f5536-c132-4481-9265-fe3425e96f1a
+		annotation Copilot_Description = Migrated from Tableau: // Count the distinct number of Opportunity Owner // where Opportunity Owner's [Sales Value] > Selected Opportunity Owner [Sales Value] COUNTD(if {INCLUDE [Calculation_711568759570620418] : [LinPack_235739231649065059]} > {MAX((IF [Is Selected Opportunity Stage Flag (copy)_813744216047374336] THEN {INCLUDE [Calculation_711568759570620418] : ZN([LinPack_235739231649065059])} ELSE 0 END))}        and Not [Is Selected Opportunity Stage Flag (copy)_813744216047374336]        then [Calculation_711568759570620418]  end)+1 | DAX: /* TODO: DAX conversion validation failed for Calculation_703968976541376514: unterminated double-quoted string literal */ BLANK()
+
+	measure Today = DATE(2022,04,18)
+		formatString: Short Date
+		displayFolder: Dimensions
+		lineageTag: 02a551eb-5d00-44de-bf0b-b57c35dddea1
+		annotation Copilot_Description = Migrated from Tableau: __MyToday | DAX: DATE(2022,04,18)
+
+	measure 'Conversion Rate Average (for trends)' = /* TODO: DAX conversion validation failed for Calculation_928867483214106624: unconverted Tableau function token detected in DAX output */ BLANK()
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: 69f13f2c-21cd-4d6c-86d2-8c0f2db7cc43
+		annotation Copilot_Description = Migrated from Tableau: RUNNING_SUM([LinPack_235739231649065059])/RUNNING_SUM([LinPack_707557147340278467]) | DAX: /* TODO: DAX conversion validation failed for Calculation_928867483214106624: unconverted Tableau function token detected in DAX output */ BLANK()
+
+	measure 'Label FOCUS - Closing Overdue - Nb of Opp' = CALCULATE(DISTINCTCOUNT('Owned By'[Opportunity Id]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - FOCUS - Cat 2], LEN("Closing Overdue")) = "Closing Overdue")))
+		displayFolder: Measures
+		lineageTag: 9441376c-addb-45a0-9ba6-5a87c384a4f5
+		annotation Copilot_Description = Migrated from Tableau: COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 2 (copy)_746190227239038988], "Closing Overdue") then [Calculation_711568759570227200] end) | DAX: CALCULATE(DISTINCTCOUNT('Owned By'[Opportunity Id]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - FOCUS - Cat 2], LEN("Closing Overdue")) = "Closing Overdue")))
+
+	measure 'Total Sales for Existing Clients' = SUMX('Owned By', IF('Owned By'[Client/Prospect by Opportunity]="Existing Clients" && 'Owned By'[Is Last N months filter - Closed Date?], 'Owned By'[_Total Sales (Expression)], BLANK()))
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: 4a747c2e-a110-4377-8b8d-28e2765ca571
+		annotation Copilot_Description = Migrated from Tableau: SUM(IF [Calculation_614178463385964547]="Existing Clients" AND [Closed in Last x Days (copy)_1142225515614175234] then [LinPack_961643984189344200] END) | DAX: SUMX('Owned By', IF('Owned By'[Client/Prospect by Opportunity]="Existing Clients" && 'Owned By'[Is Last N months filter - Closed Date?], 'Owned By'[_Total Sales (Expression)], BLANK()))
+
+	measure 'Pipeline Profile - Pipeline Generation' = IF(MAX('Owned By'[_Per Customer: Pipeline Generation]) <= CALCULATE(MAX('Owned By'[_Per Customer: Pipeline Generation]), ALL('Owned By'))/5, "1", IF(MAX('Owned By'[_Per Customer: Pipeline Generation]) <= CALCULATE(MAX('Owned By'[_Per Customer: Pipeline Generation]), ALL('Owned By'))/5*2, "2", IF(MAX('Owned By'[_Per Customer: Pipeline Generation]) <= CALCULATE(MAX('Owned By'[_Per Customer: Pipeline Generation]), ALL('Owned By'))/5*3, "3", IF(MAX('Owned By'[_Per Customer: Pipeline Generation]) <= CALCULATE(MAX('Owned By'[_Per Customer: Pipeline Generation]), ALL('Owned By'))/5*4, "4", "5"))))
+		displayFolder: Dimensions
+		lineageTag: b43e8d6c-da9f-4feb-887b-7ebe1a11acc0
+		annotation Copilot_Description = Migrated from Tableau: IF      [Calculation_995858528061263872] <= {fixed: max([Calculation_995858528061263872])}/5 then "1"  ELSEIF  [Calculation_995858528061263872] <= {fixed: max([Calculation_995858528061263872])}/5*2 then "2"  ELSEIF  [Calculation_995858528061263872] <= {fixed: max([Calculation_995858528061263872])}/5*3 then "3"  ELSEIF  [Calculation_995858528061263872] <= {fixed: max([Calculation_995858528061263872])}/5*4 then "4"  ELSE "5"                                     END | DAX: IF(MAX('Owned By'[_Per Customer: Pipeline Generation]) <= CALCULATE(MAX('Owned By'[_Per Customer: Pipeline Generation]), ALL('Owned By'))/5, "1", IF(MAX('Owned By'[_Per Customer: Pipeline Generation])))...
+
+	measure 'Label DONE - Closed WON - Nb of Opp' = CALCULATE(DISTINCTCOUNT('Owned By'[Opportunity Id]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("Closed")) = "Closed") && 'Owned By'[Won Flag]="Y"))
+		displayFolder: Measures
+		lineageTag: de0f021d-706b-4893-acad-8d3c62536be6
+		annotation Copilot_Description = Migrated from Tableau: COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], "Closed") and [Calculation_711568759572299783]="Y" then [Calculation_711568759570227200] end) | DAX: CALCULATE(DISTINCTCOUNT('Owned By'[Opportunity Id]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("Closed")) = "Closed") && 'Owned By'[Won Flag]="Y"))
+
+	measure 'Label DONE - Closed LOST - Nb of Accounts' = CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("Closed")) = "Closed") && 'Owned By'[Won Flag] <> "Y"))
+		displayFolder: Measures
+		lineageTag: 2686da38-aba9-45d2-8146-3d92687541bc
+		annotation Copilot_Description = Migrated from Tableau: COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], "Closed") and [Calculation_711568759572299783]<>"Y" then [Calculation_711568759570489345] end) | DAX: CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("Closed")) = "Closed") && 'Owned By'[Won Flag] <> "Y"))
+
+	measure 'Label DONE - Closed LOST - Opp Amount' = SUMX('Owned By', IF((LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("Closed")) = "Closed") && 'Owned By'[Won Flag] <> "Y", 'Owned By'[_Pipeline Generated (Expression)], BLANK()))
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: fc4e0d70-4c75-4f0d-9eb2-0a65a9b2ee56
+		annotation Copilot_Description = Migrated from Tableau: sum(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], "Closed") and [Calculation_711568759572299783]<>"Y" then [LinPack_523892480737294295] end) | DAX: SUMX('Owned By', IF((LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("Closed")) = "Closed") && 'Owned By'[Won Flag] <> "Y", 'Owned By'[_Pipeline Generated (Expression)], BLANK()))
+
+	measure 'Label DONE - New - Nb of Opp' = CALCULATE(DISTINCTCOUNT('Owned By'[Opportunity Id]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("New")) = "New")))
+		displayFolder: Measures
+		lineageTag: 567e24ec-4894-43ff-a2f6-a643301418ca
+		annotation Copilot_Description = Migrated from Tableau: COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], "New") then [Calculation_711568759570227200] end) | DAX: CALCULATE(DISTINCTCOUNT('Owned By'[Opportunity Id]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("New")) = "New")))
+
+	measure 'Label DONE - Closed WON - Nb of Clients (New)' = CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("Closed")) = "Closed") && 'Owned By'[Won Flag]="Y" && 'Owned By'[Is First Time Client?]))
+		displayFolder: Measures
+		lineageTag: 430994db-f669-43c4-9908-3dbdc1f7b505
+		annotation Copilot_Description = Migrated from Tableau: COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], "Closed") and [Calculation_711568759572299783]="Y" and [Calculation_614178463385661442] then [Calculation_711568759570489345] end) | DAX: CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("Closed")) = "Closed") && 'Owned By'[Won Flag]="Y" && 'Owned By'[Is First Time Cl]))...
+
+	measure 'Label DONE - Closed WON - Nb of Clients' = CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("Closed")) = "Closed") && 'Owned By'[Won Flag]="Y"))
+		displayFolder: Measures
+		lineageTag: fd1150c2-e6cf-4c6d-998d-67e73799a5a0
+		annotation Copilot_Description = Migrated from Tableau: COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], "Closed") and [Calculation_711568759572299783]="Y" then [Calculation_711568759570489345] end) | DAX: CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("Closed")) = "Closed") && 'Owned By'[Won Flag]="Y"))
+
+	measure 'Label DONE - Closed LOST - Nb of Opp' = CALCULATE(DISTINCTCOUNT('Owned By'[Opportunity Id]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("Closed")) = "Closed") && 'Owned By'[Won Flag] <> "Y"))
+		displayFolder: Measures
+		lineageTag: b2bb84c6-4b70-4dfd-856f-273cd45f9702
+		annotation Copilot_Description = Migrated from Tableau: COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], "Closed") and [Calculation_711568759572299783]<>"Y" then [Calculation_711568759570227200] end) | DAX: CALCULATE(DISTINCTCOUNT('Owned By'[Opportunity Id]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("Closed")) = "Closed") && 'Owned By'[Won Flag] <> "Y"))
+
+	measure 'Label DONE - Closed WON - Opp Amount' = SUMX('Owned By', IF((LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("Closed")) = "Closed") && 'Owned By'[Won Flag]="Y", 'Owned By'[_Pipeline Generated (Expression)], BLANK()))
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: d1d70364-66cc-4719-a869-12dcd9701b71
+		annotation Copilot_Description = Migrated from Tableau: SUM(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], "Closed") and [Calculation_711568759572299783]="Y" then [LinPack_523892480737294295] end) | DAX: SUMX('Owned By', IF((LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("Closed")) = "Closed") && 'Owned By'[Won Flag]="Y", 'Owned By'[_Pipeline Generated (Expression)], BLANK()))
+
+	measure 'Label DONE - New - Nb of Accounts (Prospect)' = CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("New")) = "New") && 'Owned By'[Client/Prospect by Account]="Prospects"))
+		displayFolder: Measures
+		lineageTag: 11e702c0-2df1-41de-9097-6ee2d0689f18
+		annotation Copilot_Description = Migrated from Tableau: COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], "New") and [Calculation_614178463393964044]="Prospects" then [Calculation_711568759570489345] end) | DAX: CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("New")) = "New") && 'Owned By'[Client/Prospect by Account]="Prospects"))
+
+	measure 'Label DONE - New - Nb of Accounts' = CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("New")) = "New")))
+		displayFolder: Measures
+		lineageTag: b5296935-1ada-4c56-b2f5-de633d1b1929
+		annotation Copilot_Description = Migrated from Tableau: COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], "New") then [Calculation_711568759570489345] end) | DAX: CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("New")) = "New")))
+
+	measure 'Label DONE - New - Opp Amount' = SUMX('Owned By', IF((LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("New")) = "New"), 'Owned By'[_Pipeline Generated (Expression)], BLANK()))
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: 42edb994-6f0e-484b-8b37-6de77037f9e3
+		annotation Copilot_Description = Migrated from Tableau: SUM(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], "New") then [LinPack_523892480737294295] end) | DAX: SUMX('Owned By', IF((LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("New")) = "New"), 'Owned By'[_Pipeline Generated (Expression)], BLANK()))
+
+	measure 'Label DONE - New - Nb of Accounts (Client)' = CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("New")) = "New") && 'Owned By'[Client/Prospect by Account]="Existing Clients"))
+		displayFolder: Measures
+		lineageTag: 5ff6e0e6-558f-43fc-b982-c0b36bd655e3
+		annotation Copilot_Description = Migrated from Tableau: COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], "New") and [Calculation_614178463393964044]="Existing Clients" then [Calculation_711568759570489345] end) | DAX: CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - DONE - Cat 2], LEN("New")) = "New") && 'Owned By'[Client/Prospect by Account]="Existing Clients"))
+
+	measure 'Label FOCUS - Closing Next x days  - Nb of Accounts (Prospect)' = CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - FOCUS - Cat 2], LEN("Closing Next")) = "Closing Next") && 'Owned By'[Client/Prospect by Account]="Prospects"))
+		displayFolder: Measures
+		lineageTag: d340aa6d-de7e-46e5-bc93-0be1d8628358
+		annotation Copilot_Description = Migrated from Tableau: COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 2 (copy)_746190227239038988], "Closing Next") and [Calculation_614178463393964044]="Prospects" then [Calculation_711568759570489345] end) | DAX: CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - FOCUS - Cat 2], LEN("Closing Next")) = "Closing Next") && 'Owned By'[Client/Prospect by Account]="Pr))...
+
+	measure 'Label FOCUS - Closing Next x days  - Nb of Accounts (Client)' = CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - FOCUS - Cat 2], LEN("Closing Next")) = "Closing Next") && 'Owned By'[Client/Prospect by Account]="Existing Clients"))
+		displayFolder: Measures
+		lineageTag: e4d0c1fa-0797-46d3-ac26-c3470fe9ee75
+		annotation Copilot_Description = Migrated from Tableau: COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 2 (copy)_746190227239038988], "Closing Next") and [Calculation_614178463393964044]="Existing Clients" then [Calculation_711568759570489345] end) | DAX: CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - FOCUS - Cat 2], LEN("Closing Next")) = "Closing Next") && 'Owned By'[Client/Prospect by Account]="Ex))...
+
+	measure 'Label FOCUS - Closing Next x days  - Nb of Accounts' = CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - FOCUS - Cat 2], LEN("Closing Next")) = "Closing Next")))
+		displayFolder: Measures
+		lineageTag: 4e75581a-3e42-4ea4-ae1f-2ba09fbbc8e4
+		annotation Copilot_Description = Migrated from Tableau: COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 2 (copy)_746190227239038988], "Closing Next") then [Calculation_711568759570489345] end) | DAX: CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - FOCUS - Cat 2], LEN("Closing Next")) = "Closing Next")))
+
+	measure 'Label FOCUS - Closing Overdue - Nb of Accounts (Client)' = CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - FOCUS - Cat 2], LEN("Closing Overdue")) = "Closing Overdue") && 'Owned By'[Client/Prospect by Account]="Existing Clients"))
+		displayFolder: Measures
+		lineageTag: 052d941e-9bc1-4af6-a842-d54f243df3f1
+		annotation Copilot_Description = Migrated from Tableau: COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 2 (copy)_746190227239038988], "Closing Overdue") and [Calculation_614178463393964044]="Existing Clients" then [Calculation_711568759570489345] end) | DAX: CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - FOCUS - Cat 2], LEN("Closing Overdue")) = "Closing Overdue") && 'Owned By'[Client/Prospect by Accoun]))...
+
+	measure 'Label FOCUS - Closing Overdue - Nb of Accounts (Prospect)' = CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - FOCUS - Cat 2], LEN("Closing Overdue")) = "Closing Overdue") && 'Owned By'[Client/Prospect by Account]="Prospects"))
+		displayFolder: Measures
+		lineageTag: 5b2d9370-01e3-4b0c-9ca2-c7c7790a942b
+		annotation Copilot_Description = Migrated from Tableau: COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 2 (copy)_746190227239038988], "Closing Overdue") and [Calculation_614178463393964044]="Prospects" then [Calculation_711568759570489345] end) | DAX: CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - FOCUS - Cat 2], LEN("Closing Overdue")) = "Closing Overdue") && 'Owned By'[Client/Prospect by Accoun]))...
+
+	measure 'Label FOCUS - Closing Overdue - Nb of Accounts' = CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - FOCUS - Cat 2], LEN("Closing Overdue")) = "Closing Overdue")))
+		displayFolder: Measures
+		lineageTag: 86ed6dbb-34eb-4624-b26b-29c974be9d3d
+		annotation Copilot_Description = Migrated from Tableau: COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 2 (copy)_746190227239038988], "Closing Overdue") then [Calculation_711568759570489345] end) | DAX: CALCULATE(DISTINCTCOUNT('Owned By'[Account]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - FOCUS - Cat 2], LEN("Closing Overdue")) = "Closing Overdue")))
+
+	measure 'Label FOCUS - Closing Next x days  - Nb of Opp' = CALCULATE(DISTINCTCOUNT('Owned By'[Opportunity Id]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - FOCUS - Cat 2], LEN("Closing Next")) = "Closing Next")))
+		displayFolder: Measures
+		lineageTag: e2a5f96b-58a3-4aa6-8ff8-43af571b3f59
+		annotation Copilot_Description = Migrated from Tableau: COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 2 (copy)_746190227239038988], "Closing Next") then [Calculation_711568759570227200] end) | DAX: CALCULATE(DISTINCTCOUNT('Owned By'[Opportunity Id]), FILTER('Owned By', (LEFT('Owned By'[Pipeline Review - FOCUS - Cat 2], LEN("Closing Next")) = "Closing Next")))
+
+	measure 'Label FOCUS - Closing Next x days - Opp Amount' = SUMX('Owned By', IF((LEFT('Owned By'[Pipeline Review - FOCUS - Cat 2], LEN("Closing Next")) = "Closing Next"), 'Owned By'[_Pipeline Generated (Expression)], BLANK()))
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: 515d3d73-e330-4740-b166-4679a24e49e0
+		annotation Copilot_Description = Migrated from Tableau: SUM(if STARTSWITH([Pipeline Review - DONE - Cat 2 (copy)_746190227239038988], "Closing Next") then [LinPack_523892480737294295] end) | DAX: SUMX('Owned By', IF((LEFT('Owned By'[Pipeline Review - FOCUS - Cat 2], LEN("Closing Next")) = "Closing Next"), 'Owned By'[_Pipeline Generated (Expression)], BLANK()))
+
+	measure 'Label FOCUS - Closing Overdue - Opp Amount' = SUMX('Owned By', IF((LEFT('Owned By'[Pipeline Review - FOCUS - Cat 2], LEN("Closing Overdue")) = "Closing Overdue"), 'Owned By'[_Pipeline Generated (Expression)], BLANK()))
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: a3d4b9c4-8ce5-43b9-8b22-fbace72e38d5
+		annotation Copilot_Description = Migrated from Tableau: SUM(if STARTSWITH([Pipeline Review - DONE - Cat 2 (copy)_746190227239038988], "Closing Overdue") then [LinPack_523892480737294295] end) | DAX: SUMX('Owned By', IF((LEFT('Owned By'[Pipeline Review - FOCUS - Cat 2], LEN("Closing Overdue")) = "Closing Overdue"), 'Owned By'[_Pipeline Generated (Expression)], BLANK()))
+
+	measure 'Pipeline Generated' = SUM('Owned By'[_Pipeline Generated (Expression)])
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: 3bd412a7-f995-4b4d-b702-b00c094d0f27
+		annotation Copilot_Description = Migrated from Tableau: SUM([LinPack_523892480737294295]) | DAX: SUM('Owned By'[_Pipeline Generated (Expression)])
+
+	measure 'Nb of Owners' = DISTINCTCOUNT('Owned By'[Opportunity Owner])
+		displayFolder: Measures
+		lineageTag: 90d8837a-36bb-4317-b94d-5398f3bdc388
+		annotation Copilot_Description = Migrated from Tableau: COUNTD([Calculation_711568759570620418]) | DAX: DISTINCTCOUNT('Owned By'[Opportunity Owner])
+
+	measure 'Won/Lost Rate' = IF(ISBLANK([Nb of Won Opportunities]), 0, [Nb of Won Opportunities]) / IF(ISBLANK([Nb of Closed Opportunities]), 0, [Nb of Closed Opportunities])
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: ee6a27e1-463d-449e-b94f-f34a6d94e306
+		annotation Copilot_Description = Migrated from Tableau: ZN([LinPack_345685562057570044]) / ZN([LinPack_945051434441023635]) | DAX: IF(ISBLANK([Nb of Won Opportunities]), 0, [Nb of Won Opportunities]) / IF(ISBLANK([Nb of Closed Opportunities]), 0, [Nb of Closed Opportunities])
+
+	measure 'Total Sales' = SUM('Owned By'[_Total Sales (Expression)])
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: dde0ba04-8210-45e6-8033-d8a762b04b83
+		annotation Copilot_Description = Migrated from Tableau: SUM([LinPack_961643984189344200]) | DAX: SUM('Owned By'[_Total Sales (Expression)])
+
+	measure 'Nb of Open Opportunities' = CALCULATE(DISTINCTCOUNT('Owned By'[Opportunity Id]), FILTER('Owned By', 'Owned By'[Is Open Opportunity?]))
+		displayFolder: Measures
+		lineageTag: 9fb2b437-c90f-4142-bd76-9195ae6f9a54
+		annotation Copilot_Description = Migrated from Tableau: COUNTD(IF [Calculation_1142225515624624133] THEN [Calculation_711568759570227200] END) | DAX: CALCULATE(DISTINCTCOUNT('Owned By'[Opportunity Id]), FILTER('Owned By', 'Owned By'[Is Open Opportunity?]))
+
+	measure 'Nb of Won Opportunities' = CALCULATE(DISTINCTCOUNT('Owned By'[Opportunity Id]), FILTER('Owned By', 'Owned By'[Is Won Opportunity?]))
+		displayFolder: Measures
+		lineageTag: a215d6b2-b79f-49ac-9302-e2a9dde53978
+		annotation Copilot_Description = Migrated from Tableau: COUNTD(IF [Is Open Opportunity? (copy)_17451502251433984] THEN [Calculation_711568759570227200] END) | DAX: CALCULATE(DISTINCTCOUNT('Owned By'[Opportunity Id]), FILTER('Owned By', 'Owned By'[Is Won Opportunity?]))
+
+	measure 'Avg Deal Size (won)' = AVERAGE('Owned By'[_Avg Deal Size (won) (Expression)])
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: 8c99d07a-cb01-4645-9cc0-e84ef4a5a8a7
+		annotation Copilot_Description = Migrated from Tableau: AVG([LinPack_760893960995960019]) | DAX: AVERAGE('Owned By'[_Avg Deal Size (won) (Expression)])
+
+	measure 'Sales Velocity' = (IF(ISBLANK([Nb of Open Opportunities]), 0, [Nb of Open Opportunities]) * IF(ISBLANK([Avg Deal Size (won)]), 0, [Avg Deal Size (won)]) * IF(ISBLANK('Owned By'[Won/Lost Rate]), 0, 'Owned By'[Won/Lost Rate])) / IF(ISBLANK([Sales Cycle]), 0, [Sales Cycle])
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: 553c6a75-2515-4b09-96ab-8ae55efdd22d
+		annotation Copilot_Description = Migrated from Tableau: (ZN([LinPack_260602485593130101]) * ZN([LinPack_416672484957473515]) * ZN([LinPack_037187737916244637])) / ZN([LinPack_451823525181570600]) | DAX: (IF(ISBLANK([Nb of Open Opportunities]), 0, [Nb of Open Opportunities]) * IF(ISBLANK([Avg Deal Size (won)]), 0, [Avg Deal Size (won)]) * IF(ISBLANK('Owned By'[Won/Lost Rate]), 0, 'Owned By'[Won/Lost R]))...
+
+	measure 'Sales Cycle' = AVERAGEX('Owned By', CONVERT(IF(NOT 'Owned By'[Is Open Opportunity?], DATEDIFF('Owned By'[CreatedDate (Owned By)], 'Owned By'[Opportunity Close Date], MINUTE) / (24*60), BLANK()), DOUBLE))
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: 15d82633-36d6-47a5-9285-775995095bd6
+		annotation Copilot_Description = Migrated from Tableau: AVG(FLOAT(IF NOT [Calculation_1142225515624624133] THEN datediff("minute", [Created Date], [Calculation_822751375422500864]) / (24*60) END)) | DAX: AVERAGEX('Owned By', CONVERT(IF(NOT 'Owned By'[Is Open Opportunity?], DATEDIFF('Owned By'[CreatedDate (Owned By)], 'Owned By'[Opportunity Close Date], MINUTE) / (24*60), BLANK()), DOUBLE))
+
+	measure 'Avg Probability' = AVERAGE('Owned By'[_Avg Probability (Expression)])
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: f466f132-d7ed-435c-8ee8-1466f1e30d07
+		annotation Copilot_Description = Migrated from Tableau: AVG([LinPack_574638457904073940]) | DAX: AVERAGE('Owned By'[_Avg Probability (Expression)])
+
+	measure 'Weighted Pipeline Value' = SUMX('Opportunities', CONVERT(IF(LOOKUPVALUE('Owned By'[Is Open Opportunity?], 'Owned By'[Id], Opportunities[OwnerId]), LOOKUPVALUE('Owned By'[Probability %], 'Owned By'[Id], Opportunities[OwnerId])*'Opportunities'[Amount], BLANK()), DOUBLE))
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: f68070f3-c1ff-49a0-a755-a50ae3beddcb
+		annotation Copilot_Description = Migrated from Tableau: SUM(FLOAT(IF [Calculation_1142225515624624133] THEN [Calculation_711568759573139467]*[Amount] END)) | DAX: SUMX('Opportunities', CONVERT(IF(LOOKUPVALUE('Owned By'[Is Open Opportunity?], 'Owned By'[Id], Opportunities[OwnerId]), LOOKUPVALUE('Owned By'[Probability %], 'Owned By'[Id], Opportunities[OwnerId])*')))...
+
+	measure 'Nb of Opportunities' = DISTINCTCOUNT('Owned By'[Opportunity Id])
+		displayFolder: Measures
+		lineageTag: 2d0cbe91-c96d-41ce-86ec-3c2999539ddb
+		annotation Copilot_Description = Migrated from Tableau: COUNTD([Calculation_711568759570227200]) | DAX: DISTINCTCOUNT('Owned By'[Opportunity Id])
+
+	measure 'Total Closed Opportunities Amount' = SUM('Owned By'[_Total Closed Opportunities Amount (Expression)])
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: 527a8b3a-5177-417e-a4bc-f31eecbd795f
+		annotation Copilot_Description = Migrated from Tableau: SUM([LinPack_808645294632541416]) | DAX: SUM('Owned By'[_Total Closed Opportunities Amount (Expression)])
+
+	measure 'Conversion Rate' = IF(ISBLANK([Total Sales]), 0, [Total Sales]) / IF(ISBLANK([Total Closed Opportunities Amount]), 0, [Total Closed Opportunities Amount])
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: 3bc64ec6-e941-4e28-90e6-fdc48f25e14d
+		annotation Copilot_Description = Migrated from Tableau: ZN([LinPack_235739231649065059]) / ZN([LinPack_707557147340278467]) | DAX: IF(ISBLANK([Total Sales]), 0, [Total Sales]) / IF(ISBLANK([Total Closed Opportunities Amount]), 0, [Total Closed Opportunities Amount])
+
+	measure 'Pipeline Value' = SUMX('Opportunities', CONVERT(IF(LOOKUPVALUE('Owned By'[Is Open Opportunity?], 'Owned By'[Id], Opportunities[OwnerId]), 'Opportunities'[Amount], BLANK()), DOUBLE))
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: d44a0b89-99db-4a3b-a6c0-b237648b9a15
+		annotation Copilot_Description = Migrated from Tableau: SUM(FLOAT(IF [Calculation_1142225515624624133] THEN [Amount] END)) | DAX: SUMX('Opportunities', CONVERT(IF(LOOKUPVALUE('Owned By'[Is Open Opportunity?], 'Owned By'[Id], Opportunities[OwnerId]), 'Opportunities'[Amount], BLANK()), DOUBLE))
+
+	measure 'Sales Cycle (won)' = AVERAGEX('Owned By', CONVERT(IF('Owned By'[Is Won Opportunity?], DATEDIFF('Owned By'[CreatedDate (Owned By)], 'Owned By'[Opportunity Close Date], MINUTE) / (24*60), BLANK()), DOUBLE))
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: bc9be427-68a2-42a3-93be-116a4abb4b26
+		annotation Copilot_Description = Migrated from Tableau: AVG(FLOAT(IF [Is Open Opportunity? (copy)_17451502251433984] THEN datediff("minute", [Created Date], [Calculation_822751375422500864]) / (24*60) END)) | DAX: AVERAGEX('Owned By', CONVERT(IF('Owned By'[Is Won Opportunity?], DATEDIFF('Owned By'[CreatedDate (Owned By)], 'Owned By'[Opportunity Close Date], MINUTE) / (24*60), BLANK()), DOUBLE))
+
+	measure 'Nb of Closed Opportunities' = CALCULATE(DISTINCTCOUNT('Owned By'[Opportunity Id]), FILTER('Owned By', NOT 'Owned By'[Is Open Opportunity?]))
+		displayFolder: Measures
+		lineageTag: b807bd27-c014-46d1-8df5-aebda7f8b399
+		annotation Copilot_Description = Migrated from Tableau: COUNTD(IF NOT [Calculation_1142225515624624133] THEN [Calculation_711568759570227200] END) | DAX: CALCULATE(DISTINCTCOUNT('Owned By'[Opportunity Id]), FILTER('Owned By', NOT 'Owned By'[Is Open Opportunity?]))
+
+	measure 'Opportunity Owner Class - Title' = IF([Opportunity Owner Class]=[pOpportunityOwner_Champions], "CHAMPIONS", IF([Opportunity Owner Class]=[pOpportunityOwner_GrowthPlanPipelineGeneration], "CLOSERS Growth Plan: Pipeline Generation", IF([Opportunity Owner Class]=[pOpportunityOwner_GrowthPlanClosing], "HUNTERS/FARMERS Growth Plan: Closing", "REQUIRED IMPROVEMENTS")))
+		displayFolder: Dimensions
+		lineageTag: 9e71c95a-45b4-46c0-a3f8-b14b3b8c98a0
+		annotation Copilot_Description = Migrated from Tableau: IF [Opportunity Owner Class Deal Size (copy)_995858528092102683]=[Parameters].[pOpportunityOwner_BigDeals (copy)_995858528093823004] THEN "CHAMPIONS" ELSEIF [Opportunity Owner Class Deal Size (copy)_995858528092102683]=[Parameters].[pOpportunityOwner_Champions (copy)_995858528093941789] THEN "CLOSERS Growth Plan: Pipeline Generation" ELSEIF [Opportunity Owner Class Deal Size (copy)_995858528092102683]=[Parameters].[pOpportunityOwner_ImprovePipelineGen (copy)_995858528094035998] THEN "HUNTERS/FARMERS Growth Plan: Closing" ELSE "REQUIRED IMPROVEMENTS" END | DAX: IF([Opportunity Owner Class]=[pOpportunityOwner_Champions], "CHAMPIONS", IF([Opportunity Owner Class]=[pOpportunityOwner_GrowthPlanPipelineGeneration], "CLOSERS Growth Plan: Pipeline Generation", IF([])))...
+
+	measure 'Opportunity Owner Class (sort)' = IF([Opportunity Owner Class]=[pOpportunityOwner_Champions], 1, IF([Opportunity Owner Class]=[pOpportunityOwner_GrowthPlanPipelineGeneration], 2, IF([Opportunity Owner Class]=[pOpportunityOwner_GrowthPlanClosing], 3, 4)))
+		displayFolder: Dimensions
+		lineageTag: 608fba06-fab6-4f04-8db2-38dac66d608b
+		annotation Copilot_Description = Migrated from Tableau: IF [Opportunity Owner Class Deal Size (copy)_995858528092102683]=[Parameters].[pOpportunityOwner_BigDeals (copy)_995858528093823004] THEN 1 ELSEIF [Opportunity Owner Class Deal Size (copy)_995858528092102683]=[Parameters].[pOpportunityOwner_Champions (copy)_995858528093941789] THEN 2 ELSEIF [Opportunity Owner Class Deal Size (copy)_995858528092102683]=[Parameters].[pOpportunityOwner_ImprovePipelineGen (copy)_995858528094035998] THEN 3 ELSE 4 END | DAX: IF([Opportunity Owner Class]=[pOpportunityOwner_Champions], 1, IF([Opportunity Owner Class]=[pOpportunityOwner_GrowthPlanPipelineGeneration], 2, IF([Opportunity Owner Class]=[pOpportunityOwner_GrowthP])))...
+
+	measure 'Opportunity Owner Class' = IF([Pipeline Profile - Conversion Rate (num)] > 3 && [Pipeline Profile - Pipeline Generation (num)] > 3, [pOpportunityOwner_Champions], IF([Pipeline Profile - Conversion Rate (num)] > 3 && [Pipeline Profile - Pipeline Generation (num)] <= 3, [pOpportunityOwner_GrowthPlanPipelineGeneration], IF([Pipeline Profile - Conversion Rate (num)] <= 3 && [Pipeline Profile - Pipeline Generation (num)] > 3, [pOpportunityOwner_GrowthPlanClosing], [pOpportunityOwner_RequiredImprovements])))
+		displayFolder: Dimensions
+		lineageTag: 8f19a2b6-7880-4197-9082-f129c847436c
+		annotation Copilot_Description = Migrated from Tableau: IF [Pipeline Profile - Conversion Rate (description) (copy)_995858528072065042] >3 AND [Pipeline Profile - Pipeline Generation (description) (copy)_995858528072167443] >3 THEN [Parameters].[pOpportunityOwner_BigDeals (copy)_995858528093823004] ELSEIF [Pipeline Profile - Conversion Rate (description) (copy)_995858528072065042] >3 AND [Pipeline Profile - Pipeline Generation (description) (copy)_995858528072167443] <=3 THEN [Parameters].[pOpportunityOwner_Champions (copy)_995858528093941789] ELSEIF [Pipeline Profile - Conversion Rate (description) (copy)_995858528072065042] <=3 AND [Pipeline Profile - Pipeline Generation (description) (copy)_995858528072167443] >3 THEN [Parameters].[pOpportunityOwner_ImprovePipelineGen (copy)_995858528094035998] ELSE [Parameters].[pOpportunityOwner_ImprovePipelineGen (copy)_995858528094134303] END | DAX: IF([Pipeline Profile - Conversion Rate (num)] > 3 && [Pipeline Profile - Pipeline Generation (num)] > 3, [pOpportunityOwner_Champions], IF([Pipeline Profile - Conversion Rate (num)] > 3 && [Pipeline P]))...
+
+	measure 'Opportunity Owner Class - Action' = SWITCH([Opportunity Owner Class], [pOpportunityOwner_Champions], "Reward these elements, they can be a model for the other owners. Leverage their best-practices.", [pOpportunityOwner_GrowthPlanPipelineGeneration], "Guide them on how to generate pipeline.", [pOpportunityOwner_GrowthPlanClosing], "Provide these elements additional trainings to improve their ability to convince clients.", [pOpportunityOwner_RequiredImprovements], "These opportunity owners need to improve their skills in both areas, to get more business && to win over clients. Train them quickly.")
+		displayFolder: Dimensions
+		lineageTag: 7af3df70-65bd-46a1-bd42-ec7ceb44b79c
+		annotation Copilot_Description = Migrated from Tableau: CASE [Opportunity Owner Class Deal Size (copy)_995858528092102683] WHEN [Parameters].[pOpportunityOwner_BigDeals (copy)_995858528093823004]                      THEN "Reward these elements, they can be a model for the other owners. Leverage their best-practices." WHEN [Parameters].[pOpportunityOwner_Champions (copy)_995858528093941789]   THEN "Guide them on how to generate pipeline." WHEN [Parameters].[pOpportunityOwner_ImprovePipelineGen (copy)_995858528094035998]              THEN "Provide these elements additional trainings to improve their ability to convince clients." WHEN [Parameters].[pOpportunityOwner_ImprovePipelineGen (copy)_995858528094134303]           THEN "These opportunity owners need to improve their skills in both areas, to get more business and to win over clients. Train them quickly."  END | DAX: SWITCH([Opportunity Owner Class], [pOpportunityOwner_Champions], "Reward these elements, they can be a model for the other owners. Leverage their best-practices.", [pOpportunityOwner_GrowthPlanPipelin])...
+
+	measure 'Opportunity Owner Class - Description' = SWITCH([Opportunity Owner Class], [pOpportunityOwner_Champions], "Top performers in the team. They perform well in all areas && pull the team up.", [pOpportunityOwner_GrowthPlanPipelineGeneration], "Effective at closing && winning deals, they can develop in Pipeline Generation (farming || hunting).", [pOpportunityOwner_GrowthPlanClosing], "Good at developing pipeline, they will improve their performance by developing their ability to close && win the deals.", [pOpportunityOwner_RequiredImprovements], "Underperforming in pipeline generation && deal closing. ")
+		displayFolder: Dimensions
+		lineageTag: b1aec52d-39cd-4042-9914-111a5532c823
+		annotation Copilot_Description = Migrated from Tableau: CASE [Opportunity Owner Class Deal Size (copy)_995858528092102683] WHEN [Parameters].[pOpportunityOwner_BigDeals (copy)_995858528093823004]                      THEN "Top performers in the team. They perform well in all areas and pull the team up." WHEN [Parameters].[pOpportunityOwner_Champions (copy)_995858528093941789]   THEN "Effective at closing and winning deals, they can develop in Pipeline Generation (farming or hunting)." WHEN [Parameters].[pOpportunityOwner_ImprovePipelineGen (copy)_995858528094035998]              THEN "Good at developing pipeline, they will improve their performance by developing their ability to close and win the deals." WHEN [Parameters].[pOpportunityOwner_ImprovePipelineGen (copy)_995858528094134303]           THEN "Underperforming in pipeline generation and deal closing. "    END | DAX: SWITCH([Opportunity Owner Class], [pOpportunityOwner_Champions], "Top performers in the team. They perform well in all areas && pull the team up.", [pOpportunityOwner_GrowthPlanPipelineGeneration], "E)...
+
+	measure 'Conversion Rate (Last N Months - Closed Date)' = [Total Sales (Last N Months - Closed Date)]/[Total Closed Opportunities Amount (Last N Months - Closed Date)]
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: 1c9e6fa0-967f-46d9-8cae-d7425efb7a3e
+		annotation Copilot_Description = Migrated from Tableau: [Pipeline Generation (Last N Months) (copy)_1243275034721849348]/[Total Sales (Last N Months) (copy)_1243275034722263045] | DAX: [Total Sales (Last N Months - Closed Date)]/[Total Closed Opportunities Amount (Last N Months - Closed Date)]
+
+	measure 'Total Sales (Last N Months - Closed Date)' = SUMX('Owned By', IF('Owned By'[Is Last N months filter - Closed Date?], 'Owned By'[_Total Sales (Expression)], BLANK()))
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: 0d2c4db3-f267-4a9b-bc82-5a473b6ae2b8
+		annotation Copilot_Description = Migrated from Tableau: SUM(IF [Closed in Last x Days (copy)_1142225515614175234] then [LinPack_961643984189344200] END) | DAX: SUMX('Owned By', IF('Owned By'[Is Last N months filter - Closed Date?], 'Owned By'[_Total Sales (Expression)], BLANK()))
+
+	measure 'Pipeline Generation (Last N Months - Created Date)' = SUMX('Owned By', IF('Owned By'[Is Last N months filter - Created Date?], 'Owned By'[_Pipeline Generated (Expression)], BLANK()))
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: 65bc7473-7f1d-4b4c-a9a4-4791d44d79a6
+		annotation Copilot_Description = Migrated from Tableau: SUM(IF [Last N months filter - Closed Date (copy)_1142225515621388292] then [LinPack_523892480737294295] END) | DAX: SUMX('Owned By', IF('Owned By'[Is Last N months filter - Created Date?], 'Owned By'[_Pipeline Generated (Expression)], BLANK()))
+
+	measure 'Pipeline Profile - Conversion Rate (Star)' = SUBSTITUTE(REPT(" ", [Pipeline Profile - Conversion Rate (num)])," ","★") & SUBSTITUTE(REPT(" ", 5-[Pipeline Profile - Conversion Rate (num)])," ","☆")
+		displayFolder: Dimensions
+		lineageTag: 4fe58606-310c-4bab-b22d-adebaf3c667e
+		annotation Copilot_Description = Migrated from Tableau: REPLACE(SPACE([Pipeline Profile - Conversion Rate (description) (copy)_995858528072065042])," ","★") + REPLACE(SPACE(5-[Pipeline Profile - Conversion Rate (description) (copy)_995858528072065042])," ","☆") | DAX: SUBSTITUTE(REPT(" ", [Pipeline Profile - Conversion Rate (num)])," ","★") & SUBSTITUTE(REPT(" ", 5-[Pipeline Profile - Conversion Rate (num)])," ","☆")
+
+	measure 'Pipeline Profile - Conversion Rate' = IF(SUM('Owned By'[_Per Customer: Conversion Rate]) <= CALCULATE(MAX('Owned By'[_Per Customer: Conversion Rate]), ALL('Owned By'))/5, "1", IF(SUM('Owned By'[_Per Customer: Conversion Rate]) <= CALCULATE(MAX('Owned By'[_Per Customer: Conversion Rate]), ALL('Owned By'))/5*2, "2", IF(SUM('Owned By'[_Per Customer: Conversion Rate]) <= CALCULATE(MAX('Owned By'[_Per Customer: Conversion Rate]), ALL('Owned By'))/5*3, "3", IF(SUM('Owned By'[_Per Customer: Conversion Rate]) <= CALCULATE(MAX('Owned By'[_Per Customer: Conversion Rate]), ALL('Owned By'))/5*4, "4", "5"))))
+		displayFolder: Dimensions
+		lineageTag: bc68d662-768d-4b43-a696-c7303d193074
+		annotation Copilot_Description = Migrated from Tableau: IF      [_Per Customer: Pipeline Generation (copy)_995858528061906945] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_995858528061906945])}/5 then "1"  ELSEIF  [_Per Customer: Pipeline Generation (copy)_995858528061906945] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_995858528061906945])}/5*2 then "2"  ELSEIF  [_Per Customer: Pipeline Generation (copy)_995858528061906945] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_995858528061906945])}/5*3 then "3"  ELSEIF  [_Per Customer: Pipeline Generation (copy)_995858528061906945] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_995858528061906945])}/5*4 then "4"  ELSE "5"                                     END | DAX: IF(SUM('Owned By'[_Per Customer: Conversion Rate]) <= CALCULATE(MAX('Owned By'[_Per Customer: Conversion Rate]), ALL('Owned By'))/5, "1", IF(SUM('Owned By'[_Per Customer: Conversion Rate]) <= CALCULAT))...
+
+	measure 'Pipeline Profile - Average Deal Size (description)' = SWITCH([Pipeline Profile - Average Deal Size], "1", "VERY LOW", "2", "LOW", "3", "MEDIUM", "4", "HIGH", "5", "VERY HIGH") & " Average Deal Size"
+		displayFolder: Dimensions
+		lineageTag: b1165a1a-1cec-43c1-9b10-c53c0cf7083a
+		annotation Copilot_Description = Migrated from Tableau: CASE [Pipeline Profile - Pipeline Generation (copy)_995858528067575816] WHEN "1" THEN "VERY LOW" WHEN "2" THEN "LOW" WHEN "3" THEN "MEDIUM" WHEN "4" THEN "HIGH" WHEN "5" THEN "VERY HIGH" END + " Average Deal Size" | DAX: SWITCH([Pipeline Profile - Average Deal Size], "1", "VERY LOW", "2", "LOW", "3", "MEDIUM", "4", "HIGH", "5", "VERY HIGH") & " Average Deal Size"
+
+	measure 'Pipeline Axis' = 100
+		displayFolder: Dimensions
+		lineageTag: 5f5a421a-4cfe-41dc-b141-b575f4a122f7
+		annotation Copilot_Description = Migrated from Tableau: 100 | DAX: 100
+
+	measure 'Pipeline Profile - Average Deal Size (num)' = INT([Pipeline Profile - Average Deal Size])
+		displayFolder: Dimensions
+		lineageTag: 92b72440-b499-47bc-8398-c8e9082fa24a
+		annotation Copilot_Description = Migrated from Tableau: int([Pipeline Profile - Pipeline Generation (copy)_995858528067575816]) | DAX: INT([Pipeline Profile - Average Deal Size])
+
+	measure 'Pipeline Profile - Pipeline Generation (Star)' = SUBSTITUTE(REPT(" ", [Pipeline Profile - Pipeline Generation (num)])," ","★") & SUBSTITUTE(REPT(" ", 5-[Pipeline Profile - Pipeline Generation (num)])," ","☆")
+		displayFolder: Dimensions
+		lineageTag: 0e58ec4a-6443-4176-8f4a-1a0546cabf13
+		annotation Copilot_Description = Migrated from Tableau: REPLACE(SPACE([Pipeline Profile - Pipeline Generation (description) (copy)_995858528072167443])," ","★") + REPLACE(SPACE(5-[Pipeline Profile - Pipeline Generation (description) (copy)_995858528072167443])," ","☆") | DAX: SUBSTITUTE(REPT(" ", [Pipeline Profile - Pipeline Generation (num)])," ","★") & SUBSTITUTE(REPT(" ", 5-[Pipeline Profile - Pipeline Generation (num)])," ","☆")
+
+	measure 'Pipeline Profile - Total Sales to Existing Clients' = IF(SUM('Owned By'[_Per Customer: Total Sales for Existing Clients]) <= CALCULATE(MAX('Owned By'[_Per Customer: Total Sales for Existing Clients]), ALL('Owned By'))/5, "1", IF(SUM('Owned By'[_Per Customer: Total Sales for Existing Clients]) <= CALCULATE(MAX('Owned By'[_Per Customer: Total Sales for Existing Clients]), ALL('Owned By'))/5*2, "2", IF(SUM('Owned By'[_Per Customer: Total Sales for Existing Clients]) <= CALCULATE(MAX('Owned By'[_Per Customer: Total Sales for Existing Clients]), ALL('Owned By'))/5*3, "3", IF(SUM('Owned By'[_Per Customer: Total Sales for Existing Clients]) <= CALCULATE(MAX('Owned By'[_Per Customer: Total Sales for Existing Clients]), ALL('Owned By'))/5*4, "4", "5"))))
+		displayFolder: Dimensions
+		lineageTag: 5c6dd68a-1c21-4929-9c9f-81314c838a57
+		annotation Copilot_Description = Migrated from Tableau: IF      [_Per Customer: Average Deal Size (copy)_995858528062611459] <= {fixed: max([_Per Customer: Average Deal Size (copy)_995858528062611459])}/5 then "1"  ELSEIF  [_Per Customer: Average Deal Size (copy)_995858528062611459] <= {fixed: max([_Per Customer: Average Deal Size (copy)_995858528062611459])}/5*2 then "2"  ELSEIF  [_Per Customer: Average Deal Size (copy)_995858528062611459] <= {fixed: max([_Per Customer: Average Deal Size (copy)_995858528062611459])}/5*3 then "3"  ELSEIF  [_Per Customer: Average Deal Size (copy)_995858528062611459] <= {fixed: max([_Per Customer: Average Deal Size (copy)_995858528062611459])}/5*4 then "4"  ELSE "5"                                     END | DAX: IF(SUM('Owned By'[_Per Customer: Total Sales for Existing Clients]) <= CALCULATE(MAX('Owned By'[_Per Customer: Total Sales for Existing Clients]), ALL('Owned By'))/5, "1", IF(SUM('Owned By'[_Per Custo])))...
+
+	measure 'Pipeline Profile - Conversion Rate (description)' = SWITCH([Pipeline Profile - Conversion Rate], "1", "VERY LOW", "2", "LOW", "3", "MEDIUM", "4", "HIGH", "5", "VERY HIGH") & " Conversion Rate"
+		displayFolder: Dimensions
+		lineageTag: 85e6cba5-eadd-4a28-9cab-61412fcb5088
+		annotation Copilot_Description = Migrated from Tableau: CASE [Pipeline Profile - Average Deal Size (copy)_995858528067751945] WHEN "1" THEN "VERY LOW" WHEN "2" THEN "LOW" WHEN "3" THEN "MEDIUM" WHEN "4" THEN "HIGH" WHEN "5" THEN "VERY HIGH" END + " Conversion Rate" | DAX: SWITCH([Pipeline Profile - Conversion Rate], "1", "VERY LOW", "2", "LOW", "3", "MEDIUM", "4", "HIGH", "5", "VERY HIGH") & " Conversion Rate"
+
+	measure 'Pipeline Profile - Conversion Rate (num)' = INT([Pipeline Profile - Conversion Rate])
+		displayFolder: Dimensions
+		lineageTag: 4b667c7d-fbf8-4d3c-a369-4e6080f1750c
+		annotation Copilot_Description = Migrated from Tableau: int([Pipeline Profile - Average Deal Size (copy)_995858528067751945]) | DAX: INT([Pipeline Profile - Conversion Rate])
+
+	measure 'Pipeline Profile - Pipeline Generation to Existing Clients (Star)' = SUBSTITUTE(REPT(" ", [Pipeline Profile - Pipeline Generation to Existing Clients (num)])," ","★") & SUBSTITUTE(REPT(" ", 5-[Pipeline Profile - Pipeline Generation to Existing Clients (num)])," ","☆")
+		displayFolder: Dimensions
+		lineageTag: 7afba946-1909-4071-9add-6883ed20c95f
+		annotation Copilot_Description = Migrated from Tableau: REPLACE(SPACE([Pipeline Profile - Total Sales to Existing Clients (num) (copy)_1849572132723974155])," ","★") + REPLACE(SPACE(5-[Pipeline Profile - Total Sales to Existing Clients (num) (copy)_1849572132723974155])," ","☆") | DAX: SUBSTITUTE(REPT(" ", [Pipeline Profile - Pipeline Generation to Existing Clients (num)])," ","★") & SUBSTITUTE(REPT(" ", 5-[Pipeline Profile - Pipeline Generation to Existing Clients (num)])," ","☆")
+
+	measure 'Pipeline Profile - Average Deal Size' = IF(SUM('Owned By'[_Per Customer: Average Deal Size]) <= CALCULATE(MAX('Owned By'[_Per Customer: Average Deal Size]), ALL('Owned By'))/5, "1", IF(SUM('Owned By'[_Per Customer: Average Deal Size]) <= CALCULATE(MAX('Owned By'[_Per Customer: Average Deal Size]), ALL('Owned By'))/5*2, "2", IF(SUM('Owned By'[_Per Customer: Average Deal Size]) <= CALCULATE(MAX('Owned By'[_Per Customer: Average Deal Size]), ALL('Owned By'))/5*3, "3", IF(SUM('Owned By'[_Per Customer: Average Deal Size]) <= CALCULATE(MAX('Owned By'[_Per Customer: Average Deal Size]), ALL('Owned By'))/5*4, "4", "5"))))
+		displayFolder: Dimensions
+		lineageTag: b0b85621-84bc-4a3e-aa35-6438c8ad0000
+		annotation Copilot_Description = Migrated from Tableau: IF      [_Per Customer: Pipeline Generation (copy)_995858528062124034] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_995858528062124034])}/5 then "1"  ELSEIF  [_Per Customer: Pipeline Generation (copy)_995858528062124034] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_995858528062124034])}/5*2 then "2"  ELSEIF  [_Per Customer: Pipeline Generation (copy)_995858528062124034] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_995858528062124034])}/5*3 then "3"  ELSEIF  [_Per Customer: Pipeline Generation (copy)_995858528062124034] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_995858528062124034])}/5*4 then "4"  ELSE "5"                                     END | DAX: IF(SUM('Owned By'[_Per Customer: Average Deal Size]) <= CALCULATE(MAX('Owned By'[_Per Customer: Average Deal Size]), ALL('Owned By'))/5, "1", IF(SUM('Owned By'[_Per Customer: Average Deal Size]) <= CA))...
+
+	measure 'Pipeline Profile - Pipeline Generation (description)' = SWITCH([Pipeline Profile - Pipeline Generation], "1", "VERY LOW", "2", "LOW", "3", "MEDIUM", "4", "HIGH", "5", "VERY HIGH") & " Ability to generate pipeline"
+		displayFolder: Dimensions
+		lineageTag: 236687f3-71c9-481c-8154-535b9f441563
+		annotation Copilot_Description = Migrated from Tableau: CASE [Calculation_995858528066854919] WHEN "1" THEN "VERY LOW" WHEN "2" THEN "LOW" WHEN "3" THEN "MEDIUM" WHEN "4" THEN "HIGH" WHEN "5" THEN "VERY HIGH" END + " Ability to generate pipeline" | DAX: SWITCH([Pipeline Profile - Pipeline Generation], "1", "VERY LOW", "2", "LOW", "3", "MEDIUM", "4", "HIGH", "5", "VERY HIGH") & " Ability to generate pipeline"
+
+	measure 'Pipeline Profile - Pipeline Generation (num)' = INT([Pipeline Profile - Pipeline Generation])
+		displayFolder: Dimensions
+		lineageTag: e396e3a2-e859-4e36-af63-5a35d159a665
+		annotation Copilot_Description = Migrated from Tableau: int([Calculation_995858528066854919]) | DAX: INT([Pipeline Profile - Pipeline Generation])
+
+	measure 'Pipeline Profile - Pipeline Generation to Prospects (Star)' = SUBSTITUTE(REPT(" ", [Pipeline Profile - Pipeline Generation to Prospects (num)])," ","★") & SUBSTITUTE(REPT(" ", 5-[Pipeline Profile - Pipeline Generation to Prospects (num)])," ","☆")
+		displayFolder: Dimensions
+		lineageTag: d5899321-d370-4883-8167-6ae52ab74bf7
+		annotation Copilot_Description = Migrated from Tableau: REPLACE(SPACE([Pipeline Profile - Total Sales to Prospects (num) (copy)_1849572132723974157])," ","★") + REPLACE(SPACE(5-[Pipeline Profile - Total Sales to Prospects (num) (copy)_1849572132723974157])," ","☆") | DAX: SUBSTITUTE(REPT(" ", [Pipeline Profile - Pipeline Generation to Prospects (num)])," ","★") & SUBSTITUTE(REPT(" ", 5-[Pipeline Profile - Pipeline Generation to Prospects (num)])," ","☆")
+
+	measure 'Pipeline Profile - Total Sales (Star)' = SUBSTITUTE(REPT(" ", [Pipeline Profile - Total Sales (num)])," ","★") & SUBSTITUTE(REPT(" ", 5-[Pipeline Profile - Total Sales (num)])," ","☆")
+		displayFolder: Dimensions
+		lineageTag: 07dd8c41-72f9-49dd-9650-156ad21067a8
+		annotation Copilot_Description = Migrated from Tableau: REPLACE(SPACE([Pipeline Profile - Total Sales to Prospects (num) (copy)_1849572132716658690])," ","★") + REPLACE(SPACE(5-[Pipeline Profile - Total Sales to Prospects (num) (copy)_1849572132716658690])," ","☆") | DAX: SUBSTITUTE(REPT(" ", [Pipeline Profile - Total Sales (num)])," ","★") & SUBSTITUTE(REPT(" ", 5-[Pipeline Profile - Total Sales (num)])," ","☆")
+
+	measure 'Pipeline Profile - Total Sales to Existing Clients (Star)' = SUBSTITUTE(REPT(" ", [Pipeline Profile - Total Sales to Existing Clients (num)])," ","★") & SUBSTITUTE(REPT(" ", 5-[Pipeline Profile - Total Sales to Existing Clients (num)])," ","☆")
+		displayFolder: Dimensions
+		lineageTag: aefb2801-76f3-4b58-aadf-24b000b3c9f6
+		annotation Copilot_Description = Migrated from Tableau: REPLACE(SPACE([Pipeline Profile - Total Sales for Existing Clients (description) (copy)_995858528072245268])," ","★") + REPLACE(SPACE(5-[Pipeline Profile - Total Sales for Existing Clients (description) (copy)_995858528072245268])," ","☆") | DAX: SUBSTITUTE(REPT(" ", [Pipeline Profile - Total Sales to Existing Clients (num)])," ","★") & SUBSTITUTE(REPT(" ", 5-[Pipeline Profile - Total Sales to Existing Clients (num)])," ","☆")
+
+	measure 'Pipeline Profile - Total Sales to Prospects' = IF(SUM('Owned By'[_Per Customer: Total Sales for Prospects]) <= CALCULATE(MAX('Owned By'[_Per Customer: Total Sales for Prospects]), ALL('Owned By'))/5, "1", IF(SUM('Owned By'[_Per Customer: Total Sales for Prospects]) <= CALCULATE(MAX('Owned By'[_Per Customer: Total Sales for Prospects]), ALL('Owned By'))/5*2, "2", IF(SUM('Owned By'[_Per Customer: Total Sales for Prospects]) <= CALCULATE(MAX('Owned By'[_Per Customer: Total Sales for Prospects]), ALL('Owned By'))/5*3, "3", IF(SUM('Owned By'[_Per Customer: Total Sales for Prospects]) <= CALCULATE(MAX('Owned By'[_Per Customer: Total Sales for Prospects]), ALL('Owned By'))/5*4, "4", "5"))))
+		displayFolder: Dimensions
+		lineageTag: 8abc0af3-0651-46f4-859b-d557e94d304f
+		annotation Copilot_Description = Migrated from Tableau: IF      [_Per Customer: Total Sales on Client (copy)_995858528065740806] <= {fixed: max([_Per Customer: Total Sales on Client (copy)_995858528065740806])}/5 then "1"  ELSEIF  [_Per Customer: Total Sales on Client (copy)_995858528065740806] <= {fixed: max([_Per Customer: Total Sales on Client (copy)_995858528065740806])}/5*2 then "2"  ELSEIF  [_Per Customer: Total Sales on Client (copy)_995858528065740806] <= {fixed: max([_Per Customer: Total Sales on Client (copy)_995858528065740806])}/5*3 then "3"  ELSEIF  [_Per Customer: Total Sales on Client (copy)_995858528065740806] <= {fixed: max([_Per Customer: Total Sales on Client (copy)_995858528065740806])}/5*4 then "4"  ELSE "5"                                     END | DAX: IF(SUM('Owned By'[_Per Customer: Total Sales for Prospects]) <= CALCULATE(MAX('Owned By'[_Per Customer: Total Sales for Prospects]), ALL('Owned By'))/5, "1", IF(SUM('Owned By'[_Per Customer: Total Sal])))...
+
+	measure 'Pipeline Profile - Total Sales to Existing Clients (description)' = SWITCH([Pipeline Profile - Total Sales to Existing Clients], "1", "VERY LOW", "2", "LOW", "3", "MEDIUM", "4", "HIGH", "5", "VERY HIGH") & " Ability to sell to existing clients"
+		displayFolder: Dimensions
+		lineageTag: afa2cefb-4752-4dd7-9960-214559fd082a
+		annotation Copilot_Description = Migrated from Tableau: CASE [Pipeline Profile - Conversion Rate (copy)_995858528068132874] WHEN "1" THEN "VERY LOW" WHEN "2" THEN "LOW" WHEN "3" THEN "MEDIUM" WHEN "4" THEN "HIGH" WHEN "5" THEN "VERY HIGH" END + " Ability to sell to existing clients" | DAX: SWITCH([Pipeline Profile - Total Sales to Existing Clients], "1", "VERY LOW", "2", "LOW", "3", "MEDIUM", "4", "HIGH", "5", "VERY HIGH") & " Ability to sell to existing clients"
+
+	measure 'Pipeline Profile - Total Sales to Existing Clients (num)' = INT([Pipeline Profile - Total Sales to Existing Clients])
+		displayFolder: Dimensions
+		lineageTag: 105bd129-2521-474c-9575-a639cb66879d
+		annotation Copilot_Description = Migrated from Tableau: int([Pipeline Profile - Conversion Rate (copy)_995858528068132874]) | DAX: INT([Pipeline Profile - Total Sales to Existing Clients])
+
+	measure 'Pipeline Profile - Total Sales to Prospects (description)' = SWITCH([Pipeline Profile - Total Sales to Prospects], "1", "VERY LOW", "2", "LOW", "3", "MEDIUM", "4", "HIGH", "5", "VERY HIGH") & " Ability to sell to prospects"
+		displayFolder: Dimensions
+		lineageTag: bd71ec40-3308-452d-897c-67c09579e60b
+		annotation Copilot_Description = Migrated from Tableau: CASE [Pipeline Profile - Total Sales for Existing Clients (copy)_995858528068710411] WHEN "1" THEN "VERY LOW" WHEN "2" THEN "LOW" WHEN "3" THEN "MEDIUM" WHEN "4" THEN "HIGH" WHEN "5" THEN "VERY HIGH" END + " Ability to sell to prospects" | DAX: SWITCH([Pipeline Profile - Total Sales to Prospects], "1", "VERY LOW", "2", "LOW", "3", "MEDIUM", "4", "HIGH", "5", "VERY HIGH") & " Ability to sell to prospects"
+
+	measure 'Pipeline Profile - Total Sales to Prospects (num)' = INT([Pipeline Profile - Total Sales to Prospects])
+		displayFolder: Dimensions
+		lineageTag: 15f90924-bccc-440e-8864-237072021d56
+		annotation Copilot_Description = Migrated from Tableau: int([Pipeline Profile - Total Sales for Existing Clients (copy)_995858528068710411]) | DAX: INT([Pipeline Profile - Total Sales to Prospects])
+
+	measure 'Pipeline Profile - Total Sales to Prospects (Star)' = SUBSTITUTE(REPT(" ", [Pipeline Profile - Total Sales to Prospects (num)])," ","★") & SUBSTITUTE(REPT(" ", 5-[Pipeline Profile - Total Sales to Prospects (num)])," ","☆")
+		displayFolder: Dimensions
+		lineageTag: a453b3dc-74b1-48c9-8a0d-e2334e5cfbed
+		annotation Copilot_Description = Migrated from Tableau: REPLACE(SPACE([Pipeline Profile - Total Sales for Prospects (description) (copy)_995858528072331285])," ","★") + REPLACE(SPACE(5-[Pipeline Profile - Total Sales for Prospects (description) (copy)_995858528072331285])," ","☆") | DAX: SUBSTITUTE(REPT(" ", [Pipeline Profile - Total Sales to Prospects (num)])," ","★") & SUBSTITUTE(REPT(" ", 5-[Pipeline Profile - Total Sales to Prospects (num)])," ","☆")
+
+	measure 'Pipeline Profile - Pipeline Generation to Existing Clients' = IF(SUM('Owned By'[_Per Customer: Pipeline Generation for Existing Clients]) <= CALCULATE(MAX('Owned By'[_Per Customer: Pipeline Generation for Existing Clients]), ALL('Owned By'))/5, "1", IF(SUM('Owned By'[_Per Customer: Pipeline Generation for Existing Clients]) <= CALCULATE(MAX('Owned By'[_Per Customer: Pipeline Generation for Existing Clients]), ALL('Owned By'))/5*2, "2", IF(SUM('Owned By'[_Per Customer: Pipeline Generation for Existing Clients]) <= CALCULATE(MAX('Owned By'[_Per Customer: Pipeline Generation for Existing Clients]), ALL('Owned By'))/5*3, "3", IF(SUM('Owned By'[_Per Customer: Pipeline Generation for Existing Clients]) <= CALCULATE(MAX('Owned By'[_Per Customer: Pipeline Generation for Existing Clients]), ALL('Owned By'))/5*4, "4", "5"))))
+		displayFolder: Dimensions
+		lineageTag: 7f815a4e-aa0c-4ea0-8aee-3e97197a30be
+		annotation Copilot_Description = Migrated from Tableau: IF      [_Per Customer: Pipeline Generation (copy)_1849572132719239174] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_1849572132719239174])}/5 then "1"  ELSEIF  [_Per Customer: Pipeline Generation (copy)_1849572132719239174] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_1849572132719239174])}/5*2 then "2"  ELSEIF  [_Per Customer: Pipeline Generation (copy)_1849572132719239174] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_1849572132719239174])}/5*3 then "3"  ELSEIF  [_Per Customer: Pipeline Generation (copy)_1849572132719239174] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_1849572132719239174])}/5*4 then "4"  ELSE "5"                                     END | DAX: IF(SUM('Owned By'[_Per Customer: Pipeline Generation for Existing Clients]) <= CALCULATE(MAX('Owned By'[_Per Customer: Pipeline Generation for Existing Clients]), ALL('Owned By'))/5, "1", IF(SUM('Owne)))...
+
+	measure 'Pipeline Profile - Pipeline Generation to Existing Clients (description)' = SWITCH([Pipeline Profile - Pipeline Generation to Existing Clients], "1", "VERY LOW", "2", "LOW", "3", "MEDIUM", "4", "HIGH", "5", "VERY HIGH") & " Ability to generate pipeline with existing clients"
+		displayFolder: Dimensions
+		lineageTag: 44213a62-b3ab-4231-be9e-5c0235f6c945
+		annotation Copilot_Description = Migrated from Tableau: CASE [Pipeline Profile - Total Sales to Existing Clients (copy)_1849572132723974152] WHEN "1" THEN "VERY LOW" WHEN "2" THEN "LOW" WHEN "3" THEN "MEDIUM" WHEN "4" THEN "HIGH" WHEN "5" THEN "VERY HIGH" END + " Ability to generate pipeline with existing clients" | DAX: SWITCH([Pipeline Profile - Pipeline Generation to Existing Clients], "1", "VERY LOW", "2", "LOW", "3", "MEDIUM", "4", "HIGH", "5", "VERY HIGH") & " Ability to generate pipeline with existing clients"
+
+	measure 'Pipeline Profile - Pipeline Generation to Existing Clients (num)' = INT([Pipeline Profile - Pipeline Generation to Existing Clients])
+		displayFolder: Dimensions
+		lineageTag: 5b5bf52d-67bf-4196-a45e-520987f84ca3
+		annotation Copilot_Description = Migrated from Tableau: int([Pipeline Profile - Total Sales to Existing Clients (copy)_1849572132723974152]) | DAX: INT([Pipeline Profile - Pipeline Generation to Existing Clients])
+
+	measure 'Pipeline Profile - Total Sales' = IF(SUM('Owned By'[_Per Customer: Total Sales]) <= CALCULATE(MAX('Owned By'[_Per Customer: Total Sales]), ALL('Owned By'))/5, "1", IF(SUM('Owned By'[_Per Customer: Total Sales]) <= CALCULATE(MAX('Owned By'[_Per Customer: Total Sales]), ALL('Owned By'))/5*2, "2", IF(SUM('Owned By'[_Per Customer: Total Sales]) <= CALCULATE(MAX('Owned By'[_Per Customer: Total Sales]), ALL('Owned By'))/5*3, "3", IF(SUM('Owned By'[_Per Customer: Total Sales]) <= CALCULATE(MAX('Owned By'[_Per Customer: Total Sales]), ALL('Owned By'))/5*4, "4", "5"))))
+		displayFolder: Dimensions
+		lineageTag: 1fc3699d-8d1a-4bee-8b67-d6cbb4ac8d5f
+		annotation Copilot_Description = Migrated from Tableau: IF      [_Per Customer: Total Sales for Prospects (copy)_1849572132717031427] <= {fixed: max([_Per Customer: Total Sales for Prospects (copy)_1849572132717031427])}/5 then "1"  ELSEIF  [_Per Customer: Total Sales for Prospects (copy)_1849572132717031427] <= {fixed: max([_Per Customer: Total Sales for Prospects (copy)_1849572132717031427])}/5*2 then "2"  ELSEIF  [_Per Customer: Total Sales for Prospects (copy)_1849572132717031427] <= {fixed: max([_Per Customer: Total Sales for Prospects (copy)_1849572132717031427])}/5*3 then "3"  ELSEIF  [_Per Customer: Total Sales for Prospects (copy)_1849572132717031427] <= {fixed: max([_Per Customer: Total Sales for Prospects (copy)_1849572132717031427])}/5*4 then "4"  ELSE "5"                                     END | DAX: IF(SUM('Owned By'[_Per Customer: Total Sales]) <= CALCULATE(MAX('Owned By'[_Per Customer: Total Sales]), ALL('Owned By'))/5, "1", IF(SUM('Owned By'[_Per Customer: Total Sales]) <= CALCULATE(MAX('Owned))))...
+
+	measure 'Pipeline Profile - Pipeline Generation to Prospects' = IF(SUM('Owned By'[_Per Customer: Pipeline Generation for Prospects]) <= CALCULATE(MAX('Owned By'[_Per Customer: Pipeline Generation for Prospects]), ALL('Owned By'))/5, "1", IF(SUM('Owned By'[_Per Customer: Pipeline Generation for Prospects]) <= CALCULATE(MAX('Owned By'[_Per Customer: Pipeline Generation for Prospects]), ALL('Owned By'))/5*2, "2", IF(SUM('Owned By'[_Per Customer: Pipeline Generation for Prospects]) <= CALCULATE(MAX('Owned By'[_Per Customer: Pipeline Generation for Prospects]), ALL('Owned By'))/5*3, "3", IF(SUM('Owned By'[_Per Customer: Pipeline Generation for Prospects]) <= CALCULATE(MAX('Owned By'[_Per Customer: Pipeline Generation for Prospects]), ALL('Owned By'))/5*4, "4", "5"))))
+		displayFolder: Dimensions
+		lineageTag: 27764f40-a844-47d4-b951-df0bc24d2b3b
+		annotation Copilot_Description = Migrated from Tableau: IF      [_Per Customer: Pipeline Generation (copy) (copy)_1849572132719255559] <= {fixed: max([_Per Customer: Pipeline Generation (copy) (copy)_1849572132719255559])}/5 then "1"  ELSEIF  [_Per Customer: Pipeline Generation (copy) (copy)_1849572132719255559] <= {fixed: max([_Per Customer: Pipeline Generation (copy) (copy)_1849572132719255559])}/5*2 then "2"  ELSEIF  [_Per Customer: Pipeline Generation (copy) (copy)_1849572132719255559] <= {fixed: max([_Per Customer: Pipeline Generation (copy) (copy)_1849572132719255559])}/5*3 then "3"  ELSEIF  [_Per Customer: Pipeline Generation (copy) (copy)_1849572132719255559] <= {fixed: max([_Per Customer: Pipeline Generation (copy) (copy)_1849572132719255559])}/5*4 then "4"  ELSE "5"                                     END | DAX: IF(SUM('Owned By'[_Per Customer: Pipeline Generation for Prospects]) <= CALCULATE(MAX('Owned By'[_Per Customer: Pipeline Generation for Prospects]), ALL('Owned By'))/5, "1", IF(SUM('Owned By'[_Per Cus])))...
+
+	measure 'Pipeline Profile - Total Sales (description)' = SWITCH([Pipeline Profile - Total Sales], "1", "VERY LOW", "2", "LOW", "3", "MEDIUM", "4", "HIGH", "5", "VERY HIGH") & " Ability to sell"
+		displayFolder: Dimensions
+		lineageTag: 8d92a320-c676-4818-a27c-5084b4847695
+		annotation Copilot_Description = Migrated from Tableau: CASE [Pipeline Profile - Total Sales to Prospects (copy)_1849572132716658688] WHEN "1" THEN "VERY LOW" WHEN "2" THEN "LOW" WHEN "3" THEN "MEDIUM" WHEN "4" THEN "HIGH" WHEN "5" THEN "VERY HIGH" END + " Ability to sell" | DAX: SWITCH([Pipeline Profile - Total Sales], "1", "VERY LOW", "2", "LOW", "3", "MEDIUM", "4", "HIGH", "5", "VERY HIGH") & " Ability to sell"
+
+	measure 'Pipeline Profile - Pipeline Generation to Prospects (description)' = SWITCH([Pipeline Profile - Pipeline Generation to Prospects], "1", "VERY LOW", "2", "LOW", "3", "MEDIUM", "4", "HIGH", "5", "VERY HIGH") & " Ability to generate pipeline with prospects"
+		displayFolder: Dimensions
+		lineageTag: 9dea6799-b7c8-40c6-ba27-690b90c773b1
+		annotation Copilot_Description = Migrated from Tableau: CASE [Pipeline Profile - Total Sales to Prospects (copy)_1849572132723974153] WHEN "1" THEN "VERY LOW" WHEN "2" THEN "LOW" WHEN "3" THEN "MEDIUM" WHEN "4" THEN "HIGH" WHEN "5" THEN "VERY HIGH" END + " Ability to generate pipeline with prospects" | DAX: SWITCH([Pipeline Profile - Pipeline Generation to Prospects], "1", "VERY LOW", "2", "LOW", "3", "MEDIUM", "4", "HIGH", "5", "VERY HIGH") & " Ability to generate pipeline with prospects"
+
+	measure 'Pipeline Profile - Total Sales (num)' = INT([Pipeline Profile - Total Sales])
+		displayFolder: Dimensions
+		lineageTag: f6f60c0d-aa1b-4db2-a3d6-9af563d98e0a
+		annotation Copilot_Description = Migrated from Tableau: int([Pipeline Profile - Total Sales to Prospects (copy)_1849572132716658688]) | DAX: INT([Pipeline Profile - Total Sales])
+
+	measure 'Pipeline Profile - Pipeline Generation to Prospects (num)' = INT([Pipeline Profile - Pipeline Generation to Prospects])
+		displayFolder: Dimensions
+		lineageTag: 0f7e9914-38a9-4b49-ab64-ee4abb602cf3
+		annotation Copilot_Description = Migrated from Tableau: int([Pipeline Profile - Total Sales to Prospects (copy)_1849572132723974153]) | DAX: INT([Pipeline Profile - Pipeline Generation to Prospects])
+
+	measure 'Probability (bucket) (sort)' = IF(MAX('Owned By'[_Avg Probability (Expression)]) < 0.25, 10, IF(MAX('Owned By'[_Avg Probability (Expression)]) < 0.50, 20, IF(MAX('Owned By'[_Avg Probability (Expression)]) < 0.75, 30, 40)))
+		displayFolder: Dimensions
+		lineageTag: 030f175d-c1e7-4fc9-8d4e-cc51458708a1
+		annotation Copilot_Description = Migrated from Tableau: IF [LinPack_574638457904073940]<0.25 THEN 10 ELSEIF [LinPack_574638457904073940]<0.50 THEN 20 ELSEIF [LinPack_574638457904073940]<0.75 THEN 30 ELSE 40 END | DAX: IF(MAX('Owned By'[_Avg Probability (Expression)]) < 0.25, 10, IF(MAX('Owned By'[_Avg Probability (Expression)]) < 0.50, 20, IF(MAX('Owned By'[_Avg Probability (Expression)]) < 0.75, 30, 40)))
+
+	measure 'Sales Value (for selected Opp Owner)' = MAXX('Owned By', IF('Owned By'[Is Selected Opportunity Owner Flag?], CALCULATE([Total Sales]), BLANK()))
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: ba9ec86c-1ccf-4b19-a6b7-a1462d4bf0fd
+		annotation Copilot_Description = Migrated from Tableau: MAX(IF [Is Selected Opportunity Stage Flag (copy)_813744216047374336] THEN {INCLUDE [Calculation_711568759570620418] : [LinPack_235739231649065059]} END) | DAX: MAXX('Owned By', IF('Owned By'[Is Selected Opportunity Owner Flag?], CALCULATE([Total Sales]), BLANK()))
+
+	measure 'Rank Conversion Rate (for selected Opp Owner)' = /* TODO: DAX conversion validation failed for Rank Sales Value (for selected Opp Owner) (copy)_1048775823272144897: unterminated double-quoted string literal */ BLANK()
+		displayFolder: Measures
+		lineageTag: ca5b981e-b293-47f7-8f34-7f542bcdc545
+		annotation Copilot_Description = Migrated from Tableau: // Count the distinct number of Opportunity Owner // where Opportunity Owner's [Conversion Rate] > Selected Opportunity Owner [Conversion Rate] COUNTD(if {INCLUDE [Calculation_711568759570620418] : [LinPack_713531991123124037]} > {MAX((IF [Is Selected Opportunity Stage Flag (copy)_813744216047374336] THEN {INCLUDE [Calculation_711568759570620418] : ZN([LinPack_713531991123124037])} ELSE 0 END))}        and Not [Is Selected Opportunity Stage Flag (copy)_813744216047374336]        then [Calculation_711568759570620418]  end)+1 | DAX: /* TODO: DAX conversion validation failed for Rank Sales Value (for selected Opp Owner) (copy)_1048775823272144897: unterminated double-quoted string literal */ BLANK()
+
+	measure 'Rank Total Opp Amount (for selected Opp Owner)' = /* TODO: DAX conversion validation failed for Rank Sales Value (for selected Opp Owner) (copy)_928867483237888003: unterminated double-quoted string literal */ BLANK()
+		displayFolder: Measures
+		lineageTag: 4e6f8a80-aae6-42c8-8c0e-5047f0cf4442
+		annotation Copilot_Description = Migrated from Tableau: // Count the distinct number of Opportunity Owner // where Opportunity Owner's [Total Opp Amount] > Selected Opportunity Owner [Total Opp Amount] COUNTD(if {INCLUDE [Calculation_711568759570620418] : [LinPack_017255839264062096]} > {MAX((IF [Is Selected Opportunity Stage Flag (copy)_813744216047374336] THEN {INCLUDE [Calculation_711568759570620418] : ZN([LinPack_017255839264062096])} ELSE 0 END))}        and Not [Is Selected Opportunity Stage Flag (copy)_813744216047374336]        then [Calculation_711568759570620418]  end)+1 | DAX: /* TODO: DAX conversion validation failed for Rank Sales Value (for selected Opp Owner) (copy)_928867483237888003: unterminated double-quoted string literal */ BLANK()
+
+	measure 'Conversion Rate (for selected Opp Owner)' = MAXX('Owned By', IF('Owned By'[Is Selected Opportunity Owner Flag?], CALCULATE('Owned By'[Conversion Rate]), BLANK()))
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: d47eee2f-777d-45c9-877b-a2ddc5fc0eb8
+		annotation Copilot_Description = Migrated from Tableau: MAX(IF [Is Selected Opportunity Stage Flag (copy)_813744216047374336] THEN {INCLUDE [Calculation_711568759570620418] : [LinPack_713531991123124037]} END) | DAX: MAXX('Owned By', IF('Owned By'[Is Selected Opportunity Owner Flag?], CALCULATE('Owned By'[Conversion Rate]), BLANK()))
+
+	measure 'Total Opp Amount (for selected Opp Owner)' = MAXX('Owned By', IF('Owned By'[Is Selected Opportunity Owner Flag?], CALCULATE([Pipeline Generated]), BLANK()))
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: 7ed359f6-1ed8-426c-b747-3ac36bdfbc28
+		annotation Copilot_Description = Migrated from Tableau: MAX(IF [Is Selected Opportunity Stage Flag (copy)_813744216047374336] THEN {INCLUDE [Calculation_711568759570620418] : [LinPack_017255839264062096]} END) | DAX: MAXX('Owned By', IF('Owned By'[Is Selected Opportunity Owner Flag?], CALCULATE([Pipeline Generated]), BLANK()))
+
+	measure 'Total Closed Opportunities Amount (Last N Months - Closed Date)' = SUMX('Owned By', IF('Owned By'[Is Last N months filter - Closed Date?], 'Owned By'[_Total Closed Opportunities Amount (Expression)], BLANK()))
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: 2aaf0e16-ac56-48d1-a76f-99678a930a31
+		annotation Copilot_Description = Migrated from Tableau: SUM(IF [Closed in Last x Days (copy)_1142225515614175234] then [LinPack_808645294632541416] END) | DAX: SUMX('Owned By', IF('Owned By'[Is Last N months filter - Closed Date?], 'Owned By'[_Total Closed Opportunities Amount (Expression)], BLANK()))
+
+	measure 'Average Deal Size (Last N Months - Closed Date)' = SUMX('Owned By', IF('Owned By'[Is Last N months filter - Closed Date?], 'Owned By'[_Avg Deal Size (won) (Expression)], BLANK()))
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: 038ac915-ad6b-4cbe-94dd-2d848a6ea505
+		annotation Copilot_Description = Migrated from Tableau: SUM(IF [Closed in Last x Days (copy)_1142225515614175234] then [LinPack_760893960995960019] END) | DAX: SUMX('Owned By', IF('Owned By'[Is Last N months filter - Closed Date?], 'Owned By'[_Avg Deal Size (won) (Expression)], BLANK()))
+
+	measure 'Pipeline Generation for Existing Clients' = SUMX('Owned By', IF('Owned By'[Client/Prospect by Opportunity]="Existing Clients" && 'Owned By'[Is Last N months filter - Created Date?], 'Owned By'[_Pipeline Generated (Expression)], BLANK()))
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: 37846d80-47cb-4fa4-b78d-1a3be5fcc19c
+		annotation Copilot_Description = Migrated from Tableau: SUM(IF [Calculation_614178463385964547]="Existing Clients" and [Last N months filter - Closed Date (copy)_1142225515621388292] THEN [LinPack_523892480737294295] END) | DAX: SUMX('Owned By', IF('Owned By'[Client/Prospect by Opportunity]="Existing Clients" && 'Owned By'[Is Last N months filter - Created Date?], 'Owned By'[_Pipeline Generated (Expression)], BLANK()))
+
+	measure 'Total Sales for Prospects' = SUMX('Owned By', IF('Owned By'[Client/Prospect by Opportunity]="Prospects" && 'Owned By'[Is Last N months filter - Closed Date?], 'Owned By'[_Total Sales (Expression)], BLANK()))
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: e9c89ddc-29fd-46f2-a074-7d1222ebdb08
+		annotation Copilot_Description = Migrated from Tableau: SUM(IF [Calculation_614178463385964547]="Prospects" AND [Closed in Last x Days (copy)_1142225515614175234] then [LinPack_961643984189344200] END) | DAX: SUMX('Owned By', IF('Owned By'[Client/Prospect by Opportunity]="Prospects" && 'Owned By'[Is Last N months filter - Closed Date?], 'Owned By'[_Total Sales (Expression)], BLANK()))
+
+	measure 'Pipeline Generation for Prospects' = SUMX('Owned By', IF('Owned By'[Client/Prospect by Opportunity]="Prospects" && 'Owned By'[Is Last N months filter - Created Date?], 'Owned By'[_Pipeline Generated (Expression)], BLANK()))
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: 2ab25060-0882-46e2-8175-5638226577ec
+		annotation Copilot_Description = Migrated from Tableau: SUM(IF [Calculation_614178463385964547]="Prospects" and [Last N months filter - Closed Date (copy)_1142225515621388292] then [LinPack_523892480737294295] END) | DAX: SUMX('Owned By', IF('Owned By'[Client/Prospect by Opportunity]="Prospects" && 'Owned By'[Is Last N months filter - Created Date?], 'Owned By'[_Pipeline Generated (Expression)], BLANK()))
+
+	measure 'Days from Open to Close' = AVERAGEX('Owned By', CONVERT(DATEDIFF('Owned By'[CreatedDate (Owned By)], 'Owned By'[Opportunity Close Date], MINUTE) / (24*60), DOUBLE))
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: bc67e1af-beb7-456c-8626-6ce22eed0105
+		annotation Copilot_Description = Migrated from Tableau: avg(FLOAT(datediff("minute", [Created Date], [Calculation_822751375422500864]) / (24*60))) | DAX: AVERAGEX('Owned By', CONVERT(DATEDIFF('Owned By'[CreatedDate (Owned By)], 'Owned By'[Opportunity Close Date], MINUTE) / (24*60), DOUBLE))
+
+	measure __MyToday = DATE(2022,04,18)
+		formatString: Short Date
+		displayFolder: Dimensions
+		lineageTag: 4dbfb889-c2dc-4657-9ea7-2513f2c3c75c
+		annotation Copilot_Description = Migrated from Tableau: MAKEDATE(2022,04,18) | DAX: DATE(2022,04,18)
+
+	measure 'Last N Months' = 36
+		displayFolder: Measures
+		lineageTag: 5a4dd0cd-a9c0-4638-bbd5-1c1a4bba3d79
+		annotation Copilot_Description = Migrated from Tableau: 36 | DAX: 36
+
+	measure KPI_AvgOpportunitySize_Calculation = "Average of [Opportunity Amount]"
+		lineageTag: bbb8b3c5-09c8-4b97-9c5b-49eb3abf52cf
+		annotation Copilot_Description = DAX: "Average of [Opportunity Amount]"
+
+	measure KPI_AvgOpportunitySize_Description = "Average amount of opportunities, whether they are open or closed (expressed in currency)"
+		lineageTag: 4c3c7452-8224-429e-ae8d-53b130028ada
+		annotation Copilot_Description = DAX: "Average amount of opportunities, whether they are open or closed (expressed in currency)"
+
+	measure KPI_SalesVelocity_Description = "Determines how fast you are making money (you bring back about that much every day) (expressed in currency)"
+		lineageTag: 2f6e10f0-ad60-440e-9f7c-a1c45cc7472c
+		annotation Copilot_Description = DAX: "Determines how fast you are making money (you bring back about that much every day) (expressed in currency)"
+
+	measure KPI_AvgDealSizeWon_Description = "Average amount of won opportunities (expressed in currency)"
+		lineageTag: 28762eca-1255-443b-9bb7-3abe7f0cfd29
+		annotation Copilot_Description = DAX: "Average amount of won opportunities (expressed in currency)"
+
+	measure KPI_TotalClosedOpportunitiesAmount_Description = "Total amount of opportunities that are closed (expressed in currency)"
+		lineageTag: 58833394-d44a-46e3-b305-d51e6f65f5fa
+		annotation Copilot_Description = DAX: "Total amount of opportunities that are closed (expressed in currency)"
+
+	measure KPI_NbOpportunities_Calculation = "Count Distinct of [Opportunity Id]"
+		lineageTag: 3332cfce-4c01-446b-99fd-d9f615651d8d
+		annotation Copilot_Description = DAX: "Count Distinct of [Opportunity Id]"
+
+	measure KPI_NbClosedOpportunities_Description = "Number of opportunities that are closed"
+		lineageTag: 08c41982-581f-4fef-9b51-926ecca494c0
+		annotation Copilot_Description = DAX: "Number of opportunities that are closed"
+
+	measure KPI_NbOpportunities_Description = "Total number of opportunities (open or closed)"
+		lineageTag: 7d51e22e-8c3d-4074-b500-4ac7989a11c3
+		annotation Copilot_Description = DAX: "Total number of opportunities (open or closed)"
+
+	measure KPI_PipelineValue_Description = "Total amount of open opportunities (expressed in currency)"
+		lineageTag: a49da3c4-d867-4307-9750-785ae900e577
+		annotation Copilot_Description = DAX: "Total amount of open opportunities (expressed in currency)"
+
+	measure KPI_NbWonOpportunities_Description = "Number of opportunities that were won"
+		lineageTag: b57aa3c9-f5b0-46ad-bb1c-55290b79ff3e
+		annotation Copilot_Description = DAX: "Number of opportunities that were won"
+
+	measure KPI_NbLostOpportunities_Description = "Number of opportunities that were lost"
+		lineageTag: 454fb053-32af-4410-9fae-b0c0ec77b7a3
+		annotation Copilot_Description = DAX: "Number of opportunities that were lost"
+
+	measure KPI_SalesCycle_Calculation = "Average of TimeDifference([Opportunity Created Date], [Opportunity Closed Date])   (for closed opportunities only)"
+		isHidden
+		lineageTag: eb8806b9-21e4-4790-88c9-832db30f61ee
+		annotation Copilot_Description = DAX: "Average of TimeDifference([Opportunity Created Date], [Opportunity Closed Date])   (for closed opportunities only)"
+
+	measure KPI_WeigthedPipelineValue_Description = "Total amount of open opportunities, weighted by probability of closing (expressed in currency)"
+		lineageTag: 5a3d70eb-69da-44bf-a603-1c77a83a14f4
+		annotation Copilot_Description = DAX: "Total amount of open opportunities, weighted by probability of closing (expressed in currency)"
+
+	measure KPI_WonLostRate_Description = "Share of the number of opportunities won in relation to the number of all closed opportunities (expressed in \%)"
+		lineageTag: 64c100f5-4019-4d28-aa88-cb005242b9e3
+		annotation Copilot_Description = DAX: "Share of the number of opportunities won in relation to the number of all closed opportunities (expressed in \%)"
+
+	measure KPI_SalesCycle_Description = "Average time it takes to close an opportunity (only considering won opportunities)"
+		lineageTag: eff4ca27-5d3b-49c2-b99a-04e4bb564ff8
+		annotation Copilot_Description = DAX: "Average time it takes to close an opportunity (only considering won opportunities)"
+
+	measure KPI_SalesCycleLost_Calculation = "Average of TimeDifference([Opportunity Created Date], [Opportunity Closed Date])   (for lost opportunities only)"
+		isHidden
+		lineageTag: 4fec554b-1060-4fb5-ba21-b65882193f9b
+		annotation Copilot_Description = DAX: "Average of TimeDifference([Opportunity Created Date], [Opportunity Closed Date])   (for lost opportunities only)"
+
+	measure KPI_SalesCycleLost_Description = "Average time it takes to close an opportunity (only considering lost opportunities)"
+		lineageTag: c1879eb1-0491-4713-8c16-52f82bf51f09
+		annotation Copilot_Description = DAX: "Average time it takes to close an opportunity (only considering lost opportunities)"
+
+	measure KPI_SalesCycleWon_Calculation = "Average of TimeDifference([Opportunity Created Date], [Opportunity Closed Date])   (for won opportunities only)"
+		isHidden
+		lineageTag: 96f54bc7-fae7-4d31-86f5-43107ba9abc6
+		annotation Copilot_Description = DAX: "Average of TimeDifference([Opportunity Created Date], [Opportunity Closed Date])   (for won opportunities only)"
+
+	measure KPI_SalesCycleWon_Description = "Average time it takes to win an opportunity"
+		lineageTag: a676d8d9-d959-4e90-9485-a436dc687941
+		annotation Copilot_Description = DAX: "Average time it takes to win an opportunity"
+
+	measure KPI_TotalSales_Description = "Total amount of opportunities won (expressed in amount)"
+		lineageTag: 8622e00e-1548-418e-b359-9029f87f3b8d
+		annotation Copilot_Description = DAX: "Total amount of opportunities won (expressed in amount)"
+
+	measure KPI_TotalPipelineGeneration_Calculation = "Sum of [Opportunity Amount]"
+		lineageTag: 6f6e778b-dd52-47ce-9968-ec08d8f07ec7
+		annotation Copilot_Description = DAX: "Sum of [Opportunity Amount]"
+
+	measure KPI_TotalPipelineGeneration_Description = "Total amount of opportunities created (expressed in amount)"
+		lineageTag: c9c500ef-e215-4369-8215-5c5fa61b06c0
+		annotation Copilot_Description = DAX: "Total amount of opportunities created (expressed in amount)"
+
+	measure KPI_ConversionRate_Description = "Share of the amount of opportunities won in relation to the amount of all closed opportunities (expressed in \%)"
+		lineageTag: c3edfad9-c275-4deb-98a4-e66d43db6f20
+		annotation Copilot_Description = DAX: "Share of the amount of opportunities won in relation to the amount of all closed opportunities (expressed in \%)"
+
+	measure KPI_NbOpenOpportunities_Description = "Number of opportunities that are currently open"
+		lineageTag: b87f95f6-9948-4d1e-934e-66a85c3e7bc6
+		annotation Copilot_Description = DAX: "Number of opportunities that are currently open"
+
+	measure Currency = "$"
+		lineageTag: 25240049-05c2-42b7-a5fe-b37c17a4c39a
+		annotation Copilot_Description = DAX: "$"
+
+	measure 'Organization Name' = "Salesforce"
+		lineageTag: c3048cde-0216-40db-b0ab-80a57f56c9df
+		annotation Copilot_Description = DAX: "Salesforce"
+
+	measure 'Accelerator Title' = "Sales Pipeline"
+		lineageTag: 751b1f07-9da0-47ae-a170-eda00bce0f76
+		annotation Copilot_Description = DAX: "Sales Pipeline"
+
+	measure 'Accelerator Log' = "LinPack messages (view comment for details)"
+		lineageTag: 4520f935-a362-4092-b227-1c1e153315ca
+		annotation Copilot_Description = DAX: "LinPack messages (view comment for details)"
+
+	measure pSelectOpportunityOwner = "Bellina Catmull"
+		lineageTag: 8b2475c3-e25b-4366-a220-4f474102555f
+		annotation Copilot_Description = DAX: "Bellina Catmull"
+
+	measure pOpportunityOwner_Champions = "CHAMPIONS"
+		lineageTag: e86c6f9b-1836-4c31-87cc-de5e987d86d2
+		annotation Copilot_Description = DAX: "CHAMPIONS"
+
+	measure pOpportunityOwner_GrowthPlanPipelineGeneration = "GROWTH PLAN Pipeline Generation"
+		lineageTag: 8d45924c-7680-4be6-9d80-33d839bc7645
+		annotation Copilot_Description = DAX: "GROWTH PLAN Pipeline Generation"
+
+	measure pOpportunityOwner_GrowthPlanClosing = "GROWTH PLAN Closing"
+		lineageTag: 5a9acaaa-11a2-4bfa-a003-fb835d280e0d
+		annotation Copilot_Description = DAX: "GROWTH PLAN Closing"
+
+	measure pOpportunityOwner_RequiredImprovements = "REQUIRED IMPROVEMENTS"
+		lineageTag: 77a4e513-0ff7-44ef-bbf1-2cd27486cbba
+		annotation Copilot_Description = DAX: "REQUIRED IMPROVEMENTS"
+
+	column '@deprecated'
+		dataType: string
+		lineageTag: 03ae548c-3543-46b2-8169-f514091b255a
+		summarizeBy: none
+		sourceColumn: '@deprecated'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'About Me'
+		dataType: string
+		lineageTag: 1eb3f6bb-9ab1-4e48-921a-b31fba49bf8a
+		summarizeBy: none
+		sourceColumn: 'About Me'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccountID
+		dataType: string
+		lineageTag: b69851bd-5431-494d-b3fb-37164106475e
+		summarizeBy: none
+		sourceColumn: AccountID
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'AccountId (Owned By)'
+		dataType: string
+		lineageTag: 37145825-4321-4eaf-968b-c998a17f25ce
+		summarizeBy: none
+		sourceColumn: 'AccountId (Owned By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccountName2
+		dataType: string
+		lineageTag: c1b6d892-5e6b-4fd5-b41b-8628cd63dc6a
+		summarizeBy: none
+		sourceColumn: AccountName2
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Active
+		dataType: boolean
+		lineageTag: eb78cf62-5f27-46e9-849a-800e118f5886
+		summarizeBy: none
+		sourceColumn: Active
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivityRemindersPopup
+		dataType: boolean
+		lineageTag: 13988955-abbd-4bc3-8be5-364eea23c2a7
+		summarizeBy: none
+		sourceColumn: ActivityRemindersPopup
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Admin Info Emails'
+		dataType: boolean
+		lineageTag: 583cf2ce-3aa9-4f3f-a9b3-9355deeef48d
+		summarizeBy: none
+		sourceColumn: 'Admin Info Emails'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Admin User'
+		dataType: boolean
+		lineageTag: 5b211aeb-b871-4ded-a5b4-acd8f2327731
+		summarizeBy: none
+		sourceColumn: 'Admin User'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AgentGdprConsent
+		dataType: boolean
+		lineageTag: dc0ef177-ce3a-4b3b-8086-7b7696b292b7
+		summarizeBy: none
+		sourceColumn: AgentGdprConsent
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Alias
+		dataType: string
+		lineageTag: ef7f1f19-88be-4c35-9385-0dfefcfb289d
+		summarizeBy: none
+		sourceColumn: Alias
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Allow Forecasting'
+		dataType: boolean
+		lineageTag: 49b01363-3235-466d-8404-8df49f7a7545
+		summarizeBy: none
+		sourceColumn: 'Allow Forecasting'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Allow Maps Exports'
+		dataType: boolean
+		lineageTag: 19402c7d-49ec-4c3c-8825-1a7f744ae4c4
+		summarizeBy: none
+		sourceColumn: 'Allow Maps Exports'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Allow Output Format Change'
+		dataType: boolean
+		lineageTag: ba8ef391-d57a-4912-afcb-ddd8e3ee24a8
+		summarizeBy: none
+		sourceColumn: 'Allow Output Format Change'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ApexPagesDeveloperMode
+		dataType: boolean
+		lineageTag: c654571d-53d5-4099-8a8d-094959821e3e
+		summarizeBy: none
+		sourceColumn: ApexPagesDeveloperMode
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Auto-login To Call Center'
+		dataType: boolean
+		lineageTag: 75569bc6-06a2-4f24-99e1-805ce666198b
+		summarizeBy: none
+		sourceColumn: 'Auto-login To Call Center'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AutoBccStayInTouch
+		dataType: boolean
+		lineageTag: a079b5dd-309e-4a51-95b4-84bded6283dd
+		summarizeBy: none
+		sourceColumn: AutoBccStayInTouch
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AutoBcc
+		dataType: boolean
+		lineageTag: 5e0016d7-e15b-4eac-affc-ca680482a583
+		summarizeBy: none
+		sourceColumn: AutoBcc
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'AvantGo User'
+		dataType: boolean
+		lineageTag: 7f801b6d-e3bc-47cf-a331-761efddd1c4f
+		summarizeBy: none
+		sourceColumn: 'AvantGo User'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Branding Template'
+		dataType: string
+		lineageTag: fb8c30a9-3284-4a11-842c-ad19cc92f0a0
+		summarizeBy: none
+		sourceColumn: 'Branding Template'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CacheDiagnostics
+		dataType: boolean
+		lineageTag: b220c78c-54a3-4e0d-8279-36a664c63d0a
+		summarizeBy: none
+		sourceColumn: CacheDiagnostics
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Call Center ID'
+		dataType: string
+		lineageTag: bb6b1f9f-5898-461d-a6f2-5c13a824ff09
+		summarizeBy: none
+		sourceColumn: 'Call Center ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Can View Not Assigned Prospects'
+		dataType: boolean
+		lineageTag: 7068cfdf-72a6-4407-bf9e-8db75b5de033
+		summarizeBy: none
+		sourceColumn: 'Can View Not Assigned Prospects'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Chat User'
+		dataType: boolean
+		lineageTag: 822a63cc-b2d0-4104-ab2f-c922432064ba
+		summarizeBy: none
+		sourceColumn: 'Chat User'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Chatter Email Highlights Frequency'
+		dataType: string
+		lineageTag: 55a014d2-1d59-4359-904d-3b5d69b2c822
+		summarizeBy: none
+		sourceColumn: 'Chatter Email Highlights Frequency'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: 90f4fe03-c022-4389-a6ee-834c66c335b4
+		summarizeBy: none
+		sourceColumn: City
+		isHidden
+		dataCategory: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Closed Credit Account'
+		dataType: boolean
+		lineageTag: d1d92c8b-78cc-4e4d-9300-7d81fa1fbd9c
+		summarizeBy: none
+		sourceColumn: 'Closed Credit Account'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Company Name'
+		dataType: string
+		lineageTag: 22d69e41-da37-4d91-adce-ecca0295a5f6
+		summarizeBy: none
+		sourceColumn: 'Company Name'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Consumer User'
+		dataType: boolean
+		lineageTag: 00ac5a95-6d36-4fa0-997b-06bd2614dd85
+		summarizeBy: none
+		sourceColumn: 'Consumer User'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ContactId (Owned By)'
+		dataType: string
+		lineageTag: 77b67c50-503e-4474-8d88-53a14ba44ffc
+		summarizeBy: none
+		sourceColumn: 'ContactId (Owned By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ContentEmailAsAndWhen
+		dataType: boolean
+		lineageTag: 67485218-f801-46cf-9fe2-fed783d5dce1
+		summarizeBy: none
+		sourceColumn: ContentEmailAsAndWhen
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ContentNoEmail
+		dataType: boolean
+		lineageTag: 55527478-c31a-4c8c-8d12-24117b53fc82
+		summarizeBy: none
+		sourceColumn: ContentNoEmail
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 52c85b6e-351c-47ee-a566-647a0e679934
+		summarizeBy: none
+		sourceColumn: Country
+		isHidden
+		dataCategory: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreateLEXAppsWTShown
+		dataType: boolean
+		lineageTag: 50e2c613-5c13-4de6-832c-f84f1dff0fe1
+		summarizeBy: none
+		sourceColumn: CreateLEXAppsWTShown
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CreatedById (Owned By)'
+		dataType: string
+		lineageTag: 8904ce9c-6d94-4e44-a8da-d090350ecbf7
+		summarizeBy: none
+		sourceColumn: 'CreatedById (Owned By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CreatedDate (Owned By)'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0a41eb38-15c9-4794-a97b-a3df737cc2a0
+		summarizeBy: none
+		sourceColumn: 'CreatedDate (Owned By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DB
+		dataType: boolean
+		lineageTag: a33940bf-aac8-4f8a-8728-e0ec3ab78fe9
+		summarizeBy: none
+		sourceColumn: DB
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Default MID'
+		dataType: string
+		lineageTag: 5e9f21b5-7eb5-42b5-ab27-e7007befd682
+		summarizeBy: none
+		sourceColumn: 'Default MID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Default Marketing Cloud Page'
+		dataType: string
+		lineageTag: 74dd07aa-4bed-4308-9a63-01fae8269eec
+		summarizeBy: none
+		sourceColumn: 'Default Marketing Cloud Page'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Default Notification Frequency when Joining Groups'
+		dataType: string
+		lineageTag: 75570bd2-23e5-48cb-9269-1864f371a7d5
+		summarizeBy: none
+		sourceColumn: 'Default Notification Frequency when Joining Groups'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Default Product Lookup Tab'
+		dataType: string
+		lineageTag: f6a22203-c42b-468a-911c-2b293f92c29d
+		summarizeBy: none
+		sourceColumn: 'Default Product Lookup Tab'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Default Proximity Radius'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 7f50332d-b4f5-4a79-87ca-b9e816403e42
+		summarizeBy: sum
+		sourceColumn: 'Default Proximity Radius'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DefaultType
+		dataType: string
+		lineageTag: 0c62f40d-9296-40bf-9804-f83bce491d73
+		summarizeBy: none
+		sourceColumn: DefaultType
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Delegated Approver ID'
+		dataType: string
+		lineageTag: 27b6e42b-0287-455c-b2cb-208b483b5161
+		summarizeBy: none
+		sourceColumn: 'Delegated Approver ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column Department
+		dataType: string
+		lineageTag: 1ed1b6c7-90c9-4cee-97b3-08782b146797
+		summarizeBy: none
+		sourceColumn: Department
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DisCommentAfterLikeEmail
+		dataType: boolean
+		lineageTag: 99b2814e-d131-47da-9b1a-375a449ee2b8
+		summarizeBy: none
+		sourceColumn: DisCommentAfterLikeEmail
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DisMentionsCommentEmail
+		dataType: boolean
+		lineageTag: 8f20e0ec-2627-4278-9e3c-a6582e916b99
+		summarizeBy: none
+		sourceColumn: DisMentionsCommentEmail
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DisProfPostCommentEmail
+		dataType: boolean
+		lineageTag: 48b13f4e-82ec-4507-9988-7b0976133624
+		summarizeBy: none
+		sourceColumn: DisProfPostCommentEmail
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DisableAllFeedsEmail
+		dataType: boolean
+		lineageTag: 850dfb41-cd16-4008-8865-751ce43aec17
+		summarizeBy: none
+		sourceColumn: DisableAllFeedsEmail
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DisableBookmarkEmail
+		dataType: boolean
+		lineageTag: dc3f0574-9867-4ef5-98e8-25fa3a566a76
+		summarizeBy: none
+		sourceColumn: DisableBookmarkEmail
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DisableChangeCommentEmail
+		dataType: boolean
+		lineageTag: f0a036df-fad6-4981-87e6-3c97fb3b81eb
+		summarizeBy: none
+		sourceColumn: DisableChangeCommentEmail
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DisableEndorsementEmail
+		dataType: boolean
+		lineageTag: c8fc9c13-159f-4e35-b23e-4ef6296dd454
+		summarizeBy: none
+		sourceColumn: DisableEndorsementEmail
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DisableFileShareNotificationsForApi
+		dataType: boolean
+		lineageTag: 33415b5b-66a1-422c-a44d-3cf1623873c3
+		summarizeBy: none
+		sourceColumn: DisableFileShareNotificationsForApi
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DisableFollowersEmail
+		dataType: boolean
+		lineageTag: d46a0e94-c7a4-432f-9470-da1f01a6da72
+		summarizeBy: none
+		sourceColumn: DisableFollowersEmail
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DisableLaterCommentEmail
+		dataType: boolean
+		lineageTag: f7a29d1e-eae7-4192-813e-6440f991495c
+		summarizeBy: none
+		sourceColumn: DisableLaterCommentEmail
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DisableLikeEmail
+		dataType: boolean
+		lineageTag: 9ca014ca-0a43-441d-9fb4-bfc4957b4021
+		summarizeBy: none
+		sourceColumn: DisableLikeEmail
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DisableMentionsPostEmail
+		dataType: boolean
+		lineageTag: 5eaba4b9-b94c-4cef-b840-8e5a13b7f3c5
+		summarizeBy: none
+		sourceColumn: DisableMentionsPostEmail
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DisableMessageEmail
+		dataType: boolean
+		lineageTag: 424230ae-a820-442b-97e1-2ac23640c9a7
+		summarizeBy: none
+		sourceColumn: DisableMessageEmail
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DisableProfilePostEmail
+		dataType: boolean
+		lineageTag: bae9e474-1d33-4d37-8e7c-61bb3e5fc914
+		summarizeBy: none
+		sourceColumn: DisableProfilePostEmail
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DisableSharePostEmail
+		dataType: boolean
+		lineageTag: 1624f836-a0d6-4704-988d-844fe50d2f53
+		summarizeBy: none
+		sourceColumn: DisableSharePostEmail
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Division
+		dataType: string
+		lineageTag: 80f98ef5-5683-471d-9782-4ba19ddad9af
+		summarizeBy: none
+		sourceColumn: Division
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Edit Maps Org Wide Queries'
+		dataType: boolean
+		lineageTag: 1c99861d-cea3-413a-a44d-dc572828b37d
+		summarizeBy: none
+		sourceColumn: 'Edit Maps Org Wide Queries'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Email Encoding'
+		dataType: string
+		lineageTag: 00772610-5740-4ceb-a350-bbf74bb1a0eb
+		summarizeBy: none
+		sourceColumn: 'Email Encoding'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Email Sender Address'
+		dataType: string
+		lineageTag: 9a85ec73-6056-4004-998e-4058e0444201
+		summarizeBy: none
+		sourceColumn: 'Email Sender Address'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Email Sender Name'
+		dataType: string
+		lineageTag: 851b634a-5523-491c-8f9d-4418dca16877
+		summarizeBy: none
+		sourceColumn: 'Email Sender Name'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Email Signature'
+		dataType: string
+		lineageTag: e081bdca-5e5a-4483-9bcb-784f0d71cb45
+		summarizeBy: none
+		sourceColumn: 'Email Signature'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Email
+		dataType: string
+		lineageTag: 9840c800-9f7f-4082-a345-5ce8a1bcb9f1
+		summarizeBy: none
+		sourceColumn: Email
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Employee Number1'
+		dataType: string
+		lineageTag: 80c356ff-5b17-49f9-9051-c1245bf4726e
+		summarizeBy: none
+		sourceColumn: 'Employee Number1'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Employee Number'
+		dataType: string
+		lineageTag: 369a4184-4120-4336-84c9-ad4f650a6125
+		summarizeBy: none
+		sourceColumn: 'Employee Number'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Enable Diagnostic Tool'
+		dataType: boolean
+		lineageTag: b15c8f33-f832-4662-85a3-98ddcad59bf0
+		summarizeBy: none
+		sourceColumn: 'Enable Diagnostic Tool'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column EnableAutoSubForFeeds
+		dataType: boolean
+		lineageTag: fbdcd67b-632e-4913-aefb-b6122ff5d320
+		summarizeBy: none
+		sourceColumn: EnableAutoSubForFeeds
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column EventRemindersCheckboxDefault
+		dataType: boolean
+		lineageTag: 6fe64c5c-6398-4e4c-bf2c-c54675fc57ad
+		summarizeBy: none
+		sourceColumn: EventRemindersCheckboxDefault
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ExcludeMailAppAttachments
+		dataType: boolean
+		lineageTag: 9d8f6f27-ed22-4ed3-9eef-aeeea36ee9ef
+		summarizeBy: none
+		sourceColumn: ExcludeMailAppAttachments
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Extension
+		dataType: string
+		lineageTag: 9db07206-bc21-4b84-9812-fdd946eb5f8f
+		summarizeBy: none
+		sourceColumn: Extension
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'External_ID__c (Owned By)'
+		dataType: string
+		lineageTag: 898dbead-a97b-4125-af6a-972c07ccded7
+		summarizeBy: none
+		sourceColumn: 'External_ID__c (Owned By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Failed Login Attempts'
+		dataType: int64
+		lineageTag: 5180b70a-6480-45ab-8f4f-cd5220fac567
+		summarizeBy: sum
+		sourceColumn: 'Failed Login Attempts'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column FavoritesShowTopFavorites
+		dataType: boolean
+		lineageTag: a38c043b-da76-4ec5-844f-99ea28d0731f
+		summarizeBy: none
+		sourceColumn: FavoritesShowTopFavorites
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column FavoritesWTShown
+		dataType: boolean
+		lineageTag: 8234e052-af8d-4140-bef1-1eb2b4371087
+		summarizeBy: none
+		sourceColumn: FavoritesWTShown
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fax
+		dataType: string
+		lineageTag: 6e640d26-c5ce-4837-9864-0469c804d957
+		summarizeBy: none
+		sourceColumn: Fax
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Field Service User'
+		dataType: boolean
+		lineageTag: 38fd30cb-630c-4e74-ad7e-195b9f6473df
+		summarizeBy: none
+		sourceColumn: 'Field Service User'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Finished Maps Advanced Route Setup'
+		dataType: boolean
+		lineageTag: 83f5d5f4-2b64-43bc-818c-fcac1424abcc
+		summarizeBy: none
+		sourceColumn: 'Finished Maps Advanced Route Setup'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'First Name'
+		dataType: string
+		lineageTag: f0baed80-8388-4a00-84e2-06509aace60c
+		summarizeBy: none
+		sourceColumn: 'First Name'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Flow User'
+		dataType: boolean
+		lineageTag: b05dd712-d6e1-4033-9d7f-00fb46b6f8d9
+		summarizeBy: none
+		sourceColumn: 'Flow User'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Full Name'
+		dataType: string
+		lineageTag: a44bba0a-2fb6-49dc-82f8-2b2fa58e2673
+		summarizeBy: none
+		sourceColumn: 'Full Name'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Geocode Accuracy'
+		dataType: string
+		lineageTag: 3ce2a7ba-dac6-4608-bc5f-58c44f0dbbfc
+		summarizeBy: none
+		sourceColumn: 'Geocode Accuracy'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column GlobalNavBarWTShown
+		dataType: boolean
+		lineageTag: 9549ccdc-eac3-4ae5-95d0-a12d0da6df17
+		summarizeBy: none
+		sourceColumn: GlobalNavBarWTShown
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column GlobalNavGridMenuWTShown
+		dataType: boolean
+		lineageTag: 2e9f033b-3933-47fb-9b1a-4f70f1537348
+		summarizeBy: none
+		sourceColumn: GlobalNavGridMenuWTShown
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Has Profile Photo'
+		dataType: boolean
+		lineageTag: 6fb49b5f-7a81-4469-a560-c2fb47f3dfac
+		summarizeBy: none
+		sourceColumn: 'Has Profile Photo'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column HasCelebrationBadge
+		dataType: boolean
+		lineageTag: d70df1c7-8357-466a-a623-ad79680c131d
+		summarizeBy: none
+		sourceColumn: HasCelebrationBadge
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column HasSentWarningEmail
+		dataType: boolean
+		lineageTag: fac5d63d-bcca-49a9-bb2e-2dc9aeed51dd
+		summarizeBy: none
+		sourceColumn: HasSentWarningEmail
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column HideBiggerPhotoCallout
+		dataType: boolean
+		lineageTag: 3c9225da-445b-40f2-8ce9-7fb2c3499f44
+		summarizeBy: none
+		sourceColumn: HideBiggerPhotoCallout
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column HideBrowseProductRedirectConfirmation
+		dataType: boolean
+		lineageTag: 0581f971-37e9-415b-87c5-3241f0fc5cf7
+		summarizeBy: none
+		sourceColumn: HideBrowseProductRedirectConfirmation
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column HideCSNDesktopTask
+		dataType: boolean
+		lineageTag: ceeb4a15-f436-4567-9f4b-64ca82757517
+		summarizeBy: none
+		sourceColumn: HideCSNDesktopTask
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column HideCSNGetChatterMobileTask
+		dataType: boolean
+		lineageTag: 6f9eaf9b-8a79-4130-89d3-32faa6be8b33
+		summarizeBy: none
+		sourceColumn: HideCSNGetChatterMobileTask
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column HideChatterOnboardingSplash
+		dataType: boolean
+		lineageTag: 0814b6da-fd3d-4914-803a-48960af5c997
+		summarizeBy: none
+		sourceColumn: HideChatterOnboardingSplash
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column HideEndUserOnboardingAssistantModal
+		dataType: boolean
+		lineageTag: e5f2dff6-c37f-473f-bc27-8874d9baefa0
+		summarizeBy: none
+		sourceColumn: HideEndUserOnboardingAssistantModal
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column HideLightningMigrationModal
+		dataType: boolean
+		lineageTag: c9f17b6c-0563-4a94-9427-54bcc89a5e23
+		summarizeBy: none
+		sourceColumn: HideLightningMigrationModal
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column HideOnlineSalesAppWelcomeMat
+		dataType: boolean
+		lineageTag: 053eb50b-3d71-4329-84a0-5d0e6350697a
+		summarizeBy: none
+		sourceColumn: HideOnlineSalesAppWelcomeMat
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column HideS1BrowserUI
+		dataType: boolean
+		lineageTag: 66d59e0d-2c6f-4f1a-a537-a66f25187472
+		summarizeBy: none
+		sourceColumn: HideS1BrowserUI
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column HideSecondChatterOnboardingSplash
+		dataType: boolean
+		lineageTag: 12c4b077-14df-4c86-9733-8056dd370c9b
+		summarizeBy: none
+		sourceColumn: HideSecondChatterOnboardingSplash
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column HideSfxWelcomeMat
+		dataType: boolean
+		lineageTag: 7ac8ae92-38e8-4697-b77c-200119c9dbeb
+		summarizeBy: none
+		sourceColumn: HideSfxWelcomeMat
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Individual ID'
+		dataType: string
+		lineageTag: 23a708ea-d069-42df-bc36-5d264a2af3f6
+		summarizeBy: none
+		sourceColumn: 'Individual ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Info Emails'
+		dataType: boolean
+		lineageTag: f30b3b91-2288-4685-ae75-9e780d58f84f
+		summarizeBy: none
+		sourceColumn: 'Info Emails'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is PMT User consider for Availability'
+		dataType: boolean
+		lineageTag: c28a6287-b841-48ff-8874-2181ffbb2074
+		summarizeBy: none
+		sourceColumn: 'Is PMT User consider for Availability'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Partner Super User'
+		dataType: boolean
+		lineageTag: 9087606e-c2e7-4e5b-aafc-2440ccf1b053
+		summarizeBy: none
+		sourceColumn: 'Is Partner Super User'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Portal Enabled'
+		dataType: boolean
+		lineageTag: 060257c0-c617-4c24-b28b-7524ab8faa63
+		summarizeBy: none
+		sourceColumn: 'Is Portal Enabled'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Key User'
+		dataType: boolean
+		lineageTag: c19add62-b9df-4aa1-9359-4866e3df004b
+		summarizeBy: none
+		sourceColumn: 'Key User'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Knowledge User'
+		dataType: boolean
+		lineageTag: 5817899b-e437-49af-9245-cfb85ea46356
+		summarizeBy: none
+		sourceColumn: 'Knowledge User'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Language
+		dataType: string
+		lineageTag: f044edca-ac29-46c0-b4bc-a20d71638b7f
+		summarizeBy: none
+		sourceColumn: Language
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Login'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 267b72c1-a11f-417c-a270-779038b805a1
+		summarizeBy: none
+		sourceColumn: 'Last Login'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Name'
+		dataType: string
+		lineageTag: 6efa20e6-09df-4975-872b-722b936aa7ca
+		summarizeBy: none
+		sourceColumn: 'Last Name'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Password Change or Reset'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 99a80714-fc14-45d6-a74d-c14a2aac82bc
+		summarizeBy: none
+		sourceColumn: 'Last Password Change or Reset'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'LastModifiedById (Owned By)'
+		dataType: string
+		lineageTag: 987c2ba5-19b8-404c-96c7-1f799c5f740b
+		summarizeBy: none
+		sourceColumn: 'LastModifiedById (Owned By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'LastModifiedDate (Owned By)'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a9eadac9-7ff6-457e-a44a-0504ed0cc21a
+		summarizeBy: none
+		sourceColumn: 'LastModifiedDate (Owned By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'LastReferencedDate (Owned By)'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1681cabb-ef09-4ca5-b231-3b4c519be2cd
+		summarizeBy: none
+		sourceColumn: 'LastReferencedDate (Owned By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'LastViewedDate (Owned By)'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 62523bce-f926-4584-83c9-f902d388b787
+		summarizeBy: none
+		sourceColumn: 'LastViewedDate (Owned By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Latitude
+		dataType: double
+		formatString: #,0.00
+		lineageTag: eba9fa07-aff9-4c49-9097-19be75a993f3
+		summarizeBy: sum
+		sourceColumn: Latitude
+		isHidden
+		dataCategory: Latitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Lightning Scheduler User'
+		dataType: boolean
+		lineageTag: 5498db86-0b28-493c-bc3a-4be042b118d5
+		summarizeBy: none
+		sourceColumn: 'Lightning Scheduler User'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column LightningExperiencePreferred
+		dataType: boolean
+		lineageTag: 2c0af576-691e-41f6-a43d-9dc9af794121
+		summarizeBy: none
+		sourceColumn: LightningExperiencePreferred
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Locale
+		dataType: string
+		lineageTag: 1c3e816e-3a48-455b-9b95-b861252d27a4
+		summarizeBy: none
+		sourceColumn: Locale
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Longitude
+		dataType: double
+		formatString: #,0.00
+		lineageTag: fd30e590-46ce-4df7-b1b2-0c62b5074bb1
+		summarizeBy: sum
+		sourceColumn: Longitude
+		isHidden
+		dataCategory: Longitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Manager (PTO)'
+		dataType: string
+		lineageTag: 0dd94f97-0f68-4573-8f81-8f4603aa6f73
+		summarizeBy: none
+		sourceColumn: 'Manager (PTO)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Manager ID'
+		dataType: string
+		lineageTag: 54224111-346c-4588-9138-9bc7c5337740
+		summarizeBy: none
+		sourceColumn: 'Manager ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Maps Beta Tester'
+		dataType: boolean
+		lineageTag: 7b4a579d-1974-453e-b019-8d758a14a98d
+		summarizeBy: none
+		sourceColumn: 'Maps Beta Tester'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Maps Default Latitude'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: ca7d66a3-63e9-40f4-930d-c7ee0e22e75c
+		summarizeBy: sum
+		sourceColumn: 'Maps Default Latitude'
+		isHidden
+		dataCategory: Latitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Maps Default Longitude'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 56fbe652-2ed2-46e4-9e5d-53853d0daa4e
+		summarizeBy: sum
+		sourceColumn: 'Maps Default Longitude'
+		isHidden
+		dataCategory: Longitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Maps Default Zoom Level'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 0c9eb6c0-95bb-43a9-bc11-58b9647c3942
+		summarizeBy: sum
+		sourceColumn: 'Maps Default Zoom Level'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Maps Max Export Size'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 1919c3c1-ae03-4518-908d-abf86eaef047
+		summarizeBy: sum
+		sourceColumn: 'Maps Max Export Size'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Maps Max Query Size'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: f3cc44c3-b7f9-4cac-a4a1-6d94fcae63c3
+		summarizeBy: sum
+		sourceColumn: 'Maps Max Query Size'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Maps Version'
+		dataType: string
+		lineageTag: 75210236-a988-442d-8c62-04d059aef128
+		summarizeBy: none
+		sourceColumn: 'Maps Version'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Marketing Cloud Username'
+		dataType: string
+		lineageTag: b244ddb6-c186-415e-b45b-2d6554039df2
+		summarizeBy: none
+		sourceColumn: 'Marketing Cloud Username'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Marketing Cloud for AppExchange Admin'
+		dataType: boolean
+		lineageTag: 81ceb167-98c0-46d4-bc70-9a579a9b7d9c
+		summarizeBy: none
+		sourceColumn: 'Marketing Cloud for AppExchange Admin'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Marketing Cloud for AppExchange User'
+		dataType: boolean
+		lineageTag: 005b9406-8198-4f98-a6ff-2f7e1dc17a62
+		summarizeBy: none
+		sourceColumn: 'Marketing Cloud for AppExchange User'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Marketing User'
+		dataType: boolean
+		lineageTag: 2468c044-044e-42a4-be38-43b5be5b6741
+		summarizeBy: none
+		sourceColumn: 'Marketing User'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mobile
+		dataType: string
+		lineageTag: 4d34b083-4cfe-467e-9855-f07259f4ecd2
+		summarizeBy: none
+		sourceColumn: Mobile
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MyS1WelcomeSplashShown
+		dataType: boolean
+		lineageTag: f82a4761-aa1f-46d2-b09e-4ebe9237ab4c
+		summarizeBy: none
+		sourceColumn: MyS1WelcomeSplashShown
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column NativeEmailClient
+		dataType: boolean
+		lineageTag: 11de38a5-65fe-480c-a4e7-85b0b9289c2c
+		summarizeBy: none
+		sourceColumn: NativeEmailClient
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column NewLightningReportRunPageEnabled
+		dataType: boolean
+		lineageTag: 2fe71ea9-1863-4f4e-ac24-71ab766c40a9
+		summarizeBy: none
+		sourceColumn: NewLightningReportRunPageEnabled
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nickname
+		dataType: string
+		lineageTag: 43e79467-9061-4737-94db-e1e435dea202
+		summarizeBy: none
+		sourceColumn: Nickname
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Offline Edition Trial Expiration Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 95996a9b-d8b4-40cd-86e3-fac83ab44cbe
+		summarizeBy: none
+		sourceColumn: 'Offline Edition Trial Expiration Date'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Offline User'
+		dataType: boolean
+		lineageTag: 0963c83a-0f23-414d-b860-89f81da97ae7
+		summarizeBy: none
+		sourceColumn: 'Offline User'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Old First Name'
+		dataType: string
+		lineageTag: e054fc50-2d6d-4599-9b5b-aaa8be5c162d
+		summarizeBy: none
+		sourceColumn: 'Old First Name'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Old Last Name'
+		dataType: string
+		lineageTag: 39dc7494-fb00-448f-8450-f8525d7fcf57
+		summarizeBy: none
+		sourceColumn: 'Old Last Name'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Omni Supervisor'
+		dataType: boolean
+		lineageTag: 5ee1d6d6-24b1-41aa-aed3-9f9cb3568a0f
+		summarizeBy: none
+		sourceColumn: 'Omni Supervisor'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Out of office message'
+		dataType: string
+		lineageTag: 8a68d261-81e5-4509-8874-83829fd7cea9
+		summarizeBy: none
+		sourceColumn: 'Out of office message'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pardot Api Key'
+		dataType: string
+		lineageTag: 25219911-1d9e-48c6-b1ad-4e4ff041390a
+		summarizeBy: none
+		sourceColumn: 'Pardot Api Key'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pardot Api Version'
+		dataType: string
+		lineageTag: 09e2803c-26e8-4b38-b210-d07fc7434426
+		summarizeBy: none
+		sourceColumn: 'Pardot Api Version'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pardot User Id'
+		dataType: string
+		lineageTag: 190a4e63-1b01-4d52-a995-7074aa3ea97d
+		summarizeBy: none
+		sourceColumn: 'Pardot User Id'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pardot User Key'
+		dataType: string
+		lineageTag: 174934d1-1ddf-4a0b-9497-0bebd9daa815
+		summarizeBy: none
+		sourceColumn: 'Pardot User Key'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pardot User Role'
+		dataType: string
+		lineageTag: c3f28d83-64c2-405f-955d-4637eb7e4b70
+		summarizeBy: none
+		sourceColumn: 'Pardot User Role'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PathAssistantCollapsed
+		dataType: boolean
+		lineageTag: 500911b9-30b0-4731-b43b-faac7c315f82
+		summarizeBy: none
+		sourceColumn: PathAssistantCollapsed
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Phone
+		dataType: string
+		lineageTag: 4bab9392-e055-4fa3-ace3-24e8aa949dbd
+		summarizeBy: none
+		sourceColumn: Phone
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Photo
+		dataType: string
+		lineageTag: 7e46b066-c6fb-4d07-8482-11bbfa9795f1
+		summarizeBy: none
+		sourceColumn: Photo
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Portal Role Level'
+		dataType: string
+		lineageTag: 27d7c3fe-c034-4102-858c-13f80d6cc242
+		summarizeBy: none
+		sourceColumn: 'Portal Role Level'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Preferred Type of Measurement'
+		dataType: string
+		lineageTag: c40102e6-c800-4e7e-a0c5-f2302a07f227
+		summarizeBy: none
+		sourceColumn: 'Preferred Type of Measurement'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PreviewCustomTheme
+		dataType: boolean
+		lineageTag: 7dc5d7f6-84bd-4a16-a18a-00eb10c0c253
+		summarizeBy: none
+		sourceColumn: PreviewCustomTheme
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PreviewLightning
+		dataType: boolean
+		lineageTag: 7692b240-dca8-489a-a334-5178a81162f6
+		summarizeBy: none
+		sourceColumn: PreviewLightning
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Primary Role'
+		dataType: string
+		lineageTag: 56ca55cd-0854-4848-a07b-ffb811b0b85a
+		summarizeBy: none
+		sourceColumn: 'Primary Role'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Sort Preference'
+		dataType: string
+		lineageTag: 179d7f24-80c2-49d1-a945-f1282e4015c7
+		summarizeBy: none
+		sourceColumn: 'Product Sort Preference'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Profile ID'
+		dataType: string
+		lineageTag: bca6f05d-144c-4ee1-bf90-eeb2cc8afee5
+		summarizeBy: none
+		sourceColumn: 'Profile ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Receive Batch Exception Emails'
+		dataType: boolean
+		lineageTag: d9e291fe-0647-47b5-9314-747b2c1d7598
+		summarizeBy: none
+		sourceColumn: 'Receive Batch Exception Emails'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReceiveNoNotificationsAsApprover
+		dataType: boolean
+		lineageTag: 415a014e-b2aa-442f-9a5a-4f777a6d1dd8
+		summarizeBy: none
+		sourceColumn: ReceiveNoNotificationsAsApprover
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReceiveNotificationsAsDelegatedApprover
+		dataType: boolean
+		lineageTag: 3cedd4a4-7e2e-46b1-8aeb-ebe8857180f0
+		summarizeBy: none
+		sourceColumn: ReceiveNotificationsAsDelegatedApprover
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column RecordHomeReservedWTShown
+		dataType: boolean
+		lineageTag: 461fe5f6-e5bd-4014-a431-adb32e89772c
+		summarizeBy: none
+		sourceColumn: RecordHomeReservedWTShown
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column RecordHomeSectionCollapseWTShown
+		dataType: boolean
+		lineageTag: c3a695f3-cd73-4693-8ea3-df1fb9c28c88
+		summarizeBy: none
+		sourceColumn: RecordHomeSectionCollapseWTShown
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReminderSoundOff
+		dataType: boolean
+		lineageTag: 1ff2553e-7c10-41a8-889b-11bcf1b3f761
+		summarizeBy: none
+		sourceColumn: ReminderSoundOff
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Reset Product Lookup'
+		dataType: boolean
+		lineageTag: 55330bd7-c438-4289-90ff-072bc0b47e4c
+		summarizeBy: none
+		sourceColumn: 'Reset Product Lookup'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReverseOpenActivitiesView
+		dataType: boolean
+		lineageTag: dcf2b0ae-d988-45cd-adb4-c0ded3bd6c0a
+		summarizeBy: none
+		sourceColumn: ReverseOpenActivitiesView
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Role ID'
+		dataType: string
+		lineageTag: 67807fda-820c-4871-82b8-5f1c24d440a2
+		summarizeBy: none
+		sourceColumn: 'Role ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SAML Federation ID'
+		dataType: string
+		lineageTag: bb957d73-11a5-4709-a28c-06056333acf5
+		summarizeBy: none
+		sourceColumn: 'SAML Federation ID'
+		isHidden
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column SRHOverrideActivities
+		dataType: boolean
+		lineageTag: 7d710ae4-e0ea-4d8a-b4c6-99a20d5cafcc
+		summarizeBy: none
+		sourceColumn: SRHOverrideActivities
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Anywhere Trial Expiration Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 975bf857-39e3-4965-a6c9-236dc23a3d55
+		summarizeBy: none
+		sourceColumn: 'Sales Anywhere Trial Expiration Date'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Management'
+		dataType: string
+		lineageTag: bb68fefc-cc98-4add-a339-1e9dd814c472
+		summarizeBy: none
+		sourceColumn: 'Sales Management'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Salesforce CRM Content User'
+		dataType: boolean
+		lineageTag: 96935e8f-1a2a-4e12-8de1-afd3b0fb8d0d
+		summarizeBy: none
+		sourceColumn: 'Salesforce CRM Content User'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Self-Registered via Customer Portal'
+		dataType: boolean
+		lineageTag: 214cacea-1d5b-4678-93a3-c54ed403fc73
+		summarizeBy: none
+		sourceColumn: 'Self-Registered via Customer Portal'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Service Cloud User'
+		dataType: boolean
+		lineageTag: 09520246-58d9-47e2-9efa-2751a0e790ae
+		summarizeBy: none
+		sourceColumn: 'Service Cloud User'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Show external indicator'
+		dataType: boolean
+		lineageTag: e19fffcf-e29a-4157-a01f-4d5a64f19ea3
+		summarizeBy: none
+		sourceColumn: 'Show external indicator'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Show on Checkin Map'
+		dataType: boolean
+		lineageTag: 9f6cfc48-4c48-451e-9032-c58a3325d2d0
+		summarizeBy: none
+		sourceColumn: 'Show on Checkin Map'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowCityToExternalUsers
+		dataType: boolean
+		lineageTag: 77421b35-7147-4cc7-b9d8-b01ade7af958
+		summarizeBy: none
+		sourceColumn: ShowCityToExternalUsers
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowCityToGuestUsers
+		dataType: boolean
+		lineageTag: d9aac329-a9a5-40cc-b14d-5e31662836f4
+		summarizeBy: none
+		sourceColumn: ShowCityToGuestUsers
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowCountryToExternalUsers
+		dataType: boolean
+		lineageTag: 22658681-45fe-4889-bdfd-68e14e16fa84
+		summarizeBy: none
+		sourceColumn: ShowCountryToExternalUsers
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowCountryToGuestUsers
+		dataType: boolean
+		lineageTag: e672d983-262c-4133-8e52-5d0d2dbe61af
+		summarizeBy: none
+		sourceColumn: ShowCountryToGuestUsers
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowEmailToExternalUsers
+		dataType: boolean
+		lineageTag: a2386158-7a35-4e10-8981-c954d4a09259
+		summarizeBy: none
+		sourceColumn: ShowEmailToExternalUsers
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowEmailToGuestUsers
+		dataType: boolean
+		lineageTag: b216d4e1-a833-408c-b166-1893d2908fd1
+		summarizeBy: none
+		sourceColumn: ShowEmailToGuestUsers
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowFaxToExternalUsers
+		dataType: boolean
+		lineageTag: d350dcaf-d123-4e84-9799-3d232a156159
+		summarizeBy: none
+		sourceColumn: ShowFaxToExternalUsers
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowFaxToGuestUsers
+		dataType: boolean
+		lineageTag: c3a44d4b-f80d-48e3-9178-83ca9e74977b
+		summarizeBy: none
+		sourceColumn: ShowFaxToGuestUsers
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowForecastingChangeSignals
+		dataType: boolean
+		lineageTag: 7cb3294d-a2f4-4941-b76d-d55a71500b51
+		summarizeBy: none
+		sourceColumn: ShowForecastingChangeSignals
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowManagerToExternalUsers
+		dataType: boolean
+		lineageTag: 937d551f-cb47-440d-be47-7c617d15bc71
+		summarizeBy: none
+		sourceColumn: ShowManagerToExternalUsers
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowManagerToGuestUsers
+		dataType: boolean
+		lineageTag: 8f4acfc2-2d21-4237-993e-4b7e8f940680
+		summarizeBy: none
+		sourceColumn: ShowManagerToGuestUsers
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowMobilePhoneToExternalUsers
+		dataType: boolean
+		lineageTag: 2f7d3832-c4a1-4c24-af8c-fa29108ab085
+		summarizeBy: none
+		sourceColumn: ShowMobilePhoneToExternalUsers
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowMobilePhoneToGuestUsers
+		dataType: boolean
+		lineageTag: a75ca32c-44d6-4b44-a0cb-2f664dc28a6f
+		summarizeBy: none
+		sourceColumn: ShowMobilePhoneToGuestUsers
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowPostalCodeToExternalUsers
+		dataType: boolean
+		lineageTag: 5c318955-57f9-479c-9feb-6f2b1b285d0a
+		summarizeBy: none
+		sourceColumn: ShowPostalCodeToExternalUsers
+		isHidden
+		dataCategory: PostalCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowPostalCodeToGuestUsers
+		dataType: boolean
+		lineageTag: 6fc100f5-1815-4dc2-8ddb-f110e4f945f7
+		summarizeBy: none
+		sourceColumn: ShowPostalCodeToGuestUsers
+		isHidden
+		dataCategory: PostalCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowProfilePicToGuestUsers
+		dataType: boolean
+		lineageTag: affa6940-e751-4220-95f3-331dedcdc807
+		summarizeBy: none
+		sourceColumn: ShowProfilePicToGuestUsers
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowStateToExternalUsers
+		dataType: boolean
+		lineageTag: 24b0e5fe-6865-429f-8823-072cc2f37b0c
+		summarizeBy: none
+		sourceColumn: ShowStateToExternalUsers
+		isHidden
+		dataCategory: StateOrProvince
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowStateToGuestUsers
+		dataType: boolean
+		lineageTag: b4f1b2e4-2070-4705-a840-cd2c44f26171
+		summarizeBy: none
+		sourceColumn: ShowStateToGuestUsers
+		isHidden
+		dataCategory: StateOrProvince
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowStreetAddressToExternalUsers
+		dataType: boolean
+		lineageTag: 1c6a0aad-6f82-4df4-9ea2-9677e953bdf4
+		summarizeBy: none
+		sourceColumn: ShowStreetAddressToExternalUsers
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowStreetAddressToGuestUsers
+		dataType: boolean
+		lineageTag: ff703142-6770-4c96-8bbd-2a5881c4c385
+		summarizeBy: none
+		sourceColumn: ShowStreetAddressToGuestUsers
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowTerritoryTimeZoneShifts
+		dataType: boolean
+		lineageTag: 4d96cfd2-bcc1-445a-bdfd-52c0eadca11c
+		summarizeBy: none
+		sourceColumn: ShowTerritoryTimeZoneShifts
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowTitleToExternalUsers
+		dataType: boolean
+		lineageTag: 69bb3784-29d1-4b3c-9592-1635c90628e5
+		summarizeBy: none
+		sourceColumn: ShowTitleToExternalUsers
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowTitleToGuestUsers
+		dataType: boolean
+		lineageTag: ce415039-9dd1-405a-9dc2-fe52dcb857e6
+		summarizeBy: none
+		sourceColumn: ShowTitleToGuestUsers
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowWorkPhoneToExternalUsers
+		dataType: boolean
+		lineageTag: 96ac7ff4-bcab-430a-8f6e-36ee7b63cb60
+		summarizeBy: none
+		sourceColumn: ShowWorkPhoneToExternalUsers
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowWorkPhoneToGuestUsers
+		dataType: boolean
+		lineageTag: 689bc98e-91c6-433a-b604-2fd0591322cc
+		summarizeBy: none
+		sourceColumn: ShowWorkPhoneToGuestUsers
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Single Time Setup'
+		dataType: boolean
+		lineageTag: e9e2c75b-cd78-4d89-8335-6a825a45850c
+		summarizeBy: none
+		sourceColumn: 'Single Time Setup'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Site.com Contributor User'
+		dataType: boolean
+		lineageTag: b7557db1-6402-4f4a-b622-670f3a2fefe0
+		summarizeBy: none
+		sourceColumn: 'Site.com Contributor User'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Site.com Publisher User'
+		dataType: boolean
+		lineageTag: 751fdc82-b5e7-4070-8256-b3f2d5955f88
+		summarizeBy: none
+		sourceColumn: 'Site.com Publisher User'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SortFeedByComment
+		dataType: boolean
+		lineageTag: f2e6e93a-ddd1-4613-ba8f-30251f540887
+		summarizeBy: none
+		sourceColumn: SortFeedByComment
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'State/Province'
+		dataType: string
+		lineageTag: 307a44f3-57c2-4665-b586-a66709acf6e2
+		summarizeBy: none
+		sourceColumn: 'State/Province'
+		isHidden
+		dataCategory: StateOrProvince
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Stay-in-Touch Email Note'
+		dataType: string
+		lineageTag: 584be990-9c85-4f54-959a-49db07b06600
+		summarizeBy: none
+		sourceColumn: 'Stay-in-Touch Email Note'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Stay-in-Touch Email Signature'
+		dataType: string
+		lineageTag: 20cefd47-e915-465f-8570-5f1b656d2fdb
+		summarizeBy: none
+		sourceColumn: 'Stay-in-Touch Email Signature'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Stay-in-Touch Email Subject'
+		dataType: string
+		lineageTag: 8a5b98b6-fa5a-473b-b483-b07836784588
+		summarizeBy: none
+		sourceColumn: 'Stay-in-Touch Email Subject'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column StayInTouchReminder
+		dataType: boolean
+		lineageTag: 1aea0662-718d-4542-8879-98ed830c6016
+		summarizeBy: none
+		sourceColumn: StayInTouchReminder
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Street
+		dataType: string
+		lineageTag: 1ca6750b-fba2-4210-8723-7801e47b5b36
+		summarizeBy: none
+		sourceColumn: Street
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SuppressEventSFXReminders
+		dataType: boolean
+		lineageTag: 500d0e9a-9c78-4ee2-8c8c-a2859567b42f
+		summarizeBy: none
+		sourceColumn: SuppressEventSFXReminders
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SuppressTaskSFXReminders
+		dataType: boolean
+		lineageTag: 3324a5de-7692-4f72-9e8f-93517d50515b
+		summarizeBy: none
+		sourceColumn: SuppressTaskSFXReminders
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SystemModstamp (Owned By)'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f1a719d6-2acd-42db-a510-900ef7535eab
+		summarizeBy: none
+		sourceColumn: 'SystemModstamp (Owned By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TaskRemindersCheckboxDefault
+		dataType: boolean
+		lineageTag: 65c7428f-74b7-4f96-b07e-46a44dc47a43
+		summarizeBy: none
+		sourceColumn: TaskRemindersCheckboxDefault
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Territory Planning Approver'
+		dataType: boolean
+		lineageTag: 5139bdca-59d6-43c7-aba5-0d7c8641edf8
+		summarizeBy: none
+		sourceColumn: 'Territory Planning Approver'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TestUserLookup
+		dataType: string
+		lineageTag: 4c7404d9-a96f-462a-8bd3-9a4aa5dd17e7
+		summarizeBy: none
+		sourceColumn: TestUserLookup
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Theme
+		dataType: string
+		lineageTag: c81c39b7-1193-4514-aee0-e43f22b25ec3
+		summarizeBy: none
+		sourceColumn: Theme
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Time Zone'
+		dataType: string
+		lineageTag: 93194d3b-01f1-4bf0-8cfb-d9b19863b6a5
+		summarizeBy: none
+		sourceColumn: 'Time Zone'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Title
+		dataType: string
+		lineageTag: 4374a8b5-91c1-486f-9bb0-017be06713bd
+		summarizeBy: none
+		sourceColumn: Title
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TrialforceDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 468798ac-1bb8-4825-aac8-38fce8cbe597
+		summarizeBy: none
+		sourceColumn: TrialforceDate
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Url for Android banner photo'
+		dataType: string
+		lineageTag: 23bf9c9c-a819-4fd0-ad06-d5e548a3d1f1
+		summarizeBy: none
+		sourceColumn: 'Url for Android banner photo'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Url for IOS banner photo'
+		dataType: string
+		lineageTag: 2134cded-e15e-41ec-bcda-3e82ac855815
+		summarizeBy: none
+		sourceColumn: 'Url for IOS banner photo'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Url for banner photo'
+		dataType: string
+		lineageTag: 3a6c7e62-9f7d-4724-9745-3969ff8d23f8
+		summarizeBy: none
+		sourceColumn: 'Url for banner photo'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Url for full-sized Photo'
+		dataType: string
+		lineageTag: 574b265a-8300-4013-9084-19d03be6cbb2
+		summarizeBy: none
+		sourceColumn: 'Url for full-sized Photo'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Url for medium profile photo'
+		dataType: string
+		lineageTag: a8881c9b-55d7-42ef-b0e1-46d5575e5394
+		summarizeBy: none
+		sourceColumn: 'Url for medium profile photo'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User ID'
+		dataType: string
+		lineageTag: f1fe68a2-17de-4349-99bf-500a79d856e8
+		summarizeBy: none
+		sourceColumn: 'User ID'
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User Photo badge text overlay'
+		dataType: string
+		lineageTag: 23747c79-fa79-49c7-80e7-1150a5d4d157
+		summarizeBy: none
+		sourceColumn: 'User Photo badge text overlay'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User Type'
+		dataType: string
+		lineageTag: 80bc9929-5762-4cce-bfb6-df353176ee21
+		summarizeBy: none
+		sourceColumn: 'User Type'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column UserDebugModePref
+		dataType: boolean
+		lineageTag: 24a56ce5-8dbd-4729-814c-eca463f1918c
+		summarizeBy: none
+		sourceColumn: UserDebugModePref
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Username
+		dataType: string
+		lineageTag: f2735d38-469c-49a2-9a99-e645b7042019
+		summarizeBy: none
+		sourceColumn: Username
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Valid Marketing Cloud Admin'
+		dataType: boolean
+		lineageTag: 251d6189-c4ea-4ab5-bd81-a3b7e8f566a9
+		summarizeBy: none
+		sourceColumn: 'Valid Marketing Cloud Admin'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Valid Marketing Cloud User'
+		dataType: boolean
+		lineageTag: 550b0e5d-c8d7-40f3-aff8-1e3186e5b7fe
+		summarizeBy: none
+		sourceColumn: 'Valid Marketing Cloud User'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'WDC User'
+		dataType: boolean
+		lineageTag: 19dcb643-c027-43c0-aee3-e189803104d9
+		summarizeBy: none
+		sourceColumn: 'WDC User'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Work.com Points'
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 2a38a1e5-e13b-45b7-925a-725ed0c8796f
+		summarizeBy: sum
+		sourceColumn: 'Work.com Points'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Zip/Postal Code'
+		dataType: string
+		lineageTag: 50c12d2d-76d4-4f8a-99c8-542c7037137a
+		summarizeBy: none
+		sourceColumn: 'Zip/Postal Code'
+		isHidden
+		dataCategory: PostalCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'analyticsdemo_batch_id__c (Owned By)'
+		dataType: string
+		lineageTag: 18a2be58-6b36-4514-b43c-5882c45469b1
+		summarizeBy: none
+		sourceColumn: 'analyticsdemo_batch_id__c (Owned By)'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Id
+		dataType: string
+		lineageTag: bdd9415f-964c-4876-b887-f4297bd5f6a9
+		summarizeBy: none
+		sourceColumn: Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Open Opportunity?' = 'Owned By'[Open Flag]="Y"
+		dataType: boolean
+		lineageTag: a35778d7-07a6-434b-b17d-57e65fc467f5
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Last N months filter - Closed or Created Date?' = 'Owned By'[Is Last N months filter - Closed Date?] || 'Owned By'[Is Last N months filter - Created Date?]
+		dataType: boolean
+		lineageTag: 150c7aa7-f44e-41b2-8bb6-40896ff8c09d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type = IF(ISBLANK(CALCULATE(SELECTEDVALUE(Opportunities[Opportunity Type]))), "Other", CALCULATE(SELECTEDVALUE(Opportunities[Opportunity Type])))
+		dataType: string
+		lineageTag: 957e62a4-0ec6-4bce-9178-80d5dbbbde65
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is First Time Client?' = IF(ISBLANK('Owned By'[Open Flag]="N" && 'Owned By'[Won Flag]="Y" && 'Owned By'[Opportunity Close Date]=[First Time Closed Won by Account]), False, 'Owned By'[Open Flag]="N" && 'Owned By'[Won Flag]="Y" && 'Owned By'[Opportunity Close Date]=[First Time Closed Won by Account])
+		dataType: boolean
+		lineageTag: 9f14bfdb-432e-4799-9a16-331e2e4076a2
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Client/Prospect by Opportunity' = IF('Owned By'[Opportunity Close Date] > [First Time Closed Won by Account], "Existing Clients", "Prospects")
+		dataType: string
+		lineageTag: 9cfaaf02-e097-4187-b13f-0cd73a55dfab
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Client/Prospect by Account' = IF(CALCULATE([Nb of Won Opportunities], ALLEXCEPT('Owned By', 'Owned By'[Account])) >= 1, "Existing Clients", "Prospects")
+		dataType: string
+		lineageTag: 8721d6b3-14fb-40e2-aef3-6d9f9bcfdb04
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Days to Close' = DATEDIFF(DATE(2022,04,18), 'Owned By'[Opportunity Close Date], DAY)
+		dataType: int64
+		lineageTag: bb1bb31f-3695-4c51-93b4-7f434ecb0435
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Days to Close (bucket)' = IF('Owned By'[Days to Close] < 0, "Overdue", IF('Owned By'[Days to Close] < 30, "0-30 days", IF('Owned By'[Days to Close] < 90, "1-3 months", IF('Owned By'[Days to Close] < 180, "3-6 months", "> 6 months"))))
+		dataType: string
+		lineageTag: f7122e45-1a77-4670-a5bd-98d51526ed50
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Id' = CALCULATE(SELECTEDVALUE(Opportunities[Opportunity ID]))
+		dataType: string
+		lineageTag: a25fc646-d8d6-4c12-8a1e-ca17d5228d2e
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Account = CALCULATE(SELECTEDVALUE(Account[Account Name]))
+		dataType: string
+		lineageTag: 3ae0b7b8-2e39-47c4-b4d7-ce112d2b0b6a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Owner' = CALCULATE(SELECTEDVALUE('Created By'[FirstName (Created By)]))&" "&CALCULATE(SELECTEDVALUE('Created By'[LastName (Created By)]))
+		dataType: string
+		lineageTag: d95c3d8e-2e57-4b98-8430-efff3fe55fb6
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Description' = CALCULATE(SELECTEDVALUE(Opportunities[Name]))
+		dataType: string
+		lineageTag: d45a018c-9874-461b-b73d-db029e03a141
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Stage' = CALCULATE(SELECTEDVALUE(Opportunities[Stage]))
+		dataType: string
+		lineageTag: 7de753b5-1c63-4474-b47d-2479987c9e55
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Open Flag' = IF(CALCULATE(SELECTEDVALUE(Opportunities[Closed])), "N", "Y")
+		dataType: string
+		lineageTag: aa0ea007-5827-4757-9a7b-56af0f324492
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Won Flag' = IF(CALCULATE(SELECTEDVALUE(Opportunities[Closed])) && CALCULATE(SELECTEDVALUE(Opportunities[Won])), "Y", "N")
+		dataType: string
+		lineageTag: 6c7661d0-5f3d-4d6c-b6f4-4de6b2860baa
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Probability %' = CALCULATE(SELECTEDVALUE(Opportunities[Probability (%)]))/100
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 67327891-8837-4ab1-a08e-31fb432289f1
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Created Date' = DATE('Owned By'[CreatedDate (Owned By)])
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 16f5c7dd-88b1-4356-8b55-6ffed5f7ac37
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Amount' = CALCULATE(SELECTEDVALUE(Opportunities[Amount]))
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 1a586b57-f136-44d1-89d2-137515159301
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Closed in Last x Days?' = 'Owned By'[Days to Close] >= -1*INT("90") && 'Owned By'[Days to Close] < 0 && 'Owned By'[Open Flag]="N"
+		dataType: boolean
+		lineageTag: 677434c8-ac87-464e-b309-2fa1f885b4e9
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Open/Won/Lost' = IF('Owned By'[Open Flag]="Y", "Open", IF('Owned By'[Won Flag]="Y", "Won", "Lost"))
+		dataType: string
+		lineageTag: 940ff3c6-4cf0-4afc-a2dd-2adf8995b3ec
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Close Date' = CALCULATE(SELECTEDVALUE(Opportunities[Close Date])) 
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 70008f5d-739b-4bcb-9ce3-e55553cad8b9
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Deal Size Bucket' = PATHITEM(SUBSTITUTE('Owned By'[Deal Size Bucket (key)], "|", "|"), 2)
+		dataType: string
+		lineageTag: 323235f7-b83c-4d08-ba46-3a8d89f0d3f3
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Open/Won/Lost Icon' = SWITCH('Owned By'[Open/Won/Lost], "Open", "", "Won", "✔", "Lost", "✘")
+		dataType: string
+		lineageTag: f63dae3d-ac83-4357-8e1b-33a745c6337a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pipeline Review - DONE - Key' =  IF('Owned By'[Is Closed in Last x Days?], "Last " & "90" & " days|Closed Last "& "90" & " days", IF('Owned By'[Is Created in Last x Days?], "Last " & "90" & " days|New Opportunities last "& "90" & " days", "Other"))
+		dataType: string
+		lineageTag: 09a594a3-e34a-4a4c-9513-291b610627a9
+		summarizeBy: none
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column '_Per Customer: Pipeline Generation' = IF(ISBLANK(CALCULATE([Pipeline Generation (Last N Months - Created Date)], ALLEXCEPT('Owned By', 'Owned By'[Opportunity Owner]))), 0, CALCULATE([Pipeline Generation (Last N Months - Created Date)], ALLEXCEPT('Owned By', 'Owned By'[Opportunity Owner])))
+		dataType: double
+		formatString: #,0.00
+		lineageTag: e1e4f84c-75ad-4412-9e2c-7562f00a3903
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Created in Last x Days?' = 'Owned By'[Days from Open] >= 0 && 'Owned By'[Days from Open] <= INT("90") && 'Owned By'[Open Flag]="Y"
+		dataType: boolean
+		lineageTag: d8de042d-8b6e-4ac6-99fb-ad540a0c5bbe
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Last N months filter - Closed Date?' = 'Owned By'[Opportunity Close Date] > EDATE(DATE(2022,04,18), -36) && 'Owned By'[Opportunity Close Date] <= DATE(2022,04,18)
+		dataType: boolean
+		lineageTag: 8d6fe103-51fe-4904-9d01-44c404426875
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Closing Overdue?' = 'Owned By'[Days to Close] < 0 && 'Owned By'[Open Flag]="Y"
+		dataType: boolean
+		lineageTag: fedd0e1c-74b7-4131-a0c7-72a8ba06489a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Closing in Next x Days?' = 'Owned By'[Days to Close] <= INT("90") && 'Owned By'[Open Flag]="Y"
+		dataType: boolean
+		lineageTag: 20dbaa93-fcec-46bc-a299-d2d5c8d98473
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Days to Close (bucket) (sort)' = IF('Owned By'[Days to Close] < 0, 0, IF('Owned By'[Days to Close] < 30, 10, IF('Owned By'[Days to Close] < 90, 20, IF('Owned By'[Days to Close] < 180, 30, 100))))
+		dataType: int64
+		lineageTag: aa3946ba-4d89-44e9-8d7e-5dbeecdf98d8
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Type (filter)' = CALCULATE(SELECTEDVALUE(Opportunities[Opportunity Type]))
+		dataType: string
+		lineageTag: d7d05f39-f288-48d0-a80a-cac3e45c67e7
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Days from Open'
+		dataType: int64
+		lineageTag: 55eac59d-974e-486b-a026-b32ec1ae3c55
+		summarizeBy: none
+		sourceColumn: 'Days from Open'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Deal Size Bucket (sort)' = INT(PATHITEM(SUBSTITUTE('Owned By'[Deal Size Bucket (key)], "|", "|"), 1))
+		dataType: int64
+		lineageTag: 8f0da0a3-b61f-4697-bac2-fceca0cd8d67
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Deal Size Bucket (key)' = IF('Owned By'[_Pipeline Generated (Expression)] < 50000, "20|< 50k", IF('Owned By'[_Pipeline Generated (Expression)] < 100000, "30|50k - 100k", IF('Owned By'[_Pipeline Generated (Expression)] < 200000, "40|100k - 200k", IF('Owned By'[_Pipeline Generated (Expression)] < 500000, "50|200k - 500k", IF('Owned By'[_Pipeline Generated (Expression)] < 1000000, "60|500k - 1M", "99|>1M")))))
+		dataType: string
+		lineageTag: 3e40f963-811f-4bc5-b35d-dd6f971e79d0
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Won Opportunity?' = 'Owned By'[Won Flag]="Y"
+		dataType: boolean
+		lineageTag: a166e2aa-4ad9-47e8-b176-2ee9cd60a84d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Selected Opportunity Owner Flag?' = "Bellina Catmull"='Owned By'[Opportunity Owner]
+		dataType: boolean
+		lineageTag: 3ab2878e-16bd-4b8f-a9bf-ea082655b617
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Last N months filter - Created Date?' = 'Owned By'[CreatedDate (Owned By)] > EDATE(DATE(2022,04,18), -36) && 'Owned By'[CreatedDate (Owned By)] <= DATE(2022,04,18)
+		dataType: boolean
+		lineageTag: 6f7ef4a9-8480-41ad-89a8-20ecb1f8a986
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dimension = SWITCH("Account", "Account", 'Owned By'[Account], "Open Flag", 'Owned By'[Open Flag], "Opportunity Owner", 'Owned By'[Opportunity Owner], "Opportunity Stage", 'Owned By'[Opportunity Stage], "Opportunity Type", CALCULATE(SELECTEDVALUE(Opportunities[Opportunity Type])), "Won Flag", 'Owned By'[Won Flag])
+		dataType: string
+		lineageTag: d440978d-9200-4bb5-a5bf-5fac6f7ca5e6
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column '_Pipeline Generated (Expression)' = CALCULATE(SELECTEDVALUE(Opportunities[Amount]))
+		dataType: double
+		formatString: #,0.00
+		lineageTag: dab4762a-0b18-4cdb-9a1d-1d5bfbceb842
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column '_Avg Probability (Expression)' = 'Owned By'[Probability %]
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 85213837-fcfe-4b4c-bb8e-caf117a66aa0
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column '_Avg Deal Size (won) (Expression)' = CONVERT(IF('Owned By'[Is Won Opportunity?], CALCULATE(SELECTEDVALUE(Opportunities[Amount])), BLANK()), DOUBLE)
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 60f8c16e-3f26-48bd-bc1d-f2a603638330
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column '_Total Closed Opportunities Amount (Expression)' = CONVERT(IF(NOT 'Owned By'[Is Open Opportunity?], CALCULATE(SELECTEDVALUE(Opportunities[Amount])), BLANK()), DOUBLE)
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 73ed6103-28f5-4d1e-a6a4-4598a88165e5
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column '_Total Sales (Expression)' = CONVERT(IF('Owned By'[Is Won Opportunity?], CALCULATE(SELECTEDVALUE(Opportunities[Amount])), BLANK()), DOUBLE)
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 7616244f-6483-4cf1-ad12-f99f8daa5f7d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pipeline Review - DONE - Cat 1' = PATHITEM(SUBSTITUTE('Owned By'[Pipeline Review - DONE - Key], "|", "|"), 1)
+		dataType: string
+		lineageTag: 9537be53-0ac9-4a6e-962f-13fc3d16dc9f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pipeline Review - DONE - Cat 2' = PATHITEM(SUBSTITUTE('Owned By'[Pipeline Review - DONE - Key], "|", "|"), 2)
+		dataType: string
+		lineageTag: 9a641de6-85c1-49ee-b407-ac89d8b803ea
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pipeline Review - FOCUS - Cat 1' = PATHITEM(SUBSTITUTE('Owned By'[Pipeline Review - FOCUS - Key], "|", "|"), 1)
+		dataType: string
+		lineageTag: 7539f4ba-7fce-474d-8e86-bceaa5eefc66
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pipeline Review - FOCUS - Cat 2' = PATHITEM(SUBSTITUTE('Owned By'[Pipeline Review - FOCUS - Key], "|", "|"), 2)
+		dataType: string
+		lineageTag: 345ec159-0768-4d8e-880e-ff2455f417ec
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pipeline Review - FOCUS - Key' = IF('Owned By'[Is Closing Overdue?], "Overdue|Closing Overdue", IF('Owned By'[Is Closing in Next x Days?], "Next " & "90" & " days|Closing Next "& "90" & " days", "Other"))
+		dataType: string
+		lineageTag: ed30acdd-f5a2-4cbe-bc31-a32220832b95
+		summarizeBy: none
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'URL Drill-back to Source Application on Opportunity' =  "https://tableauaccelerators.github.io/drill-back/?Opportunity="&'Owned By'[Opportunity Id]
+		dataType: string
+		lineageTag: 9283ecb7-f1b9-4ef1-a37a-609a2d4dabec
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column '_Per Customer: Total Sales for Existing Clients' = IF(ISBLANK(CALCULATE([Total Sales for Existing Clients], ALLEXCEPT('Owned By', 'Owned By'[Opportunity Owner]))), 0, CALCULATE([Total Sales for Existing Clients], ALLEXCEPT('Owned By', 'Owned By'[Opportunity Owner])))
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 91edb574-47e4-4ef0-b9fc-4c944bc4dc7e
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column '_Per Customer: Pipeline Generation for Prospects' = IF(ISBLANK(CALCULATE([Pipeline Generation for Prospects], ALLEXCEPT('Owned By', 'Owned By'[Opportunity Owner]))), 0, CALCULATE([Pipeline Generation for Prospects], ALLEXCEPT('Owned By', 'Owned By'[Opportunity Owner])))
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 9bcae05a-d154-432a-bd67-b8a1a524966b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column '_Per Customer: Pipeline Generation for Existing Clients' = IF(ISBLANK(CALCULATE([Pipeline Generation for Existing Clients], ALLEXCEPT('Owned By', 'Owned By'[Opportunity Owner]))), 0, CALCULATE([Pipeline Generation for Existing Clients], ALLEXCEPT('Owned By', 'Owned By'[Opportunity Owner])))
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 8a304eec-30f1-4b69-8d20-ba754357df05
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column '_Per Customer: Conversion Rate' = IF(ISBLANK(CALCULATE('Owned By'[Conversion Rate (Last N Months - Closed Date)], ALLEXCEPT('Owned By', 'Owned By'[Opportunity Owner]))), 0, CALCULATE('Owned By'[Conversion Rate (Last N Months - Closed Date)], ALLEXCEPT('Owned By', 'Owned By'[Opportunity Owner])))
+		dataType: double
+		formatString: #,0.00
+		lineageTag: e07c946c-cc57-4681-846e-55d001f9ee7d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column '_Per Customer: Average Deal Size' = IF(ISBLANK(CALCULATE([Average Deal Size (Last N Months - Closed Date)], ALLEXCEPT('Owned By', 'Owned By'[Opportunity Owner]))), 0, CALCULATE([Average Deal Size (Last N Months - Closed Date)], ALLEXCEPT('Owned By', 'Owned By'[Opportunity Owner])))
+		dataType: double
+		formatString: #,0.00
+		lineageTag: c19250c0-6fc5-414f-a56d-8b76c000a701
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column '_Per Customer: Total Sales' = IF(ISBLANK(CALCULATE([Total Sales (Last N Months - Closed Date)], ALLEXCEPT('Owned By', 'Owned By'[Opportunity Owner]))), 0, CALCULATE([Total Sales (Last N Months - Closed Date)], ALLEXCEPT('Owned By', 'Owned By'[Opportunity Owner])))
+		dataType: double
+		formatString: #,0.00
+		lineageTag: f5960715-6472-4780-ba1c-46cedc2de627
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column '_Per Customer: Total Sales for Prospects' = IF(ISBLANK(CALCULATE([Total Sales for Prospects], ALLEXCEPT('Owned By', 'Owned By'[Opportunity Owner]))), 0, CALCULATE([Total Sales for Prospects], ALLEXCEPT('Owned By', 'Owned By'[Opportunity Owner])))
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 39a9b164-e4af-437e-8b08-9020bff90c3b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Owned By-dfad4e78-8835-4e48-a62e-e02a86a23fd0' = m
+		mode: import
+		source =
+				let
+				    // TODO: Configure the data source for connector type: SALESFORCE
+				    // Replace the sample table below with the actual source expression.
+				    Source = Table.PromoteHeaders(Csv.Document(File.Contents(DataFolder & "\Owned By.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]), [PromoteAllScalars=true]),
+				    #"Added Days from Open" = Table.AddColumn(Source, "Days from Open", each Duration.Days(#date(2022, 04, 18) - [#"CreatedDate (Owned By)"]), Int64.Type),
+				    Result = #"Added Days from Open"
+				in
+				    Result
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 296 columns and 138 measures: @deprecated, About Me, AccountID, AccountId (Owned By), AccountName2, Active, ActivityRemindersPopup, Admin Info Emails, ... (296 columns total).
+

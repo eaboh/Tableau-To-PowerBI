@@ -1,26 +1,26 @@
 table Employees
-	lineageTag: 8a87a118-1881-4cc0-bbb1-a342f0cee39b
+	lineageTag: 6b34faae-ffcf-40ca-9639-91c0c47d8519
 
 	measure 'Average Salary' = AVERAGE('Employees'[Salary])
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: decb674b-11c2-43d5-b0cc-96eccd02e35c
+		lineageTag: f12ea66d-816c-4cdd-936d-224a27979f79
 		annotation Copilot_Description = Migrated from Tableau: AVG([Salary]) | DAX: AVERAGE('Employees'[Salary])
 
 	measure 'Employee Count' = COUNT('Employees'[EmployeeID])
 		displayFolder: Measures
-		lineageTag: 16dadf24-8503-409e-b114-f25083c1701b
+		lineageTag: 88cbef66-06d2-41c3-a1a6-527f412736ab
 		annotation Copilot_Description = Migrated from Tableau: COUNT([EmployeeID]) | DAX: COUNT('Employees'[EmployeeID])
 
 	measure 'Total Compensation' = SUM('Employees'[Salary]) * 1.25
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: e226491a-d989-4928-87f9-21b705c8f687
+		lineageTag: ed927b87-567a-45e2-bc5c-ab4793cd52a2
 		annotation Copilot_Description = Migrated from Tableau: SUM([Salary]) * 1.25 | DAX: SUM('Employees'[Salary]) * 1.25
 
 	column EmployeeID
 		dataType: int64
-		lineageTag: 05f5eaa3-e651-4b7c-83c4-c12e7a3d5e4d
+		lineageTag: b1dbfd6d-f68f-44f9-ae0d-4f91df594eff
 		summarizeBy: sum
 		sourceColumn: EmployeeID
 		annotation Copilot_Hidden = true
@@ -29,7 +29,7 @@ table Employees
 
 	column FirstName
 		dataType: string
-		lineageTag: 86574d52-d444-4e9b-bce4-c940cc6f3d30
+		lineageTag: 7afd4377-3f3c-4e48-b7c1-2f4404829779
 		summarizeBy: none
 		sourceColumn: FirstName
 
@@ -37,7 +37,7 @@ table Employees
 
 	column LastName
 		dataType: string
-		lineageTag: bcd1976f-ac19-4ea1-9cc6-f01952fd9922
+		lineageTag: be423de2-05b2-4e5e-8825-bf8a351d6221
 		summarizeBy: none
 		sourceColumn: LastName
 
@@ -46,16 +46,15 @@ table Employees
 	column HireDate
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: 932c0ba5-1f64-431a-8905-068d04a7e285
+		lineageTag: 19c3a4f4-c94d-4f18-8886-1a17a885ebc2
 		summarizeBy: none
 		sourceColumn: HireDate
-		dataCategory: DateTime
 
 		annotation SummarizationSetBy = Automatic
 
 	column Department
 		dataType: string
-		lineageTag: fcff551f-f501-4fca-b4bd-cefb804fc287
+		lineageTag: f8511f09-a819-42e5-91b1-061fdc12c16c
 		summarizeBy: none
 		sourceColumn: Department
 
@@ -63,7 +62,7 @@ table Employees
 
 	column JobTitle
 		dataType: string
-		lineageTag: 3d202d16-cf9a-4abd-8848-d2c4c6efaf2d
+		lineageTag: 2f087f60-ee58-4d1e-95da-5d1db6b4ca03
 		summarizeBy: none
 		sourceColumn: JobTitle
 
@@ -72,7 +71,7 @@ table Employees
 	column Salary
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 2096ff51-2046-46ec-8dcf-dcc8af0b86b2
+		lineageTag: f377d1c7-95fc-448b-a0e4-86e5158b58e3
 		summarizeBy: sum
 		sourceColumn: Salary
 
@@ -80,7 +79,7 @@ table Employees
 
 	column Location
 		dataType: string
-		lineageTag: 3e645009-0b05-413b-924a-21aa043c91a9
+		lineageTag: f0eb2891-497c-49e1-8238-427677715b75
 		summarizeBy: none
 		sourceColumn: Location
 
@@ -88,7 +87,7 @@ table Employees
 
 	column Age
 		dataType: int64
-		lineageTag: 8e556f3b-a551-440c-8cf1-766d4d4dd574
+		lineageTag: 2ebf936e-0d83-4043-a9df-858697184c8a
 		summarizeBy: sum
 		sourceColumn: Age
 
@@ -96,7 +95,7 @@ table Employees
 
 	column YearsOfService
 		dataType: int64
-		lineageTag: 45488d14-ad91-43e8-bee1-95d74585a487
+		lineageTag: 8fc81c30-b7a5-4c65-b9db-31c177fa7ba2
 		summarizeBy: sum
 		sourceColumn: YearsOfService
 
@@ -104,7 +103,7 @@ table Employees
 
 	column PerformanceRating
 		dataType: string
-		lineageTag: db80d666-caa8-492f-85f2-417594f2b26e
+		lineageTag: b54af086-3b81-476b-a4ff-09380a94aecd
 		summarizeBy: none
 		sourceColumn: PerformanceRating
 
@@ -112,13 +111,13 @@ table Employees
 
 	column 'Tenure Category'
 		dataType: string
-		lineageTag: e0e8d0e8-7d2c-47fc-b4d3-deaf41437ac7
+		lineageTag: ae824193-36a8-44e2-840b-c2396f4be425
 		summarizeBy: none
 		sourceColumn: 'Tenure Category'
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Employees-18b5373b-3a95-4079-b956-15872840d3ee' = m
+	partition 'Employees-01c5d143-73a8-4029-a152-6d14349f7959' = m
 		mode: import
 		source =
 				let

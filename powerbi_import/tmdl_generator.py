@@ -1218,11 +1218,13 @@ def generate_tmdl(datasources, report_name, extra_objects, output_dir,
         total_measures += len(t.get('measures', []))
         total_hierarchies += len(t.get('hierarchies', []))
 
-    # Step 2b: Write TMDL files (clears column/measure data afterward)
-    _write_tmdl_files(model, output_dir)
-
-    # Step 2c: Build lineage map — Tableau source → PBI target mapping
+    # Step 2b: Build lineage map BEFORE writing — _write_tmdl_files clears
+    #          column/measure data from tables to free memory, so lineage must
+    #          be captured while the data is still intact.
     lineage = _build_lineage_map(tables, rels, extra_objects, datasources)
+
+    # Step 2c: Write TMDL files (clears column/measure data afterward)
+    _write_tmdl_files(model, output_dir)
 
     # Step 3: Return pre-computed stats
     stats = {
@@ -1312,8 +1314,10 @@ def _build_lineage_map(tables, relationships, extra_objects, datasources):
             'cardinality': rel.get('crossFilteringBehavior', rel.get('cardinality', '')),
         })
 
-    # Worksheet lineage (from extra_objects)
-    for ws in extra.get('worksheets', []):
+    # Worksheet lineage (from extra_objects — key is '_worksheets' with
+    # underscore prefix as set in pbip_generator.create_tmdl_model)
+    worksheets = extra.get('_worksheets') or extra.get('worksheets') or []
+    for ws in worksheets:
         ws_name = ws.get('name', '')
         if ws_name:
             lineage['worksheets'].append({
@@ -2417,6 +2421,12 @@ def _build_table(table, connection, calculations, columns_metadata, dax_context=
         r'RANK|RANK_UNIQUE|RANK_DENSE|RANK_MODIFIED|RANK_PERCENTILE)\s*\(',
         re.IGNORECASE
     )
+    # LOD expressions ({FIXED dim: expr}, {INCLUDE ...}, {EXCLUDE ...}) are
+    # aggregation contexts in Tableau — they produce CALCULATE + ALLEXCEPT
+    # in DAX.  Detect them separately from the function-call pattern above.
+    _lod_pattern = re.compile(
+        r'\{\s*(FIXED|INCLUDE|EXCLUDE)\s', re.IGNORECASE
+    )
 
     # --- Pre-classification pass ---
     # Identify which calculations will be calculated columns so that when
@@ -2433,7 +2443,7 @@ def _build_table(table, connection, calculations, columns_metadata, dax_context=
         _pc_formula = _pc.get('formula', '').strip()
         _pc_role = _pc.get('role', 'measure')
         _pc_is_literal = _pc_formula and '[' not in _pc_formula
-        _pc_has_agg = bool(_agg_pattern.search(_pc_formula))
+        _pc_has_agg = bool(_agg_pattern.search(_pc_formula)) or bool(_lod_pattern.search(_pc_formula))
         # Check for physical column refs (refs not in calc_map/measure_names)
         _pc_refs = re.findall(r'\[([^\]]+)\]', _pc_formula)
         _pc_has_col = False
@@ -2528,7 +2538,7 @@ def _build_table(table, connection, calculations, columns_metadata, dax_context=
         is_literal = formula and '[' not in formula
 
         # Classify: calculated column or measure
-        has_aggregation = bool(_agg_pattern.search(formula))
+        has_aggregation = bool(_agg_pattern.search(formula)) or bool(_lod_pattern.search(formula))
         refs_in_formula = re.findall(r'\[([^\]]+)\]', formula)
         has_column_refs = False
         references_only_measures = True
@@ -3030,6 +3040,17 @@ def _detect_join_graph_issues(relationships):
     return unique
 
 
+def _is_parameter_table(tables, table_name):
+    """Check if a table is a What-If parameter table (has ParameterTable annotation)."""
+    for t in tables:
+        if t.get("name", "") == table_name:
+            for ann in t.get("annotations", []):
+                if ann.get("name") == "ParameterTable":
+                    return True
+            return False
+    return False
+
+
 def _infer_cross_table_relationships(model):
     """
     Infer relationships between tables when DAX expressions reference
@@ -3092,6 +3113,9 @@ def _infer_cross_table_relationships(model):
     # For each needed pair, find a matching column for the relationship
     for (source_table, ref_table) in needed_pairs:
         if (source_table, ref_table) in connected_pairs:
+            continue
+        # Skip parameter tables — they don't need inferred relationships
+        if _is_parameter_table(tables, source_table) or _is_parameter_table(tables, ref_table):
             continue
 
         source_cols = table_columns.get(source_table, set())
@@ -3157,8 +3181,12 @@ def _infer_cross_table_relationships(model):
         for t2 in all_table_names[i + 1:]:
             if (t1, t2) in connected_pairs:
                 continue
-            # Skip auto-generated tables (Calendar, parameters)
+            # Skip auto-generated tables (Calendar, parameter tables)
             if t1 == 'Calendar' or t2 == 'Calendar':
+                continue
+            # Skip parameter tables (What-If) — they should not participate
+            # in cross-table relationship inference
+            if _is_parameter_table(tables, t1) or _is_parameter_table(tables, t2):
                 continue
 
             t1_cols = table_columns.get(t1, set())
@@ -4096,8 +4124,8 @@ def _create_parameter_tables(model, parameters, main_table_name):
         if domain_type == 'range':
             range_info = next((v for v in allowable_values if v.get('type') == 'range'), None)
             if range_info:
-                min_val = range_info.get('min', '0')
-                max_val = range_info.get('max', '100')
+                min_val = range_info.get('min', '') or '0'
+                max_val = range_info.get('max', '') or '100'
                 step = range_info.get('step', '') or '1'
                 table_expr = f"GENERATESERIES({min_val}, {max_val}, {step})"
                 col_name = "Value"
@@ -4111,7 +4139,29 @@ def _create_parameter_tables(model, parameters, main_table_name):
                     for v in list_values
                 )
                 if datatype == 'string':
-                    rows = ', '.join(f'{{"{v.get("value", "")}"}}' for v in list_values)
+                    def _clean_str_val(v):
+                        val = v.get('value', '')
+                        # Strip one layer of surrounding quotes (Tableau wraps strings)
+                        if len(val) >= 2 and val[0] == '"' and val[-1] == '"':
+                            val = val[1:-1]
+                        # Escape internal quotes for DAX string literals
+                        return val.replace('"', '""')
+                    if has_aliases:
+                        # String list with aliases → include both Value and Name columns
+                        def _clean_str_alias(v):
+                            alias = v.get('alias', v.get('value', ''))
+                            if len(alias) >= 2 and alias[0] == '"' and alias[-1] == '"':
+                                alias = alias[1:-1]
+                            return alias.replace('"', '""')
+                        rows = ', '.join(
+                            '{{"{}","{}"}}'.format(_clean_str_val(v), _clean_str_alias(v))
+                            for v in list_values
+                        )
+                    else:
+                        rows = ', '.join(
+                            '{{"{}"}}'.format(_clean_str_val(v))
+                            for v in list_values
+                        )
                 elif datatype == 'boolean':
                     rows = ', '.join(f'{{{v.get("value", "TRUE").upper()}}}' for v in list_values)
                 elif has_aliases:
@@ -4123,7 +4173,7 @@ def _create_parameter_tables(model, parameters, main_table_name):
                 else:
                     rows = ', '.join(f'{{{v.get("value", "0")}}}' for v in list_values)
                 col_name = "Value"
-                if has_aliases and datatype not in ('string', 'boolean'):
+                if has_aliases and datatype not in ('boolean',):
                     table_expr = f'DATATABLE("Value", {dax_type}, "Name", STRING, {{{rows}}})'
                 else:
                     table_expr = f'DATATABLE("Value", {dax_type}, {{{rows}}})'
@@ -4161,8 +4211,8 @@ def _create_parameter_tables(model, parameters, main_table_name):
             }]
         }
 
-        # Add Name column for numeric list parameters with aliases
-        if has_aliases and domain_type == 'list':
+        # Add Name column when DATATABLE includes aliases (numeric or string with aliases)
+        if has_aliases and domain_type == 'list' and datatype not in ('boolean',):
             param_table["columns"].append({
                 "name": "Name",
                 "dataType": "string",
@@ -4171,6 +4221,11 @@ def _create_parameter_tables(model, parameters, main_table_name):
                     {"name": "displayFolder", "value": "Parameters"}
                 ]
             })
+
+        # Mark as parameter table so Phase 10 skips it during relationship inference
+        if "annotations" not in param_table:
+            param_table["annotations"] = []
+        param_table["annotations"].append({"name": "ParameterTable", "value": "true"})
 
         model["model"]["tables"].append(param_table)
 
@@ -4444,7 +4499,7 @@ def _create_field_parameters(model, parameters, main_table_name, column_table_ma
                 f"(NAMEOF('{col_table}'[{col_name}]), {idx}, \"{col_name}\")"
             )
 
-        fp_expr = "{\\n" + ",\\n".join(rows) + "\\n}"
+        fp_expr = "{\n" + ",\n".join(rows) + "\n}"
 
         fp_table = {
             "name": fp_name,

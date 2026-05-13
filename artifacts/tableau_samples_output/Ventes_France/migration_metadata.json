@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-02T14:10:45.998437",
+  "generated_at": "2026-05-13T17:42:40.895628",
   "source": "Tableau Migration",
   "report_name": "Ventes_France",
   "objects_converted": {
@@ -20,7 +20,7 @@
   },
   "generated_output": {
     "pages": 2,
-    "visuals": 9,
+    "visuals": 7,
     "theme_applied": false,
     "theme_detail": {
       "status": "skipped",

@@ -1646,6 +1646,101 @@ class TestIntegrationParameterEdges(unittest.TestCase):
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
 
+    def test_string_list_no_double_quotes(self):
+        """String list DATATABLE values must not get double-double quotes."""
+        tmp = tempfile.mkdtemp()
+        try:
+            generate_tmdl(self._ds(), 'test', {'parameters': [{
+                'caption': 'State',
+                'value': 'Alabama',
+                'datatype': 'string',
+                'domain_type': 'list',
+                'name': 'State',
+                'allowable_values': [
+                    {'value': 'Alabama', 'alias': 'Alabama'},
+                    {'value': 'Arizona', 'alias': 'Arizona'},
+                ],
+            }]}, tmp)
+            tmdl = os.path.join(tmp, 'definition', 'tables', 'State.tmdl')
+            content = open(tmdl, encoding='utf-8').read()
+            self.assertIn('{"Alabama"}', content)
+            self.assertNotIn('""Alabama""', content)
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_string_list_strips_pre_quoted_values(self):
+        """Old-format Tableau values with surrounding quotes → single quotes in DATATABLE."""
+        tmp = tempfile.mkdtemp()
+        try:
+            generate_tmdl(self._ds(), 'test', {'parameters': [{
+                'caption': 'Last x Days',
+                'value': '"90"',
+                'datatype': 'string',
+                'domain_type': 'list',
+                'name': 'Last x Days',
+                'allowable_values': [
+                    {'value': '"7"', 'alias': '"7"'},
+                    {'value': '"30"', 'alias': '"30"'},
+                    {'value': '"90"', 'alias': '"90"'},
+                ],
+            }]}, tmp)
+            tmdl = os.path.join(tmp, 'definition', 'tables', 'Last x Days.tmdl')
+            content = open(tmdl, encoding='utf-8').read()
+            # Must have single-quoted values, not double-double
+            self.assertIn('{"7"}', content)
+            self.assertNotIn('""7""', content)
+            self.assertNotIn('{""7""}', content)
+            # Default should also be stripped
+            self.assertIn('"90"', content)  # SELECTEDVALUE default
+            self.assertNotIn('""90""', content)
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_range_parameter_missing_max(self):
+        """GENERATESERIES with missing max must default to 100, not produce empty arg."""
+        tmp = tempfile.mkdtemp()
+        try:
+            generate_tmdl(self._ds(), 'test', {'parameters': [{
+                'caption': 'Quota',
+                'value': '50000',
+                'datatype': 'integer',
+                'domain_type': 'range',
+                'name': 'Quota',
+                'allowable_values': [
+                    {'type': 'range', 'min': '100000', 'max': '', 'step': '25000'},
+                ],
+            }]}, tmp)
+            tmdl = os.path.join(tmp, 'definition', 'tables', 'Quota.tmdl')
+            content = open(tmdl, encoding='utf-8').read()
+            # Must not have empty arg: GENERATESERIES(100000, , 25000)
+            self.assertNotIn(', ,', content)
+            self.assertIn('GENERATESERIES(100000, 100, 25000)', content)
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_string_list_with_embedded_quotes(self):
+        """DATATABLE string values with embedded quotes must be escaped as double-double."""
+        tmp = tempfile.mkdtemp()
+        try:
+            generate_tmdl(self._ds(), 'test', {'parameters': [{
+                'caption': 'Label',
+                'value': 'Normal',
+                'datatype': 'string',
+                'domain_type': 'list',
+                'name': 'Label',
+                'allowable_values': [
+                    {'value': 'Normal', 'alias': 'Normal'},
+                    {'value': 'He said "hello"', 'alias': 'He said "hello"'},
+                ],
+            }]}, tmp)
+            tmdl = os.path.join(tmp, 'definition', 'tables', 'Label.tmdl')
+            content = open(tmdl, encoding='utf-8').read()
+            self.assertIn('{"Normal"}', content)
+            # Embedded quotes must be escaped as "" in DAX
+            self.assertIn('He said ""hello""', content)
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
 
 class TestIntegrationCalcClassification(unittest.TestCase):
     """L1196, L1234, L1290: calc classification edge cases via generate_tmdl."""
@@ -1666,6 +1761,74 @@ class TestIntegrationCalcClassification(unittest.TestCase):
         tmp = tempfile.mkdtemp()
         try:
             generate_tmdl(datasources, 'test', {}, tmp)
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_lod_fixed_classified_as_measure(self):
+        """LOD {FIXED dim: AGG(expr)} must be classified as a measure, not calc column."""
+        datasources = [{
+            'name': 'DS1',
+            'tables': [{'name': 'Sales', 'columns': [
+                {'name': 'Customer', 'datatype': 'string'},
+                {'name': 'Revenue', 'datatype': 'real'},
+            ]}],
+            'calculations': [
+                {'name': 'PerCustomerRevenue', 'caption': 'Per Customer Revenue',
+                 'formula': '{FIXED [Customer]: SUM([Revenue])}',
+                 'role': 'dimension', 'datatype': 'real'},
+            ],
+            'connection': {'class': 'sqlserver', 'server': 'srv', 'dbname': 'db'},
+        }]
+        tmp = tempfile.mkdtemp()
+        try:
+            generate_tmdl(datasources, 'test', {}, tmp)
+            # Read the generated TMDL files to verify classification
+            tmdl_dir = os.path.join(tmp, 'definition')
+            # Walk TMDL files looking for 'Per Customer Revenue'
+            found_as_measure = False
+            found_as_column = False
+            for root, dirs, files in os.walk(tmdl_dir):
+                for f in files:
+                    if f.endswith('.tmdl'):
+                        with open(os.path.join(root, f), 'r', encoding='utf-8') as fh:
+                            content = fh.read()
+                            if "measure 'Per Customer Revenue'" in content:
+                                found_as_measure = True
+                            if "column 'Per Customer Revenue'" in content:
+                                found_as_column = True
+            self.assertTrue(found_as_measure, "LOD calc should be classified as measure")
+            self.assertFalse(found_as_column, "LOD calc should NOT be a calculated column")
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_lod_include_classified_as_measure(self):
+        """LOD {INCLUDE dim: AGG(expr)} must be classified as a measure."""
+        datasources = [{
+            'name': 'DS1',
+            'tables': [{'name': 'Sales', 'columns': [
+                {'name': 'Region', 'datatype': 'string'},
+                {'name': 'Amount', 'datatype': 'real'},
+            ]}],
+            'calculations': [
+                {'name': 'IncludedSum', 'caption': 'Included Sum',
+                 'formula': '{INCLUDE [Region]: SUM([Amount])}',
+                 'role': 'measure', 'datatype': 'real'},
+            ],
+            'connection': {'class': 'sqlserver', 'server': 'srv', 'dbname': 'db'},
+        }]
+        tmp = tempfile.mkdtemp()
+        try:
+            generate_tmdl(datasources, 'test', {}, tmp)
+            tmdl_dir = os.path.join(tmp, 'definition')
+            found_as_measure = False
+            for root, dirs, files in os.walk(tmdl_dir):
+                for f in files:
+                    if f.endswith('.tmdl'):
+                        with open(os.path.join(root, f), 'r', encoding='utf-8') as fh:
+                            content = fh.read()
+                            if "measure 'Included Sum'" in content:
+                                found_as_measure = True
+            self.assertTrue(found_as_measure, "INCLUDE LOD calc should be classified as measure")
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
 

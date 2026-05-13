@@ -21,7 +21,74 @@
       "pbi_table": "Business Unit"
     }
   ],
-  "calculations": [],
+  "calculations": [
+    {
+      "tableau_calculation": "SUM(IF [type] = \"Revenue\" THEN [amount] ELSE 0 END)",
+      "pbi_table": "transactions",
+      "pbi_object": "Revenue",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM(IF [type] = \"Expense\" THEN [amount] ELSE 0 END)",
+      "pbi_table": "transactions",
+      "pbi_object": "Expenses",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM(IF [type] = \"Revenue\" THEN [amount] ELSE -[amount] END)",
+      "pbi_table": "transactions",
+      "pbi_object": "Net Income",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "([Revenue] - [Expenses]) / [Revenue]",
+      "pbi_table": "transactions",
+      "pbi_object": "Profit Margin %",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "{FIXED : SUM(IF YEAR([transaction_date]) = YEAR(TODAY()) THEN [amount] ELSE 0 END)}",
+      "pbi_table": "transactions",
+      "pbi_object": "YTD Revenue",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM([amount]) - WINDOW_AVG(SUM([amount]))",
+      "pbi_table": "transactions",
+      "pbi_object": "Budget Variance",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Year To Date",
+      "pbi_table": "Calendar",
+      "pbi_object": "Year To Date",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Previous Year",
+      "pbi_table": "Calendar",
+      "pbi_object": "Previous Year",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Year Over Year %",
+      "pbi_table": "Calendar",
+      "pbi_object": "Year Over Year %",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Fiscal Year",
+      "pbi_table": "Fiscal Year",
+      "pbi_object": "Fiscal Year",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Business Unit",
+      "pbi_table": "Business Unit",
+      "pbi_object": "Business Unit",
+      "pbi_type": "measure"
+    }
+  ],
   "relationships": [
     {
       "from": "transactions[transaction_date]",
@@ -29,5 +96,22 @@
       "cardinality": "bothDirections"
     }
   ],
-  "worksheets": []
+  "worksheets": [
+    {
+      "tableau_worksheet": "Revenue vs Expenses",
+      "pbi_page": "Revenue vs Expenses"
+    },
+    {
+      "tableau_worksheet": "Category Breakdown",
+      "pbi_page": "Category Breakdown"
+    },
+    {
+      "tableau_worksheet": "Business Unit Performance",
+      "pbi_page": "Business Unit Performance"
+    },
+    {
+      "tableau_worksheet": "Top 10 Accounts",
+      "pbi_page": "Top 10 Accounts"
+    }
+  ]
 }

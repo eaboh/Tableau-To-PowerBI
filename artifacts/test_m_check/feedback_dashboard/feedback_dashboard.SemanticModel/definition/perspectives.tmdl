@@ -1,3 +1,4 @@
 perspective 'Full Model'
 	perspectiveTable 'customer_feedback_data.json'
 	perspectiveTable Extract
+	perspectiveTable Calendar

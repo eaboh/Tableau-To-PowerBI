@@ -2,8 +2,8 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/2.0.0/schema.json",
   "themeCollection": {
     "baseTheme": {
-      "name": "CY24SU06",
-      "reportVersionAtImport": "5.55",
+      "name": "CY26SU04",
+      "reportVersionAtImport": "5.58",
       "type": "SharedResources"
     }
   },
@@ -13,8 +13,8 @@
       "type": "SharedResources",
       "items": [
         {
-          "name": "CY24SU06",
-          "path": "BaseThemes/CY24SU06.json",
+          "name": "CY26SU04",
+          "path": "BaseThemes/CY26SU04.json",
           "type": "BaseTheme"
         }
       ]
@@ -27,5 +27,9 @@
     "defaultDrillFilterOtherVisuals": true,
     "allowChangeFilterTypes": true,
     "useEnhancedTooltips": true
-  }
+  },
+  "publicCustomVisuals": [
+    "boxAndWhisker",
+    "ganttChart"
+  ]
 }

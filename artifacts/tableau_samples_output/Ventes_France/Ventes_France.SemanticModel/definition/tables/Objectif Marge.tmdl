@@ -1,20 +1,20 @@
 table 'Objectif Marge'
-	lineageTag: 498b5fbe-fe4c-444a-a83b-0825d5ecb4c0
+	lineageTag: e50c77ef-f670-4846-90d8-df414bf5b21f
 
 	measure 'Objectif Marge' = SELECTEDVALUE('Objectif Marge'[Value], 0.15)
-		lineageTag: 7c33272d-8d1b-48d6-9099-9eaede5209d5
+		lineageTag: 99e19aa9-f545-43aa-9524-aff2babf7254
 		annotation Copilot_Description = DAX: SELECTEDVALUE('Objectif Marge'[Value], 0.15)
 
 	column Value
 		dataType: double
-		lineageTag: 0b3348a8-d74f-479d-8d70-d0a88a56a904
+		lineageTag: fb57762f-9fa6-4e89-91d3-ae3b5f7f8386
 		summarizeBy: none
 		sourceColumn: Value
 		annotation displayFolder = Parameters
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Objectif Marge-0b1eb8d8-b8f2-4ec0-a9d2-a0300104e643' = calculated
+	partition 'Objectif Marge-b094f5b0-0787-4cb3-a702-5c38f9af7efa' = calculated
 		mode: import
 		source = GENERATESERIES(0, 0.5, 0.01)
 

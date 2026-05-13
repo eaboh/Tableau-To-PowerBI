@@ -1,44 +1,45 @@
 table Calendar
-	lineageTag: e0f8f1e3-0a88-42f1-841e-2717124819a4
+	lineageTag: 12b5eda5-f036-49b6-8ebc-504519fe09fb
 
 	measure 'Year To Date' = TOTALYTD([Margin], 'Calendar'[Date])
 		formatString: #,0.00
 		displayFolder: Time Intelligence
-		lineageTag: d41f42e3-63be-41f7-bbcf-bada3e5cbe77
+		lineageTag: 0b487f2b-d8a7-468a-8ba6-8f7abcb05ef8
+		annotation Copilot_Description = DAX: TOTALYTD([Margin], 'Calendar'[Date])
 
 	measure 'Previous Year' = CALCULATE([Margin], SAMEPERIODLASTYEAR('Calendar'[Date]))
 		formatString: #,0.00
 		displayFolder: Time Intelligence
-		lineageTag: 673ce7a2-5e40-43a6-84fc-870623eb74ed
+		lineageTag: 3ee63fe6-3a69-4838-9924-bca197f12ac5
+		annotation Copilot_Description = DAX: CALCULATE([Margin], SAMEPERIODLASTYEAR('Calendar'[Date]))
 
 	measure 'Year Over Year %' = DIVIDE([Year To Date] - [Previous Year], [Previous Year], 0)
 		formatString: 0.00%
 		displayFolder: Time Intelligence
-		lineageTag: 896835a5-df80-4934-8c49-bdbe0dc43fad
+		lineageTag: 5da259c9-70f1-431d-93d3-235e9e34809a
+		annotation Copilot_Description = DAX: DIVIDE([Year To Date] - [Previous Year], [Previous Year], 0)
 
 	column Date
 		dataType: dateTime
 		formatString: dd/mm/yyyy
-		lineageTag: a65bb5c8-15d9-4b4f-840b-db9c558e73f4
+		lineageTag: eb9e6003-718e-400d-9a97-e9d1a3f8bcc1
 		summarizeBy: none
 		sourceColumn: Date
 		isKey
-		dataCategory: DateTime
 
 		annotation SummarizationSetBy = Automatic
 
 	column Year
 		dataType: int64
-		lineageTag: f78db7f1-b63b-43e2-81fc-12c7051ce322
+		lineageTag: f92af944-4e88-47c5-ad8c-1913943bf8d2
 		summarizeBy: none
 		sourceColumn: Year
-		dataCategory: Years
 
 		annotation SummarizationSetBy = Automatic
 
 	column Quarter
 		dataType: string
-		lineageTag: da6b1bd8-edb1-4c1e-aec1-52dfcc25c4b5
+		lineageTag: ccd8c04c-ac70-4738-9c64-42a18285a7e5
 		summarizeBy: none
 		sourceColumn: Quarter
 
@@ -46,16 +47,15 @@ table Calendar
 
 	column Month
 		dataType: int64
-		lineageTag: d6c3d250-6aa5-4286-9901-a31dca646924
+		lineageTag: c50bb0d5-4e26-4c38-9640-65c96c3ea346
 		summarizeBy: none
 		sourceColumn: Month
-		dataCategory: Months
 
 		annotation SummarizationSetBy = Automatic
 
 	column MonthName
 		dataType: string
-		lineageTag: de03bf02-a6c3-4a7a-8c24-9ac68dc22397
+		lineageTag: 36324557-7b18-48f1-b974-610ee4e0be5a
 		summarizeBy: none
 		sourceColumn: MonthName
 		sortByColumn: Month
@@ -64,16 +64,15 @@ table Calendar
 
 	column Day
 		dataType: int64
-		lineageTag: fbe13a84-9540-4f90-bc5b-1c01de520c9e
+		lineageTag: fb26f1bb-a015-462e-8a81-abd602371354
 		summarizeBy: none
 		sourceColumn: Day
-		dataCategory: Days
 
 		annotation SummarizationSetBy = Automatic
 
 	column DayOfWeek
 		dataType: int64
-		lineageTag: 5d0a5567-38de-4f69-a4ae-27c6d9d47c94
+		lineageTag: 7340e242-c918-458f-b6fc-2ee58a86d7f9
 		summarizeBy: none
 		sourceColumn: DayOfWeek
 
@@ -81,7 +80,7 @@ table Calendar
 
 	column DayName
 		dataType: string
-		lineageTag: cad09b83-dbc2-44f3-aedd-99c5e8ece692
+		lineageTag: 3ff1aca7-b463-49b9-88ab-701c16c24d66
 		summarizeBy: none
 		sourceColumn: DayName
 		sortByColumn: DayOfWeek
@@ -89,30 +88,30 @@ table Calendar
 		annotation SummarizationSetBy = Automatic
 
 	hierarchy 'Date Hierarchy'
-		lineageTag: 58ed7951-1cea-43a9-809b-9eabd38634a0
+		lineageTag: 4c61c32f-1161-444b-8380-5755202ebb9f
 
 		level Year
 			ordinal: 0
 			column: Year
-			lineageTag: f2c845f9-9170-4c9f-ac19-09d56f2f9dc3
+			lineageTag: 415dfe33-3c4c-4bfa-9ee3-396d5c806540
 
 		level Quarter
 			ordinal: 1
 			column: Quarter
-			lineageTag: e24c319e-6cd5-490a-832d-2061ab8811f2
+			lineageTag: 42c1dc2a-6ef4-47a0-b22a-41b3c66c0fb9
 
 		level Month
 			ordinal: 2
 			column: MonthName
-			lineageTag: 969faf78-8cca-4bfb-a4bc-e149cd7d0a4e
+			lineageTag: a70c219c-0b93-41a4-8c17-d7788ea65efe
 
 		level Day
 			ordinal: 3
 			column: Day
-			lineageTag: 57971ec5-4070-481d-9753-5d1bedc279ca
+			lineageTag: 835cf452-ec0f-41c6-bdf7-6f4a238de43f
 
 
-	partition 'Calendar-a16acb28-e57f-48e0-aaa4-631bbd8ae3ad' = m
+	partition 'Calendar-5bf383e1-5dc7-4c1a-96d8-88d74ebd86a0' = m
 		mode: import
 		source =
 				let

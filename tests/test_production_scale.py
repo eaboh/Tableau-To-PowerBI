@@ -58,7 +58,7 @@ class TestSLATracker:
         result = tracker.record_result("wb.twbx", fidelity=75.0, validation_passed=True)
         assert not result.fidelity_compliant
         assert not result.compliant
-        assert any("Fidelity" in b for b in result.breaches)
+        assert any("Extraction" in b for b in result.breaches)
 
     def test_validation_breach(self):
         tracker = SLATracker({"require_validation_pass": True})

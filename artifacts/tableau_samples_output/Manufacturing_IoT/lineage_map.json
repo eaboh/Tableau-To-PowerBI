@@ -26,7 +26,92 @@
       "pbi_table": "Alert Threshold"
     }
   ],
-  "calculations": [],
+  "calculations": [
+    {
+      "tableau_calculation": "MEDIAN([value])",
+      "pbi_table": "Sensors",
+      "pbi_object": "Median Value",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "PERCENTILE([value], 0.95)",
+      "pbi_table": "Sensors",
+      "pbi_object": "P95 Value",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "VAR([value])",
+      "pbi_table": "Sensors",
+      "pbi_object": "Value Variance",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "VARP([value])",
+      "pbi_table": "Sensors",
+      "pbi_object": "Value Variance Pop",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "{INCLUDE [sensor_type], [machine_id] : AVG([value])}",
+      "pbi_table": "Sensors",
+      "pbi_object": "Avg by Sensor Machine",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "RUNNING_AVG(AVG([value]))",
+      "pbi_table": "Sensors",
+      "pbi_object": "Running Avg Value",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "RUNNING_COUNT(COUNT([reading_id]))",
+      "pbi_table": "Sensors",
+      "pbi_object": "Running Count",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "RUNNING_MAX(MAX([value]))",
+      "pbi_table": "Sensors",
+      "pbi_object": "Running Max Value",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "RUNNING_MIN(MIN([value]))",
+      "pbi_table": "Sensors",
+      "pbi_object": "Running Min Value",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "RANK_DENSE(SUM([value]))",
+      "pbi_table": "Sensors",
+      "pbi_object": "Dense Rank",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "RANK_UNIQUE(AVG([value]))",
+      "pbi_table": "Sensors",
+      "pbi_object": "Unique Rank",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "WINDOW_SUM(SUM([value]))",
+      "pbi_table": "Sensors",
+      "pbi_object": "Window Total",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Time Granularity",
+      "pbi_table": "Sensors",
+      "pbi_object": "Time Granularity",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Alert Threshold",
+      "pbi_table": "Alert Threshold",
+      "pbi_object": "Alert Threshold",
+      "pbi_type": "measure"
+    }
+  ],
   "relationships": [
     {
       "from": "Sensors[machine_id]",
@@ -41,7 +126,7 @@
     {
       "from": "Sensors[reading_time]",
       "to": "Calendar[Date]",
-      "cardinality": "oneDirection"
+      "cardinality": "bothDirections"
     },
     {
       "from": "Machines[install_date]",
@@ -59,5 +144,30 @@
       "cardinality": "bothDirections"
     }
   ],
-  "worksheets": []
+  "worksheets": [
+    {
+      "tableau_worksheet": "Sensor Monitor",
+      "pbi_page": "Sensor Monitor"
+    },
+    {
+      "tableau_worksheet": "Machine Health",
+      "pbi_page": "Machine Health"
+    },
+    {
+      "tableau_worksheet": "Maintenance Costs",
+      "pbi_page": "Maintenance Costs"
+    },
+    {
+      "tableau_worksheet": "Value Distribution",
+      "pbi_page": "Value Distribution"
+    },
+    {
+      "tableau_worksheet": "Vibration Analysis",
+      "pbi_page": "Vibration Analysis"
+    },
+    {
+      "tableau_worksheet": "Machine Rankings",
+      "pbi_page": "Machine Rankings"
+    }
+  ]
 }

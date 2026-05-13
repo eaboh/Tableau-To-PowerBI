@@ -480,7 +480,7 @@ class MigrationReport:
         print(f'  MIGRATION REPORT: {self.report_name}')
         print('=' * 72)
         print(f'  Total items converted: {s["total_items"]}')
-        print(f'  Fidelity score:        {s["fidelity_score"]}%')
+        print(f'  Extraction score:      {s["fidelity_score"]}%')
         print()
         print(f'    Exact:        {s["exact"]:>4}')
         print(f'    Approximate:  {s["approximate"]:>4}')
@@ -502,7 +502,7 @@ class MigrationReport:
         print()
         print(f'  Completeness grade:    {cs["grade"]} ({cs["overall_score"]}%)')
         if cs['categories']:
-            print('  Per-category fidelity:')
+            print('  Per-category extraction:')
             for cat, info in sorted(cs['categories'].items()):
                 print(f'    {cat:<20} {info["fidelity_pct"]:>5.1f}%  ({info["total"]} items)')
 

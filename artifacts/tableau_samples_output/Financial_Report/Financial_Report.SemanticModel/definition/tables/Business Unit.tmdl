@@ -1,20 +1,20 @@
 table 'Business Unit'
-	lineageTag: 28495639-7d39-473b-a02a-ec85522a9065
+	lineageTag: 461c38a5-6a49-4340-bed7-7bdc0dc3431c
 
 	measure 'Business Unit' = SELECTEDVALUE('Business Unit'[Value], "All")
-		lineageTag: fe7aa90d-1d70-4d4a-ae40-6827c78edf07
+		lineageTag: 41766103-4985-4f78-8005-22e471a7c70f
 		annotation Copilot_Description = DAX: SELECTEDVALUE('Business Unit'[Value], "All")
 
 	column Value
 		dataType: string
-		lineageTag: 9dd601da-ae0e-477a-a999-6c0aac5642db
+		lineageTag: 8de48faf-3e1d-4960-a455-f145622202b9
 		summarizeBy: none
 		sourceColumn: Value
 		annotation displayFolder = Parameters
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Business Unit-1af753ef-3722-437b-9afb-40c8b55dd838' = calculated
+	partition 'Business Unit-560e7bfe-ee09-4d22-949c-a9cbb4dc6272' = calculated
 		mode: import
 		source = DATATABLE("Value", STRING, {{"All"}, {"North America"}, {"Europe"}, {"Asia Pacific"}})
 

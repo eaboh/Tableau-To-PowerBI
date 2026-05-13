@@ -1,29 +1,27 @@
 table Calendar
-	lineageTag: 40e17f88-3ba5-40aa-87ca-edf792f82ffd
+	lineageTag: 053c7d8e-d0b7-4f7c-bada-49e859fcc536
 
 	column Date
 		dataType: dateTime
 		formatString: dd/mm/yyyy
-		lineageTag: ffb5a8d5-3bdb-4001-8602-e0bf3f644317
+		lineageTag: 6e5142f7-9535-4061-a81f-b3e0222ddc78
 		summarizeBy: none
 		sourceColumn: Date
 		isKey
-		dataCategory: DateTime
 
 		annotation SummarizationSetBy = Automatic
 
 	column Year
 		dataType: int64
-		lineageTag: 1edd1926-a928-4305-ab5b-1cac4f326477
+		lineageTag: a6a89f4f-f3e5-4680-bcb3-76bcc1c1153f
 		summarizeBy: none
 		sourceColumn: Year
-		dataCategory: Years
 
 		annotation SummarizationSetBy = Automatic
 
 	column Quarter
 		dataType: string
-		lineageTag: 49113ca8-2e65-4c83-88e6-293e24f16636
+		lineageTag: 946c5017-6dba-469a-a17b-9363765a75bc
 		summarizeBy: none
 		sourceColumn: Quarter
 
@@ -31,16 +29,15 @@ table Calendar
 
 	column Month
 		dataType: int64
-		lineageTag: f8d300b5-e3f3-46f7-bd6f-56ef2d1242f5
+		lineageTag: 5be31a95-18f5-4abe-804e-e6d5a9e224db
 		summarizeBy: none
 		sourceColumn: Month
-		dataCategory: Months
 
 		annotation SummarizationSetBy = Automatic
 
 	column MonthName
 		dataType: string
-		lineageTag: b8611c0a-368b-463c-afeb-0b79be894a20
+		lineageTag: ccf249b2-f682-495b-93b0-69b44a845e76
 		summarizeBy: none
 		sourceColumn: MonthName
 		sortByColumn: Month
@@ -49,16 +46,15 @@ table Calendar
 
 	column Day
 		dataType: int64
-		lineageTag: dc1fc953-9e9a-4708-b4e2-d6f11b1180c5
+		lineageTag: 60f3acde-b9d9-4ce2-b916-fbddd87a2e46
 		summarizeBy: none
 		sourceColumn: Day
-		dataCategory: Days
 
 		annotation SummarizationSetBy = Automatic
 
 	column DayOfWeek
 		dataType: int64
-		lineageTag: 6e80fe25-7525-4c15-9931-26a124378d19
+		lineageTag: 1a41a9f2-5269-46ec-b602-31d1b5934356
 		summarizeBy: none
 		sourceColumn: DayOfWeek
 
@@ -66,7 +62,7 @@ table Calendar
 
 	column DayName
 		dataType: string
-		lineageTag: 40487ffc-a9b3-43f2-8935-7add01452493
+		lineageTag: 7063b43a-3941-4d0f-b9df-f76580cd66ba
 		summarizeBy: none
 		sourceColumn: DayName
 		sortByColumn: DayOfWeek
@@ -74,30 +70,30 @@ table Calendar
 		annotation SummarizationSetBy = Automatic
 
 	hierarchy 'Date Hierarchy'
-		lineageTag: 6c845ea5-0294-4327-b3c0-c38e03705c87
+		lineageTag: ec559a0e-f1b0-4344-b935-b32975fc1a88
 
 		level Year
 			ordinal: 0
 			column: Year
-			lineageTag: 2c19011c-a74e-4a35-986c-64cb5b7e36a1
+			lineageTag: 90c98a66-5a51-489a-af27-6a3bfbde5ade
 
 		level Quarter
 			ordinal: 1
 			column: Quarter
-			lineageTag: a606520e-2bf0-43c8-8ea0-9240180a7c68
+			lineageTag: ceb4873a-3c94-44b0-9d91-dcbffd683f67
 
 		level Month
 			ordinal: 2
 			column: MonthName
-			lineageTag: 157a181c-b674-48aa-800d-e4cf6cd34ba3
+			lineageTag: 5d483e99-bac5-4332-83b7-3ebfea76cc17
 
 		level Day
 			ordinal: 3
 			column: Day
-			lineageTag: 290fad3c-61bb-4990-9436-e6cedd1a02ec
+			lineageTag: 4300774f-eb02-4154-bb8c-44b2e6ad4af5
 
 
-	partition 'Calendar-c6ee29a9-65f2-4e50-af48-c8b568d5c885' = m
+	partition 'Calendar-877ed54c-7176-4705-ba1e-06053aa94c82' = m
 		mode: import
 		source =
 				let

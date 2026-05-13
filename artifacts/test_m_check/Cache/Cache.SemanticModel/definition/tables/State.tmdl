@@ -1,21 +1,23 @@
 table State
-	lineageTag: f065a7b4-5754-4d23-bf7e-e30200fc4ff3
+	lineageTag: d53c86a9-6eb4-4a4b-974b-9ae5b5f8b7c2
 
 	measure State = SELECTEDVALUE('State'[Value], "Alabama")
-		lineageTag: 82235976-810d-4fe8-9287-5d334955373e
+		lineageTag: 7dbc62e1-5dff-417a-80a9-e8d70124d305
+		annotation Copilot_Description = DAX: SELECTEDVALUE('State'[Value], "Alabama")
 
 	column Value
 		dataType: string
-		lineageTag: 466319c0-f109-4709-925f-57025daa7afa
+		lineageTag: 44b834d5-631a-4264-9c2e-3a4f0d7bfafc
 		summarizeBy: none
 		sourceColumn: Value
 		annotation displayFolder = Parameters
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'State-03eccab7-a4c5-477c-b83d-69b8512f9b20' = calculated
+	partition 'State-b49092d7-4f73-4696-9b9c-10761633472e' = calculated
 		mode: import
-		source = DATATABLE("Value", STRING, {{""Alabama""}, {""Arizona""}, {""Arkansas""}, {""California""}, {""Colorado""}, {""Connecticut""}, {""Delaware""}, {""District of Columbia""}, {""Florida""}, {""Georgia""}, {""Idaho""}, {""Illinois""}, {""Indiana""}, {""Iowa""}, {""Kansas""}, {""Kentucky""}, {""Louisiana""}, {""Maine""}, {""Maryland""}, {""Massachusetts""}, {""Michigan""}, {""Minnesota""}, {""Mississippi""}, {""Missouri""}, {""Montana""}, {""Nebraska""}, {""Nevada""}, {""New Hampshire""}, {""New Jersey""}, {""New Mexico""}, {""New York""}, {""North Carolina""}, {""North Dakota""}, {""Ohio""}, {""Oklahoma""}, {""Oregon""}, {""Pennsylvania""}, {""Rhode Island""}, {""South Carolina""}, {""South Dakota""}, {""Tennessee""}, {""Texas""}, {""Utah""}, {""Vermont""}, {""Virginia""}, {""Washington""}, {""West Virginia""}, {""Wisconsin""}, {""Wyoming""}})
+		source = DATATABLE("Value", STRING, {{"Alabama"}, {"Arizona"}, {"Arkansas"}, {"California"}, {"Colorado"}, {"Connecticut"}, {"Delaware"}, {"District of Columbia"}, {"Florida"}, {"Georgia"}, {"Idaho"}, {"Illinois"}, {"Indiana"}, {"Iowa"}, {"Kansas"}, {"Kentucky"}, {"Louisiana"}, {"Maine"}, {"Maryland"}, {"Massachusetts"}, {"Michigan"}, {"Minnesota"}, {"Mississippi"}, {"Missouri"}, {"Montana"}, {"Nebraska"}, {"Nevada"}, {"New Hampshire"}, {"New Jersey"}, {"New Mexico"}, {"New York"}, {"North Carolina"}, {"North Dakota"}, {"Ohio"}, {"Oklahoma"}, {"Oregon"}, {"Pennsylvania"}, {"Rhode Island"}, {"South Carolina"}, {"South Dakota"}, {"Tennessee"}, {"Texas"}, {"Utah"}, {"Vermont"}, {"Virginia"}, {"Washington"}, {"West Virginia"}, {"Wisconsin"}, {"Wyoming"}})
 
 	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 1 columns and 1 measures: Value.
 

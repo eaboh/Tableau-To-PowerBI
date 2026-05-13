@@ -1,0 +1,34 @@
+{
+  "tables": [
+    {
+      "tableau_datasource": "datasource_test",
+      "tableau_table": "xy",
+      "pbi_table": "xy"
+    }
+  ],
+  "calculations": [
+    {
+      "tableau_calculation": "1",
+      "pbi_table": "xy",
+      "pbi_object": "Number of Records",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM([x]) + SUM([y])",
+      "pbi_table": "xy",
+      "pbi_object": "SUM(X) + SUM(Y)",
+      "pbi_type": "measure"
+    }
+  ],
+  "relationships": [],
+  "worksheets": [
+    {
+      "tableau_worksheet": "Sheet 1",
+      "pbi_page": "Sheet 1"
+    },
+    {
+      "tableau_worksheet": "Sheet 2",
+      "pbi_page": "Sheet 2"
+    }
+  ]
+}

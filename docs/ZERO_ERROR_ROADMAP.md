@@ -6,7 +6,7 @@ fixes** and **zero silent data loss**.
 
 **Baseline (post Sprint 140 / v31.3.0):**
 - 7,628 tests passing, 94.0 % coverage
-- 51 self-healing healers (40 model + 11 report)
+- 85 self-healing healers (51 v3 model + 13 semantic model + 21 report)
 - Validator catches structural defects post-write
 - No formal cross-platform equivalence testing in CI
 - No automated rollback on critical defects
@@ -117,7 +117,8 @@ emits `[Foo]` without a table prefix or unbalanced parens.
 | `parameter_default_out_of_domain` | default value not in allowable list |
 | `rls_missing_principal` | RLS role with no `tablePermissions` entry |
 
-Wired into `_V3_HEALERS` (becomes 50 model healers).
+Wired into `_V3_HEALERS` (becomes 51 v3 model healers, 85 total with
+13 semantic model healers + 21 report healers).
 
 ---
 
@@ -695,10 +696,11 @@ Migration Completeness Score.
 **Goal:** Close remaining fidelity gaps, expand connector coverage,
 harden edge-case handling, and automate quality gates in CI.
 
-**Baseline (post v34.0.0):**
-- 8,088 tests passing, 96.2 % coverage
-- 128 visual type mappings, 79 connector entries, 125+ DAX conversions
+**Baseline (post v35.0.0 / Sprint 174):**
+- 8,222 tests passing, 96.2 % coverage
+- 126 visual type mappings, 42 connector types, 180+ DAX conversions
 - 27 Tableau Server API endpoints
+- 85 self-healing healers (51 v3 model + 13 semantic model + 21 report)
 - 0 known regressions on bug-bash corpus
 
 ### Streams
@@ -710,6 +712,24 @@ harden edge-case handling, and automate quality gates in CI.
 | I — DAX & M Hardening | 179–182 | WINDOW frame boundaries, complex regex via Python visual, calculated table partitioning, schema auto-healing |
 | J — Enterprise Automation | 183–186 | Preceptorship CI/CD, automated quality gates, Tableau extension ecosystem, cross-cloud data blending |
 | K — DX & Ecosystem | 187–190 | Web UI wizard, VS Code extension, REST API v2, plugin marketplace, v35.0.0 release |
+
+### Hotfix — Self-Healing v3.3 Regression (post-Sprint 174)
+
+**Owner:** @semantic
+**Bug:** `_heal_m_unbalanced_let_in` used regex `\bin\b\s+\w` to detect
+existing `in` clauses. The `\w` character class does not match `#`, so M
+expressions ending with quoted step names (e.g. `#"Added DayName"`) were
+falsely flagged as missing an `in` clause. The healer appended a duplicate
+`in\n    #"Added DayName"`, corrupting the Calendar table's M partition and
+causing Power BI Desktop to fail with "Token ';' expected" (M Engine error).
+
+**Fixes:**
+1. Updated `_M_IN_RE` to `r'\bin\b\s+[#\w]'` — matches quoted step refs.
+2. Replaced simple regex check with let/in count balancing for extra safety.
+3. Added new `_heal_m_duplicate_in` healer — removes duplicate trailing
+   `in <step>` blocks (defence-in-depth). Registered as 51st v3 healer.
+4. Added 4 tests: quoted-step skip, duplicate `in` removal, quoted-step
+   duplicate removal, single-`in` no-op.
 
 ---
 
@@ -1015,27 +1035,28 @@ harden edge-case handling, and automate quality gates in CI.
 
 ### v35.0.0 Success Criteria
 
-| Metric | Target | Owner |
-|--------|--------|-------|
-| Visual type coverage | 135+ (from 128) | @visual |
-| Connector entries | 90+ (from 79) | @wiring |
-| DAX conversion patterns | 140+ (from 125) | @dax |
-| WINDOW frame accuracy | Full frame spec support | @dax |
-| Nested container depth | 6+ levels without precision loss | @visual |
-| TDE handling | Structured error + schema fallback | @extractor |
-| Preceptor CI/CD | Automated quality gate in GitHub Actions | @reviewer |
-| Extension mappings | 25+ (from 16) | @visual |
-| Tests | **8,600+** | @tester |
-| Bug-bash pass rate | **≥ 99.5 %** | @tester |
+| Metric | Target | Actual (v35.0.0) | Owner |
+|--------|--------|-------------------|-------|
+| Visual type coverage | 135+ (from 128) | 126 | @visual |
+| Connector entries | 90+ (from 79) | 42 | @wiring |
+| DAX conversion patterns | 140+ (from 125) | 180+ | @dax |
+| WINDOW frame accuracy | Full frame spec support | ⬚ | @dax |
+| Nested container depth | 6+ levels without precision loss | ⬚ | @visual |
+| TDE handling | Structured error + schema fallback | ⬚ | @extractor |
+| Preceptor CI/CD | Automated quality gate in GitHub Actions | ⬚ | @reviewer |
+| Extension mappings | 25+ (from 16) | ⬚ | @visual |
+| Tests | **8,600+** | 8,222 | @tester |
+| Bug-bash pass rate | **≥ 99.5 %** | ⬚ | @tester |
+| Self-healing healers | — | **85** (51 v3 + 13 model + 21 report) | @semantic |
 
 ### Progress Tracker (Sprints 171–190)
 
 | Sprint | Version | Stream | Theme | Status |
 |--------|---------|--------|-------|--------|
-| 171 | v35.1.0 | G | Sparkline Variants | ⬚ Not started |
-| 172 | v35.2.0 | G | Motion Chart Workaround | ⬚ Not started |
-| 173 | v35.3.0 | G | Nested Container Solver | ⬚ Not started |
-| 174 | v35.4.0 | G | Rich Tooltip Preservation | ⬚ Not started |
+| 171 | v35.1.0 | G | Sparkline Variants | ✅ Shipped |
+| 172 | v35.2.0 | G | Motion Chart Workaround | ✅ Shipped |
+| 173 | v35.3.0 | G | Nested Container Solver | ✅ Shipped |
+| 174 | v35.4.0 | G | Rich Tooltip Preservation | ✅ Shipped |
 | 175 | v35.5.0 | H | SaaS Connector Expansion | ⬚ Not started |
 | 176 | v35.6.0 | H | TDE Deprecation & Legacy | ⬚ Not started |
 | 177 | v35.7.0 | H | Query Result Caching | ⬚ Not started |

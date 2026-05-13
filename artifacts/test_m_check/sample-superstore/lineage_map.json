@@ -1,0 +1,35 @@
+{
+  "tables": [
+    {
+      "tableau_datasource": "sqlserver.187oiqw1ls5tey1df9op71phda18",
+      "tableau_table": "Orders",
+      "pbi_table": "Orders"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Calendar",
+      "pbi_table": "Calendar"
+    }
+  ],
+  "calculations": [
+    {
+      "tableau_calculation": "1",
+      "pbi_table": "Orders",
+      "pbi_object": "Number of Records",
+      "pbi_type": "measure"
+    }
+  ],
+  "relationships": [
+    {
+      "from": "Orders[Order Date]",
+      "to": "Calendar[Date]",
+      "cardinality": "oneDirection"
+    }
+  ],
+  "worksheets": [
+    {
+      "tableau_worksheet": "Sheet 1",
+      "pbi_page": "Sheet 1"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-23T14:58:17.926158",
+  "generated_at": "2026-05-13T17:36:33.628140",
   "source": "Tableau Migration",
   "report_name": "vishnu_dashboard",
   "objects_converted": {
@@ -81,9 +81,10 @@
         "Sub-Category"
       ],
       "measures": [
-        "Profit"
+        "Profit",
+        "Sales"
       ],
-      "field_count": 2
+      "field_count": 3
     },
     {
       "worksheet": "Sheet 5",
