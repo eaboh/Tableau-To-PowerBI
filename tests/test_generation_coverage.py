@@ -1265,5 +1265,45 @@ class TestCalendarLocale(unittest.TestCase):
         self.assertIn('Date.MonthName([Date], "en-US")', m_expr)
 
 
+class TestDaxToMDateFunctions(unittest.TestCase):
+    """Test TODAY/NOW conversion and DATEDIFF Date.From wrapping."""
+
+    def test_today_converts_to_m(self):
+        result = _dax_to_m_expression('TODAY()')
+        self.assertEqual(result, 'Date.From(DateTime.LocalNow())')
+
+    def test_now_converts_to_m(self):
+        result = _dax_to_m_expression('NOW()')
+        self.assertEqual(result, 'DateTime.LocalNow()')
+
+    def test_datediff_day_wraps_column_refs(self):
+        result = _dax_to_m_expression('DATEDIFF([Start], [End], DAY)')
+        self.assertIn('Date.From([Start])', result)
+        self.assertIn('Date.From([End])', result)
+        self.assertIn('Duration.Days', result)
+
+    def test_datediff_day_no_wrap_date_literal(self):
+        result = _dax_to_m_expression('DATEDIFF([Start], DATE(2022, 4, 18), DAY)')
+        self.assertIn('Date.From([Start])', result)
+        # DATE literal (#date) should NOT be wrapped in Date.From
+        self.assertNotIn('Date.From(#date', result)
+
+    def test_datediff_month_wraps_column_refs(self):
+        result = _dax_to_m_expression('DATEDIFF([Start], [End], MONTH)')
+        self.assertIn('Date.From([Start])', result)
+        self.assertIn('Date.From([End])', result)
+
+    def test_datediff_year_wraps_column_refs(self):
+        result = _dax_to_m_expression('DATEDIFF([Start], [End], YEAR)')
+        self.assertIn('Date.From([Start])', result)
+        self.assertIn('Date.From([End])', result)
+
+    def test_datediff_with_today(self):
+        result = _dax_to_m_expression('DATEDIFF([Created], TODAY(), DAY)')
+        self.assertIn('Date.From([Created])', result)
+        self.assertIn('Date.From(DateTime.LocalNow())', result)
+        self.assertIn('Duration.Days', result)
+
+
 if __name__ == '__main__':
     unittest.main(verbosity=2)

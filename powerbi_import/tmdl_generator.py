@@ -299,6 +299,12 @@ def _dax_to_m_expression(dax_expr, table_name=''):
                 return None
             return f'Text.Replace({", ".join(converted)})'
 
+    # ── TODAY() / NOW() → Date.From(DateTime.LocalNow()) / DateTime.LocalNow()
+    if re.match(r'^TODAY\s*\(\s*\)$', expr, re.IGNORECASE):
+        return 'Date.From(DateTime.LocalNow())'
+    if re.match(r'^NOW\s*\(\s*\)$', expr, re.IGNORECASE):
+        return 'DateTime.LocalNow()'
+
     # ── DATEDIFF(start, end, interval) → Duration.Days/Months/Years ──
     body = _extract_function_body(expr, 'DATEDIFF')
     if body is not None:
@@ -308,16 +314,20 @@ def _dax_to_m_expression(dax_expr, table_name=''):
             end_m = _dax_to_m_expression(args[1], table_name)
             interval = args[2].strip().upper()
             if start_m is not None and end_m is not None:
+                # Wrap column refs in Date.From() for type safety
+                # (CSV sources return text; date arithmetic needs typed dates)
+                start_d = f'Date.From({start_m})' if start_m.strip().startswith('[') else start_m
+                end_d = f'Date.From({end_m})' if end_m.strip().startswith('[') else end_m
                 if interval == 'DAY':
-                    return f'Duration.Days({end_m} - {start_m})'
+                    return f'Duration.Days({end_d} - {start_d})'
                 elif interval == 'MONTH':
-                    return f'(Date.Year({end_m})*12 + Date.Month({end_m})) - (Date.Year({start_m})*12 + Date.Month({start_m}))'
+                    return f'(Date.Year({end_d})*12 + Date.Month({end_d})) - (Date.Year({start_d})*12 + Date.Month({start_d}))'
                 elif interval == 'YEAR':
-                    return f'Date.Year({end_m}) - Date.Year({start_m})'
+                    return f'Date.Year({end_d}) - Date.Year({start_d})'
                 elif interval == 'QUARTER':
-                    return f'(Date.Year({end_m})*4 + Date.QuarterOfYear({end_m})) - (Date.Year({start_m})*4 + Date.QuarterOfYear({start_m}))'
+                    return f'(Date.Year({end_d})*4 + Date.QuarterOfYear({end_d})) - (Date.Year({start_d})*4 + Date.QuarterOfYear({start_d}))'
                 elif interval in ('HOUR', 'MINUTE', 'SECOND'):
-                    return f'Duration.TotalSeconds({end_m} - {start_m})'
+                    return f'Duration.TotalSeconds({end_d} - {start_d})'
                 # Unsupported interval
                 return None
         return None
