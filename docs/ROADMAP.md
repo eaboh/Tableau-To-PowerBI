@@ -1,4 +1,4 @@
-# Development Roadmap — v22.0.0 → v31.0.0
+# Development Roadmap — v22.0.0 → v32.0.0
 
 **Date:** 2026-04-23
 **Baseline:** v28.5.8 — 7,099 tests across 141+ test files, 0 failures
@@ -28,6 +28,8 @@ The migration engine is **feature-complete for core single-workbook scenarios**.
 | **v28.5.x** | DAX/M Correctness Hardening (metadata-record, DATEADD scalar, SELECTEDVALUE, bracket protection, operator spacing) | Patch series | ✅ Shipped |
 | **v29.0.0** | Migration Completeness & Enterprise Operations | Sprints 112–117, 120–127 | Planned |
 | **v30.0.0** | Correctness, Observability & Self-Healing | Sprints 128–134 | In Progress (128–131 done; 132–134 pending) |
+| **v31.0.0** | Visual Fidelity & Mapping Accuracy | Sprints 135–138 | Planned |
+| **v32.0.0** | **Tableau Server Enterprise Migration** | Sprints 139–145 | Planned |
 
 ---
 
@@ -1685,3 +1687,219 @@ The pattern: every silent failure mode caught in v28.5.x becomes a class of test
 | **@assessor** | — | — | — | 138.4 |
 | **@orchestrator** | — | — | — | 138.1, 138.7 |
 | **@tester** | 135.7 | 136.8 | 137.8 | 138.3, 138.5, 138.8 |
+
+---
+
+## v32.0.0 — Tableau Server Enterprise Migration (Sprints 139–145)
+
+**Theme:** End-to-end enterprise migration from Tableau Server/Cloud to Power BI Service / Microsoft Fabric — from **site discovery** through **permission mapping**, **subscription migration**, and **cutover orchestration**. Transforms the tool from a workbook converter into a **full-platform migration engine**.
+
+**Motivation:** Customers migrating at scale need more than file-by-file conversion. They need to understand their entire Tableau Server estate (who uses what, how often, with what permissions), plan migration waves with dependency ordering, map security and scheduling configurations, and execute a phased cutover with rollback capability. The `server_client.py` already has 20+ REST API endpoints — v32 builds the **intelligence layer** on top.
+
+| Sprint | Theme | Status |
+|--------|-------|--------|
+| **139** | Site Discovery & Dependency Graph | Planned |
+| **140** | Enterprise Migration Planner | Planned |
+| **141** | User, Group & Permission Mapping | Planned |
+| **142** | Subscription & Alert Migration | Planned |
+| **143** | Published Datasource Resolution | Planned |
+| **144** | Cutover Orchestration & Rollback | Planned |
+| **145** | v32.0.0 Release & Hardening | Planned |
+
+---
+
+### Tableau Server — Current Capabilities (Baseline)
+
+Already implemented in `tableau_export/server_client.py`:
+
+| Capability | Endpoints | Status |
+|-----------|-----------|--------|
+| **Authentication** | PAT, password, JWT (Connected Apps / EAS) | ✅ |
+| **Cloud detection** | `detect_cloud_vs_server()` (6 cloud domains) | ✅ |
+| **Workbook ops** | list, get, download, search, batch download | ✅ |
+| **Datasource ops** | list, download, published datasource details | ✅ |
+| **Prep flow ops** | list, download | ✅ |
+| **Inventory** | projects, users, groups, schedules, views | ✅ |
+| **Server summary** | `get_server_summary()` → 8-count inventory | ✅ |
+| **Usage stats** | view count, last accessed per workbook | ✅ |
+| **Permissions** | per-workbook grantee capabilities (user/group) | ✅ |
+| **Dependencies** | `get_workbook_dependencies()` → DS + downstream WBs | ✅ |
+| **Quality warnings** | data quality warnings / certifications | ✅ |
+| **Metadata GraphQL** | lineage upstream (databases, tables, datasources) | ✅ |
+| **Extract tasks** | per-workbook extract refresh tasks | ✅ |
+| **Subscriptions** | per-workbook email subscriptions | ✅ |
+| **Batch download** | `--server-batch`, `--server-assets`, `--server-preserve-folders` | ✅ |
+
+---
+
+### Sprint 139 — Site Discovery & Dependency Graph (@extractor, @assessor)
+
+**Goal:** Build a complete topology of a Tableau Server site — every workbook, datasource (embedded + published), Prep flow, and their dependency relationships — as the foundation for migration planning.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 139.1 | **Site topology builder** | @extractor | `tableau_export/server_client.py` | High | New `get_site_topology()`: orchestrates list_workbooks, list_datasources, list_prep_flows, list_users, list_groups, list_schedules. For each workbook, calls `get_workbook_connections()` to build workbook↔datasource adjacency map. Deduplicates published datasources shared across workbooks. Returns `SiteTopology` dict. |
+| 139.2 | **Dependency graph engine** | @assessor | `powerbi_import/dependency_graph.py` (new) | High | Build directed graph: published datasources → workbooks → views. Detect dependency chains (WB-A uses DS-1, WB-B uses DS-1 → DS-1 must migrate first). Topological sort for migration ordering. Detect circular references (datasource extract referencing another workbook). |
+| 139.3 | **Usage-weighted scoring** | @assessor | `powerbi_import/dependency_graph.py` | Medium | Enrich topology with `get_usage_stats()` per workbook: total views, last access date. Classify: **Active** (accessed <30d), **Stale** (30–180d), **Dormant** (>180d, candidate for decommission). |
+| 139.4 | **Content certification audit** | @assessor | `powerbi_import/dependency_graph.py` | Low | Pull `get_quality_warnings()` per workbook/datasource. Flag certified content (must migrate), warned content (needs review), uncertified (lower priority). |
+| 139.5 | **Lineage depth enrichment** | @extractor | `tableau_export/server_client.py` | Medium | For sites with Metadata API access (Server 2019.3+), call `get_lineage_upstream()` per workbook to discover database→table→datasource→workbook full chain. Fall back to connection-based graph when Metadata API unavailable. |
+| 139.6 | **Topology HTML report** | @assessor | `powerbi_import/dependency_graph.py` | Medium | Interactive HTML: site inventory summary (counts by type), Mermaid dependency diagram, usage heatmap (active/stale/dormant), certification breakdown. Uses `html_template.py`. |
+| 139.7 | **CLI integration** | @orchestrator | `migrate.py` | Low | `--server-discover` flag (requires `--server`). Outputs `site_topology.json` + `site_topology_report.html`. |
+| 139.8 | **Tests** | @tester | `tests/test_site_discovery.py` (new) | Medium | 35+ tests: topology building (mock server responses), dependency graph (DAG ordering, cycle detection), usage scoring, certification audit, HTML report structure. |
+
+**Success:** `python migrate.py --server URL --server-discover` produces a full site map with dependency-ordered workbook list and usage classification.
+
+---
+
+### Sprint 140 — Enterprise Migration Planner (@assessor, @deployer)
+
+**Goal:** Given the site topology from Sprint 139, generate a complete migration plan: dependency-ordered waves, effort estimates, Fabric workspace mapping, timeline, and team allocation.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 140.1 | **Migration wave planner** | @assessor | `powerbi_import/migration_planner.py` (new) | High | Input: site topology + per-workbook complexity (from `--assess`). Group workbooks into waves: Wave 0 = shared published datasources, Wave 1 = simple workbooks (GREEN), Wave 2 = moderate (YELLOW), Wave 3 = complex (RED). Respect dependency ordering (datasource before its consumers). Max wave size configurable (default 20 workbooks). |
+| 140.2 | **Effort estimator** | @assessor | `powerbi_import/migration_planner.py` | Medium | Per-workbook effort estimate (hours): base time from complexity grade + multipliers for custom SQL (+2h), LOD expressions (+1h), published datasources (+1h), RLS (+1h), >50 measures (+2h). Wave total = sum. Project total = sum + 20% buffer for testing/validation. |
+| 140.3 | **Fabric workspace mapper** | @deployer | `powerbi_import/migration_planner.py` | Medium | Map Tableau Projects → Fabric Workspaces (1:1 by default, configurable via `--workspace-mapping` JSON). Tableau Sites → Fabric Capacities. Suggest workspace partitioning based on content volume and RLS boundaries. Output: workspace mapping JSON with project→workspace assignments. |
+| 140.4 | **Timeline generator** | @assessor | `powerbi_import/migration_planner.py` | Medium | Given effort estimates + team size (default 2 engineers), generate a Gantt-style timeline: wave start/end dates, parallel tracks, dependency blocks, milestones (pilot wave, UAT, cutover). Configurable working hours/day and sprint duration. |
+| 140.5 | **Migration plan HTML report** | @assessor | `powerbi_import/migration_planner.py` | High | Interactive HTML with 6 sections: (1) Executive summary (total scope, effort, timeline), (2) Wave breakdown (table with workbooks per wave), (3) Gantt timeline (CSS-based), (4) Workspace mapping diagram, (5) Risk matrix (complex workbooks, published DS dependencies, RLS gaps), (6) Ready-to-run CLI commands per wave (`python migrate.py --batch wave_1/ ...`). |
+| 140.6 | **CLI integration** | @orchestrator | `migrate.py` | Low | `--plan-migration` flag (requires `--server` or `--batch` + previous `--server-discover` output). `--team-size N`, `--wave-max-size N`, `--workspace-mapping FILE`. |
+| 140.7 | **Tests** | @tester | `tests/test_migration_planner.py` (new) | Medium | 30+ tests: wave ordering (dependency-first), effort calculation, workspace mapping, timeline generation, HTML report structure, CLI flag wiring. |
+
+**Success:** `python migrate.py --server URL --plan-migration --team-size 3` produces an actionable migration plan with waves, timeline, and per-wave CLI commands.
+
+---
+
+### Sprint 141 — User, Group & Permission Mapping (@deployer, @extractor)
+
+**Goal:** Map Tableau Server security model (users, groups, site roles, workbook permissions) to Azure AD groups and Fabric/PBI workspace roles. Generate actionable scripts for Azure AD provisioning.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 141.1 | **User inventory with roles** | @extractor | `tableau_export/server_client.py` | Medium | Enhance `list_users()`: include site role (Creator/Explorer/Viewer/Unlicensed), last login date, group memberships (via per-user group query). Output enriched user inventory. |
+| 141.2 | **Permission matrix builder** | @extractor | `tableau_export/server_client.py` | Medium | New `build_permission_matrix()`: for each workbook/datasource, call `get_permissions()`. Build cross-reference: user×content ACL matrix (View/Explore/Edit/Download). Identify over-permissioned users and orphaned permissions. |
+| 141.3 | **Site role → Workspace role mapper** | @deployer | `powerbi_import/permission_mapper.py` | High | Map Tableau site roles → PBI/Fabric workspace roles: Creator→Admin/Member, Explorer→Contributor, Viewer→Viewer, Unlicensed→None. Map Tableau groups → recommended Azure AD security groups. Generate mapping CSV. |
+| 141.4 | **RLS principal reconciliation** | @deployer | `powerbi_import/permission_mapper.py` | Medium | Cross-reference migrated RLS roles (from `USERPRINCIPALNAME()`) with user inventory. Verify UPN format consistency (user@domain.com vs DOMAIN\user). Flag mismatches. Suggest UPN transform rules. |
+| 141.5 | **Azure AD provisioning scripts** | @deployer | `powerbi_import/permission_mapper.py` | Medium | Generate PowerShell scripts: (1) Create Azure AD security groups matching Tableau groups, (2) Add members to groups, (3) Assign workspace roles. Include dry-run mode and `Connect-MgGraph` setup. |
+| 141.6 | **Permission migration report** | @assessor | `powerbi_import/permission_mapper.py` | Medium | HTML report: user count by role, group mapping table, permission matrix heatmap, RLS coverage, unmapped users list, over-permissioned user warnings. |
+| 141.7 | **CLI integration** | @orchestrator | `migrate.py` | Low | `--map-permissions` flag (requires `--server`). Output: `permission_mapping.csv`, `provision_groups.ps1`, `permission_report.html`. |
+| 141.8 | **Tests** | @tester | `tests/test_permission_mapping.py` (new) | Medium | 30+ tests: user inventory parsing, permission matrix, role mapping, UPN validation, PowerShell script generation, HTML report structure. |
+
+**Success:** `python migrate.py --server URL --map-permissions` produces a complete security mapping with ready-to-run Azure AD provisioning scripts.
+
+---
+
+### Sprint 142 — Subscription & Alert Migration (@deployer, @extractor)
+
+**Goal:** Migrate Tableau Server subscriptions (scheduled email reports) and data-driven alerts to Power BI equivalents (PBI subscriptions + Power Automate flow definitions).
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 142.1 | **Site-wide subscription extraction** | @extractor | `tableau_export/server_client.py` | Medium | Enhance `get_workbook_subscriptions()` to site-wide mode: all subscriptions with schedule (cron), recipients (user email), format (PDF/PNG/Excel), subject line, view filter context. Group by workbook. |
+| 142.2 | **Data-driven alert extraction** | @extractor | `tableau_export/server_client.py` | Medium | New `list_data_alerts()`: extract all data-driven alert conditions (field, threshold, operator, frequency, recipient list). Map to structured alert rules. Available on Server 2018.3+. |
+| 142.3 | **PBI subscription config generator** | @deployer | `powerbi_import/subscription_generator.py` (new) | High | Generate PBI subscription JSON per Tableau subscription: report page, frequency (daily/weekly/monthly), time, recipient email, format (PDF/PNG). Map Tableau cron schedule to PBI schedule format. Output importable via PBI REST API. |
+| 142.4 | **Power Automate flow templates** | @deployer | `powerbi_import/subscription_generator.py` | Medium | For advanced scenarios (conditional send, Teams notification, multi-report digest): generate Power Automate flow definition JSON. Template: scheduled trigger → Get PBI report page → condition check → Send email/Teams. Importable via Power Automate portal. |
+| 142.5 | **Alert → PBI data alert mapping** | @deployer | `powerbi_import/alerts_generator.py` | Medium | Extend existing alerts_generator: map Tableau alert conditions to PBI tile-based data alerts. Generate alert config JSON with measure reference, threshold, operator, and notification frequency. |
+| 142.6 | **Schedule conflict detector** | @assessor | `powerbi_import/subscription_generator.py` | Low | Detect conflicts: >8 daily refreshes on Pro license, overlapping subscription windows, high-frequency alerts on large datasets. Recommend Power BI Premium or schedule staggering. |
+| 142.7 | **Subscription migration report** | @deployer | `powerbi_import/subscription_generator.py` | Low | Summary HTML: N subscriptions mapped, N alerts mapped, recipient distribution, schedule comparison table (Tableau vs PBI), unmapped items, license impact (Pro vs Premium). |
+| 142.8 | **CLI integration** | @orchestrator | `migrate.py` | Low | `--migrate-subscriptions` flag (requires `--server`). Output: `subscriptions/` directory with JSON configs + `subscription_report.html`. |
+| 142.9 | **Tests** | @tester | `tests/test_subscription_migration.py` (new) | Medium | 30+ tests: subscription extraction, alert extraction, PBI subscription JSON, Power Automate flow structure, schedule conflict detection, report generation. |
+
+**Success:** `python migrate.py --server URL --migrate-subscriptions` produces deployable PBI subscription configs and Power Automate flow templates.
+
+---
+
+### Sprint 143 — Published Datasource Resolution (@extractor, @semantic)
+
+**Goal:** When a workbook references a published datasource (no embedded XML), automatically fetch the full datasource definition from Server and inject it into the extraction pipeline — eliminating the biggest source of "missing columns" in enterprise migrations.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 143.1 | **Published DS detection** | @extractor | `tableau_export/datasource_extractor.py` | Medium | During extraction, detect `<datasource ... hasConnection="false">` or `<repository-location>` patterns that indicate a published datasource reference. Extract the published DS name and project. |
+| 143.2 | **Server-side DS fetch** | @extractor | `tableau_export/server_client.py` | Medium | New `download_published_datasource_by_name(name, project)`: search published datasources, download the `.tdsx`, extract embedded XML. Cache downloaded datasources to avoid re-fetching across workbooks that share the same published DS. |
+| 143.3 | **DS merge into extraction** | @extractor | `tableau_export/datasource_extractor.py` | High | Merge fetched published DS XML into the workbook's datasource tree: inject tables, columns, calculations, relationships. Handle naming conflicts (published DS field names vs local workbook overrides). Preserve workbook-level calculated fields that reference published DS columns. |
+| 143.4 | **Offline fallback** | @extractor | `tableau_export/datasource_extractor.py` | Low | When `--server` is not provided but workbook references published DS: extract available metadata from the workbook XML (field names, types from `<column>` elements). Emit warning listing missing columns. Generate placeholder M query with `// TODO: connect to published datasource` comment. |
+| 143.5 | **Published DS cache** | @extractor | `tableau_export/server_client.py` | Low | File-based cache: `~/.tableau_migration_cache/datasources/{ds_id}.tdsx`. TTL-based expiry (default 24h). `--clear-cache` CLI flag. Avoids redundant downloads during batch migrations of 100+ workbooks sharing 5–10 published datasources. |
+| 143.6 | **CLI integration** | @orchestrator | `migrate.py` | Low | `--resolve-published-ds` flag (auto-enabled when `--server` is provided). `--ds-cache-dir`, `--no-ds-cache` flags. |
+| 143.7 | **Tests** | @tester | `tests/test_published_ds_resolution.py` (new) | Medium | 25+ tests: published DS detection, server-side fetch (mock), merge into extraction, offline fallback, cache hit/miss/expiry, naming conflict resolution. |
+
+**Success:** Enterprise workbooks using published datasources migrate with full column/calculation fidelity when `--server` is provided.
+
+---
+
+### Sprint 144 — Cutover Orchestration & Rollback (@deployer, @orchestrator)
+
+**Goal:** Provide a managed cutover workflow: staged deployment with validation gates, automatic rollback on failure, and parallel-run mode for side-by-side comparison during transition.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 144.1 | **Cutover plan generator** | @deployer | `powerbi_import/cutover_manager.py` (new) | High | Generate a step-by-step cutover plan from migration plan: (1) Deploy shared datasources, (2) Deploy Wave 1 reports, (3) Validate (autoplay), (4) Redirect users, (5) Monitor for 48h, (6) Decommission Tableau content. Each step has success criteria and rollback action. |
+| 144.2 | **Staged deployment executor** | @deployer | `powerbi_import/cutover_manager.py` | High | Execute cutover plan step-by-step: deploy → validate → gate (auto or manual approval) → next step. On validation failure: pause and prompt for rollback or continue. Uses existing `pbi_deployer.py` and `bundle_deployer.py` for deployment actions. |
+| 144.3 | **Rollback snapshots** | @deployer | `powerbi_import/cutover_manager.py` | Medium | Before each deployment step, capture a rollback snapshot: workspace content list, dataset IDs, report IDs. On rollback: delete deployed artifacts, restore workspace to pre-cutover state. Snapshot stored as JSON in `.cutover/` directory. |
+| 144.4 | **Parallel-run mode** | @orchestrator | `migrate.py` | Medium | `--parallel-run` flag: deploy PBI reports alongside existing Tableau content. Generate a comparison dashboard (HTML) showing both sources side-by-side. Users validate in parallel before final cutover. Auto-generate "migration complete" notification template (email/Teams). |
+| 144.5 | **Cutover status dashboard** | @deployer | `powerbi_import/cutover_manager.py` | Medium | Live HTML dashboard: cutover progress (step N/M), per-step status (pending/running/passed/failed/rolled-back), deployment timestamps, validation results, rollback history. Auto-refreshes via `<meta http-equiv="refresh">`. |
+| 144.6 | **CLI integration** | @orchestrator | `migrate.py` | Low | `--cutover` flag (requires `--deploy` or `--deploy-bundle`). `--cutover-plan-only` (generate plan without executing). `--rollback STEP_ID` (rollback to a specific step). |
+| 144.7 | **Tests** | @tester | `tests/test_cutover_manager.py` (new) | Medium | 30+ tests: plan generation, staged execution (mock deploy), rollback (mock delete), parallel-run, status dashboard HTML, CLI flag wiring. |
+
+**Success:** `python migrate.py --server URL --plan-migration --cutover` executes a full staged migration with validation gates and automatic rollback on failure.
+
+---
+
+### Sprint 145 — v32.0.0 Release & Hardening (All Agents)
+
+**Goal:** Version bump, comprehensive integration testing across all Server features, documentation refresh, PyPI publish.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 145.1 | **Version bump** | @orchestrator | `pyproject.toml`, `CHANGELOG.md` | Low | `31.x` → `32.0.0`. Document Sprints 139–145. |
+| 145.2 | **Server E2E integration test** | @tester | `tests/test_server_e2e.py` (new) | High | Mock-based E2E: discover → plan → map permissions → migrate subscriptions → resolve published DS → cutover. 20+ integration tests spanning all Server sprints. |
+| 145.3 | **Real-world Server validation** | @tester | — | Medium | Validate against a real Tableau Server/Cloud instance (manual test). Document results in `docs/SERVER_MIGRATION_GUIDE.md`. |
+| 145.4 | **Server Migration Guide** | @orchestrator | `docs/SERVER_MIGRATION_GUIDE.md` (new) | Medium | Step-by-step enterprise guide: prerequisites, authentication setup, discovery, planning, permission mapping, wave execution, subscription migration, cutover, post-migration monitoring. |
+| 145.5 | **CLI reference update** | @orchestrator | `README.md`, `docs/FAQ.md` | Low | Add all new Server flags to CLI reference table. Add Server FAQ section. |
+| 145.6 | **Test baseline** | @tester | — | — | Target: **8,400+** tests. |
+
+---
+
+### v32.0.0 Success Criteria
+
+| Metric | Target | Owner |
+|--------|--------|-------|
+| Site discovery | Full topology + dependency graph from any Server/Cloud instance | @extractor |
+| Migration waves | Dependency-ordered waves with effort estimates | @assessor |
+| Permission mapping | 100% of users/groups mapped to Azure AD equivalents | @deployer |
+| Subscription migration | Tableau subscriptions → PBI subscription JSON | @deployer |
+| Published DS resolution | Zero "missing columns" when `--server` is provided | @extractor |
+| Cutover orchestration | Staged deploy with automatic rollback | @deployer |
+| Server Migration Guide | Complete step-by-step enterprise documentation | @orchestrator |
+| **Migration Confidence Score** | **≥98.5 (Grade A+)** | @assessor |
+| Tests | **8,400+** | @tester |
+
+### v32.0.0 Agent Ownership Matrix
+
+| Agent | Sprint 139 | Sprint 140 | Sprint 141 | Sprint 142 | Sprint 143 | Sprint 144 | Sprint 145 |
+|-------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
+| **@extractor** | 139.1, 139.5 | — | 141.1, 141.2 | 142.1, 142.2 | 143.1–143.5 | — | — |
+| **@assessor** | 139.2–139.4, 139.6 | 140.1, 140.2, 140.4, 140.5 | 141.6 | 142.6 | — | — | — |
+| **@deployer** | — | 140.3 | 141.3–141.5 | 142.3–142.5, 142.7 | — | 144.1–144.3, 144.5 | — |
+| **@semantic** | — | — | — | — | 143.3 | — | — |
+| **@orchestrator** | 139.7 | 140.6 | 141.7 | 142.8 | 143.6 | 144.4, 144.6 | 145.1, 145.4, 145.5 |
+| **@tester** | 139.8 | 140.7 | 141.8 | 142.9 | 143.7 | 144.7 | 145.2, 145.3, 145.6 |
+
+### v32.0.0 CLI Flags Summary
+
+| Flag | Requires | Description |
+|------|----------|-------------|
+| `--server-discover` | `--server` | Build full site topology + dependency graph |
+| `--plan-migration` | `--server` or `--batch` | Generate migration wave plan + effort estimates |
+| `--team-size N` | `--plan-migration` | Team size for timeline calculation (default 2) |
+| `--wave-max-size N` | `--plan-migration` | Max workbooks per wave (default 20) |
+| `--workspace-mapping FILE` | `--plan-migration` | Custom Tableau project → Fabric workspace mapping JSON |
+| `--map-permissions` | `--server` | Extract users/groups/permissions + generate Azure AD scripts |
+| `--migrate-subscriptions` | `--server` | Migrate subscriptions + alerts to PBI/Power Automate configs |
+| `--resolve-published-ds` | `--server` | Auto-fetch published datasource definitions (auto-enabled with `--server`) |
+| `--ds-cache-dir DIR` | `--resolve-published-ds` | Cache directory for downloaded published datasources |
+| `--no-ds-cache` | `--resolve-published-ds` | Disable datasource cache |
+| `--clear-cache` | — | Clear the published datasource cache |
+| `--cutover` | `--deploy` or `--deploy-bundle` | Execute staged cutover with validation gates |
+| `--cutover-plan-only` | `--cutover` | Generate cutover plan without executing |
+| `--rollback STEP_ID` | `--cutover` | Rollback to a specific cutover step |
+| `--parallel-run` | `--cutover` | Deploy alongside existing Tableau content for comparison |
