@@ -25,7 +25,7 @@ class PowerBIImporter:
     """Power BI object importer"""
     
     def __init__(self, source_dir=None):
-        self.source_dir = source_dir or 'tableau_export/'
+        self.source_dir = source_dir or os.environ.get('TTPBI_EXTRACT_DIR', 'tableau_export/')
     
     def import_all(self, generate_pbip=True, report_name=None, output_dir=None,
                    calendar_start=None, calendar_end=None, culture=None,

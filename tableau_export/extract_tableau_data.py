@@ -161,9 +161,9 @@ def _scan_delimited_sample(text_chunk, col_names, max_rows):
 class TableauExtractor:
     """Tableau objects extractor"""
     
-    def __init__(self, tableau_file, output_dir='tableau_export/', hyper_max_rows=None):
+    def __init__(self, tableau_file, output_dir=None, hyper_max_rows=None):
         self.tableau_file = tableau_file
-        self.output_dir = output_dir
+        self.output_dir = output_dir or os.environ.get('TTPBI_EXTRACT_DIR', 'tableau_export/')
         self.workbook_data = {}
         self.extraction_warnings = []
         self.hyper_max_rows = hyper_max_rows or 20

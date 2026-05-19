@@ -6150,8 +6150,10 @@ def _write_expressions_tmdl(def_dir, tables, datasources=None):
         if common_dir:
             default_folder = "C:\\" + common_dir.replace('/', '\\')
 
+    # TMDL strings require doubled backslashes for literal backslash characters
+    escaped_folder = default_folder.replace('\\', '\\\\')
     lines = []
-    lines.append(f'expression DataFolder = "{default_folder}" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]')
+    lines.append(f'expression DataFolder = "{escaped_folder}" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]')
     lines.append("")
 
     # Add server/database M parameters for easy environment switching

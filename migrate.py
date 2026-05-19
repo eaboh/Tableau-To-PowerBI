@@ -56,6 +56,20 @@ if sys.stdout and hasattr(sys.stdout, 'reconfigure'):
         pass
 
 
+# ── Extraction directory resolution ──────────────────────────────────
+
+def _get_extract_dir():
+    """Return the directory for intermediate extraction JSON files.
+
+    Checks the ``TTPBI_EXTRACT_DIR`` environment variable first, falling
+    back to the ``tableau_export/`` subdirectory next to this script.
+    """
+    env = os.environ.get('TTPBI_EXTRACT_DIR')
+    if env:
+        return env
+    return os.path.join(os.path.dirname(__file__), 'tableau_export')
+
+
 # ── Structured logging setup ────────────────────────────────────────
 
 logger = logging.getLogger('tableau_to_powerbi')
@@ -208,7 +222,7 @@ def run_extraction(tableau_file, hyper_max_rows=None):
 
         if success:
             # Collect extraction counts from saved JSON files
-            json_dir = os.path.join(os.path.dirname(__file__), 'tableau_export')
+            json_dir = _get_extract_dir()
             for attr, fname in [
                 ('datasources', 'datasources.json'),
                 ('worksheets', 'worksheets.json'),
@@ -412,7 +426,7 @@ def run_migration_report(report_name, output_dir=None):
         report = MigrationReport(report_name)
 
         # Load extracted JSON files
-        json_dir = os.path.join(os.path.dirname(__file__), 'tableau_export')
+        json_dir = _get_extract_dir()
         _load = lambda fname: _load_json(os.path.join(json_dir, fname))
 
         datasources = _load('datasources.json')
@@ -762,7 +776,7 @@ def _build_calc_map_from_tmdl(report_name, output_dir=None):
     return calc_map
 
 
-def run_prep_flow(prep_file, datasources_json='tableau_export/datasources.json'):
+def run_prep_flow(prep_file, datasources_json=None):
     """Parse Tableau Prep flow and merge transforms into extracted datasources.
 
     Reads the Prep flow (.tfl/.tflx), converts all steps to Power Query M,
@@ -782,6 +796,9 @@ def run_prep_flow(prep_file, datasources_json='tableau_export/datasources.json')
     if not os.path.exists(prep_file):
         print(f"Error: Prep flow file not found: {prep_file}")
         return False
+
+    if datasources_json is None:
+        datasources_json = os.path.join(_get_extract_dir(), 'datasources.json')
 
     print(f"Prep flow: {prep_file}")
 
@@ -851,7 +868,7 @@ def run_standalone_prep(prep_file):
         print(f"  [OK] {len(prep_datasources)} Prep output(s) parsed")
 
         # Write synthetic extraction JSON files
-        json_dir = os.path.join(os.path.dirname(__file__), 'tableau_export')
+        json_dir = _get_extract_dir()
         os.makedirs(json_dir, exist_ok=True)
 
         with open(os.path.join(json_dir, 'datasources.json'), 'w', encoding='utf-8') as f:
@@ -1003,8 +1020,8 @@ def _run_check_drift(args):
         print("Error: Extraction failed — cannot detect drift.")
         return ExitCode.EXTRACTION_FAILED
 
-    # Load current extracted data from tableau_export/
-    json_dir = os.path.join(os.path.dirname(__file__), 'tableau_export')
+    # Load current extracted data
+    json_dir = _get_extract_dir()
     current = load_snapshot(json_dir)
 
     # Load previous snapshot
@@ -3467,7 +3484,7 @@ def _run_assessment_mode(args, results):
                       'groups', 'bins', 'hierarchies', 'custom_sql', 'user_filters',
                       'sort_orders', 'aliases']
         for jf in json_files:
-            fpath = os.path.join('tableau_export', f'{jf}.json')
+            fpath = os.path.join(_get_extract_dir(), f'{jf}.json')
             if os.path.exists(fpath):
                 with open(fpath, 'r', encoding='utf-8') as f:
                     extracted[jf] = json.load(f)
@@ -3816,7 +3833,7 @@ def _run_governance_checks(args, source_basename):
                     gov_config.update(user_cfg)
 
         # Load extracted data to build table list for checks
-        source_dir = os.path.join(os.path.dirname(__file__), 'tableau_export')
+        source_dir = _get_extract_dir()
         tmdl_tables = []
         ds_path = os.path.join(source_dir, 'datasources.json')
         if os.path.isfile(ds_path):
@@ -3915,7 +3932,7 @@ def _run_rollback_gate(args, source_basename):
     if not os.path.isdir(project_dir):
         return None
 
-    extract_dir = os.path.join(os.path.dirname(__file__), 'tableau_export')
+    extract_dir = _get_extract_dir()
     engine = RollbackEngine(project_dir, source_basename, extract_dir=extract_dir)
 
     # Ingest QA report if available
@@ -4006,7 +4023,7 @@ def _run_issue_report(args, source_basename, rollback_result=None):
 
     out_base = args.output_dir or os.path.join('artifacts', 'powerbi_projects', 'migrated')
     project_dir = os.path.join(out_base, source_basename)
-    extract_dir = os.path.join(os.path.dirname(__file__), 'tableau_export')
+    extract_dir = _get_extract_dir()
     source_file = getattr(args, 'tableau_file', None)
 
     verdict = None
@@ -4106,7 +4123,7 @@ def _run_qa_suite(args, source_basename):
     if not getattr(args, 'governance', None):
         try:
             from governance import run_governance
-            source_dir = os.path.join(os.path.dirname(__file__), 'tableau_export')
+            source_dir = _get_extract_dir()
             tmdl_tables = []
             ds_path = os.path.join(source_dir, 'datasources.json')
             if os.path.isfile(ds_path):
@@ -4135,7 +4152,7 @@ def _run_qa_suite(args, source_basename):
     # 4. Comparison report
     try:
         from powerbi_import.comparison_report import generate_comparison_report
-        extract_dir = os.path.join(os.path.dirname(__file__), 'tableau_export')
+        extract_dir = _get_extract_dir()
         cmp_path = os.path.join(out_base, f'comparison_{source_basename}.html')
         html_path = generate_comparison_report(extract_dir, project_dir, output_path=cmp_path)
         if html_path:
@@ -4731,7 +4748,7 @@ def _fix_twb_data_folder(project_dir, source_basename):
     # Create a local Data/ folder and point DataFolder there
     data_dir = os.path.join(project_dir, 'Data')
     os.makedirs(data_dir, exist_ok=True)
-    abs_data = os.path.abspath(data_dir)
+    abs_data = os.path.abspath(data_dir).replace('\\', '\\\\')
     new_content = _re.sub(
         r'(expression\s+DataFolder\s*=\s*)"[^"]*"',
         lambda m: m.group(1) + '"' + abs_data + '"',
@@ -4830,7 +4847,7 @@ def _process_twbx_post_generation(source_path, project_dir, source_basename):
         try:
             with open(expr_path, 'r', encoding='utf-8') as f:
                 expr_content = f.read()
-            abs_data_dir = os.path.abspath(actual_data_dir)
+            abs_data_dir = os.path.abspath(actual_data_dir).replace('\\', '\\\\')
             new_content = _re.sub(
                 r'(expression\s+DataFolder\s*=\s*)"[^"]*"',
                 lambda m: m.group(1) + '"' + abs_data_dir + '"',
@@ -4895,7 +4912,7 @@ def _run_post_generation_reports(args, source_basename, results):
     if getattr(args, 'compare', False) and results.get('generation') and not args.dry_run:
         try:
             from powerbi_import.comparison_report import generate_comparison_report
-            extract_dir = os.path.join(os.path.dirname(__file__), 'tableau_export')
+            extract_dir = _get_extract_dir()
             out_base = args.output_dir or os.path.join('artifacts', 'powerbi_projects', 'migrated')
             pbip_dir = os.path.join(out_base, source_basename)
             cmp_path = os.path.join(out_base, f'comparison_{source_basename}.html')
@@ -4918,7 +4935,7 @@ def _run_post_generation_reports(args, source_basename, results):
     if getattr(args, 'fidelity', False) and results.get('generation') and not args.dry_run:
         try:
             from scripts.compare_migration import run_comparison, print_results as print_fidelity
-            extract_dir = os.path.join(os.path.dirname(__file__), 'tableau_export')
+            extract_dir = _get_extract_dir()
             out_base = args.output_dir or os.path.join('artifacts', 'powerbi_projects', 'migrated')
             pbip_dir = os.path.join(out_base, source_basename)
             fidelity = run_comparison(pbip_dir, extract_dir)
@@ -4935,7 +4952,7 @@ def _run_post_generation_reports(args, source_basename, results):
     if getattr(args, 'autoplay', False) and results.get('generation') and not args.dry_run:
         try:
             from scripts.autoplay import run_autoplay, print_autoplay
-            extract_dir = os.path.join(os.path.dirname(__file__), 'tableau_export')
+            extract_dir = _get_extract_dir()
             out_base = args.output_dir or os.path.join('artifacts', 'powerbi_projects', 'migrated')
             pbip_dir = os.path.join(out_base, source_basename)
             autoplay_results = run_autoplay(
@@ -5223,7 +5240,7 @@ def _run_single_migration(args):
             project_dir = os.path.join(out_base, source_basename)
             print("\n  📄 Generating standalone paginated report...")
             pag_gen = PaginatedReportGenerator(project_dir, source_basename)
-            json_dir = os.path.join(os.path.dirname(__file__), 'tableau_export')
+            json_dir = _get_extract_dir()
             ws_path = os.path.join(json_dir, 'worksheets.json')
             ds_path = os.path.join(json_dir, 'datasources.json')
             worksheets = []
