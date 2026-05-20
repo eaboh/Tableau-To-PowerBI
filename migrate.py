@@ -2895,17 +2895,24 @@ def _handle_enterprise_server_ops(args):
             print_header("SITE TOPOLOGY DISCOVERY")
             from powerbi_import.dependency_graph import (
                 build_site_topology, build_dependency_graph,
+                classify_usage, audit_certifications,
                 generate_topology_report, save_topology,
             )
 
             topology = build_site_topology(ts_client)
             dep_graph = build_dependency_graph(topology)
-            report = generate_topology_report(topology, dep_graph)
-
-            save_topology(topology, dep_graph, output_dir)
-            print(f"  Topology saved to {output_dir}")
+            usage = classify_usage(topology)
+            certification = audit_certifications(topology)
 
             report_path = os.path.join(output_dir, 'topology_report.html')
+            report = generate_topology_report(
+                topology, dep_graph, usage, certification, report_path,
+            )
+
+            topo_path = os.path.join(output_dir, 'topology.json')
+            save_topology(topology, topo_path)
+            print(f"  Topology saved to {topo_path}")
+
             with open(report_path, 'w', encoding='utf-8') as f:
                 f.write(report)
             print(f"  Report:  {report_path}")
@@ -2967,6 +2974,7 @@ def _handle_enterprise_server_ops(args):
             from powerbi_import.subscription_generator import (
                 extract_all_subscriptions, extract_data_alerts,
                 generate_pbi_subscriptions, generate_power_automate_flows,
+                detect_schedule_conflicts,
                 generate_subscription_report, save_subscriptions,
             )
 
@@ -2977,10 +2985,13 @@ def _handle_enterprise_server_ops(args):
 
             pbi_subs = generate_pbi_subscriptions(subscriptions)
             flows = generate_power_automate_flows(subscriptions, alerts)
+            conflicts = detect_schedule_conflicts(pbi_subs)
 
             save_subscriptions(pbi_subs, flows, output_dir)
-            report = generate_subscription_report(subscriptions, alerts, pbi_subs, flows)
             report_path = os.path.join(output_dir, 'subscription_report.html')
+            report = generate_subscription_report(
+                subscriptions, alerts, pbi_subs, flows, conflicts, report_path,
+            )
             with open(report_path, 'w', encoding='utf-8') as f:
                 f.write(report)
             print(f"  Report: {report_path}")

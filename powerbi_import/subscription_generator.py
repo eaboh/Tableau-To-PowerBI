@@ -118,8 +118,8 @@ def extract_all_subscriptions(client, topology: Dict[str, Any] = None) -> List[D
             'run_times': run_times,
             'run_days': run_days,
             'send_if_no_data': sub.get('sendIfViewEmpty', False),
-            'attach_pdf': sub.get('attachImage', False),
-            'attach_csv': sub.get('attachPdf', False),
+            'attach_pdf': sub.get('attachPdf', False),
+            'attach_image': sub.get('attachImage', False),
             'message': sub.get('message', ''),
         })
 

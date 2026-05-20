@@ -652,7 +652,7 @@ class TableauServerClient:
             list[dict]: Permission entries with granteeType, capabilities.
         """
         url = f'{self.site_url}/workbooks/{workbook_id}/permissions'
-        resp = self._request(url)
+        resp = self._request('GET', url)
         perms_data = resp.get('permissions', {})
         grant_list = perms_data.get('granteeCapabilities', [])
 
@@ -688,7 +688,7 @@ class TableauServerClient:
             url = (f'{self.site_url}/{content_type}s/{content_id}'
                    f'/dataQualityWarnings')
         try:
-            resp = self._request(url)
+            resp = self._request('GET', url)
             return resp.get('dataQualityWarnings', {}).get(
                 'dataQualityWarning', [])
         except Exception:
