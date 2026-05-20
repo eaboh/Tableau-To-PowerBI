@@ -202,11 +202,22 @@ class FabricDeployer:
             Item dict if found, None otherwise
         """
         try:
+            import unicodedata as _ud
+            def _norm(s):
+                return ''.join(c for c in _ud.normalize('NFKD', s)
+                               if not _ud.combining(c)).lower()
             items = self.client.list_items(workspace_id, item_type)
+            norm_target = _norm(item_name)
+            exact = None
+            fuzzy = None
             for item in items.get('value', []):
-                if item.get('displayName') == item_name:
-                    return item
-            return None
+                dn = item.get('displayName', '')
+                if dn == item_name:
+                    exact = item
+                    break
+                if not fuzzy and _norm(dn) == norm_target:
+                    fuzzy = item
+            return exact or fuzzy
         except Exception as e:
             logger.warning(f'Failed to search for item: {e}')
             return None

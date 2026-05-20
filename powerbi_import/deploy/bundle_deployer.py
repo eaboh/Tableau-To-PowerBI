@@ -356,13 +356,20 @@ class BundleDeployer:
                 f'/workspaces/{self.workspace_id}/items') or []
             if isinstance(items, dict):
                 items = items.get('value', [])
+            import unicodedata as _ud
+            def _norm(s):
+                return ''.join(c for c in _ud.normalize('NFKD', s)
+                               if not _ud.combining(c)).lower()
             name_map = {}
+            norm_map = {}  # normalized name → [items]
             for item in items:
                 dname = item.get('displayName', '')
                 name_map.setdefault(dname, []).append(item)
-            # Check model
-            if model_name in name_map:
-                for item in name_map[model_name]:
+                norm_map.setdefault(_norm(dname), []).append(item)
+            # Check model (exact then accent-insensitive)
+            model_items = name_map.get(model_name) or norm_map.get(_norm(model_name), [])
+            if model_items:
+                for item in model_items:
                     conflicts.append({
                         'name': model_name,
                         'type': item.get('type', 'SemanticModel'),
@@ -370,8 +377,9 @@ class BundleDeployer:
                     })
             # Check reports
             for rname in report_names:
-                if rname in name_map:
-                    for item in name_map[rname]:
+                ritems = name_map.get(rname) or norm_map.get(_norm(rname), [])
+                if ritems:
+                    for item in ritems:
                         conflicts.append({
                             'name': rname,
                             'type': item.get('type', 'Report'),

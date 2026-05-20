@@ -23,12 +23,20 @@ import json
 import logging
 import os
 import re
+import unicodedata
 import urllib.error
+import urllib.parse
 
 logger = logging.getLogger(__name__)
 
 # Tableau REST API version
 DEFAULT_API_VERSION = '3.21'
+
+
+def _normalize_name(name):
+    """Strip accents and lowercase for accent-insensitive comparison."""
+    nfkd = unicodedata.normalize('NFKD', name)
+    return ''.join(c for c in nfkd if not unicodedata.combining(c)).lower()
 
 # Default page size for paginated requests
 DEFAULT_PAGE_SIZE = 100
@@ -170,9 +178,56 @@ class TableauServerClient:
                 return {}
         except urllib.error.HTTPError as e:
             body_text = e.read().decode('utf-8', errors='replace')
-            raise RuntimeError(
-                f'Tableau API error {e.code}: {body_text[:1000]}'
-            ) from e
+            # Parse Tableau error JSON for a friendlier message
+            detail = ''
+            try:
+                err_json = json.loads(body_text)
+                err_obj = err_json.get('error', {})
+                summary = err_obj.get('summary', '')
+                detail = err_obj.get('detail', '')
+                code = err_obj.get('code', '')
+            except (json.JSONDecodeError, AttributeError):
+                summary = ''
+                code = ''
+
+            if e.code == 403:
+                hint = (
+                    'Permission denied. The authenticated user does not have '
+                    'access to this resource.\n'
+                    '  Possible fixes:\n'
+                    '  - Ensure the PAT user has at least "Explorer (can publish)" '
+                    'or "Creator" site role\n'
+                    '  - Check that the user has "Download/Save a Copy" permission '
+                    'on the workbook/datasource\n'
+                    '  - Ask a Tableau Server admin to grant download permissions'
+                )
+                if detail:
+                    hint = f'{detail}\n\n  {hint}'
+                raise RuntimeError(
+                    f'Tableau API 403 Forbidden: {hint}'
+                ) from e
+            elif e.code == 401:
+                raise RuntimeError(
+                    'Tableau API 401 Unauthorized: Authentication failed. '
+                    'Check your --token-name and --token-secret (or '
+                    'TABLEAU_TOKEN_SECRET env var). The PAT may have expired.'
+                ) from e
+            elif e.code == 404:
+                msg = detail or summary or 'Resource not found'
+                raise RuntimeError(
+                    f'Tableau API 404 Not Found: {msg}. '
+                    'Check the workbook/datasource name or ID.'
+                ) from e
+            elif e.code == 409:
+                msg = detail or summary or 'Conflict'
+                raise RuntimeError(
+                    f'Tableau API 409 Conflict: {msg}'
+                ) from e
+            else:
+                raise RuntimeError(
+                    f'Tableau API error {e.code}: '
+                    f'{detail or summary or body_text[:1000]}'
+                ) from e
 
     # ── Pagination helper ─────────────────────────────────────
 
@@ -297,7 +352,8 @@ class TableauServerClient:
         """
         url = f'{self.site_url}/workbooks'
         if project_name:
-            url += f'?filter=projectName:eq:{project_name}'
+            encoded = urllib.parse.quote(project_name, safe='')
+            url += f'?filter=projectName:eq:{encoded}'
 
         workbooks = self._paginated_get(url, 'workbooks', 'workbook')
         logger.info(f'Found {len(workbooks)} workbooks')
@@ -358,15 +414,48 @@ class TableauServerClient:
     def search_workbooks(self, name_pattern):
         """Search workbooks by name pattern.
 
+        Supports regex matching, accent-insensitive matching, and
+        contentUrl matching for names with special characters.
+
         Args:
-            name_pattern: Regex pattern to match workbook names.
+            name_pattern: Regex pattern or plain name to match.
 
         Returns:
             list[dict]: Matching workbooks.
         """
         all_wb = self.list_workbooks()
-        pattern = re.compile(name_pattern, re.IGNORECASE)
-        matches = [w for w in all_wb if pattern.search(w.get('name', ''))]
+        # 1. Try regex match on name
+        try:
+            pattern = re.compile(name_pattern, re.IGNORECASE)
+            matches = [w for w in all_wb if pattern.search(w.get('name', ''))]
+            if matches:
+                return matches
+        except re.error:
+            pass  # name_pattern is not valid regex — continue with other strategies
+
+        # 2. Accent-insensitive match (strips diacritics from both sides)
+        norm_pattern = _normalize_name(name_pattern)
+        matches = [
+            w for w in all_wb
+            if _normalize_name(w.get('name', '')) == norm_pattern
+        ]
+        if matches:
+            return matches
+
+        # 3. Accent-insensitive contains
+        matches = [
+            w for w in all_wb
+            if norm_pattern in _normalize_name(w.get('name', ''))
+        ]
+        if matches:
+            return matches
+
+        # 4. contentUrl match (Tableau strips accents in contentUrl)
+        matches = [
+            w for w in all_wb
+            if norm_pattern == _normalize_name(w.get('contentUrl', ''))
+               or norm_pattern in _normalize_name(w.get('contentUrl', ''))
+        ]
         return matches
 
     # ── Views ─────────────────────────────────────────────────
@@ -896,10 +985,19 @@ class TableauServerClient:
         """
         datasources = self.list_datasources() or []
         match = None
+        name_lower = name.lower()
+        norm_name = _normalize_name(name)
         for ds in datasources:
-            if ds.get('name', '').lower() == name.lower():
+            ds_name = ds.get('name', '')
+            if ds_name == name or ds_name.lower() == name_lower:
                 match = ds
                 break
+        # Accent-insensitive fallback
+        if not match:
+            for ds in datasources:
+                if _normalize_name(ds.get('name', '')) == norm_name:
+                    match = ds
+                    break
 
         if not match:
             logger.warning("Published datasource '%s' not found", name)

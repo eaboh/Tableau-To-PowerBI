@@ -51,7 +51,8 @@ pip install tableauhyperapi           # .hyper extract file reading (v2+ format)
 | 📁 **Batch (folder)** | `python migrate.py --batch folder/ --output-dir /tmp/out` |
 | 📁 Global merge analysis | `python migrate.py --global-assess --batch folder/` |
 | ☁️ **Server — single** | `python migrate.py --server URL --workbook "Name" --token-name pat --token-secret secret` |
-| ☁️ Server — batch all | `python migrate.py --server URL --server-batch Project --server-assets all --server-preserve-folders ...` |
+| ☁️ Server — batch project | `python migrate.py --server URL --server-batch Project --server-assets all --server-preserve-folders --token-name pat --token-secret secret --output-dir ./output` |
+| ☁️ Server — batch all | `python migrate.py --server URL --server-batch all --server-assets all --token-name pat --token-secret secret --output-dir ./output` |
 | 🔗 **Shared model** | `python migrate.py --shared-model wb1.twbx wb2.twbx --model-name "Sales"` |
 | 🔗 Merge assessment | `python migrate.py --shared-model wb1.twbx wb2.twbx --assess-merge` |
 | 🚀 **Deploy to PBI** | `python migrate.py workbook.twbx --deploy WORKSPACE_ID --deploy-refresh` |
@@ -677,6 +678,11 @@ TableauToPowerBI/
 | `--server-batch PROJECT` | Download all workbooks from a server project |
 | `--server-assets TYPE [...]` | Asset types to download: `workbooks`, `flows`, `datasources`, `all` (default: workbooks flows) |
 | `--server-preserve-folders` | Mirror Tableau Server project folder structure locally |
+| `--migrate-schedules` | Extract Tableau refresh schedules/subscriptions → PBI refresh config JSON |
+| `--server-discover` | Discover site topology, dependency graph, and topology report |
+| `--server-assess` | Server-level portfolio readiness report (per-workbook GREEN/YELLOW/RED) |
+| `--plan-migration` | Generate migration plan with wave assignments, effort estimates, and timeline |
+| `--team-size N` | Number of migration engineers for timeline calculation (default: 1) |
 | `--languages LOCALES` | Multi-language culture TMDL files (e.g., `fr-FR,de-DE`) |
 | `--goals` | Convert Tableau Pulse metrics to PBI Goals |
 | `--shared-model WB [WB ...]` | Merge multiple workbooks into one shared semantic model |

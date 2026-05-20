@@ -3111,9 +3111,12 @@ def _download_from_server(args):
                     flows = ts_client.list_prep_flows()
                     # Filter by project if specified (not 'all')
                     if project_filter.lower() != 'all':
+                        from tableau_export.server_client import _normalize_name as _nn
+                        _norm_pf = _nn(project_filter)
                         flows = [
                             fl for fl in flows
                             if fl.get('project', {}).get('name', '') == project_filter
+                               or _nn(fl.get('project', {}).get('name', '')) == _norm_pf
                         ]
                     flow_count = 0
                     for fl in flows:
@@ -3145,9 +3148,12 @@ def _download_from_server(args):
                     datasources = ts_client.list_datasources()
                     # Filter by project if specified
                     if project_filter.lower() != 'all':
+                        from tableau_export.server_client import _normalize_name as _nn
+                        _norm_pf2 = _nn(project_filter)
                         datasources = [
                             ds for ds in datasources
                             if ds.get('project', {}).get('name', '') == project_filter
+                               or _nn(ds.get('project', {}).get('name', '')) == _norm_pf2
                         ]
                     ds_count = 0
                     for ds in datasources:
@@ -3184,12 +3190,33 @@ def _download_from_server(args):
             print(f"  Workbook: {args.workbook}")
             workbooks = ts_client.list_workbooks()
             match = None
+            # 1. Exact ID or name match
             for wb in workbooks:
                 if wb.get('id') == args.workbook or wb.get('name') == args.workbook:
                     match = wb
                     break
+            # 2. contentUrl match (Tableau strips accents in contentUrl)
             if not match:
-                # Try regex search
+                for wb in workbooks:
+                    if wb.get('contentUrl', '') == args.workbook:
+                        match = wb
+                        break
+            # 3. Accent-insensitive match (handles é→e, etc.)
+            if not match:
+                from tableau_export.server_client import _normalize_name
+                norm_input = _normalize_name(args.workbook)
+                for wb in workbooks:
+                    if _normalize_name(wb.get('name', '')) == norm_input:
+                        match = wb
+                        break
+                # 3b. Accent-insensitive contentUrl
+                if not match:
+                    for wb in workbooks:
+                        if _normalize_name(wb.get('contentUrl', '')) == norm_input:
+                            match = wb
+                            break
+            # 4. Regex / fuzzy search (multi-tier in search_workbooks)
+            if not match:
                 matches = ts_client.search_workbooks(args.workbook)
                 if matches:
                     match = matches[0]
@@ -3197,6 +3224,13 @@ def _download_from_server(args):
             if not match:
                 ts_client.sign_out()
                 print(f"  Workbook '{args.workbook}' not found on server")
+                # List available workbooks to help user find the right name
+                if workbooks:
+                    print(f"  Available workbooks ({len(workbooks)}):")
+                    for wb in workbooks[:20]:
+                        print(f"    - {wb.get('name', '?')} (id={wb.get('id', '?')[:8]}...)")
+                    if len(workbooks) > 20:
+                        print(f"    ... and {len(workbooks) - 20} more")
                 return ExitCode.EXTRACTION_FAILED
 
             import re as _re

@@ -447,6 +447,17 @@ def resolve_published_datasource(datasource, server_client=None):
             if rds.get('name', '') == ds_name:
                 match = rds
                 break
+        # Accent-insensitive fallback
+        if not match:
+            import unicodedata as _ud
+            def _norm(s):
+                return ''.join(c for c in _ud.normalize('NFKD', s)
+                               if not _ud.combining(c)).lower()
+            norm_ds = _norm(ds_name)
+            for rds in remote_datasources:
+                if _norm(rds.get('name', '')) == norm_ds:
+                    match = rds
+                    break
 
         if not match:
             datasource['_published_unresolved'] = True
