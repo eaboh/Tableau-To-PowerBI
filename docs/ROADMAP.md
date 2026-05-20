@@ -1,39 +1,43 @@
-# Development Roadmap — v22.0.0 → v32.0.0
+# Development Roadmap — v22.0.0 → v42.0.0
 
-**Date:** 2026-04-23
-**Baseline:** v28.5.8 — 7,099 tests across 141+ test files, 0 failures
-**Current state:** v28.5.8 shipped (Sprints 108–111 + 118–119 + standalone prep pipeline + 12-agent model + aggregation-aware SUM wrapping + v28.5.x DAX/M correctness hardening: metadata-record type resolution, DATEADD scalar conversion, manyToMany SELECTEDVALUE, bare calc reference inlining with bracket protection, comparison operator spacing). Migration Confidence Score: 91.9/100 (Grade A).
+**Date:** 2026-07-03
+**Baseline:** v37.1.0 — 8,518 tests across 141+ test files, 0 failures
+**Current state:** v37.1.0 shipped. All core migration, enterprise server, self-healing, Fabric-native, and analytics parity features complete. 14-agent specialization model. Migration Confidence Score: ≥97/100 (Grade A+).
 
 ---
 
 ## Executive Summary
 
-The migration engine is **feature-complete for core single-workbook scenarios**. v22–v24 shift focus to:
+The migration engine has reached **full-platform maturity** — single-workbook, batch, shared-model, Fabric-native, Tableau Server enterprise migration, and zero-error self-healing are all production-ready. v38+ shifts focus to **developer experience**, **report packaging**, **data blending**, **real-time connectors**, and **ecosystem expansion**.
 
-| Version | Theme | Target Date | Status |
-|---------|-------|-------------|--------|
-| **v22.0.0** | Real-World Fidelity & Layout Intelligence | Sprints 76–80 | ✅ Shipped |
-| **v23.0.0** | Conversion Accuracy & Fidelity Perfection | Sprints 81–85 | ✅ Shipped |
-| **v24.0.0** | Composite Models, Live Sync & Enterprise Scale | Sprints 86–90 | ✅ Shipped |
-| **v25.0.0** | Semantic Intelligence & Cross-Platform Parity | Sprints 91–95 | ✅ Shipped |
-| **v26.0.0** | Autonomous Migration & Production Hardening | Sprints 96–100 | ✅ Shipped |
-| **v27.0.0** | Advanced Intelligence & Marketplace | Sprints 101–106 | ✅ Shipped |
-| **v27.1.0** | Unified HTML Report Template | Sprint 107 | ✅ Shipped |
-| **v28.0.0** | Extensibility & Core Infrastructure | Sprints 108–111 | ✅ Shipped |
-| **v28.1.0** | Copilot Readiness & Semantic Descriptions | Sprints 118–119 | ✅ Shipped |
-| **v28.1.1** | M Quoting, Bracket Stripping, Bug Fixes | Hotfix | ✅ Shipped |
-| **v28.2.0** | Standalone Prep Flow Pipeline & Documentation | — | ✅ Shipped |
-| **v28.3.0** | 12-Agent Specialization Model | — | ✅ Shipped |
-| **v28.4.0** | Aggregation-Aware Cross-Table SUM Wrapping | — | ✅ Shipped |
-| **v28.5.x** | DAX/M Correctness Hardening (metadata-record, DATEADD scalar, SELECTEDVALUE, bracket protection, operator spacing) | Patch series | ✅ Shipped |
-| **v29.0.0** | Migration Completeness & Enterprise Operations | Sprints 112–117, 120–127 | Planned |
-| **v30.0.0** | Correctness, Observability & Self-Healing | Sprints 128–134 | In Progress (128–131 done; 132–134 pending) |
-| **v31.0.0** | Visual Fidelity & Mapping Accuracy | Sprints 135–138 | Planned |
-| **v32.0.0** | **Tableau Server Enterprise Migration** | Sprints 139–145 | Planned |
+| Version | Theme | Sprints | Status |
+|---------|-------|---------|--------|
+| **v22.0.0** | Real-World Fidelity & Layout Intelligence | 76–80 | ✅ Shipped |
+| **v23.0.0** | Conversion Accuracy & Fidelity Perfection | 81–85 | ✅ Shipped |
+| **v24.0.0** | Composite Models, Live Sync & Enterprise Scale | 86–90 | ✅ Shipped |
+| **v25.0.0** | Semantic Intelligence & Cross-Platform Parity | 91–95 | ✅ Shipped |
+| **v26.0.0** | Autonomous Migration & Production Hardening | 96–100 | ✅ Shipped |
+| **v27.0.0** | Advanced Intelligence & Marketplace | 101–107 | ✅ Shipped |
+| **v28.0.0** | Extensibility & Core Infrastructure | 108–111, 118–119 | ✅ Shipped |
+| **v28.2.0** | Standalone Prep Flow Pipeline | — | ✅ Shipped |
+| **v28.4.0** | 14-Agent Model & Cross-Table SUM Fix | — | ✅ Shipped |
+| **v28.5.x** | DAX/M Correctness Hardening | Patch series | ✅ Shipped |
+| **v30.0.0** | Correctness, Observability & Self-Healing | 128–134 | ✅ Shipped |
+| **v31.0.0–v31.6.0** | Self-Healing v3 & Zero-Error Phases 1–10 | 136–150 | ✅ Shipped |
+| **v34.0.0** | Zero Error Full Spectrum (20 sprints) | 151–170 | ✅ Shipped |
+| **v35.0.0** | Advanced Visual Fidelity | 171–174 | ✅ Shipped |
+| **v36.0.0** | Tableau Server Enterprise Migration | 139–145 | ✅ Shipped |
+| **v37.0.0** | Migration Completeness & Analytics Parity | 120–124 | ✅ Shipped |
+| **v37.1.0** | Bulk Assessment (`--bulk-assess`) | — | ✅ Shipped |
+| **v38.0.0** | Report Packaging & Developer Experience | 175–179 | Planned |
+| **v39.0.0** | Data Blending & Advanced Connectivity | 180–184 | Planned |
+| **v40.0.0** | VS Code Extension & Interactive Tooling | 185–189 | Planned |
+| **v41.0.0** | Real-Time, Streaming & Paginated Reports | 190–194 | Planned |
+| **v42.0.0** | Ecosystem Maturity & GA Polish | 195–199 | Planned |
 
 ---
 
-## Agent Ownership Matrix
+## Agent Ownership Matrix (v22–v26)
 
 | Agent | v22.0.0 Sprints | v23.0.0 Sprints | v24.0.0 Sprints | v25.0.0 Sprints | v26.0.0 Sprints |
 |-------|----------------|----------------|----------------|----------------|----------------|
@@ -1121,10 +1125,11 @@ Standalone `.tfl`/`.tflx` Tableau Prep flow files in `--batch` mode were incorre
 
 ---
 
-## v29.0.0 — Migration Completeness & Enterprise Operations (Sprints 112–117, 120–127)
+## v29.0.0 — Migration Completeness & Enterprise Operations (Sprints 112–117, 120–127) ✅ Shipped
 
 > v29.0.0 combines the remaining v28 Phase 2–3 items (Sprints 112–117) with the original v29 Phase 2–4 items (Sprints 120–127).
 > See [GAP_ANALYSIS.md §13](GAP_ANALYSIS.md) for the gap priority matrix driving this sprint order.
+> **Status:** Shipped across v29.0.0–v37.0.0. Sprint 115 (PDF Export) deferred to v38.0.0.
 
 ### Phase 1 — Intelligence & UX (Sprints 112–114)
 
@@ -1415,7 +1420,7 @@ These were originally v28.0.0 Phase 2–3 but deferred to v29.0.0 to ship v28.x 
 
 ---
 
-## v30.0.0 — Correctness, Observability & Self-Healing (Sprints 128–134)
+## v30.0.0 — Correctness, Observability & Self-Healing (Sprints 128–134) ✅ Shipped
 
 **Theme:** With v29.0.0 closing the *feature* gaps, v30.0.0 attacks **silent-wrong-result risk**, **operational visibility**, and **automated repair**. Grounded in concrete patterns surfaced during the v28.5.x audit (re.match tail-drop, string-literal regex collisions, missing PBI_ACCESS_TOKEN env priority, ungated LLM responses): every conversion path needs a *validation gate*, every gate needs *telemetry*, and every telemetry signal should drive an *auto-repair* attempt before failing the migration.
 
@@ -1580,7 +1585,7 @@ The pattern: every silent failure mode caught in v28.5.x becomes a class of test
 
 ---
 
-## v31.0.0 — Visual Fidelity & Mapping Accuracy (Sprints 135–138)
+## v31.0.0 — Visual Fidelity & Mapping Accuracy (Sprints 135–138) ✅ Shipped
 
 **Theme:** Close visual mapping gaps — eliminate approximations that lose Tableau semantics, add missing visual configs, improve layout and encoding fidelity.
 
@@ -1690,7 +1695,7 @@ The pattern: every silent failure mode caught in v28.5.x becomes a class of test
 
 ---
 
-## v32.0.0 — Tableau Server Enterprise Migration (Sprints 139–145)
+## v32.0.0 — Tableau Server Enterprise Migration (Sprints 139–145) ✅ Shipped
 
 **Theme:** End-to-end enterprise migration from Tableau Server/Cloud to Power BI Service / Microsoft Fabric — from **site discovery** through **permission mapping**, **subscription migration**, and **cutover orchestration**. Transforms the tool from a workbook converter into a **full-platform migration engine**.
 
@@ -1903,3 +1908,567 @@ Already implemented in `tableau_export/server_client.py`:
 | `--cutover-plan-only` | `--cutover` | Generate cutover plan without executing |
 | `--rollback STEP_ID` | `--cutover` | Rollback to a specific cutover step |
 | `--parallel-run` | `--cutover` | Deploy alongside existing Tableau content for comparison |
+
+---
+
+## v38.0.0 — Report Packaging & Developer Experience (Sprints 175–179)
+
+**Theme:** Enterprise customers need polished deliverables for stakeholder communication. Developers need better tooling for iterative migration refinement. This version delivers **PDF/PPTX report export**, **REST API v2**, **Streamlit UI polish**, and **migration diff tooling**.
+
+**Motivation:** The tool generates 9 HTML report types (assessment, portfolio, merge, topology, telemetry, visual diff, comparison, lineage, cutover), but enterprises need offline-distributable PDF/PPTX versions for executive reviews, audit trails, and compliance documentation. The REST API (v1) lacks pagination, filtering, and webhook support. The Streamlit Web UI works but needs batch mode, merge UI, and deployment integration.
+
+---
+
+### Sprint 175 — PDF & PPTX Report Export (@visual, @assessor)
+
+**Goal:** Generate PDF and PPTX versions of all 9 HTML migration/assessment reports for offline distribution and executive review. Pure stdlib approach — no `weasyprint` dependency.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 175.1 | **PDF renderer module** | @visual | `powerbi_import/pdf_renderer.py` (new) | High | Stdlib HTML-to-PDF via `@media print` CSS + browser print API hint. Generates print-optimized HTML with page breaks, expanded sections, hidden interactive elements. `render_to_pdf(html_content, output_path)` API. Fallback: saves print-ready HTML with `.pdf.html` extension and instructions. |
+| 175.2 | **Print-optimized CSS** | @visual | `powerbi_import/html_template.py` | Medium | Add `@media print` styles to shared template: page breaks before sections, collapse interactive elements, A4 page size, margin control, expand all collapsed sections. |
+| 175.3 | **PPTX report generator** | @assessor | `powerbi_import/pptx_report.py` (new) | High | Generate PowerPoint executive summary from migration data: title slide, scope overview (workbook count, measure count, visual count), fidelity radar chart (as table), wave plan timeline, risk matrix, recommendations. Uses `python-pptx` as optional dependency with stdlib XML fallback. |
+| 175.4 | **Report packaging** | @assessor | `powerbi_import/assessment.py` | Medium | `--report-package` generates a ZIP containing: HTML report + print-ready PDF + extraction JSON + fidelity summary CSV + PPTX executive summary. Single deliverable for stakeholders. |
+| 175.5 | **CLI integration** | @orchestrator | `migrate.py` | Low | `--pdf` flag on `--assess`, `--global-assess`, `--assess-merge`, `--bulk-assess`. `--pptx` for executive summary. `--report-package` for bundled ZIP. |
+| 175.6 | **Tests** | @tester | `tests/test_report_packaging.py` (new) | Medium | 30+ tests: print CSS validation, PPTX slide structure, report package ZIP contents, CLI flag wiring. |
+
+**Success:** `python migrate.py --bulk-assess examples/ --report-package` produces a ZIP with HTML + printable PDF + PPTX executive summary.
+
+---
+
+### Sprint 176 — REST API v2 & OpenAPI (@orchestrator, @deployer)
+
+**Goal:** Upgrade the REST API from basic endpoints to a production-grade API with pagination, filtering, webhook callbacks, OpenAPI spec, and authentication.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 176.1 | **OpenAPI spec generation** | @orchestrator | `powerbi_import/api_server.py` | Medium | Auto-generate OpenAPI 3.0 spec from endpoint definitions. Serve at `GET /openapi.json`. Include request/response schemas, error codes, parameter descriptions. |
+| 176.2 | **Pagination & filtering** | @orchestrator | `powerbi_import/api_server.py` | Medium | `GET /jobs?status=completed&page=2&per_page=20`. Filter by status, date range, workbook name. Cursor-based pagination for large job lists. |
+| 176.3 | **Webhook callbacks** | @deployer | `powerbi_import/api_server.py` | Medium | `POST /migrate` accepts `webhook_url` parameter. On completion/failure, POST job result JSON to webhook URL. Configurable retry (3 attempts, exponential backoff). HMAC signature for verification. |
+| 176.4 | **API key authentication** | @orchestrator | `powerbi_import/api_server.py` | Medium | Optional `--api-key` flag. Requests require `Authorization: Bearer <key>` header. Rate limiting per key (default 60 req/min). |
+| 176.5 | **Batch migration endpoint** | @orchestrator | `powerbi_import/api_server.py` | Medium | `POST /migrate/batch` accepts multiple files. Returns batch job ID. `GET /batch/{id}` returns per-workbook status. ZIP download for all results. |
+| 176.6 | **Tests** | @tester | `tests/test_api_v2.py` (new) | Medium | 35+ tests: OpenAPI schema validation, pagination, filtering, webhook delivery (mock), auth, batch endpoint, rate limiting. |
+
+**Success:** API consumers can integrate migration into CI/CD pipelines with webhook-driven automation and OpenAPI-generated client SDKs.
+
+---
+
+### Sprint 177 — Streamlit Web UI Polish (@orchestrator, @merger, @assessor)
+
+**Goal:** Extend the existing Streamlit Web UI with batch mode, shared-model merge UI, visual diff viewer, and deployment integration.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 177.1 | **Batch mode page** | @orchestrator | `web/app.py` | Medium | Multi-file upload with drag-and-drop. Per-workbook progress table (name, status, fidelity, grade). Batch summary dashboard. Download all results as ZIP. |
+| 177.2 | **Shared model merge page** | @merger | `web/app.py` | High | Multi-workbook upload → interactive merge heatmap (table overlap scores as color matrix), conflict list with resolution options, force-merge toggle, model name input. Preview merged table list before generation. |
+| 177.3 | **Visual diff viewer** | @assessor | `web/app.py` | Medium | Side-by-side comparison: Tableau worksheet list vs PBI page/visual list. Per-visual field coverage bars. Encoding gap highlights. Reuses `visual_diff.py` output. |
+| 177.4 | **DAX formula editor** | @orchestrator | `web/app.py` | Medium | Select a measure → view Tableau formula + converted DAX side-by-side in code editors. In-place edit DAX. Re-validate with `dax_optimizer.py`. Save overrides to `config.json`. |
+| 177.5 | **Assessment radar chart** | @assessor | `web/app.py` | Low | Interactive 9-category radar chart using Streamlit's native chart components. Click-to-expand per-category detail. |
+| 177.6 | **Tests** | @tester | `tests/test_web_ui_polish.py` (new) | Medium | 25+ tests: batch upload validation, merge flow, diff rendering, DAX edit round-trip, chart data construction. |
+
+**Success:** Non-CLI users can perform the full migration lifecycle (upload → assess → merge → migrate → review → download) from a browser.
+
+---
+
+### Sprint 178 — Migration Diff & Comparison Tooling (@assessor, @orchestrator)
+
+**Goal:** When re-migrating a workbook (after Tableau changes or tool upgrades), generate a structured diff showing what changed in the output.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 178.1 | **Artifact diff engine** | @assessor | `powerbi_import/artifact_diff.py` (new) | High | Compare two `.pbip` project directories: new/removed/changed TMDL objects (tables, columns, measures, relationships), visual changes (added/removed visuals, data role changes), M query changes. Output: structured diff JSON. |
+| 178.2 | **Diff HTML report** | @assessor | `powerbi_import/artifact_diff.py` | Medium | Interactive HTML diff report: tree view of changes, inline before/after DAX comparison, visual layout delta, relationship graph diff. Color-coded (green=added, red=removed, yellow=changed). Uses `html_template.py`. |
+| 178.3 | **CLI integration** | @orchestrator | `migrate.py` | Low | `--diff PREVIOUS_OUTPUT_DIR` flag. Generates diff report alongside normal migration output. |
+| 178.4 | **Regression baseline management** | @assessor | `powerbi_import/artifact_diff.py` | Medium | `--save-baseline` stores current output as reference. `--check-baseline` compares against stored baseline and fails if unexpected changes detected. For CI integration. |
+| 178.5 | **Tests** | @tester | `tests/test_artifact_diff.py` (new) | Medium | 25+ tests: TMDL diff, visual diff, M query diff, HTML report structure, baseline save/load, no-change detection. |
+
+**Success:** `python migrate.py workbook.twbx --diff artifacts/previous/` produces a clear report of what changed between migration runs.
+
+---
+
+### Sprint 179 — v38.0.0 Release & Hardening (All Agents)
+
+**Goal:** Version bump, cross-feature integration testing, documentation refresh, PyPI publish.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 179.1 | **Version bump** | @orchestrator | `pyproject.toml`, `CHANGELOG.md` | Low | `37.1.0` → `38.0.0`. Document Sprints 175–179. |
+| 179.2 | **Integration tests** | @tester | `tests/test_v38_e2e.py` (new) | High | E2E: migrate → report package → API batch → diff against baseline. 20+ tests. |
+| 179.3 | **Real-world re-validation** | @tester | `tests/test_real_world_e2e.py` | Medium | All 27+ workbooks pass with 0 regressions. |
+| 179.4 | **Docs refresh** | @orchestrator | `docs/*.md`, `README.md` | Medium | Update README with report packaging, API v2, UI screenshots. |
+| 179.5 | **Test baseline** | @tester | — | — | Target: **8,800+** tests. |
+
+### v38.0.0 Success Criteria
+
+| Metric | Target | Owner |
+|--------|--------|-------|
+| Report packaging | PDF-ready HTML + PPTX executive summary + ZIP bundle | @visual, @assessor |
+| REST API v2 | OpenAPI spec, pagination, webhooks, auth, batch endpoint | @orchestrator |
+| Web UI | Batch mode, merge UI, visual diff, DAX editor | @orchestrator |
+| Artifact diff | Structured diff between migration runs | @assessor |
+| Tests | **8,800+** | @tester |
+
+### v38.0.0 Agent Ownership Matrix
+
+| Agent | Sprint 175 | Sprint 176 | Sprint 177 | Sprint 178 | Sprint 179 |
+|-------|-----------|-----------|-----------|-----------|-----------|
+| **@visual** | 175.1, 175.2 | — | — | — | — |
+| **@assessor** | 175.3, 175.4 | — | 177.3, 177.5 | 178.1–178.4 | — |
+| **@orchestrator** | 175.5 | 176.1, 176.2, 176.4, 176.5 | 177.1, 177.4 | 178.3 | 179.1, 179.4 |
+| **@deployer** | — | 176.3 | — | — | — |
+| **@merger** | — | — | 177.2 | — | — |
+| **@tester** | 175.6 | 176.6 | 177.6 | 178.5 | 179.2, 179.3, 179.5 |
+
+---
+
+## v39.0.0 — Data Blending & Advanced Connectivity (Sprints 180–184)
+
+**Theme:** Close the remaining **data blending gap** (federated cross-datasource queries) and expand connector coverage to handle **real-world enterprise data landscapes** — SAP BW, IBM Db2, Teradata, and cloud-native warehouses with advanced features.
+
+**Motivation:** The GAP_ANALYSIS identifies data blending as a partially-supported gap. Enterprise migrations frequently involve workbooks connecting to 3+ datasources with cross-source calculations. Additionally, many enterprise environments use legacy warehouse connectors (SAP BW, IBM Db2, Teradata) not yet covered by the 63-connector library.
+
+---
+
+### Sprint 180 — Data Blending Engine (@wiring, @semantic)
+
+**Goal:** Full support for Tableau data blending — workbooks that use fields from multiple datasources in a single worksheet via blend relationships (link fields).
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 180.1 | **Blend relationship extraction** | @extractor | `tableau_export/datasource_extractor.py` | High | Extract `<relation type="blend">` and `<column-mapping>` elements. Build blend graph: primary datasource + linked secondary datasources with join fields. Capture blend direction (primary vs secondary) and aggregation behavior. |
+| 180.2 | **Blend → merge M query** | @wiring | `tableau_export/m_query_builder.py` | High | Generate Power Query M merge steps for each blend relationship: `Table.NestedJoin(Primary, LinkFields, Secondary, LinkFields, "Blended", JoinKind.LeftOuter)` + `Table.ExpandTableColumn`. Handle multiple secondary datasources (sequential merges). |
+| 180.3 | **Cross-datasource DAX measures** | @dax | `tableau_export/dax_converter.py` | High | When a calculation references fields from blended datasources, generate DAX with proper table qualifications. Use `RELATED()` for manyToOne blend relationships. Emit `LOOKUPVALUE()` for manyToMany. |
+| 180.4 | **Blend relationship → TMDL relationships** | @semantic | `powerbi_import/tmdl_generator.py` | Medium | Convert blend link fields to TMDL relationships with correct cardinality. Set `crossFilteringBehavior: oneDirection` (secondary→primary). |
+| 180.5 | **Blend migration report** | @assessor | `powerbi_import/assessment.py` | Low | Blend-specific assessment: count blended datasources, link field coverage, cross-source calculation complexity. Grade: GREEN (simple 2-source), YELLOW (3+ sources), RED (circular blends). |
+| 180.6 | **Tests** | @tester | `tests/test_data_blending.py` (new) | Medium | 35+ tests: blend extraction, merge M generation, cross-source DAX, relationship conversion, complex blend graphs. |
+
+**Success:** A workbook blending Salesforce Opportunities with SQL Server Products produces correct merged M queries and cross-table DAX measures.
+
+---
+
+### Sprint 181 — Enterprise Connector Expansion (@wiring, @extractor)
+
+**Goal:** Add 12 enterprise connectors frequently seen in Fortune 500 migrations.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 181.1 | **SAP BW connector** | @wiring | `tableau_export/m_query_builder.py` | High | `SapBusinessWarehouse.Cubes()` with MDX query passthrough. Server, system ID, client number parameters. |
+| 181.2 | **IBM Db2 connector** | @wiring | `tableau_export/m_query_builder.py` | Medium | `DB2.Database()` with schema navigation. z/OS and LUW variants. |
+| 181.3 | **Teradata connector** | @wiring | `tableau_export/m_query_builder.py` | Medium | `Teradata.Database()` with BTEQ/FastLoad hints in migration notes. |
+| 181.4 | **Vertica enhanced** | @wiring | `tableau_export/m_query_builder.py` | Low | Schema navigation, query pushdown hints, connection pooling parameters. |
+| 181.5 | **Azure Synapse Analytics** | @wiring | `tableau_export/m_query_builder.py` | Medium | `AzureSynapse.Database()` with dedicated SQL pool vs serverless detection. |
+| 181.6 | **Dremio connector** | @wiring | `tableau_export/m_query_builder.py` | Medium | `Dremio.Datasets()` with reflection and acceleration metadata. |
+| 181.7 | **ClickHouse connector** | @wiring | `tableau_export/m_query_builder.py` | Low | `ClickHouse.Database()` with `Odbc.Query` fallback. |
+| 181.8 | **SingleStore (MemSQL)** | @wiring | `tableau_export/m_query_builder.py` | Low | `MySQL.Database()` with SingleStore-specific connection parameters. |
+| 181.9 | **Firebolt connector** | @wiring | `tableau_export/m_query_builder.py` | Low | `Odbc.Query()` with Firebolt JDBC bridge parameters. |
+| 181.10 | **Trino/Starburst** | @wiring | `tableau_export/m_query_builder.py` | Medium | `Odbc.Query()` with catalog/schema navigation from Trino's information_schema. |
+| 181.11 | **Connector auto-detection** | @extractor | `tableau_export/datasource_extractor.py` | Low | Detect connector type from connection XML `class` attribute for all 12 new types. Map to correct M generator. |
+| 181.12 | **Tests** | @tester | `tests/test_enterprise_connectors.py` (new) | Medium | 30+ tests: M query generation, connection parameter mapping, schema navigation. |
+
+**Success:** 75+ connectors supported. All Fortune 500 migration pilots encounter ≤2 unknown connector types.
+
+---
+
+### Sprint 182 — Custom SQL & Native Query Depth (@wiring, @dax)
+
+**Goal:** Improve handling of Tableau custom SQL queries — currently passed through but not analyzed. Parse custom SQL to extract column metadata, detect aggregations, and generate optimized M `Value.NativeQuery()` expressions.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 182.1 | **Custom SQL parser** | @wiring | `powerbi_import/sql_analyzer.py` (new) | High | Lightweight SQL parser (stdlib `re`-based): extract SELECT columns (name, alias, expression), FROM tables, WHERE filters, GROUP BY, ORDER BY, JOINs. No full SQL AST — focus on column metadata extraction for M query generation. |
+| 182.2 | **SQL → M column metadata** | @wiring | `powerbi_import/sql_analyzer.py` | Medium | Infer PBI column types from SQL expressions: `COUNT(*)` → Int64, `SUM(amount)` → Decimal, `CONCAT(...)` → String. Populate `sourceColumn` metadata for TMDL. |
+| 182.3 | **Optimized NativeQuery** | @wiring | `tableau_export/m_query_builder.py` | Medium | When custom SQL contains parameters (Tableau `<Parameters.X>` placeholders), convert to M `Value.NativeQuery()` with proper parameter binding instead of string concatenation. |
+| 182.4 | **SQL dialect detection** | @wiring | `powerbi_import/sql_analyzer.py` | Low | Detect SQL dialect from connection type (T-SQL, PL/SQL, PostgreSQL, MySQL). Add dialect-specific migration notes (e.g., Oracle `ROWNUM` → SQL Server `TOP`, PostgreSQL `LIMIT`). |
+| 182.5 | **Tests** | @tester | `tests/test_sql_analyzer.py` (new) | Medium | 30+ tests: SELECT parsing, column type inference, parameterized NativeQuery, dialect detection. |
+
+---
+
+### Sprint 183 — OAuth & Authentication Flow Migration (@deployer, @extractor)
+
+**Goal:** Automate gateway credential configuration and OAuth token flow setup for migrated connections.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 183.1 | **Gateway credential template v2** | @deployer | `powerbi_import/gateway_config.py` | Medium | Generate detailed gateway connection configs per datasource: data source type, connection string, authentication method (Windows, OAuth2, Basic, Key). Include Azure Key Vault reference for credentials. |
+| 183.2 | **OAuth provider mapping** | @deployer | `powerbi_import/gateway_config.py` | Medium | Map Tableau OAuth providers (Google, Salesforce, Snowflake) → PBI OAuth2 client configuration. Generate Azure AD app registration requirements per provider. |
+| 183.3 | **Service principal config** | @deployer | `powerbi_import/gateway_config.py` | Low | For each data source requiring service principal auth, generate Entra ID app registration instructions with required permissions. |
+| 183.4 | **Connection test script** | @deployer | `powerbi_import/gateway_config.py` | Medium | Generate PowerShell/Python script that validates each migrated connection can reach its target (TCP connect test + basic auth handshake). Output pass/fail per connection. |
+| 183.5 | **Tests** | @tester | `tests/test_gateway_v2.py` (new) | Medium | 20+ tests: credential template, OAuth mapping, service principal config, connection test script generation. |
+
+---
+
+### Sprint 184 — v39.0.0 Release & Hardening (All Agents)
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 184.1 | **Version bump** | @orchestrator | `pyproject.toml`, `CHANGELOG.md` | Low | `38.0.0` → `39.0.0`. |
+| 184.2 | **Connector E2E tests** | @tester | `tests/test_connector_e2e.py` (new) | High | E2E: blend workbook → extract → generate → validate. 15+ tests with synthetic multi-datasource workbooks. |
+| 184.3 | **Docs refresh** | @orchestrator | `docs/MAPPING_REFERENCE.md`, `docs/TABLEAU_TO_POWERQUERY_REFERENCE.md` | Medium | Update connector table, blend documentation, SQL analyzer reference. |
+| 184.4 | **Test baseline** | @tester | — | — | Target: **9,200+** tests. |
+
+### v39.0.0 Success Criteria
+
+| Metric | Target | Owner |
+|--------|--------|-------|
+| Data blending | Full blend → merge M + cross-source DAX | @wiring |
+| Connectors | 75+ supported (12 new enterprise connectors) | @wiring |
+| Custom SQL | Column metadata extraction + parameterized NativeQuery | @wiring |
+| OAuth config | Gateway credential templates with OAuth provider mapping | @deployer |
+| Tests | **9,200+** | @tester |
+
+### v39.0.0 Agent Ownership Matrix
+
+| Agent | Sprint 180 | Sprint 181 | Sprint 182 | Sprint 183 | Sprint 184 |
+|-------|-----------|-----------|-----------|-----------|-----------|
+| **@extractor** | 180.1 | 181.11 | — | — | — |
+| **@wiring** | 180.2 | 181.1–181.10 | 182.1–182.4 | — | — |
+| **@dax** | 180.3 | — | — | — | — |
+| **@semantic** | 180.4 | — | — | — | — |
+| **@assessor** | 180.5 | — | — | — | — |
+| **@deployer** | — | — | — | 183.1–183.4 | — |
+| **@orchestrator** | — | — | — | — | 184.1, 184.3 |
+| **@tester** | 180.6 | 181.12 | 182.5 | 183.5 | 184.2, 184.4 |
+
+---
+
+## v40.0.0 — VS Code Extension & Interactive Tooling (Sprints 185–189)
+
+**Theme:** Bring the migration engine directly into the developer's IDE with a **VS Code extension** providing inline assessment, DAX preview, visual mapping review, and one-click migration. Also add **interactive notebook support** for data engineers who prefer Jupyter-style workflows.
+
+**Motivation:** CLI is powerful for automation; Web UI serves non-technical users. But the core audience — data engineers and BI developers — live in VS Code. A native extension provides the fastest feedback loop: open a `.twbx`, see the assessment, preview DAX conversions, and generate the `.pbip` without leaving the editor.
+
+---
+
+### Sprint 185 — VS Code Extension Core (@orchestrator, @visual)
+
+**Goal:** VS Code extension that provides Tableau file preview, inline assessment, and one-click migration.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 185.1 | **Extension scaffold** | @orchestrator | `vscode-extension/` (new) | High | TypeScript extension: package.json, activation events for `.twb`/`.twbx` files, command palette entries (Assess, Migrate, Preview DAX). Calls Python migration engine as subprocess. |
+| 185.2 | **Tableau file tree view** | @visual | `vscode-extension/src/tableauTreeProvider.ts` (new) | Medium | TreeView showing workbook structure: datasources → tables → columns, worksheets → fields, dashboards, parameters. Parsed from extraction JSON. |
+| 185.3 | **Inline assessment panel** | @assessor | `vscode-extension/src/assessmentPanel.ts` (new) | Medium | Webview panel showing 9-category assessment with pass/warn/fail badges. Strategy recommendation. Click to expand category details. |
+| 185.4 | **One-click migration** | @orchestrator | `vscode-extension/src/migrateCommand.ts` (new) | Medium | `Tableau: Migrate to Power BI` command. Output channel for progress. Opens generated `.pbip` folder in Explorer on completion. |
+| 185.5 | **Status bar integration** | @orchestrator | `vscode-extension/src/statusBar.ts` (new) | Low | Status bar item showing migration status, fidelity score, and quick actions. |
+| 185.6 | **Tests** | @tester | `vscode-extension/src/test/` (new) | Medium | 20+ tests: command registration, tree view structure, assessment panel data, subprocess invocation. |
+
+---
+
+### Sprint 186 — DAX Preview & Side-by-Side Editor (@dax, @visual)
+
+**Goal:** Interactive DAX conversion preview — see Tableau formula → DAX conversion in real-time with syntax highlighting, validation status, and edit capability.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 186.1 | **DAX preview panel** | @dax | `vscode-extension/src/daxPreviewPanel.ts` (new) | High | Split editor: Tableau formula (read-only, syntax highlighted) on left, converted DAX (editable, with validation) on right. Red/green indicators for conversion confidence. MigrationNote display. |
+| 186.2 | **DAX language support** | @dax | `vscode-extension/syntaxes/dax.tmLanguage.json` (new) | Medium | TextMate grammar for DAX: function names, string literals, column references (`[Col]`), table references (`'Table'`), comments. |
+| 186.3 | **Tableau formula language support** | @extractor | `vscode-extension/syntaxes/tableau.tmLanguage.json` (new) | Medium | TextMate grammar for Tableau calc syntax: LOD expressions, table calcs, functions. |
+| 186.4 | **Override management** | @dax | `vscode-extension/src/overrideManager.ts` (new) | Medium | Edit DAX in preview → save as override in `config.json`. Override persists across re-migrations. Clear override to revert to auto-converted DAX. |
+| 186.5 | **Tests** | @tester | `vscode-extension/src/test/` | Medium | 15+ tests: panel rendering, language grammar validation, override save/load. |
+
+---
+
+### Sprint 187 — Jupyter Notebook Migration API (@orchestrator, @semantic)
+
+**Goal:** Enhance the existing `notebook_api.py` with interactive widgets, inline visualization, and step-by-step migration control for data engineers using Jupyter.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 187.1 | **Interactive assessment widget** | @orchestrator | `powerbi_import/notebook_api.py` | Medium | `session.assess_interactive()` renders HTML radar chart inline in notebook. Clickable categories expand to show details. |
+| 187.2 | **DAX conversion explorer** | @dax | `powerbi_import/notebook_api.py` | Medium | `session.explore_dax()` shows all conversions as a DataFrame with columns: Tableau formula, DAX result, confidence, migration note. Filter by status (exact/approximated/unsupported). |
+| 187.3 | **Relationship diagram** | @semantic | `powerbi_import/notebook_api.py` | Medium | `session.show_relationships()` renders Mermaid ER diagram inline. Highlights cross-table issues, cardinality, inactive relationships. |
+| 187.4 | **Step-by-step migration** | @orchestrator | `powerbi_import/notebook_api.py` | Medium | `session.step_extract()`, `session.step_convert()`, `session.step_generate()`, `session.step_validate()` — run each phase independently with intermediate inspection. |
+| 187.5 | **Notebook template generator** | @orchestrator | `powerbi_import/notebook_api.py` | Low | `MigrationSession.generate_notebook()` creates a ready-to-run `.ipynb` with all migration steps pre-populated for a specific workbook. |
+| 187.6 | **Tests** | @tester | `tests/test_notebook_api_v2.py` (new) | Medium | 20+ tests: widget rendering, DAX explorer DataFrame, relationship diagram, step-by-step execution, notebook generation. |
+
+---
+
+### Sprint 188 — Plugin SDK & Community Marketplace (@orchestrator, @deployer)
+
+**Goal:** Formalize the plugin API (currently informal hook-based) into a versioned SDK with schema validation, and connect to a community marketplace for sharing migration patterns.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 188.1 | **Plugin SDK v2** | @orchestrator | `powerbi_import/plugin_sdk.py` (new) | High | Formal plugin interface: `MigrationPlugin` base class with versioned hooks (`on_extract`, `on_convert_dax`, `on_generate_visual`, `on_validate`). Schema validation for plugin manifest. Backward-compatible with existing `plugins.py` auto-discovery. |
+| 188.2 | **Plugin testing framework** | @tester | `powerbi_import/plugin_sdk.py` | Medium | `PluginTestRunner` that validates plugin output against expected schemas. `assert_dax_valid()`, `assert_m_valid()`, `assert_visual_schema()` helpers. |
+| 188.3 | **Marketplace v2** | @deployer | `powerbi_import/marketplace.py` | Medium | Extend existing PatternRegistry: remote catalogue fetch from GitHub releases. `--marketplace-sync` CLI flag. Version pinning (`--marketplace-version 2.0.0`). Pattern dependency tracking. |
+| 188.4 | **Curated industry packs** | @orchestrator | `examples/marketplace/` | Medium | Package existing DAX recipes + model templates into versioned industry packs: Healthcare v1.0, Finance v1.0, Retail v1.0. Include validation tests per pack. |
+| 188.5 | **Tests** | @tester | `tests/test_plugin_sdk.py` (new) | Medium | 25+ tests: plugin lifecycle, hook invocation, schema validation, marketplace sync (mock), industry pack loading. |
+
+---
+
+### Sprint 189 — v40.0.0 Release & Hardening (All Agents)
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 189.1 | **Version bump** | @orchestrator | `pyproject.toml`, `CHANGELOG.md` | Low | `39.0.0` → `40.0.0`. |
+| 189.2 | **Extension E2E tests** | @tester | `vscode-extension/src/test/` | High | E2E: open .twbx → assess → preview DAX → migrate → verify output. 15+ integration tests. |
+| 189.3 | **Docs refresh** | @orchestrator | `docs/VS_CODE_EXTENSION.md` (new), `docs/PLUGIN_SDK.md` (new) | Medium | Extension installation guide, plugin authoring guide, marketplace usage. |
+| 189.4 | **Test baseline** | @tester | — | — | Target: **9,500+** tests. |
+
+### v40.0.0 Success Criteria
+
+| Metric | Target | Owner |
+|--------|--------|-------|
+| VS Code extension | File preview, assessment panel, one-click migrate, DAX preview | @orchestrator, @visual, @dax |
+| DAX language support | TextMate grammar with syntax highlighting | @dax |
+| Notebook API v2 | Interactive widgets, step-by-step migration, diagram rendering | @orchestrator |
+| Plugin SDK | Versioned hooks, schema validation, test framework | @orchestrator |
+| Marketplace v2 | Remote catalogue, industry packs, version pinning | @deployer |
+| Tests | **9,500+** | @tester |
+
+### v40.0.0 Agent Ownership Matrix
+
+| Agent | Sprint 185 | Sprint 186 | Sprint 187 | Sprint 188 | Sprint 189 |
+|-------|-----------|-----------|-----------|-----------|-----------|
+| **@orchestrator** | 185.1, 185.4, 185.5 | — | 187.1, 187.4, 187.5 | 188.1, 188.4 | 189.1, 189.3 |
+| **@visual** | 185.2 | — | — | — | — |
+| **@dax** | — | 186.1, 186.2, 186.4 | 187.2 | — | — |
+| **@extractor** | — | 186.3 | — | — | — |
+| **@semantic** | — | — | 187.3 | — | — |
+| **@assessor** | 185.3 | — | — | — | — |
+| **@deployer** | — | — | — | 188.3 | — |
+| **@tester** | 185.6 | 186.5 | 187.6 | 188.2, 188.5 | 189.2, 189.4 |
+
+---
+
+## v41.0.0 — Real-Time, Streaming & Paginated Reports (Sprints 190–194)
+
+**Theme:** Extend the migration engine to handle **real-time/streaming data scenarios** (Tableau Server extract refresh → PBI DirectQuery/real-time datasets) and **paginated reports** (Tableau PDF/print-optimized views → PBI paginated reports).
+
+**Motivation:** Enterprise customers increasingly use real-time dashboards for operational monitoring. Tableau's live connections and frequent extract refreshes need to map to PBI DirectQuery or real-time streaming datasets. Additionally, regulated industries (finance, healthcare) require pixel-perfect paginated reports for compliance — Tableau print layouts need to map to PBI paginated report (RDL) format.
+
+---
+
+### Sprint 190 — DirectQuery Optimization & Real-Time (@semantic, @wiring)
+
+**Goal:** Optimize DirectQuery mode for performance: query folding hints, aggregation pushdown, and dual-storage hybrid for frequently-accessed dimensions.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 190.1 | **Query folding analyzer** | @wiring | `powerbi_import/query_folding.py` (new) | High | Analyze generated M queries to detect operations that break query folding (Table.AddColumn with custom logic, Table.Buffer, non-foldable transforms). Emit warnings with suggested rewrites. |
+| 190.2 | **Aggregation table auto-generation** | @semantic | `powerbi_import/tmdl_generator.py` | High | For DirectQuery tables with >1M rows (estimated from metadata), auto-generate Import-mode aggregation tables with `alternateOf` annotations. Configure rollup grain (daily, weekly, monthly). |
+| 190.3 | **Hybrid storage advisor** | @assessor | `powerbi_import/strategy_advisor.py` | Medium | Extend strategy advisor: recommend which tables should be Import (small lookups), which DirectQuery (large facts), and which need aggregation tables. Output: per-table storage mode recommendation with rationale. |
+| 190.4 | **Real-time dataset hints** | @semantic | `powerbi_import/tmdl_generator.py` | Low | For Tableau workbooks with <5min extract refresh schedules, emit migration note recommending PBI streaming dataset or push dataset configuration. |
+| 190.5 | **Tests** | @tester | `tests/test_directquery_optimization.py` (new) | Medium | 25+ tests: query folding analysis, aggregation table generation, hybrid storage advisor, real-time hints. |
+
+---
+
+### Sprint 191 — Paginated Report Generation (@visual, @orchestrator)
+
+**Goal:** Convert Tableau print-optimized layouts to PBI paginated reports (RDL format) for pixel-perfect PDF output.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 191.1 | **RDL generator** | @visual | `powerbi_import/rdl_generator.py` (new) | High | Generate Report Definition Language (RDL) XML for paginated reports. Map Tableau worksheets to RDL tablix/chart/gauge body items. Support page headers/footers with page numbers, dates, report title. |
+| 191.2 | **Print layout detection** | @extractor | `tableau_export/extract_tableau_data.py` | Medium | Detect Tableau "print-optimized" dashboards (specific size targets: Letter 8.5×11, A4, Legal). Flag for paginated report generation. Extract page header/footer text. |
+| 191.3 | **Table → tablix mapping** | @visual | `powerbi_import/rdl_generator.py` | Medium | Tableau text/cross-tab worksheets → RDL tablix with row groups, column groups, subtotals, formatting. Map Tableau number formats to RDL format strings. |
+| 191.4 | **CLI integration** | @orchestrator | `migrate.py` | Low | `--paginated` flag: generate `.rdl` alongside `.pbip`. `--paginated-only` for paginated-report-only output. `--page-size letter|a4|legal|custom`. |
+| 191.5 | **Tests** | @tester | `tests/test_paginated_reports.py` (new) | Medium | 25+ tests: RDL XML structure, tablix generation, page header/footer, format string mapping, print layout detection. |
+
+---
+
+### Sprint 192 — Streaming & Push Dataset Support (@deployer, @semantic)
+
+**Goal:** For operational dashboards requiring sub-minute refresh, generate PBI streaming/push dataset configurations that can receive data via REST API or EventHub.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 192.1 | **Streaming dataset schema** | @semantic | `powerbi_import/streaming_config.py` (new) | Medium | Generate PBI streaming dataset JSON schema from TMDL table definitions. Map column types to streaming-compatible types. |
+| 192.2 | **Push data endpoint template** | @deployer | `powerbi_import/streaming_config.py` | Medium | Generate Python/PowerShell scripts that push data to PBI streaming dataset REST API. Include authentication, rate limiting, and error handling. |
+| 192.3 | **EventHub integration config** | @deployer | `powerbi_import/streaming_config.py` | Medium | For Azure EventHub-sourced Tableau extracts, generate PBI real-time dataset with EventHub binding configuration. |
+| 192.4 | **Refresh strategy migration** | @deployer | `powerbi_import/refresh_generator.py` | Low | Map Tableau extract refresh frequency to PBI refresh strategy: ≤5min → streaming, ≤15min → DirectQuery, ≤1hr → incremental, >1hr → scheduled. |
+| 192.5 | **Tests** | @tester | `tests/test_streaming_config.py` (new) | Medium | 20+ tests: streaming schema, push endpoint, EventHub config, refresh strategy mapping. |
+
+---
+
+### Sprint 193 — Cross-Platform Data Validation v2 (@assessor, @tester)
+
+**Goal:** Upgrade the equivalence testing framework to support automated visual validation against live PBI Service deployments.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 193.1 | **Live dataset query runner** | @assessor | `powerbi_import/equivalence_tester.py` | High | Execute DAX queries against deployed PBI datasets via REST API. Compare measure values against Tableau Server query results. Tolerance-based comparison (±0.01% for numerics, exact for strings). |
+| 193.2 | **Visual regression runner** | @assessor | `powerbi_import/equivalence_tester.py` | Medium | Capture PBI report page screenshots via PBI REST API export. Compare against Tableau view screenshots (SSIM ≥ 0.85). Generate side-by-side diff HTML report. |
+| 193.3 | **Automated validation pipeline** | @tester | `tests/test_live_validation.py` (new) | Medium | Opt-in CI job: deploy sample workbooks to PBI Service → run equivalence tests → capture regression snapshots → generate validation report. Requires `PBI_WORKSPACE_ID` env var. |
+| 193.4 | **Validation dashboard** | @assessor | `powerbi_import/equivalence_tester.py` | Low | HTML dashboard: per-measure pass/fail, per-visual SSIM score, per-workbook overall confidence. Trend line across migration versions. |
+| 193.5 | **Tests** | @tester | `tests/test_equivalence_v2.py` (new) | Medium | 20+ tests: query runner (mock PBI API), SSIM calculation, diff report, dashboard generation. |
+
+---
+
+### Sprint 194 — v41.0.0 Release & Hardening (All Agents)
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 194.1 | **Version bump** | @orchestrator | `pyproject.toml`, `CHANGELOG.md` | Low | `40.0.0` → `41.0.0`. |
+| 194.2 | **Paginated report validation** | @tester | `tests/test_v41_e2e.py` (new) | High | E2E: extract → generate PBIP + RDL → validate both → deploy (mock). 20+ tests. |
+| 194.3 | **Docs refresh** | @orchestrator | `docs/PAGINATED_REPORTS.md` (new), `docs/STREAMING_GUIDE.md` (new) | Medium | Paginated report format reference, streaming dataset setup guide. |
+| 194.4 | **Test baseline** | @tester | — | — | Target: **9,800+** tests. |
+
+### v41.0.0 Success Criteria
+
+| Metric | Target | Owner |
+|--------|--------|-------|
+| DirectQuery optimization | Query folding analysis + aggregation tables + hybrid advisor | @wiring, @semantic |
+| Paginated reports | RDL generation from Tableau print layouts | @visual |
+| Streaming datasets | Push/EventHub dataset config from high-frequency extracts | @deployer |
+| Live validation | Automated measure comparison against deployed PBI datasets | @assessor |
+| Tests | **9,800+** | @tester |
+
+---
+
+## v42.0.0 — Ecosystem Maturity & GA Polish (Sprints 195–199)
+
+**Theme:** Final polish for **general availability** — comprehensive documentation, onboarding wizard, migration certification program, community engagement infrastructure, and long-term maintenance tooling.
+
+**Motivation:** The migration engine is technically complete. v42 focuses on the **last mile** — making the tool accessible to a broad audience of BI professionals who may not be Python experts, establishing quality certification for migration outputs, and building community infrastructure for long-term sustainability.
+
+---
+
+### Sprint 195 — Onboarding & Documentation Excellence (@orchestrator, @assessor)
+
+**Goal:** Zero-friction onboarding: a new user should go from download to first migration in <5 minutes.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 195.1 | **Interactive quickstart wizard** | @orchestrator | `powerbi_import/wizard.py` | Medium | Extend existing wizard: auto-detect Tableau Desktop installation, scan for `.twbx` files, suggest first workbook, run migration with guided prompts. Progress indicators at each step. |
+| 195.2 | **Video tutorial script generator** | @orchestrator | `scripts/generate_tutorial.py` (new) | Low | Generate step-by-step markdown tutorial with annotated CLI commands for common scenarios: single workbook, batch, shared model, Fabric deploy, server migration. |
+| 195.3 | **Migration cookbook** | @orchestrator | `docs/COOKBOOK.md` (new) | Medium | 20 recipes: "How to migrate a workbook with custom SQL", "How to handle LOD expressions", "How to merge 5 workbooks into one model", "How to deploy to Fabric", etc. Each recipe: problem → solution → CLI command → expected output. |
+| 195.4 | **API documentation** | @orchestrator | `docs/API_REFERENCE.md` (new) | Medium | Auto-generated module reference from docstrings. Public API surface for each module. Versioned since v28.0.0 REST API. |
+| 195.5 | **Tests** | @tester | `tests/test_onboarding.py` (new) | Low | 10+ tests: wizard flows, tutorial generation, cookbook code samples execute without error. |
+
+---
+
+### Sprint 196 — Migration Certification & Quality Badge (@reviewer, @assessor)
+
+**Goal:** Establish a migration quality certification system — each migrated `.pbip` gets a quality badge (Bronze/Silver/Gold/Platinum) based on automated testing results.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 196.1 | **Certification engine** | @reviewer | `powerbi_import/certification.py` (new) | High | Run automated quality checks: (1) TMDL validation pass, (2) PBIR schema validation pass, (3) Cross-artifact validation pass, (4) DAX syntax validation pass, (5) M validation pass, (6) Preceptor review ≥4★, (7) Zero self-healing repairs of severity ≥error. Score → badge: Bronze (≥3 checks), Silver (≥5), Gold (≥6), Platinum (all 7). |
+| 196.2 | **Certification badge in output** | @reviewer | `powerbi_import/certification.py` | Medium | Embed certification badge in migration report HTML. Generate `certification.json` in output directory with check results, score, badge, timestamp. |
+| 196.3 | **Certification history** | @assessor | `powerbi_import/certification.py` | Low | Track certification results across migration runs. Compare quality trends. Alert on quality regression (previous Gold → current Silver). |
+| 196.4 | **CI certification gate** | @tester | `.github/workflows/ci.yml` | Low | Optional CI step: fail build if any sample workbook migration drops below Silver certification. |
+| 196.5 | **Tests** | @tester | `tests/test_certification.py` (new) | Medium | 20+ tests: check execution, scoring algorithm, badge assignment, history tracking, regression detection. |
+
+---
+
+### Sprint 197 — Telemetry Insights & Usage Analytics (@deployer, @assessor)
+
+**Goal:** Aggregate telemetry data across migrations to provide insights: which Tableau features are most migrated, which cause the most approximations, which connectors are most common.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 197.1 | **Telemetry aggregation engine** | @deployer | `powerbi_import/telemetry_insights.py` (new) | Medium | Aggregate JSONL telemetry across multiple migration runs. Compute: top 10 Tableau functions used, top 10 approximated functions, connector distribution, visual type distribution, average fidelity score, self-healing hit rate. |
+| 197.2 | **Insights dashboard** | @assessor | `powerbi_import/telemetry_insights.py` | Medium | HTML dashboard: usage heatmap, approximation leaderboard, connector pie chart, fidelity trend line, self-healing effectiveness. Auto-generated when ≥10 migration records exist. |
+| 197.3 | **Improvement advisor** | @assessor | `powerbi_import/telemetry_insights.py` | Low | Based on aggregated data, recommend: "Your top 3 approximation sources are LOD EXCLUDE, WINDOW_SUM, and REGEX_MATCH — consider enabling LLM refinement for these." |
+| 197.4 | **Tests** | @tester | `tests/test_telemetry_insights.py` (new) | Medium | 15+ tests: aggregation, dashboard generation, advisor recommendations. |
+
+---
+
+### Sprint 198 — Windows CI, PyPI Polish & Distribution (@deployer, @tester)
+
+**Goal:** Close the Windows CI gap, optimize PyPI package, and ensure cross-platform reliability.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 198.1 | **Windows CI matrix** | @tester | `.github/workflows/ci.yml` | Medium | Add `windows-latest` to CI matrix. Fix any Windows-specific path issues (backslash, long paths, case sensitivity). |
+| 198.2 | **macOS CI matrix** | @tester | `.github/workflows/ci.yml` | Low | Add `macos-latest` to CI matrix. Verify Darwin-specific behavior. |
+| 198.3 | **PyPI metadata polish** | @deployer | `pyproject.toml` | Low | Add classifiers, project URLs, long description from README, optional dependency groups (`[fabric]`, `[web]`, `[llm]`). |
+| 198.4 | **Standalone executable** | @deployer | `scripts/build_exe.py` (new) | Medium | PyInstaller/Nuitka build script: produce standalone `migrate.exe` (Windows) / `migrate` (Linux/macOS) binary. No Python installation required. |
+| 198.5 | **Tests** | @tester | — | — | CI matrix validation across 3 OS × 3 Python versions. |
+
+---
+
+### Sprint 199 — v42.0.0 GA Release (All Agents)
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 199.1 | **Version bump** | @orchestrator | `pyproject.toml`, `CHANGELOG.md` | Low | `41.0.0` → `42.0.0`. |
+| 199.2 | **Full regression suite** | @tester | `tests/` | High | All 27+ real-world workbooks + 11 sample workbooks + synthetic benchmarks. Assert: 100% Platinum certification on samples, ≥Gold on real-world. |
+| 199.3 | **Release notes** | @orchestrator | `CHANGELOG.md`, `README.md` | Medium | Comprehensive v42 GA release notes with feature highlights, migration guide updates. |
+| 199.4 | **Announcement materials** | @orchestrator | `docs/GA_ANNOUNCEMENT.md` (new) | Low | Blog post draft, feature comparison table (Tableau vs PBI), migration ROI calculator template. |
+| 199.5 | **Test baseline** | @tester | — | — | Target: **10,000+** tests. |
+
+### v42.0.0 GA Success Criteria
+
+| Metric | Target | Owner |
+|--------|--------|-------|
+| Onboarding time | <5 minutes from download to first migration | @orchestrator |
+| Certification | Platinum on all sample workbooks, ≥Gold on real-world | @reviewer |
+| Cross-platform CI | Windows + macOS + Linux, Python 3.12/3.13 | @tester |
+| Standalone binary | Single-file executable for Windows/Linux/macOS | @deployer |
+| Documentation | Cookbook (20 recipes), API reference, extension guide, plugin SDK | @orchestrator |
+| Telemetry insights | Aggregated analytics across migration runs | @deployer |
+| **Tests** | **10,000+** | @tester |
+
+---
+
+## Sprint Sequencing (v38–v42)
+
+```
+v38.0.0 — Report Packaging & Developer Experience
+  Sprint 175 (PDF/PPTX) ──→ Sprint 176 (REST API v2)
+           ↓                        ↓
+  Sprint 177 (Web UI Polish) ──→ Sprint 178 (Artifact Diff)
+                                       ↓
+                             Sprint 179 (Release)
+
+v39.0.0 — Data Blending & Advanced Connectivity
+  Sprint 180 (Data Blending) ──→ Sprint 181 (12 Connectors)
+           ↓                          ↓
+  Sprint 182 (Custom SQL) ──→ Sprint 183 (OAuth/Gateway)
+                                       ↓
+                             Sprint 184 (Release)
+
+v40.0.0 — VS Code Extension & Interactive Tooling
+  Sprint 185 (Extension Core) ──→ Sprint 186 (DAX Preview)
+           ↓                           ↓
+  Sprint 187 (Notebook API v2) ──→ Sprint 188 (Plugin SDK)
+                                       ↓
+                             Sprint 189 (Release)
+
+v41.0.0 — Real-Time, Streaming & Paginated Reports
+  Sprint 190 (DirectQuery) ──→ Sprint 191 (Paginated/RDL)
+           ↓                         ↓
+  Sprint 192 (Streaming) ──→ Sprint 193 (Live Validation v2)
+                                       ↓
+                             Sprint 194 (Release)
+
+v42.0.0 — Ecosystem Maturity & GA Polish
+  Sprint 195 (Onboarding) ──→ Sprint 196 (Certification)
+           ↓                         ↓
+  Sprint 197 (Telemetry) ──→ Sprint 198 (Cross-Platform CI)
+                                       ↓
+                             Sprint 199 (GA Release)
+```
+
+---
+
+## Risk Matrix (v38–v42)
+
+| Risk | Impact | Mitigation |
+|------|--------|-----------|
+| VS Code extension TypeScript adds new tech stack | Medium | Keep extension thin — delegate all logic to Python subprocess. Extension is presentation layer only. |
+| Paginated reports (RDL) is complex XML format | High | Start with tablix/chart only. Complex report items (sub-reports, drill-through) deferred. |
+| Data blending complexity explosion | High | Limit to 5 blended datasources per worksheet. Circular blends emit error + migration note. |
+| Streaming dataset requires PBI Premium/PPU | Medium | Detect license type in assessment. Recommend refresh strategy compatible with license. |
+| Standalone binary size (PyInstaller) | Low | Strip test files and sample data from binary. Target <50MB. |
+| Plugin API stability across versions | Medium | Semantic versioning for plugin SDK. Deprecation warnings for changed hooks. |
+| Cross-platform path handling (Windows backslash) | Medium | Use `pathlib.Path` consistently. CI matrix catches regressions. |
+| Community marketplace quality control | Medium | Require passing tests for submitted patterns. Automated validation on merge. |
+
+---
+
+## Cumulative Metrics Targets
+
+| Version | Tests | Connectors | Visual Types | DAX Functions | Healers | Agents |
+|---------|-------|------------|--------------|---------------|---------|--------|
+| v28.5.8 | 7,099 | 63 | 118 | 125 | 13 | 14 |
+| v30.0.0 | 8,008 | 63 | 118 | 125 | 85 | 14 |
+| v37.1.0 | 8,518 | 63 | 145 | 125+ | 85 | 14 |
+| **v38.0.0** | **8,800+** | 63 | 145 | 125+ | 85 | 14 |
+| **v39.0.0** | **9,200+** | **75+** | 145 | 125+ | 85 | 14 |
+| **v40.0.0** | **9,500+** | 75+ | 145 | 125+ | 85 | 14 |
+| **v41.0.0** | **9,800+** | 75+ | 145+ | 125+ | 85 | 14 |
+| **v42.0.0** | **10,000+** | 75+ | 145+ | 125+ | 85 | 14 |
