@@ -25,6 +25,7 @@ All agents MUST follow these rules. They apply to every file in the project.
 3. **Read before write** — never assume file contents from memory
 4. **Test after every change** — run `pytest tests/ --tb=short -q`
 5. **Git hygiene** — commit only when tests pass, conventional messages (`feat:`, `fix:`, `test:`, `docs:`)
+6. **Identifier safety (Unicode + special chars)** — always preserve and validate field/table identifiers with accents, spaces, and symbols (for example `réalisé`, `%`, `/`, parentheses). Never assume ASCII-only names.
 
 ## Python Conventions
 
@@ -45,6 +46,7 @@ All agents MUST follow these rules. They apply to every file in the project.
 - `inject_m_steps()` can produce duplicate step names when called multiple times — use dedup suffix
 - Calendar `Date.MonthName()`/`Date.DayOfWeekName()` must pass explicit culture parameter
 - Connection string values must be escaped with `_m_escape_string()` before M injection
+- Regex/parsing for table/field refs must support Unicode identifiers and quoted names; include edge-case tests when touching ref parsing
 
 ## Preceptorship Loop — Quality Gate
 

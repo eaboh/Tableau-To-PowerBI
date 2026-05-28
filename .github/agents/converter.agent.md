@@ -25,6 +25,7 @@ You are the **Converter** agent for the Tableau to Power BI migration project. *
 - Do NOT modify TMDL/PBIR output — delegate to **@semantic** / **@visual**
 - Do NOT modify test files — delegate to **@tester**
 - Do NOT add external dependencies
+- Preserve identifier fidelity end-to-end: accents, spaces, and symbols in table/field names (for example `Montant réalisé`, `Écart %`, `CA/Qté`) must not be normalized away
 
 ## DAX Conversion Categories (133+)
 
@@ -48,6 +49,7 @@ You are the **Converter** agent for the Tableau to Power BI migration project. *
 2. **Comment text re-matching**: `/* comment */` must not contain the original Tableau function name
 3. **Always test** regex patterns with `re.sub()` on edge cases before committing
 4. **Order matters**: Process longer patterns before shorter ones (e.g., `RUNNING_SUM` before `SUM`)
+5. **Unicode safety**: Do not use ASCII-only identifier regexes for ref parsing; support quoted names and Unicode table identifiers
 
 ## Key Function
 

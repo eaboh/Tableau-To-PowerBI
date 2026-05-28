@@ -28,6 +28,7 @@ You co-own the following **DAX-specific post-processing blocks** in `powerbi_imp
 - Do NOT modify TMDL structure / PBIR output — delegate to **@generator**
 - Do NOT modify test files — delegate to **@tester**
 - Do NOT add external dependencies
+- Preserve table/field identifier fidelity: accents, spaces, and special characters in references must remain valid in emitted DAX and post-processing
 
 ## DAX Conversion Categories (133+)
 
@@ -74,6 +75,11 @@ Three-factor rule:
 3. No aggregation + no column refs → **measure**
 - Security functions (USERNAME, USERPRINCIPALNAME) → always measures
 - Dimension-role calcs referencing only other measures → reclassify as measure
+
+### 5. Identifier Character Fidelity
+- Keep quoted identifiers exact, including accents and symbols (example: `'Équipe'[Montant réalisé]`, `'sqlproxy'[Écart %]`, `'sqlproxy'[CA/Qté]`).
+- When parsing unquoted qualified refs, ensure Unicode-safe matching for table identifiers.
+- Any change touching ref parsing must include/retain tests for accent + space + special-character names.
 
 ## CRITICAL Regex Pitfalls (Learned the Hard Way)
 
