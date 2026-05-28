@@ -4,6 +4,7 @@
 import json
 import os
 import glob
+import csv
 import datetime
 
 from powerbi_import.html_template import (
@@ -19,6 +20,139 @@ ASSESSMENTS_DIR = os.path.join(BASE, "assessments")
 REPORTS_DIR = os.path.join(BASE, "reports")
 MIGRATED_DIR = os.path.join(BASE, "migrated")
 OUTPUT = os.path.join(BASE, "MIGRATION_ASSESSMENT_REPORT.html")
+
+
+EXCLUDED_NON_ANALYTIC_VISUALS = {
+    "slicer",
+    "image",
+    "textbox",
+    "shape",
+    "button",
+    "actionbutton",
+    "navigator",
+    "blank",
+}
+
+
+def _is_real_visual(item):
+    """Return True when a visual detail entry is an analytic/data visual."""
+    visual_type = str(
+        item.get("pbi_visual")
+        or item.get("visual_type")
+        or item.get("visualType")
+        or ""
+    ).strip().lower()
+    return visual_type not in EXCLUDED_NON_ANALYTIC_VISUALS
+
+
+def _count_visuals_with_values(meta):
+    """Count worksheet visuals that bind at least one value-bearing field.
+
+    This is broader than explicit DAX usage and includes visuals that use
+    measures/aggregations sourced from migrated numeric fields.
+    """
+    details = meta.get("visual_details", [])
+    count = 0
+    for item in details:
+        if _is_real_visual(item) and (item.get("dax_measures") or item.get("measures")):
+            count += 1
+    return count
+
+
+def _count_visuals_with_dax_measures(meta):
+    """Count worksheet visuals that have at least one explicit DAX measure bound.
+
+    Prefers ``visual_details[].dax_measures`` when present. For backward
+    compatibility with older metadata payloads, falls back to intersecting
+    ``visual_details[].measures`` with model-level ``dax_measure_names``.
+    """
+    details = meta.get("visual_details", [])
+    model_dax_measures = set(meta.get("dax_measure_names", []) or [])
+
+    count = 0
+    for item in details:
+        if not _is_real_visual(item):
+            continue
+        explicit = item.get("dax_measures") or []
+        if explicit:
+            count += 1
+            continue
+        if model_dax_measures:
+            bound = set(item.get("measures") or [])
+            if bound & model_dax_measures:
+                count += 1
+    return count
+
+
+def _build_report_summary_rows(reports, metadata):
+    """Build per-report summary rows for CSV export."""
+    rows = []
+    names = sorted(set(list(reports.keys()) + list(metadata.keys())))
+    for name in names:
+        rep = reports.get(name, {})
+        meta = metadata.get(name, {})
+
+        objects = meta.get("objects_converted", {})
+        tmdl = meta.get("tmdl_stats", {})
+        generated = meta.get("generated_output", {})
+
+        sources = objects.get("datasources", 0)
+        if not sources:
+            table_mapping = rep.get("table_mapping", [])
+            sources = len({tm.get("source_datasource", "") for tm in table_mapping if tm.get("source_datasource")})
+
+        tables = tmdl.get("tables", 0)
+        if not tables:
+            table_mapping = rep.get("table_mapping", [])
+            tables = len({tm.get("target_table", "") for tm in table_mapping
+                          if tm.get("target_table") and not str(tm.get("target_table", "")).startswith("(")})
+
+        measures = tmdl.get("measures", 0)
+        fallback_visuals = generated.get("visuals", 0)
+        if not fallback_visuals:
+            fallback_visuals = rep.get("summary", {}).get("by_category", {}).get("visual", {}).get("total", 0)
+
+        visuals = _count_visuals_with_values(meta)
+        if visuals == 0 and not meta.get("visual_details"):
+            visuals = fallback_visuals
+        visuals_with_values = visuals
+        visuals_with_dax_measures = _count_visuals_with_dax_measures(meta)
+        if visuals:
+            visuals_with_dax_measures = min(visuals_with_dax_measures, visuals)
+
+        rows.append({
+            "artifact_name": name,
+            "artifact_type": "tableau_report",
+            "sources_count": int(sources or 0),
+            "tables_count": int(tables or 0),
+            "measures_count": int(measures or 0),
+            "visuals_count": int(visuals or 0),
+            "visuals_with_values_count": int(visuals_with_values or 0),
+            "visuals_with_dax_measures_count": int(visuals_with_dax_measures or 0),
+        })
+
+    return rows
+
+
+def _write_summary_csv(csv_path, rows):
+    """Write summary counters as CSV."""
+    headers = [
+        "artifact_name",
+        "artifact_type",
+        "sources_count",
+        "tables_count",
+        "measures_count",
+        "visuals_count",
+        "visuals_with_values_count",
+        "visuals_with_dax_measures_count",
+    ]
+    os.makedirs(os.path.dirname(csv_path) or ".", exist_ok=True)
+    with open(csv_path, "w", encoding="utf-8", newline="") as fh:
+        writer = csv.DictWriter(fh, fieldnames=headers)
+        writer.writeheader()
+        for row in rows:
+            writer.writerow(row)
+    return csv_path
 
 
 def load_assessments():
@@ -117,7 +251,17 @@ def generate_html(assessments, reports, metadata, lineage=None, pbi_validation=N
     total_columns = sum(m.get("tmdl_stats", {}).get("columns", 0) for m in metadata.values())
     total_relationships = sum(m.get("tmdl_stats", {}).get("relationships", 0) for m in metadata.values())
     total_pages = sum(m.get("generated_output", {}).get("pages", 0) for m in metadata.values())
-    total_visuals = sum(m.get("generated_output", {}).get("visuals", 0) for m in metadata.values())
+    total_visuals = 0
+    for m in metadata.values():
+        count = _count_visuals_with_values(m)
+        if count == 0 and not m.get("visual_details"):
+            count = int(m.get("generated_output", {}).get("visuals", 0) or 0)
+        total_visuals += count
+    total_visuals_with_dax_measures = 0
+    for m in metadata.values():
+        count = _count_visuals_with_dax_measures(m)
+        visuals = int(m.get("generated_output", {}).get("visuals", 0) or 0)
+        total_visuals_with_dax_measures += min(count, visuals) if visuals else count
 
     # Aggregate by-category breakdown
     cat_totals = {}
@@ -151,7 +295,11 @@ def generate_html(assessments, reports, metadata, lineage=None, pbi_validation=N
             "columns": tmdl.get("columns", 0),
             "relationships": tmdl.get("relationships", 0),
             "pages": gen.get("pages", 0),
-            "visuals": gen.get("visuals", 0),
+            "visuals": _count_visuals_with_values(m) if m.get("visual_details") else gen.get("visuals", 0),
+            "visuals_with_dax_measure": min(
+                _count_visuals_with_dax_measures(m),
+                _count_visuals_with_values(m) if m.get("visual_details") else int(m.get("generated_output", {}).get("visuals", 0) or 0)
+            ) if (_count_visuals_with_values(m) if m.get("visual_details") else int(m.get("generated_output", {}).get("visuals", 0) or 0)) else _count_visuals_with_dax_measures(m),
             "calculations": obj.get("calculations", 0),
             "filters": obj.get("filters", 0),
             "worksheets": obj.get("worksheets", 0),
@@ -226,12 +374,13 @@ def generate_html(assessments, reports, metadata, lineage=None, pbi_validation=N
         stat_card(total_relationships, "Relationships", accent="teal"),
         stat_card(total_pages, "Report Pages"),
         stat_card(total_visuals, "Visuals"),
+        stat_card(total_visuals_with_dax_measures, "Visuals With DAX Measure", accent="purple"),
     ])
 
     # Workbook Complexity Heatmap
     if wb_complexity:
         dims = ("tables", "columns", "measures", "relationships", "worksheets",
-                "dashboards", "calculations", "filters", "pages", "visuals")
+            "dashboards", "calculations", "filters", "pages", "visuals", "visuals_with_dax_measure")
         maxima = {}
         for dim in dims:
             maxima[dim] = max((v.get(dim, 0) for v in wb_complexity.values()), default=1) or 1
@@ -306,6 +455,10 @@ def generate_html(assessments, reports, metadata, lineage=None, pbi_validation=N
         approx_val = s.get('approximate', 0)
         unsup_val = s.get('unsupported', 0)
         _em = "\u2014"
+        visuals_with_measure = _count_visuals_with_dax_measures(m)
+        total_visuals = int(gen.get('visuals', 0) or 0)
+        if total_visuals:
+            visuals_with_measure = min(visuals_with_measure, total_visuals)
         mig_rows.append([
             f'<strong>{esc(name)}</strong>',
             fidelity_bar(fid),
@@ -317,11 +470,12 @@ def generate_html(assessments, reports, metadata, lineage=None, pbi_validation=N
             str(tmdl.get('measures', '\u2014')),
             str(gen.get('pages', '\u2014')),
             str(gen.get('visuals', '\u2014')),
+            str(visuals_with_measure),
         ])
     html += '<div class="card">'
     html += data_table(
         ["Workbook", "Fidelity", "Total", "Exact", "Approx.", "Unsupported",
-         "Tables", "Measures", "Pages", "Visuals"],
+         "Tables", "Measures", "Pages", "Visuals", "Visuals With DAX Measure"],
         mig_rows, "mig-tbl", sortable=True, searchable=True,
     )
     html += '</div>'
@@ -838,6 +992,10 @@ def generate_dashboard(report_name, output_dir, migration_report_path=None, meta
     with open(html_path, "w", encoding="utf-8") as f:
         f.write(html)
 
+    summary_rows = _build_report_summary_rows(reports, metadata)
+    summary_csv_path = os.path.join(output_dir, f"MIGRATION_DASHBOARD_{report_name}_summary.csv")
+    _write_summary_csv(summary_csv_path, summary_rows)
+
     return html_path
 
 
@@ -904,6 +1062,10 @@ def generate_batch_dashboard(output_dir, workbook_results):
     with open(html_path, "w", encoding="utf-8") as f:
         f.write(html)
 
+    summary_rows = _build_report_summary_rows(reports, metadata)
+    summary_csv_path = os.path.join(output_dir, "MIGRATION_DASHBOARD_summary.csv")
+    _write_summary_csv(summary_csv_path, summary_rows)
+
     return html_path
 
 
@@ -920,7 +1082,12 @@ def main():
     with open(OUTPUT, "w", encoding="utf-8") as f:
         f.write(html)
 
+    summary_rows = _build_report_summary_rows(reports, metadata)
+    summary_csv_path = os.path.splitext(OUTPUT)[0] + "_summary.csv"
+    _write_summary_csv(summary_csv_path, summary_rows)
+
     print(f"Report generated: {OUTPUT}")
+    print(f"Summary CSV generated: {summary_csv_path}")
     print(f"  Size: {len(html):,} bytes")
 
 

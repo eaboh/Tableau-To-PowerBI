@@ -1,0 +1,64 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "33061b1fd55b4e059664",
+  "position": {
+    "x": 26,
+    "y": 513,
+    "z": 11000,
+    "height": 151,
+    "width": 120,
+    "tabOrder": 11000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Won Volume",
+                    "textStyle": {
+                      "color": "#333333",
+                      "fontSize": "8.0pt"
+                    }
+                  },
+                  {
+                    "value": "Æ"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "vs ",
+                    "textStyle": {
+                      "color": "#333333",
+                      "fontSize": "8.0pt"
+                    }
+                  },
+                  {
+                    "value": "Æ"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Total Opp Amount",
+                    "textStyle": {
+                      "color": "#333333",
+                      "fontSize": "8.0pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

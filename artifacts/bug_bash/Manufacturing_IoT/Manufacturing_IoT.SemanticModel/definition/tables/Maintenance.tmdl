@@ -1,9 +1,9 @@
 table Maintenance
-	lineageTag: 4c9c68fe-40e5-48cf-bb41-19e94bf60207
+	lineageTag: c1efcaa7-a782-42fd-afa2-08a478678481
 
 	column maint_id
 		dataType: int64
-		lineageTag: fe1527e4-8003-439c-a524-c97aaea4c5a8
+		lineageTag: a3e96689-a0d5-4b09-9c60-50b668288a5a
 		summarizeBy: sum
 		sourceColumn: maint_id
 		annotation Copilot_Hidden = true
@@ -12,7 +12,7 @@ table Maintenance
 
 	column machine_id
 		dataType: int64
-		lineageTag: 824be312-2cc9-4a6e-8719-f4b53d17c76c
+		lineageTag: 6e60cf87-93c5-4350-b421-9e46c0c37004
 		summarizeBy: sum
 		sourceColumn: machine_id
 		annotation Copilot_Hidden = true
@@ -22,16 +22,15 @@ table Maintenance
 	column maint_date
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: 14b2703a-be22-4fe2-97d8-2bda0f64b6c7
+		lineageTag: 0cddc102-dcd3-4b6b-9221-ffc84020e5f2
 		summarizeBy: none
 		sourceColumn: maint_date
-		dataCategory: DateTime
 
 		annotation SummarizationSetBy = Automatic
 
 	column maint_type
 		dataType: string
-		lineageTag: 1e217ccd-5ec8-41d2-8f13-6365952ddb9f
+		lineageTag: 7f230ac1-5454-40e6-a87d-31230a3fbfb7
 		summarizeBy: none
 		sourceColumn: maint_type
 
@@ -40,7 +39,7 @@ table Maintenance
 	column maint_cost
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 3583affb-de18-444b-9f84-a8b2b154e4fc
+		lineageTag: e3d724fc-3130-470e-b197-4e4483649a9b
 		summarizeBy: sum
 		sourceColumn: maint_cost
 
@@ -49,7 +48,7 @@ table Maintenance
 	column downtime_hours
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 271124cf-562b-4bc7-8047-6370c5de8a70
+		lineageTag: 5e5fb2af-256d-4e95-af8b-386fb61c40a6
 		summarizeBy: sum
 		sourceColumn: downtime_hours
 
@@ -57,7 +56,7 @@ table Maintenance
 
 	column technician
 		dataType: string
-		lineageTag: d2850cc3-d4da-45d0-aac7-7211d2d6295b
+		lineageTag: eaa0ddeb-a6a9-4fc0-be5b-f580319f8403
 		summarizeBy: none
 		sourceColumn: technician
 
@@ -65,13 +64,13 @@ table Maintenance
 
 	column description
 		dataType: string
-		lineageTag: 3f5e54a6-07b6-4a89-81aa-de20729c4053
+		lineageTag: 611583cc-3e33-42dc-a8ec-e240811feb6e
 		summarizeBy: none
 		sourceColumn: description
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Maintenance-b1886bb0-8fe5-41b1-a53b-69f7357e25bd' = m
+	partition 'Maintenance-af0ac6ab-9f05-44ec-ae5d-25fffac8845d' = m
 		mode: import
 		source =
 				let

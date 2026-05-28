@@ -1,0 +1,2587 @@
+
+================================================================================
+                      TABLEAU TO POWER BI BATCH MIGRATION                       
+================================================================================
+
+  Source:     C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world
+  Workbooks:  20
+  Output:     artifacts/bug_bash_rw
+
+
+================================================================================
+  [1/20] Migrating: Cache
+================================================================================
+
+[Step 1/2] TABLEAU OBJECTS EXTRACTION
+--------------------------------------------------------------------------------
+Source file: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\Cache.twbx
+Extracting C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\Cache.twbx...
+  Γ£ô 1 worksheets extracted
+  Γ£ô 0 dashboards extracted
+  Γ£ô 2 datasources extracted (filtered from 3 raw)
+  Γ£ô 7 calculations extracted
+  Γ£ô 7 parameters extracted
+  Γ£ô 0 filters extracted
+  Γ£ô 0 stories extracted
+  Γ£ô 0 actions extracted
+  Γ£ô 0 sets extracted
+  Γ£ô 0 groups extracted
+  Γ£ô 0 bins extracted
+  Γ£ô 0 hierarchies extracted
+  Γ£ô 0 sort orders extracted
+  Γ£ô 0 columns with aliases extracted
+  Γ£ô 0 custom SQL queries extracted
+  Γ£ô 0 user filters/security rules extracted
+  [OK] 0 datasource-level filters extracted
+  Γ£ô 0 custom geocoding refs extracted
+  Γ£ô 0 published datasource refs extracted
+  Γ£ô 0 data blending links extracted
+  Γ£ô 0 table extensions extracted
+  Γ£ô 4 linguistic synonyms extracted
+  ΓåÆ tableau_export/worksheets.json
+  ΓåÆ tableau_export/dashboards.json
+  ΓåÆ tableau_export/datasources.json
+  ΓåÆ tableau_export/calculations.json
+  ΓåÆ tableau_export/parameters.json
+  ΓåÆ tableau_export/filters.json
+  ΓåÆ tableau_export/stories.json
+  ΓåÆ tableau_export/actions.json
+  ΓåÆ tableau_export/sets.json
+  ΓåÆ tableau_export/groups.json
+  ΓåÆ tableau_export/bins.json
+  ΓåÆ tableau_export/hierarchies.json
+  ΓåÆ tableau_export/sort_orders.json
+  ΓåÆ tableau_export/aliases.json
+  ΓåÆ tableau_export/custom_sql.json
+  ΓåÆ tableau_export/user_filters.json
+  ΓåÆ tableau_export/datasource_filters.json
+  ΓåÆ tableau_export/custom_geocoding.json
+  ΓåÆ tableau_export/published_datasources.json
+  ΓåÆ tableau_export/data_blending.json
+  ΓåÆ tableau_export/hyper_files.json
+  ΓåÆ tableau_export/table_extensions.json
+  ΓåÆ tableau_export/linguistic_schema.json
+Γ£ô Extraction complete
+
+Γ£ô Extraction completed successfully
+
+[Step 2/2] POWER BI PROJECT GENERATION
+--------------------------------------------------------------------------------
+================================================================================
+IMPORT POWER BI
+================================================================================
+
+  Report: Cache
+  Datasources: 2
+  Worksheets: 1
+  Calculations: 7
+
+  Generating Power BI Project (.pbip)...
+
+├░┼╕ΓÇ¥┬¿ Generating Power BI Project: Cache
+  ├ó┼ôΓÇ£ .pbip file created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\Cache\Cache.pbip
+  ΓÜá∩╕Å  Relation ΓåÆ 'Calendar.Date' set to manyToMany (peer table, 8/5 cols ΓëÑ 70%).
+  Γ£ô TMDL model created with:
+    - 9 tables
+    - 20 columns
+    - 8 DAX measures
+    - 1 relationships
+    - 1 hierarchies
+  ├ó┼ôΓÇ£ SemanticModel created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\Cache\Cache.SemanticModel
+  ├░┼╕ΓÇ£┼á 1 worksheet pages created (1 visual each)
+  ├ó┼ôΓÇ£ Report created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\Cache\Cache.Report
+  ├ó┼ôΓÇ£ Metadata created
+2026-05-28 17:02:41 [INFO] powerbi_import.permission_mapper: Credential template written: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\Cache\credentials_template.json
+  ├ó┼ôΓÇ£ Credential template: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\Cache\credentials_template.json
+
+├ó┼ôΓÇª Power BI Project generated: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\Cache
+   ├░┼╕ΓÇ£ΓÇÜ Open in Power BI Desktop: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\Cache\Cache.pbip
+  [OK] Power BI Project created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\Cache
+
+================================================================================
+IMPORT COMPLETE
+================================================================================
+
+[OK] Power BI Projects (.pbip) generated automatically
+   Open the .pbip files in Power BI Desktop
+
+
+Γ£ô Power BI project generated successfully
+2026-05-28 17:02:42 [INFO] tableau_to_powerbi: Migration report saved: artifacts/bug_bash_rw\migration_report_Cache_20260528_170241.json
+
+========================================================================
+  MIGRATION REPORT: Cache
+========================================================================
+  Total items converted: 17
+  Extraction score:      100.0%
+
+    Exact:          17
+    Approximate:     0
+    Placeholder:     0
+    Unsupported:     0
+    Skipped:         0
+
+  By category:
+    calculation             7 items  (100% exact)
+    datasource              2 items  (100% exact)
+    parameter               7 items  (100% exact)
+    visual                  1 items  (100% exact)
+
+  Completeness grade:    A (100.0%)
+  Per-category extraction:
+    calculation          100.0%  (7 items)
+    datasource           100.0%  (2 items)
+    parameter            100.0%  (7 items)
+    visual               100.0%  (1 items)
+
+  Table mapping (source ΓåÆ target):
+    Source Datasource              Source Table                   Target Table                   Columns
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    Sales Target                   Extract                        Extract                              5
+
+========================================================================
+  ≡ƒôü Extracted 9 data file(s) from TWBX into artifacts/bug_bash_rw\Cache\Data
+  ≡ƒôé DataFolder updated ΓåÆ C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\Cache\Data\en_US-US
+  ≡ƒôé PowerQuery/ folder: 3 M expression file(s) exported
+  ≡ƒôé DAX/ folder: 8 DAX measure file(s) exported
+
+================================================================================
+  [2/20] Migrating: RESTAPISample
+================================================================================
+
+[Step 1/2] TABLEAU OBJECTS EXTRACTION
+--------------------------------------------------------------------------------
+Source file: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\RESTAPISample.twb
+Extracting C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\RESTAPISample.twb...
+  Γ£ô 7 worksheets extracted
+  Γ£ô 1 dashboards extracted
+  Γ£ô 1 datasources extracted (filtered from 10 raw)
+  Γ£ô 4 calculations extracted
+  Γ£ô 0 parameters extracted
+  Γ£ô 16 filters extracted
+  Γ£ô 0 stories extracted
+  Γ£ô 6 actions extracted
+  Γ£ô 0 sets extracted
+  Γ£ô 5 groups extracted
+  Γ£ô 0 bins extracted
+  Γ£ô 0 hierarchies extracted
+  Γ£ô 1 sort orders extracted
+  Γ£ô 2 columns with aliases extracted
+  Γ£ô 0 custom SQL queries extracted
+  Γ£ô 0 user filters/security rules extracted
+  [OK] 0 datasource-level filters extracted
+  Γ£ô 0 custom geocoding refs extracted
+  Γ£ô 0 published datasource refs extracted
+  Γ£ô 0 data blending links extracted
+  Γ£ô 0 table extensions extracted
+  Γ£ô 14 linguistic synonyms extracted
+  ΓåÆ tableau_export/worksheets.json
+  ΓåÆ tableau_export/dashboards.json
+  ΓåÆ tableau_export/datasources.json
+  ΓåÆ tableau_export/calculations.json
+  ΓåÆ tableau_export/parameters.json
+  ΓåÆ tableau_export/filters.json
+  ΓåÆ tableau_export/stories.json
+  ΓåÆ tableau_export/actions.json
+  ΓåÆ tableau_export/sets.json
+  ΓåÆ tableau_export/groups.json
+  ΓåÆ tableau_export/bins.json
+  ΓåÆ tableau_export/hierarchies.json
+  ΓåÆ tableau_export/sort_orders.json
+  ΓåÆ tableau_export/aliases.json
+  ΓåÆ tableau_export/custom_sql.json
+  ΓåÆ tableau_export/user_filters.json
+  ΓåÆ tableau_export/datasource_filters.json
+  ΓåÆ tableau_export/custom_geocoding.json
+  ΓåÆ tableau_export/published_datasources.json
+  ΓåÆ tableau_export/data_blending.json
+  ΓåÆ tableau_export/hyper_files.json
+  ΓåÆ tableau_export/table_extensions.json
+  ΓåÆ tableau_export/linguistic_schema.json
+Γ£ô Extraction complete
+
+Γ£ô Extraction completed successfully
+
+[Step 2/2] POWER BI PROJECT GENERATION
+--------------------------------------------------------------------------------
+================================================================================
+IMPORT POWER BI
+================================================================================
+
+  Report: RESTAPISample
+  Datasources: 1
+  Worksheets: 7
+  Calculations: 4
+
+  Generating Power BI Project (.pbip)...
+
+├░┼╕ΓÇ¥┬¿ Generating Power BI Project: RESTAPISample
+  ├ó┼ôΓÇ£ .pbip file created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\RESTAPISample\RESTAPISample.pbip
+  Γ£ô  Relation ΓåÆ 'Calendar.Date' set to manyToOne (Calendar table).
+  Γ£ô TMDL model created with:
+    - 2 tables
+    - 26 columns
+    - 8 DAX measures
+    - 1 relationships
+    - 1 hierarchies
+  ├ó┼ôΓÇ£ SemanticModel created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\RESTAPISample\RESTAPISample.SemanticModel
+  ├░┼╕ΓÇ£┼á Page 'GDP per Capita Dashboard': 3 visuals created
+  ├ó┼ôΓÇ£ Report created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\RESTAPISample\RESTAPISample.Report
+  ├ó┼ôΓÇ£ Metadata created
+2026-05-28 17:02:43 [INFO] powerbi_import.permission_mapper: Credential template written: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\RESTAPISample\credentials_template.json
+  ├ó┼ôΓÇ£ Credential template: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\RESTAPISample\credentials_template.json
+
+├ó┼ôΓÇª Power BI Project generated: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\RESTAPISample
+   ├░┼╕ΓÇ£ΓÇÜ Open in Power BI Desktop: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\RESTAPISample\RESTAPISample.pbip
+  [OK] Power BI Project created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\RESTAPISample
+
+================================================================================
+IMPORT COMPLETE
+================================================================================
+
+[OK] Power BI Projects (.pbip) generated automatically
+   Open the .pbip files in Power BI Desktop
+
+
+Γ£ô Power BI project generated successfully
+2026-05-28 17:02:43 [INFO] tableau_to_powerbi: Migration report saved: artifacts/bug_bash_rw\migration_report_RESTAPISample_20260528_170243.json
+
+========================================================================
+  MIGRATION REPORT: RESTAPISample
+========================================================================
+  Total items converted: 17
+  Extraction score:      100.0%
+
+    Exact:          17
+    Approximate:     0
+    Placeholder:     0
+    Unsupported:     0
+    Skipped:         0
+
+  By category:
+    calculation             4 items  (100% exact)
+    datasource              1 items  (100% exact)
+    group                   5 items  (100% exact)
+    visual                  7 items  (100% exact)
+
+  Completeness grade:    A (100.0%)
+  Per-category extraction:
+    calculation          100.0%  (4 items)
+    datasource           100.0%  (1 items)
+    group                100.0%  (5 items)
+    visual               100.0%  (7 items)
+
+  Table mapping (source ΓåÆ target):
+    Source Datasource              Source Table                   Target Table                   Columns
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    World Indicators               Extract                        Extract                             13
+
+========================================================================
+  ≡ƒôé DataFolder updated ΓåÆ C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\bug_bash_rw\\RESTAPISample\\Data
+  Γä╣∩╕Å  Place your data files in: C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\bug_bash_rw\\RESTAPISample\\Data
+  ≡ƒôé PowerQuery/ folder: 3 M expression file(s) exported
+  ≡ƒôé DAX/ folder: 2 DAX measure file(s) exported
+
+================================================================================
+  [3/20] Migrating: Salesforce
+================================================================================
+
+[Step 1/2] TABLEAU OBJECTS EXTRACTION
+--------------------------------------------------------------------------------
+Pre-flight summary:
+  [WARNING] newer_tableau_version: Workbook saved by Tableau 2026.1.0 (20261.26.0226.1626) ΓÇö newer than tested (2024.3)
+           ΓåÆ Migration may work but features added after are unsupported. Use --force to proceed.
+Source file: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\Salesforce.twbx
+Extracting C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\Salesforce.twbx...
+  Γ£ô 53 worksheets extracted
+  Γ£ô 8 dashboards extracted
+  Γ£ô 2 datasources extracted (filtered from 122 raw)
+  Γ£ô 212 calculations extracted
+  Γ£ô 52 parameters extracted
+  Γ£ô 69 filters extracted
+  Γ£ô 0 stories extracted
+  Γ£ô 3 actions extracted
+  Γ£ô 0 sets extracted
+  Γ£ô 0 groups extracted
+  Γ£ô 0 bins extracted
+  Γ£ô 0 hierarchies extracted
+  Γ£ô 0 sort orders extracted
+  Γ£ô 2 columns with aliases extracted
+  Γ£ô 0 custom SQL queries extracted
+  Γ£ô 0 user filters/security rules extracted
+  [OK] 0 datasource-level filters extracted
+  Γ£ô 0 custom geocoding refs extracted
+  Γ£ô 0 published datasource refs extracted
+  Γ£ô 9 data blending links extracted
+  Γ£ô 1 .hyper extract files detected
+2026-05-28 17:03:01 [DEBUG] extract_tableau_data: Hyper reader enriched 1 file(s)
+  Γ£ô 0 table extensions extracted
+  Γ£ô 1037 linguistic synonyms extracted
+  ΓåÆ tableau_export/worksheets.json
+  ΓåÆ tableau_export/dashboards.json
+  ΓåÆ tableau_export/datasources.json
+  ΓåÆ tableau_export/calculations.json
+  ΓåÆ tableau_export/parameters.json
+  ΓåÆ tableau_export/filters.json
+  ΓåÆ tableau_export/stories.json
+  ΓåÆ tableau_export/actions.json
+  ΓåÆ tableau_export/sets.json
+  ΓåÆ tableau_export/groups.json
+  ΓåÆ tableau_export/bins.json
+  ΓåÆ tableau_export/hierarchies.json
+  ΓåÆ tableau_export/sort_orders.json
+  ΓåÆ tableau_export/aliases.json
+  ΓåÆ tableau_export/custom_sql.json
+  ΓåÆ tableau_export/user_filters.json
+  ΓåÆ tableau_export/datasource_filters.json
+  ΓåÆ tableau_export/custom_geocoding.json
+  ΓåÆ tableau_export/published_datasources.json
+  ΓåÆ tableau_export/data_blending.json
+  ΓåÆ tableau_export/hyper_files.json
+  ΓåÆ tableau_export/table_extensions.json
+  ΓåÆ tableau_export/linguistic_schema.json
+Γ£ô Extraction complete
+
+Γ£ô Extraction completed successfully
+
+[Step 2/2] POWER BI PROJECT GENERATION
+--------------------------------------------------------------------------------
+================================================================================
+IMPORT POWER BI
+================================================================================
+
+  Report: Salesforce
+  Datasources: 2
+  Worksheets: 53
+  Calculations: 212
+
+  Generating Power BI Project (.pbip)...
+
+├░┼╕ΓÇ¥┬¿ Generating Power BI Project: Salesforce
+  ├ó┼ôΓÇ£ .pbip file created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\Salesforce\Salesforce.pbip
+2026-05-28 17:03:02 [WARNING] tmdl_generator: DAX conversion guard triggered for 'Calculation_703968976541376514' on table 'Owned By'
+2026-05-28 17:03:02 [WARNING] tmdl_generator: DAX conversion guard triggered for 'Calculation_928867483214106624' on table 'Owned By'
+2026-05-28 17:03:02 [WARNING] tmdl_generator: DAX conversion guard triggered for 'Rank Sales Value (for selected Opp Owner) (copy)_1048775823272144897' on table 'Owned By'
+2026-05-28 17:03:02 [WARNING] tmdl_generator: DAX conversion guard triggered for 'Rank Sales Value (for selected Opp Owner) (copy)_928867483237888003' on table 'Owned By'
+2026-05-28 17:03:02 [DEBUG] tmdl_generator: Wrapped bare column ref 'Owned By'[_Avg Probability (Expression)] ΓåÆ SUM('Owned By'[_Avg Probability (Expression)]) in measure 'Probability (bucket)'
+2026-05-28 17:03:02 [DEBUG] tmdl_generator: Wrapped bare column ref 'Owned By'[_Avg Probability (Expression)] ΓåÆ SUM('Owned By'[_Avg Probability (Expression)]) in measure 'Probability (bucket)'
+2026-05-28 17:03:02 [DEBUG] tmdl_generator: Wrapped bare column ref 'Owned By'[_Avg Probability (Expression)] ΓåÆ SUM('Owned By'[_Avg Probability (Expression)]) in measure 'Probability (bucket)'
+  ΓÜá∩╕Å  Relation ΓåÆ 'Account Created By.Id (Account Created By)' set to manyToMany (peer table, 239/214 cols ΓëÑ 70%).
+  ΓÜá∩╕Å  Relation ΓåÆ 'Account Owned By.Id (Account Owned By)' set to manyToMany (peer table, 239/214 cols ΓëÑ 70%).
+  ΓÜá∩╕Å  Relation ΓåÆ 'Account.Id (Account)' set to manyToMany (peer table, 214/113 cols ΓëÑ 70%).
+  ΓÜá∩╕Å  Relation ΓåÆ 'Created By.Id (Created By)' set to manyToMany (peer table, 239/113 cols ΓëÑ 70%).
+  ΓÜá∩╕Å  Relation ΓåÆ 'Owned By.Id' set to manyToMany (peer table, 287/113 cols ΓëÑ 70%).
+  Γ£ô  Relation ΓåÆ 'Calendar.Date' set to manyToOne bothDirections (Calendar bridge).
+  Γ£ô  Relation ΓåÆ 'Calendar.Date' set to manyToOne bothDirections (Calendar bridge).
+  Γ£ô  Relation ΓåÆ 'Calendar.Date' set to manyToOne bothDirections (Calendar bridge).
+  Γ£ô  Relation ΓåÆ 'Calendar.Date' set to manyToOne bothDirections (Calendar bridge).
+  Γ£ô  Relation ΓåÆ 'Calendar.Date' set to manyToOne bothDirections (Calendar bridge).
+  Γ£ô  Relation ΓåÆ 'Calendar.Date' set to manyToOne bothDirections (Calendar bridge).
+  ΓÜá∩╕Å  Relation ΓåÆ 'Created By.analyticsdemo_batch_id__c (Created By)' set to manyToMany (peer table, 239/287 cols ΓëÑ 70%).
+  ΓÜá∩╕Å  Relation ΓåÆ 'Account.analyticsdemo_batch_id__c (Account)' set to manyToMany (peer table, 214/287 cols ΓëÑ 70%).
+  ΓÜá Deactivated relationship (ambiguous path): Owned By.analyticsdemo_batch_id__c (Owned By) ΓåÆ Created By.analyticsdemo_batch_id__c (Created By)
+  ΓÜá Deactivated relationship (ambiguous path): Owned By.analyticsdemo_batch_id__c (Owned By) ΓåÆ Account.analyticsdemo_batch_id__c (Account)
+  ΓÜá Deactivated relationship (ambiguous path): Owned By.CreatedDate (Owned By) ΓåÆ Calendar.Date
+  ΓÜá Deactivated relationship (ambiguous path): Created By.CreatedDate (Created By) ΓåÆ Calendar.Date
+  ΓÜá Deactivated relationship (ambiguous path): Account.Application Date ΓåÆ Calendar.Date
+  ΓÜá Deactivated relationship (ambiguous path): Account Owned By.CreatedDate (Account Owned By) ΓåÆ Calendar.Date
+  ΓÜá Deactivated relationship (ambiguous path): Account Created By.CreatedDate (Account Created By) ΓåÆ Calendar.Date
+  ΓÜò Self-heal: Added 1 placeholder column(s) to 'Owned By' for measure 'KPI_SalesCycle_Calculation'
+  Γ£ô TMDL model created with:
+    - 15 tables
+    - 1352 columns
+    - 175 DAX measures
+    - 13 relationships
+    - 1 hierarchies
+  ├ó┼ôΓÇ£ SemanticModel created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\Salesforce\Salesforce.SemanticModel
+  ├░┼╕ΓÇ£┼á Page 'Conversion': 18 visuals created
+  ├░┼╕ΓÇ£┼á Page 'Executive Summary': 33 visuals created
+  ├░┼╕ΓÇ£┼á Page 'Home': 23 visuals created
+  ├░┼╕ΓÇ£┼á Page 'Opportunity Owner': 74 visuals created
+  ├░┼╕ΓÇ£┼á Page 'Opportunity Owners': 25 visuals created
+  ├░┼╕ΓÇ£┼á Page 'Performance Review': 22 visuals created
+  ├░┼╕ΓÇ£┼á Page 'Pipeline Analysis': 13 visuals created
+  ├░┼╕ΓÇ£┼á Page 'Trend': 13 visuals created
+2026-05-28 17:03:15 [INFO] pbip_generator: Self-Healing v3.4 applied 148 report-side repair(s)
+  ├ó┼ôΓÇ£ Report created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\Salesforce\Salesforce.Report
+  ├ó┼ôΓÇ£ Metadata created
+2026-05-28 17:03:16 [INFO] powerbi_import.permission_mapper: Credential template written: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\Salesforce\credentials_template.json
+  ├ó┼ôΓÇ£ Credential template: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\Salesforce\credentials_template.json
+
+├ó┼ôΓÇª Power BI Project generated: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\Salesforce
+   ├░┼╕ΓÇ£ΓÇÜ Open in Power BI Desktop: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\Salesforce\Salesforce.pbip
+  [OK] Power BI Project created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\Salesforce
+
+================================================================================
+IMPORT COMPLETE
+================================================================================
+
+[OK] Power BI Projects (.pbip) generated automatically
+   Open the .pbip files in Power BI Desktop
+
+
+Γ£ô Power BI project generated successfully
+2026-05-28 17:03:16 [INFO] tableau_to_powerbi: Migration report saved: artifacts/bug_bash_rw\migration_report_Salesforce_20260528_170316.json
+
+========================================================================
+  MIGRATION REPORT: Salesforce
+========================================================================
+  Total items converted: 319
+  Extraction score:      100.0%
+
+    Exact:         307
+    Approximate:     0
+    Placeholder:     0
+    Unsupported:     0
+    Skipped:        12
+
+  By category:
+    calculation           212 items  (94% exact)
+    datasource              2 items  (100% exact)
+    parameter              52 items  (100% exact)
+    visual                 53 items  (100% exact)
+
+  Completeness grade:    A (100.0%)
+  Per-category extraction:
+    calculation          100.0%  (212 items)
+    datasource           100.0%  (2 items)
+    parameter            100.0%  (52 items)
+    visual               100.0%  (53 items)
+
+  Table mapping (source ΓåÆ target):
+    Source Datasource              Source Table                   Target Table                   Columns
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    Opportunity                    Opportunities                  Opportunities                      113
+    Opportunity                    Owned By                       Owned By                           240
+    Opportunity                    Created By                     Created By                         239
+    Opportunity                    Account                        Account                            214
+    Opportunity                    Account Owned By               Account Owned By                   239
+    Opportunity                    Account Created By             Account Created By                 239
+
+========================================================================
+  ≡ƒôü Extracted 8 data file(s) from TWBX into artifacts/bug_bash_rw\Salesforce\Data
+  ≡ƒôè Converted Hyper ΓåÆ 3 CSV file(s)
+  ≡ƒôé DataFolder updated ΓåÆ C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\Salesforce\Data
+  ≡ƒôé PowerQuery/ folder: 8 M expression file(s) exported
+  ≡ƒôé DAX/ folder: 8 DAX measure file(s) exported
+
+================================================================================
+  [4/20] Migrating: SampleDS
+================================================================================
+
+[Step 1/2] TABLEAU OBJECTS EXTRACTION
+--------------------------------------------------------------------------------
+Source file: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\SampleDS.tds
+Extracting C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\SampleDS.tds...
+  Γ£ô 0 worksheets extracted
+  Γ£ô 0 dashboards extracted
+  Γ£ô 1 datasources extracted (filtered from 1 raw)
+  Γ£ô 1 calculations extracted
+  Γ£ô 0 parameters extracted
+  Γ£ô 0 filters extracted
+  Γ£ô 0 stories extracted
+  Γ£ô 0 actions extracted
+  Γ£ô 0 sets extracted
+  Γ£ô 0 groups extracted
+  Γ£ô 0 bins extracted
+  Γ£ô 0 hierarchies extracted
+  Γ£ô 0 sort orders extracted
+  Γ£ô 0 columns with aliases extracted
+  Γ£ô 0 custom SQL queries extracted
+  Γ£ô 0 user filters/security rules extracted
+  [OK] 0 datasource-level filters extracted
+  Γ£ô 0 custom geocoding refs extracted
+  Γ£ô 0 published datasource refs extracted
+  Γ£ô 0 data blending links extracted
+  Γ£ô 0 table extensions extracted
+  Γ£ô 3 linguistic synonyms extracted
+  ΓåÆ tableau_export/worksheets.json
+  ΓåÆ tableau_export/dashboards.json
+  ΓåÆ tableau_export/datasources.json
+  ΓåÆ tableau_export/calculations.json
+  ΓåÆ tableau_export/parameters.json
+  ΓåÆ tableau_export/filters.json
+  ΓåÆ tableau_export/stories.json
+  ΓåÆ tableau_export/actions.json
+  ΓåÆ tableau_export/sets.json
+  ΓåÆ tableau_export/groups.json
+  ΓåÆ tableau_export/bins.json
+  ΓåÆ tableau_export/hierarchies.json
+  ΓåÆ tableau_export/sort_orders.json
+  ΓåÆ tableau_export/aliases.json
+  ΓåÆ tableau_export/custom_sql.json
+  ΓåÆ tableau_export/user_filters.json
+  ΓåÆ tableau_export/datasource_filters.json
+  ΓåÆ tableau_export/custom_geocoding.json
+  ΓåÆ tableau_export/published_datasources.json
+  ΓåÆ tableau_export/data_blending.json
+  ΓåÆ tableau_export/hyper_files.json
+  ΓåÆ tableau_export/table_extensions.json
+  ΓåÆ tableau_export/linguistic_schema.json
+Γ£ô Extraction complete
+
+Γ£ô Extraction completed successfully
+
+[Step 2/2] POWER BI PROJECT GENERATION
+--------------------------------------------------------------------------------
+================================================================================
+IMPORT POWER BI
+================================================================================
+
+  Report: SampleDS
+  Datasources: 1
+  Worksheets: 0
+  Calculations: 1
+
+  Generating Power BI Project (.pbip)...
+
+├░┼╕ΓÇ¥┬¿ Generating Power BI Project: SampleDS
+  ├ó┼ôΓÇ£ .pbip file created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\SampleDS\SampleDS.pbip
+  Γ£ô TMDL model created with:
+    - 1 tables
+    - 4 columns
+    - 1 DAX measures
+    - 0 relationships
+  ├ó┼ôΓÇ£ SemanticModel created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\SampleDS\SampleDS.SemanticModel
+  ├óΓÇ₧┬╣ Datasource-only mode: SemanticModel generated (no Report)
+  ├ó┼ôΓÇ£ Metadata created
+2026-05-28 17:03:26 [INFO] powerbi_import.permission_mapper: Credential template written: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\SampleDS\credentials_template.json
+  ├ó┼ôΓÇ£ Credential template: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\SampleDS\credentials_template.json
+
+├ó┼ôΓÇª Power BI Project generated: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\SampleDS
+   ├░┼╕ΓÇ£ΓÇÜ Open in Power BI Desktop: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\SampleDS\SampleDS.pbip
+  [OK] Power BI Project created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\SampleDS
+
+================================================================================
+IMPORT COMPLETE
+================================================================================
+
+[OK] Power BI Projects (.pbip) generated automatically
+   Open the .pbip files in Power BI Desktop
+
+
+Γ£ô Power BI project generated successfully
+2026-05-28 17:03:26 [INFO] tableau_to_powerbi: Migration report saved: artifacts/bug_bash_rw\migration_report_SampleDS_20260528_170326.json
+
+========================================================================
+  MIGRATION REPORT: SampleDS
+========================================================================
+  Total items converted: 2
+  Extraction score:      100.0%
+
+    Exact:           2
+    Approximate:     0
+    Placeholder:     0
+    Unsupported:     0
+    Skipped:         0
+
+  By category:
+    calculation             1 items  (100% exact)
+    datasource              1 items  (100% exact)
+
+  Completeness grade:    A (100.0%)
+  Per-category extraction:
+    calculation          100.0%  (1 items)
+    datasource           100.0%  (1 items)
+
+  Table mapping (source ΓåÆ target):
+    Source Datasource              Source Table                   Target Table                   Columns
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    Unknown                        xy                             xy                                   4
+
+========================================================================
+  ≡ƒôé DataFolder updated ΓåÆ C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\bug_bash_rw\\SampleDS\\Data
+  Γä╣∩╕Å  Place your data files in: C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\bug_bash_rw\\SampleDS\\Data
+  ≡ƒôé PowerQuery/ folder: 2 M expression file(s) exported
+  ≡ƒôé DAX/ folder: 1 DAX measure file(s) exported
+
+================================================================================
+  [5/20] Migrating: SampleFlow
+================================================================================
+
+[Step 1/2] PREP FLOW ANALYSIS
+--------------------------------------------------------------------------------
+  Flow: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\SampleFlow.tfl
+  ΓÜá No nodes found in Prep flow
+  ΓåÆ 0 inputs, 0 outputs, 0 transforms, 0 M queries [RED]
+
+[Step 2/2] EXPORT POWER QUERY M & SOURCES
+--------------------------------------------------------------------------------
+
+  [OK] Prep flow export completed ΓåÆ artifacts/bug_bash_rw\SampleFlow
+
+================================================================================
+  [6/20] Migrating: SampleWB
+================================================================================
+
+[Step 1/2] TABLEAU OBJECTS EXTRACTION
+--------------------------------------------------------------------------------
+Source file: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\SampleWB.twbx
+Extracting C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\SampleWB.twbx...
+  Γ£ô 7 worksheets extracted
+  Γ£ô 1 dashboards extracted
+  Γ£ô 1 datasources extracted (filtered from 10 raw)
+  Γ£ô 4 calculations extracted
+  Γ£ô 0 parameters extracted
+  Γ£ô 16 filters extracted
+  Γ£ô 0 stories extracted
+  Γ£ô 6 actions extracted
+  Γ£ô 0 sets extracted
+  Γ£ô 5 groups extracted
+  Γ£ô 0 bins extracted
+  Γ£ô 0 hierarchies extracted
+  Γ£ô 1 sort orders extracted
+  Γ£ô 2 columns with aliases extracted
+  Γ£ô 0 custom SQL queries extracted
+  Γ£ô 0 user filters/security rules extracted
+  [OK] 0 datasource-level filters extracted
+  Γ£ô 0 custom geocoding refs extracted
+  Γ£ô 0 published datasource refs extracted
+  Γ£ô 0 data blending links extracted
+  Γ£ô 0 table extensions extracted
+  Γ£ô 14 linguistic synonyms extracted
+  ΓåÆ tableau_export/worksheets.json
+  ΓåÆ tableau_export/dashboards.json
+  ΓåÆ tableau_export/datasources.json
+  ΓåÆ tableau_export/calculations.json
+  ΓåÆ tableau_export/parameters.json
+  ΓåÆ tableau_export/filters.json
+  ΓåÆ tableau_export/stories.json
+  ΓåÆ tableau_export/actions.json
+  ΓåÆ tableau_export/sets.json
+  ΓåÆ tableau_export/groups.json
+  ΓåÆ tableau_export/bins.json
+  ΓåÆ tableau_export/hierarchies.json
+  ΓåÆ tableau_export/sort_orders.json
+  ΓåÆ tableau_export/aliases.json
+  ΓåÆ tableau_export/custom_sql.json
+  ΓåÆ tableau_export/user_filters.json
+  ΓåÆ tableau_export/datasource_filters.json
+  ΓåÆ tableau_export/custom_geocoding.json
+  ΓåÆ tableau_export/published_datasources.json
+  ΓåÆ tableau_export/data_blending.json
+  ΓåÆ tableau_export/hyper_files.json
+  ΓåÆ tableau_export/table_extensions.json
+  ΓåÆ tableau_export/linguistic_schema.json
+Γ£ô Extraction complete
+
+Γ£ô Extraction completed successfully
+
+[Step 2/2] POWER BI PROJECT GENERATION
+--------------------------------------------------------------------------------
+================================================================================
+IMPORT POWER BI
+================================================================================
+
+  Report: SampleWB
+  Datasources: 1
+  Worksheets: 7
+  Calculations: 4
+
+  Generating Power BI Project (.pbip)...
+
+├░┼╕ΓÇ¥┬¿ Generating Power BI Project: SampleWB
+  ├ó┼ôΓÇ£ .pbip file created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\SampleWB\SampleWB.pbip
+  Γ£ô  Relation ΓåÆ 'Calendar.Date' set to manyToOne (Calendar table).
+  Γ£ô TMDL model created with:
+    - 2 tables
+    - 26 columns
+    - 8 DAX measures
+    - 1 relationships
+    - 1 hierarchies
+  ├ó┼ôΓÇ£ SemanticModel created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\SampleWB\SampleWB.SemanticModel
+  ├░┼╕ΓÇ£┼á Page 'GDP per Capita Dashboard': 3 visuals created
+  ├ó┼ôΓÇ£ Report created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\SampleWB\SampleWB.Report
+  ├ó┼ôΓÇ£ Metadata created
+2026-05-28 17:03:27 [INFO] powerbi_import.permission_mapper: Credential template written: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\SampleWB\credentials_template.json
+  ├ó┼ôΓÇ£ Credential template: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\SampleWB\credentials_template.json
+
+├ó┼ôΓÇª Power BI Project generated: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\SampleWB
+   ├░┼╕ΓÇ£ΓÇÜ Open in Power BI Desktop: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\SampleWB\SampleWB.pbip
+  [OK] Power BI Project created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\SampleWB
+
+================================================================================
+IMPORT COMPLETE
+================================================================================
+
+[OK] Power BI Projects (.pbip) generated automatically
+   Open the .pbip files in Power BI Desktop
+
+
+Γ£ô Power BI project generated successfully
+2026-05-28 17:03:28 [INFO] tableau_to_powerbi: Migration report saved: artifacts/bug_bash_rw\migration_report_SampleWB_20260528_170328.json
+
+========================================================================
+  MIGRATION REPORT: SampleWB
+========================================================================
+  Total items converted: 17
+  Extraction score:      100.0%
+
+    Exact:          17
+    Approximate:     0
+    Placeholder:     0
+    Unsupported:     0
+    Skipped:         0
+
+  By category:
+    calculation             4 items  (100% exact)
+    datasource              1 items  (100% exact)
+    group                   5 items  (100% exact)
+    visual                  7 items  (100% exact)
+
+  Completeness grade:    A (100.0%)
+  Per-category extraction:
+    calculation          100.0%  (4 items)
+    datasource           100.0%  (1 items)
+    group                100.0%  (5 items)
+    visual               100.0%  (7 items)
+
+  Table mapping (source ΓåÆ target):
+    Source Datasource              Source Table                   Target Table                   Columns
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    World Indicators               Extract                        Extract                             13
+
+========================================================================
+  ≡ƒôü Extracted 1 data file(s) from TWBX into artifacts/bug_bash_rw\SampleWB\Data
+  ≡ƒôé DataFolder updated ΓåÆ C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\SampleWB\Data\Tableau Samples
+  ≡ƒôé PowerQuery/ folder: 3 M expression file(s) exported
+  ≡ƒôé DAX/ folder: 2 DAX measure file(s) exported
+
+================================================================================
+  [7/20] Migrating: TABLEAU_10_TWB
+================================================================================
+
+[Step 1/2] TABLEAU OBJECTS EXTRACTION
+--------------------------------------------------------------------------------
+Source file: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\TABLEAU_10_TWB.twb
+Extracting C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\TABLEAU_10_TWB.twb...
+  Γ£ô 0 worksheets extracted
+  Γ£ô 0 dashboards extracted
+  Γ£ô 0 datasources extracted (filtered from 1 raw)
+  Γ£ô 0 calculations extracted
+  Γ£ô 0 parameters extracted
+  Γ£ô 0 filters extracted
+  Γ£ô 0 stories extracted
+  Γ£ô 0 actions extracted
+  Γ£ô 0 sets extracted
+  Γ£ô 0 groups extracted
+  Γ£ô 0 bins extracted
+  Γ£ô 0 hierarchies extracted
+  Γ£ô 0 sort orders extracted
+  Γ£ô 0 columns with aliases extracted
+  Γ£ô 0 custom SQL queries extracted
+  Γ£ô 0 user filters/security rules extracted
+  [OK] 0 datasource-level filters extracted
+  Γ£ô 0 custom geocoding refs extracted
+  Γ£ô 0 published datasource refs extracted
+  Γ£ô 0 data blending links extracted
+  Γ£ô 0 table extensions extracted
+  Γ£ô 0 linguistic synonyms extracted
+  ΓåÆ tableau_export/worksheets.json
+  ΓåÆ tableau_export/dashboards.json
+  ΓåÆ tableau_export/datasources.json
+  ΓåÆ tableau_export/calculations.json
+  ΓåÆ tableau_export/parameters.json
+  ΓåÆ tableau_export/filters.json
+  ΓåÆ tableau_export/stories.json
+  ΓåÆ tableau_export/actions.json
+  ΓåÆ tableau_export/sets.json
+  ΓåÆ tableau_export/groups.json
+  ΓåÆ tableau_export/bins.json
+  ΓåÆ tableau_export/hierarchies.json
+  ΓåÆ tableau_export/sort_orders.json
+  ΓåÆ tableau_export/aliases.json
+  ΓåÆ tableau_export/custom_sql.json
+  ΓåÆ tableau_export/user_filters.json
+  ΓåÆ tableau_export/datasource_filters.json
+  ΓåÆ tableau_export/custom_geocoding.json
+  ΓåÆ tableau_export/published_datasources.json
+  ΓåÆ tableau_export/data_blending.json
+  ΓåÆ tableau_export/hyper_files.json
+  ΓåÆ tableau_export/table_extensions.json
+  ΓåÆ tableau_export/linguistic_schema.json
+Γ£ô Extraction complete
+
+Γ£ô Extraction completed successfully
+
+[Step 2/2] POWER BI PROJECT GENERATION
+--------------------------------------------------------------------------------
+================================================================================
+IMPORT POWER BI
+================================================================================
+
+  [ERROR] No datasources found in tableau_export/datasources.json
+     Run extraction first: python migrate.py <file>
+
+Γ£ô Power BI project generated successfully
+2026-05-28 17:03:28 [INFO] tableau_to_powerbi: Migration report saved: artifacts/bug_bash_rw\migration_report_TABLEAU_10_TWB_20260528_170328.json
+
+========================================================================
+  MIGRATION REPORT: TABLEAU_10_TWB
+========================================================================
+  Total items converted: 0
+  Extraction score:      100.0%
+
+    Exact:           0
+    Approximate:     0
+    Placeholder:     0
+    Unsupported:     0
+    Skipped:         0
+
+  Completeness grade:    A (100.0%)
+
+========================================================================
+
+================================================================================
+  [8/20] Migrating: TABLEAU_10_TWBX
+================================================================================
+
+[Step 1/2] TABLEAU OBJECTS EXTRACTION
+--------------------------------------------------------------------------------
+Source file: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\TABLEAU_10_TWBX.twbx
+Extracting C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\TABLEAU_10_TWBX.twbx...
+  Γ£ô 1 worksheets extracted
+  Γ£ô 0 dashboards extracted
+  Γ£ô 1 datasources extracted (filtered from 1 raw)
+  Γ£ô 1 calculations extracted
+  Γ£ô 0 parameters extracted
+  Γ£ô 0 filters extracted
+  Γ£ô 0 stories extracted
+  Γ£ô 0 actions extracted
+  Γ£ô 0 sets extracted
+  Γ£ô 0 groups extracted
+  Γ£ô 0 bins extracted
+  Γ£ô 0 hierarchies extracted
+  Γ£ô 0 sort orders extracted
+  Γ£ô 0 columns with aliases extracted
+  Γ£ô 0 custom SQL queries extracted
+  Γ£ô 0 user filters/security rules extracted
+  [OK] 0 datasource-level filters extracted
+  Γ£ô 0 custom geocoding refs extracted
+  Γ£ô 0 published datasource refs extracted
+  Γ£ô 0 data blending links extracted
+  Γ£ô 0 table extensions extracted
+  Γ£ô 3 linguistic synonyms extracted
+  ΓåÆ tableau_export/worksheets.json
+  ΓåÆ tableau_export/dashboards.json
+  ΓåÆ tableau_export/datasources.json
+  ΓåÆ tableau_export/calculations.json
+  ΓåÆ tableau_export/parameters.json
+  ΓåÆ tableau_export/filters.json
+  ΓåÆ tableau_export/stories.json
+  ΓåÆ tableau_export/actions.json
+  ΓåÆ tableau_export/sets.json
+  ΓåÆ tableau_export/groups.json
+  ΓåÆ tableau_export/bins.json
+  ΓåÆ tableau_export/hierarchies.json
+  ΓåÆ tableau_export/sort_orders.json
+  ΓåÆ tableau_export/aliases.json
+  ΓåÆ tableau_export/custom_sql.json
+  ΓåÆ tableau_export/user_filters.json
+  ΓåÆ tableau_export/datasource_filters.json
+  ΓåÆ tableau_export/custom_geocoding.json
+  ΓåÆ tableau_export/published_datasources.json
+  ΓåÆ tableau_export/data_blending.json
+  ΓåÆ tableau_export/hyper_files.json
+  ΓåÆ tableau_export/table_extensions.json
+  ΓåÆ tableau_export/linguistic_schema.json
+Γ£ô Extraction complete
+
+Γ£ô Extraction completed successfully
+
+[Step 2/2] POWER BI PROJECT GENERATION
+--------------------------------------------------------------------------------
+================================================================================
+IMPORT POWER BI
+================================================================================
+
+  Report: TABLEAU_10_TWBX
+  Datasources: 1
+  Worksheets: 1
+  Calculations: 1
+
+  Generating Power BI Project (.pbip)...
+
+├░┼╕ΓÇ¥┬¿ Generating Power BI Project: TABLEAU_10_TWBX
+  ├ó┼ôΓÇ£ .pbip file created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\TABLEAU_10_TWBX\TABLEAU_10_TWBX.pbip
+  Γ£ô TMDL model created with:
+    - 2 tables
+    - 7 columns
+    - 1 DAX measures
+    - 0 relationships
+  ├ó┼ôΓÇ£ SemanticModel created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\TABLEAU_10_TWBX\TABLEAU_10_TWBX.SemanticModel
+  ├░┼╕ΓÇ£┼á 1 worksheet pages created (1 visual each)
+  ├ó┼ôΓÇ£ Report created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\TABLEAU_10_TWBX\TABLEAU_10_TWBX.Report
+  ├ó┼ôΓÇ£ Metadata created
+2026-05-28 17:03:29 [INFO] powerbi_import.permission_mapper: Credential template written: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\TABLEAU_10_TWBX\credentials_template.json
+  ├ó┼ôΓÇ£ Credential template: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\TABLEAU_10_TWBX\credentials_template.json
+
+├ó┼ôΓÇª Power BI Project generated: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\TABLEAU_10_TWBX
+   ├░┼╕ΓÇ£ΓÇÜ Open in Power BI Desktop: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\TABLEAU_10_TWBX\TABLEAU_10_TWBX.pbip
+  [OK] Power BI Project created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\TABLEAU_10_TWBX
+
+================================================================================
+IMPORT COMPLETE
+================================================================================
+
+[OK] Power BI Projects (.pbip) generated automatically
+   Open the .pbip files in Power BI Desktop
+
+
+Γ£ô Power BI project generated successfully
+2026-05-28 17:03:29 [INFO] tableau_to_powerbi: Migration report saved: artifacts/bug_bash_rw\migration_report_TABLEAU_10_TWBX_20260528_170329.json
+
+========================================================================
+  MIGRATION REPORT: TABLEAU_10_TWBX
+========================================================================
+  Total items converted: 3
+  Extraction score:      100.0%
+
+    Exact:           3
+    Approximate:     0
+    Placeholder:     0
+    Unsupported:     0
+    Skipped:         0
+
+  By category:
+    calculation             1 items  (100% exact)
+    datasource              1 items  (100% exact)
+    visual                  1 items  (100% exact)
+
+  Completeness grade:    A (100.0%)
+  Per-category extraction:
+    calculation          100.0%  (1 items)
+    datasource           100.0%  (1 items)
+    visual               100.0%  (1 items)
+
+  Table mapping (source ΓåÆ target):
+    Source Datasource              Source Table                   Target Table                   Columns
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    xy (TestV1)                    xy                             xy                                   3
+    xy (TestV1)                    Extract                        Extract                              4
+
+========================================================================
+  ≡ƒôü Extracted 1 data file(s) from TWBX into artifacts/bug_bash_rw\TABLEAU_10_TWBX\Data
+  ≡ƒôé DataFolder updated ΓåÆ C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\TABLEAU_10_TWBX\Data\Datasources
+  ≡ƒôé PowerQuery/ folder: 3 M expression file(s) exported
+  ≡ƒôé DAX/ folder: 1 DAX measure file(s) exported
+
+================================================================================
+  [9/20] Migrating: datasource_test
+================================================================================
+
+[Step 1/2] TABLEAU OBJECTS EXTRACTION
+--------------------------------------------------------------------------------
+Source file: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\datasource_test.twb
+Extracting C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\datasource_test.twb...
+  Γ£ô 2 worksheets extracted
+  Γ£ô 0 dashboards extracted
+  Γ£ô 1 datasources extracted (filtered from 3 raw)
+  Γ£ô 1 calculations extracted
+  Γ£ô 0 parameters extracted
+  Γ£ô 0 filters extracted
+  Γ£ô 0 stories extracted
+  Γ£ô 0 actions extracted
+  Γ£ô 0 sets extracted
+  Γ£ô 0 groups extracted
+  Γ£ô 0 bins extracted
+  Γ£ô 0 hierarchies extracted
+  Γ£ô 0 sort orders extracted
+  Γ£ô 0 columns with aliases extracted
+  Γ£ô 0 custom SQL queries extracted
+  Γ£ô 0 user filters/security rules extracted
+  [OK] 0 datasource-level filters extracted
+  Γ£ô 0 custom geocoding refs extracted
+  Γ£ô 0 published datasource refs extracted
+  Γ£ô 0 data blending links extracted
+  Γ£ô 0 table extensions extracted
+  Γ£ô 3 linguistic synonyms extracted
+  ΓåÆ tableau_export/worksheets.json
+  ΓåÆ tableau_export/dashboards.json
+  ΓåÆ tableau_export/datasources.json
+  ΓåÆ tableau_export/calculations.json
+  ΓåÆ tableau_export/parameters.json
+  ΓåÆ tableau_export/filters.json
+  ΓåÆ tableau_export/stories.json
+  ΓåÆ tableau_export/actions.json
+  ΓåÆ tableau_export/sets.json
+  ΓåÆ tableau_export/groups.json
+  ΓåÆ tableau_export/bins.json
+  ΓåÆ tableau_export/hierarchies.json
+  ΓåÆ tableau_export/sort_orders.json
+  ΓåÆ tableau_export/aliases.json
+  ΓåÆ tableau_export/custom_sql.json
+  ΓåÆ tableau_export/user_filters.json
+  ΓåÆ tableau_export/datasource_filters.json
+  ΓåÆ tableau_export/custom_geocoding.json
+  ΓåÆ tableau_export/published_datasources.json
+  ΓåÆ tableau_export/data_blending.json
+  ΓåÆ tableau_export/hyper_files.json
+  ΓåÆ tableau_export/table_extensions.json
+  ΓåÆ tableau_export/linguistic_schema.json
+Γ£ô Extraction complete
+
+Γ£ô Extraction completed successfully
+
+[Step 2/2] POWER BI PROJECT GENERATION
+--------------------------------------------------------------------------------
+================================================================================
+IMPORT POWER BI
+================================================================================
+
+  Report: datasource_test
+  Datasources: 1
+  Worksheets: 2
+  Calculations: 1
+
+  Generating Power BI Project (.pbip)...
+
+├░┼╕ΓÇ¥┬¿ Generating Power BI Project: datasource_test
+  ├ó┼ôΓÇ£ .pbip file created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\datasource_test\datasource_test.pbip
+  Γ£ô TMDL model created with:
+    - 1 tables
+    - 3 columns
+    - 1 DAX measures
+    - 0 relationships
+  ├ó┼ôΓÇ£ SemanticModel created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\datasource_test\datasource_test.SemanticModel
+  ├░┼╕ΓÇ£┼á 2 worksheet pages created (1 visual each)
+  ├ó┼ôΓÇ£ Report created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\datasource_test\datasource_test.Report
+  ├ó┼ôΓÇ£ Metadata created
+2026-05-28 17:03:30 [INFO] powerbi_import.permission_mapper: Credential template written: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\datasource_test\credentials_template.json
+  ├ó┼ôΓÇ£ Credential template: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\datasource_test\credentials_template.json
+
+├ó┼ôΓÇª Power BI Project generated: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\datasource_test
+   ├░┼╕ΓÇ£ΓÇÜ Open in Power BI Desktop: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\datasource_test\datasource_test.pbip
+  [OK] Power BI Project created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\datasource_test
+
+================================================================================
+IMPORT COMPLETE
+================================================================================
+
+[OK] Power BI Projects (.pbip) generated automatically
+   Open the .pbip files in Power BI Desktop
+
+
+Γ£ô Power BI project generated successfully
+2026-05-28 17:03:30 [INFO] tableau_to_powerbi: Migration report saved: artifacts/bug_bash_rw\migration_report_datasource_test_20260528_170330.json
+
+========================================================================
+  MIGRATION REPORT: datasource_test
+========================================================================
+  Total items converted: 4
+  Extraction score:      100.0%
+
+    Exact:           4
+    Approximate:     0
+    Placeholder:     0
+    Unsupported:     0
+    Skipped:         0
+
+  By category:
+    calculation             1 items  (100% exact)
+    datasource              1 items  (100% exact)
+    visual                  2 items  (100% exact)
+
+  Completeness grade:    A (100.0%)
+  Per-category extraction:
+    calculation          100.0%  (1 items)
+    datasource           100.0%  (1 items)
+    visual               100.0%  (2 items)
+
+  Table mapping (source ΓåÆ target):
+    Source Datasource              Source Table                   Target Table                   Columns
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    datasource_test                xy                             xy                                   3
+
+========================================================================
+  ≡ƒôé DataFolder updated ΓåÆ C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\bug_bash_rw\\datasource_test\\Data
+  Γä╣∩╕Å  Place your data files in: C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\bug_bash_rw\\datasource_test\\Data
+  ≡ƒôé PowerQuery/ folder: 2 M expression file(s) exported
+  ≡ƒôé DAX/ folder: 1 DAX measure file(s) exported
+
+================================================================================
+  [10/20] Migrating: ephemeral_field
+================================================================================
+
+[Step 1/2] TABLEAU OBJECTS EXTRACTION
+--------------------------------------------------------------------------------
+Source file: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\ephemeral_field.twb
+Extracting C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\ephemeral_field.twb...
+  Γ£ô 2 worksheets extracted
+  Γ£ô 0 dashboards extracted
+  Γ£ô 1 datasources extracted (filtered from 3 raw)
+  Γ£ô 2 calculations extracted
+  Γ£ô 0 parameters extracted
+  Γ£ô 0 filters extracted
+  Γ£ô 0 stories extracted
+  Γ£ô 0 actions extracted
+  Γ£ô 0 sets extracted
+  Γ£ô 0 groups extracted
+  Γ£ô 0 bins extracted
+  Γ£ô 0 hierarchies extracted
+  Γ£ô 0 sort orders extracted
+  Γ£ô 0 columns with aliases extracted
+  Γ£ô 0 custom SQL queries extracted
+  Γ£ô 0 user filters/security rules extracted
+  [OK] 0 datasource-level filters extracted
+  Γ£ô 0 custom geocoding refs extracted
+  Γ£ô 0 published datasource refs extracted
+  Γ£ô 0 data blending links extracted
+  Γ£ô 0 table extensions extracted
+  Γ£ô 3 linguistic synonyms extracted
+  ΓåÆ tableau_export/worksheets.json
+  ΓåÆ tableau_export/dashboards.json
+  ΓåÆ tableau_export/datasources.json
+  ΓåÆ tableau_export/calculations.json
+  ΓåÆ tableau_export/parameters.json
+  ΓåÆ tableau_export/filters.json
+  ΓåÆ tableau_export/stories.json
+  ΓåÆ tableau_export/actions.json
+  ΓåÆ tableau_export/sets.json
+  ΓåÆ tableau_export/groups.json
+  ΓåÆ tableau_export/bins.json
+  ΓåÆ tableau_export/hierarchies.json
+  ΓåÆ tableau_export/sort_orders.json
+  ΓåÆ tableau_export/aliases.json
+  ΓåÆ tableau_export/custom_sql.json
+  ΓåÆ tableau_export/user_filters.json
+  ΓåÆ tableau_export/datasource_filters.json
+  ΓåÆ tableau_export/custom_geocoding.json
+  ΓåÆ tableau_export/published_datasources.json
+  ΓåÆ tableau_export/data_blending.json
+  ΓåÆ tableau_export/hyper_files.json
+  ΓåÆ tableau_export/table_extensions.json
+  ΓåÆ tableau_export/linguistic_schema.json
+Γ£ô Extraction complete
+
+Γ£ô Extraction completed successfully
+
+[Step 2/2] POWER BI PROJECT GENERATION
+--------------------------------------------------------------------------------
+================================================================================
+IMPORT POWER BI
+================================================================================
+
+  Report: ephemeral_field
+  Datasources: 1
+  Worksheets: 2
+  Calculations: 2
+
+  Generating Power BI Project (.pbip)...
+
+├░┼╕ΓÇ¥┬¿ Generating Power BI Project: ephemeral_field
+  ├ó┼ôΓÇ£ .pbip file created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\ephemeral_field\ephemeral_field.pbip
+  Γ£ô TMDL model created with:
+    - 1 tables
+    - 3 columns
+    - 3 DAX measures
+    - 0 relationships
+  ├ó┼ôΓÇ£ SemanticModel created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\ephemeral_field\ephemeral_field.SemanticModel
+  ├░┼╕ΓÇ£┼á 2 worksheet pages created (1 visual each)
+  ├ó┼ôΓÇ£ Report created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\ephemeral_field\ephemeral_field.Report
+  ├ó┼ôΓÇ£ Metadata created
+2026-05-28 17:03:31 [INFO] powerbi_import.permission_mapper: Credential template written: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\ephemeral_field\credentials_template.json
+  ├ó┼ôΓÇ£ Credential template: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\ephemeral_field\credentials_template.json
+
+├ó┼ôΓÇª Power BI Project generated: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\ephemeral_field
+   ├░┼╕ΓÇ£ΓÇÜ Open in Power BI Desktop: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\ephemeral_field\ephemeral_field.pbip
+  [OK] Power BI Project created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\ephemeral_field
+
+================================================================================
+IMPORT COMPLETE
+================================================================================
+
+[OK] Power BI Projects (.pbip) generated automatically
+   Open the .pbip files in Power BI Desktop
+
+
+Γ£ô Power BI project generated successfully
+2026-05-28 17:03:31 [INFO] tableau_to_powerbi: Migration report saved: artifacts/bug_bash_rw\migration_report_ephemeral_field_20260528_170331.json
+
+========================================================================
+  MIGRATION REPORT: ephemeral_field
+========================================================================
+  Total items converted: 5
+  Extraction score:      100.0%
+
+    Exact:           5
+    Approximate:     0
+    Placeholder:     0
+    Unsupported:     0
+    Skipped:         0
+
+  By category:
+    calculation             2 items  (100% exact)
+    datasource              1 items  (100% exact)
+    visual                  2 items  (100% exact)
+
+  Completeness grade:    A (100.0%)
+  Per-category extraction:
+    calculation          100.0%  (2 items)
+    datasource           100.0%  (1 items)
+    visual               100.0%  (2 items)
+
+  Table mapping (source ΓåÆ target):
+    Source Datasource              Source Table                   Target Table                   Columns
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    datasource_test                xy                             xy                                   3
+
+========================================================================
+  ≡ƒôé DataFolder updated ΓåÆ C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\bug_bash_rw\\ephemeral_field\\Data
+  Γä╣∩╕Å  Place your data files in: C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\bug_bash_rw\\ephemeral_field\\Data
+  ≡ƒôé PowerQuery/ folder: 2 M expression file(s) exported
+  ≡ƒôé DAX/ folder: 1 DAX measure file(s) exported
+
+================================================================================
+  [11/20] Migrating: feedback_dashboard
+================================================================================
+
+[Step 1/2] TABLEAU OBJECTS EXTRACTION
+--------------------------------------------------------------------------------
+Pre-flight summary:
+  [WARNING] newer_tableau_version: Workbook saved by Tableau 2025.1.2 (20251.25.0520.1026) ΓÇö newer than tested (2024.3)
+           ΓåÆ Migration may work but features added after are unsupported. Use --force to proceed.
+Source file: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\feedback_dashboard.twb
+Extracting C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\feedback_dashboard.twb...
+  Γ£ô 7 worksheets extracted
+  Γ£ô 1 dashboards extracted
+  Γ£ô 1 datasources extracted (filtered from 8 raw)
+  Γ£ô 1 calculations extracted
+  Γ£ô 0 parameters extracted
+  Γ£ô 1 filters extracted
+  Γ£ô 0 stories extracted
+  Γ£ô 0 actions extracted
+  Γ£ô 0 sets extracted
+  Γ£ô 2 groups extracted
+  Γ£ô 0 bins extracted
+  Γ£ô 0 hierarchies extracted
+  Γ£ô 0 sort orders extracted
+  Γ£ô 1 columns with aliases extracted
+  Γ£ô 0 custom SQL queries extracted
+  Γ£ô 0 user filters/security rules extracted
+  [OK] 0 datasource-level filters extracted
+  Γ£ô 0 custom geocoding refs extracted
+  Γ£ô 0 published datasource refs extracted
+  Γ£ô 0 data blending links extracted
+  Γ£ô 0 table extensions extracted
+  Γ£ô 11 linguistic synonyms extracted
+  ΓåÆ tableau_export/worksheets.json
+  ΓåÆ tableau_export/dashboards.json
+  ΓåÆ tableau_export/datasources.json
+  ΓåÆ tableau_export/calculations.json
+  ΓåÆ tableau_export/parameters.json
+  ΓåÆ tableau_export/filters.json
+  ΓåÆ tableau_export/stories.json
+  ΓåÆ tableau_export/actions.json
+  ΓåÆ tableau_export/sets.json
+  ΓåÆ tableau_export/groups.json
+  ΓåÆ tableau_export/bins.json
+  ΓåÆ tableau_export/hierarchies.json
+  ΓåÆ tableau_export/sort_orders.json
+  ΓåÆ tableau_export/aliases.json
+  ΓåÆ tableau_export/custom_sql.json
+  ΓåÆ tableau_export/user_filters.json
+  ΓåÆ tableau_export/datasource_filters.json
+  ΓåÆ tableau_export/custom_geocoding.json
+  ΓåÆ tableau_export/published_datasources.json
+  ΓåÆ tableau_export/data_blending.json
+  ΓåÆ tableau_export/hyper_files.json
+  ΓåÆ tableau_export/table_extensions.json
+  ΓåÆ tableau_export/linguistic_schema.json
+Γ£ô Extraction complete
+
+Γ£ô Extraction completed successfully
+
+[Step 2/2] POWER BI PROJECT GENERATION
+--------------------------------------------------------------------------------
+================================================================================
+IMPORT POWER BI
+================================================================================
+
+  Report: feedback_dashboard
+  Datasources: 1
+  Worksheets: 7
+  Calculations: 1
+
+  Generating Power BI Project (.pbip)...
+
+├░┼╕ΓÇ¥┬¿ Generating Power BI Project: feedback_dashboard
+  ├ó┼ôΓÇ£ .pbip file created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\feedback_dashboard\feedback_dashboard.pbip
+  Γ£ô  Relation ΓåÆ 'Calendar.Date' set to manyToOne bothDirections (Calendar bridge).
+  ΓÜá∩╕Å  Relation ΓåÆ 'Calendar.Date' set to manyToMany (peer table, 8/9 cols ΓëÑ 70%).
+  ΓÜá∩╕Å  Relation ΓåÆ 'Extract.customer_id' set to manyToMany (peer table, 9/12 cols ΓëÑ 70%).
+  ΓÜá Deactivated relationship (ambiguous path): Extract.date ΓåÆ Calendar.Date
+  Γ£ô TMDL model created with:
+    - 3 tables
+    - 29 columns
+    - 0 DAX measures
+    - 3 relationships
+    - 1 hierarchies
+  ├ó┼ôΓÇ£ SemanticModel created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\feedback_dashboard\feedback_dashboard.SemanticModel
+  ├░┼╕ΓÇ£┼á Page 'Dashboard 1': 8 visuals created
+2026-05-28 17:03:32 [INFO] pbip_generator: Self-Healing v3.4 applied 6 report-side repair(s)
+  ├ó┼ôΓÇ£ Report created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\feedback_dashboard\feedback_dashboard.Report
+  ├ó┼ôΓÇ£ Metadata created
+2026-05-28 17:03:33 [INFO] powerbi_import.permission_mapper: Credential template written: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\feedback_dashboard\credentials_template.json
+  ├ó┼ôΓÇ£ Credential template: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\feedback_dashboard\credentials_template.json
+
+├ó┼ôΓÇª Power BI Project generated: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\feedback_dashboard
+   ├░┼╕ΓÇ£ΓÇÜ Open in Power BI Desktop: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\feedback_dashboard\feedback_dashboard.pbip
+  [OK] Power BI Project created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\feedback_dashboard
+
+================================================================================
+IMPORT COMPLETE
+================================================================================
+
+[OK] Power BI Projects (.pbip) generated automatically
+   Open the .pbip files in Power BI Desktop
+
+
+Γ£ô Power BI project generated successfully
+2026-05-28 17:03:33 [INFO] tableau_to_powerbi: Migration report saved: artifacts/bug_bash_rw\migration_report_feedback_dashboard_20260528_170333.json
+
+========================================================================
+  MIGRATION REPORT: feedback_dashboard
+========================================================================
+  Total items converted: 11
+  Extraction score:      100.0%
+
+    Exact:          11
+    Approximate:     0
+    Placeholder:     0
+    Unsupported:     0
+    Skipped:         0
+
+  By category:
+    calculation             1 items  (100% exact)
+    datasource              1 items  (100% exact)
+    group                   2 items  (100% exact)
+    visual                  7 items  (100% exact)
+
+  Completeness grade:    A (100.0%)
+  Per-category extraction:
+    calculation          100.0%  (1 items)
+    datasource           100.0%  (1 items)
+    group                100.0%  (2 items)
+    visual               100.0%  (7 items)
+
+  Table mapping (source ΓåÆ target):
+    Source Datasource              Source Table                   Target Table                   Columns
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    customer_feedback_data         customer_feedback_data.json    customer_feedback_data.json          9
+    customer_feedback_data         Extract                        Extract                              9
+
+========================================================================
+  ≡ƒôé DataFolder updated ΓåÆ C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\bug_bash_rw\\feedback_dashboard\\Data
+  Γä╣∩╕Å  Place your data files in: C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\bug_bash_rw\\feedback_dashboard\\Data
+  ≡ƒôé PowerQuery/ folder: 4 M expression file(s) exported
+
+================================================================================
+  [12/20] Migrating: filtering
+================================================================================
+
+[Step 1/2] TABLEAU OBJECTS EXTRACTION
+--------------------------------------------------------------------------------
+Source file: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\filtering.twb
+Extracting C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\filtering.twb...
+  Γ£ô 2 worksheets extracted
+  Γ£ô 1 dashboards extracted
+  Γ£ô 1 datasources extracted (filtered from 3 raw)
+  Γ£ô 1 calculations extracted
+  Γ£ô 0 parameters extracted
+  Γ£ô 0 filters extracted
+  Γ£ô 0 stories extracted
+  Γ£ô 0 actions extracted
+  Γ£ô 0 sets extracted
+  Γ£ô 1 groups extracted
+  Γ£ô 0 bins extracted
+  Γ£ô 0 hierarchies extracted
+  Γ£ô 0 sort orders extracted
+  Γ£ô 0 columns with aliases extracted
+  Γ£ô 0 custom SQL queries extracted
+  Γ£ô 0 user filters/security rules extracted
+  [OK] 0 datasource-level filters extracted
+  Γ£ô 0 custom geocoding refs extracted
+  Γ£ô 0 published datasource refs extracted
+  Γ£ô 0 data blending links extracted
+  Γ£ô 0 table extensions extracted
+  Γ£ô 2 linguistic synonyms extracted
+  ΓåÆ tableau_export/worksheets.json
+  ΓåÆ tableau_export/dashboards.json
+  ΓåÆ tableau_export/datasources.json
+  ΓåÆ tableau_export/calculations.json
+  ΓåÆ tableau_export/parameters.json
+  ΓåÆ tableau_export/filters.json
+  ΓåÆ tableau_export/stories.json
+  ΓåÆ tableau_export/actions.json
+  ΓåÆ tableau_export/sets.json
+  ΓåÆ tableau_export/groups.json
+  ΓåÆ tableau_export/bins.json
+  ΓåÆ tableau_export/hierarchies.json
+  ΓåÆ tableau_export/sort_orders.json
+  ΓåÆ tableau_export/aliases.json
+  ΓåÆ tableau_export/custom_sql.json
+  ΓåÆ tableau_export/user_filters.json
+  ΓåÆ tableau_export/datasource_filters.json
+  ΓåÆ tableau_export/custom_geocoding.json
+  ΓåÆ tableau_export/published_datasources.json
+  ΓåÆ tableau_export/data_blending.json
+  ΓåÆ tableau_export/hyper_files.json
+  ΓåÆ tableau_export/table_extensions.json
+  ΓåÆ tableau_export/linguistic_schema.json
+Γ£ô Extraction complete
+
+Γ£ô Extraction completed successfully
+
+[Step 2/2] POWER BI PROJECT GENERATION
+--------------------------------------------------------------------------------
+================================================================================
+IMPORT POWER BI
+================================================================================
+
+  Report: filtering
+  Datasources: 1
+  Worksheets: 2
+  Calculations: 1
+
+  Generating Power BI Project (.pbip)...
+
+├░┼╕ΓÇ¥┬¿ Generating Power BI Project: filtering
+  ├ó┼ôΓÇ£ .pbip file created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\filtering\filtering.pbip
+  Γ£ô TMDL model created with:
+    - 1 tables
+    - 41 columns
+    - 1 DAX measures
+    - 0 relationships
+  ├ó┼ôΓÇ£ SemanticModel created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\filtering\filtering.SemanticModel
+  ├░┼╕ΓÇ£┼á Page 'setTest': 2 visuals created
+2026-05-28 17:03:34 [INFO] pbip_generator: Self-Healing v3.4 applied 2 report-side repair(s)
+  ├ó┼ôΓÇ£ Report created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\filtering\filtering.Report
+  ├ó┼ôΓÇ£ Metadata created
+2026-05-28 17:03:34 [INFO] powerbi_import.permission_mapper: Credential template written: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\filtering\credentials_template.json
+  ├ó┼ôΓÇ£ Credential template: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\filtering\credentials_template.json
+
+├ó┼ôΓÇª Power BI Project generated: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\filtering
+   ├░┼╕ΓÇ£ΓÇÜ Open in Power BI Desktop: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\filtering\filtering.pbip
+  [OK] Power BI Project created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\filtering
+
+================================================================================
+IMPORT COMPLETE
+================================================================================
+
+[OK] Power BI Projects (.pbip) generated automatically
+   Open the .pbip files in Power BI Desktop
+
+
+Γ£ô Power BI project generated successfully
+2026-05-28 17:03:34 [INFO] tableau_to_powerbi: Migration report saved: artifacts/bug_bash_rw\migration_report_filtering_20260528_170334.json
+
+========================================================================
+  MIGRATION REPORT: filtering
+========================================================================
+  Total items converted: 5
+  Extraction score:      100.0%
+
+    Exact:           5
+    Approximate:     0
+    Placeholder:     0
+    Unsupported:     0
+    Skipped:         0
+
+  By category:
+    calculation             1 items  (100% exact)
+    datasource              1 items  (100% exact)
+    group                   1 items  (100% exact)
+    visual                  2 items  (100% exact)
+
+  Completeness grade:    A (100.0%)
+  Per-category extraction:
+    calculation          100.0%  (1 items)
+    datasource           100.0%  (1 items)
+    group                100.0%  (1 items)
+    visual               100.0%  (2 items)
+
+  Table mapping (source ΓåÆ target):
+    Source Datasource              Source Table                   Target Table                   Columns
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    TestData (EmptyDB)             TestData                       TestData                            40
+
+========================================================================
+  ≡ƒôé DataFolder updated ΓåÆ C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\bug_bash_rw\\filtering\\Data
+  Γä╣∩╕Å  Place your data files in: C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\bug_bash_rw\\filtering\\Data
+  ≡ƒôé PowerQuery/ folder: 2 M expression file(s) exported
+  ≡ƒôé DAX/ folder: 1 DAX measure file(s) exported
+
+================================================================================
+  [13/20] Migrating: global_superstores_db
+================================================================================
+
+[Step 1/2] TABLEAU OBJECTS EXTRACTION
+--------------------------------------------------------------------------------
+Source file: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\global_superstores_db.twb
+Extracting C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\global_superstores_db.twb...
+  Γ£ô 20 worksheets extracted
+  Γ£ô 6 dashboards extracted
+  Γ£ô 1 datasources extracted (filtered from 24 raw)
+  Γ£ô 3 calculations extracted
+  Γ£ô 0 parameters extracted
+  Γ£ô 17 filters extracted
+  Γ£ô 0 stories extracted
+  Γ£ô 4 actions extracted
+  Γ£ô 0 sets extracted
+  Γ£ô 5 groups extracted
+  Γ£ô 1 bins extracted
+  Γ£ô 0 hierarchies extracted
+  Γ£ô 0 sort orders extracted
+  Γ£ô 0 columns with aliases extracted
+  Γ£ô 0 custom SQL queries extracted
+  Γ£ô 0 user filters/security rules extracted
+  [OK] 0 datasource-level filters extracted
+  Γ£ô 0 custom geocoding refs extracted
+  Γ£ô 0 published datasource refs extracted
+  Γ£ô 0 data blending links extracted
+  Γ£ô 0 table extensions extracted
+  Γ£ô 3 linguistic synonyms extracted
+  ΓåÆ tableau_export/worksheets.json
+  ΓåÆ tableau_export/dashboards.json
+  ΓåÆ tableau_export/datasources.json
+  ΓåÆ tableau_export/calculations.json
+  ΓåÆ tableau_export/parameters.json
+  ΓåÆ tableau_export/filters.json
+  ΓåÆ tableau_export/stories.json
+  ΓåÆ tableau_export/actions.json
+  ΓåÆ tableau_export/sets.json
+  ΓåÆ tableau_export/groups.json
+  ΓåÆ tableau_export/bins.json
+  ΓåÆ tableau_export/hierarchies.json
+  ΓåÆ tableau_export/sort_orders.json
+  ΓåÆ tableau_export/aliases.json
+  ΓåÆ tableau_export/custom_sql.json
+  ΓåÆ tableau_export/user_filters.json
+  ΓåÆ tableau_export/datasource_filters.json
+  ΓåÆ tableau_export/custom_geocoding.json
+  ΓåÆ tableau_export/published_datasources.json
+  ΓåÆ tableau_export/data_blending.json
+  ΓåÆ tableau_export/hyper_files.json
+  ΓåÆ tableau_export/table_extensions.json
+  ΓåÆ tableau_export/linguistic_schema.json
+Γ£ô Extraction complete
+
+Γ£ô Extraction completed successfully
+
+[Step 2/2] POWER BI PROJECT GENERATION
+--------------------------------------------------------------------------------
+================================================================================
+IMPORT POWER BI
+================================================================================
+
+  Report: global_superstores_db
+  Datasources: 1
+  Worksheets: 20
+  Calculations: 3
+
+  Generating Power BI Project (.pbip)...
+
+├░┼╕ΓÇ¥┬¿ Generating Power BI Project: global_superstores_db
+  ├ó┼ôΓÇ£ .pbip file created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\global_superstores_db\global_superstores_db.pbip
+  Γ£ô  Relation ΓåÆ 'Calendar.Date' set to manyToOne (Calendar table).
+  Γ£ô TMDL model created with:
+    - 2 tables
+    - 38 columns
+    - 6 DAX measures
+    - 1 relationships
+    - 1 hierarchies
+  ├ó┼ôΓÇ£ SemanticModel created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\global_superstores_db\global_superstores_db.SemanticModel
+  ├░┼╕ΓÇ£┼á Page 'Dashboard 1': 3 visuals created
+  ├░┼╕ΓÇ£┼á Page 'Dashboard 2': 3 visuals created
+  ├░┼╕ΓÇ£┼á Page 'Dashboard 3': 4 visuals created
+  ├░┼╕ΓÇ£┼á Page 'Dashboard 4': 3 visuals created
+  ├░┼╕ΓÇ£┼á Page 'Dashboard 5': 4 visuals created
+  ├░┼╕ΓÇ£┼á Page 'Story 1': 0 visuals created
+2026-05-28 17:03:36 [INFO] pbip_generator: Self-Healing v3.4 applied 1 report-side repair(s)
+  ├ó┼ôΓÇ£ Report created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\global_superstores_db\global_superstores_db.Report
+  ├ó┼ôΓÇ£ Metadata created
+2026-05-28 17:03:37 [INFO] powerbi_import.permission_mapper: Credential template written: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\global_superstores_db\credentials_template.json
+  ├ó┼ôΓÇ£ Credential template: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\global_superstores_db\credentials_template.json
+
+├ó┼ôΓÇª Power BI Project generated: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\global_superstores_db
+   ├░┼╕ΓÇ£ΓÇÜ Open in Power BI Desktop: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\global_superstores_db\global_superstores_db.pbip
+  [OK] Power BI Project created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\global_superstores_db
+
+================================================================================
+IMPORT COMPLETE
+================================================================================
+
+[OK] Power BI Projects (.pbip) generated automatically
+   Open the .pbip files in Power BI Desktop
+
+
+Γ£ô Power BI project generated successfully
+2026-05-28 17:03:37 [INFO] tableau_to_powerbi: Migration report saved: artifacts/bug_bash_rw\migration_report_global_superstores_db_20260528_170337.json
+
+========================================================================
+  MIGRATION REPORT: global_superstores_db
+========================================================================
+  Total items converted: 30
+  Extraction score:      100.0%
+
+    Exact:          30
+    Approximate:     0
+    Placeholder:     0
+    Unsupported:     0
+    Skipped:         0
+
+  By category:
+    bin                     1 items  (100% exact)
+    calculation             3 items  (100% exact)
+    datasource              1 items  (100% exact)
+    group                   5 items  (100% exact)
+    visual                 20 items  (100% exact)
+
+  Completeness grade:    A (100.0%)
+  Per-category extraction:
+    bin                  100.0%  (1 items)
+    calculation          100.0%  (3 items)
+    datasource           100.0%  (1 items)
+    group                100.0%  (5 items)
+    visual               100.0%  (20 items)
+
+  Table mapping (source ΓåÆ target):
+    Source Datasource              Source Table                   Target Table                   Columns
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    Orders (Global Superstore)     Orders                         Orders                              24
+
+========================================================================
+  ≡ƒôé DataFolder updated ΓåÆ C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\bug_bash_rw\\global_superstores_db\\Data
+  Γä╣∩╕Å  Place your data files in: C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\bug_bash_rw\\global_superstores_db\\Data
+  ≡ƒôé PowerQuery/ folder: 3 M expression file(s) exported
+  ≡ƒôé DAX/ folder: 2 DAX measure file(s) exported
+
+================================================================================
+  [14/20] Migrating: multiple_connections
+================================================================================
+
+[Step 1/2] TABLEAU OBJECTS EXTRACTION
+--------------------------------------------------------------------------------
+Source file: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\multiple_connections.twb
+Extracting C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\multiple_connections.twb...
+  Γ£ô 0 worksheets extracted
+  Γ£ô 0 dashboards extracted
+  Γ£ô 2 datasources extracted (filtered from 2 raw)
+  Γ£ô 0 calculations extracted
+  Γ£ô 0 parameters extracted
+  Γ£ô 0 filters extracted
+  Γ£ô 0 stories extracted
+  Γ£ô 0 actions extracted
+  Γ£ô 0 sets extracted
+  Γ£ô 0 groups extracted
+  Γ£ô 0 bins extracted
+  Γ£ô 0 hierarchies extracted
+  Γ£ô 0 sort orders extracted
+  Γ£ô 0 columns with aliases extracted
+  Γ£ô 0 custom SQL queries extracted
+  Γ£ô 0 user filters/security rules extracted
+  [OK] 0 datasource-level filters extracted
+  Γ£ô 0 custom geocoding refs extracted
+  Γ£ô 1 published datasource refs extracted
+  Γ£ô 0 data blending links extracted
+  Γ£ô 0 table extensions extracted
+  Γ£ô 0 linguistic synonyms extracted
+  ΓåÆ tableau_export/worksheets.json
+  ΓåÆ tableau_export/dashboards.json
+  ΓåÆ tableau_export/datasources.json
+  ΓåÆ tableau_export/calculations.json
+  ΓåÆ tableau_export/parameters.json
+  ΓåÆ tableau_export/filters.json
+  ΓåÆ tableau_export/stories.json
+  ΓåÆ tableau_export/actions.json
+  ΓåÆ tableau_export/sets.json
+  ΓåÆ tableau_export/groups.json
+  ΓåÆ tableau_export/bins.json
+  ΓåÆ tableau_export/hierarchies.json
+  ΓåÆ tableau_export/sort_orders.json
+  ΓåÆ tableau_export/aliases.json
+  ΓåÆ tableau_export/custom_sql.json
+  ΓåÆ tableau_export/user_filters.json
+  ΓåÆ tableau_export/datasource_filters.json
+  ΓåÆ tableau_export/custom_geocoding.json
+  ΓåÆ tableau_export/published_datasources.json
+  ΓåÆ tableau_export/data_blending.json
+  ΓåÆ tableau_export/hyper_files.json
+  ΓåÆ tableau_export/table_extensions.json
+  ΓåÆ tableau_export/linguistic_schema.json
+Γ£ô Extraction complete
+
+Γ£ô Extraction completed successfully
+
+[Step 2/2] POWER BI PROJECT GENERATION
+--------------------------------------------------------------------------------
+================================================================================
+IMPORT POWER BI
+================================================================================
+
+  Report: multiple_connections
+  Datasources: 2
+  Worksheets: 0
+  Calculations: 0
+
+  Generating Power BI Project (.pbip)...
+
+├░┼╕ΓÇ¥┬¿ Generating Power BI Project: multiple_connections
+  ├ó┼ôΓÇ£ .pbip file created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\multiple_connections\multiple_connections.pbip
+  ΓÜá∩╕Å  Relation ΓåÆ 'xy1.a' set to manyToMany (peer table, 1/1 cols ΓëÑ 70%).
+  ΓÜò Self-heal: Removed empty table 'sqlproxy' (no columns, no measures)
+  Γ£ô TMDL model created with:
+    - 2 tables
+    - 2 columns
+    - 0 DAX measures
+    - 1 relationships
+  ├ó┼ôΓÇ£ SemanticModel created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\multiple_connections\multiple_connections.SemanticModel
+  ├óΓÇ₧┬╣ Datasource-only mode: SemanticModel generated (no Report)
+  ├ó┼ôΓÇ£ Metadata created
+2026-05-28 17:03:37 [INFO] powerbi_import.permission_mapper: Credential template written: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\multiple_connections\credentials_template.json
+  ├ó┼ôΓÇ£ Credential template: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\multiple_connections\credentials_template.json
+
+├ó┼ôΓÇª Power BI Project generated: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\multiple_connections
+   ├░┼╕ΓÇ£ΓÇÜ Open in Power BI Desktop: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\multiple_connections\multiple_connections.pbip
+  [OK] Power BI Project created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\multiple_connections
+
+================================================================================
+IMPORT COMPLETE
+================================================================================
+
+[OK] Power BI Projects (.pbip) generated automatically
+   Open the .pbip files in Power BI Desktop
+
+
+Γ£ô Power BI project generated successfully
+2026-05-28 17:03:37 [INFO] tableau_to_powerbi: Migration report saved: artifacts/bug_bash_rw\migration_report_multiple_connections_20260528_170337.json
+
+========================================================================
+  MIGRATION REPORT: multiple_connections
+========================================================================
+  Total items converted: 2
+  Extraction score:      100.0%
+
+    Exact:           2
+    Approximate:     0
+    Placeholder:     0
+    Unsupported:     0
+    Skipped:         0
+
+  By category:
+    datasource              2 items  (100% exact)
+
+  Completeness grade:    A (100.0%)
+  Per-category extraction:
+    datasource           100.0%  (2 items)
+
+  Table mapping (source ΓåÆ target):
+    Source Datasource              Source Table                   Target Table                   Columns
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    xy (TestV1)                    sqlproxy                       (deduplicated / merged)              0
+    xy+ (Multiple Connections)     xy                             xy                                   1
+    xy+ (Multiple Connections)     xy1                            xy1                                  1
+
+========================================================================
+  ≡ƒôé DataFolder updated ΓåÆ C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\bug_bash_rw\\multiple_connections\\Data
+  Γä╣∩╕Å  Place your data files in: C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\bug_bash_rw\\multiple_connections\\Data
+  ≡ƒôé PowerQuery/ folder: 3 M expression file(s) exported
+
+================================================================================
+  [15/20] Migrating: nba_player_stats
+================================================================================
+
+[Step 1/2] TABLEAU OBJECTS EXTRACTION
+--------------------------------------------------------------------------------
+Source file: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\nba_player_stats.twbx
+Extracting C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\nba_player_stats.twbx...
+  Γ£ô 5 worksheets extracted
+  Γ£ô 1 dashboards extracted
+  Γ£ô 2 datasources extracted (filtered from 11 raw)
+  Γ£ô 4 calculations extracted
+  Γ£ô 1 parameters extracted
+  Γ£ô 6 filters extracted
+  Γ£ô 0 stories extracted
+  Γ£ô 2 actions extracted
+  Γ£ô 0 sets extracted
+  Γ£ô 1 groups extracted
+  Γ£ô 0 bins extracted
+  Γ£ô 0 hierarchies extracted
+  Γ£ô 0 sort orders extracted
+  Γ£ô 1 columns with aliases extracted
+  Γ£ô 0 custom SQL queries extracted
+  Γ£ô 0 user filters/security rules extracted
+  [OK] 0 datasource-level filters extracted
+  Γ£ô 0 custom geocoding refs extracted
+  Γ£ô 0 published datasource refs extracted
+  Γ£ô 1 data blending links extracted
+  Γ£ô 0 table extensions extracted
+  Γ£ô 6 linguistic synonyms extracted
+  ΓåÆ tableau_export/worksheets.json
+  ΓåÆ tableau_export/dashboards.json
+  ΓåÆ tableau_export/datasources.json
+  ΓåÆ tableau_export/calculations.json
+  ΓåÆ tableau_export/parameters.json
+  ΓåÆ tableau_export/filters.json
+  ΓåÆ tableau_export/stories.json
+  ΓåÆ tableau_export/actions.json
+  ΓåÆ tableau_export/sets.json
+  ΓåÆ tableau_export/groups.json
+  ΓåÆ tableau_export/bins.json
+  ΓåÆ tableau_export/hierarchies.json
+  ΓåÆ tableau_export/sort_orders.json
+  ΓåÆ tableau_export/aliases.json
+  ΓåÆ tableau_export/custom_sql.json
+  ΓåÆ tableau_export/user_filters.json
+  ΓåÆ tableau_export/datasource_filters.json
+  ΓåÆ tableau_export/custom_geocoding.json
+  ΓåÆ tableau_export/published_datasources.json
+  ΓåÆ tableau_export/data_blending.json
+  ΓåÆ tableau_export/hyper_files.json
+  ΓåÆ tableau_export/table_extensions.json
+  ΓåÆ tableau_export/linguistic_schema.json
+Γ£ô Extraction complete
+
+Γ£ô Extraction completed successfully
+
+[Step 2/2] POWER BI PROJECT GENERATION
+--------------------------------------------------------------------------------
+================================================================================
+IMPORT POWER BI
+================================================================================
+
+  Report: nba_player_stats
+  Datasources: 2
+  Worksheets: 5
+  Calculations: 4
+
+  Generating Power BI Project (.pbip)...
+
+├░┼╕ΓÇ¥┬¿ Generating Power BI Project: nba_player_stats
+  ├ó┼ôΓÇ£ .pbip file created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\nba_player_stats\nba_player_stats.pbip
+  Γ£ô TMDL model created with:
+    - 3 tables
+    - 23 columns
+    - 3 DAX measures
+    - 0 relationships
+  ├ó┼ôΓÇ£ SemanticModel created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\nba_player_stats\nba_player_stats.SemanticModel
+  ├░┼╕ΓÇ£┼á Page 'NBA Player Stats': 9 visuals created
+2026-05-28 17:03:39 [INFO] pbip_generator: Self-Healing v3.4 applied 4 report-side repair(s)
+  ├ó┼ôΓÇ£ Report created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\nba_player_stats\nba_player_stats.Report
+  ├ó┼ôΓÇ£ Metadata created
+2026-05-28 17:03:39 [INFO] powerbi_import.permission_mapper: Credential template written: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\nba_player_stats\credentials_template.json
+  ├ó┼ôΓÇ£ Credential template: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\nba_player_stats\credentials_template.json
+
+├ó┼ôΓÇª Power BI Project generated: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\nba_player_stats
+   ├░┼╕ΓÇ£ΓÇÜ Open in Power BI Desktop: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\nba_player_stats\nba_player_stats.pbip
+  [OK] Power BI Project created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\nba_player_stats
+
+================================================================================
+IMPORT COMPLETE
+================================================================================
+
+[OK] Power BI Projects (.pbip) generated automatically
+   Open the .pbip files in Power BI Desktop
+
+
+Γ£ô Power BI project generated successfully
+2026-05-28 17:03:39 [INFO] tableau_to_powerbi: Migration report saved: artifacts/bug_bash_rw\migration_report_nba_player_stats_20260528_170339.json
+
+========================================================================
+  MIGRATION REPORT: nba_player_stats
+========================================================================
+  Total items converted: 13
+  Extraction score:      100.0%
+
+    Exact:          13
+    Approximate:     0
+    Placeholder:     0
+    Unsupported:     0
+    Skipped:         0
+
+  By category:
+    calculation             4 items  (100% exact)
+    datasource              2 items  (100% exact)
+    group                   1 items  (100% exact)
+    parameter               1 items  (100% exact)
+    visual                  5 items  (100% exact)
+
+  Completeness grade:    A (100.0%)
+  Per-category extraction:
+    calculation          100.0%  (4 items)
+    datasource           100.0%  (2 items)
+    group                100.0%  (1 items)
+    parameter            100.0%  (1 items)
+    visual               100.0%  (5 items)
+
+  Table mapping (source ΓåÆ target):
+    Source Datasource              Source Table                   Target Table                   Columns
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    Sheet1 (nba_players)           Sheet1                         Sheet1                              19
+
+========================================================================
+  ≡ƒôü Extracted 2 data file(s) from TWBX into artifacts/bug_bash_rw\nba_player_stats\Data
+  ≡ƒôé DataFolder updated ΓåÆ C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\nba_player_stats\Data\Datasets
+  ≡ƒôé PowerQuery/ folder: 2 M expression file(s) exported
+  ≡ƒôé DAX/ folder: 2 DAX measure file(s) exported
+
+================================================================================
+  [16/20] Migrating: sample-superstore
+================================================================================
+
+[Step 1/2] TABLEAU OBJECTS EXTRACTION
+--------------------------------------------------------------------------------
+Source file: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\sample-superstore.twb
+Extracting C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\sample-superstore.twb...
+  Γ£ô 1 worksheets extracted
+  Γ£ô 0 dashboards extracted
+  Γ£ô 1 datasources extracted (filtered from 2 raw)
+  Γ£ô 1 calculations extracted
+  Γ£ô 0 parameters extracted
+  Γ£ô 0 filters extracted
+  Γ£ô 0 stories extracted
+  Γ£ô 0 actions extracted
+  Γ£ô 0 sets extracted
+  Γ£ô 0 groups extracted
+  Γ£ô 0 bins extracted
+  Γ£ô 0 hierarchies extracted
+  Γ£ô 0 sort orders extracted
+  Γ£ô 0 columns with aliases extracted
+  Γ£ô 0 custom SQL queries extracted
+  Γ£ô 0 user filters/security rules extracted
+  [OK] 0 datasource-level filters extracted
+  Γ£ô 0 custom geocoding refs extracted
+  Γ£ô 0 published datasource refs extracted
+  Γ£ô 0 data blending links extracted
+  Γ£ô 0 table extensions extracted
+  Γ£ô 0 linguistic synonyms extracted
+  ΓåÆ tableau_export/worksheets.json
+  ΓåÆ tableau_export/dashboards.json
+  ΓåÆ tableau_export/datasources.json
+  ΓåÆ tableau_export/calculations.json
+  ΓåÆ tableau_export/parameters.json
+  ΓåÆ tableau_export/filters.json
+  ΓåÆ tableau_export/stories.json
+  ΓåÆ tableau_export/actions.json
+  ΓåÆ tableau_export/sets.json
+  ΓåÆ tableau_export/groups.json
+  ΓåÆ tableau_export/bins.json
+  ΓåÆ tableau_export/hierarchies.json
+  ΓåÆ tableau_export/sort_orders.json
+  ΓåÆ tableau_export/aliases.json
+  ΓåÆ tableau_export/custom_sql.json
+  ΓåÆ tableau_export/user_filters.json
+  ΓåÆ tableau_export/datasource_filters.json
+  ΓåÆ tableau_export/custom_geocoding.json
+  ΓåÆ tableau_export/published_datasources.json
+  ΓåÆ tableau_export/data_blending.json
+  ΓåÆ tableau_export/hyper_files.json
+  ΓåÆ tableau_export/table_extensions.json
+  ΓåÆ tableau_export/linguistic_schema.json
+Γ£ô Extraction complete
+
+Γ£ô Extraction completed successfully
+
+[Step 2/2] POWER BI PROJECT GENERATION
+--------------------------------------------------------------------------------
+================================================================================
+IMPORT POWER BI
+================================================================================
+
+  Report: sample-superstore
+  Datasources: 1
+  Worksheets: 1
+  Calculations: 1
+
+  Generating Power BI Project (.pbip)...
+
+├░┼╕ΓÇ¥┬¿ Generating Power BI Project: sample-superstore
+  ├ó┼ôΓÇ£ .pbip file created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\sample-superstore\sample-superstore.pbip
+  Γ£ô  Relation ΓåÆ 'Calendar.Date' set to manyToOne (Calendar table).
+  Γ£ô TMDL model created with:
+    - 2 tables
+    - 32 columns
+    - 1 DAX measures
+    - 1 relationships
+    - 1 hierarchies
+  ├ó┼ôΓÇ£ SemanticModel created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\sample-superstore\sample-superstore.SemanticModel
+  ├░┼╕ΓÇ£┼á 1 worksheet pages created (1 visual each)
+  ├ó┼ôΓÇ£ Report created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\sample-superstore\sample-superstore.Report
+  ├ó┼ôΓÇ£ Metadata created
+2026-05-28 17:03:41 [INFO] powerbi_import.permission_mapper: Credential template written: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\sample-superstore\credentials_template.json
+  ├ó┼ôΓÇ£ Credential template: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\sample-superstore\credentials_template.json
+
+├ó┼ôΓÇª Power BI Project generated: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\sample-superstore
+   ├░┼╕ΓÇ£ΓÇÜ Open in Power BI Desktop: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\sample-superstore\sample-superstore.pbip
+  [OK] Power BI Project created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\sample-superstore
+
+================================================================================
+IMPORT COMPLETE
+================================================================================
+
+[OK] Power BI Projects (.pbip) generated automatically
+   Open the .pbip files in Power BI Desktop
+
+
+Γ£ô Power BI project generated successfully
+2026-05-28 17:03:41 [INFO] tableau_to_powerbi: Migration report saved: artifacts/bug_bash_rw\migration_report_sample-superstore_20260528_170341.json
+
+========================================================================
+  MIGRATION REPORT: sample-superstore
+========================================================================
+  Total items converted: 3
+  Extraction score:      100.0%
+
+    Exact:           3
+    Approximate:     0
+    Placeholder:     0
+    Unsupported:     0
+    Skipped:         0
+
+  By category:
+    calculation             1 items  (100% exact)
+    datasource              1 items  (100% exact)
+    visual                  1 items  (100% exact)
+
+  Completeness grade:    A (100.0%)
+  Per-category extraction:
+    calculation          100.0%  (1 items)
+    datasource           100.0%  (1 items)
+    visual               100.0%  (1 items)
+
+  Table mapping (source ΓåÆ target):
+    Source Datasource              Source Table                   Target Table                   Columns
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    Orders (sample_superstore)     Orders                         Orders                              24
+
+========================================================================
+  ≡ƒôé DataFolder updated ΓåÆ C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\bug_bash_rw\\sample-superstore\\Data
+  Γä╣∩╕Å  Place your data files in: C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\bug_bash_rw\\sample-superstore\\Data
+  ≡ƒôé PowerQuery/ folder: 3 M expression file(s) exported
+  ≡ƒôé DAX/ folder: 1 DAX measure file(s) exported
+
+================================================================================
+  [17/20] Migrating: shapes_test
+================================================================================
+
+[Step 1/2] TABLEAU OBJECTS EXTRACTION
+--------------------------------------------------------------------------------
+Source file: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\shapes_test.twb
+Extracting C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\shapes_test.twb...
+  Γ£ô 1 worksheets extracted
+  Γ£ô 0 dashboards extracted
+  Γ£ô 2 datasources extracted (filtered from 3 raw)
+  Γ£ô 4 calculations extracted
+  Γ£ô 2 parameters extracted
+  Γ£ô 0 filters extracted
+  Γ£ô 0 stories extracted
+  Γ£ô 1 actions extracted
+  Γ£ô 0 sets extracted
+  Γ£ô 2 groups extracted
+  Γ£ô 1 bins extracted
+  Γ£ô 0 hierarchies extracted
+  Γ£ô 0 sort orders extracted
+  Γ£ô 0 columns with aliases extracted
+  Γ£ô 0 custom SQL queries extracted
+  Γ£ô 0 user filters/security rules extracted
+  [OK] 0 datasource-level filters extracted
+  Γ£ô 0 custom geocoding refs extracted
+  Γ£ô 0 published datasource refs extracted
+  Γ£ô 2 data blending links extracted
+  Γ£ô 0 table extensions extracted
+  Γ£ô 5 linguistic synonyms extracted
+  ΓåÆ tableau_export/worksheets.json
+  ΓåÆ tableau_export/dashboards.json
+  ΓåÆ tableau_export/datasources.json
+  ΓåÆ tableau_export/calculations.json
+  ΓåÆ tableau_export/parameters.json
+  ΓåÆ tableau_export/filters.json
+  ΓåÆ tableau_export/stories.json
+  ΓåÆ tableau_export/actions.json
+  ΓåÆ tableau_export/sets.json
+  ΓåÆ tableau_export/groups.json
+  ΓåÆ tableau_export/bins.json
+  ΓåÆ tableau_export/hierarchies.json
+  ΓåÆ tableau_export/sort_orders.json
+  ΓåÆ tableau_export/aliases.json
+  ΓåÆ tableau_export/custom_sql.json
+  ΓåÆ tableau_export/user_filters.json
+  ΓåÆ tableau_export/datasource_filters.json
+  ΓåÆ tableau_export/custom_geocoding.json
+  ΓåÆ tableau_export/published_datasources.json
+  ΓåÆ tableau_export/data_blending.json
+  ΓåÆ tableau_export/hyper_files.json
+  ΓåÆ tableau_export/table_extensions.json
+  ΓåÆ tableau_export/linguistic_schema.json
+Γ£ô Extraction complete
+
+Γ£ô Extraction completed successfully
+
+[Step 2/2] POWER BI PROJECT GENERATION
+--------------------------------------------------------------------------------
+================================================================================
+IMPORT POWER BI
+================================================================================
+
+  Report: shapes_test
+  Datasources: 2
+  Worksheets: 1
+  Calculations: 4
+
+  Generating Power BI Project (.pbip)...
+
+├░┼╕ΓÇ¥┬¿ Generating Power BI Project: shapes_test
+  ├ó┼ôΓÇ£ .pbip file created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\shapes_test\shapes_test.pbip
+  ΓÜá∩╕Å  Relation ΓåÆ 'People.Region' set to manyToMany (cannot verify uniqueness).
+  ΓÜá∩╕Å  Relation ΓåÆ 'Returns.Order ID' set to manyToMany (cannot verify uniqueness).
+  Γ£ô  Relation ΓåÆ 'Calendar.Date' set to manyToOne (Calendar table).
+  Γ£ô TMDL model created with:
+    - 6 tables
+    - 39 columns
+    - 7 DAX measures
+    - 3 relationships
+    - 1 hierarchies
+  ├ó┼ôΓÇ£ SemanticModel created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\shapes_test\shapes_test.SemanticModel
+  ├░┼╕ΓÇ£┼á 1 worksheet pages created (1 visual each)
+  ├ó┼ôΓÇ£ Report created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\shapes_test\shapes_test.Report
+  ├ó┼ôΓÇ£ Metadata created
+2026-05-28 17:03:45 [INFO] powerbi_import.permission_mapper: Credential template written: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\shapes_test\credentials_template.json
+  ├ó┼ôΓÇ£ Credential template: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\shapes_test\credentials_template.json
+
+├ó┼ôΓÇª Power BI Project generated: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\shapes_test
+   ├░┼╕ΓÇ£ΓÇÜ Open in Power BI Desktop: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\shapes_test\shapes_test.pbip
+  [OK] Power BI Project created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\shapes_test
+
+================================================================================
+IMPORT COMPLETE
+================================================================================
+
+[OK] Power BI Projects (.pbip) generated automatically
+   Open the .pbip files in Power BI Desktop
+
+
+Γ£ô Power BI project generated successfully
+2026-05-28 17:03:45 [INFO] tableau_to_powerbi: Migration report saved: artifacts/bug_bash_rw\migration_report_shapes_test_20260528_170345.json
+
+========================================================================
+  MIGRATION REPORT: shapes_test
+========================================================================
+  Total items converted: 12
+  Extraction score:      100.0%
+
+    Exact:          12
+    Approximate:     0
+    Placeholder:     0
+    Unsupported:     0
+    Skipped:         0
+
+  By category:
+    bin                     1 items  (100% exact)
+    calculation             4 items  (100% exact)
+    datasource              2 items  (100% exact)
+    group                   2 items  (100% exact)
+    parameter               2 items  (100% exact)
+    visual                  1 items  (100% exact)
+
+  Completeness grade:    A (100.0%)
+  Per-category extraction:
+    bin                  100.0%  (1 items)
+    calculation          100.0%  (4 items)
+    datasource           100.0%  (2 items)
+    group                100.0%  (2 items)
+    parameter            100.0%  (2 items)
+    visual               100.0%  (1 items)
+
+  Table mapping (source ΓåÆ target):
+    Source Datasource              Source Table                   Target Table                   Columns
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    Sample - Superstore            Orders                         Orders                              21
+    Sample - Superstore            People                         People                               2
+    Sample - Superstore            Returns                        Returns                              2
+
+========================================================================
+  ≡ƒôé DataFolder updated ΓåÆ C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\bug_bash_rw\\shapes_test\\Data
+  Γä╣∩╕Å  Place your data files in: C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\bug_bash_rw\\shapes_test\\Data
+  ≡ƒôé PowerQuery/ folder: 5 M expression file(s) exported
+  ≡ƒôé DAX/ folder: 4 DAX measure file(s) exported
+
+================================================================================
+  [18/20] Migrating: superstore_sales_dashboard
+================================================================================
+
+[Step 1/2] TABLEAU OBJECTS EXTRACTION
+--------------------------------------------------------------------------------
+Pre-flight summary:
+  [WARNING] newer_tableau_version: Workbook saved by Tableau 2025.2.0 (20252.25.0514.2217) ΓÇö newer than tested (2024.3)
+           ΓåÆ Migration may work but features added after are unsupported. Use --force to proceed.
+Source file: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\superstore_sales_dashboard.twbx
+Extracting C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\superstore_sales_dashboard.twbx...
+  Γ£ô 4 worksheets extracted
+  Γ£ô 1 dashboards extracted
+  Γ£ô 1 datasources extracted (filtered from 7 raw)
+  Γ£ô 1 calculations extracted
+  Γ£ô 0 parameters extracted
+  Γ£ô 4 filters extracted
+  Γ£ô 0 stories extracted
+  Γ£ô 4 actions extracted
+  Γ£ô 0 sets extracted
+  Γ£ô 1 groups extracted
+  Γ£ô 0 bins extracted
+  Γ£ô 0 hierarchies extracted
+  Γ£ô 0 sort orders extracted
+  Γ£ô 0 columns with aliases extracted
+  Γ£ô 0 custom SQL queries extracted
+  Γ£ô 0 user filters/security rules extracted
+  [OK] 0 datasource-level filters extracted
+  Γ£ô 0 custom geocoding refs extracted
+  Γ£ô 0 published datasource refs extracted
+  Γ£ô 0 data blending links extracted
+  Γ£ô 1 .hyper extract files detected
+2026-05-28 17:03:50 [DEBUG] extract_tableau_data: Hyper reader enriched 1 file(s)
+  Γ£ô 0 table extensions extracted
+  Γ£ô 3 linguistic synonyms extracted
+  ΓåÆ tableau_export/worksheets.json
+  ΓåÆ tableau_export/dashboards.json
+  ΓåÆ tableau_export/datasources.json
+  ΓåÆ tableau_export/calculations.json
+  ΓåÆ tableau_export/parameters.json
+  ΓåÆ tableau_export/filters.json
+  ΓåÆ tableau_export/stories.json
+  ΓåÆ tableau_export/actions.json
+  ΓåÆ tableau_export/sets.json
+  ΓåÆ tableau_export/groups.json
+  ΓåÆ tableau_export/bins.json
+  ΓåÆ tableau_export/hierarchies.json
+  ΓåÆ tableau_export/sort_orders.json
+  ΓåÆ tableau_export/aliases.json
+  ΓåÆ tableau_export/custom_sql.json
+  ΓåÆ tableau_export/user_filters.json
+  ΓåÆ tableau_export/datasource_filters.json
+  ΓåÆ tableau_export/custom_geocoding.json
+  ΓåÆ tableau_export/published_datasources.json
+  ΓåÆ tableau_export/data_blending.json
+  ΓåÆ tableau_export/hyper_files.json
+  ΓåÆ tableau_export/table_extensions.json
+  ΓåÆ tableau_export/linguistic_schema.json
+Γ£ô Extraction complete
+
+Γ£ô Extraction completed successfully
+
+[Step 2/2] POWER BI PROJECT GENERATION
+--------------------------------------------------------------------------------
+================================================================================
+IMPORT POWER BI
+================================================================================
+
+  Report: superstore_sales_dashboard
+  Datasources: 1
+  Worksheets: 4
+  Calculations: 1
+
+  Generating Power BI Project (.pbip)...
+
+├░┼╕ΓÇ¥┬¿ Generating Power BI Project: superstore_sales_dashboard
+  ├ó┼ôΓÇ£ .pbip file created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\superstore_sales_dashboard\superstore_sales_dashboard.pbip
+  Γ£ô  Relation ΓåÆ 'Calendar.Date' set to manyToOne bothDirections (Calendar bridge).
+  Γ£ô  Relation ΓåÆ 'Calendar.Date' set to manyToOne bothDirections (Calendar bridge).
+  ΓÜá∩╕Å  Relation ΓåÆ 'Extract.Zip Code' set to manyToMany (peer table, 23/25 cols ΓëÑ 70%).
+  ΓÜá Deactivated relationship (ambiguous path): Extract.Order Date ΓåÆ Calendar.Date
+  Γ£ô TMDL model created with:
+    - 3 tables
+    - 56 columns
+    - 0 DAX measures
+    - 3 relationships
+    - 1 hierarchies
+  ├ó┼ôΓÇ£ SemanticModel created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\superstore_sales_dashboard\superstore_sales_dashboard.SemanticModel
+  ├░┼╕ΓÇ£┼á Page 'Dashboard 1': 5 visuals created
+2026-05-28 17:03:53 [INFO] pbip_generator: Self-Healing v3.4 applied 3 report-side repair(s)
+  ├ó┼ôΓÇ£ Report created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\superstore_sales_dashboard\superstore_sales_dashboard.Report
+  ├ó┼ôΓÇ£ Metadata created
+2026-05-28 17:03:53 [INFO] powerbi_import.permission_mapper: Credential template written: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\superstore_sales_dashboard\credentials_template.json
+  ├ó┼ôΓÇ£ Credential template: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\superstore_sales_dashboard\credentials_template.json
+
+├ó┼ôΓÇª Power BI Project generated: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\superstore_sales_dashboard
+   ├░┼╕ΓÇ£ΓÇÜ Open in Power BI Desktop: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\superstore_sales_dashboard\superstore_sales_dashboard.pbip
+  [OK] Power BI Project created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\superstore_sales_dashboard
+
+================================================================================
+IMPORT COMPLETE
+================================================================================
+
+[OK] Power BI Projects (.pbip) generated automatically
+   Open the .pbip files in Power BI Desktop
+
+
+Γ£ô Power BI project generated successfully
+2026-05-28 17:03:53 [INFO] tableau_to_powerbi: Migration report saved: artifacts/bug_bash_rw\migration_report_superstore_sales_dashboard_20260528_170353.json
+
+========================================================================
+  MIGRATION REPORT: superstore_sales_dashboard
+========================================================================
+  Total items converted: 7
+  Extraction score:      100.0%
+
+    Exact:           7
+    Approximate:     0
+    Placeholder:     0
+    Unsupported:     0
+    Skipped:         0
+
+  By category:
+    calculation             1 items  (100% exact)
+    datasource              1 items  (100% exact)
+    group                   1 items  (100% exact)
+    visual                  4 items  (100% exact)
+
+  Completeness grade:    A (100.0%)
+  Per-category extraction:
+    calculation          100.0%  (1 items)
+    datasource           100.0%  (1 items)
+    group                100.0%  (1 items)
+    visual               100.0%  (4 items)
+
+  Table mapping (source ΓåÆ target):
+    Source Datasource              Source Table                   Target Table                   Columns
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    Orders (Sample+-+Superstore+Sa Orders                         Orders                              23
+    Orders (Sample+-+Superstore+Sa Extract                        Extract                             23
+
+========================================================================
+  ≡ƒôü Extracted 1 data file(s) from TWBX into artifacts/bug_bash_rw\superstore_sales_dashboard\Data
+  ≡ƒôè Converted Hyper ΓåÆ 1 CSV file(s)
+  ≡ƒôé DataFolder updated ΓåÆ C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\superstore_sales_dashboard\Data
+  ≡ƒôé PowerQuery/ folder: 4 M expression file(s) exported
+
+================================================================================
+  [19/20] Migrating: tableau_prep_book
+================================================================================
+
+[Step 1/2] PREP FLOW ANALYSIS
+--------------------------------------------------------------------------------
+  Flow: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\tableau_prep_book.tfl
+    Γ£ô Input: Orders_Central (textscan)
+    Γ£ô Input: orders_south_2015 (textscan)
+    Γ£ô Input: returns_new (excel-direct)
+    Γ£ô Input: Orders_West (textscan)
+  ΓåÆ 4 inputs, 1 outputs, 0 transforms, 0 M queries [GREEN]
+
+[Step 2/2] EXPORT POWER QUERY M & SOURCES
+--------------------------------------------------------------------------------
+  Sources: 4 file(s) in artifacts/bug_bash_rw\tableau_prep_book\Sources
+
+  [OK] Prep flow export completed ΓåÆ artifacts/bug_bash_rw\tableau_prep_book
+
+================================================================================
+  [20/20] Migrating: vishnu_dashboard
+================================================================================
+
+[Step 1/2] TABLEAU OBJECTS EXTRACTION
+--------------------------------------------------------------------------------
+Pre-flight summary:
+  [WARNING] newer_tableau_version: Workbook saved by Tableau 2026.1.0 (20261.26.0226.1626) ΓÇö newer than tested (2024.3)
+           ΓåÆ Migration may work but features added after are unsupported. Use --force to proceed.
+Source file: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\vishnu_dashboard.twb
+Extracting C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\examples\real_world\vishnu_dashboard.twb...
+  Γ£ô 5 worksheets extracted
+  Γ£ô 0 dashboards extracted
+  Γ£ô 2 datasources extracted (filtered from 6 raw)
+  Γ£ô 6 calculations extracted
+  Γ£ô 2 parameters extracted
+  Γ£ô 2 filters extracted
+  Γ£ô 0 stories extracted
+  Γ£ô 0 actions extracted
+  Γ£ô 0 sets extracted
+  Γ£ô 2 groups extracted
+  Γ£ô 1 bins extracted
+  Γ£ô 0 hierarchies extracted
+  Γ£ô 0 sort orders extracted
+  Γ£ô 0 columns with aliases extracted
+  Γ£ô 0 custom SQL queries extracted
+  Γ£ô 0 user filters/security rules extracted
+  [OK] 0 datasource-level filters extracted
+  Γ£ô 0 custom geocoding refs extracted
+  Γ£ô 0 published datasource refs extracted
+  Γ£ô 2 data blending links extracted
+  Γ£ô 0 table extensions extracted
+  Γ£ô 6 linguistic synonyms extracted
+  ΓåÆ tableau_export/worksheets.json
+  ΓåÆ tableau_export/dashboards.json
+  ΓåÆ tableau_export/datasources.json
+  ΓåÆ tableau_export/calculations.json
+  ΓåÆ tableau_export/parameters.json
+  ΓåÆ tableau_export/filters.json
+  ΓåÆ tableau_export/stories.json
+  ΓåÆ tableau_export/actions.json
+  ΓåÆ tableau_export/sets.json
+  ΓåÆ tableau_export/groups.json
+  ΓåÆ tableau_export/bins.json
+  ΓåÆ tableau_export/hierarchies.json
+  ΓåÆ tableau_export/sort_orders.json
+  ΓåÆ tableau_export/aliases.json
+  ΓåÆ tableau_export/custom_sql.json
+  ΓåÆ tableau_export/user_filters.json
+  ΓåÆ tableau_export/datasource_filters.json
+  ΓåÆ tableau_export/custom_geocoding.json
+  ΓåÆ tableau_export/published_datasources.json
+  ΓåÆ tableau_export/data_blending.json
+  ΓåÆ tableau_export/hyper_files.json
+  ΓåÆ tableau_export/table_extensions.json
+  ΓåÆ tableau_export/linguistic_schema.json
+Γ£ô Extraction complete
+
+Γ£ô Extraction completed successfully
+
+[Step 2/2] POWER BI PROJECT GENERATION
+--------------------------------------------------------------------------------
+================================================================================
+IMPORT POWER BI
+================================================================================
+
+  Report: vishnu_dashboard
+  Datasources: 2
+  Worksheets: 5
+  Calculations: 6
+
+  Generating Power BI Project (.pbip)...
+
+├░┼╕ΓÇ¥┬¿ Generating Power BI Project: vishnu_dashboard
+  ├ó┼ôΓÇ£ .pbip file created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\vishnu_dashboard\vishnu_dashboard.pbip
+  Γ£ô  Relation ΓåÆ 'Calendar.Date' set to manyToOne (Calendar table).
+  Γ£ô TMDL model created with:
+    - 4 tables
+    - 36 columns
+    - 8 DAX measures
+    - 1 relationships
+    - 1 hierarchies
+  ├ó┼ôΓÇ£ SemanticModel created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\vishnu_dashboard\vishnu_dashboard.SemanticModel
+  ├░┼╕ΓÇ£┼á 5 worksheet pages created (1 visual each)
+  ├ó┼ôΓÇ£ Report created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\vishnu_dashboard\vishnu_dashboard.Report
+  ├ó┼ôΓÇ£ Metadata created
+2026-05-28 17:03:58 [INFO] powerbi_import.permission_mapper: Credential template written: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\vishnu_dashboard\credentials_template.json
+  ├ó┼ôΓÇ£ Credential template: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\vishnu_dashboard\credentials_template.json
+
+├ó┼ôΓÇª Power BI Project generated: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\vishnu_dashboard
+   ├░┼╕ΓÇ£ΓÇÜ Open in Power BI Desktop: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\vishnu_dashboard\vishnu_dashboard.pbip
+  [OK] Power BI Project created: C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\bug_bash_rw\vishnu_dashboard
+
+================================================================================
+IMPORT COMPLETE
+================================================================================
+
+[OK] Power BI Projects (.pbip) generated automatically
+   Open the .pbip files in Power BI Desktop
+
+
+Γ£ô Power BI project generated successfully
+2026-05-28 17:03:58 [INFO] tableau_to_powerbi: Migration report saved: artifacts/bug_bash_rw\migration_report_vishnu_dashboard_20260528_170358.json
+
+========================================================================
+  MIGRATION REPORT: vishnu_dashboard
+========================================================================
+  Total items converted: 18
+  Extraction score:      100.0%
+
+    Exact:          18
+    Approximate:     0
+    Placeholder:     0
+    Unsupported:     0
+    Skipped:         0
+
+  By category:
+    bin                     1 items  (100% exact)
+    calculation             6 items  (100% exact)
+    datasource              2 items  (100% exact)
+    group                   2 items  (100% exact)
+    parameter               2 items  (100% exact)
+    visual                  5 items  (100% exact)
+
+  Completeness grade:    A (100.0%)
+  Per-category extraction:
+    bin                  100.0%  (1 items)
+    calculation          100.0%  (6 items)
+    datasource           100.0%  (2 items)
+    group                100.0%  (2 items)
+    parameter            100.0%  (2 items)
+    visual               100.0%  (5 items)
+
+  Table mapping (source ΓåÆ target):
+    Source Datasource              Source Table                   Target Table                   Columns
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    Sample - Superstore            Orders$                        Orders$                             21
+
+========================================================================
+  ≡ƒôé DataFolder updated ΓåÆ C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\bug_bash_rw\\vishnu_dashboard\\Data
+  Γä╣∩╕Å  Place your data files in: C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\bug_bash_rw\\vishnu_dashboard\\Data
+  ≡ƒôé PowerQuery/ folder: 3 M expression file(s) exported
+  ≡ƒôé DAX/ folder: 4 DAX measure file(s) exported
+
+≡ƒôè Batch HTML dashboard: artifacts/bug_bash_rw\MIGRATION_DASHBOARD.html
+
+================================================================================
+                            BATCH MIGRATION SUMMARY                             
+================================================================================
+
+  Total items:     20
+  Workbooks:       18
+  Prep flows:      2
+  Succeeded:       20
+  Failed:          0
+  Duration:        0:01:18.484082
+
+  Workbook                      Status  Extracted   Tables   Visuals
+  --------------------------  --------  ---------  -------  --------
+  Cache                             OK     100.0%        9         1
+  RESTAPISample                     OK     100.0%        2         3
+  Salesforce                        OK     100.0%       15       217
+  SampleDS                          OK     100.0%        1         0
+  SampleWB                          OK     100.0%        2         3
+  TABLEAU_10_TWB                    OK     100.0%        0         0
+  TABLEAU_10_TWBX                   OK     100.0%        2         1
+  datasource_test                   OK     100.0%        1         2
+  ephemeral_field                   OK     100.0%        1         2
+  feedback_dashboard                OK     100.0%        3         8
+  filtering                         OK     100.0%        1         2
+  global_superstores_db             OK     100.0%        2        16
+  multiple_connections              OK     100.0%        2         0
+  nba_player_stats                  OK     100.0%        3         9
+  sample-superstore                 OK     100.0%        2         1
+  shapes_test                       OK     100.0%        6         1
+  superstore_sales_dashboard        OK     100.0%        3         5
+  vishnu_dashboard                  OK     100.0%        4         5
+
+  Prep Flow               Status    Grade   M Queries   Sources
+  --------------------  --------  -------  ----------  --------
+  SampleFlow                  OK      RED           0         0
+  tableau_prep_book           OK    GREEN           0         4
+
+  Extracted: avg 100.0% | min 100.0% | max 100.0%
+
+================================================================================
+                          CROSS-FLOW LINEAGE ANALYSIS                           
+================================================================================
+
+  Flows: 2
+
+================================================================
+                    Prep Flow Lineage Analysis                  
+================================================================
+  Total flows:              2
+  External sources:         4
+  Final outputs:            1
+  Cross-flow edges:         0
+  Max chain depth:          0
+  Isolated flows:           2
+----------------------------------------------------------------
+  Isolated (standalone): SampleFlow, tableau_prep_book
+
+  MIGRATION READINESS:
+    ≡ƒö┤ SampleFlow: RED, 1 blocker(s)
+       Γ¥î No outputs detected ΓÇö flow may be incomplete
+    ≡ƒƒó tableau_prep_book: GREEN
+================================================================
+2026-05-28 17:04:07 [INFO] powerbi_import.prep_lineage_report: Lineage summary CSV saved to artifacts/bug_bash_rw\prep_lineage\prep_lineage_report_summary.csv
+2026-05-28 17:04:07 [INFO] powerbi_import.prep_lineage_report: Lineage report saved to artifacts/bug_bash_rw\prep_lineage\prep_lineage_report.html
+  HTML report: artifacts/bug_bash_rw\prep_lineage\prep_lineage_report.html
+2026-05-28 17:04:07 [INFO] powerbi_import.prep_lineage_report: Lineage JSON saved to artifacts/bug_bash_rw\prep_lineage\prep_lineage.json
+  JSON report: artifacts/bug_bash_rw\prep_lineage\prep_lineage.json

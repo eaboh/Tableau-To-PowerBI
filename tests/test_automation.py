@@ -14,6 +14,7 @@ import json
 import os
 import sys
 import tempfile
+import csv
 
 import pytest
 
@@ -285,7 +286,6 @@ class TestQAFlag:
 
     def test_qa_arg_exists(self):
         """The --qa flag should be registered in argparse."""
-        import argparse
         # Quick regex scan of migrate.py for --qa
         migrate_path = os.path.join(ROOT_DIR, 'migrate.py')
         with open(migrate_path, 'r', encoding='utf-8') as f:
@@ -337,6 +337,101 @@ class TestDefaultONFlags:
         with open(migrate_path, 'r', encoding='utf-8') as f:
             content = f.read()
         assert "'--no-compare'" in content or '"--no-compare"' in content
+
+
+class TestReportSummaryCsv:
+    """Test summary CSV exports for dashboard reports."""
+
+    def test_generate_dashboard_writes_summary_csv(self):
+        from generate_report import generate_dashboard
+        with tempfile.TemporaryDirectory() as tmpdir:
+            proj = os.path.join(tmpdir, 'TestWB')
+            os.makedirs(proj)
+            with open(os.path.join(proj, 'migration_metadata.json'), 'w', encoding='utf-8') as f:
+                json.dump({
+                    'objects_converted': {'datasources': 2},
+                    'tmdl_stats': {'tables': 4, 'measures': 6},
+                    'generated_output': {'pages': 1, 'visuals': 5},
+                    'dax_measure_names': ['Sales', 'Profit'],
+                    'visual_details': [
+                        {'worksheet': 'W1', 'pbi_visual': 'lineChart', 'measures': ['Sales'], 'dax_measures': ['Sales']},
+                        {'worksheet': 'W2', 'pbi_visual': 'slicer', 'measures': ['Qty']},
+                        {'worksheet': 'W3', 'pbi_visual': 'clusteredBarChart', 'measures': ['Profit', 'Qty'], 'dax_measures': ['Profit']},
+                        {'worksheet': 'W4', 'pbi_visual': 'image', 'measures': ['Sales']},
+                    ],
+                }, f)
+
+            html_path = generate_dashboard('TestWB', tmpdir)
+            assert html_path is not None
+
+            csv_path = os.path.join(tmpdir, 'MIGRATION_DASHBOARD_TestWB_summary.csv')
+            assert os.path.exists(csv_path)
+            with open(csv_path, newline='', encoding='utf-8') as fh:
+                rows = list(csv.DictReader(fh))
+
+            assert len(rows) == 1
+            row = rows[0]
+            assert row['artifact_name'] == 'TestWB'
+            assert row['artifact_type'] == 'tableau_report'
+            assert row['sources_count'] == '2'
+            assert row['tables_count'] == '4'
+            assert row['measures_count'] == '6'
+            assert row['visuals_count'] == '2'
+            assert row['visuals_with_values_count'] == '2'
+            assert row['visuals_with_dax_measures_count'] == '2'
+
+    def test_generate_batch_dashboard_writes_summary_csv(self):
+        from generate_report import generate_batch_dashboard
+        with tempfile.TemporaryDirectory() as tmpdir:
+            wb1_dir = os.path.join(tmpdir, 'WB1')
+            wb2_dir = os.path.join(tmpdir, 'WB2')
+            os.makedirs(wb1_dir)
+            os.makedirs(wb2_dir)
+
+            wb1_meta = os.path.join(wb1_dir, 'migration_metadata.json')
+            wb2_meta = os.path.join(wb2_dir, 'migration_metadata.json')
+            with open(wb1_meta, 'w', encoding='utf-8') as f:
+                json.dump({
+                    'objects_converted': {'datasources': 1},
+                    'tmdl_stats': {'tables': 2, 'measures': 3},
+                    'generated_output': {'visuals': 2},
+                    'dax_measure_names': ['M'],
+                    'visual_details': [
+                        {'worksheet': 'A', 'pbi_visual': 'lineChart', 'measures': ['M'], 'dax_measures': ['M']},
+                        {'worksheet': 'A_img', 'pbi_visual': 'image', 'measures': ['M']},
+                    ],
+                }, f)
+            with open(wb2_meta, 'w', encoding='utf-8') as f:
+                json.dump({
+                    'objects_converted': {'datasources': 3},
+                    'tmdl_stats': {'tables': 5, 'measures': 8},
+                    'generated_output': {'visuals': 4},
+                    'dax_measure_names': [],
+                    'visual_details': [
+                        {'worksheet': 'B', 'pbi_visual': 'slicer', 'measures': ['Total']},
+                        {'worksheet': 'B2', 'pbi_visual': 'tableEx', 'measures': []},
+                    ],
+                }, f)
+
+            workbook_results = {
+                'WB1': {'metadata_path': wb1_meta},
+                'WB2': {'metadata_path': wb2_meta},
+            }
+            html_path = generate_batch_dashboard(tmpdir, workbook_results)
+            assert html_path is not None
+
+            csv_path = os.path.join(tmpdir, 'MIGRATION_DASHBOARD_summary.csv')
+            assert os.path.exists(csv_path)
+            with open(csv_path, newline='', encoding='utf-8') as fh:
+                rows = {r['artifact_name']: r for r in csv.DictReader(fh)}
+
+            assert set(rows.keys()) == {'WB1', 'WB2'}
+            assert rows['WB1']['visuals_count'] == '1'
+            assert rows['WB1']['visuals_with_values_count'] == '1'
+            assert rows['WB1']['visuals_with_dax_measures_count'] == '1'
+            assert rows['WB2']['visuals_count'] == '0'
+            assert rows['WB2']['visuals_with_values_count'] == '0'
+            assert rows['WB2']['visuals_with_dax_measures_count'] == '0'
 
 
 # ════════════════════════════════════════════════════════════════════════

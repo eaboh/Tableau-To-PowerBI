@@ -1,19 +1,20 @@
 table 'Profit Bin Size'
-	lineageTag: b16598aa-b090-4552-bfb0-8f2c06b39f47
+	lineageTag: e781ff7d-3df9-47d3-92b5-bed125d5c5b9
 
 	measure 'Profit Bin Size' = SELECTEDVALUE('Profit Bin Size'[Value], 200)
-		lineageTag: d9240af0-3310-4ab2-a48c-7f92ba8af824
+		lineageTag: 1b35a614-cebc-4834-a154-b4679e82ff18
+		annotation Copilot_Description = DAX: SELECTEDVALUE('Profit Bin Size'[Value], 200)
 
 	column Value
 		dataType: int64
-		lineageTag: f14d89e4-2ebc-4aa8-ae06-bf6d219ed850
+		lineageTag: 3975f1b9-0d4e-4243-a9b7-990c7e04a1bb
 		summarizeBy: none
 		sourceColumn: Value
 		annotation displayFolder = Parameters
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Profit Bin Size-51da5656-bfee-49c3-a6d5-ac1bb2eec7f9' = calculated
+	partition 'Profit Bin Size-07be3895-dbc2-439a-affa-20060fc7945b' = calculated
 		mode: import
 		source = GENERATESERIES(50, 200, 50)
 

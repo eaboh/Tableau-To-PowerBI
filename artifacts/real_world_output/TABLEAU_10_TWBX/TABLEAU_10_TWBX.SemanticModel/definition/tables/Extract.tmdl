@@ -1,13 +1,9 @@
 table Extract
-	lineageTag: 5a4f3cfc-179b-40bb-8fc4-c1acd6d3e6d5
-
-	measure '[Number of Records]' = 1
-		displayFolder: Measures
-		lineageTag: 1dc24035-c367-4f87-918a-24fde1568e08
+	lineageTag: 593ca353-b578-4296-a836-c04b9f797960
 
 	column 'Number of Records'
 		dataType: int64
-		lineageTag: 80d4aa60-f673-4a78-8536-7cfaff014197
+		lineageTag: e04240e8-f3ab-4e04-8be1-d40cd10acf11
 		summarizeBy: sum
 		sourceColumn: 'Number of Records'
 
@@ -15,7 +11,7 @@ table Extract
 
 	column a
 		dataType: string
-		lineageTag: f06256e6-c89c-4c91-b82b-5648ae96165a
+		lineageTag: b12705a2-c520-46b7-9468-3354e89f24e6
 		summarizeBy: none
 		sourceColumn: a
 
@@ -23,7 +19,7 @@ table Extract
 
 	column x
 		dataType: int64
-		lineageTag: caa5f2a6-0df8-483c-8090-cf3ef33ae84d
+		lineageTag: cb7f2ba4-b2ca-4edc-9f6c-82a5fe1639fa
 		summarizeBy: sum
 		sourceColumn: x
 
@@ -31,13 +27,13 @@ table Extract
 
 	column y
 		dataType: int64
-		lineageTag: 0f473398-885a-404c-a222-1e071fe476a8
+		lineageTag: bb1d186e-970f-49b2-8b02-b2025d1e6da5
 		summarizeBy: sum
 		sourceColumn: y
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Extract-ce39f87a-4b67-423b-a51d-18f1fa0e60b3' = m
+	partition 'Extract-b1a0b5d6-1fa2-4734-b70c-9f5107ecbc42' = m
 		mode: import
 		source =
 				let
@@ -61,5 +57,5 @@ table Extract
 				    Result
 
 	annotation PBI_ResultType = Table
-	annotation Copilot_TableDescription = Contains 4 columns and 1 measures: Number of Records, a, x, y.
+	annotation Copilot_TableDescription = Contains 4 columns: Number of Records, a, x, y.
 

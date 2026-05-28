@@ -1,107 +1,155 @@
 table Commandes
-	lineageTag: 11950d91-5335-4ea0-8623-b9496940b7ae
+	lineageTag: 454be186-76c2-4c0b-ac27-aadd071173c2
 
 	measure 'Chiffre d''Affaires Brut' = SUMX('Commandes', 'Commandes'[quantite] * 'Commandes'[prix_unitaire])
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: f3af938f-e5be-4fa6-b600-531d91889973
+		lineageTag: 73a42d6a-a846-47e1-a492-d364e842bbb8
 		annotation Copilot_Description = Migrated from Tableau: SUM([quantite] * [prix_unitaire]) | DAX: SUMX('Commandes', 'Commandes'[quantite] * 'Commandes'[prix_unitaire])
 
 	measure 'Chiffre d''Affaires Net' = SUMX('Commandes', IF('Commandes'[statut] <> "Annulée", 'Commandes'[quantite] * 'Commandes'[prix_unitaire] * (1 - 'Commandes'[remise]), 0))
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: 6f063f02-f011-4450-aa95-9d93c6c5053d
-		annotation Copilot_Description = Migrated from Tableau: SUM(IF [statut] != "Annulée" THEN [quantite] * [prix_unitaire] * (1 - [remise]) ELSE 0 END) | DAX: SUMX('Commandes', IF('Commandes'[statut] <> "Annulée", 'Commandes'[quantite] * 'Commandes'[prix_unitaire] * (1 - 'Comman...
+		lineageTag: f001c594-2ff4-4d1c-be5c-6f8baa7e4681
+		annotation Copilot_Description = Migrated from Tableau: SUM(IF [statut] != "Annulée" THEN [quantite] * [prix_unitaire] * (1 - [remise]) ELSE 0 END) | DAX: SUMX('Commandes', IF('Commandes'[statut] <> "Annulée", 'Commandes'[quantite] * 'Commandes'[prix_unitaire] * (1 - 'Commandes'[remise]), 0))
 
-	measure 'Marge Brute' = SUMX('Commandes', IF('Commandes'[statut] <> "Annulée", ('Commandes'[quantite] * 'Commandes'[prix_unitaire] * (1 - 'Commandes'[remise])) - ('Commandes'[quantite] * 'Produits'[cout_achat]) - 'Commandes'[frais_port], 0))
+	measure 'Marge Brute' = SUMX('Produits', IF(LOOKUPVALUE(Commandes[statut], Commandes[produit_id], Produits[produit_id]) <> "Annulée", (LOOKUPVALUE(Commandes[quantite], Commandes[produit_id], Produits[produit_id]) * LOOKUPVALUE(Commandes[prix_unitaire], Commandes[produit_id], Produits[produit_id]) * (1 - LOOKUPVALUE(Commandes[remise], Commandes[produit_id], Produits[produit_id]))) - (LOOKUPVALUE(Commandes[quantite], Commandes[produit_id], Produits[produit_id]) * 'Produits'[cout_achat]) - LOOKUPVALUE(Commandes[frais_port], Commandes[produit_id], Produits[produit_id]), 0))
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: a21a6fe4-adc5-4afd-b558-632209d9fe78
-		annotation Copilot_Description = Migrated from Tableau: SUM(IF [statut] != "Annulée" THEN ([quantite] * [prix_unitaire] * (1 - [remise])) - ([quantite] * [cout_achat]) - [frais_port] ELSE 0 END) | DAX: SUMX('Commandes', IF('Commandes'[statut] <> "Annulée", ('Commandes'[quantite] * 'Commandes'[prix_unitaire] * (1 - 'Comma...
+		lineageTag: 373fecb8-30c9-47cb-9a84-ec28253e7c6f
+		annotation Copilot_Description = Migrated from Tableau: SUM(IF [statut] != "Annulée" THEN ([quantite] * [prix_unitaire] * (1 - [remise])) - ([quantite] * [cout_achat]) - [frais_port] ELSE 0 END) | DAX: SUMX('Produits', IF(LOOKUPVALUE(Commandes[statut], Commandes[produit_id], Produits[produit_id]) <> "Annulée", (LOOKUPVALUE(Commandes[quantite], Commandes[produit_id], Produits[produit_id]) * LOOKUPVAL)))...
 
 	measure 'Taux de Marge (%)' = IF(ISBLANK([Marge Brute] / [Chiffre d"Affaires Net]), 0, [Marge Brute] / [Chiffre d"Affaires Net])
 		formatString: #,0.00
 		displayFolder: Measures
-		isHidden
-		lineageTag: 6721d3d4-5cb9-408c-bacb-03ed51414241
+		lineageTag: ec5ce068-49a3-48ce-bb63-d965fbd2eb14
 		annotation Copilot_Description = Migrated from Tableau: ZN([Calc_Marge] / [Calc_CA_Net]) | DAX: IF(ISBLANK([Marge Brute] / [Chiffre d"Affaires Net]), 0, [Marge Brute] / [Chiffre d"Affaires Net])
 
 	measure 'Montant Remises' = SUMX('Commandes', 'Commandes'[quantite] * 'Commandes'[prix_unitaire] * 'Commandes'[remise])
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: d120d2d8-1e8a-48a8-9af1-199b54cac47f
+		lineageTag: 1e2e1309-d8f3-41dd-be4b-1ba90772e744
 		annotation Copilot_Description = Migrated from Tableau: SUM([quantite] * [prix_unitaire] * [remise]) | DAX: SUMX('Commandes', 'Commandes'[quantite] * 'Commandes'[prix_unitaire] * 'Commandes'[remise])
 
 	measure 'Nombre de Commandes' = DISTINCTCOUNT('Commandes'[commande_id])
 		displayFolder: Measures
-		lineageTag: bde4fbb9-6364-47ae-a258-68c0cc3ceb9c
+		lineageTag: ec0e3caf-87d4-4f6d-b784-56ef00197fc1
 		annotation Copilot_Description = Migrated from Tableau: COUNTD([commande_id]) | DAX: DISTINCTCOUNT('Commandes'[commande_id])
 
 	measure 'Clients Uniques' = DISTINCTCOUNT('Commandes'[client_id])
 		displayFolder: Measures
-		lineageTag: b8528c3e-5c1a-4d47-ae65-f71dc0f8dc0c
+		lineageTag: ed7f6366-1adc-472e-9019-6f9806962fed
 		annotation Copilot_Description = Migrated from Tableau: COUNTD([client_id]) | DAX: DISTINCTCOUNT('Commandes'[client_id])
 
-	measure 'Panier Moyen' = [Chiffre d'Affaires Net] / [Nombre de Commandes]
+	measure 'Panier Moyen' = /* TODO: DAX conversion validation failed for Calc_PanierMoyen: unterminated single-quoted identifier */ BLANK()
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: 8e9970be-53e8-4ec6-a446-0125bcc28ca4
-		annotation Copilot_Description = Migrated from Tableau: [Calc_CA_Net] / [Calc_NbCommandes] | DAX: [Chiffre d'Affaires Net] / [Nombre de Commandes]
+		lineageTag: fb9c4527-c611-4fb9-9e5f-f01518a11238
+		annotation Copilot_Description = Migrated from Tableau: [Calc_CA_Net] / [Calc_NbCommandes] | DAX: /* TODO: DAX conversion validation failed for Calc_PanierMoyen: unterminated single-quoted identifier */ BLANK()
 
 	measure 'CA par Client' = CALCULATE(SUMX('Commandes', 'Commandes'[quantite] * 'Commandes'[prix_unitaire]), ALLEXCEPT('Commandes', 'Commandes'[client_id]))
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: 2c527449-b84e-4557-8537-0d14dd3186a3
-		annotation Copilot_Description = Migrated from Tableau: {FIXED [client_id] : SUM([quantite] * [prix_unitaire])} | DAX: CALCULATE(SUMX('Commandes', 'Commandes'[quantite] * 'Commandes'[prix_unitaire]), ALLEXCEPT('Commandes', 'Commandes'[clie...
+		lineageTag: 93901ce9-98f7-43cd-9db3-4d45d22ed722
+		annotation Copilot_Description = Migrated from Tableau: {FIXED [client_id] : SUM([quantite] * [prix_unitaire])} | DAX: CALCULATE(SUMX('Commandes', 'Commandes'[quantite] * 'Commandes'[prix_unitaire]), ALLEXCEPT('Commandes', 'Commandes'[client_id]))
 
 	measure 'CA Régional par Catégorie' = CALCULATE(SUMX('Commandes', 'Commandes'[quantite] * 'Commandes'[prix_unitaire]), REMOVEFILTERS('Commandes'[region]), REMOVEFILTERS('Produits'[categorie]))
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: f9193730-a9aa-4a4e-82c3-b19056e1ef98
-		annotation Copilot_Description = Migrated from Tableau: {FIXED [region], [categorie] : SUM([quantite] * [prix_unitaire])} | DAX: CALCULATE(SUMX('Commandes', 'Commandes'[quantite] * 'Commandes'[prix_unitaire]), REMOVEFILTERS('Commandes'[region]), REM...
+		lineageTag: 80b044de-7e73-45b9-b8f3-7eff71544dfb
+		annotation Copilot_Description = Migrated from Tableau: {FIXED [region], [categorie] : SUM([quantite] * [prix_unitaire])} | DAX: CALCULATE(SUMX('Commandes', 'Commandes'[quantite] * 'Commandes'[prix_unitaire]), REMOVEFILTERS('Commandes'[region]), REMOVEFILTERS('Produits'[categorie]))
 
 	measure 'CA hors Produit' = CALCULATE(SUMX('Commandes', 'Commandes'[quantite] * 'Commandes'[prix_unitaire]), REMOVEFILTERS('Produits'[nom_produit]))
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: a4c5c0c8-99b3-4147-80d9-1b0c60bb966a
+		lineageTag: cb137449-21e1-40d8-a911-95c0255cb07d
 		annotation Copilot_Description = Migrated from Tableau: {EXCLUDE [nom_produit] : SUM([quantite] * [prix_unitaire])} | DAX: CALCULATE(SUMX('Commandes', 'Commandes'[quantite] * 'Commandes'[prix_unitaire]), REMOVEFILTERS('Produits'[nom_produit]))
 
 	measure 'Classification Client' = IF([CA par Client] > 50000, "Platine", IF([CA par Client] > 20000, "||", IF([CA par Client] > 5000, "Argent", "Bronze")))
 		displayFolder: Dimensions
-		lineageTag: a3530b17-e64f-4ad4-a282-b010e6df5a3c
-		annotation Copilot_Description = Migrated from Tableau: IF [Calc_CAParClient] > 50000 THEN "Platine" ELSEIF [Calc_CAParClient] > 20000 THEN "Or" ELSEIF [Calc_CAParClient] > 5000 THEN "Argent" ELSE "Bronze" END | DAX: IF([CA par Client] > 50000, "Platine", IF([CA par Client] > 20000, "||", IF([CA par Client] > 5000, "Argent", "Bronze"))...
+		lineageTag: 6e7e9781-e67b-4641-b79b-13dc1c228a3c
+		annotation Copilot_Description = Migrated from Tableau: IF [Calc_CAParClient] > 50000 THEN "Platine" ELSEIF [Calc_CAParClient] > 20000 THEN "Or" ELSEIF [Calc_CAParClient] > 5000 THEN "Argent" ELSE "Bronze" END | DAX: IF([CA par Client] > 50000, "Platine", IF([CA par Client] > 20000, "||", IF([CA par Client] > 5000, "Argent", "Bronze")))
 
-	measure 'Cumul Mobile CA' = CALCULATE(SUMX('Commandes', 'Commandes'[quantite] * 'Commandes'[prix_unitaire]), FILTER(ALLSELECTED('Commandes'), TRUE())) /* RUNNING_SUM: converted to cumulative — verify window scope */
+	measure 'Cumul Mobile CA' = /* TODO: DAX conversion validation failed for Calc_CumulCA: unconverted Tableau function token detected in DAX output */ BLANK()
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: 3ec09881-ac56-4f73-9938-7db5eb1ce70a
-		annotation Copilot_Description = Migrated from Tableau: RUNNING_SUM(SUM([quantite] * [prix_unitaire])) | DAX: CALCULATE(SUMX('Commandes', 'Commandes'[quantite] * 'Commandes'[prix_unitaire]), FILTER(ALLSELECTED('Commandes'), TRUE()...
+		lineageTag: 5b95e7a3-8832-4a62-997b-85a5a5933f9c
+		annotation Copilot_Description = Migrated from Tableau: RUNNING_SUM(SUM([quantite] * [prix_unitaire])) | DAX: /* TODO: DAX conversion validation failed for Calc_CumulCA: unconverted Tableau function token detected in DAX output */ BLANK()
 
-	measure 'Moyenne Mobile 3M' = CALCULATE(SUMX('Commandes', 'Commandes'[quantite] * 'Commandes'[prix_unitaire]), WINDOW(-2, REL, 0, REL, ORDERBY('Commandes'[commande_id], ASC)), ALL('Commandes')) /* WINDOW.AVG: frame 'Commandes'[-2,0] */
+	measure 'Moyenne Mobile 3M' = CALCULATE(SUMX('Commandes', 'Commandes'[quantite] * 'Commandes'[prix_unitaire]), WINDOW(-2, REL, 0, REL, ORDERBY(SUM('Commandes'[commande_id]), ASC)), ALL('Commandes')) /* WINDOW.AVG: frame SUM('Commandes'[-2,0]) */
 		formatString: #,0.00
 		displayFolder: Measures
-		isHidden
-		lineageTag: e35a391a-da3c-4f90-b975-1dbe5e2be842
-		annotation Copilot_Description = Migrated from Tableau: WINDOW_AVG(SUM([quantite] * [prix_unitaire]), -2, 0) | DAX: CALCULATE(SUMX('Commandes', 'Commandes'[quantite] * 'Commandes'[prix_unitaire]), WINDOW(-2, REL, 0, REL, ORDERBY('Comman...
+		lineageTag: 9a7cf653-5056-437c-b5fb-06a33a3dc90a
+		annotation Copilot_Description = Migrated from Tableau: WINDOW_AVG(SUM([quantite] * [prix_unitaire]), -2, 0) | DAX: CALCULATE(SUMX('Commandes', 'Commandes'[quantite] * 'Commandes'[prix_unitaire]), WINDOW(-2, REL, 0, REL, ORDERBY(SUM('Commandes'[commande_id]), ASC)), ALL('Commandes')) /* WINDOW.AVG: frame SUM('Comma)...
 
 	measure 'Classement CA' = RANKX(ALL('Commandes'), SUMX('Commandes', 'Commandes'[quantite] * 'Commandes'[prix_unitaire]))
 		displayFolder: Measures
-		lineageTag: d753077b-d5ab-4f62-a422-08f785675a51
+		lineageTag: ebd30144-8dd5-4289-8be0-24f08c73458f
 		annotation Copilot_Description = Migrated from Tableau: RANK(SUM([quantite] * [prix_unitaire])) | DAX: RANKX(ALL('Commandes'), SUMX('Commandes', 'Commandes'[quantite] * 'Commandes'[prix_unitaire]))
 
 	measure 'CA Année en Cours' = CALCULATE(SUMX('Commandes', IF(YEAR('Commandes'[date_commande]) = YEAR(TODAY()), 'Commandes'[quantite] * 'Commandes'[prix_unitaire], 0)), ALL('Commandes'))
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: d4e5cc3f-af69-4b47-9c96-e68202a881b4
-		annotation Copilot_Description = Migrated from Tableau: {FIXED : SUM(IF YEAR([date_commande]) = YEAR(TODAY()) THEN [quantite] * [prix_unitaire] ELSE 0 END)} | DAX: CALCULATE(SUMX('Commandes', IF(YEAR('Commandes'[date_commande]) = YEAR(TODAY()), 'Commandes'[quantite] * 'Commandes'[pri...
+		lineageTag: 6772ab67-6c52-49f5-8501-f8df98079a79
+		annotation Copilot_Description = Migrated from Tableau: {FIXED : SUM(IF YEAR([date_commande]) = YEAR(TODAY()) THEN [quantite] * [prix_unitaire] ELSE 0 END)} | DAX: CALCULATE(SUMX('Commandes', IF(YEAR('Commandes'[date_commande]) = YEAR(TODAY()), 'Commandes'[quantite] * 'Commandes'[prix_unitaire], 0)), ALL('Commandes'))
 
 	measure 'Période d''Analyse' = "Année"
-		lineageTag: af272e03-d351-4bda-a5c2-784120e18ec8
+		lineageTag: 40bf1c7b-d6ed-4b46-a6a8-909820934773
 		annotation Copilot_Description = DAX: "Année"
+
+	measure 'Chiffre d''Affaires Brut Formatted' = VAR _val = [Chiffre d'Affaires Brut] RETURN IF(ABS(_val) >= 1E9, FORMAT(_val / 1E9, "#,0.0") & "B", IF(ABS(_val) >= 1E6, FORMAT(_val / 1E6, "#,0.0") & "M", IF(ABS(_val) >= 1E3, FORMAT(_val / 1E3, "#,0.0") & "K", FORMAT(_val, "#,0.00"))))
+		displayFolder: Formatted
+		lineageTag: f363f816-075a-41a9-99b0-a1b0e1a0365e
+		annotation Copilot_Description = Dynamic numeric abbreviation for Chiffre d'Affaires Brut (K/M/B)
+
+	measure 'Chiffre d''Affaires Net Formatted' = VAR _val = [Chiffre d'Affaires Net] RETURN IF(ABS(_val) >= 1E9, FORMAT(_val / 1E9, "#,0.0") & "B", IF(ABS(_val) >= 1E6, FORMAT(_val / 1E6, "#,0.0") & "M", IF(ABS(_val) >= 1E3, FORMAT(_val / 1E3, "#,0.0") & "K", FORMAT(_val, "#,0.00"))))
+		displayFolder: Formatted
+		lineageTag: 718bd04b-400e-42a3-8778-76566df7bdf3
+		annotation Copilot_Description = Dynamic numeric abbreviation for Chiffre d'Affaires Net (K/M/B)
+
+	measure 'Marge Brute Formatted' = VAR _val = [Marge Brute] RETURN IF(ABS(_val) >= 1E9, FORMAT(_val / 1E9, "#,0.0") & "B", IF(ABS(_val) >= 1E6, FORMAT(_val / 1E6, "#,0.0") & "M", IF(ABS(_val) >= 1E3, FORMAT(_val / 1E3, "#,0.0") & "K", FORMAT(_val, "#,0.00"))))
+		displayFolder: Formatted
+		lineageTag: 75352293-fdca-4a9d-bc49-80028d1bbdb1
+		annotation Copilot_Description = Dynamic numeric abbreviation for Marge Brute (K/M/B)
+
+	measure 'Montant Remises Formatted' = VAR _val = [Montant Remises] RETURN IF(ABS(_val) >= 1E9, FORMAT(_val / 1E9, "#,0.0") & "B", IF(ABS(_val) >= 1E6, FORMAT(_val / 1E6, "#,0.0") & "M", IF(ABS(_val) >= 1E3, FORMAT(_val / 1E3, "#,0.0") & "K", FORMAT(_val, "#,0.00"))))
+		displayFolder: Formatted
+		lineageTag: 11356533-d709-48ca-ad17-4cdf82c7d56d
+		annotation Copilot_Description = Dynamic numeric abbreviation for Montant Remises (K/M/B)
+
+	measure 'CA par Client Formatted' = VAR _val = [CA par Client] RETURN IF(ABS(_val) >= 1E9, FORMAT(_val / 1E9, "#,0.0") & "B", IF(ABS(_val) >= 1E6, FORMAT(_val / 1E6, "#,0.0") & "M", IF(ABS(_val) >= 1E3, FORMAT(_val / 1E3, "#,0.0") & "K", FORMAT(_val, "#,0.00"))))
+		displayFolder: Formatted
+		lineageTag: 5f62eb1b-dae0-4b85-8d26-bbbb0a1c0556
+		annotation Copilot_Description = Dynamic numeric abbreviation for CA par Client (K/M/B)
+
+	measure 'CA Régional par Catégorie Formatted' = VAR _val = [CA Régional par Catégorie] RETURN IF(ABS(_val) >= 1E9, FORMAT(_val / 1E9, "#,0.0") & "B", IF(ABS(_val) >= 1E6, FORMAT(_val / 1E6, "#,0.0") & "M", IF(ABS(_val) >= 1E3, FORMAT(_val / 1E3, "#,0.0") & "K", FORMAT(_val, "#,0.00"))))
+		displayFolder: Formatted
+		lineageTag: 411002e7-b5ef-4669-a88f-9dab8d024e85
+		annotation Copilot_Description = Dynamic numeric abbreviation for CA Régional par Catégorie (K/M/B)
+
+	measure 'CA hors Produit Formatted' = VAR _val = [CA hors Produit] RETURN IF(ABS(_val) >= 1E9, FORMAT(_val / 1E9, "#,0.0") & "B", IF(ABS(_val) >= 1E6, FORMAT(_val / 1E6, "#,0.0") & "M", IF(ABS(_val) >= 1E3, FORMAT(_val / 1E3, "#,0.0") & "K", FORMAT(_val, "#,0.00"))))
+		displayFolder: Formatted
+		lineageTag: 331b3830-4d1c-4708-bf23-360b10cde24f
+		annotation Copilot_Description = Dynamic numeric abbreviation for CA hors Produit (K/M/B)
+
+	measure 'Moyenne Mobile 3M Formatted' = VAR _val = [Moyenne Mobile 3M] RETURN IF(ABS(_val) >= 1E9, FORMAT(_val / 1E9, "#,0.0") & "B", IF(ABS(_val) >= 1E6, FORMAT(_val / 1E6, "#,0.0") & "M", IF(ABS(_val) >= 1E3, FORMAT(_val / 1E3, "#,0.0") & "K", FORMAT(_val, "#,0.00"))))
+		displayFolder: Formatted
+		lineageTag: 509897e9-50f2-4330-9660-9bdcabc14828
+		annotation Copilot_Description = Dynamic numeric abbreviation for Moyenne Mobile 3M (K/M/B)
+
+	measure 'Classement CA Formatted' = VAR _val = [Classement CA] RETURN IF(ABS(_val) >= 1E9, FORMAT(_val / 1E9, "#,0.0") & "B", IF(ABS(_val) >= 1E6, FORMAT(_val / 1E6, "#,0.0") & "M", IF(ABS(_val) >= 1E3, FORMAT(_val / 1E3, "#,0.0") & "K", FORMAT(_val, "0"))))
+		displayFolder: Formatted
+		lineageTag: 12863172-f3f0-462e-b754-4c18b3e5bbba
+		annotation Copilot_Description = Dynamic numeric abbreviation for Classement CA (K/M/B)
+
+	measure 'CA Année en Cours Formatted' = VAR _val = [CA Année en Cours] RETURN IF(ABS(_val) >= 1E9, FORMAT(_val / 1E9, "#,0.0") & "B", IF(ABS(_val) >= 1E6, FORMAT(_val / 1E6, "#,0.0") & "M", IF(ABS(_val) >= 1E3, FORMAT(_val / 1E3, "#,0.0") & "K", FORMAT(_val, "#,0.00"))))
+		displayFolder: Formatted
+		lineageTag: fc9cb63d-50f4-4080-be3a-4b927c8ac5f2
+		annotation Copilot_Description = Dynamic numeric abbreviation for CA Année en Cours (K/M/B)
 
 	column commande_id
 		dataType: int64
-		lineageTag: eb1047de-6c50-4d5c-8765-252c1cc8b169
+		lineageTag: ecdbf849-ff38-4137-8e87-20c2ec6c3f31
 		summarizeBy: sum
 		sourceColumn: commande_id
 		annotation Copilot_Hidden = true
@@ -111,26 +159,24 @@ table Commandes
 	column date_commande
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: 17a05452-bf77-476b-b0ce-e300ddeb6d47
+		lineageTag: 249fe80e-92f9-4c98-a712-a57781dc0ab2
 		summarizeBy: none
 		sourceColumn: date_commande
-		dataCategory: DateTime
 
 		annotation SummarizationSetBy = Automatic
 
 	column date_livraison
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: 59c97ece-0e72-4c32-9443-165e982e18b5
+		lineageTag: 1700e16f-54e9-4314-a8be-599a003292b8
 		summarizeBy: none
 		sourceColumn: date_livraison
-		dataCategory: DateTime
 
 		annotation SummarizationSetBy = Automatic
 
 	column client_id
 		dataType: int64
-		lineageTag: 337365fd-5494-4e21-aa08-7e58229b71b0
+		lineageTag: 26a9f2e3-665f-466b-ab72-3a4e1f155473
 		summarizeBy: sum
 		sourceColumn: client_id
 		annotation Copilot_Hidden = true
@@ -139,7 +185,7 @@ table Commandes
 
 	column produit_id
 		dataType: int64
-		lineageTag: f4eb3113-7e05-40f4-8c4b-ce82342ceaa8
+		lineageTag: 2d74479a-b115-4c00-a5d1-b58d3923ca25
 		summarizeBy: sum
 		sourceColumn: produit_id
 		annotation Copilot_Hidden = true
@@ -148,7 +194,7 @@ table Commandes
 
 	column region
 		dataType: string
-		lineageTag: 611c9221-a9be-464e-aec2-c0e5998fb0b5
+		lineageTag: 00347f51-7f68-4ed8-b388-9323dc96abec
 		summarizeBy: none
 		sourceColumn: region
 		dataCategory: StateOrProvince
@@ -157,7 +203,7 @@ table Commandes
 
 	column departement
 		dataType: string
-		lineageTag: 007ddcc3-f08b-46eb-857a-ed82a04f67a9
+		lineageTag: 91999de5-d11b-4645-8f1f-88aaead15543
 		summarizeBy: none
 		sourceColumn: departement
 
@@ -165,7 +211,7 @@ table Commandes
 
 	column ville
 		dataType: string
-		lineageTag: 1dd6a7bf-57f5-4f57-a570-5a7b0b16d4f8
+		lineageTag: 504d7e16-1e7f-44f2-9ce6-65ac73c3c228
 		summarizeBy: none
 		sourceColumn: ville
 		dataCategory: City
@@ -174,7 +220,7 @@ table Commandes
 
 	column code_postal
 		dataType: string
-		lineageTag: 89e3c7d2-dce4-485d-b9a6-98b370d0572d
+		lineageTag: c2b874e5-3978-4c44-805d-b7b008ec2e7d
 		summarizeBy: none
 		sourceColumn: code_postal
 		dataCategory: PostalCode
@@ -184,7 +230,7 @@ table Commandes
 	column quantite
 		dataType: double
 		formatString: #,0.00
-		lineageTag: d601241e-4024-4db0-9ae6-2d8060275c47
+		lineageTag: f528559f-0344-4c67-9689-ef999bb803c9
 		summarizeBy: sum
 		sourceColumn: quantite
 
@@ -193,7 +239,7 @@ table Commandes
 	column prix_unitaire
 		dataType: double
 		formatString: #,0.00
-		lineageTag: b67f69a2-370f-4b92-9a9f-5756335e7de3
+		lineageTag: 0abce103-ad2c-4e34-8609-394a8d57d847
 		summarizeBy: sum
 		sourceColumn: prix_unitaire
 
@@ -202,7 +248,7 @@ table Commandes
 	column remise
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 2062f804-ae9f-4ec4-b2f7-2be2f2a99de5
+		lineageTag: 2e093aac-a953-415c-800d-78e167b416a9
 		summarizeBy: sum
 		sourceColumn: remise
 
@@ -211,7 +257,7 @@ table Commandes
 	column frais_port
 		dataType: double
 		formatString: #,0.00
-		lineageTag: f93adae2-2287-46c9-9e19-292dabf17aa2
+		lineageTag: ed92db3c-9732-467a-9e3e-dc6591292d1c
 		summarizeBy: sum
 		sourceColumn: frais_port
 
@@ -219,7 +265,7 @@ table Commandes
 
 	column mode_paiement
 		dataType: string
-		lineageTag: fcbb8e40-1a8d-444f-9dc0-46f25946fc8e
+		lineageTag: a531d954-0751-407b-b3a6-94a4da130991
 		summarizeBy: none
 		sourceColumn: mode_paiement
 
@@ -227,7 +273,7 @@ table Commandes
 
 	column statut
 		dataType: string
-		lineageTag: afd356bf-13b0-4e43-82ad-a4dbb0c71bd7
+		lineageTag: 5c61735c-dc5e-4eb3-89b3-932591edc9e5
 		summarizeBy: none
 		sourceColumn: statut
 
@@ -235,7 +281,7 @@ table Commandes
 
 	column commercial
 		dataType: string
-		lineageTag: 4573ea10-7b75-4cdd-ae85-3e30569e19ef
+		lineageTag: 7a1f1ca9-b987-4051-8073-96e17a60ce30
 		summarizeBy: none
 		sourceColumn: commercial
 
@@ -243,29 +289,29 @@ table Commandes
 
 	column 'Délai de Livraison'
 		dataType: int64
-		lineageTag: aa3d30dc-3db7-446b-b0b0-bbf0322f3b9d
+		lineageTag: a2f0be60-5571-4234-9b08-2980a00be30c
 		summarizeBy: none
 		sourceColumn: 'Délai de Livraison'
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Ancienneté Client' = DATEDIFF(LOOKUPVALUE(Clients[date_inscription], Clients[client_id], Commandes[client_id]), TODAY(), DAY)
+	column 'Ancienneté Client' = DATEDIFF(CALCULATE(SELECTEDVALUE(Clients[date_inscription])), TODAY(), DAY)
 		dataType: int64
-		lineageTag: ced8bf77-ad48-400c-8729-a3cd51e0b0ce
+		lineageTag: 01df3ea5-0e76-4e4f-908a-342aa18a7a75
 		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Nom Complet' = LOOKUPVALUE(Clients[prenom_client], Clients[client_id], Commandes[client_id]) & " " & UPPER(LOOKUPVALUE(Clients[nom_client], Clients[client_id], Commandes[client_id]))
+	column 'Nom Complet' = CALCULATE(SELECTEDVALUE(Clients[prenom_client])) & " " & UPPER(CALCULATE(SELECTEDVALUE(Clients[nom_client])))
 		dataType: string
-		lineageTag: 437cdf6e-f462-480e-9920-07fcdfb9258d
+		lineageTag: ddeecbee-b0fa-4d3b-bb7a-2c95b2557a52
 		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
 
 	column Localisation
 		dataType: string
-		lineageTag: 8d8d65e2-e5a1-41f3-b505-3a01bef1942f
+		lineageTag: 4824be70-a10b-4099-a977-52f37e6225db
 		summarizeBy: none
 		sourceColumn: Localisation
 
@@ -273,19 +319,39 @@ table Commandes
 
 	column 'Catégorie de Remise' = IF(ISBLANK('Commandes'[remise]) || 'Commandes'[remise] = 0, "Aucune Remise", IF('Commandes'[remise] < 0.1, "Faible (<10%)", IF('Commandes'[remise] < 0.25, "Moyenne (10-25%)", "Forte (>25%)")))
 		dataType: string
-		lineageTag: c4ee5b7c-9c22-4280-9a9d-a4e9e6c02e07
+		lineageTag: b0f0f135-f04b-4af2-9f54-98cda36d215a
 		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
 
 	column Trimestre = "T" & FORMAT(QUARTER('Commandes'[date_commande]), "0") & " " & FORMAT(YEAR('Commandes'[date_commande]), "0")
 		dataType: string
-		lineageTag: 30c4c407-ffdc-43e0-8798-848a6f24ac76
+		lineageTag: 1262ead4-612c-4209-aafe-fcb906805ab2
 		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Commandes-a1d5c4cd-bfa6-4b35-aa23-c278ff575c62' = m
+	column 'Chiffre d"Affaires Net'
+		dataType: string
+		lineageTag: 1a9604b9-fa11-40c6-a042-6dabd4294e14
+		summarizeBy: none
+		sourceColumn: 'Chiffre d"Affaires Net'
+		isHidden
+		annotation MigrationNote = Self-heal: placeholder column created to satisfy missing qualified reference 'Commandes'[Chiffre d"Affaires Net].
+
+		annotation SummarizationSetBy = Automatic
+
+	column '-2,0'
+		dataType: string
+		lineageTag: 246171c0-0d8a-45f1-b5e2-9e307ed2078f
+		summarizeBy: none
+		sourceColumn: '-2,0'
+		isHidden
+		annotation MigrationNote = Self-heal: placeholder column created to satisfy missing qualified reference 'Commandes'[-2,0].
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Commandes-db804491-7d93-4a40-8022-0a292632ae5f' = m
 		mode: import
 		source =
 				let
@@ -304,12 +370,12 @@ table Commandes
 				
 				        #table({"commande_id", "date_commande", "date_livraison", "client_id", "produit_id", "region", "departement", "ville", "code_postal", "quantite", "prix_unitaire", "remise", "frais_port", "mode_paiement", "statut", "commercial"}, {}),
 				    #"Renamed Columns" = Table.RenameColumns(Source, {{"commande_id", "N° Commande"}, {"date_commande", "Date de Commande"}, {"date_livraison", "Date de Livraison"}, {"client_id", "ID Client"}, {"produit_id", "ID Produit"}, {"region", "Région"}, {"departement", "Département"}, {"ville", "Ville"}, {"code_postal", "Code Postal"}, {"quantite", "Quantité"}, {"prix_unitaire", "Prix Unitaire"}, {"remise", "Remise"}, {"frais_port", "Frais de Port"}, {"mode_paiement", "Mode de Paiement"}, {"statut", "Statut"}, {"commercial", "Commercial"}}),
-				    #"Added Délai de Livraison" = Table.AddColumn(#"Renamed Columns", "Délai de Livraison", each Duration.Days([date_livraison] - [date_commande]), Int64.Type),
+				    #"Added Délai de Livraison" = Table.AddColumn(#"Renamed Columns", "Délai de Livraison", each Duration.Days(Date.From([date_livraison]) - Date.From([date_commande])), Int64.Type),
 				    #"Added Localisation" = Table.AddColumn(#"Added Délai de Livraison", "Localisation", each [ville] & " (" & [departement] & ") - " & [region], type text),
 				    Result = #"Added Localisation"
 				in
 				    Result
 
 	annotation PBI_ResultType = Table
-	annotation Copilot_TableDescription = Contains 22 columns and 17 measures: commande_id, date_commande, date_livraison, client_id, produit_id, region, departement, ville, ... (22 columns total).
+	annotation Copilot_TableDescription = Contains 24 columns and 27 measures: commande_id, date_commande, date_livraison, client_id, produit_id, region, departement, ville, ... (24 columns total).
 

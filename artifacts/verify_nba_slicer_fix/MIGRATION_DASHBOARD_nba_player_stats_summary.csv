@@ -1,0 +1,2 @@
+artifact_name,artifact_type,sources_count,tables_count,measures_count,visuals_count,visuals_with_dax_measures_count
+nba_player_stats,tableau_report,2,3,3,9,0

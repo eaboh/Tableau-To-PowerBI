@@ -1,0 +1,2 @@
+artifact_name,artifact_type,sources_count,tables_count,measures_count,visuals_count,visuals_with_dax_measures_count
+SampleWB,tableau_report,1,2,7,3,0

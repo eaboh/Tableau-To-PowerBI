@@ -1,13 +1,9 @@
 table Extract
-	lineageTag: 09706c7e-7cc8-4503-bca8-c5e8864aca66
-
-	measure 'Number of Records' = COUNTROWS('Extract')
-		displayFolder: Measures
-		lineageTag: 7bc713c0-095b-4ae8-994a-fe5cd5be85a8
+	lineageTag: 7d9071e6-5993-4e73-896c-5a7064b55135
 
 	column Category
 		dataType: string
-		lineageTag: 6f5fbe95-ae48-49ac-a840-a486d222954f
+		lineageTag: c4586c0b-827d-44f1-ba83-3104149193e3
 		summarizeBy: none
 		sourceColumn: Category
 
@@ -15,7 +11,7 @@ table Extract
 
 	column 'Number of Records'
 		dataType: int64
-		lineageTag: dfaf20a5-679c-45bf-b895-5e1c01228c06
+		lineageTag: 010dec63-3e47-49e7-bae0-faa93a5b0620
 		summarizeBy: sum
 		sourceColumn: 'Number of Records'
 
@@ -24,17 +20,16 @@ table Extract
 	column 'Order Date'
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: 96bee128-e94c-4f94-bc07-0e7cb856ce24
+		lineageTag: 0a04856e-28eb-4864-a9c8-5978a9d19278
 		summarizeBy: none
 		sourceColumn: 'Order Date'
-		dataCategory: DateTime
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Sales Target'
 		dataType: int64
 		formatString: c"$"#,#0;("$"#,#0)
-		lineageTag: f97a0a75-da2e-4503-8d65-e951858d6158
+		lineageTag: 2e2c5910-28bd-4718-bf2f-c5d1347dccb1
 		summarizeBy: sum
 		sourceColumn: 'Sales Target'
 
@@ -42,13 +37,13 @@ table Extract
 
 	column Segment
 		dataType: string
-		lineageTag: d4d5687b-a1f2-43ca-a95d-2fcd50434589
+		lineageTag: 5b256e4f-6643-44c3-9a60-8c38a0609601
 		summarizeBy: none
 		sourceColumn: Segment
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Extract-b330ba20-3c9b-462b-be03-6b5925a1bae3' = m
+	partition 'Extract-457b44f8-94c1-4566-9962-f33d2b84b51c' = m
 		mode: import
 		source =
 				let
@@ -68,5 +63,5 @@ table Extract
 				    Source
 
 	annotation PBI_ResultType = Table
-	annotation Copilot_TableDescription = Contains 5 columns and 1 measures: Category, Number of Records, Order Date, Sales Target, Segment.
+	annotation Copilot_TableDescription = Contains 5 columns: Category, Number of Records, Order Date, Sales Target, Segment.
 

@@ -1,0 +1,32 @@
+table 'Last x Days'
+	lineageTag: bfea32ea-bdc1-4fe2-82f8-7c8932ec9d41
+
+	measure 'Last x Days' = SELECTEDVALUE('Last x Days'[Value], "90")
+		lineageTag: a5ba67eb-e5d0-4c24-972f-0b0d58df5da6
+		annotation Copilot_Description = DAX: SELECTEDVALUE('Last x Days'[Value], "90")
+
+	column Value
+		dataType: string
+		lineageTag: dbbb35c7-116e-4e08-b971-1765e765d66d
+		summarizeBy: none
+		sourceColumn: Value
+		annotation displayFolder = Parameters
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: a33edf6b-e771-44dd-8268-da917c0e87bb
+		summarizeBy: none
+		sourceColumn: Name
+		annotation displayFolder = Parameters
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Last x Days-b6c74908-ba5c-49fb-bea2-03d9dfa96d0e' = calculated
+		mode: import
+		source = DATATABLE("Value", STRING, "Name", STRING, {{"7","Last 7 days"}, {"30","Last 30 days"}, {"90","Last 90 days"}, {"180","Last 180 days"}, {"360","Last 360 days"}})
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 2 columns and 1 measures: Value, Name.
+

@@ -1,0 +1,73 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "19e866dd4d564bf39d96",
+  "position": {
+    "x": 26,
+    "y": 362,
+    "z": 10000,
+    "height": 151,
+    "width": 120,
+    "tabOrder": 10000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Won/Lost Rate",
+                    "textStyle": {
+                      "color": "#333333",
+                      "fontSize": "8.0pt"
+                    }
+                  },
+                  {
+                    "value": "Æ"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "=Nb Won Opp. / ",
+                    "textStyle": {
+                      "fontStyle": "italic",
+                      "color": "#898989",
+                      "fontSize": "7.0pt"
+                    }
+                  },
+                  {
+                    "value": "Æ"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Nb Closed Opp.",
+                    "textStyle": {
+                      "fontStyle": "italic",
+                      "color": "#898989",
+                      "fontSize": "7.0pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "total_workbooks": 2,
+  "total_tables": 2,
+  "total_measures": 0,
+  "merge_clusters": [
+    {
+      "cluster_id": 0,
+      "workbooks": [
+        "WB1",
+        "WB2"
+      ],
+      "shared_tables": [
+        "orders"
+      ],
+      "avg_score": 80,
+      "recommendation": "merge",
+      "merge_details": {
+        "workbooks": [
+          "WB1",
+          "WB2"
+        ],
+        "total_tables": 2,
+        "unique_table_count": 1,
+        "tables_saved": 1,
+        "merge_candidates": [
+          {
+            "table_name": "orders",
+            "workbooks": [
+              "WB1",
+              "WB2"
+            ],
+            "column_overlap": 1.0,
+            "conflicts": []
+          }
+        ],
+        "unique_tables": {},
+        "measure_conflicts": [],
+        "measure_duplicates_removed": 0,
+        "relationship_duplicates_removed": 0,
+        "parameter_conflicts": [],
+        "parameter_duplicates_removed": 0,
+        "rls_conflicts": [],
+        "merge_score": 80,
+        "recommendation": "merge",
+        "linked_unique_tables": {},
+        "isolated_tables": {}
+      }
+    }
+  ],
+  "isolated_workbooks": [],
+  "pairwise_scores": [
+    {
+      "workbook_a": "WB1",
+      "workbook_b": "WB2",
+      "merge_score": 80,
+      "shared_tables": 1,
+      "recommendation": "merge"
+    }
+  ],
+  "workbook_profiles": [
+    {
+      "name": "WB1",
+      "tables": 1,
+      "columns": 3,
+      "measures": 0,
+      "calc_columns": 0,
+      "relationships": 0,
+      "worksheets": 1,
+      "dashboards": 1,
+      "parameters": 0,
+      "connection_types": [
+        "PostgreSQL"
+      ],
+      "table_names": [
+        "orders"
+      ]
+    },
+    {
+      "name": "WB2",
+      "tables": 1,
+      "columns": 3,
+      "measures": 0,
+      "calc_columns": 0,
+      "relationships": 0,
+      "worksheets": 1,
+      "dashboards": 1,
+      "parameters": 0,
+      "connection_types": [
+        "PostgreSQL"
+      ],
+      "table_names": [
+        "orders"
+      ]
+    }
+  ],
+  "timestamp": "2026-05-20T17:50:52.426140+00:00"
+}

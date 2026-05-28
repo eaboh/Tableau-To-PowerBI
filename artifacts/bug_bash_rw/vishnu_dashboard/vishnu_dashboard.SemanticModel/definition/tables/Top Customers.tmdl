@@ -1,0 +1,23 @@
+table 'Top Customers'
+	lineageTag: 7cfb3990-1461-4785-936d-265436269976
+
+	measure 'Top Customers' = SELECTEDVALUE('Top Customers'[Value], 5)
+		lineageTag: c94ac0da-7d18-4fbd-8ffe-2d47956db3ac
+		annotation Copilot_Description = DAX: SELECTEDVALUE('Top Customers'[Value], 5)
+
+	column Value
+		dataType: int64
+		lineageTag: f3d6140d-b78d-482f-9b59-216f79ed7c99
+		summarizeBy: none
+		sourceColumn: Value
+		annotation displayFolder = Parameters
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Top Customers-36ba8cdf-6c91-4889-9527-b78d519fc9fc' = calculated
+		mode: import
+		source = GENERATESERIES(5, 20, 5)
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 1 columns and 1 measures: Value.
+

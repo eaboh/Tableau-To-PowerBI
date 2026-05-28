@@ -1,21 +1,22 @@
 table 'New Quota'
-	lineageTag: 8ffa4d19-2de8-4d72-b9a7-6a3e1adce640
+	lineageTag: d7f1f75b-e363-4d1d-8cb4-cbb67df0d7cc
 
 	measure 'New Quota' = SELECTEDVALUE('New Quota'[Value], 500000)
-		lineageTag: dbd559f4-c4ab-4c3e-92fa-72ce9bc1af00
+		lineageTag: 9be16031-bfb9-4baa-9a20-7b63539ce3a3
+		annotation Copilot_Description = DAX: SELECTEDVALUE('New Quota'[Value], 500000)
 
 	column Value
 		dataType: int64
-		lineageTag: 038f8db9-bb6e-4db9-9b38-aaf59a1008a5
+		lineageTag: f9e180f8-678a-4eb7-877e-55929e3ebf8e
 		summarizeBy: none
 		sourceColumn: Value
 		annotation displayFolder = Parameters
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'New Quota-92a358b3-e618-483d-8678-19066fee6cb7' = calculated
+	partition 'New Quota-28b55b8a-7266-44d0-a9d0-21e9d0a54d4e' = calculated
 		mode: import
-		source = GENERATESERIES(100000, , 25000)
+		source = GENERATESERIES(100000, 100, 25000)
 
 	annotation PBI_ResultType = Table
 	annotation Copilot_TableDescription = Contains 1 columns and 1 measures: Value.

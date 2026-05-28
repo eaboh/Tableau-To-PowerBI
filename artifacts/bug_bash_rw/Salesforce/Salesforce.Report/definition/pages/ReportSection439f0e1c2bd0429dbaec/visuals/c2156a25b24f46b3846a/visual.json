@@ -1,0 +1,206 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "c2156a25b24f46b3846a",
+  "position": {
+    "x": 220,
+    "y": 47,
+    "z": 18000,
+    "height": 285,
+    "width": 765,
+    "tabOrder": 18000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "WEIGHTED SALES PIPELINE",
+                    "textStyle": {
+                      "color": "#2b5c8a",
+                      "fontSize": "12.0pt"
+                    }
+                  },
+                  {
+                    "value": "Æ"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Sales Pipeline is the process by which an organization converts its sales opportunities (or leads) into sales.",
+                    "textStyle": {
+                      "fontStyle": "italic"
+                    }
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "The Tableau Accelerator allows you to:"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Conduct overall sales pipeline review",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Assess and improve your sales performance",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": "
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "               - Pipeline generation"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "               - Ability to convert opportunities"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Understand & grow each opportunity owner's profile (based on profiling  & recommended trainings)",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Breakdown your pipeline at any level of detail",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Focus your efforts on areas with best conversion",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Assess performance improvements over time",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Drill-back at Opportunity level of detail, directly in your Sales Pipeline Application and take immediate actions",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Compared to a standard Pipeline, a Weighted Pipeline introduces the concept of \"Probability of Closing\" (expressed in %) for each opportunity, which allows a more accurate and realistic analysis of the pipeline."
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

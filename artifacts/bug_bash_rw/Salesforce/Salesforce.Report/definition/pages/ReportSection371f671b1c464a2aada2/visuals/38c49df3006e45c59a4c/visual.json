@@ -1,0 +1,58 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "38c49df3006e45c59a4c",
+  "position": {
+    "x": 26,
+    "y": 664,
+    "z": 12000,
+    "height": 60,
+    "width": 120,
+    "tabOrder": 12000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Conversion Rate",
+                    "textStyle": {
+                      "color": "#333333",
+                      "fontSize": "8.0pt"
+                    }
+                  },
+                  {
+                    "value": "Æ"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "=Won Volume <[Parameters].[LinPack_437656825848927055]> / Closed Volume <[Parameters].[LinPack_437656825848927055]>",
+                    "textStyle": {
+                      "fontStyle": "italic",
+                      "color": "#898989",
+                      "fontSize": "7.0pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

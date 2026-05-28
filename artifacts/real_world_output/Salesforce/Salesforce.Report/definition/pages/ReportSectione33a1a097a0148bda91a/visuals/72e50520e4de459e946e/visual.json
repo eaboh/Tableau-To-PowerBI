@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "72e50520e4de459e946e",
+  "position": {
+    "x": 220,
+    "y": 26,
+    "z": 17000,
+    "height": 40,
+    "width": 1060,
+    "tabOrder": 17000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Follow us on Youtube for latest Accelerator videos: @TableauAccelerators ",
+                    "textStyle": {
+                      "fontStyle": "italic",
+                      "color": "#2b5c8a",
+                      "fontSize": "7.0pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

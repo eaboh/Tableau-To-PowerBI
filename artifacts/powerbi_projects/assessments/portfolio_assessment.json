@@ -1,0 +1,80 @@
+{
+  "timestamp": "2026-05-20T17:50:52.412679+00:00",
+  "total_workbooks": 2,
+  "green_count": 2,
+  "yellow_count": 0,
+  "red_count": 0,
+  "total_effort_hours": 3.2,
+  "workbook_results": [
+    {
+      "name": "WB1",
+      "status": "GREEN",
+      "pass_count": 20,
+      "warn_count": 0,
+      "fail_count": 0,
+      "info_count": 12,
+      "complexity": {
+        "visuals": 1,
+        "dashboards": 1,
+        "calculations": 0,
+        "tables": 1,
+        "lod_expressions": 0,
+        "table_calcs": 0,
+        "filters": 0,
+        "actions": 0,
+        "parameters": 0,
+        "rls_rules": 0,
+        "custom_sql": 0
+      },
+      "effort_hours": 1.6,
+      "connector_types": [
+        "PostgreSQL"
+      ],
+      "visual_count": 1,
+      "calc_count": 0,
+      "table_count": 1
+    },
+    {
+      "name": "WB2",
+      "status": "GREEN",
+      "pass_count": 20,
+      "warn_count": 0,
+      "fail_count": 0,
+      "info_count": 12,
+      "complexity": {
+        "visuals": 1,
+        "dashboards": 1,
+        "calculations": 0,
+        "tables": 1,
+        "lod_expressions": 0,
+        "table_calcs": 0,
+        "filters": 0,
+        "actions": 0,
+        "parameters": 0,
+        "rls_rules": 0,
+        "custom_sql": 0
+      },
+      "effort_hours": 1.6,
+      "connector_types": [
+        "PostgreSQL"
+      ],
+      "visual_count": 1,
+      "calc_count": 0,
+      "table_count": 1
+    }
+  ],
+  "connector_census": {
+    "PostgreSQL": 2
+  },
+  "waves": [
+    {
+      "wave_number": 1,
+      "label": "Easy (quick wins)",
+      "workbooks": [
+        "WB1",
+        "WB2"
+      ],
+      "total_effort": 3.2
+    }
+  ]
+}

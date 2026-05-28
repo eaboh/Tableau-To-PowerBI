@@ -1,7 +1,15 @@
 table xy1
-	lineageTag: e9bdc0e6-eb2a-43da-9226-6f62b77ef7ba
+	lineageTag: 6beeb3ee-da7a-4721-a892-ef6e323db2ac
 
-	partition 'xy1-aaa540c3-56e3-49c6-bbc1-10ad77346c29' = m
+	column a
+		dataType: string
+		lineageTag: eec2065d-6461-468b-ac01-c60c78deb377
+		summarizeBy: none
+		sourceColumn: a
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'xy1-aabe5ce4-adbf-4aee-84af-2d253c7e8f2d' = m
 		mode: import
 		source =
 				let
@@ -18,11 +26,11 @@ table xy1
 				
 				    otherwise
 				
-				        #table({}, {}),
+				        #table({"a"}, {}),
 				    Result = Source
 				in
 				    Result
 
 	annotation PBI_ResultType = Table
-	annotation Copilot_TableDescription = Contains 0 columns.
+	annotation Copilot_TableDescription = Contains 1 columns: a.
 

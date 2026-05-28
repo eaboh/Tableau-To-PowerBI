@@ -1,0 +1,89 @@
+table 'Select Indicator CalcGroup'
+	lineageTag: 58e9aaa4-4e1a-40a7-83c0-4e58de08ead9
+
+	calculationGroup
+		precedence: 0
+
+		calculationItem 'Avg Deal Size (won)'
+			expression = CALCULATE(SELECTEDMEASURE())
+			ordinal: 0
+
+		calculationItem 'Avg Probability'
+			expression = CALCULATE(SELECTEDMEASURE())
+			ordinal: 1
+
+		calculationItem 'Conversion Rate'
+			expression = CALCULATE(SELECTEDMEASURE())
+			ordinal: 2
+
+		calculationItem 'Nb of Closed Opportunities'
+			expression = CALCULATE(SELECTEDMEASURE())
+			ordinal: 3
+
+		calculationItem 'Nb of Open Opportunities'
+			expression = CALCULATE(SELECTEDMEASURE())
+			ordinal: 4
+
+		calculationItem 'Nb of Opportunities'
+			expression = CALCULATE(SELECTEDMEASURE())
+			ordinal: 5
+
+		calculationItem 'Nb of Owners'
+			expression = CALCULATE(SELECTEDMEASURE())
+			ordinal: 6
+
+		calculationItem 'Nb of Won Opportunities'
+			expression = CALCULATE(SELECTEDMEASURE())
+			ordinal: 7
+
+		calculationItem 'Pipeline Generated'
+			expression = CALCULATE(SELECTEDMEASURE())
+			ordinal: 8
+
+		calculationItem 'Pipeline Value'
+			expression = CALCULATE(SELECTEDMEASURE())
+			ordinal: 9
+
+		calculationItem 'Sales Cycle'
+			expression = CALCULATE(SELECTEDMEASURE())
+			ordinal: 10
+
+		calculationItem 'Sales Cycle (won)'
+			expression = CALCULATE(SELECTEDMEASURE())
+			ordinal: 11
+
+		calculationItem 'Sales Velocity'
+			expression = CALCULATE(SELECTEDMEASURE())
+			ordinal: 12
+
+		calculationItem 'Total Closed Opportunities Amount'
+			expression = CALCULATE(SELECTEDMEASURE())
+			ordinal: 13
+
+		calculationItem 'Total Sales'
+			expression = CALCULATE(SELECTEDMEASURE())
+			ordinal: 14
+
+		calculationItem 'Weighted Pipeline Value'
+			expression = CALCULATE(SELECTEDMEASURE())
+			ordinal: 15
+
+		calculationItem 'Won/Lost Rate'
+			expression = CALCULATE(SELECTEDMEASURE())
+			ordinal: 16
+
+
+	column 'Select Indicator'
+		dataType: string
+		lineageTag: c3e24fec-ca58-4c57-870c-735663787c6a
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Select Indicator CalcGroup-c910186a-3b00-4393-b7fe-7aed640400f7' = calculationGroup
+		mode: import
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 1 columns: Select Indicator.
+

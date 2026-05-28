@@ -1,0 +1,50 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "bc6e29e460ad4406a9a9",
+  "position": {
+    "x": 59,
+    "y": 490,
+    "z": 10000,
+    "height": 230,
+    "width": 346,
+    "tabOrder": 10000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "REQUIRED",
+                    "textStyle": {
+                      "color": "#9e3d22",
+                      "fontSize": "13.0pt"
+                    }
+                  },
+                  {
+                    "value": "Æ"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "IMPROVEMENTS",
+                    "textStyle": {
+                      "color": "#9e3d22",
+                      "fontSize": "13.0pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

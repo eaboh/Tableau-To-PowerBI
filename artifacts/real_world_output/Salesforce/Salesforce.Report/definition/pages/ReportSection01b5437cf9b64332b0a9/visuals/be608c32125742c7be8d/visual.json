@@ -1,0 +1,36 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "be608c32125742c7be8d",
+  "position": {
+    "x": 16,
+    "y": 544,
+    "z": 3000,
+    "height": 176,
+    "width": 430,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "What was our ability to convert opportunities?",
+                    "textStyle": {
+                      "color": "#2b5c8a",
+                      "fontSize": "10.0pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

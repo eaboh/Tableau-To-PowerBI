@@ -26,7 +26,206 @@
       "pbi_table": "Top N"
     }
   ],
-  "calculations": [],
+  "calculations": [
+    {
+      "tableau_calculation": "SUM([quantity] * [unit_price])",
+      "pbi_table": "Orders",
+      "pbi_object": "Gross Revenue",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM(IF [order_status] != \"Cancelled\" THEN [quantity] * [unit_price] * (1 - [discount]) ELSE 0 END)",
+      "pbi_table": "Orders",
+      "pbi_object": "Net Revenue",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM([quantity] * [unit_price] * [discount])",
+      "pbi_table": "Orders",
+      "pbi_object": "Total Discount",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM(IF [order_status] != \"Cancelled\" THEN ([quantity] * [unit_price] * (1 - [discount])) - [shipping_cost] ELSE 0 END)",
+      "pbi_table": "Orders",
+      "pbi_object": "Profit",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "[Calc_Profit] / [Calc_NetRevenue]",
+      "pbi_table": "Orders",
+      "pbi_object": "Profit Margin %",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "{FIXED [customer_id] : SUM([quantity] * [unit_price])}",
+      "pbi_table": "Orders",
+      "pbi_object": "Revenue per Customer",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "{FIXED [region], [channel] : SUM([quantity] * [unit_price])}",
+      "pbi_table": "Orders",
+      "pbi_object": "Regional Channel Revenue",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "{EXCLUDE [channel] : SUM([quantity] * [unit_price])}",
+      "pbi_table": "Orders",
+      "pbi_object": "Revenue Excl Category",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "WINDOW_AVG(SUM([quantity] * [unit_price]))",
+      "pbi_table": "Orders",
+      "pbi_object": "Moving Avg Revenue",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "RUNNING_SUM(SUM([quantity] * [unit_price]))",
+      "pbi_table": "Orders",
+      "pbi_object": "Running Total Revenue",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "RANK(SUM([quantity] * [unit_price]))",
+      "pbi_table": "Orders",
+      "pbi_object": "Revenue Rank",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "{FIXED : SUM(IF YEAR([order_date]) = YEAR(TODAY()) THEN [quantity] * [unit_price] ELSE 0 END)}",
+      "pbi_table": "Orders",
+      "pbi_object": "YTD Revenue",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "IF [Calc_RevPerCustomer] > 10000 THEN \"Platinum\" ELSEIF [Calc_RevPerCustomer] > 5000 THEN \"Gold\" ELSEIF [Calc_RevPerCustomer] > 1000 THEN \"Silver\" ELSE \"Bronze\" END",
+      "pbi_table": "Orders",
+      "pbi_object": "Customer Tier",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD([customer_id])",
+      "pbi_table": "Orders",
+      "pbi_object": "Unique Customers",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "AVG(IF [order_status] = \"Completed\" THEN [quantity] * [unit_price] ELSE 0 END)",
+      "pbi_table": "Orders",
+      "pbi_object": "AOV Completed",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "STDEV(SUM([quantity] * [unit_price]))",
+      "pbi_table": "Orders",
+      "pbi_object": "Revenue StdDev",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "[customer_email] = USERNAME()",
+      "pbi_table": "Orders",
+      "pbi_object": "Is My Account",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Date Range Start",
+      "pbi_table": "Orders",
+      "pbi_object": "Date Range Start",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Gross Revenue Formatted",
+      "pbi_table": "Orders",
+      "pbi_object": "Gross Revenue Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Net Revenue Formatted",
+      "pbi_table": "Orders",
+      "pbi_object": "Net Revenue Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Total Discount Formatted",
+      "pbi_table": "Orders",
+      "pbi_object": "Total Discount Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Profit Formatted",
+      "pbi_table": "Orders",
+      "pbi_object": "Profit Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Revenue per Customer Formatted",
+      "pbi_table": "Orders",
+      "pbi_object": "Revenue per Customer Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Regional Channel Revenue Formatted",
+      "pbi_table": "Orders",
+      "pbi_object": "Regional Channel Revenue Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Revenue Excl Category Formatted",
+      "pbi_table": "Orders",
+      "pbi_object": "Revenue Excl Category Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Moving Avg Revenue Formatted",
+      "pbi_table": "Orders",
+      "pbi_object": "Moving Avg Revenue Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Revenue Rank Formatted",
+      "pbi_table": "Orders",
+      "pbi_object": "Revenue Rank Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "YTD Revenue Formatted",
+      "pbi_table": "Orders",
+      "pbi_object": "YTD Revenue Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Year To Date",
+      "pbi_table": "Calendar",
+      "pbi_object": "Year To Date",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Previous Year",
+      "pbi_table": "Calendar",
+      "pbi_object": "Previous Year",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Year Over Year %",
+      "pbi_table": "Calendar",
+      "pbi_object": "Year Over Year %",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Target Margin",
+      "pbi_table": "Target Margin",
+      "pbi_object": "Target Margin",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Top N",
+      "pbi_table": "Top N",
+      "pbi_object": "Top N",
+      "pbi_type": "measure"
+    }
+  ],
   "relationships": [
     {
       "from": "Orders[customer_id]",
@@ -36,7 +235,7 @@
     {
       "from": "Orders[order_date]",
       "to": "Calendar[Date]",
-      "cardinality": "oneDirection"
+      "cardinality": "bothDirections"
     },
     {
       "from": "Customers[first_purchase_date]",
@@ -44,5 +243,26 @@
       "cardinality": "bothDirections"
     }
   ],
-  "worksheets": []
+  "worksheets": [
+    {
+      "tableau_worksheet": "Executive KPIs",
+      "pbi_page": "Executive KPIs"
+    },
+    {
+      "tableau_worksheet": "Revenue by Region",
+      "pbi_page": "Revenue by Region"
+    },
+    {
+      "tableau_worksheet": "Profit Trend",
+      "pbi_page": "Profit Trend"
+    },
+    {
+      "tableau_worksheet": "Customer Analysis",
+      "pbi_page": "Customer Analysis"
+    },
+    {
+      "tableau_worksheet": "Sales Map",
+      "pbi_page": "Sales Map"
+    }
+  ]
 }

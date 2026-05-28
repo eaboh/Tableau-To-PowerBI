@@ -1,2 +1,2 @@
-expression DataFolder = "C:\\\\Users\\mkorotchenkov\\Documents\\My Tableau Repository\\Datasources\\2021.2\\en_US-US" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+expression DataFolder = "C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\real_world_output\\shapes_test\\Data" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
 

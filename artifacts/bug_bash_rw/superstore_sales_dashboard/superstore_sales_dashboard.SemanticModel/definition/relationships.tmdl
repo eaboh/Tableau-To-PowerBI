@@ -1,0 +1,18 @@
+relationship d1fbfeb6-d603-4888-b9f0-dc779ac144d0
+	fromColumn: Orders.'Order Date'
+	toColumn: Calendar.Date
+	crossFilteringBehavior: bothDirections
+
+relationship 89b87159-a236-4e24-8269-a4bc2e8d04ee
+	fromColumn: Extract.'Order Date'
+	toColumn: Calendar.Date
+	crossFilteringBehavior: bothDirections
+	isActive: false
+
+relationship 861254c7-d745-4677-a54f-c9e1505c4861
+	fromColumn: Orders.'Zip Code'
+	toColumn: Extract.'Zip Code'
+	fromCardinality: many
+	toCardinality: many
+	crossFilteringBehavior: bothDirections
+

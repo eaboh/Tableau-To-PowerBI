@@ -1,23 +1,20 @@
 table Orders
-	lineageTag: 24220684-21f3-44dc-8bb7-e1bc728b6f69
-	description: Contains 25 columns: Row ID, Order ID, Order Date, Order Priority, Order Quantity, Sales, Discount, Ship Mode, ... (25 columns total).
+	lineageTag: 8b5e792d-80c2-46e1-bbc3-685d1f1b57a8
 
 	column 'Row ID'
 		dataType: int64
-		lineageTag: 1cdedf28-38a4-44dc-9af7-c517bf7affbf
+		lineageTag: 8162f847-9ff3-4fd9-bc38-fd5b800264f9
 		summarizeBy: sum
 		sourceColumn: 'Row ID'
-		description: Int64 column.
 		annotation Copilot_Hidden = true
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Order ID'
 		dataType: int64
-		lineageTag: 534ee6d5-818f-45cd-882f-a7817bb3a282
+		lineageTag: 0928b684-bbcb-4d2c-ac65-c63b9cb608e4
 		summarizeBy: sum
 		sourceColumn: 'Order ID'
-		description: Int64 column.
 		annotation Copilot_Hidden = true
 
 		annotation SummarizationSetBy = Automatic
@@ -25,243 +22,206 @@ table Orders
 	column 'Order Date'
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: 64bbb229-5135-4965-8c3a-005bacb203ad
+		lineageTag: e07e01a5-49d4-467e-8f21-391b0572e54d
 		summarizeBy: none
 		sourceColumn: 'Order Date'
-		dataCategory: DateTime
-		description: Datetime column. categorized as DateTime.
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Order Priority'
 		dataType: string
-		lineageTag: 29898cad-0dfb-4bbd-9816-3c6804245274
+		lineageTag: 5e3b481d-41fc-4a91-93c3-4db4d37cd9ff
 		summarizeBy: none
 		sourceColumn: 'Order Priority'
-		description: String column.
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Order Quantity'
 		dataType: int64
-		lineageTag: a4938612-ef03-4493-b580-4a65f7b1aa39
+		lineageTag: 047a183e-b037-470b-a4a1-c5d78612efe9
 		summarizeBy: sum
 		sourceColumn: 'Order Quantity'
-		description: Int64 column.
 
 		annotation SummarizationSetBy = Automatic
 
 	column Sales
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 13500ad6-9bd7-4523-a283-2084c0a959cb
+		lineageTag: 4f883dda-1dc1-41db-91ff-32a72fa8407d
 		summarizeBy: sum
 		sourceColumn: Sales
-		description: Double column.
 
 		annotation SummarizationSetBy = Automatic
 
 	column Discount
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 912c1bbb-f648-4adc-9134-cde488d53df8
+		lineageTag: a1148267-e237-45b5-8a06-b3ff5444a7bf
 		summarizeBy: sum
 		sourceColumn: Discount
-		description: Double column.
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Ship Mode'
 		dataType: string
-		lineageTag: d16081f3-3d5d-43f6-94eb-1bb02dc2c762
+		lineageTag: 9ebb0789-f8d7-4b04-b80a-46a8e3899fc7
 		summarizeBy: none
 		sourceColumn: 'Ship Mode'
-		description: String column.
 
 		annotation SummarizationSetBy = Automatic
 
 	column Profit
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 4f4c7273-01ed-469c-9194-a2cb3c44fd17
+		lineageTag: a8353a63-ed70-419d-aa0e-ad89b81293f1
 		summarizeBy: sum
 		sourceColumn: Profit
-		description: Double column.
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Unit Price'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 7b7ff8e2-92f1-4a00-9c3e-454b1f38aff1
+		lineageTag: 5a0157fd-f756-4d5a-89a6-ef8112576650
 		summarizeBy: sum
 		sourceColumn: 'Unit Price'
-		description: Double column.
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Shipping Cost'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: da3b16fb-0750-4b24-9bd7-7b795ec5a186
+		lineageTag: 1a184b35-a9c9-4c31-9631-047b76a8cee5
 		summarizeBy: sum
 		sourceColumn: 'Shipping Cost'
-		description: Double column.
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Customer Name'
 		dataType: string
-		lineageTag: 1130811e-4090-49db-8ac6-502fff83b25a
+		lineageTag: d82a78bc-8dfb-4fc7-80c1-6be9bd8fac22
 		summarizeBy: none
 		sourceColumn: 'Customer Name'
-		description: String column.
 
 		annotation SummarizationSetBy = Automatic
 
 	column City
 		dataType: string
-		lineageTag: dbc1c1b8-9b83-4788-9fcd-d362ad3ff477
+		lineageTag: e4df2fe4-9917-4038-9aa6-70df8d40be15
 		summarizeBy: none
 		sourceColumn: City
 		dataCategory: City
-		description: String column. categorized as City.
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Zip Code'
 		dataType: string
-		lineageTag: 6123e4b5-0eb0-4158-a716-b457c41f459b
+		lineageTag: e65a186c-99e8-492f-80f7-06adbd4bc59a
 		summarizeBy: none
 		sourceColumn: 'Zip Code'
 		dataCategory: PostalCode
-		description: String column. categorized as PostalCode.
 
 		annotation SummarizationSetBy = Automatic
 
 	column State
 		dataType: string
-		lineageTag: 50ca5e60-7bd7-453a-a4d8-25f2e36f57cd
+		lineageTag: 4f70f98b-4176-496d-ab77-1de047965aab
 		summarizeBy: none
 		sourceColumn: State
 		dataCategory: StateOrProvince
-		description: String column. categorized as StateOrProvince.
 
 		annotation SummarizationSetBy = Automatic
 
 	column Region
 		dataType: string
-		lineageTag: 58872a6b-62bf-486d-a4d5-79de6f39244b
+		lineageTag: bfa8ecdd-cfd4-4e43-80ce-f5e8c2dac142
 		summarizeBy: none
 		sourceColumn: Region
 		dataCategory: StateOrProvince
-		description: String column. categorized as StateOrProvince.
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Customer Segment'
 		dataType: string
-		lineageTag: 63ac1628-89e0-45a8-8f14-6728c3fd3f64
+		lineageTag: c4a81b32-e9f5-474f-af41-3dcfb4fe3f4d
 		summarizeBy: none
 		sourceColumn: 'Customer Segment'
-		description: String column.
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Product Category'
 		dataType: string
-		lineageTag: 522a6eb1-bae6-4058-ae98-64cdcffdbe9a
+		lineageTag: 88d0af1c-58a2-45e5-a3a4-1933ab7aab22
 		summarizeBy: none
 		sourceColumn: 'Product Category'
-		description: String column.
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Product Sub-Category'
 		dataType: string
-		lineageTag: 813d046a-4730-4c70-b792-ba16bbbf3ff6
+		lineageTag: a7393aa7-4146-4375-9c29-93db439da618
 		summarizeBy: none
 		sourceColumn: 'Product Sub-Category'
-		description: String column.
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Product Name'
 		dataType: string
-		lineageTag: ec82c93a-0ae2-4fec-93d3-741423be1929
+		lineageTag: 860dff7d-aac5-4545-9889-6e66b5360ac4
 		summarizeBy: none
 		sourceColumn: 'Product Name'
-		description: String column.
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Product Container'
 		dataType: string
-		lineageTag: 9dfcc8ca-d2e9-4a7b-9041-dc1ae23f3f6b
+		lineageTag: b562fb40-5414-4e3e-832b-c07af8565a12
 		summarizeBy: none
 		sourceColumn: 'Product Container'
-		description: String column.
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Product Base Margin'
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 66f534a7-bb57-4a9c-ab51-5ff18db85433
+		lineageTag: 14064e4e-da65-4d83-80cd-ef89f0ce9a00
 		summarizeBy: sum
 		sourceColumn: 'Product Base Margin'
-		description: Double column.
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Ship Date'
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: c334d087-953a-4d57-ba7d-f89589ef048f
+		lineageTag: 4a6c20cc-6698-410c-ad8b-082ed25021c3
 		summarizeBy: none
 		sourceColumn: 'Ship Date'
-		dataCategory: DateTime
-		description: Datetime column. categorized as DateTime.
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Grouping Based on Unit Price'
 		dataType: string
-		lineageTag: 8571ed6a-b476-412d-88a6-c2b32d1835fe
+		lineageTag: 9ceb2347-0096-435d-bbf7-357d916c41fa
 		summarizeBy: none
 		sourceColumn: 'Grouping Based on Unit Price'
-		description: String column.
 
 		annotation SummarizationSetBy = Automatic
 
 	column 'Action (Region)'
 		dataType: string
-		lineageTag: af7a103b-2ffc-4c2f-9d0f-bde46b701214
+		lineageTag: abb5f596-1c56-4f9a-932c-acf79d9ff53f
 		summarizeBy: none
 		sourceColumn: 'Action (Region)'
-		description: String column.
 		displayFolder: Groups
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Orders-573f4307-fabb-4c22-923d-3f32fb6f9cb8' = m
+	partition 'Orders-e7ff7989-ab6a-43f8-9122-a9fb195aaa0e' = m
 		mode: import
 		source =
 				let
 				    // Source Excel: Orders.xlsx
-				    Source = try
-				
-				        let
-				
-				            _src = Excel.Workbook(File.Contents(DataFolder & "\Orders.xlsx"), null, true),
-				
-				            _nav = _src{[Item="Orders",Kind="Sheet"]}[Data]
-				
-				        in _nav
-				
-				    otherwise
-				
-				        #table({"Row ID", "Order ID", "Order Date", "Order Priority", "Order Quantity", "Sales", "Discount", "Ship Mode", "Profit", "Unit Price", "Shipping Cost", "Customer Name", "City", "Zip Code", "State", "Region", "Customer Segment", "Product Category", "Product Sub-Category", "Product Name", "Product Container", "Product Base Margin", "Ship Date"}, {}),
+				    Source = Csv.Document(File.Contents(DataFolder & "\Extract.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
 				    #"Changed Types" = Table.TransformColumnTypes(#"Promoted Headers", {
 				        {"Row ID", Int64.Type},
@@ -288,7 +248,7 @@ table Orders
 				        {"Product Base Margin", type number},
 				        {"Ship Date", type date}
 				    }),
-				    #"Added Grouping Based on Unit Price" = Table.AddColumn(#"Changed Types", "Grouping Based on Unit Price", each if [Unit Price] <= 2500 then "A" else if [Unit Price] <=5000 then "B" else "C", type text),
+				    #"Added Grouping Based on Unit Price" = Table.AddColumn(#"Changed Types", "Grouping Based on Unit Price", each if [Unit Price] <= 2500 then "A" else if [Unit Price] <= 5000 then "B" else "C", type text),
 				    #"Added Action (Region)" = Table.AddColumn(#"Added Grouping Based on Unit Price", "Action (Region)", each Text.From([#"Region"]), type text),
 				    Result = #"Added Action (Region)"
 				in

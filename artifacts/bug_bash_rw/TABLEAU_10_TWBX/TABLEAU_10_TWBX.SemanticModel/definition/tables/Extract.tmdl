@@ -1,0 +1,66 @@
+table Extract
+	lineageTag: 6b712be4-6ce6-46fc-af78-013ec523f62a
+
+	measure 'Number of Records' = 1
+		displayFolder: Measures
+		lineageTag: 7083b772-7786-4226-ab58-2082785e497f
+		annotation Copilot_Description = Migrated from Tableau: 1 | DAX: 1
+
+	column 'Number of Records'
+		dataType: int64
+		lineageTag: 44086b5d-1b58-4f3a-9b3a-888b0443684b
+		summarizeBy: sum
+		sourceColumn: 'Number of Records'
+
+		annotation SummarizationSetBy = Automatic
+
+	column a
+		dataType: string
+		lineageTag: 97fe241a-1956-4cd5-877c-69b16d1347a9
+		summarizeBy: none
+		sourceColumn: a
+
+		annotation SummarizationSetBy = Automatic
+
+	column x
+		dataType: int64
+		lineageTag: 7395384e-8f5a-4d78-ad0b-004263cbb63f
+		summarizeBy: sum
+		sourceColumn: x
+
+		annotation SummarizationSetBy = Automatic
+
+	column y
+		dataType: int64
+		lineageTag: 5fa077d0-a1b8-43e7-ac05-1bc47105b6b3
+		summarizeBy: sum
+		sourceColumn: y
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Extract-ed3898ec-4bc0-4eb2-9846-a66ba330d289' = m
+		mode: import
+		source =
+				let
+				    // Source SQL Server
+				    Source = try
+				
+				        let
+				
+				            _src = Sql.Database("mssql2012.test.tsi.lan", "TestV1"),
+				
+				            _nav = _src{[Schema="dbo", Item="Extract"]}[Data]
+				
+				        in _nav
+				
+				    otherwise
+				
+				        #table({"Number of Records", "a", "x", "y"}, {}),
+				    #"Renamed Columns" = Table.RenameColumns(Source, {{"a", "A"}, {"x", "X"}, {"y", "Y"}}),
+				    Result = #"Renamed Columns"
+				in
+				    Result
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 4 columns and 1 measures: Number of Records, a, x, y.
+

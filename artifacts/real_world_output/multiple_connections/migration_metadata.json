@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-24T17:43:40.201225",
+  "generated_at": "2026-05-28T19:28:48.536878",
   "source": "Tableau Migration",
   "report_name": "multiple_connections",
   "objects_converted": {
@@ -19,7 +19,7 @@
     "custom_sql": 0
   },
   "generated_output": {
-    "pages": 1,
+    "pages": 0,
     "visuals": 0,
     "theme_applied": false,
     "theme_detail": {
@@ -28,11 +28,12 @@
     }
   },
   "tmdl_stats": {
-    "tables": 3,
+    "tables": 2,
     "measures": 0,
-    "columns": 0,
+    "columns": 2,
     "relationships": 0
   },
+  "dax_measure_names": [],
   "visual_type_mappings": {},
   "visual_details": [],
   "approximations": []

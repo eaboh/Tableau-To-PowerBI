@@ -2,8 +2,8 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/2.0.0/schema.json",
   "themeCollection": {
     "baseTheme": {
-      "name": "CY24SU06",
-      "reportVersionAtImport": "5.55",
+      "name": "CY26SU04",
+      "reportVersionAtImport": "5.58",
       "type": "SharedResources"
     }
   },
@@ -13,8 +13,8 @@
       "type": "SharedResources",
       "items": [
         {
-          "name": "CY24SU06",
-          "path": "BaseThemes/CY24SU06.json",
+          "name": "CY26SU04",
+          "path": "BaseThemes/CY26SU04.json",
           "type": "BaseTheme"
         }
       ]
@@ -31,7 +31,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "Filter_188159d3da60",
+        "name": "Filter_cb1095360503",
         "type": "Advanced",
         "field": {
           "Column": {
@@ -40,7 +40,7 @@
                 "Entity": "transactions"
               }
             },
-            "Property": "federated.1.sum:amount:qk"
+            "Property": "amount"
           }
         },
         "filter": {
@@ -56,28 +56,6 @@
             {
               "Condition": {
                 "Comparison": {
-                  "ComparisonKind": 2,
-                  "Left": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Source": "t"
-                        }
-                      },
-                      "Property": "federated.1.sum:amount:qk"
-                    }
-                  },
-                  "Right": {
-                    "Literal": {
-                      "Value": "''"
-                    }
-                  }
-                }
-              }
-            },
-            {
-              "Condition": {
-                "Comparison": {
                   "ComparisonKind": 3,
                   "Left": {
                     "Column": {
@@ -86,12 +64,12 @@
                           "Source": "t"
                         }
                       },
-                      "Property": "federated.1.sum:amount:qk"
+                      "Property": "amount"
                     }
                   },
                   "Right": {
                     "Literal": {
-                      "Value": "'10'"
+                      "Value": "10L"
                     }
                   }
                 }

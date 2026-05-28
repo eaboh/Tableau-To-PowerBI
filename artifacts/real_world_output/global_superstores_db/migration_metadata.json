@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-24T17:43:39.676666",
+  "generated_at": "2026-05-28T19:28:48.197232",
   "source": "Tableau Migration",
   "report_name": "global_superstores_db",
   "objects_converted": {
@@ -20,7 +20,7 @@
   },
   "generated_output": {
     "pages": 6,
-    "visuals": 23,
+    "visuals": 16,
     "theme_applied": false,
     "theme_detail": {
       "status": "skipped",
@@ -29,10 +29,18 @@
   },
   "tmdl_stats": {
     "tables": 2,
-    "measures": 5,
+    "measures": 6,
     "columns": 38,
     "relationships": 0
   },
+  "dax_measure_names": [
+    "Margin",
+    "Margin Formatted",
+    "Number of Records",
+    "Previous Year",
+    "Year Over Year %",
+    "Year To Date"
+  ],
   "visual_type_mappings": {
     "AnalyticsBasic": "Automatic",
     "Bar 1": "Automatic",
@@ -67,6 +75,7 @@
         "Sales",
         "Profit"
       ],
+      "dax_measures": [],
       "field_count": 3
     },
     {
@@ -81,6 +90,7 @@
         "Sales",
         "Profit"
       ],
+      "dax_measures": [],
       "field_count": 4
     },
     {
@@ -96,6 +106,7 @@
         "Sales",
         "Profit"
       ],
+      "dax_measures": [],
       "field_count": 5
     },
     {
@@ -111,6 +122,7 @@
         "Calculation_555350140620128257",
         "Calculation_555350140620128257"
       ],
+      "dax_measures": [],
       "field_count": 5
     },
     {
@@ -123,6 +135,7 @@
       "measures": [
         "Discount"
       ],
+      "dax_measures": [],
       "field_count": 2
     },
     {
@@ -136,6 +149,7 @@
       "measures": [
         "Sales"
       ],
+      "dax_measures": [],
       "field_count": 3
     },
     {
@@ -149,6 +163,7 @@
         "Forecast Indicator"
       ],
       "measures": [],
+      "dax_measures": [],
       "field_count": 4
     },
     {
@@ -163,6 +178,7 @@
         "Sales",
         "Profit"
       ],
+      "dax_measures": [],
       "field_count": 4
     },
     {
@@ -175,43 +191,54 @@
       "measures": [
         "Profit"
       ],
+      "dax_measures": [],
       "field_count": 2
     },
     {
       "worksheet": "Profit Map",
       "tableau_mark": "Automatic",
-      "pbi_visual": "map",
-      "dimensions": [],
+      "pbi_visual": "azureMap",
+      "dimensions": [
+        "Country",
+        "Market"
+      ],
       "measures": [
         "Profit",
         "Sales"
       ],
-      "field_count": 2
+      "dax_measures": [],
+      "field_count": 4
     },
     {
       "worksheet": "Profit and Sales",
       "tableau_mark": "Automatic",
       "pbi_visual": "scatterChart",
-      "dimensions": [],
+      "dimensions": [
+        "Country",
+        "Market"
+      ],
       "measures": [
         "Sales",
         "Profit",
         "Profit"
       ],
-      "field_count": 3
+      "dax_measures": [],
+      "field_count": 5
     },
     {
       "worksheet": "Profit and Sales Relationship",
       "tableau_mark": "Automatic",
       "pbi_visual": "scatterChart",
       "dimensions": [
-        "Segment"
+        "Segment",
+        "Country"
       ],
       "measures": [
         "Sales",
         "Profit"
       ],
-      "field_count": 3
+      "dax_measures": [],
+      "field_count": 4
     },
     {
       "worksheet": "Profit and Sales by Sub Categories",
@@ -224,6 +251,7 @@
         "Sales",
         "Profit"
       ],
+      "dax_measures": [],
       "field_count": 3
     },
     {
@@ -237,6 +265,7 @@
         "Discount",
         "Profit"
       ],
+      "dax_measures": [],
       "field_count": 3
     },
     {
@@ -256,6 +285,7 @@
         "Sales",
         "Shipping Cost"
       ],
+      "dax_measures": [],
       "field_count": 9
     },
     {
@@ -268,6 +298,7 @@
       "measures": [
         "Shipping Cost"
       ],
+      "dax_measures": [],
       "field_count": 2
     },
     {
@@ -281,29 +312,36 @@
       "measures": [
         "Shipping Cost"
       ],
+      "dax_measures": [],
       "field_count": 3
     },
     {
       "worksheet": "South Map",
       "tableau_mark": "Automatic",
-      "pbi_visual": "map",
-      "dimensions": [],
+      "pbi_visual": "azureMap",
+      "dimensions": [
+        "State"
+      ],
       "measures": [
         "Profit",
         "Sales"
       ],
-      "field_count": 2
+      "dax_measures": [],
+      "field_count": 3
     },
     {
       "worksheet": "World's Profit and Sales Reln",
       "tableau_mark": "Automatic",
-      "pbi_visual": "map",
-      "dimensions": [],
+      "pbi_visual": "azureMap",
+      "dimensions": [
+        "Country"
+      ],
       "measures": [
         "Profit",
         "Sales"
       ],
-      "field_count": 2
+      "dax_measures": [],
+      "field_count": 3
     },
     {
       "worksheet": "YOY Profit",
@@ -315,6 +353,7 @@
       "measures": [
         "Profit"
       ],
+      "dax_measures": [],
       "field_count": 2
     }
   ],

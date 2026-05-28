@@ -35,6 +35,18 @@ def _get_m_query_builder():
     return generate_power_query_m
 
 
+def _m_shared_identifier(name):
+    """Return a safe M identifier for ``shared`` declarations.
+
+    In M, identifiers containing spaces or special characters must be
+    emitted as ``#"Name"``.
+    """
+    if re.match(r'^[A-Za-z_][A-Za-z0-9_]*$', name or ''):
+        return name
+    escaped = (name or '').replace('"', '""')
+    return f'#"{escaped}"'
+
+
 class DataflowGenerator:
     """Generates Dataflow Gen2 definitions from Tableau datasources."""
 
@@ -200,7 +212,8 @@ class DataflowGenerator:
         """Build the Dataflow Gen2 JSON definition."""
         mashup_sections = []
         for q in queries:
-            mashup_sections.append(f'shared {q["name"]} = {q["m_query"]};')
+            safe_qname = _m_shared_identifier(q['name'])
+            mashup_sections.append(f'shared {safe_qname} = {q["m_query"]};')
 
         mashup_document = '\nsection Section1;\n\n' + '\n\n'.join(mashup_sections)
 
@@ -255,7 +268,8 @@ class DataflowGenerator:
             f.write(f'// Generated: {datetime.now().isoformat()}\n\n')
             f.write('section Section1;\n\n')
             for q in queries:
-                f.write(f'shared {q["name"]} = {q["m_query"]};\n\n')
+                safe_qname = _m_shared_identifier(q['name'])
+                f.write(f'shared {safe_qname} = {q["m_query"]};\n\n')
 
     # ════════════════════════════════════════════════════════════════
     #  PREP FLOW → DATAFLOW GEN2 DIRECT CONVERSION

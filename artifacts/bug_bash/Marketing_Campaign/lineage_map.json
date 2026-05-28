@@ -21,7 +21,140 @@
       "pbi_table": "Min Budget"
     }
   ],
-  "calculations": [],
+  "calculations": [
+    {
+      "tableau_calculation": "COUNTA([lead_name])",
+      "pbi_table": "Campaigns",
+      "pbi_object": "Non-Blank Leads",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "CORR([budget], [deal_value])",
+      "pbi_table": "Campaigns",
+      "pbi_object": "Budget Deal Correlation",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COVAR([spend], [engagement_score])",
+      "pbi_table": "Campaigns",
+      "pbi_object": "Spend Engagement Covar",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "{INCLUDE [channel] : AVG([deal_value])}",
+      "pbi_table": "Campaigns",
+      "pbi_object": "Avg Deal by Channel",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "(SUM([deal_value]) - SUM([spend])) / SUM([spend])",
+      "pbi_table": "Campaigns",
+      "pbi_object": "Campaign ROI",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM([spend]) / COUNTD([lead_id])",
+      "pbi_table": "Campaigns",
+      "pbi_object": "Cost Per Lead",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "WINDOW_MAX((SUM([deal_value]) - SUM([spend])) / SUM([spend]))",
+      "pbi_table": "Campaigns",
+      "pbi_object": "Window Best ROI",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "WINDOW_MIN((SUM([deal_value]) - SUM([spend])) / SUM([spend]))",
+      "pbi_table": "Campaigns",
+      "pbi_object": "Window Worst ROI",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "RUNNING_COUNT(COUNTD([lead_id]))",
+      "pbi_table": "Campaigns",
+      "pbi_object": "Cumulative Leads",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM(IF [lead_status] = \"Won\" THEN 1 ELSE 0 END) / COUNT([lead_id])",
+      "pbi_table": "Campaigns",
+      "pbi_object": "Conversion Rate",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Target Channel",
+      "pbi_table": "Campaigns",
+      "pbi_object": "Target Channel",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Budget Deal Correlation Formatted",
+      "pbi_table": "Campaigns",
+      "pbi_object": "Budget Deal Correlation Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Spend Engagement Covar Formatted",
+      "pbi_table": "Campaigns",
+      "pbi_object": "Spend Engagement Covar Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Campaign ROI Formatted",
+      "pbi_table": "Campaigns",
+      "pbi_object": "Campaign ROI Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Cost Per Lead Formatted",
+      "pbi_table": "Campaigns",
+      "pbi_object": "Cost Per Lead Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Window Best ROI Formatted",
+      "pbi_table": "Campaigns",
+      "pbi_object": "Window Best ROI Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Window Worst ROI Formatted",
+      "pbi_table": "Campaigns",
+      "pbi_object": "Window Worst ROI Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Conversion Rate Formatted",
+      "pbi_table": "Campaigns",
+      "pbi_object": "Conversion Rate Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Year To Date",
+      "pbi_table": "Calendar",
+      "pbi_object": "Year To Date",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Previous Year",
+      "pbi_table": "Calendar",
+      "pbi_object": "Previous Year",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Year Over Year %",
+      "pbi_table": "Calendar",
+      "pbi_object": "Year Over Year %",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Min Budget",
+      "pbi_table": "Min Budget",
+      "pbi_object": "Min Budget",
+      "pbi_type": "measure"
+    }
+  ],
   "relationships": [
     {
       "from": "Campaigns[campaign_id]",
@@ -31,13 +164,34 @@
     {
       "from": "Campaigns[start_date]",
       "to": "Calendar[Date]",
-      "cardinality": "oneDirection"
+      "cardinality": "bothDirections"
     },
     {
       "from": "Leads[created_date]",
       "to": "Calendar[Date]",
-      "cardinality": "oneDirection"
+      "cardinality": "bothDirections"
     }
   ],
-  "worksheets": []
+  "worksheets": [
+    {
+      "tableau_worksheet": "Campaign Performance",
+      "pbi_page": "Campaign Performance"
+    },
+    {
+      "tableau_worksheet": "Lead Funnel",
+      "pbi_page": "Lead Funnel"
+    },
+    {
+      "tableau_worksheet": "Conversion Trend",
+      "pbi_page": "Conversion Trend"
+    },
+    {
+      "tableau_worksheet": "Budget Analysis",
+      "pbi_page": "Budget Analysis"
+    },
+    {
+      "tableau_worksheet": "Lead Details",
+      "pbi_page": "Lead Details"
+    }
+  ]
 }

@@ -2675,7 +2675,9 @@ class PowerBIProjectGenerator:
                 if f.get('name') == 'Number of Records':
                     self._field_map['Number of Records'] = (measures_table, 'Number of Records')
                     self._measure_names.add('Number of Records')
-                    self._bim_measure_names.add('Number of Records')
+                    actual_bim = getattr(self, '_actual_bim_measure_names', set()) or set()
+                    if (not actual_bim) or ('Number of Records' in actual_bim):
+                        self._bim_measure_names.add('Number of Records')
                     break
 
         # Save the main table for fallback
@@ -4547,34 +4549,9 @@ class PowerBIProjectGenerator:
             }]
         }
 
-        # For slider / range mode, add numericInputStyle
-        if slicer_mode == 'Between':
-            slicer_objects["numericInputStyle"] = [{
-                "properties": {
-                    "show": _L("true")
-                }
-            }]
-
-        # For Search/wildcard mode, enable search box
-        if slicer_mode == 'Search':
-            slicer_objects["selection"] = [{
-                "properties": {
-                    "selectAllCheckboxEnabled": _L("true")
-                }
-            }]
-            slicer_objects["search"] = [{
-                "properties": {
-                    "enabled": _L("true")
-                }
-            }]
-
-        # For relative date mode, add relative date config
-        if slicer_mode == 'Basic':
-            slicer_objects["relativeDate"] = [{
-                "properties": {
-                    "includeToday": _L("true")
-                }
-            }]
+        # Keep slicer objects minimal for PBIR compatibility across Desktop builds.
+        # Extra blocks such as numericInputStyle/search/selection/relativeDate
+        # can trigger client-side rendering errors in some versions.
 
         slicer = {
             "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
@@ -5036,6 +5013,7 @@ class PowerBIProjectGenerator:
             ws_fields = ws.get('fields', [])
             dim_names = []
             mea_names = []
+            dax_mea_names = []
             for f in ws_fields:
                 fname = f.get('name', '')
                 # Strip Tableau derivation prefixes
@@ -5049,6 +5027,8 @@ class PowerBIProjectGenerator:
                     hasattr(self, '_measure_names') and fname in self._measure_names
                 ):
                     mea_names.append(fname)
+                    if hasattr(self, '_bim_measure_names') and fname in self._bim_measure_names:
+                        dax_mea_names.append(fname)
                 else:
                     dim_names.append(fname)
             visual_details.append({
@@ -5057,6 +5037,7 @@ class PowerBIProjectGenerator:
                 'pbi_visual': pbi_type,
                 'dimensions': dim_names,
                 'measures': mea_names,
+                'dax_measures': dax_mea_names,
                 'field_count': len(dim_names) + len(mea_names),
             })
 
@@ -5107,6 +5088,7 @@ class PowerBIProjectGenerator:
                 "theme_detail": theme_detail
             },
             "tmdl_stats": tmdl_stats,
+            "dax_measure_names": sorted(getattr(self, '_bim_measure_names', set())),
             "visual_type_mappings": visual_types_used,
             "visual_details": visual_details,
             "approximations": approximations,

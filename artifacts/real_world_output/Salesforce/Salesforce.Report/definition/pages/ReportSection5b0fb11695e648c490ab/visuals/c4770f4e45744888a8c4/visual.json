@@ -1,0 +1,54 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "c4770f4e45744888a8c4",
+  "position": {
+    "x": 59,
+    "y": 231,
+    "z": 8000,
+    "height": 259,
+    "width": 346,
+    "tabOrder": 8000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "CLOSERS",
+                    "textStyle": {
+                      "color": "#c0c0c0",
+                      "fontSize": "13.0pt"
+                    }
+                  },
+                  {
+                    "value": "Æ",
+                    "textStyle": {
+                      "color": "#c0c0c0",
+                      "fontSize": "14.0pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Growth Plan: Pipeline Generation",
+                    "textStyle": {
+                      "color": "#c0c0c0",
+                      "fontSize": "11.0pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

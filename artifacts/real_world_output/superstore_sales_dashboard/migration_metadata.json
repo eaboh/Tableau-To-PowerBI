@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-23T21:18:53.273222",
+  "generated_at": "2026-05-28T19:28:52.950085",
   "source": "Tableau Migration",
   "report_name": "superstore_sales_dashboard",
   "objects_converted": {
@@ -33,6 +33,7 @@
     "columns": 56,
     "relationships": 2
   },
+  "dax_measure_names": [],
   "visual_type_mappings": {
     "Bar Chart": "Automatic",
     "Line chart": "Automatic",
@@ -53,6 +54,7 @@
         "Sales",
         "Sales"
       ],
+      "dax_measures": [],
       "field_count": 5
     },
     {
@@ -66,6 +68,7 @@
         "Order Quantity",
         "Sales"
       ],
+      "dax_measures": [],
       "field_count": 3
     },
     {
@@ -80,18 +83,22 @@
       "measures": [
         "Sales"
       ],
+      "dax_measures": [],
       "field_count": 4
     },
     {
       "worksheet": "Scatter Plot",
       "tableau_mark": "Automatic",
       "pbi_visual": "scatterChart",
-      "dimensions": [],
+      "dimensions": [
+        "Customer Name"
+      ],
       "measures": [
         "Sales",
         "Profit"
       ],
-      "field_count": 2
+      "dax_measures": [],
+      "field_count": 3
     }
   ],
   "approximations": []

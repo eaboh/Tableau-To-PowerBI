@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-24T17:45:20.013651",
+  "generated_at": "2026-05-28T19:28:50.079996",
   "source": "Tableau Migration",
   "report_name": "sample-superstore",
   "objects_converted": {
@@ -33,6 +33,9 @@
     "columns": 32,
     "relationships": 0
   },
+  "dax_measure_names": [
+    "Number of Records"
+  ],
   "visual_type_mappings": {
     "Sheet 1": "Automatic"
   },
@@ -47,6 +50,7 @@
       "measures": [
         "Sales"
       ],
+      "dax_measures": [],
       "field_count": 2
     }
   ],

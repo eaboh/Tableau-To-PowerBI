@@ -1,0 +1,23 @@
+table 'New Business Growth'
+	lineageTag: d54a1af7-661e-4c14-8062-2e054b87a3ba
+
+	measure 'New Business Growth' = SELECTEDVALUE('New Business Growth'[Value], 0.59999999999999998)
+		lineageTag: 6974e672-1b6b-4447-9257-8737f1bccac4
+		annotation Copilot_Description = DAX: SELECTEDVALUE('New Business Growth'[Value], 0.59999999999999998)
+
+	column Value
+		dataType: double
+		lineageTag: e4978a58-6121-4103-b1ec-621175ddd1dd
+		summarizeBy: none
+		sourceColumn: Value
+		annotation displayFolder = Parameters
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'New Business Growth-44e7aaf0-3459-4deb-b0e3-754e892f67c4' = calculated
+		mode: import
+		source = GENERATESERIES(0.0, 1.0, 0.01)
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 1 columns and 1 measures: Value.
+

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-24T21:44:34.336449",
+  "generated_at": "2026-05-28T19:28:24.177170",
   "source": "Tableau Migration",
   "report_name": "Cache",
   "objects_converted": {
@@ -29,10 +29,19 @@
   },
   "tmdl_stats": {
     "tables": 9,
-    "measures": 8,
+    "measures": 7,
     "columns": 20,
     "relationships": 0
   },
+  "dax_measure_names": [
+    "Base Salary",
+    "Churn Rate",
+    "Commission Rate",
+    "New Business Growth",
+    "New Quota",
+    "Sort by",
+    "State"
+  ],
   "visual_type_mappings": {
     "Sheet 21": "Automatic"
   },
@@ -47,6 +56,7 @@
       "measures": [
         "Number of Records"
       ],
+      "dax_measures": [],
       "field_count": 2
     }
   ],

@@ -614,14 +614,29 @@
 
     /* ── Print ───────────────────────────────────────────────── */
     @media print {
-        .report-header { background: #0078d4 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-        .section-body { max-height: none !important; opacity: 1 !important; }
-        .section-header { cursor: default; }
+        @page { size: A4 portrait; margin: 18mm 15mm; }
+        * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+        body { background: #fff; font-size: 10pt; line-height: 1.45; }
+        .report-header { background: #0078d4 !important; padding: 20px 24px 16px; }
+        .container { padding: 0 8px 20px; }
+        .section-body { max-height: none !important; opacity: 1 !important; overflow: visible !important; }
+        .section-body.collapsed { max-height: none !important; opacity: 1 !important; }
+        .section-header { cursor: default; pointer-events: none; }
         .toggle-arrow { display: none; }
+        .theme-toggle { display: none !important; }
+        .table-search { display: none; }
+        .tab-bar { display: none; }
+        .tab-content { display: block !important; }
         .stat-card { break-inside: avoid; }
         .card { break-inside: avoid; }
-        .table-search { display: none; }
-        body { background: #fff; }
+        .table-container { break-inside: avoid; }
+        .chart-card { break-inside: avoid; }
+        .donut-container { break-inside: avoid; }
+        .bar-chart { break-inside: avoid; }
+        thead th { background: #0078d4 !important; color: #fff !important; font-size: 0.78em; }
+        tbody td { font-size: 0.8em; padding: 5px 8px; }
+        .badge { border: 1px solid currentColor; }
+        .report-footer { page-break-before: avoid; margin-top: 20px; }
     }
 
     /* ── Responsive ──────────────────────────────────────────── */
@@ -695,35 +710,35 @@
 <button id="theme-toggle-btn" class="theme-toggle" onclick="toggleTheme()">&#9790; Dark</button>
 <div class="report-header">
     <h1>Tableau Prep — Flow Lineage Report</h1>
-    <div class='subtitle'>3 flows analyzed | 0 cross-flow edges | 0 merge candidates</div>
+    <div class='subtitle'>14 flows analyzed | 13 cross-flow edges | 2 merge candidates</div>
     <div class="meta">
-        <span>&#128197; 2026-04-02 11:26</span>
+        <span>&#128197; 2026-05-28 19:30</span>
     </div>
 </div>
 <div class="container">
 <div class="stat-grid">
 <div class="stat-card accent-blue">
-    <div class="stat-value">3</div>
+    <div class="stat-value">14</div>
     <div class="stat-label">Total Flows</div>
 </div>
 <div class="stat-card accent-teal">
-    <div class="stat-value">6</div>
+    <div class="stat-value">21</div>
     <div class="stat-label">External Sources</div>
 </div>
 <div class="stat-card accent-purple">
-    <div class="stat-value">2</div>
+    <div class="stat-value">13</div>
     <div class="stat-label">Final Outputs</div>
 </div>
 <div class="stat-card">
-    <div class="stat-value">0</div>
+    <div class="stat-value">13</div>
     <div class="stat-label">Cross-Flow Edges</div>
 </div>
 <div class="stat-card">
-    <div class="stat-value">0</div>
+    <div class="stat-value">2</div>
     <div class="stat-label">Max Chain Depth</div>
 </div>
-<div class="stat-card">
-    <div class="stat-value">0</div>
+<div class="stat-card accent-success">
+    <div class="stat-value">2</div>
     <div class="stat-label">Merge Candidates</div>
 </div>
 </div>
@@ -750,9 +765,20 @@
 <th class="sortable" onclick="sortTable('flow-inventory', 8)">Complexity <span class="sort-icon">&#8693;</span></th>
 </tr></thead>
 <tbody>
-<tr><td>Sales_Prep_Flow</td><td>2</td><td>1</td><td>3</td><td>1</td><td>0</td><td>—</td><td>4</td><td><span class="badge badge-green">Low</span></td></tr>
-<tr><td>SampleFlow</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>—</td><td>0</td><td><span class="badge badge-green">Low</span></td></tr>
-<tr><td>tableau_prep_book</td><td>4</td><td>1</td><td>0</td><td>0</td><td>0</td><td>—</td><td>5</td><td><span class="badge badge-green">Low</span></td></tr>
+<tr><td>01_Raw_Orders_Clean</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>—</td><td>2</td><td><span class="badge badge-green">Low</span></td></tr>
+<tr><td>02_Raw_Products_Clean</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>—</td><td>2</td><td><span class="badge badge-green">Low</span></td></tr>
+<tr><td>03_Raw_Returns_Clean</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>—</td><td>2</td><td><span class="badge badge-green">Low</span></td></tr>
+<tr><td>04_Customer_Enrichment</td><td>2</td><td>1</td><td>2</td><td>1</td><td>0</td><td>—</td><td>3</td><td><span class="badge badge-green">Low</span></td></tr>
+<tr><td>05_Sales_Analytics</td><td>3</td><td>1</td><td>3</td><td>2</td><td>0</td><td>—</td><td>4</td><td><span class="badge badge-green">Low</span></td></tr>
+<tr><td>06_Returns_Analytics</td><td>2</td><td>1</td><td>3</td><td>1</td><td>0</td><td>1</td><td>4</td><td><span class="badge badge-yellow">Medium</span></td></tr>
+<tr><td>07_Executive_Dashboard</td><td>2</td><td>1</td><td>3</td><td>1</td><td>0</td><td>—</td><td>4</td><td><span class="badge badge-green">Low</span></td></tr>
+<tr><td>08_Inventory_Tracker</td><td>2</td><td>1</td><td>2</td><td>1</td><td>0</td><td>—</td><td>3</td><td><span class="badge badge-green">Low</span></td></tr>
+<tr><td>09_HR_Attrition_Analysis</td><td>3</td><td>2</td><td>6</td><td>2</td><td>0</td><td>—</td><td>6</td><td><span class="badge badge-yellow">Medium</span></td></tr>
+<tr><td>10_Food_Delivery_ETL</td><td>3</td><td>3</td><td>6</td><td>1</td><td>1</td><td>—</td><td>6</td><td><span class="badge badge-yellow">Medium</span></td></tr>
+<tr><td>11_Energy_Consumption</td><td>3</td><td>2</td><td>9</td><td>1</td><td>1</td><td>—</td><td>9</td><td><span class="badge badge-yellow">Medium</span></td></tr>
+<tr><td>12_Real_Estate_Valuation</td><td>4</td><td>2</td><td>5</td><td>3</td><td>0</td><td>—</td><td>5</td><td><span class="badge badge-yellow">Medium</span></td></tr>
+<tr><td>13_Financial_Reconciliation</td><td>3</td><td>2</td><td>6</td><td>2</td><td>0</td><td>—</td><td>6</td><td><span class="badge badge-yellow">Medium</span></td></tr>
+<tr><td>14_Healthcare_Patient_Flow</td><td>4</td><td>3</td><td>6</td><td>3</td><td>0</td><td>—</td><td>6</td><td><span class="badge badge-yellow">Medium</span></td></tr>
 </tbody></table></div>
 </div> <!-- /section -->
 
@@ -776,12 +802,27 @@
 <th class="sortable" onclick="sortTable('source-inventory', 5)">Used By <span class="sort-icon">&#8693;</span></th>
 </tr></thead>
 <tbody>
-<tr><td>Orders.csv</td><td>textscan</td><td>—</td><td>—</td><td>Orders.csv</td><td><span class="badge badge-blue">Sales_Prep_Flow</span></td></tr>
-<tr><td>Customers.csv</td><td>textscan</td><td>—</td><td>—</td><td>Customers.csv</td><td><span class="badge badge-blue">Sales_Prep_Flow</span></td></tr>
-<tr><td>Orders_Central</td><td>textscan</td><td>—</td><td>—</td><td>Orders_Central</td><td><span class="badge badge-blue">tableau_prep_book</span></td></tr>
-<tr><td>orders_south_2015</td><td>textscan</td><td>—</td><td>—</td><td>orders_south_2015</td><td><span class="badge badge-blue">tableau_prep_book</span></td></tr>
-<tr><td>returns_new</td><td>excel-direct</td><td>—</td><td>—</td><td>returns_new</td><td><span class="badge badge-blue">tableau_prep_book</span></td></tr>
-<tr><td>Orders_West</td><td>textscan</td><td>—</td><td>—</td><td>Orders_West</td><td><span class="badge badge-blue">tableau_prep_book</span></td></tr>
+<tr><td>Orders_2024.csv</td><td>textscan</td><td>—</td><td>—</td><td>Orders_2024.csv</td><td><span class="badge badge-blue">01_Raw_Orders_Clean</span></td></tr>
+<tr><td>Products_Master.csv</td><td>textscan</td><td>—</td><td>—</td><td>Products_Master.csv</td><td><span class="badge badge-blue">02_Raw_Products_Clean</span></td></tr>
+<tr><td>Returns_2024.csv</td><td>textscan</td><td>—</td><td>—</td><td>Returns_2024.csv</td><td><span class="badge badge-blue">03_Raw_Returns_Clean</span></td></tr>
+<tr><td>Demographics.csv</td><td>textscan</td><td>—</td><td>—</td><td>Demographics.csv</td><td><span class="badge badge-blue">04_Customer_Enrichment</span></td></tr>
+<tr><td>Employee_Survey.xlsx</td><td>excel-direct</td><td>—</td><td>—</td><td>Employee_Survey.xlsx</td><td><span class="badge badge-blue">09_HR_Attrition_Analysis</span></td></tr>
+<tr><td>Employees</td><td>sqlserver</td><td>hr-db.corp.local</td><td>HumanResources</td><td>Employees</td><td><span class="badge badge-blue">09_HR_Attrition_Analysis</span></td></tr>
+<tr><td>order_log</td><td>postgres</td><td>app-db.foodfast.io</td><td>food_delivery</td><td>order_log</td><td><span class="badge badge-blue">10_Food_Delivery_ETL</span></td></tr>
+<tr><td>Restaurants_Jan.csv</td><td>textscan</td><td>—</td><td>—</td><td>Restaurants_Jan.csv</td><td><span class="badge badge-blue">10_Food_Delivery_ETL</span></td></tr>
+<tr><td>Restaurants_Feb.csv</td><td>textscan</td><td>—</td><td>—</td><td>Restaurants_Feb.csv</td><td><span class="badge badge-blue">10_Food_Delivery_ETL</span></td></tr>
+<tr><td>Electricity_2023.csv</td><td>textscan</td><td>—</td><td>—</td><td>Electricity_2023.csv</td><td><span class="badge badge-blue">11_Energy_Consumption</span></td></tr>
+<tr><td>Electricity_2024.csv</td><td>textscan</td><td>—</td><td>—</td><td>Electricity_2024.csv</td><td><span class="badge badge-blue">11_Energy_Consumption</span></td></tr>
+<tr><td>Population_GDP.xlsx</td><td>excel-direct</td><td>—</td><td>—</td><td>Population_GDP.xlsx</td><td><span class="badge badge-blue">11_Energy_Consumption</span></td></tr>
+<tr><td>PROPERTY_LISTINGS</td><td>snowflake</td><td>acme.us-west-2.snowflakecomputing.com</td><td>REAL_ESTATE</td><td>PROPERTY_LISTINGS</td><td><span class="badge badge-blue">12_Real_Estate_Valuation</span></td></tr>
+<tr><td>Census_Demographics.csv</td><td>textscan</td><td>—</td><td>—</td><td>Census_Demographics.csv</td><td><span class="badge badge-blue">12_Real_Estate_Valuation</span></td></tr>
+<tr><td>Zillow_Estimates.json</td><td>json</td><td>—</td><td>—</td><td>Zillow_Estimates.json</td><td><span class="badge badge-blue">12_Real_Estate_Valuation</span></td></tr>
+<tr><td>GL_Transactions.xlsx</td><td>excel-direct</td><td>—</td><td>—</td><td>GL_Transactions.xlsx</td><td><span class="badge badge-blue">13_Financial_Reconciliation</span></td></tr>
+<tr><td>BankStatements</td><td>sqlserver</td><td>fin-db.corp.local</td><td>Banking</td><td>BankStatements</td><td><span class="badge badge-blue">13_Financial_Reconciliation</span></td></tr>
+<tr><td>Chart_of_Accounts.csv</td><td>textscan</td><td>—</td><td>—</td><td>Chart_of_Accounts.csv</td><td><span class="badge badge-blue">13_Financial_Reconciliation</span></td></tr>
+<tr><td>admissions</td><td>postgres</td><td>ehr-db.hospital.local</td><td>ehr_system</td><td>admissions</td><td><span class="badge badge-blue">14_Healthcare_Patient_Flow</span></td></tr>
+<tr><td>ICD10_Codes.csv</td><td>textscan</td><td>—</td><td>—</td><td>ICD10_Codes.csv</td><td><span class="badge badge-blue">14_Healthcare_Patient_Flow</span></td></tr>
+<tr><td>Staff_Schedule.xlsx</td><td>excel-direct</td><td>—</td><td>—</td><td>Staff_Schedule.xlsx</td><td><span class="badge badge-blue">14_Healthcare_Patient_Flow</span></td></tr>
 </tbody></table></div>
 </div> <!-- /section -->
 
@@ -800,8 +841,19 @@
 <th class="sortable" onclick="sortTable('output-inventory', 4)">Consumed By <span class="sort-icon">&#8693;</span></th>
 </tr></thead>
 <tbody>
-<tr><td>Regional Sales Summary</td><td>PublishExtract</td><td>Regional Sales Summary</td><td><span class="badge badge-blue">Sales_Prep_Flow</span></td><td>—  (final)</td></tr>
-<tr><td>Output</td><td>WriteToHyper</td><td>Output</td><td><span class="badge badge-blue">tableau_prep_book</span></td><td>—  (final)</td></tr>
+<tr><td>Executive_KPIs</td><td>PublishExtract</td><td>Executive_KPIs</td><td><span class="badge badge-blue">07_Executive_Dashboard</span></td><td>—  (final)</td></tr>
+<tr><td>Inventory_Status</td><td>PublishExtract</td><td>INVENTORY_STATUS</td><td><span class="badge badge-blue">08_Inventory_Tracker</span></td><td>—  (final)</td></tr>
+<tr><td>HR_Attrition_Detail</td><td>PublishExtract</td><td>HR_Attrition_Detail</td><td><span class="badge badge-blue">09_HR_Attrition_Analysis</span></td><td>—  (final)</td></tr>
+<tr><td>HR_Department_Summary</td><td>PublishExtract</td><td>HR_Department_Summary</td><td><span class="badge badge-blue">09_HR_Attrition_Analysis</span></td><td>—  (final)</td></tr>
+<tr><td>Delivery_Fact</td><td>PublishExtract</td><td>Delivery_Fact</td><td><span class="badge badge-blue">10_Food_Delivery_ETL</span></td><td>—  (final)</td></tr>
+<tr><td>Restaurant_Dim</td><td>PublishExtract</td><td>Restaurant_Dim</td><td><span class="badge badge-blue">10_Food_Delivery_ETL</span></td><td>—  (final)</td></tr>
+<tr><td>Restaurant_Performance</td><td>PublishExtract</td><td>Restaurant_Performance</td><td><span class="badge badge-blue">10_Food_Delivery_ETL</span></td><td>—  (final)</td></tr>
+<tr><td>Energy_Detail</td><td>PublishExtract</td><td>Energy_Detail</td><td><span class="badge badge-blue">11_Energy_Consumption</span></td><td>—  (final)</td></tr>
+<tr><td>Energy_Country_Summary</td><td>PublishExtract</td><td>Energy_Country_Summary</td><td><span class="badge badge-blue">11_Energy_Consumption</span></td><td>—  (final)</td></tr>
+<tr><td>Market_Summary</td><td>PublishExtract</td><td>Market_Summary</td><td><span class="badge badge-blue">12_Real_Estate_Valuation</span></td><td>—  (final)</td></tr>
+<tr><td>Reconciliation_Summary</td><td>PublishExtract</td><td>Reconciliation_Summary</td><td><span class="badge badge-blue">13_Financial_Reconciliation</span></td><td>—  (final)</td></tr>
+<tr><td>Patient_Flow_Detail</td><td>PublishExtract</td><td>Patient_Flow_Detail</td><td><span class="badge badge-blue">14_Healthcare_Patient_Flow</span></td><td>—  (final)</td></tr>
+<tr><td>Department_KPI_Summary</td><td>PublishExtract</td><td>Department_KPI_Summary</td><td><span class="badge badge-blue">14_Healthcare_Patient_Flow</span></td><td>—  (final)</td></tr>
 </tbody></table></div>
 </div> <!-- /section -->
 
@@ -814,33 +866,135 @@
 <div class="card">
 <div id="mermaid-diagram" class="mermaid">
 graph LR
-    SRC0[("Orders.csv<br/><small>textscan</small>")]
+    SRC0[("Orders_2024.csv<br/><small>textscan</small>")]
     style SRC0 fill:#deecf9,stroke:#0078d4
-    SRC1[("Customers.csv<br/><small>textscan</small>")]
+    SRC1[("Products_Master.csv<br/><small>textscan</small>")]
     style SRC1 fill:#deecf9,stroke:#0078d4
-    SRC2[("Orders_Central<br/><small>textscan</small>")]
+    SRC2[("Returns_2024.csv<br/><small>textscan</small>")]
     style SRC2 fill:#deecf9,stroke:#0078d4
-    SRC3[("orders_south_2015<br/><small>textscan</small>")]
+    SRC3[("Demographics.csv<br/><small>textscan</small>")]
     style SRC3 fill:#deecf9,stroke:#0078d4
-    SRC4[("returns_new<br/><small>excel-direct</small>")]
+    SRC4[("Employee_Survey.xlsx<br/><small>excel-direct</small>")]
     style SRC4 fill:#deecf9,stroke:#0078d4
-    SRC5[("Orders_West<br/><small>textscan</small>")]
+    SRC5[("Employees<br/><small>sqlserver</small>")]
     style SRC5 fill:#deecf9,stroke:#0078d4
-    F_Sales_Prep_Flow["Sales_Prep_Flow<br/><small>3 transforms</small>"]
-    F_tableau_prep_book["tableau_prep_book<br/><small>0 transforms</small>"]
-    F_SampleFlow["SampleFlow<br/><small>0 transforms</small>"]
-    SINK0(("Regional Sales Summary"))
+    SRC6[("order_log<br/><small>postgres</small>")]
+    style SRC6 fill:#deecf9,stroke:#0078d4
+    SRC7[("Restaurants_Jan.csv<br/><small>textscan</small>")]
+    style SRC7 fill:#deecf9,stroke:#0078d4
+    SRC8[("Restaurants_Feb.csv<br/><small>textscan</small>")]
+    style SRC8 fill:#deecf9,stroke:#0078d4
+    SRC9[("Electricity_2023.csv<br/><small>textscan</small>")]
+    style SRC9 fill:#deecf9,stroke:#0078d4
+    SRC10[("Electricity_2024.csv<br/><small>textscan</small>")]
+    style SRC10 fill:#deecf9,stroke:#0078d4
+    SRC11[("Population_GDP.xlsx<br/><small>excel-direct</small>")]
+    style SRC11 fill:#deecf9,stroke:#0078d4
+    SRC12[("PROPERTY_LISTINGS<br/><small>snowflake</small>")]
+    style SRC12 fill:#deecf9,stroke:#0078d4
+    SRC13[("Census_Demographics.csv<br/><small>textscan</small>")]
+    style SRC13 fill:#deecf9,stroke:#0078d4
+    SRC14[("Zillow_Estimates.json<br/><small>json</small>")]
+    style SRC14 fill:#deecf9,stroke:#0078d4
+    SRC15[("GL_Transactions.xlsx<br/><small>excel-direct</small>")]
+    style SRC15 fill:#deecf9,stroke:#0078d4
+    SRC16[("BankStatements<br/><small>sqlserver</small>")]
+    style SRC16 fill:#deecf9,stroke:#0078d4
+    SRC17[("Chart_of_Accounts.csv<br/><small>textscan</small>")]
+    style SRC17 fill:#deecf9,stroke:#0078d4
+    SRC18[("admissions<br/><small>postgres</small>")]
+    style SRC18 fill:#deecf9,stroke:#0078d4
+    SRC19[("ICD10_Codes.csv<br/><small>textscan</small>")]
+    style SRC19 fill:#deecf9,stroke:#0078d4
+    SRC20[("Staff_Schedule.xlsx<br/><small>excel-direct</small>")]
+    style SRC20 fill:#deecf9,stroke:#0078d4
+    F_01_Raw_Orders_Clean["01_Raw_Orders_Clean<br/><small>1 transforms</small>"]
+    F_02_Raw_Products_Clean["02_Raw_Products_Clean<br/><small>1 transforms</small>"]
+    F_03_Raw_Returns_Clean["03_Raw_Returns_Clean<br/><small>1 transforms</small>"]
+    F_04_Customer_Enrichment["04_Customer_Enrichment<br/><small>2 transforms</small>"]
+    F_05_Sales_Analytics["05_Sales_Analytics<br/><small>3 transforms</small>"]
+    F_06_Returns_Analytics["06_Returns_Analytics<br/><small>3 transforms</small>"]
+    F_07_Executive_Dashboard["07_Executive_Dashboard<br/><small>3 transforms</small>"]
+    F_08_Inventory_Tracker["08_Inventory_Tracker<br/><small>2 transforms</small>"]
+    F_09_HR_Attrition_Analysis["09_HR_Attrition_Analysis<br/><small>6 transforms</small>"]
+    F_10_Food_Delivery_ETL["10_Food_Delivery_ETL<br/><small>6 transforms</small>"]
+    F_11_Energy_Consumption["11_Energy_Consumption<br/><small>9 transforms</small>"]
+    F_12_Real_Estate_Valuation["12_Real_Estate_Valuation<br/><small>5 transforms</small>"]
+    F_13_Financial_Reconciliation["13_Financial_Reconciliation<br/><small>6 transforms</small>"]
+    F_14_Healthcare_Patient_Flow["14_Healthcare_Patient_Flow<br/><small>6 transforms</small>"]
+    SINK0(("Executive_KPIs"))
     style SINK0 fill:#dff6dd,stroke:#107c10
-    SINK1(("Output"))
+    SINK1(("INVENTORY_STATUS"))
     style SINK1 fill:#dff6dd,stroke:#107c10
-    SRC0 --> F_Sales_Prep_Flow
-    SRC1 --> F_Sales_Prep_Flow
-    SRC2 --> F_tableau_prep_book
-    SRC3 --> F_tableau_prep_book
-    SRC4 --> F_tableau_prep_book
-    SRC5 --> F_tableau_prep_book
-    F_Sales_Prep_Flow --> SINK0
-    F_tableau_prep_book --> SINK1
+    SINK2(("HR_Attrition_Detail"))
+    style SINK2 fill:#dff6dd,stroke:#107c10
+    SINK3(("HR_Department_Summary"))
+    style SINK3 fill:#dff6dd,stroke:#107c10
+    SINK4(("Delivery_Fact"))
+    style SINK4 fill:#dff6dd,stroke:#107c10
+    SINK5(("Restaurant_Dim"))
+    style SINK5 fill:#dff6dd,stroke:#107c10
+    SINK6(("Restaurant_Performance"))
+    style SINK6 fill:#dff6dd,stroke:#107c10
+    SINK7(("Energy_Detail"))
+    style SINK7 fill:#dff6dd,stroke:#107c10
+    SINK8(("Energy_Country_Summary"))
+    style SINK8 fill:#dff6dd,stroke:#107c10
+    SINK9(("Market_Summary"))
+    style SINK9 fill:#dff6dd,stroke:#107c10
+    SINK10(("Reconciliation_Summary"))
+    style SINK10 fill:#dff6dd,stroke:#107c10
+    SINK11(("Patient_Flow_Detail"))
+    style SINK11 fill:#dff6dd,stroke:#107c10
+    SINK12(("Department_KPI_Summary"))
+    style SINK12 fill:#dff6dd,stroke:#107c10
+    SRC0 --> F_01_Raw_Orders_Clean
+    SRC1 --> F_02_Raw_Products_Clean
+    SRC2 --> F_03_Raw_Returns_Clean
+    SRC3 --> F_04_Customer_Enrichment
+    SRC4 --> F_09_HR_Attrition_Analysis
+    SRC5 --> F_09_HR_Attrition_Analysis
+    SRC6 --> F_10_Food_Delivery_ETL
+    SRC7 --> F_10_Food_Delivery_ETL
+    SRC8 --> F_10_Food_Delivery_ETL
+    SRC9 --> F_11_Energy_Consumption
+    SRC10 --> F_11_Energy_Consumption
+    SRC11 --> F_11_Energy_Consumption
+    SRC12 --> F_12_Real_Estate_Valuation
+    SRC13 --> F_12_Real_Estate_Valuation
+    SRC14 --> F_12_Real_Estate_Valuation
+    SRC15 --> F_13_Financial_Reconciliation
+    SRC16 --> F_13_Financial_Reconciliation
+    SRC17 --> F_13_Financial_Reconciliation
+    SRC18 --> F_14_Healthcare_Patient_Flow
+    SRC19 --> F_14_Healthcare_Patient_Flow
+    SRC20 --> F_14_Healthcare_Patient_Flow
+    F_02_Raw_Products_Clean -->|"fuzzy"| F_04_Customer_Enrichment
+    F_01_Raw_Orders_Clean -->|"table_name"| F_05_Sales_Analytics
+    F_02_Raw_Products_Clean -->|"table_name"| F_05_Sales_Analytics
+    F_04_Customer_Enrichment -->|"table_name"| F_05_Sales_Analytics
+    F_03_Raw_Returns_Clean -->|"table_name"| F_06_Returns_Analytics
+    F_01_Raw_Orders_Clean -->|"table_name"| F_06_Returns_Analytics
+    F_05_Sales_Analytics -->|"table_name"| F_07_Executive_Dashboard
+    F_06_Returns_Analytics -->|"table_name"| F_07_Executive_Dashboard
+    F_02_Raw_Products_Clean -->|"fuzzy"| F_08_Inventory_Tracker
+    F_12_Real_Estate_Valuation -->|"fuzzy"| F_08_Inventory_Tracker
+    F_14_Healthcare_Patient_Flow -->|"fuzzy"| F_09_HR_Attrition_Analysis
+    F_13_Financial_Reconciliation -->|"fuzzy"| F_12_Real_Estate_Valuation
+    F_03_Raw_Returns_Clean -->|"fuzzy"| F_14_Healthcare_Patient_Flow
+    F_07_Executive_Dashboard --> SINK0
+    F_08_Inventory_Tracker --> SINK1
+    F_09_HR_Attrition_Analysis --> SINK2
+    F_09_HR_Attrition_Analysis --> SINK3
+    F_10_Food_Delivery_ETL --> SINK4
+    F_10_Food_Delivery_ETL --> SINK5
+    F_10_Food_Delivery_ETL --> SINK6
+    F_11_Energy_Consumption --> SINK7
+    F_11_Energy_Consumption --> SINK8
+    F_12_Real_Estate_Valuation --> SINK9
+    F_13_Financial_Reconciliation --> SINK10
+    F_14_Healthcare_Patient_Flow --> SINK11
+    F_14_Healthcare_Patient_Flow --> SINK12
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
@@ -863,13 +1017,1290 @@ graph LR
 <th class="sortable" onclick="sortTable('merge-recs', 4)">Impact <span class="sort-icon">&#8693;</span></th>
 </tr></thead>
 <tbody>
+<tr><td><span class="badge badge-green">70/100</span></td><td>Chain Collapse</td><td><span class="badge badge-blue">13_Financial_Reconciliation</span>, <span class="badge badge-blue">12_Real_Estate_Valuation</span></td><td>Linear chain of 2 flows with no fan-out</td><td>Merge into 1 flow (22 total nodes)</td></tr>
+<tr><td><span class="badge badge-gray">36/100</span></td><td>Source Consolidation</td><td><span class="badge badge-blue">04_Customer_Enrichment</span>, <span class="badge badge-blue">08_Inventory_Tracker</span></td><td>Both read 1 common source(s), 60% transform similarity</td><td>Eliminate 1 flow, reduce 1 duplicate source connections</td></tr>
 </tbody></table></div>
-<p style="margin-top:12px;color:#605e5c;">3 isolated flow(s) require no merging: Sales_Prep_Flow, SampleFlow, tableau_prep_book</p>
+<p style="margin-top:12px;color:#605e5c;">2 isolated flow(s) require no merging: 10_Food_Delivery_ETL, 11_Energy_Consumption</p>
+</div> <!-- /section -->
+
+<div class="section-header" onclick="toggleSection('sec-transforms')">
+    <span class="section-icon">🔧</span>
+    <h2>Transform Documentation</h2>
+    <span class="toggle-arrow" id="sec-transforms-arrow">&#9660;</span>
+</div>
+<div class="section-body" id="sec-transforms">
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">01_Raw_Orders_Clean</h3>
+<p style="color:#605e5c;margin:0 0 12px;">1 input(s) → 1 transform(s) → 1 output(s) | Complexity: <span class="badge badge-green">Low</span></p>
+<div class="table-container"><table id="transforms-01_Raw_Orders_Clean">
+<thead><tr>
+<th>#</th>
+<th>Step</th>
+<th>Type</th>
+<th>Operations</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
+<tr><td>1</td><td>Clean Orders</td><td><span class="badge badge-blue">Clean</span></td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">02_Raw_Products_Clean</h3>
+<p style="color:#605e5c;margin:0 0 12px;">1 input(s) → 1 transform(s) → 1 output(s) | Complexity: <span class="badge badge-green">Low</span></p>
+<div class="table-container"><table id="transforms-02_Raw_Products_Clean">
+<thead><tr>
+<th>#</th>
+<th>Step</th>
+<th>Type</th>
+<th>Operations</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
+<tr><td>1</td><td>Clean Products</td><td><span class="badge badge-blue">Clean</span></td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">03_Raw_Returns_Clean</h3>
+<p style="color:#605e5c;margin:0 0 12px;">1 input(s) → 1 transform(s) → 1 output(s) | Complexity: <span class="badge badge-green">Low</span></p>
+<div class="table-container"><table id="transforms-03_Raw_Returns_Clean">
+<thead><tr>
+<th>#</th>
+<th>Step</th>
+<th>Type</th>
+<th>Operations</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
+<tr><td>1</td><td>Clean Returns</td><td><span class="badge badge-blue">Clean</span></td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">04_Customer_Enrichment</h3>
+<p style="color:#605e5c;margin:0 0 12px;">2 input(s) → 2 transform(s) → 1 output(s) | Complexity: <span class="badge badge-green">Low</span></p>
+<div class="table-container"><table id="transforms-04_Customer_Enrichment">
+<thead><tr>
+<th>#</th>
+<th>Step</th>
+<th>Type</th>
+<th>Operations</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
+<tr><td>1</td><td>Enrich Customers</td><td><span class="badge badge-purple">Join</span></td><td>—</td><td>Join: left; 1 key(s)</td></tr>
+<tr><td>2</td><td>Standardize Customer</td><td><span class="badge badge-blue">Clean</span></td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">05_Sales_Analytics</h3>
+<p style="color:#605e5c;margin:0 0 12px;">3 input(s) → 3 transform(s) → 1 output(s) | Complexity: <span class="badge badge-green">Low</span></p>
+<div class="table-container"><table id="transforms-05_Sales_Analytics">
+<thead><tr>
+<th>#</th>
+<th>Step</th>
+<th>Type</th>
+<th>Operations</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
+<tr><td>1</td><td>Orders + Products</td><td><span class="badge badge-purple">Join</span></td><td>—</td><td>Join: left; 1 key(s)</td></tr>
+<tr><td>2</td><td>Add Customer Info</td><td><span class="badge badge-purple">Join</span></td><td>—</td><td>Join: left; 1 key(s)</td></tr>
+<tr><td>3</td><td>Sales Summary</td><td><span class="badge badge-gray">Other</span></td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">06_Returns_Analytics</h3>
+<p style="color:#605e5c;margin:0 0 12px;">2 input(s) → 3 transform(s) → 1 output(s) | Complexity: <span class="badge badge-yellow">Medium</span></p>
+<div class="table-container"><table id="transforms-06_Returns_Analytics">
+<thead><tr>
+<th>#</th>
+<th>Step</th>
+<th>Type</th>
+<th>Operations</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
+<tr><td>1</td><td>Returns + Orders</td><td><span class="badge badge-purple">Join</span></td><td>—</td><td>Join: left; 1 key(s)</td></tr>
+<tr><td>2</td><td>Calc Return Metrics</td><td><span class="badge badge-blue">Clean</span></td><td>—</td><td>—</td></tr>
+<tr><td>3</td><td>Anomaly Detection</td><td><span class="badge badge-red">Script</span></td><td>—</td><td>Language: unknown</td></tr>
+</tbody></table></div>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">07_Executive_Dashboard</h3>
+<p style="color:#605e5c;margin:0 0 12px;">2 input(s) → 3 transform(s) → 1 output(s) | Complexity: <span class="badge badge-green">Low</span></p>
+<div class="table-container"><table id="transforms-07_Executive_Dashboard">
+<thead><tr>
+<th>#</th>
+<th>Step</th>
+<th>Type</th>
+<th>Operations</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
+<tr><td>1</td><td>Sales + Returns by Region</td><td><span class="badge badge-purple">Join</span></td><td>—</td><td>Join: left; 1 key(s)</td></tr>
+<tr><td>2</td><td>Executive KPIs</td><td><span class="badge badge-gray">Other</span></td><td>—</td><td>—</td></tr>
+<tr><td>3</td><td>Final KPI Calcs</td><td><span class="badge badge-blue">Clean</span></td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">08_Inventory_Tracker</h3>
+<p style="color:#605e5c;margin:0 0 12px;">2 input(s) → 2 transform(s) → 1 output(s) | Complexity: <span class="badge badge-green">Low</span></p>
+<div class="table-container"><table id="transforms-08_Inventory_Tracker">
+<thead><tr>
+<th>#</th>
+<th>Step</th>
+<th>Type</th>
+<th>Operations</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
+<tr><td>1</td><td>Customer Inventory</td><td><span class="badge badge-purple">Join</span></td><td>—</td><td>Join: full; 1 key(s)</td></tr>
+<tr><td>2</td><td>Inventory Metrics</td><td><span class="badge badge-blue">Clean</span></td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">09_HR_Attrition_Analysis</h3>
+<p style="color:#605e5c;margin:0 0 12px;">3 input(s) → 6 transform(s) → 2 output(s) | Complexity: <span class="badge badge-yellow">Medium</span></p>
+<div class="table-container"><table id="transforms-09_HR_Attrition_Analysis">
+<thead><tr>
+<th>#</th>
+<th>Step</th>
+<th>Type</th>
+<th>Operations</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
+<tr><td>1</td><td>Unpivot Survey Scores</td><td><span class="badge badge-yellow">Pivot</span></td><td>—</td><td>Pivot: columnsToRows</td></tr>
+<tr><td>2</td><td>Employee + Performance</td><td><span class="badge badge-purple">Join</span></td><td>—</td><td>Join: left; 1 key(s)</td></tr>
+<tr><td>3</td><td>Avg Survey by Employee</td><td><span class="badge badge-yellow">Aggregate</span></td><td>Group by: EmployeeID<br/>Agg: AVG(Score), MIN(Score), MAX(Score)</td><td>1 group field(s); 3 agg field(s)</td></tr>
+<tr><td>4</td><td>Enrich with Survey</td><td><span class="badge badge-purple">Join</span></td><td>—</td><td>Join: left; 1 key(s)</td></tr>
+<tr><td>5</td><td>Attrition Risk Score</td><td><span class="badge badge-blue">Clean</span></td><td>—</td><td>—</td></tr>
+<tr><td>6</td><td>Department Summary</td><td><span class="badge badge-yellow">Aggregate</span></td><td>Group by: Department, AttritionRisk<br/>Agg: COUNT(EmployeeID), AVG(MonthlyIncome), AVG(AvgSurveyScore), SUM(IsTerminated)</td><td>2 group field(s); 4 agg field(s)</td></tr>
+</tbody></table></div>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">10_Food_Delivery_ETL</h3>
+<p style="color:#605e5c;margin:0 0 12px;">3 input(s) → 6 transform(s) → 3 output(s) | Complexity: <span class="badge badge-yellow">Medium</span></p>
+<div class="table-container"><table id="transforms-10_Food_Delivery_ETL">
+<thead><tr>
+<th>#</th>
+<th>Step</th>
+<th>Type</th>
+<th>Operations</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
+<tr><td>1</td><td>Clean Orders</td><td><span class="badge badge-blue">Clean</span></td><td>—</td><td>—</td></tr>
+<tr><td>2</td><td>Union Restaurants</td><td><span class="badge badge-teal">Union</span></td><td>—</td><td>—</td></tr>
+<tr><td>3</td><td>Deduplicate Restaurants</td><td><span class="badge badge-blue">Clean</span></td><td>—</td><td>—</td></tr>
+<tr><td>4</td><td>Orders + Restaurants</td><td><span class="badge badge-purple">Join</span></td><td>—</td><td>Join: inner; 1 key(s)</td></tr>
+<tr><td>5</td><td>Delivery Performance</td><td><span class="badge badge-blue">Clean</span></td><td>—</td><td>—</td></tr>
+<tr><td>6</td><td>Restaurant KPIs</td><td><span class="badge badge-yellow">Aggregate</span></td><td>Group by: RestaurantID, RestaurantName, cuisine_type, city<br/>Agg: COUNTD(OrderID), SUM(NetRevenue), AVG(NetRevenue), AVG(TotalWaitMinutes), AVG(tip_amount)</td><td>4 group field(s); 5 agg field(s)</td></tr>
+</tbody></table></div>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">11_Energy_Consumption</h3>
+<p style="color:#605e5c;margin:0 0 12px;">3 input(s) → 9 transform(s) → 2 output(s) | Complexity: <span class="badge badge-yellow">Medium</span></p>
+<div class="table-container"><table id="transforms-11_Energy_Consumption">
+<thead><tr>
+<th>#</th>
+<th>Step</th>
+<th>Type</th>
+<th>Operations</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
+<tr><td>1</td><td>unused</td><td><span class="badge badge-gray">Other</span></td><td>—</td><td>—</td></tr>
+<tr><td>2</td><td>Union All Years</td><td><span class="badge badge-teal">Union</span></td><td>—</td><td>—</td></tr>
+<tr><td>3</td><td>Unpivot Energy Sources</td><td><span class="badge badge-yellow">Pivot</span></td><td>—</td><td>Pivot: columnsToRows</td></tr>
+<tr><td>4</td><td>Classify Energy Type</td><td><span class="badge badge-blue">Clean</span></td><td>—</td><td>—</td></tr>
+<tr><td>5</td><td>Energy + Demographics</td><td><span class="badge badge-purple">Join</span></td><td>—</td><td>Join: left; 2 key(s)</td></tr>
+<tr><td>6</td><td>Per Capita Metrics</td><td><span class="badge badge-blue">Clean</span></td><td>—</td><td>—</td></tr>
+<tr><td>7</td><td>Country Totals</td><td><span class="badge badge-yellow">Aggregate</span></td><td>Group by: Country, ISO_Code, Year, Region, EnergyCategory<br/>Agg: SUM(Generation_TWh)</td><td>5 group field(s); 1 agg field(s)</td></tr>
+<tr><td>8</td><td>Pivot by Category</td><td><span class="badge badge-yellow">Pivot</span></td><td>—</td><td>Pivot: rowsToColumns</td></tr>
+<tr><td>9</td><td>Renewable Share</td><td><span class="badge badge-blue">Clean</span></td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">12_Real_Estate_Valuation</h3>
+<p style="color:#605e5c;margin:0 0 12px;">4 input(s) → 5 transform(s) → 2 output(s) | Complexity: <span class="badge badge-yellow">Medium</span></p>
+<div class="table-container"><table id="transforms-12_Real_Estate_Valuation">
+<thead><tr>
+<th>#</th>
+<th>Step</th>
+<th>Type</th>
+<th>Operations</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
+<tr><td>1</td><td>Listings + Sales</td><td><span class="badge badge-purple">Join</span></td><td>—</td><td>Join: left; 1 key(s)</td></tr>
+<tr><td>2</td><td>Census + Zillow</td><td><span class="badge badge-purple">Join</span></td><td>—</td><td>Join: inner; 1 key(s)</td></tr>
+<tr><td>3</td><td>Property + Market Data</td><td><span class="badge badge-purple">Join</span></td><td>—</td><td>Join: left; 1 key(s)</td></tr>
+<tr><td>4</td><td>Valuation Metrics</td><td><span class="badge badge-blue">Clean</span></td><td>—</td><td>—</td></tr>
+<tr><td>5</td><td>Zip Market Summary</td><td><span class="badge badge-yellow">Aggregate</span></td><td>Group by: ZipCode, city, state, MarketSegment<br/>Agg: COUNTD(ListingID), AVG(list_price), MEDIAN(list_price), AVG(PricePerSqft), AVG(DaysOnMarket), AVG(CapRate)</td><td>4 group field(s); 6 agg field(s)</td></tr>
+</tbody></table></div>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">13_Financial_Reconciliation</h3>
+<p style="color:#605e5c;margin:0 0 12px;">3 input(s) → 6 transform(s) → 2 output(s) | Complexity: <span class="badge badge-yellow">Medium</span></p>
+<div class="table-container"><table id="transforms-13_Financial_Reconciliation">
+<thead><tr>
+<th>#</th>
+<th>Step</th>
+<th>Type</th>
+<th>Operations</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
+<tr><td>1</td><td>Parse GL Entries</td><td><span class="badge badge-blue">Clean</span></td><td>—</td><td>—</td></tr>
+<tr><td>2</td><td>Parse Bank Entries</td><td><span class="badge badge-blue">Clean</span></td><td>—</td><td>—</td></tr>
+<tr><td>3</td><td>GL + Chart of Accounts</td><td><span class="badge badge-purple">Join</span></td><td>—</td><td>Join: left; 1 key(s)</td></tr>
+<tr><td>4</td><td>Reconcile GL vs Bank</td><td><span class="badge badge-purple">Join</span></td><td>—</td><td>Join: full; 2 key(s)</td></tr>
+<tr><td>5</td><td>Reconciliation Status</td><td><span class="badge badge-blue">Clean</span></td><td>—</td><td>—</td></tr>
+<tr><td>6</td><td>Monthly Reconciliation</td><td><span class="badge badge-yellow">Aggregate</span></td><td>Group by: PostingMonth, FiscalQuarter, MatchStatus<br/>Agg: COUNT(JournalID), SUM(NetAmount), SUM(Amount), SUM(Variance)</td><td>3 group field(s); 4 agg field(s)</td></tr>
+</tbody></table></div>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">14_Healthcare_Patient_Flow</h3>
+<p style="color:#605e5c;margin:0 0 12px;">4 input(s) → 6 transform(s) → 3 output(s) | Complexity: <span class="badge badge-yellow">Medium</span></p>
+<div class="table-container"><table id="transforms-14_Healthcare_Patient_Flow">
+<thead><tr>
+<th>#</th>
+<th>Step</th>
+<th>Type</th>
+<th>Operations</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
+<tr><td>1</td><td>Admissions + Procedures</td><td><span class="badge badge-purple">Join</span></td><td>—</td><td>Join: left; 1 key(s)</td></tr>
+<tr><td>2</td><td>Add Diagnosis Info</td><td><span class="badge badge-purple">Join</span></td><td>—</td><td>Join: left; 1 key(s)</td></tr>
+<tr><td>3</td><td>Patient Flow Metrics</td><td><span class="badge badge-blue">Clean</span></td><td>—</td><td>—</td></tr>
+<tr><td>4</td><td>Physician Workload</td><td><span class="badge badge-yellow">Aggregate</span></td><td>Group by: attending_physician, department<br/>Agg: COUNTD(AdmissionID), AVG(LOS_Days), SUM(TotalCost), SUM(Readmission30), AVG(CaseMixIndex), SUM(duration_minutes)</td><td>2 group field(s); 6 agg field(s)</td></tr>
+<tr><td>5</td><td>Department KPIs</td><td><span class="badge badge-yellow">Aggregate</span></td><td>Group by: department, diagnosis_category, admission_type<br/>Agg: COUNTD(AdmissionID), AVG(LOS_Days), MEDIAN(LOS_Days), SUM(TotalCost), SUM(cms_reimbursement), SUM(Readmission30), AVG(CaseMixIndex)</td><td>3 group field(s); 7 agg field(s)</td></tr>
+<tr><td>6</td><td>Add Staff Info</td><td><span class="badge badge-purple">Join</span></td><td>—</td><td>Join: left; 1 key(s)</td></tr>
+</tbody></table></div>
+</div>
+</div> <!-- /section -->
+
+<div class="section-header" onclick="toggleSection('sec-assessment')">
+    <span class="section-icon">📊</span>
+    <h2>Migration Readiness Assessment</h2>
+    <span class="toggle-arrow" id="sec-assessment-arrow">&#9660;</span>
+</div>
+<div class="section-body" id="sec-assessment">
+<div class="table-container"><table id="assessment">
+<thead><tr>
+<th class="sortable" onclick="sortTable('assessment', 0)">Flow <span class="sort-icon">&#8693;</span></th>
+<th class="sortable" onclick="sortTable('assessment', 1)">Grade <span class="sort-icon">&#8693;</span></th>
+<th class="sortable" onclick="sortTable('assessment', 2)">Pass <span class="sort-icon">&#8693;</span></th>
+<th class="sortable" onclick="sortTable('assessment', 3)">Warn <span class="sort-icon">&#8693;</span></th>
+<th class="sortable" onclick="sortTable('assessment', 4)">Fail <span class="sort-icon">&#8693;</span></th>
+<th class="sortable" onclick="sortTable('assessment', 5)">Details <span class="sort-icon">&#8693;</span></th>
+</tr></thead>
+<tbody>
+<tr><td>01_Raw_Orders_Clean</td><td><span class="badge badge-green">GREEN</span></td><td>4</td><td>0</td><td>0</td><td>✅ 1 input(s) — all connectors supported<br/>✅ No Script nodes<br/>✅ No joins<br/>✅ 1 output(s)</td></tr>
+<tr><td>02_Raw_Products_Clean</td><td><span class="badge badge-green">GREEN</span></td><td>4</td><td>0</td><td>0</td><td>✅ 1 input(s) — all connectors supported<br/>✅ No Script nodes<br/>✅ No joins<br/>✅ 1 output(s)</td></tr>
+<tr><td>03_Raw_Returns_Clean</td><td><span class="badge badge-green">GREEN</span></td><td>4</td><td>0</td><td>0</td><td>✅ 1 input(s) — all connectors supported<br/>✅ No Script nodes<br/>✅ No joins<br/>✅ 1 output(s)</td></tr>
+<tr><td>04_Customer_Enrichment</td><td><span class="badge badge-green">GREEN</span></td><td>4</td><td>0</td><td>0</td><td>✅ 2 input(s) — all connectors supported<br/>✅ No Script nodes<br/>✅ 1 join(s) → Power Query Table.NestedJoin<br/>✅ 1 output(s)</td></tr>
+<tr><td>05_Sales_Analytics</td><td><span class="badge badge-green">GREEN</span></td><td>4</td><td>0</td><td>0</td><td>✅ 3 input(s) — all connectors supported<br/>✅ No Script nodes<br/>✅ 2 join(s) → Power Query Table.NestedJoin<br/>✅ 1 output(s)</td></tr>
+<tr><td>06_Returns_Analytics</td><td><span class="badge badge-yellow">YELLOW</span></td><td>3</td><td>1</td><td>0</td><td>✅ 2 input(s) — all connectors supported<br/>⚠️ 1 Script node(s) — manual review needed<br/>✅ 1 join(s) → Power Query Table.NestedJoin<br/>✅ 1 output(s)</td></tr>
+<tr><td>07_Executive_Dashboard</td><td><span class="badge badge-green">GREEN</span></td><td>4</td><td>0</td><td>0</td><td>✅ 2 input(s) — all connectors supported<br/>✅ No Script nodes<br/>✅ 1 join(s) → Power Query Table.NestedJoin<br/>✅ 1 output(s)</td></tr>
+<tr><td>08_Inventory_Tracker</td><td><span class="badge badge-green">GREEN</span></td><td>4</td><td>0</td><td>0</td><td>✅ 2 input(s) — all connectors supported<br/>✅ No Script nodes<br/>✅ 1 join(s) → Power Query Table.NestedJoin<br/>✅ 1 output(s)</td></tr>
+<tr><td>09_HR_Attrition_Analysis</td><td><span class="badge badge-green">GREEN</span></td><td>5</td><td>0</td><td>0</td><td>✅ 3 input(s) — all connectors supported<br/>✅ No Script nodes<br/>✅ 2 join(s) → Power Query Table.NestedJoin<br/>✅ 2 aggregate(s) → Table.Group<br/>✅ 2 output(s)</td></tr>
+<tr><td>10_Food_Delivery_ETL</td><td><span class="badge badge-green">GREEN</span></td><td>6</td><td>0</td><td>0</td><td>✅ 3 input(s) — all connectors supported<br/>✅ No Script nodes<br/>✅ 1 join(s) → Power Query Table.NestedJoin<br/>✅ 1 aggregate(s) → Table.Group<br/>✅ 1 union(s) → Table.Combine<br/>✅ 3 output(s)</td></tr>
+<tr><td>11_Energy_Consumption</td><td><span class="badge badge-green">GREEN</span></td><td>6</td><td>0</td><td>0</td><td>✅ 3 input(s) — all connectors supported<br/>✅ No Script nodes<br/>✅ 1 join(s) → Power Query Table.NestedJoin<br/>✅ 1 aggregate(s) → Table.Group<br/>✅ 1 union(s) → Table.Combine<br/>✅ 2 output(s)</td></tr>
+<tr><td>12_Real_Estate_Valuation</td><td><span class="badge badge-green">GREEN</span></td><td>5</td><td>0</td><td>0</td><td>✅ 4 input(s) — all connectors supported<br/>✅ No Script nodes<br/>✅ 3 join(s) → Power Query Table.NestedJoin<br/>✅ 1 aggregate(s) → Table.Group<br/>✅ 2 output(s)</td></tr>
+<tr><td>13_Financial_Reconciliation</td><td><span class="badge badge-green">GREEN</span></td><td>5</td><td>0</td><td>0</td><td>✅ 3 input(s) — all connectors supported<br/>✅ No Script nodes<br/>✅ 2 join(s) → Power Query Table.NestedJoin<br/>✅ 1 aggregate(s) → Table.Group<br/>✅ 2 output(s)</td></tr>
+<tr><td>14_Healthcare_Patient_Flow</td><td><span class="badge badge-green">GREEN</span></td><td>5</td><td>0</td><td>0</td><td>✅ 4 input(s) — all connectors supported<br/>✅ No Script nodes<br/>✅ 3 join(s) → Power Query Table.NestedJoin<br/>✅ 2 aggregate(s) → Table.Group<br/>✅ 3 output(s)</td></tr>
+</tbody></table></div>
+</div> <!-- /section -->
+
+<div class="section-header" onclick="toggleSection('sec-powerquery')">
+    <span class="section-icon">⚡</span>
+    <h2>Power Query M Equivalence</h2>
+    <span class="toggle-arrow" id="sec-powerquery-arrow">&#9660;</span>
+</div>
+<div class="section-body" id="sec-powerquery">
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">Tableau Prep → Power Query M Reference</h3>
+<div class="table-container"><table id="pq-reference">
+<thead><tr>
+<th>Tableau Prep Step</th>
+<th>Power Query M Equivalent</th>
+</tr></thead>
+<tbody>
+<tr><td>Clean</td><td><code>Table.TransformColumns / Table.RenameColumns / Table.SelectRows / Table.RemoveColumns / Table.ReplaceValue</code></td></tr>
+<tr><td>Join</td><td><code>Table.NestedJoin + Table.ExpandTableColumn</code></td></tr>
+<tr><td>Union</td><td><code>Table.Combine</code></td></tr>
+<tr><td>Aggregate</td><td><code>Table.Group</code></td></tr>
+<tr><td>Pivot</td><td><code>Table.Pivot / Table.Unpivot</code></td></tr>
+<tr><td>Script</td><td><code>⚠ Manual: Python/R visuals or custom function</code></td></tr>
+<tr><td>Prediction</td><td><code>⚠ Manual: ML model endpoint or custom function</code></td></tr>
+<tr><td>PublishedDS</td><td><code>Power BI Dataflow or shared dataset reference</code></td></tr>
+<tr><td>Other</td><td><code>Various Table.* functions</code></td></tr>
+</tbody></table></div>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">01_Raw_Orders_Clean — Generated Power Query M</h3>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Orders_Clean</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: textscan
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;Order_ID&quot;, &quot;Order_Date&quot;, &quot;Customer_ID&quot;, &quot;Product_ID&quot;, &quot;Region&quot;, &quot;Sales&quot;, &quot;Quantity&quot;, &quot;Discount&quot;, &quot;Profit&quot;, &quot;Ship_Mode&quot;, &quot;Status&quot;, &quot;_temp_col&quot;},
+            {
+                {&quot;Sample 1&quot;, 2, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7, 8, 9, &quot;Sample 10&quot;, &quot;Sample 11&quot;, &quot;Sample 12&quot;},
+                {&quot;Sample 2&quot;, 3, &quot;Sample 4&quot;, &quot;Sample 5&quot;, &quot;Sample 6&quot;, 7, 8, 9, 10, &quot;Sample 11&quot;, &quot;Sample 12&quot;, &quot;Sample 13&quot;}
+            }
+        )
+    otherwise
+        #table({&quot;Order_ID&quot;, &quot;Order_Date&quot;, &quot;Customer_ID&quot;, &quot;Product_ID&quot;, &quot;Region&quot;, &quot;Sales&quot;, &quot;Quantity&quot;, &quot;Discount&quot;, &quot;Profit&quot;, &quot;Ship_Mode&quot;, &quot;Status&quot;, &quot;_temp_col&quot;}, {}),
+    #&quot;Removed Columns&quot; = Table.RemoveColumns(Source, {&quot;_temp_col&quot;}),
+    #&quot;Renamed Columns&quot; = Table.RenameColumns(#&quot;Removed Columns&quot;, {{&quot;Order_ID&quot;, &quot;OrderID&quot;}, {&quot;Order_Date&quot;, &quot;OrderDate&quot;}, {&quot;Customer_ID&quot;, &quot;CustomerID&quot;}, {&quot;Product_ID&quot;, &quot;ProductID&quot;}}),
+    #&quot;Trimmed Text&quot; = Table.TransformColumns(#&quot;Renamed Columns&quot;, {{&quot;Region&quot;, Text.Trim}}),
+    #&quot;Filtered Rows&quot; = Table.SelectRows(#&quot;Trimmed Text&quot;, each [Status] &lt;&gt; &quot;Cancelled&quot;),
+    #&quot;Removed Columns 2&quot; = Table.RemoveColumns(#&quot;Filtered Rows&quot;, {&quot;Status&quot;}),
+    #&quot;Replaced Nulls in Discount&quot; = Table.ReplaceValue(#&quot;Removed Columns 2&quot;, null, &quot;0&quot;, Replacer.ReplaceValue, {&quot;Discount&quot;}),
+    #&quot;Added Revenue&quot; = Table.AddColumn(#&quot;Replaced Nulls in Discount&quot;, &quot;Revenue&quot;, each [Sales] * (1 - [Discount])),
+    #&quot;Changed Type&quot; = Table.TransformColumnTypes(#&quot;Added Revenue&quot;, {{&quot;OrderDate&quot;, type date}}),
+    Result = #&quot;Changed Type&quot;
+in
+    Result</pre>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">02_Raw_Products_Clean — Generated Power Query M</h3>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Products_Master</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: textscan
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;Product_ID&quot;, &quot;Product_Name&quot;, &quot;Category&quot;, &quot;Sub_Category&quot;, &quot;Unit_Cost&quot;, &quot;Unit_Price&quot;, &quot;Supplier&quot;, &quot;Weight_kg&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, 5, 6, &quot;Sample 7&quot;, 8},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7, &quot;Sample 8&quot;, 9}
+            }
+        )
+    otherwise
+        #table({&quot;Product_ID&quot;, &quot;Product_Name&quot;, &quot;Category&quot;, &quot;Sub_Category&quot;, &quot;Unit_Cost&quot;, &quot;Unit_Price&quot;, &quot;Supplier&quot;, &quot;Weight_kg&quot;}, {}),
+    #&quot;Renamed Columns&quot; = Table.RenameColumns(Source, {{&quot;Product_ID&quot;, &quot;ProductID&quot;}, {&quot;Product_Name&quot;, &quot;ProductName&quot;}, {&quot;Sub_Category&quot;, &quot;SubCategory&quot;}, {&quot;Unit_Cost&quot;, &quot;UnitCost&quot;}, {&quot;Unit_Price&quot;, &quot;UnitPrice&quot;}}),
+    #&quot;Proper Cased&quot; = Table.TransformColumns(#&quot;Renamed Columns&quot;, {{&quot;ProductName&quot;, Text.Proper}}),
+    #&quot;Trimmed Text&quot; = Table.TransformColumns(#&quot;Proper Cased&quot;, {{&quot;Category&quot;, Text.Trim}}),
+    #&quot;Replaced Nulls in Weight_kg&quot; = Table.ReplaceValue(#&quot;Trimmed Text&quot;, null, &quot;0&quot;, Replacer.ReplaceValue, {&quot;Weight_kg&quot;}),
+    #&quot;Added Margin&quot; = Table.AddColumn(#&quot;Replaced Nulls in Weight_kg&quot;, &quot;Margin&quot;, each ([UnitPrice] - [UnitCost]) / [UnitPrice]),
+    Result = #&quot;Added Margin&quot;
+in
+    Result</pre>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">03_Raw_Returns_Clean — Generated Power Query M</h3>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Returns_Processed</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: textscan
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;Return_ID&quot;, &quot;Order_ID&quot;, &quot;Return_Date&quot;, &quot;Reason_Code&quot;, &quot;Reason_Text&quot;, &quot;Refund_Amount&quot;, &quot;Restocking_Fee&quot;, &quot;Return_Status&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, 3, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7, &quot;Sample 8&quot;},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, 4, &quot;Sample 5&quot;, &quot;Sample 6&quot;, 7, 8, &quot;Sample 9&quot;}
+            }
+        )
+    otherwise
+        #table({&quot;Return_ID&quot;, &quot;Order_ID&quot;, &quot;Return_Date&quot;, &quot;Reason_Code&quot;, &quot;Reason_Text&quot;, &quot;Refund_Amount&quot;, &quot;Restocking_Fee&quot;, &quot;Return_Status&quot;}, {}),
+    #&quot;Renamed Columns&quot; = Table.RenameColumns(Source, {{&quot;Return_ID&quot;, &quot;ReturnID&quot;}, {&quot;Order_ID&quot;, &quot;OrderID&quot;}, {&quot;Return_Date&quot;, &quot;ReturnDate&quot;}, {&quot;Reason_Code&quot;, &quot;ReasonCode&quot;}, {&quot;Refund_Amount&quot;, &quot;RefundAmount&quot;}}),
+    #&quot;Filtered Rows&quot; = Table.SelectRows(#&quot;Renamed Columns&quot;, each [Return_Status] &lt;&gt; &quot;Voided&quot;),
+    #&quot;Removed Columns&quot; = Table.RemoveColumns(#&quot;Filtered Rows&quot;, {&quot;Return_Status&quot;}),
+    #&quot;Trimmed Text&quot; = Table.TransformColumns(#&quot;Removed Columns&quot;, {{&quot;Reason_Text&quot;, Text.Trim}}),
+    #&quot;Added NetRefund&quot; = Table.AddColumn(#&quot;Trimmed Text&quot;, &quot;NetRefund&quot;, each [RefundAmount] - [Restocking_Fee]),
+    Result = #&quot;Added NetRefund&quot;
+in
+    Result</pre>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">04_Customer_Enrichment — Generated Power Query M</h3>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Customer_360</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: postgres
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;customer_id&quot;, &quot;first_name&quot;, &quot;last_name&quot;, &quot;email&quot;, &quot;phone&quot;, &quot;created_at&quot;, &quot;segment&quot;, &quot;loyalty_tier&quot;, &quot;lifetime_value&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, &quot;Sample 7&quot;, &quot;Sample 8&quot;, 9},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, &quot;Sample 6&quot;, 7, &quot;Sample 8&quot;, &quot;Sample 9&quot;, 10}
+            }
+        )
+    otherwise
+        #table({&quot;customer_id&quot;, &quot;first_name&quot;, &quot;last_name&quot;, &quot;email&quot;, &quot;phone&quot;, &quot;created_at&quot;, &quot;segment&quot;, &quot;loyalty_tier&quot;, &quot;lifetime_value&quot;}, {}),
+    #&quot;Joined Joined&quot; = Table.NestedJoin(Source, &quot;customer_id&quot;, Demographics, &quot;customer_id&quot;, &quot;Joined&quot;, JoinKind.LeftOuter),
+    #&quot;Expanded Joined&quot; = Table.ExpandTableColumn(#&quot;Joined Joined&quot;, &quot;Joined&quot;, {&quot;age_group&quot;, &quot;income_bracket&quot;, &quot;city&quot;, &quot;state&quot;, &quot;country&quot;, &quot;postal_code&quot;}),
+    #&quot;Renamed Columns&quot; = Table.RenameColumns(#&quot;Expanded Joined&quot;, {{&quot;customer_id&quot;, &quot;CustomerID&quot;}}),
+    #&quot;Lowercased&quot; = Table.TransformColumns(#&quot;Renamed Columns&quot;, {{&quot;email&quot;, Text.Lower}}),
+    #&quot;Replaced Nulls in loyalty_tier&quot; = Table.ReplaceValue(#&quot;Lowercased&quot;, null, &quot;Bronze&quot;, Replacer.ReplaceValue, {&quot;loyalty_tier&quot;}),
+    #&quot;Added FullAddress&quot; = Table.AddColumn(#&quot;Replaced Nulls in loyalty_tier&quot;, &quot;FullAddress&quot;, each [city] + &quot;, &quot; + [state] + &quot; &quot; + [postal_code]),
+    Result = #&quot;Added FullAddress&quot;
+in
+    Result</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Demographics</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: textscan
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;customer_id&quot;, &quot;age_group&quot;, &quot;income_bracket&quot;, &quot;city&quot;, &quot;state&quot;, &quot;country&quot;, &quot;postal_code&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, &quot;Sample 6&quot;, &quot;Sample 7&quot;},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, &quot;Sample 6&quot;, &quot;Sample 7&quot;, &quot;Sample 8&quot;}
+            }
+        )
+    otherwise
+        #table({&quot;customer_id&quot;, &quot;age_group&quot;, &quot;income_bracket&quot;, &quot;city&quot;, &quot;state&quot;, &quot;country&quot;, &quot;postal_code&quot;}, {})  // Empty table on error
+in
+    Source</pre>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">05_Sales_Analytics — Generated Power Query M</h3>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Orders_+_Products</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: sqlserver
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;OrderID&quot;, &quot;OrderDate&quot;, &quot;CustomerID&quot;, &quot;ProductID&quot;, &quot;Region&quot;, &quot;Sales&quot;, &quot;Quantity&quot;, &quot;Discount&quot;, &quot;Profit&quot;, &quot;Revenue&quot;},
+            {
+                {&quot;Sample 1&quot;, 2, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7, 8, 9, 10},
+                {&quot;Sample 2&quot;, 3, &quot;Sample 4&quot;, &quot;Sample 5&quot;, &quot;Sample 6&quot;, 7, 8, 9, 10, 11}
+            }
+        )
+    otherwise
+        #table({&quot;OrderID&quot;, &quot;OrderDate&quot;, &quot;CustomerID&quot;, &quot;ProductID&quot;, &quot;Region&quot;, &quot;Sales&quot;, &quot;Quantity&quot;, &quot;Discount&quot;, &quot;Profit&quot;, &quot;Revenue&quot;}, {}),
+    #&quot;Joined Joined&quot; = Table.NestedJoin(Source, &quot;ProductID&quot;, Products_Master, &quot;ProductID&quot;, &quot;Joined&quot;, JoinKind.LeftOuter),
+    #&quot;Expanded Joined&quot; = Table.ExpandTableColumn(#&quot;Joined Joined&quot;, &quot;Joined&quot;, {&quot;ProductName&quot;, &quot;Category&quot;, &quot;SubCategory&quot;, &quot;UnitCost&quot;, &quot;UnitPrice&quot;, &quot;Margin&quot;}),
+    Result = #&quot;Expanded Joined&quot;
+in
+    Result</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Products_Master</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: sqlserver
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;ProductID&quot;, &quot;ProductName&quot;, &quot;Category&quot;, &quot;SubCategory&quot;, &quot;UnitCost&quot;, &quot;UnitPrice&quot;, &quot;Margin&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, 5, 6, 7},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7, 8}
+            }
+        )
+    otherwise
+        #table({&quot;ProductID&quot;, &quot;ProductName&quot;, &quot;Category&quot;, &quot;SubCategory&quot;, &quot;UnitCost&quot;, &quot;UnitPrice&quot;, &quot;Margin&quot;}, {})  // Empty table on error
+in
+    Source</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Sales_Summary</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: sqlserver
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;CustomerID&quot;, &quot;CustomerName&quot;, &quot;segment&quot;, &quot;loyalty_tier&quot;, &quot;city&quot;, &quot;state&quot;, &quot;country&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, &quot;Sample 6&quot;, &quot;Sample 7&quot;},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, &quot;Sample 6&quot;, &quot;Sample 7&quot;, &quot;Sample 8&quot;}
+            }
+        )
+    otherwise
+        #table({&quot;CustomerID&quot;, &quot;CustomerName&quot;, &quot;segment&quot;, &quot;loyalty_tier&quot;, &quot;city&quot;, &quot;state&quot;, &quot;country&quot;}, {}),
+    #&quot;Joined Joined&quot; = Table.NestedJoin(Source, &quot;CustomerID&quot;, Orders_+_Products, &quot;CustomerID&quot;, &quot;Joined&quot;, JoinKind.LeftOuter),
+    #&quot;Expanded Joined&quot; = Table.ExpandTableColumn(#&quot;Joined Joined&quot;, &quot;Joined&quot;, {&quot;OrderID&quot;, &quot;OrderDate&quot;, &quot;ProductID&quot;, &quot;Region&quot;, &quot;Sales&quot;, &quot;Quantity&quot;, &quot;Discount&quot;, &quot;Profit&quot;, &quot;Revenue&quot;}),
+    #&quot;Grouped Rows&quot; = Table.Group(#&quot;Expanded Joined&quot;, {&quot;Region&quot;, &quot;Category&quot;, &quot;segment&quot;, &quot;loyalty_tier&quot;}, {{&quot;TotalRevenue&quot;, each List.Sum([Revenue]), type number}, {&quot;TotalProfit&quot;, each List.Sum([Profit]), type number}, {&quot;OrderCount&quot;, each List.Count(List.Distinct([OrderID])), Int64.Type}, {&quot;TotalQuantity&quot;, each List.Sum([Quantity]), type number}, {&quot;AvgDiscount&quot;, each List.Average([Discount]), type number}}),
+    Result = #&quot;Grouped Rows&quot;
+in
+    Result</pre>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">06_Returns_Analytics — Generated Power Query M</h3>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Orders_Clean</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: sqlserver
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;OrderID&quot;, &quot;OrderDate&quot;, &quot;CustomerID&quot;, &quot;ProductID&quot;, &quot;Region&quot;, &quot;Sales&quot;, &quot;Revenue&quot;},
+            {
+                {&quot;Sample 1&quot;, 2, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7},
+                {&quot;Sample 2&quot;, 3, &quot;Sample 4&quot;, &quot;Sample 5&quot;, &quot;Sample 6&quot;, 7, 8}
+            }
+        )
+    otherwise
+        #table({&quot;OrderID&quot;, &quot;OrderDate&quot;, &quot;CustomerID&quot;, &quot;ProductID&quot;, &quot;Region&quot;, &quot;Sales&quot;, &quot;Revenue&quot;}, {})  // Empty table on error
+in
+    Source</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Returns_Analysis</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: sqlserver
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;ReturnID&quot;, &quot;OrderID&quot;, &quot;ReturnDate&quot;, &quot;ReasonCode&quot;, &quot;Reason_Text&quot;, &quot;RefundAmount&quot;, &quot;NetRefund&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, 3, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, 4, &quot;Sample 5&quot;, &quot;Sample 6&quot;, 7, 8}
+            }
+        )
+    otherwise
+        #table({&quot;ReturnID&quot;, &quot;OrderID&quot;, &quot;ReturnDate&quot;, &quot;ReasonCode&quot;, &quot;Reason_Text&quot;, &quot;RefundAmount&quot;, &quot;NetRefund&quot;}, {}),
+    #&quot;Joined Joined&quot; = Table.NestedJoin(Source, &quot;OrderID&quot;, Orders_Clean, &quot;OrderID&quot;, &quot;Joined&quot;, JoinKind.LeftOuter),
+    #&quot;Expanded Joined&quot; = Table.ExpandTableColumn(#&quot;Joined Joined&quot;, &quot;Joined&quot;, {&quot;OrderDate&quot;, &quot;CustomerID&quot;, &quot;ProductID&quot;, &quot;Region&quot;, &quot;Sales&quot;, &quot;Revenue&quot;}),
+    #&quot;Added ReturnRate&quot; = Table.AddColumn(#&quot;Expanded Joined&quot;, &quot;ReturnRate&quot;, each [NetRefund] / [Revenue]),
+    #&quot;Added DaysToReturn&quot; = Table.AddColumn(#&quot;Added ReturnRate&quot;, &quot;DaysToReturn&quot;, each DATEDIFF('day', [OrderDate], [ReturnDate])),
+    #&quot;Script Warning&quot; = Table.AddColumn(#&quot;Added DaysToReturn&quot;, &quot;__script_warning&quot;, each &quot;/* Python script step not auto-converted — manual migration required */&quot;, type text),
+    Result = #&quot;Script Warning&quot;
+in
+    Result</pre>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">07_Executive_Dashboard — Generated Power Query M</h3>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Executive_KPIs</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: sqlserver
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;Region&quot;, &quot;Category&quot;, &quot;segment&quot;, &quot;TotalRevenue&quot;, &quot;TotalProfit&quot;, &quot;OrderCount&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, &quot;Sample 3&quot;, 4, 5, 6},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, 5, 6, 7}
+            }
+        )
+    otherwise
+        #table({&quot;Region&quot;, &quot;Category&quot;, &quot;segment&quot;, &quot;TotalRevenue&quot;, &quot;TotalProfit&quot;, &quot;OrderCount&quot;}, {}),
+    #&quot;Joined Joined&quot; = Table.NestedJoin(Source, &quot;Region&quot;, Returns_Analysis, &quot;Region&quot;, &quot;Joined&quot;, JoinKind.LeftOuter),
+    #&quot;Expanded Joined&quot; = Table.ExpandTableColumn(#&quot;Joined Joined&quot;, &quot;Joined&quot;, {&quot;ReasonCode&quot;, &quot;NetRefund&quot;, &quot;ReturnRate&quot;, &quot;anomaly_score&quot;}),
+    #&quot;Grouped Rows&quot; = Table.Group(#&quot;Expanded Joined&quot;, {&quot;Region&quot;}, {{&quot;GrandRevenue&quot;, each List.Sum([TotalRevenue]), type number}, {&quot;GrandProfit&quot;, each List.Sum([TotalProfit]), type number}, {&quot;TotalOrders&quot;, each List.Sum([OrderCount]), type number}, {&quot;TotalRefunds&quot;, each List.Sum([NetRefund]), type number}, {&quot;AvgReturnRate&quot;, each List.Average([ReturnRate]), type number}}),
+    #&quot;Added ProfitMargin&quot; = Table.AddColumn(#&quot;Grouped Rows&quot;, &quot;ProfitMargin&quot;, each [GrandProfit] / [GrandRevenue]),
+    #&quot;Added NetRevenue&quot; = Table.AddColumn(#&quot;Added ProfitMargin&quot;, &quot;NetRevenue&quot;, each [GrandRevenue] - [TotalRefunds]),
+    #&quot;Added AvgOrderValue&quot; = Table.AddColumn(#&quot;Added NetRevenue&quot;, &quot;AvgOrderValue&quot;, each [GrandRevenue] / [TotalOrders]),
+    Result = #&quot;Added AvgOrderValue&quot;
+in
+    Result</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Returns_Analysis</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: sqlserver
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;Region&quot;, &quot;ReasonCode&quot;, &quot;NetRefund&quot;, &quot;ReturnRate&quot;, &quot;anomaly_score&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, 3, 4, 5},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, 4, 5, 6}
+            }
+        )
+    otherwise
+        #table({&quot;Region&quot;, &quot;ReasonCode&quot;, &quot;NetRefund&quot;, &quot;ReturnRate&quot;, &quot;anomaly_score&quot;}, {})  // Empty table on error
+in
+    Source</pre>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">08_Inventory_Tracker — Generated Power Query M</h3>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Inventory_Levels</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: snowflake
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;SKU&quot;, &quot;WAREHOUSE_ID&quot;, &quot;QTY_ON_HAND&quot;, &quot;QTY_RESERVED&quot;, &quot;REORDER_POINT&quot;, &quot;LAST_RECEIPT_DATE&quot;, &quot;UNIT_COST&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, 3, 4, 5, 6, 7},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, 4, 5, 6, 7, 8}
+            }
+        )
+    otherwise
+        #table({&quot;SKU&quot;, &quot;WAREHOUSE_ID&quot;, &quot;QTY_ON_HAND&quot;, &quot;QTY_RESERVED&quot;, &quot;REORDER_POINT&quot;, &quot;LAST_RECEIPT_DATE&quot;, &quot;UNIT_COST&quot;}, {})  // Empty table on error
+in
+    Source</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Inventory_Status</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: postgres
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;customer_id&quot;, &quot;first_name&quot;, &quot;last_name&quot;, &quot;email&quot;, &quot;segment&quot;, &quot;lifetime_value&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, &quot;Sample 6&quot;, 7}
+            }
+        )
+    otherwise
+        #table({&quot;customer_id&quot;, &quot;first_name&quot;, &quot;last_name&quot;, &quot;email&quot;, &quot;segment&quot;, &quot;lifetime_value&quot;}, {}),
+    #&quot;Joined Joined&quot; = Table.NestedJoin(Source, &quot;customer_id&quot;, Inventory_Levels, &quot;WAREHOUSE_ID&quot;, &quot;Joined&quot;, JoinKind.FullOuter),
+    #&quot;Expanded Joined&quot; = Table.ExpandTableColumn(#&quot;Joined Joined&quot;, &quot;Joined&quot;, {&quot;SKU&quot;, &quot;QTY_ON_HAND&quot;, &quot;QTY_RESERVED&quot;, &quot;REORDER_POINT&quot;, &quot;LAST_RECEIPT_DATE&quot;, &quot;UNIT_COST&quot;}),
+    #&quot;Added AvailableQty&quot; = Table.AddColumn(#&quot;Expanded Joined&quot;, &quot;AvailableQty&quot;, each [QTY_ON_HAND] - [QTY_RESERVED]),
+    #&quot;Added NeedsReorder&quot; = Table.AddColumn(#&quot;Added AvailableQty&quot;, &quot;NeedsReorder&quot;, each if [AvailableQty] &lt; [REORDER_POINT] then 'Yes' else 'No' ),
+    #&quot;Added InventoryValue&quot; = Table.AddColumn(#&quot;Added NeedsReorder&quot;, &quot;InventoryValue&quot;, each [QTY_ON_HAND] * [UNIT_COST]),
+    Result = #&quot;Added InventoryValue&quot;
+in
+    Result</pre>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">09_HR_Attrition_Analysis — Generated Power Query M</h3>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Avg_Survey_by_Employee</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: excel-direct
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;EmployeeID&quot;, &quot;Q1_Satisfaction&quot;, &quot;Q2_WorkLifeBalance&quot;, &quot;Q3_Environment&quot;, &quot;Q4_Relationship&quot;, &quot;Q5_JobInvolvement&quot;, &quot;SurveyDate&quot;},
+            {
+                {&quot;Sample 1&quot;, 2, 3, 4, 5, 6, 7},
+                {&quot;Sample 2&quot;, 3, 4, 5, 6, 7, 8}
+            }
+        )
+    otherwise
+        #table({&quot;EmployeeID&quot;, &quot;Q1_Satisfaction&quot;, &quot;Q2_WorkLifeBalance&quot;, &quot;Q3_Environment&quot;, &quot;Q4_Relationship&quot;, &quot;Q5_JobInvolvement&quot;, &quot;SurveyDate&quot;}, {})  // Empty table on error
+in
+    Source</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">HR_Attrition_Detail</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: sqlserver
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;EmployeeID&quot;, &quot;FirstName&quot;, &quot;LastName&quot;, &quot;Department&quot;, &quot;JobRole&quot;, &quot;HireDate&quot;, &quot;TerminationDate&quot;, &quot;MonthlyIncome&quot;, &quot;EducationLevel&quot;, &quot;Gender&quot;, &quot;Age&quot;, &quot;OverTime&quot;, &quot;DistanceFromHome&quot;, &quot;YearsAtCompany&quot;, &quot;NumCompaniesWorked&quot;, &quot;TrainingTimesLastYear&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7, 8, 9, &quot;Sample 10&quot;, 11, &quot;Sample 12&quot;, 13, 14, 15, 16},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, &quot;Sample 6&quot;, 7, 8, 9, 10, &quot;Sample 11&quot;, 12, &quot;Sample 13&quot;, 14, 15, 16, 17}
+            }
+        )
+    otherwise
+        #table({&quot;EmployeeID&quot;, &quot;FirstName&quot;, &quot;LastName&quot;, &quot;Department&quot;, &quot;JobRole&quot;, &quot;HireDate&quot;, &quot;TerminationDate&quot;, &quot;MonthlyIncome&quot;, &quot;EducationLevel&quot;, &quot;Gender&quot;, &quot;Age&quot;, &quot;OverTime&quot;, &quot;DistanceFromHome&quot;, &quot;YearsAtCompany&quot;, &quot;NumCompaniesWorked&quot;, &quot;TrainingTimesLastYear&quot;}, {}),
+    #&quot;Joined Joined&quot; = Table.NestedJoin(Source, &quot;EmployeeID&quot;, Performance_Reviews, &quot;EmployeeID&quot;, &quot;Joined&quot;, JoinKind.LeftOuter),
+    #&quot;Expanded Joined&quot; = Table.ExpandTableColumn(#&quot;Joined Joined&quot;, &quot;Joined&quot;, {&quot;ReviewYear&quot;, &quot;PerformanceRating&quot;, &quot;ManagerRating&quot;, &quot;GoalsAchieved&quot;, &quot;PromotionRecommendation&quot;}),
+    #&quot;Joined Joined 2&quot; = Table.NestedJoin(#&quot;Expanded Joined&quot;, &quot;EmployeeID&quot;, Avg_Survey_by_Employee, &quot;EmployeeID&quot;, &quot;Joined&quot;, JoinKind.LeftOuter),
+    #&quot;Expanded Joined 2&quot; = Table.ExpandTableColumn(#&quot;Joined Joined 2&quot;, &quot;Joined&quot;, {&quot;Q1_Satisfaction&quot;, &quot;Q2_WorkLifeBalance&quot;, &quot;Q3_Environment&quot;, &quot;Q4_Relationship&quot;, &quot;Q5_JobInvolvement&quot;, &quot;SurveyDate&quot;}),
+    #&quot;Added IsTerminated&quot; = Table.AddColumn(#&quot;Expanded Joined 2&quot;, &quot;IsTerminated&quot;, each if (null = [TerminationDate]) then 0 else 1 ),
+    #&quot;Added TenureBucket&quot; = Table.AddColumn(#&quot;Added IsTerminated&quot;, &quot;TenureBucket&quot;, each if [YearsAtCompany] &lt; 2 then 'New' else if [YearsAtCompany] &lt; 5 then 'Mid' else if [YearsAtCompany] &lt; 10 then 'Senior' else 'Veteran' ),
+    #&quot;Added AttritionRisk&quot; = Table.AddColumn(#&quot;Added TenureBucket&quot;, &quot;AttritionRisk&quot;, each if [OverTime] = 'Yes' and [AvgSurveyScore] &lt; 3 then 'High' else if [OverTime] = 'Yes' or [AvgSurveyScore] &lt; 3 then 'Medium' else 'Low' ),
+    #&quot;Added IncomeBracket&quot; = Table.AddColumn(#&quot;Added AttritionRisk&quot;, &quot;IncomeBracket&quot;, each if [MonthlyIncome] &lt; 3000 then 'Low' else if [MonthlyIncome] &lt; 7000 then 'Mid' else 'High' ),
+    #&quot;Renamed Columns&quot; = Table.RenameColumns(#&quot;Added IncomeBracket&quot;, {{&quot;EducationLevel&quot;, &quot;Education&quot;}}),
+    Result = #&quot;Renamed Columns&quot;
+in
+    Result</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">HR_Department_Summary</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: sqlserver
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;EmployeeID&quot;, &quot;FirstName&quot;, &quot;LastName&quot;, &quot;Department&quot;, &quot;JobRole&quot;, &quot;HireDate&quot;, &quot;TerminationDate&quot;, &quot;MonthlyIncome&quot;, &quot;EducationLevel&quot;, &quot;Gender&quot;, &quot;Age&quot;, &quot;OverTime&quot;, &quot;DistanceFromHome&quot;, &quot;YearsAtCompany&quot;, &quot;NumCompaniesWorked&quot;, &quot;TrainingTimesLastYear&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7, 8, 9, &quot;Sample 10&quot;, 11, &quot;Sample 12&quot;, 13, 14, 15, 16},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, &quot;Sample 6&quot;, 7, 8, 9, 10, &quot;Sample 11&quot;, 12, &quot;Sample 13&quot;, 14, 15, 16, 17}
+            }
+        )
+    otherwise
+        #table({&quot;EmployeeID&quot;, &quot;FirstName&quot;, &quot;LastName&quot;, &quot;Department&quot;, &quot;JobRole&quot;, &quot;HireDate&quot;, &quot;TerminationDate&quot;, &quot;MonthlyIncome&quot;, &quot;EducationLevel&quot;, &quot;Gender&quot;, &quot;Age&quot;, &quot;OverTime&quot;, &quot;DistanceFromHome&quot;, &quot;YearsAtCompany&quot;, &quot;NumCompaniesWorked&quot;, &quot;TrainingTimesLastYear&quot;}, {}),
+    #&quot;Joined Joined&quot; = Table.NestedJoin(Source, &quot;EmployeeID&quot;, Performance_Reviews, &quot;EmployeeID&quot;, &quot;Joined&quot;, JoinKind.LeftOuter),
+    #&quot;Expanded Joined&quot; = Table.ExpandTableColumn(#&quot;Joined Joined&quot;, &quot;Joined&quot;, {&quot;ReviewYear&quot;, &quot;PerformanceRating&quot;, &quot;ManagerRating&quot;, &quot;GoalsAchieved&quot;, &quot;PromotionRecommendation&quot;}),
+    #&quot;Joined Joined 2&quot; = Table.NestedJoin(#&quot;Expanded Joined&quot;, &quot;EmployeeID&quot;, Avg_Survey_by_Employee, &quot;EmployeeID&quot;, &quot;Joined&quot;, JoinKind.LeftOuter),
+    #&quot;Expanded Joined 2&quot; = Table.ExpandTableColumn(#&quot;Joined Joined 2&quot;, &quot;Joined&quot;, {&quot;Q1_Satisfaction&quot;, &quot;Q2_WorkLifeBalance&quot;, &quot;Q3_Environment&quot;, &quot;Q4_Relationship&quot;, &quot;Q5_JobInvolvement&quot;, &quot;SurveyDate&quot;}),
+    #&quot;Added IsTerminated&quot; = Table.AddColumn(#&quot;Expanded Joined 2&quot;, &quot;IsTerminated&quot;, each if (null = [TerminationDate]) then 0 else 1 ),
+    #&quot;Added TenureBucket&quot; = Table.AddColumn(#&quot;Added IsTerminated&quot;, &quot;TenureBucket&quot;, each if [YearsAtCompany] &lt; 2 then 'New' else if [YearsAtCompany] &lt; 5 then 'Mid' else if [YearsAtCompany] &lt; 10 then 'Senior' else 'Veteran' ),
+    #&quot;Added AttritionRisk&quot; = Table.AddColumn(#&quot;Added TenureBucket&quot;, &quot;AttritionRisk&quot;, each if [OverTime] = 'Yes' and [AvgSurveyScore] &lt; 3 then 'High' else if [OverTime] = 'Yes' or [AvgSurveyScore] &lt; 3 then 'Medium' else 'Low' ),
+    #&quot;Added IncomeBracket&quot; = Table.AddColumn(#&quot;Added AttritionRisk&quot;, &quot;IncomeBracket&quot;, each if [MonthlyIncome] &lt; 3000 then 'Low' else if [MonthlyIncome] &lt; 7000 then 'Mid' else 'High' ),
+    #&quot;Renamed Columns&quot; = Table.RenameColumns(#&quot;Added IncomeBracket&quot;, {{&quot;EducationLevel&quot;, &quot;Education&quot;}}),
+    Result = #&quot;Renamed Columns&quot;
+in
+    Result</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Performance_Reviews</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: textscan
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;EmployeeID&quot;, &quot;ReviewYear&quot;, &quot;PerformanceRating&quot;, &quot;ManagerRating&quot;, &quot;GoalsAchieved&quot;, &quot;PromotionRecommendation&quot;},
+            {
+                {&quot;Sample 1&quot;, 2, 3, 4, 5, &quot;Sample 6&quot;},
+                {&quot;Sample 2&quot;, 3, 4, 5, 6, &quot;Sample 7&quot;}
+            }
+        )
+    otherwise
+        #table({&quot;EmployeeID&quot;, &quot;ReviewYear&quot;, &quot;PerformanceRating&quot;, &quot;ManagerRating&quot;, &quot;GoalsAchieved&quot;, &quot;PromotionRecommendation&quot;}, {})  // Empty table on error
+in
+    Source</pre>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">10_Food_Delivery_ETL — Generated Power Query M</h3>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Deduplicate_Restaurants</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: textscan
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;restaurant_id&quot;, &quot;restaurant_name&quot;, &quot;cuisine_type&quot;, &quot;city&quot;, &quot;state&quot;, &quot;avg_rating&quot;, &quot;prep_time_min&quot;, &quot;active&quot;, &quot;month&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7, 8, &quot;Sample 9&quot;},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, &quot;Sample 6&quot;, 7, 8, 9, &quot;Sample 10&quot;}
+            }
+        )
+    otherwise
+        #table({&quot;restaurant_id&quot;, &quot;restaurant_name&quot;, &quot;cuisine_type&quot;, &quot;city&quot;, &quot;state&quot;, &quot;avg_rating&quot;, &quot;prep_time_min&quot;, &quot;active&quot;, &quot;month&quot;}, {}),
+    #&quot;Combined Tables&quot; = Table.Combine({Restaurants_Jan, Restaurants_Feb}),
+    #&quot;Renamed Columns&quot; = Table.RenameColumns(#&quot;Combined Tables&quot;, {{&quot;restaurant_id&quot;, &quot;RestaurantID&quot;}, {&quot;restaurant_name&quot;, &quot;RestaurantName&quot;}}),
+    #&quot;Trimmed Text&quot; = Table.TransformColumns(#&quot;Renamed Columns&quot;, {{&quot;RestaurantName&quot;, Text.Trim}}),
+    #&quot;Proper Cased&quot; = Table.TransformColumns(#&quot;Trimmed Text&quot;, {{&quot;cuisine_type&quot;, Text.Proper}}),
+    Result = #&quot;Proper Cased&quot;
+in
+    Result</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Delivery_Fact</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: postgres
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;order_id&quot;, &quot;customer_id&quot;, &quot;restaurant_id&quot;, &quot;driver_id&quot;, &quot;order_timestamp&quot;, &quot;delivery_timestamp&quot;, &quot;order_total&quot;, &quot;delivery_fee&quot;, &quot;tip_amount&quot;, &quot;payment_method&quot;, &quot;promo_code&quot;, &quot;discount_amount&quot;, &quot;status&quot;, &quot;platform&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, 5, 6, 7, 8, 9, &quot;Sample 10&quot;, &quot;Sample 11&quot;, 12, &quot;Sample 13&quot;, &quot;Sample 14&quot;},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7, 8, 9, 10, &quot;Sample 11&quot;, &quot;Sample 12&quot;, 13, &quot;Sample 14&quot;, &quot;Sample 15&quot;}
+            }
+        )
+    otherwise
+        #table({&quot;order_id&quot;, &quot;customer_id&quot;, &quot;restaurant_id&quot;, &quot;driver_id&quot;, &quot;order_timestamp&quot;, &quot;delivery_timestamp&quot;, &quot;order_total&quot;, &quot;delivery_fee&quot;, &quot;tip_amount&quot;, &quot;payment_method&quot;, &quot;promo_code&quot;, &quot;discount_amount&quot;, &quot;status&quot;, &quot;platform&quot;}, {}),
+    #&quot;Filtered Rows&quot; = Table.SelectRows(Source, each [status] = &quot;Delivered&quot; or [status] = &quot;Completed&quot;),
+    #&quot;Added DeliveryMinutes&quot; = Table.AddColumn(#&quot;Filtered Rows&quot;, &quot;DeliveryMinutes&quot;, each DATEDIFF('minute', [order_timestamp], [delivery_timestamp])),
+    #&quot;Added NetRevenue&quot; = Table.AddColumn(#&quot;Added DeliveryMinutes&quot;, &quot;NetRevenue&quot;, each [order_total] - [discount_amount] + [delivery_fee]),
+    #&quot;Added HasPromo&quot; = Table.AddColumn(#&quot;Added NetRevenue&quot;, &quot;HasPromo&quot;, each if (null = [promo_code]) then 'No' else 'Yes' ),
+    #&quot;Renamed Columns&quot; = Table.RenameColumns(#&quot;Added HasPromo&quot;, {{&quot;order_id&quot;, &quot;OrderID&quot;}, {&quot;restaurant_id&quot;, &quot;RestaurantID&quot;}, {&quot;customer_id&quot;, &quot;CustomerID&quot;}}),
+    #&quot;Removed Columns&quot; = Table.RemoveColumns(#&quot;Renamed Columns&quot;, {&quot;status&quot;}),
+    #&quot;Joined Joined&quot; = Table.NestedJoin(#&quot;Removed Columns&quot;, &quot;RestaurantID&quot;, Deduplicate_Restaurants, &quot;RestaurantID&quot;, &quot;Joined&quot;, JoinKind.Inner),
+    #&quot;Expanded Joined&quot; = Table.ExpandTableColumn(#&quot;Joined Joined&quot;, &quot;Joined&quot;, {&quot;restaurant_id&quot;, &quot;restaurant_name&quot;, &quot;cuisine_type&quot;, &quot;city&quot;, &quot;state&quot;, &quot;avg_rating&quot;, &quot;prep_time_min&quot;, &quot;active&quot;, &quot;month&quot;}),
+    #&quot;Added TotalWaitMinutes&quot; = Table.AddColumn(#&quot;Expanded Joined&quot;, &quot;TotalWaitMinutes&quot;, each [prep_time_min] + [DeliveryMinutes]),
+    #&quot;Added SpeedTier&quot; = Table.AddColumn(#&quot;Added TotalWaitMinutes&quot;, &quot;SpeedTier&quot;, each if [TotalWaitMinutes] &lt;= 30 then 'Fast' else if [TotalWaitMinutes] &lt;= 45 then 'Normal' else if [TotalWaitMinutes] &lt;= 60 then 'Slow' else 'Very Slow' ),
+    #&quot;Added RevenuePerMinute&quot; = Table.AddColumn(#&quot;Added SpeedTier&quot;, &quot;RevenuePerMinute&quot;, each [NetRevenue] / [TotalWaitMinutes]),
+    Result = #&quot;Added RevenuePerMinute&quot;
+in
+    Result</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Restaurant_Dim</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: textscan
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;restaurant_id&quot;, &quot;restaurant_name&quot;, &quot;cuisine_type&quot;, &quot;city&quot;, &quot;state&quot;, &quot;avg_rating&quot;, &quot;prep_time_min&quot;, &quot;active&quot;, &quot;month&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7, 8, &quot;Sample 9&quot;},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, &quot;Sample 6&quot;, 7, 8, 9, &quot;Sample 10&quot;}
+            }
+        )
+    otherwise
+        #table({&quot;restaurant_id&quot;, &quot;restaurant_name&quot;, &quot;cuisine_type&quot;, &quot;city&quot;, &quot;state&quot;, &quot;avg_rating&quot;, &quot;prep_time_min&quot;, &quot;active&quot;, &quot;month&quot;}, {}),
+    #&quot;Combined Tables&quot; = Table.Combine({Restaurants_Jan, Restaurants_Feb}),
+    #&quot;Renamed Columns&quot; = Table.RenameColumns(#&quot;Combined Tables&quot;, {{&quot;restaurant_id&quot;, &quot;RestaurantID&quot;}, {&quot;restaurant_name&quot;, &quot;RestaurantName&quot;}}),
+    #&quot;Trimmed Text&quot; = Table.TransformColumns(#&quot;Renamed Columns&quot;, {{&quot;RestaurantName&quot;, Text.Trim}}),
+    #&quot;Proper Cased&quot; = Table.TransformColumns(#&quot;Trimmed Text&quot;, {{&quot;cuisine_type&quot;, Text.Proper}}),
+    Result = #&quot;Proper Cased&quot;
+in
+    Result</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Restaurant_Performance</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: postgres
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;order_id&quot;, &quot;customer_id&quot;, &quot;restaurant_id&quot;, &quot;driver_id&quot;, &quot;order_timestamp&quot;, &quot;delivery_timestamp&quot;, &quot;order_total&quot;, &quot;delivery_fee&quot;, &quot;tip_amount&quot;, &quot;payment_method&quot;, &quot;promo_code&quot;, &quot;discount_amount&quot;, &quot;status&quot;, &quot;platform&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, 5, 6, 7, 8, 9, &quot;Sample 10&quot;, &quot;Sample 11&quot;, 12, &quot;Sample 13&quot;, &quot;Sample 14&quot;},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7, 8, 9, 10, &quot;Sample 11&quot;, &quot;Sample 12&quot;, 13, &quot;Sample 14&quot;, &quot;Sample 15&quot;}
+            }
+        )
+    otherwise
+        #table({&quot;order_id&quot;, &quot;customer_id&quot;, &quot;restaurant_id&quot;, &quot;driver_id&quot;, &quot;order_timestamp&quot;, &quot;delivery_timestamp&quot;, &quot;order_total&quot;, &quot;delivery_fee&quot;, &quot;tip_amount&quot;, &quot;payment_method&quot;, &quot;promo_code&quot;, &quot;discount_amount&quot;, &quot;status&quot;, &quot;platform&quot;}, {}),
+    #&quot;Filtered Rows&quot; = Table.SelectRows(Source, each [status] = &quot;Delivered&quot; or [status] = &quot;Completed&quot;),
+    #&quot;Added DeliveryMinutes&quot; = Table.AddColumn(#&quot;Filtered Rows&quot;, &quot;DeliveryMinutes&quot;, each DATEDIFF('minute', [order_timestamp], [delivery_timestamp])),
+    #&quot;Added NetRevenue&quot; = Table.AddColumn(#&quot;Added DeliveryMinutes&quot;, &quot;NetRevenue&quot;, each [order_total] - [discount_amount] + [delivery_fee]),
+    #&quot;Added HasPromo&quot; = Table.AddColumn(#&quot;Added NetRevenue&quot;, &quot;HasPromo&quot;, each if (null = [promo_code]) then 'No' else 'Yes' ),
+    #&quot;Renamed Columns&quot; = Table.RenameColumns(#&quot;Added HasPromo&quot;, {{&quot;order_id&quot;, &quot;OrderID&quot;}, {&quot;restaurant_id&quot;, &quot;RestaurantID&quot;}, {&quot;customer_id&quot;, &quot;CustomerID&quot;}}),
+    #&quot;Removed Columns&quot; = Table.RemoveColumns(#&quot;Renamed Columns&quot;, {&quot;status&quot;}),
+    #&quot;Joined Joined&quot; = Table.NestedJoin(#&quot;Removed Columns&quot;, &quot;RestaurantID&quot;, Deduplicate_Restaurants, &quot;RestaurantID&quot;, &quot;Joined&quot;, JoinKind.Inner),
+    #&quot;Expanded Joined&quot; = Table.ExpandTableColumn(#&quot;Joined Joined&quot;, &quot;Joined&quot;, {&quot;restaurant_id&quot;, &quot;restaurant_name&quot;, &quot;cuisine_type&quot;, &quot;city&quot;, &quot;state&quot;, &quot;avg_rating&quot;, &quot;prep_time_min&quot;, &quot;active&quot;, &quot;month&quot;}),
+    #&quot;Added TotalWaitMinutes&quot; = Table.AddColumn(#&quot;Expanded Joined&quot;, &quot;TotalWaitMinutes&quot;, each [prep_time_min] + [DeliveryMinutes]),
+    #&quot;Added SpeedTier&quot; = Table.AddColumn(#&quot;Added TotalWaitMinutes&quot;, &quot;SpeedTier&quot;, each if [TotalWaitMinutes] &lt;= 30 then 'Fast' else if [TotalWaitMinutes] &lt;= 45 then 'Normal' else if [TotalWaitMinutes] &lt;= 60 then 'Slow' else 'Very Slow' ),
+    #&quot;Added RevenuePerMinute&quot; = Table.AddColumn(#&quot;Added SpeedTier&quot;, &quot;RevenuePerMinute&quot;, each [NetRevenue] / [TotalWaitMinutes]),
+    Result = #&quot;Added RevenuePerMinute&quot;
+in
+    Result</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Restaurants_Feb</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: textscan
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;restaurant_id&quot;, &quot;restaurant_name&quot;, &quot;cuisine_type&quot;, &quot;city&quot;, &quot;state&quot;, &quot;avg_rating&quot;, &quot;prep_time_min&quot;, &quot;active&quot;, &quot;month&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7, 8, &quot;Sample 9&quot;},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, &quot;Sample 6&quot;, 7, 8, 9, &quot;Sample 10&quot;}
+            }
+        )
+    otherwise
+        #table({&quot;restaurant_id&quot;, &quot;restaurant_name&quot;, &quot;cuisine_type&quot;, &quot;city&quot;, &quot;state&quot;, &quot;avg_rating&quot;, &quot;prep_time_min&quot;, &quot;active&quot;, &quot;month&quot;}, {})  // Empty table on error
+in
+    Source</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Restaurants_Jan</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: textscan
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;restaurant_id&quot;, &quot;restaurant_name&quot;, &quot;cuisine_type&quot;, &quot;city&quot;, &quot;state&quot;, &quot;avg_rating&quot;, &quot;prep_time_min&quot;, &quot;active&quot;, &quot;month&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7, 8, &quot;Sample 9&quot;},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, &quot;Sample 6&quot;, 7, 8, 9, &quot;Sample 10&quot;}
+            }
+        )
+    otherwise
+        #table({&quot;restaurant_id&quot;, &quot;restaurant_name&quot;, &quot;cuisine_type&quot;, &quot;city&quot;, &quot;state&quot;, &quot;avg_rating&quot;, &quot;prep_time_min&quot;, &quot;active&quot;, &quot;month&quot;}, {})  // Empty table on error
+in
+    Source</pre>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">11_Energy_Consumption — Generated Power Query M</h3>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Classify_Energy_Type</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: textscan
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;Country&quot;, &quot;ISO_Code&quot;, &quot;Coal_TWh&quot;, &quot;Gas_TWh&quot;, &quot;Nuclear_TWh&quot;, &quot;Hydro_TWh&quot;, &quot;Wind_TWh&quot;, &quot;Solar_TWh&quot;, &quot;Other_Renewables_TWh&quot;, &quot;Year&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, 3, 4, 5, 6, 7, 8, 9, 10},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, 4, 5, 6, 7, 8, 9, 10, 11}
+            }
+        )
+    otherwise
+        #table({&quot;Country&quot;, &quot;ISO_Code&quot;, &quot;Coal_TWh&quot;, &quot;Gas_TWh&quot;, &quot;Nuclear_TWh&quot;, &quot;Hydro_TWh&quot;, &quot;Wind_TWh&quot;, &quot;Solar_TWh&quot;, &quot;Other_Renewables_TWh&quot;, &quot;Year&quot;}, {}),
+    #&quot;Combined Tables&quot; = Table.Combine({Electricity_2023, Electricity_2024}),
+    #&quot;Added EnergyCategory&quot; = Table.AddColumn(#&quot;Combined Tables&quot;, &quot;EnergyCategory&quot;, each if [EnergySource] = 'Coal' or [EnergySource] = 'Gas' then 'Fossil' else if [EnergySource] = 'Nuclear' then 'Nuclear' else 'Renewable' ),
+    #&quot;Added IsRenewable&quot; = Table.AddColumn(#&quot;Added EnergyCategory&quot;, &quot;IsRenewable&quot;, each if [EnergyCategory] = 'Renewable' then 1 else 0 ),
+    #&quot;Filtered Rows&quot; = Table.SelectRows(#&quot;Added IsRenewable&quot;, each [Generation_TWh] &gt; 0),
+    Result = #&quot;Filtered Rows&quot;
+in
+    Result</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Electricity_2023</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: textscan
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;Country&quot;, &quot;ISO_Code&quot;, &quot;Coal_TWh&quot;, &quot;Gas_TWh&quot;, &quot;Nuclear_TWh&quot;, &quot;Hydro_TWh&quot;, &quot;Wind_TWh&quot;, &quot;Solar_TWh&quot;, &quot;Other_Renewables_TWh&quot;, &quot;Year&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, 3, 4, 5, 6, 7, 8, 9, 10},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, 4, 5, 6, 7, 8, 9, 10, 11}
+            }
+        )
+    otherwise
+        #table({&quot;Country&quot;, &quot;ISO_Code&quot;, &quot;Coal_TWh&quot;, &quot;Gas_TWh&quot;, &quot;Nuclear_TWh&quot;, &quot;Hydro_TWh&quot;, &quot;Wind_TWh&quot;, &quot;Solar_TWh&quot;, &quot;Other_Renewables_TWh&quot;, &quot;Year&quot;}, {})  // Empty table on error
+in
+    Source</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Electricity_2024</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: textscan
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;Country&quot;, &quot;ISO_Code&quot;, &quot;Coal_TWh&quot;, &quot;Gas_TWh&quot;, &quot;Nuclear_TWh&quot;, &quot;Hydro_TWh&quot;, &quot;Wind_TWh&quot;, &quot;Solar_TWh&quot;, &quot;Other_Renewables_TWh&quot;, &quot;Year&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, 3, 4, 5, 6, 7, 8, 9, 10},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, 4, 5, 6, 7, 8, 9, 10, 11}
+            }
+        )
+    otherwise
+        #table({&quot;Country&quot;, &quot;ISO_Code&quot;, &quot;Coal_TWh&quot;, &quot;Gas_TWh&quot;, &quot;Nuclear_TWh&quot;, &quot;Hydro_TWh&quot;, &quot;Wind_TWh&quot;, &quot;Solar_TWh&quot;, &quot;Other_Renewables_TWh&quot;, &quot;Year&quot;}, {})  // Empty table on error
+in
+    Source</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Energy_Country_Summary</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: excel-direct
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;ISO_Code&quot;, &quot;Country_Name&quot;, &quot;Population_M&quot;, &quot;GDP_Billion_USD&quot;, &quot;Region&quot;, &quot;IncomeGroup&quot;, &quot;Year&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, 3, 4, &quot;Sample 5&quot;, &quot;Sample 6&quot;, 7},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, 4, 5, &quot;Sample 6&quot;, &quot;Sample 7&quot;, 8}
+            }
+        )
+    otherwise
+        #table({&quot;ISO_Code&quot;, &quot;Country_Name&quot;, &quot;Population_M&quot;, &quot;GDP_Billion_USD&quot;, &quot;Region&quot;, &quot;IncomeGroup&quot;, &quot;Year&quot;}, {}),
+    #&quot;Joined Joined&quot; = Table.NestedJoin(Source, {&quot;ISO_Code&quot;, &quot;Year&quot;}, Classify_Energy_Type, {&quot;ISO_Code&quot;, &quot;Year&quot;}, &quot;Joined&quot;, JoinKind.LeftOuter),
+    #&quot;Expanded Joined&quot; = Table.ExpandTableColumn(#&quot;Joined Joined&quot;, &quot;Joined&quot;, {&quot;Country&quot;, &quot;Coal_TWh&quot;, &quot;Gas_TWh&quot;, &quot;Nuclear_TWh&quot;, &quot;Hydro_TWh&quot;, &quot;Wind_TWh&quot;, &quot;Solar_TWh&quot;, &quot;Other_Renewables_TWh&quot;}),
+    #&quot;Added GenPerCapita_MWh&quot; = Table.AddColumn(#&quot;Expanded Joined&quot;, &quot;GenPerCapita_MWh&quot;, each ([Generation_TWh] * 1000000) / ([Population_M] * 1000000)),
+    #&quot;Added GenPerGDP&quot; = Table.AddColumn(#&quot;Added GenPerCapita_MWh&quot;, &quot;GenPerGDP&quot;, each [Generation_TWh] / [GDP_Billion_USD]),
+    #&quot;Removed Columns&quot; = Table.RemoveColumns(#&quot;Added GenPerGDP&quot;, {&quot;Country_Name&quot;}),
+    #&quot;Replaced Nulls in Fossil&quot; = Table.ReplaceValue(#&quot;Removed Columns&quot;, null, &quot;0&quot;, Replacer.ReplaceValue, {&quot;Fossil&quot;}),
+    #&quot;Replaced Nulls in Nuclear&quot; = Table.ReplaceValue(#&quot;Replaced Nulls in Fossil&quot;, null, &quot;0&quot;, Replacer.ReplaceValue, {&quot;Nuclear&quot;}),
+    #&quot;Replaced Nulls in Renewable&quot; = Table.ReplaceValue(#&quot;Replaced Nulls in Nuclear&quot;, null, &quot;0&quot;, Replacer.ReplaceValue, {&quot;Renewable&quot;}),
+    #&quot;Added TotalGeneration&quot; = Table.AddColumn(#&quot;Replaced Nulls in Renewable&quot;, &quot;TotalGeneration&quot;, each [Fossil] + [Nuclear] + [Renewable]),
+    #&quot;Added RenewableShare&quot; = Table.AddColumn(#&quot;Added TotalGeneration&quot;, &quot;RenewableShare&quot;, each [Renewable] / [TotalGeneration]),
+    Result = #&quot;Added RenewableShare&quot;
+in
+    Result</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Energy_Detail</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: excel-direct
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;ISO_Code&quot;, &quot;Country_Name&quot;, &quot;Population_M&quot;, &quot;GDP_Billion_USD&quot;, &quot;Region&quot;, &quot;IncomeGroup&quot;, &quot;Year&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, 3, 4, &quot;Sample 5&quot;, &quot;Sample 6&quot;, 7},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, 4, 5, &quot;Sample 6&quot;, &quot;Sample 7&quot;, 8}
+            }
+        )
+    otherwise
+        #table({&quot;ISO_Code&quot;, &quot;Country_Name&quot;, &quot;Population_M&quot;, &quot;GDP_Billion_USD&quot;, &quot;Region&quot;, &quot;IncomeGroup&quot;, &quot;Year&quot;}, {}),
+    #&quot;Joined Joined&quot; = Table.NestedJoin(Source, {&quot;ISO_Code&quot;, &quot;Year&quot;}, Classify_Energy_Type, {&quot;ISO_Code&quot;, &quot;Year&quot;}, &quot;Joined&quot;, JoinKind.LeftOuter),
+    #&quot;Expanded Joined&quot; = Table.ExpandTableColumn(#&quot;Joined Joined&quot;, &quot;Joined&quot;, {&quot;Country&quot;, &quot;Coal_TWh&quot;, &quot;Gas_TWh&quot;, &quot;Nuclear_TWh&quot;, &quot;Hydro_TWh&quot;, &quot;Wind_TWh&quot;, &quot;Solar_TWh&quot;, &quot;Other_Renewables_TWh&quot;}),
+    #&quot;Added GenPerCapita_MWh&quot; = Table.AddColumn(#&quot;Expanded Joined&quot;, &quot;GenPerCapita_MWh&quot;, each ([Generation_TWh] * 1000000) / ([Population_M] * 1000000)),
+    #&quot;Added GenPerGDP&quot; = Table.AddColumn(#&quot;Added GenPerCapita_MWh&quot;, &quot;GenPerGDP&quot;, each [Generation_TWh] / [GDP_Billion_USD]),
+    #&quot;Removed Columns&quot; = Table.RemoveColumns(#&quot;Added GenPerGDP&quot;, {&quot;Country_Name&quot;}),
+    Result = #&quot;Removed Columns&quot;
+in
+    Result</pre>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">12_Real_Estate_Valuation — Generated Power Query M</h3>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Census_+_Zillow</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: textscan
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;zip_code&quot;, &quot;median_household_income&quot;, &quot;population&quot;, &quot;poverty_rate&quot;, &quot;education_bachelors_pct&quot;, &quot;crime_index&quot;, &quot;school_rating&quot;},
+            {
+                {&quot;Sample 1&quot;, 2, 3, 4, 5, 6, 7},
+                {&quot;Sample 2&quot;, 3, 4, 5, 6, 7, 8}
+            }
+        )
+    otherwise
+        #table({&quot;zip_code&quot;, &quot;median_household_income&quot;, &quot;population&quot;, &quot;poverty_rate&quot;, &quot;education_bachelors_pct&quot;, &quot;crime_index&quot;, &quot;school_rating&quot;}, {}),
+    #&quot;Joined Joined&quot; = Table.NestedJoin(Source, &quot;zip_code&quot;, Zillow_Estimates, &quot;zip_code&quot;, &quot;Joined&quot;, JoinKind.Inner),
+    #&quot;Expanded Joined&quot; = Table.ExpandTableColumn(#&quot;Joined Joined&quot;, &quot;Joined&quot;, {&quot;zestimate_median&quot;, &quot;rent_zestimate&quot;, &quot;price_change_yoy_pct&quot;, &quot;days_on_market_median&quot;, &quot;month&quot;}),
+    Result = #&quot;Expanded Joined&quot;
+in
+    Result</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Market_Summary</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: snowflake
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;listing_id&quot;, &quot;address&quot;, &quot;city&quot;, &quot;state&quot;, &quot;zip_code&quot;, &quot;latitude&quot;, &quot;longitude&quot;, &quot;property_type&quot;, &quot;bedrooms&quot;, &quot;bathrooms&quot;, &quot;sqft&quot;, &quot;lot_size_sqft&quot;, &quot;year_built&quot;, &quot;list_price&quot;, &quot;list_date&quot;, &quot;status&quot;, &quot;agent_id&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7, &quot;Sample 8&quot;, 9, 10, 11, 12, 13, 14, 15, &quot;Sample 16&quot;, &quot;Sample 17&quot;},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, &quot;Sample 6&quot;, 7, 8, &quot;Sample 9&quot;, 10, 11, 12, 13, 14, 15, 16, &quot;Sample 17&quot;, &quot;Sample 18&quot;}
+            }
+        )
+    otherwise
+        #table({&quot;listing_id&quot;, &quot;address&quot;, &quot;city&quot;, &quot;state&quot;, &quot;zip_code&quot;, &quot;latitude&quot;, &quot;longitude&quot;, &quot;property_type&quot;, &quot;bedrooms&quot;, &quot;bathrooms&quot;, &quot;sqft&quot;, &quot;lot_size_sqft&quot;, &quot;year_built&quot;, &quot;list_price&quot;, &quot;list_date&quot;, &quot;status&quot;, &quot;agent_id&quot;}, {}),
+    #&quot;Joined Joined&quot; = Table.NestedJoin(Source, &quot;listing_id&quot;, Sales_Transactions, &quot;listing_id&quot;, &quot;Joined&quot;, JoinKind.LeftOuter),
+    #&quot;Expanded Joined&quot; = Table.ExpandTableColumn(#&quot;Joined Joined&quot;, &quot;Joined&quot;, {&quot;transaction_id&quot;, &quot;sale_price&quot;, &quot;sale_date&quot;, &quot;buyer_id&quot;, &quot;financing_type&quot;, &quot;closing_costs&quot;, &quot;commission_pct&quot;}),
+    #&quot;Joined Joined 2&quot; = Table.NestedJoin(#&quot;Expanded Joined&quot;, &quot;zip_code&quot;, Census_+_Zillow, &quot;zip_code&quot;, &quot;Joined&quot;, JoinKind.LeftOuter),
+    #&quot;Expanded Joined 2&quot; = Table.ExpandTableColumn(#&quot;Joined Joined 2&quot;, &quot;Joined&quot;, {&quot;median_household_income&quot;, &quot;population&quot;, &quot;poverty_rate&quot;, &quot;education_bachelors_pct&quot;, &quot;crime_index&quot;, &quot;school_rating&quot;}),
+    #&quot;Added PricePerSqft&quot; = Table.AddColumn(#&quot;Expanded Joined 2&quot;, &quot;PricePerSqft&quot;, each [list_price] / [sqft]),
+    #&quot;Added SaleToListRatio&quot; = Table.AddColumn(#&quot;Added PricePerSqft&quot;, &quot;SaleToListRatio&quot;, each if not (null = [sale_price]) then [sale_price] / [list_price] else NULL ),
+    #&quot;Added DaysOnMarket&quot; = Table.AddColumn(#&quot;Added SaleToListRatio&quot;, &quot;DaysOnMarket&quot;, each if not (null = [sale_date]) then DATEDIFF('day', [list_date], [sale_date]) else DATEDIFF('day', [list_date], TODAY()) ),
+    #&quot;Added PropertyAge&quot; = Table.AddColumn(#&quot;Added DaysOnMarket&quot;, &quot;PropertyAge&quot;, each YEAR(TODAY()) - [year_built]),
+    #&quot;Added PriceToIncome&quot; = Table.AddColumn(#&quot;Added PropertyAge&quot;, &quot;PriceToIncome&quot;, each [list_price] / [median_household_income]),
+    #&quot;Added ZestimateGap&quot; = Table.AddColumn(#&quot;Added PriceToIncome&quot;, &quot;ZestimateGap&quot;, each ([list_price] - [zestimate_median]) / [zestimate_median]),
+    #&quot;Added MarketSegment&quot; = Table.AddColumn(#&quot;Added ZestimateGap&quot;, &quot;MarketSegment&quot;, each if [list_price] &lt; 200000 then 'Starter' else if [list_price] &lt; 500000 then 'Mid-Market' else if [list_price] &lt; 1000000 then 'Upscale' else 'Luxury' ),
+    #&quot;Added CapRate&quot; = Table.AddColumn(#&quot;Added MarketSegment&quot;, &quot;CapRate&quot;, each ([rent_zestimate] * 12) / [list_price]),
+    #&quot;Renamed Columns&quot; = Table.RenameColumns(#&quot;Added CapRate&quot;, {{&quot;listing_id&quot;, &quot;ListingID&quot;}, {&quot;zip_code&quot;, &quot;ZipCode&quot;}}),
+    Result = #&quot;Renamed Columns&quot;
+in
+    Result</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Property_Valuation</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: snowflake
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;listing_id&quot;, &quot;address&quot;, &quot;city&quot;, &quot;state&quot;, &quot;zip_code&quot;, &quot;latitude&quot;, &quot;longitude&quot;, &quot;property_type&quot;, &quot;bedrooms&quot;, &quot;bathrooms&quot;, &quot;sqft&quot;, &quot;lot_size_sqft&quot;, &quot;year_built&quot;, &quot;list_price&quot;, &quot;list_date&quot;, &quot;status&quot;, &quot;agent_id&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7, &quot;Sample 8&quot;, 9, 10, 11, 12, 13, 14, 15, &quot;Sample 16&quot;, &quot;Sample 17&quot;},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, &quot;Sample 6&quot;, 7, 8, &quot;Sample 9&quot;, 10, 11, 12, 13, 14, 15, 16, &quot;Sample 17&quot;, &quot;Sample 18&quot;}
+            }
+        )
+    otherwise
+        #table({&quot;listing_id&quot;, &quot;address&quot;, &quot;city&quot;, &quot;state&quot;, &quot;zip_code&quot;, &quot;latitude&quot;, &quot;longitude&quot;, &quot;property_type&quot;, &quot;bedrooms&quot;, &quot;bathrooms&quot;, &quot;sqft&quot;, &quot;lot_size_sqft&quot;, &quot;year_built&quot;, &quot;list_price&quot;, &quot;list_date&quot;, &quot;status&quot;, &quot;agent_id&quot;}, {}),
+    #&quot;Joined Joined&quot; = Table.NestedJoin(Source, &quot;listing_id&quot;, Sales_Transactions, &quot;listing_id&quot;, &quot;Joined&quot;, JoinKind.LeftOuter),
+    #&quot;Expanded Joined&quot; = Table.ExpandTableColumn(#&quot;Joined Joined&quot;, &quot;Joined&quot;, {&quot;transaction_id&quot;, &quot;sale_price&quot;, &quot;sale_date&quot;, &quot;buyer_id&quot;, &quot;financing_type&quot;, &quot;closing_costs&quot;, &quot;commission_pct&quot;}),
+    #&quot;Joined Joined 2&quot; = Table.NestedJoin(#&quot;Expanded Joined&quot;, &quot;zip_code&quot;, Census_+_Zillow, &quot;zip_code&quot;, &quot;Joined&quot;, JoinKind.LeftOuter),
+    #&quot;Expanded Joined 2&quot; = Table.ExpandTableColumn(#&quot;Joined Joined 2&quot;, &quot;Joined&quot;, {&quot;median_household_income&quot;, &quot;population&quot;, &quot;poverty_rate&quot;, &quot;education_bachelors_pct&quot;, &quot;crime_index&quot;, &quot;school_rating&quot;}),
+    #&quot;Added PricePerSqft&quot; = Table.AddColumn(#&quot;Expanded Joined 2&quot;, &quot;PricePerSqft&quot;, each [list_price] / [sqft]),
+    #&quot;Added SaleToListRatio&quot; = Table.AddColumn(#&quot;Added PricePerSqft&quot;, &quot;SaleToListRatio&quot;, each if not (null = [sale_price]) then [sale_price] / [list_price] else NULL ),
+    #&quot;Added DaysOnMarket&quot; = Table.AddColumn(#&quot;Added SaleToListRatio&quot;, &quot;DaysOnMarket&quot;, each if not (null = [sale_date]) then DATEDIFF('day', [list_date], [sale_date]) else DATEDIFF('day', [list_date], TODAY()) ),
+    #&quot;Added PropertyAge&quot; = Table.AddColumn(#&quot;Added DaysOnMarket&quot;, &quot;PropertyAge&quot;, each YEAR(TODAY()) - [year_built]),
+    #&quot;Added PriceToIncome&quot; = Table.AddColumn(#&quot;Added PropertyAge&quot;, &quot;PriceToIncome&quot;, each [list_price] / [median_household_income]),
+    #&quot;Added ZestimateGap&quot; = Table.AddColumn(#&quot;Added PriceToIncome&quot;, &quot;ZestimateGap&quot;, each ([list_price] - [zestimate_median]) / [zestimate_median]),
+    #&quot;Added MarketSegment&quot; = Table.AddColumn(#&quot;Added ZestimateGap&quot;, &quot;MarketSegment&quot;, each if [list_price] &lt; 200000 then 'Starter' else if [list_price] &lt; 500000 then 'Mid-Market' else if [list_price] &lt; 1000000 then 'Upscale' else 'Luxury' ),
+    #&quot;Added CapRate&quot; = Table.AddColumn(#&quot;Added MarketSegment&quot;, &quot;CapRate&quot;, each ([rent_zestimate] * 12) / [list_price]),
+    #&quot;Renamed Columns&quot; = Table.RenameColumns(#&quot;Added CapRate&quot;, {{&quot;listing_id&quot;, &quot;ListingID&quot;}, {&quot;zip_code&quot;, &quot;ZipCode&quot;}}),
+    Result = #&quot;Renamed Columns&quot;
+in
+    Result</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Sales_Transactions</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: postgres
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;transaction_id&quot;, &quot;listing_id&quot;, &quot;sale_price&quot;, &quot;sale_date&quot;, &quot;buyer_id&quot;, &quot;financing_type&quot;, &quot;closing_costs&quot;, &quot;commission_pct&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, 3, 4, &quot;Sample 5&quot;, &quot;Sample 6&quot;, 7, 8},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, 4, 5, &quot;Sample 6&quot;, &quot;Sample 7&quot;, 8, 9}
+            }
+        )
+    otherwise
+        #table({&quot;transaction_id&quot;, &quot;listing_id&quot;, &quot;sale_price&quot;, &quot;sale_date&quot;, &quot;buyer_id&quot;, &quot;financing_type&quot;, &quot;closing_costs&quot;, &quot;commission_pct&quot;}, {})  // Empty table on error
+in
+    Source</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Zillow_Estimates</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: json
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;zip_code&quot;, &quot;zestimate_median&quot;, &quot;rent_zestimate&quot;, &quot;price_change_yoy_pct&quot;, &quot;days_on_market_median&quot;, &quot;month&quot;},
+            {
+                {&quot;Sample 1&quot;, 2, 3, 4, 5, &quot;Sample 6&quot;},
+                {&quot;Sample 2&quot;, 3, 4, 5, 6, &quot;Sample 7&quot;}
+            }
+        )
+    otherwise
+        #table({&quot;zip_code&quot;, &quot;zestimate_median&quot;, &quot;rent_zestimate&quot;, &quot;price_change_yoy_pct&quot;, &quot;days_on_market_median&quot;, &quot;month&quot;}, {})  // Empty table on error
+in
+    Source</pre>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">13_Financial_Reconciliation — Generated Power Query M</h3>
+<h4 style="margin:8px 0 4px;color:#0078d4;">GL_+_Chart_of_Accounts</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: textscan
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;AccountCode&quot;, &quot;AccountName&quot;, &quot;AccountType&quot;, &quot;ParentAccount&quot;, &quot;IsActive&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, 5},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6}
+            }
+        )
+    otherwise
+        #table({&quot;AccountCode&quot;, &quot;AccountName&quot;, &quot;AccountType&quot;, &quot;ParentAccount&quot;, &quot;IsActive&quot;}, {}),
+    #&quot;Joined Joined&quot; = Table.NestedJoin(Source, &quot;AccountCode&quot;, Parse_GL_Entries, &quot;AccountCode&quot;, &quot;Joined&quot;, JoinKind.LeftOuter),
+    #&quot;Expanded Joined&quot; = Table.ExpandTableColumn(#&quot;Joined Joined&quot;, &quot;Joined&quot;, {&quot;JournalID&quot;, &quot;PostingDate&quot;, &quot;Description&quot;, &quot;DebitAmount&quot;, &quot;CreditAmount&quot;, &quot;CostCenter&quot;, &quot;Currency&quot;, &quot;Source&quot;, &quot;ApprovedBy&quot;}),
+    Result = #&quot;Expanded Joined&quot;
+in
+    Result</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Parse_GL_Entries</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: excel-direct
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;JournalID&quot;, &quot;PostingDate&quot;, &quot;AccountCode&quot;, &quot;Description&quot;, &quot;DebitAmount&quot;, &quot;CreditAmount&quot;, &quot;CostCenter&quot;, &quot;Currency&quot;, &quot;Source&quot;, &quot;ApprovedBy&quot;},
+            {
+                {&quot;Sample 1&quot;, 2, &quot;Sample 3&quot;, &quot;Sample 4&quot;, 5, 6, &quot;Sample 7&quot;, &quot;Sample 8&quot;, &quot;Sample 9&quot;, &quot;Sample 10&quot;},
+                {&quot;Sample 2&quot;, 3, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7, &quot;Sample 8&quot;, &quot;Sample 9&quot;, &quot;Sample 10&quot;, &quot;Sample 11&quot;}
+            }
+        )
+    otherwise
+        #table({&quot;JournalID&quot;, &quot;PostingDate&quot;, &quot;AccountCode&quot;, &quot;Description&quot;, &quot;DebitAmount&quot;, &quot;CreditAmount&quot;, &quot;CostCenter&quot;, &quot;Currency&quot;, &quot;Source&quot;, &quot;ApprovedBy&quot;}, {}),
+    #&quot;Split AccountCode&quot; = Table.SplitColumn(Source, &quot;AccountCode&quot;, Splitter.SplitTextByDelimiter(&quot;,&quot;, QuoteStyle.None)),
+    #&quot;Added NetAmount&quot; = Table.AddColumn(#&quot;Split AccountCode&quot;, &quot;NetAmount&quot;, each [DebitAmount] - [CreditAmount]),
+    #&quot;Added TransDirection&quot; = Table.AddColumn(#&quot;Added NetAmount&quot;, &quot;TransDirection&quot;, each if [NetAmount] &gt; 0 then 'Debit' else if [NetAmount] &lt; 0 then 'Credit' else 'Zero' ),
+    #&quot;Trimmed Text&quot; = Table.TransformColumns(#&quot;Added TransDirection&quot;, {{&quot;Description&quot;, Text.Trim}}),
+    #&quot;Uppercased&quot; = Table.TransformColumns(#&quot;Trimmed Text&quot;, {{&quot;CostCenter&quot;, Text.Upper}}),
+    #&quot;Added PostingMonth&quot; = Table.AddColumn(#&quot;Uppercased&quot;, &quot;PostingMonth&quot;, each STR(YEAR([PostingDate])) + '-' + Text.End('0' + STR(MONTH([PostingDate])), 2)),
+    #&quot;Added FiscalQuarter&quot; = Table.AddColumn(#&quot;Added PostingMonth&quot;, &quot;FiscalQuarter&quot;, each if MONTH([PostingDate]) &lt;= 3 then 'Q1' else if MONTH([PostingDate]) &lt;= 6 then 'Q2' else if MONTH([PostingDate]) &lt;= 9 then 'Q3' else 'Q4' ),
+    Result = #&quot;Added FiscalQuarter&quot;
+in
+    Result</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Reconciliation_Detail</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: sqlserver
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;StatementID&quot;, &quot;TransactionDate&quot;, &quot;Reference&quot;, &quot;PayeePayer&quot;, &quot;Amount&quot;, &quot;Balance&quot;, &quot;BankAccount&quot;, &quot;TransactionType&quot;, &quot;CheckNumber&quot;},
+            {
+                {&quot;Sample 1&quot;, 2, &quot;Sample 3&quot;, &quot;Sample 4&quot;, 5, 6, &quot;Sample 7&quot;, &quot;Sample 8&quot;, &quot;Sample 9&quot;},
+                {&quot;Sample 2&quot;, 3, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7, &quot;Sample 8&quot;, &quot;Sample 9&quot;, &quot;Sample 10&quot;}
+            }
+        )
+    otherwise
+        #table({&quot;StatementID&quot;, &quot;TransactionDate&quot;, &quot;Reference&quot;, &quot;PayeePayer&quot;, &quot;Amount&quot;, &quot;Balance&quot;, &quot;BankAccount&quot;, &quot;TransactionType&quot;, &quot;CheckNumber&quot;}, {}),
+    #&quot;Split Reference&quot; = Table.SplitColumn(Source, &quot;Reference&quot;, Splitter.SplitTextByDelimiter(&quot;,&quot;, QuoteStyle.None)),
+    #&quot;Trimmed Text&quot; = Table.TransformColumns(#&quot;Split Reference&quot;, {{&quot;PayeePayer&quot;, Text.Trim}}),
+    #&quot;Replaced Nulls in CheckNumber&quot; = Table.ReplaceValue(#&quot;Trimmed Text&quot;, null, &quot;N/A&quot;, Replacer.ReplaceValue, {&quot;CheckNumber&quot;}),
+    #&quot;Added AbsAmount&quot; = Table.AddColumn(#&quot;Replaced Nulls in CheckNumber&quot;, &quot;AbsAmount&quot;, each ABS([Amount])),
+    #&quot;Added BankDirection&quot; = Table.AddColumn(#&quot;Added AbsAmount&quot;, &quot;BankDirection&quot;, each if [Amount] &gt; 0 then 'Inflow' else 'Outflow' ),
+    #&quot;Joined Joined&quot; = Table.NestedJoin(#&quot;Added BankDirection&quot;, {&quot;PostingDate&quot;, &quot;NetAmount&quot;}, GL_+_Chart_of_Accounts, {&quot;TransactionDate&quot;, &quot;Amount&quot;}, &quot;Joined&quot;, JoinKind.FullOuter),
+    #&quot;Expanded Joined&quot; = Table.ExpandTableColumn(#&quot;Joined Joined&quot;, &quot;Joined&quot;, {&quot;AccountCode&quot;, &quot;AccountName&quot;, &quot;AccountType&quot;, &quot;ParentAccount&quot;, &quot;IsActive&quot;}),
+    #&quot;Added MatchStatus&quot; = Table.AddColumn(#&quot;Expanded Joined&quot;, &quot;MatchStatus&quot;, each if not (null = [JournalID]) and not (null = [StatementID]) then 'Matched' else if not (null = [JournalID]) then 'GL Only' else 'Bank Only' ),
+    #&quot;Added Variance&quot; = Table.AddColumn(#&quot;Added MatchStatus&quot;, &quot;Variance&quot;, each if not (null = [NetAmount]) and not (null = [Amount]) then ABS([NetAmount] - [Amount]) else 0 ),
+    #&quot;Added NeedsReview&quot; = Table.AddColumn(#&quot;Added Variance&quot;, &quot;NeedsReview&quot;, each if [MatchStatus] &lt;&gt; 'Matched' or [Variance] &gt; 0.01 then 'Yes' else 'No' ),
+    Result = #&quot;Added NeedsReview&quot;
+in
+    Result</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Reconciliation_Summary</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: sqlserver
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;StatementID&quot;, &quot;TransactionDate&quot;, &quot;Reference&quot;, &quot;PayeePayer&quot;, &quot;Amount&quot;, &quot;Balance&quot;, &quot;BankAccount&quot;, &quot;TransactionType&quot;, &quot;CheckNumber&quot;},
+            {
+                {&quot;Sample 1&quot;, 2, &quot;Sample 3&quot;, &quot;Sample 4&quot;, 5, 6, &quot;Sample 7&quot;, &quot;Sample 8&quot;, &quot;Sample 9&quot;},
+                {&quot;Sample 2&quot;, 3, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7, &quot;Sample 8&quot;, &quot;Sample 9&quot;, &quot;Sample 10&quot;}
+            }
+        )
+    otherwise
+        #table({&quot;StatementID&quot;, &quot;TransactionDate&quot;, &quot;Reference&quot;, &quot;PayeePayer&quot;, &quot;Amount&quot;, &quot;Balance&quot;, &quot;BankAccount&quot;, &quot;TransactionType&quot;, &quot;CheckNumber&quot;}, {}),
+    #&quot;Split Reference&quot; = Table.SplitColumn(Source, &quot;Reference&quot;, Splitter.SplitTextByDelimiter(&quot;,&quot;, QuoteStyle.None)),
+    #&quot;Trimmed Text&quot; = Table.TransformColumns(#&quot;Split Reference&quot;, {{&quot;PayeePayer&quot;, Text.Trim}}),
+    #&quot;Replaced Nulls in CheckNumber&quot; = Table.ReplaceValue(#&quot;Trimmed Text&quot;, null, &quot;N/A&quot;, Replacer.ReplaceValue, {&quot;CheckNumber&quot;}),
+    #&quot;Added AbsAmount&quot; = Table.AddColumn(#&quot;Replaced Nulls in CheckNumber&quot;, &quot;AbsAmount&quot;, each ABS([Amount])),
+    #&quot;Added BankDirection&quot; = Table.AddColumn(#&quot;Added AbsAmount&quot;, &quot;BankDirection&quot;, each if [Amount] &gt; 0 then 'Inflow' else 'Outflow' ),
+    #&quot;Joined Joined&quot; = Table.NestedJoin(#&quot;Added BankDirection&quot;, {&quot;PostingDate&quot;, &quot;NetAmount&quot;}, GL_+_Chart_of_Accounts, {&quot;TransactionDate&quot;, &quot;Amount&quot;}, &quot;Joined&quot;, JoinKind.FullOuter),
+    #&quot;Expanded Joined&quot; = Table.ExpandTableColumn(#&quot;Joined Joined&quot;, &quot;Joined&quot;, {&quot;AccountCode&quot;, &quot;AccountName&quot;, &quot;AccountType&quot;, &quot;ParentAccount&quot;, &quot;IsActive&quot;}),
+    #&quot;Added MatchStatus&quot; = Table.AddColumn(#&quot;Expanded Joined&quot;, &quot;MatchStatus&quot;, each if not (null = [JournalID]) and not (null = [StatementID]) then 'Matched' else if not (null = [JournalID]) then 'GL Only' else 'Bank Only' ),
+    #&quot;Added Variance&quot; = Table.AddColumn(#&quot;Added MatchStatus&quot;, &quot;Variance&quot;, each if not (null = [NetAmount]) and not (null = [Amount]) then ABS([NetAmount] - [Amount]) else 0 ),
+    #&quot;Added NeedsReview&quot; = Table.AddColumn(#&quot;Added Variance&quot;, &quot;NeedsReview&quot;, each if [MatchStatus] &lt;&gt; 'Matched' or [Variance] &gt; 0.01 then 'Yes' else 'No' ),
+    Result = #&quot;Added NeedsReview&quot;
+in
+    Result</pre>
+</div>
+<div class="card" style="margin-bottom:16px;">
+<h3 style="margin:0 0 8px;">14_Healthcare_Patient_Flow — Generated Power Query M</h3>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Admissions_+_Procedures</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: postgres
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;admission_id&quot;, &quot;patient_id&quot;, &quot;admit_date&quot;, &quot;discharge_date&quot;, &quot;department&quot;, &quot;attending_physician&quot;, &quot;primary_diagnosis_code&quot;, &quot;admission_type&quot;, &quot;insurance_type&quot;, &quot;bed_type&quot;, &quot;discharge_disposition&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, 3, 4, &quot;Sample 5&quot;, &quot;Sample 6&quot;, &quot;Sample 7&quot;, &quot;Sample 8&quot;, &quot;Sample 9&quot;, &quot;Sample 10&quot;, &quot;Sample 11&quot;},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, 4, 5, &quot;Sample 6&quot;, &quot;Sample 7&quot;, &quot;Sample 8&quot;, &quot;Sample 9&quot;, &quot;Sample 10&quot;, &quot;Sample 11&quot;, &quot;Sample 12&quot;}
+            }
+        )
+    otherwise
+        #table({&quot;admission_id&quot;, &quot;patient_id&quot;, &quot;admit_date&quot;, &quot;discharge_date&quot;, &quot;department&quot;, &quot;attending_physician&quot;, &quot;primary_diagnosis_code&quot;, &quot;admission_type&quot;, &quot;insurance_type&quot;, &quot;bed_type&quot;, &quot;discharge_disposition&quot;}, {}),
+    #&quot;Joined Joined&quot; = Table.NestedJoin(Source, &quot;admission_id&quot;, Procedures, &quot;admission_id&quot;, &quot;Joined&quot;, JoinKind.LeftOuter),
+    #&quot;Expanded Joined&quot; = Table.ExpandTableColumn(#&quot;Joined Joined&quot;, &quot;Joined&quot;, {&quot;procedure_id&quot;, &quot;procedure_code&quot;, &quot;procedure_name&quot;, &quot;procedure_date&quot;, &quot;duration_minutes&quot;, &quot;cost&quot;, &quot;performing_physician&quot;}),
+    Result = #&quot;Expanded Joined&quot;
+in
+    Result</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Department_KPI_Summary</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: textscan
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;diagnosis_code&quot;, &quot;diagnosis_description&quot;, &quot;diagnosis_category&quot;, &quot;drg_code&quot;, &quot;drg_weight&quot;, &quot;expected_los_days&quot;, &quot;cms_reimbursement&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, 5, 6, 7},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7, 8}
+            }
+        )
+    otherwise
+        #table({&quot;diagnosis_code&quot;, &quot;diagnosis_description&quot;, &quot;diagnosis_category&quot;, &quot;drg_code&quot;, &quot;drg_weight&quot;, &quot;expected_los_days&quot;, &quot;cms_reimbursement&quot;}, {}),
+    #&quot;Joined Joined&quot; = Table.NestedJoin(Source, &quot;primary_diagnosis_code&quot;, Admissions_+_Procedures, &quot;diagnosis_code&quot;, &quot;Joined&quot;, JoinKind.LeftOuter),
+    #&quot;Expanded Joined&quot; = Table.ExpandTableColumn(#&quot;Joined Joined&quot;, &quot;Joined&quot;, {&quot;admission_id&quot;, &quot;patient_id&quot;, &quot;admit_date&quot;, &quot;discharge_date&quot;, &quot;department&quot;, &quot;attending_physician&quot;, &quot;primary_diagnosis_code&quot;, &quot;admission_type&quot;, &quot;insurance_type&quot;, &quot;bed_type&quot;, &quot;discharge_disposition&quot;}),
+    #&quot;Added LOS_Days&quot; = Table.AddColumn(#&quot;Expanded Joined&quot;, &quot;LOS_Days&quot;, each DATEDIFF('day', [admit_date], [discharge_date])),
+    #&quot;Added LOS_Variance&quot; = Table.AddColumn(#&quot;Added LOS_Days&quot;, &quot;LOS_Variance&quot;, each [LOS_Days] - [expected_los_days]),
+    #&quot;Added LOS_Status&quot; = Table.AddColumn(#&quot;Added LOS_Variance&quot;, &quot;LOS_Status&quot;, each if [LOS_Variance] &lt;= -1 then 'Below Expected' else if [LOS_Variance] &lt;= 1 then 'On Track' else 'Extended' ),
+    #&quot;Added TotalCost&quot; = Table.AddColumn(#&quot;Added LOS_Status&quot;, &quot;TotalCost&quot;, each [cost] + ([LOS_Days] * 2500)),
+    #&quot;Added CostVariance&quot; = Table.AddColumn(#&quot;Added TotalCost&quot;, &quot;CostVariance&quot;, each [TotalCost] - [cms_reimbursement]),
+    #&quot;Added Profitable&quot; = Table.AddColumn(#&quot;Added CostVariance&quot;, &quot;Profitable&quot;, each if [CostVariance] &lt;= 0 then 'Yes' else 'No' ),
+    #&quot;Added CaseMixIndex&quot; = Table.AddColumn(#&quot;Added Profitable&quot;, &quot;CaseMixIndex&quot;, each [drg_weight]),
+    #&quot;Added Readmission30&quot; = Table.AddColumn(#&quot;Added CaseMixIndex&quot;, &quot;Readmission30&quot;, each if [discharge_disposition] = 'Readmitted' and [LOS_Days] &lt; 30 then 1 else 0 ),
+    #&quot;Added AdmitHour&quot; = Table.AddColumn(#&quot;Added Readmission30&quot;, &quot;AdmitHour&quot;, each DATEPART('hour', [admit_date])),
+    #&quot;Added AdmitDayOfWeek&quot; = Table.AddColumn(#&quot;Added AdmitHour&quot;, &quot;AdmitDayOfWeek&quot;, each DATENAME('weekday', [admit_date])),
+    #&quot;Renamed Columns&quot; = Table.RenameColumns(#&quot;Added AdmitDayOfWeek&quot;, {{&quot;admission_id&quot;, &quot;AdmissionID&quot;}, {&quot;patient_id&quot;, &quot;PatientID&quot;}}),
+    Result = #&quot;Renamed Columns&quot;
+in
+    Result</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Patient_Flow_Detail</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: textscan
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;diagnosis_code&quot;, &quot;diagnosis_description&quot;, &quot;diagnosis_category&quot;, &quot;drg_code&quot;, &quot;drg_weight&quot;, &quot;expected_los_days&quot;, &quot;cms_reimbursement&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, 5, 6, 7},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7, 8}
+            }
+        )
+    otherwise
+        #table({&quot;diagnosis_code&quot;, &quot;diagnosis_description&quot;, &quot;diagnosis_category&quot;, &quot;drg_code&quot;, &quot;drg_weight&quot;, &quot;expected_los_days&quot;, &quot;cms_reimbursement&quot;}, {}),
+    #&quot;Joined Joined&quot; = Table.NestedJoin(Source, &quot;primary_diagnosis_code&quot;, Admissions_+_Procedures, &quot;diagnosis_code&quot;, &quot;Joined&quot;, JoinKind.LeftOuter),
+    #&quot;Expanded Joined&quot; = Table.ExpandTableColumn(#&quot;Joined Joined&quot;, &quot;Joined&quot;, {&quot;admission_id&quot;, &quot;patient_id&quot;, &quot;admit_date&quot;, &quot;discharge_date&quot;, &quot;department&quot;, &quot;attending_physician&quot;, &quot;primary_diagnosis_code&quot;, &quot;admission_type&quot;, &quot;insurance_type&quot;, &quot;bed_type&quot;, &quot;discharge_disposition&quot;}),
+    #&quot;Added LOS_Days&quot; = Table.AddColumn(#&quot;Expanded Joined&quot;, &quot;LOS_Days&quot;, each DATEDIFF('day', [admit_date], [discharge_date])),
+    #&quot;Added LOS_Variance&quot; = Table.AddColumn(#&quot;Added LOS_Days&quot;, &quot;LOS_Variance&quot;, each [LOS_Days] - [expected_los_days]),
+    #&quot;Added LOS_Status&quot; = Table.AddColumn(#&quot;Added LOS_Variance&quot;, &quot;LOS_Status&quot;, each if [LOS_Variance] &lt;= -1 then 'Below Expected' else if [LOS_Variance] &lt;= 1 then 'On Track' else 'Extended' ),
+    #&quot;Added TotalCost&quot; = Table.AddColumn(#&quot;Added LOS_Status&quot;, &quot;TotalCost&quot;, each [cost] + ([LOS_Days] * 2500)),
+    #&quot;Added CostVariance&quot; = Table.AddColumn(#&quot;Added TotalCost&quot;, &quot;CostVariance&quot;, each [TotalCost] - [cms_reimbursement]),
+    #&quot;Added Profitable&quot; = Table.AddColumn(#&quot;Added CostVariance&quot;, &quot;Profitable&quot;, each if [CostVariance] &lt;= 0 then 'Yes' else 'No' ),
+    #&quot;Added CaseMixIndex&quot; = Table.AddColumn(#&quot;Added Profitable&quot;, &quot;CaseMixIndex&quot;, each [drg_weight]),
+    #&quot;Added Readmission30&quot; = Table.AddColumn(#&quot;Added CaseMixIndex&quot;, &quot;Readmission30&quot;, each if [discharge_disposition] = 'Readmitted' and [LOS_Days] &lt; 30 then 1 else 0 ),
+    #&quot;Added AdmitHour&quot; = Table.AddColumn(#&quot;Added Readmission30&quot;, &quot;AdmitHour&quot;, each DATEPART('hour', [admit_date])),
+    #&quot;Added AdmitDayOfWeek&quot; = Table.AddColumn(#&quot;Added AdmitHour&quot;, &quot;AdmitDayOfWeek&quot;, each DATENAME('weekday', [admit_date])),
+    #&quot;Renamed Columns&quot; = Table.RenameColumns(#&quot;Added AdmitDayOfWeek&quot;, {{&quot;admission_id&quot;, &quot;AdmissionID&quot;}, {&quot;patient_id&quot;, &quot;PatientID&quot;}}),
+    Result = #&quot;Renamed Columns&quot;
+in
+    Result</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Physician_Performance</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: excel-direct
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;physician_id&quot;, &quot;physician_name&quot;, &quot;specialty&quot;, &quot;department&quot;, &quot;fte&quot;, &quot;hire_date&quot;, &quot;credential&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, 5, 6, &quot;Sample 7&quot;},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7, &quot;Sample 8&quot;}
+            }
+        )
+    otherwise
+        #table({&quot;physician_id&quot;, &quot;physician_name&quot;, &quot;specialty&quot;, &quot;department&quot;, &quot;fte&quot;, &quot;hire_date&quot;, &quot;credential&quot;}, {}),
+    #&quot;Joined Joined&quot; = Table.NestedJoin(Source, &quot;attending_physician&quot;, RightTable, &quot;physician_name&quot;, &quot;Joined&quot;, JoinKind.LeftOuter),
+    Result = #&quot;Joined Joined&quot;
+in
+    Result</pre>
+<h4 style="margin:8px 0 4px;color:#0078d4;">Procedures</h4>
+<pre style="background:#f3f2f1;padding:12px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid #edebe9;">let
+    // TODO: Configure the data source for connector type: postgres
+    // Replace the sample table below with the actual source expression.
+    Source = try
+        #table(
+            {&quot;procedure_id&quot;, &quot;admission_id&quot;, &quot;procedure_code&quot;, &quot;procedure_name&quot;, &quot;procedure_date&quot;, &quot;duration_minutes&quot;, &quot;cost&quot;, &quot;performing_physician&quot;},
+            {
+                {&quot;Sample 1&quot;, &quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, 5, 6, 7, &quot;Sample 8&quot;},
+                {&quot;Sample 2&quot;, &quot;Sample 3&quot;, &quot;Sample 4&quot;, &quot;Sample 5&quot;, 6, 7, 8, &quot;Sample 9&quot;}
+            }
+        )
+    otherwise
+        #table({&quot;procedure_id&quot;, &quot;admission_id&quot;, &quot;procedure_code&quot;, &quot;procedure_name&quot;, &quot;procedure_date&quot;, &quot;duration_minutes&quot;, &quot;cost&quot;, &quot;performing_physician&quot;}, {})  // Empty table on error
+in
+    Source</pre>
+</div>
 </div> <!-- /section -->
 
 </div> <!-- /container -->
 <div class="report-footer">
-    <p>Tableau &#8594; Power BI Migration Tool &nbsp;|&nbsp; Report generated 2026-04-02 11:26</p>
+    <p>Tableau &#8594; Power BI Migration Tool &nbsp;|&nbsp; Report generated 2026-05-28 19:30</p>
     <p>Open .pbip files in Power BI Desktop (Developer Mode) to validate</p>
 </div>
 <script>

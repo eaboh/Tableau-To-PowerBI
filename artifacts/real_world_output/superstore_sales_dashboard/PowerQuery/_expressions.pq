@@ -1,0 +1,1 @@
+expression DataFolder = "C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\real_world_output\\superstore_sales_dashboard\\Data" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]

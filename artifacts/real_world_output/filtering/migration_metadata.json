@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-24T21:49:22.602179",
+  "generated_at": "2026-05-28T19:28:46.803346",
   "source": "Tableau Migration",
   "report_name": "filtering",
   "objects_converted": {
@@ -29,10 +29,13 @@
   },
   "tmdl_stats": {
     "tables": 1,
-    "measures": 1,
+    "measures": 0,
     "columns": 41,
     "relationships": 0
   },
+  "dax_measure_names": [
+    "Number of Records"
+  ],
   "visual_type_mappings": {
     "Sheet 1": "Automatic",
     "Sheet 2": "Automatic"
@@ -49,6 +52,9 @@
         "Burst Out Set list",
         "Number of Records"
       ],
+      "dax_measures": [
+        "Number of Records"
+      ],
       "field_count": 3
     },
     {
@@ -61,6 +67,7 @@
       "measures": [
         "Burst Out Set list"
       ],
+      "dax_measures": [],
       "field_count": 2
     }
   ],

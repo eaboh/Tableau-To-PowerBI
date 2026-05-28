@@ -1,0 +1,55 @@
+{
+  "tables": [
+    {
+      "tableau_datasource": "federated.1oojzyi1k8irfh101qtoq07jz0mm",
+      "tableau_table": "Orders",
+      "pbi_table": "Orders"
+    },
+    {
+      "tableau_datasource": "federated.1oojzyi1k8irfh101qtoq07jz0mm",
+      "tableau_table": "Extract",
+      "pbi_table": "Extract"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Calendar",
+      "pbi_table": "Calendar"
+    }
+  ],
+  "calculations": [],
+  "relationships": [
+    {
+      "from": "Orders[Order Date]",
+      "to": "Calendar[Date]",
+      "cardinality": "bothDirections"
+    },
+    {
+      "from": "Extract[Order Date]",
+      "to": "Calendar[Date]",
+      "cardinality": "bothDirections"
+    },
+    {
+      "from": "Orders[Zip Code]",
+      "to": "Extract[Zip Code]",
+      "cardinality": "bothDirections"
+    }
+  ],
+  "worksheets": [
+    {
+      "tableau_worksheet": "Bar Chart",
+      "pbi_page": "Bar Chart"
+    },
+    {
+      "tableau_worksheet": "Line chart",
+      "pbi_page": "Line chart"
+    },
+    {
+      "tableau_worksheet": "Pie chart",
+      "pbi_page": "Pie chart"
+    },
+    {
+      "tableau_worksheet": "Scatter Plot",
+      "pbi_page": "Scatter Plot"
+    }
+  ]
+}

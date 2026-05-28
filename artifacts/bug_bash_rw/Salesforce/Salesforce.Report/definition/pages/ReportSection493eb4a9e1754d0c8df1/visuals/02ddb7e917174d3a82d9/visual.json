@@ -1,0 +1,50 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "02ddb7e917174d3a82d9",
+  "position": {
+    "x": 676,
+    "y": 186,
+    "z": 3000,
+    "height": 534,
+    "width": 604,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "What is the performance of <",
+                    "textStyle": {
+                      "color": "#2b5c8a",
+                      "fontSize": "10.0pt"
+                    }
+                  },
+                  {
+                    "value": "[Parameters].[Opportunity Owner Parameter]",
+                    "textStyle": {
+                      "color": "#2b5c8a",
+                      "fontSize": "10.0pt"
+                    }
+                  },
+                  {
+                    "value": ">?",
+                    "textStyle": {
+                      "color": "#2b5c8a",
+                      "fontSize": "10.0pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "updated_at": "2026-05-28T17:29:47.074529",
+  "summary": {
+    "total": 1,
+    "success": 1,
+    "failed": 0,
+    "zero_touch_rate": 100.0,
+    "top_failure_modes": []
+  },
+  "records": [
+    {
+      "workbook": "nba_player_stats",
+      "timestamp": "2026-05-28T17:29:47.073978",
+      "success": true,
+      "failure_mode": "",
+      "verdict_severity": "info",
+      "issues_count": 0
+    }
+  ]
+}

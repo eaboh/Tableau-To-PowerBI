@@ -13,5 +13,10 @@
   ],
   "calculations": [],
   "relationships": [],
-  "worksheets": []
+  "worksheets": [
+    {
+      "tableau_worksheet": "Sheet 1",
+      "pbi_page": "Sheet 1"
+    }
+  ]
 }

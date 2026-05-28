@@ -1,0 +1,72 @@
+table Extract
+	lineageTag: c19557a9-338a-4efa-a746-a81e7fdeee99
+
+	measure 'Number of Records' = COUNTROWS('Extract')
+		displayFolder: Measures
+		lineageTag: 02abfe13-5f30-4810-ac7e-6f5c4c47e48e
+		annotation Copilot_Description = DAX: COUNTROWS('Extract')
+
+	column Category
+		dataType: string
+		lineageTag: 4ea3a8c2-44ba-475d-a14a-006354475749
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Number of Records'
+		dataType: int64
+		lineageTag: 4375c4d8-9cde-4332-a786-b7a98522063d
+		summarizeBy: sum
+		sourceColumn: 'Number of Records'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a7540bad-5607-4d1a-9120-bec3ff0bf581
+		summarizeBy: none
+		sourceColumn: 'Order Date'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Target'
+		dataType: int64
+		formatString: c"$"#,#0;("$"#,#0)
+		lineageTag: e64fa092-6ded-477b-a8ee-a6f1db27a3d1
+		summarizeBy: sum
+		sourceColumn: 'Sales Target'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Segment
+		dataType: string
+		lineageTag: 07c0de23-d424-469e-9718-701522414d9f
+		summarizeBy: none
+		sourceColumn: Segment
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Extract-cc41ca2a-2d4d-4bfd-8e63-28156adb0150' = m
+		mode: import
+		source =
+				let
+				    // TODO: Configure the data source for connector type: DATAENGINE
+				    // Replace the sample table below with the actual source expression.
+				    Source = try
+				        #table(
+				            {"Category", "Number of Records", "Order Date", "Sales Target", "Segment"},
+				            {
+				                {"Sample 1", 2, 3, 4, "Sample 5"},
+				                {"Sample 2", 3, 4, 5, "Sample 6"}
+				            }
+				        )
+				    otherwise
+				        #table({"Category", "Number of Records", "Order Date", "Sales Target", "Segment"}, {})  // Empty table on error
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 5 columns and 1 measures: Category, Number of Records, Order Date, Sales Target, Segment.
+

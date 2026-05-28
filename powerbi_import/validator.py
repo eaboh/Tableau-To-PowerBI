@@ -636,13 +636,19 @@ class ArtifactValidator:
     # ── Semantic model validation ──────────────────────────────────
 
     # Regex to match TMDL table definition:  ``table 'Name'`` or ``table Name``
-    _RE_TABLE_DEF = re.compile(r"^table\s+'((?:[^']|'')+)'|^table\s+(\w+)(?:\s|$)")
+    _RE_TABLE_DEF = re.compile(
+        r"^table\s+'((?:[^']|'')+)'(?:\s|$)|^table\s+(.+?)\s*$"
+    )
     # Regex to match TMDL column definition:  ``column 'Name'`` or ``column Name``
     # Handles escaped apostrophes ('') inside quoted names and optional ``= expression``.
-    _RE_COL_DEF = re.compile(r"^column\s+'((?:[^']|'')+)'|^column\s+(\w+)(?:\s|$)")
+    _RE_COL_DEF = re.compile(
+        r"^column\s+'((?:[^']|'')+)'(?:\s*=.*)?$|^column\s+(.+?)(?:\s*=.*)?$"
+    )
     # Regex to match TMDL measure definition:  ``measure 'Name'`` or ``measure Name``
     # Handles escaped apostrophes ('') inside quoted names and optional ``= expression``.
-    _RE_MEASURE_DEF = re.compile(r"^measure\s+'((?:[^']|'')+)'|^measure\s+(\w+)(?:\s|$)")
+    _RE_MEASURE_DEF = re.compile(
+        r"^measure\s+'((?:[^']|'')+)'(?:\s*=.*)?$|^measure\s+(.+?)(?:\s*=.*)?$"
+    )
     # Regex to extract DAX column/measure references: 'Table'[Column]
     # Handles escaped apostrophes ('') inside table names.
     _RE_DAX_REF = re.compile(r"'((?:[^']|'')+)'\[([^\]]+)\]")
@@ -672,6 +678,16 @@ class ArtifactValidator:
         columns = {}  # table -> {col1, col2, ...}
         measures = {}  # table -> {meas1, ...}
 
+        def _normalize_symbol_name(raw):
+            """Normalize a parsed TMDL symbol name.
+
+            Accepts quoted, bracketed, or plain identifiers.
+            """
+            name = (raw or '').strip()
+            if name.startswith('[') and name.endswith(']') and len(name) >= 2:
+                name = name[1:-1].strip()
+            return cls._unescape_tmdl_name(name)
+
         def _scan_tmdl(filepath):
             """Read a single TMDL file and populate tables/columns/measures."""
             try:
@@ -685,7 +701,7 @@ class ArtifactValidator:
                 tm = cls._RE_TABLE_DEF.match(stripped)
                 if tm:
                     raw = tm.group(1) if tm.group(1) is not None else tm.group(2)
-                    current_table = cls._unescape_tmdl_name(raw)
+                    current_table = _normalize_symbol_name(raw)
                     tables.add(current_table)
                     columns.setdefault(current_table, set())
                     measures.setdefault(current_table, set())
@@ -694,12 +710,12 @@ class ArtifactValidator:
                     cm = cls._RE_COL_DEF.match(stripped)
                     if cm:
                         raw = cm.group(1) if cm.group(1) is not None else cm.group(2)
-                        columns[current_table].add(cls._unescape_tmdl_name(raw))
+                        columns[current_table].add(_normalize_symbol_name(raw))
                         continue
                     mm = cls._RE_MEASURE_DEF.match(stripped)
                     if mm:
                         raw = mm.group(1) if mm.group(1) is not None else mm.group(2)
-                        measures[current_table].add(cls._unescape_tmdl_name(raw))
+                        measures[current_table].add(_normalize_symbol_name(raw))
                         continue
 
         sm_path = Path(sm_dir)

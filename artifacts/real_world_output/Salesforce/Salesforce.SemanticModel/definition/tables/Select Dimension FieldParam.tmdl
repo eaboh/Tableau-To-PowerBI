@@ -1,0 +1,46 @@
+table 'Select Dimension FieldParam'
+	lineageTag: 5675379f-4611-4669-bed3-5950b2c57783
+
+	column 'Select Dimension'
+		dataType: string
+		lineageTag: a5265e01-f652-4bfa-89e7-d5411cfcc83e
+		summarizeBy: none
+		sourceColumn: 'Select Dimension'
+		annotation displayFolder = Field Parameters
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Select Dimension_Order'
+		dataType: int64
+		lineageTag: 2d69c342-fe63-407f-a4c8-fbf45a63b973
+		summarizeBy: none
+		sourceColumn: 'Select Dimension_Order'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Select Dimension_Fields'
+		dataType: string
+		lineageTag: 81fdd28e-3eac-4c61-b8db-e112f52f2df4
+		summarizeBy: none
+		sourceColumn: 'Select Dimension_Fields'
+		isHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Select Dimension FieldParam-01a69de4-beff-4451-b218-336007b63472' = calculated
+		mode: import
+		source = ```
+				{
+				(NAMEOF('Owned By'[Account]), 0, "Account"),
+				(NAMEOF('Owned By'[Open Flag]), 1, "Open Flag"),
+				(NAMEOF('Owned By'[Opportunity Owner]), 2, "Opportunity Owner"),
+				(NAMEOF('Owned By'[Opportunity Stage]), 3, "Opportunity Stage"),
+				(NAMEOF('Opportunities'[Opportunity Type]), 4, "Opportunity Type"),
+				(NAMEOF('Owned By'[Won Flag]), 5, "Won Flag")
+				}
+				```
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 3 columns: Select Dimension, Select Dimension_Order, Select Dimension_Fields.
+

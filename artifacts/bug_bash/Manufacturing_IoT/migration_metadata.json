@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-02T13:39:17.747948",
+  "generated_at": "2026-05-28T17:01:14.479749",
   "source": "Tableau Migration",
   "report_name": "Manufacturing_IoT",
   "objects_converted": {
@@ -20,7 +20,7 @@
   },
   "generated_output": {
     "pages": 2,
-    "visuals": 10,
+    "visuals": 8,
     "theme_applied": false,
     "theme_detail": {
       "status": "skipped",
@@ -29,7 +29,7 @@
   },
   "tmdl_stats": {
     "tables": 5,
-    "measures": 14,
+    "measures": 16,
     "columns": 50,
     "relationships": 5
   },

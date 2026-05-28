@@ -1,9 +1,9 @@
 table Extract
-	lineageTag: 7901b889-8c17-4785-94d3-81ee86d0f7c2
+	lineageTag: 2c251a08-bdb9-4747-b48b-6442e968378c
 
 	column 'Document Index (generated)'
 		dataType: int64
-		lineageTag: 8d118223-ff64-4869-a74a-ddaf1964de44
+		lineageTag: b8c33919-4ed5-4816-9d11-7d08784ab382
 		summarizeBy: sum
 		sourceColumn: 'Document Index (generated)'
 
@@ -11,7 +11,7 @@ table Extract
 
 	column category
 		dataType: string
-		lineageTag: 6b74f64b-5748-4110-9b3b-2d11bacd3039
+		lineageTag: 2e1e8553-2eeb-4d69-b9e1-06d25d3f96c3
 		summarizeBy: none
 		sourceColumn: category
 
@@ -19,7 +19,7 @@ table Extract
 
 	column customer_id
 		dataType: string
-		lineageTag: 133828ad-2f46-4377-9f3f-2805f920c38b
+		lineageTag: 685d9fde-b774-4541-a8b1-5bedaad9ceb3
 		summarizeBy: none
 		sourceColumn: customer_id
 		annotation Copilot_Hidden = true
@@ -27,8 +27,9 @@ table Extract
 		annotation SummarizationSetBy = Automatic
 
 	column date
-		dataType: string
-		lineageTag: 8286b525-4c39-44c3-88b7-3ffbc52ff0d2
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0ce27a74-9126-4d89-9cdc-9eb32295cb55
 		summarizeBy: none
 		sourceColumn: date
 
@@ -36,7 +37,7 @@ table Extract
 
 	column email
 		dataType: string
-		lineageTag: 1c7b45bd-b9d0-4642-846a-a7ea52345426
+		lineageTag: a3ac2b42-9d36-435b-b911-e85084d40359
 		summarizeBy: none
 		sourceColumn: email
 
@@ -45,7 +46,7 @@ table Extract
 	column feedback_score
 		dataType: double
 		formatString: #,0.00
-		lineageTag: b2a56741-e992-4c6d-938b-2136435d7660
+		lineageTag: 04df5034-210b-48a3-9b33-92a5e2fa734b
 		summarizeBy: sum
 		sourceColumn: feedback_score
 
@@ -53,7 +54,7 @@ table Extract
 
 	column feedback_text
 		dataType: string
-		lineageTag: dae99743-3b26-4562-98f1-22eb4db344fa
+		lineageTag: 20807fb4-f08a-41ed-bbf2-d37f0a7b52e1
 		summarizeBy: none
 		sourceColumn: feedback_text
 
@@ -61,7 +62,7 @@ table Extract
 
 	column name
 		dataType: string
-		lineageTag: 3af88ec6-b750-42c0-9d31-72699622b443
+		lineageTag: 9bf8d1bf-1252-4b9d-9b3f-ed2d7072a393
 		summarizeBy: none
 		sourceColumn: name
 
@@ -69,13 +70,13 @@ table Extract
 
 	column sentiment
 		dataType: string
-		lineageTag: 1766bca7-1d28-4e22-9454-56db7e9c9345
+		lineageTag: 792e5877-1c5e-44e0-b6a2-b0cf5eaf8f79
 		summarizeBy: none
 		sourceColumn: sentiment
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Extract-035bcefb-5d16-40cf-a0e1-8e7f950aebe6' = m
+	partition 'Extract-6a239876-74fe-4830-b1c7-aa6ca4003d0e' = m
 		mode: import
 		source =
 				let
@@ -85,8 +86,8 @@ table Extract
 				        #table(
 				            {"Document Index (generated)", "category", "customer_id", "date", "email", "feedback_score", "feedback_text", "name", "sentiment"},
 				            {
-				                {1, "Sample 2", "Sample 3", "Sample 4", "Sample 5", 6, "Sample 7", "Sample 8", "Sample 9"},
-				                {2, "Sample 3", "Sample 4", "Sample 5", "Sample 6", 7, "Sample 8", "Sample 9", "Sample 10"}
+				                {1, "Sample 2", "Sample 3", 4, "Sample 5", 6, "Sample 7", "Sample 8", "Sample 9"},
+				                {2, "Sample 3", "Sample 4", 5, "Sample 6", 7, "Sample 8", "Sample 9", "Sample 10"}
 				            }
 				        )
 				    otherwise

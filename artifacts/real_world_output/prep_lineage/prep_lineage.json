@@ -1,0 +1,404 @@
+{
+  "total_flows": 2,
+  "total_sources": 4,
+  "total_outputs": 1,
+  "total_transforms": 0,
+  "total_cross_flow_edges": 0,
+  "max_chain_depth": 0,
+  "flows": [
+    {
+      "name": "SampleFlow",
+      "file_path": "C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\examples\\real_world\\SampleFlow.tfl",
+      "inputs": [],
+      "outputs": [],
+      "transforms": [],
+      "node_count": 0,
+      "edge_count": 0,
+      "dag_depth": 0,
+      "join_count": 0,
+      "union_count": 0,
+      "script_count": 0,
+      "calc_count": 0,
+      "complexity_score": 0,
+      "complexity_label": "Low",
+      "node_graph": {},
+      "m_queries": {},
+      "assessment": {
+        "grade": "RED",
+        "items": [
+          {
+            "category": "datasource",
+            "status": "pass",
+            "detail": "0 input(s) — all connectors supported"
+          },
+          {
+            "category": "script",
+            "status": "pass",
+            "detail": "No Script nodes"
+          },
+          {
+            "category": "join",
+            "status": "pass",
+            "detail": "No joins"
+          },
+          {
+            "category": "output",
+            "status": "fail",
+            "detail": "No outputs detected — flow may be incomplete"
+          }
+        ],
+        "pass_count": 3,
+        "warn_count": 0,
+        "fail_count": 1
+      }
+    },
+    {
+      "name": "tableau_prep_book",
+      "file_path": "C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\examples\\real_world\\tableau_prep_book.tfl",
+      "inputs": [
+        {
+          "node_id": "1057498c-093d-4dfc-86cc-2e6dc1ac8731",
+          "name": "Orders_Central",
+          "connection_type": "textscan",
+          "server": "",
+          "database": "",
+          "schema": "",
+          "table_name": "Orders_Central",
+          "filename": "C:\\Program Files\\Tableau\\Tableau Prep 2018.3\\help\\Samples\\en_US\\Superstore Files\\Orders_Central.csv",
+          "column_count": 24,
+          "column_names": [
+            "Row ID",
+            "Order ID",
+            "Ship Mode",
+            "Customer ID",
+            "Customer Name",
+            "Segment",
+            "Country",
+            "City",
+            "State",
+            "Postal Code",
+            "Product ID",
+            "Category",
+            "Sub-Category",
+            "Product",
+            "Sales",
+            "Quantity",
+            "Profit",
+            "Order Year",
+            "Order Month",
+            "Order Day",
+            "Ship Year",
+            "Ship Month",
+            "Ship Day",
+            "Discounts"
+          ],
+          "fingerprint": "c1f2f8eaf624a73b"
+        },
+        {
+          "node_id": "92a40f62-e5e1-4660-99f8-008bcd03decc",
+          "name": "orders_south_2015",
+          "connection_type": "textscan",
+          "server": "",
+          "database": "",
+          "schema": "",
+          "table_name": "orders_south_2015",
+          "filename": "C:\\Program Files\\Tableau\\Tableau Prep 2018.3\\help\\Samples\\en_US\\Superstore Files\\Orders South\\orders_south_2015.csv",
+          "column_count": 22,
+          "column_names": [
+            "Sales",
+            "Quantity",
+            "Profit",
+            "Discount",
+            "Region",
+            "State",
+            "Row ID",
+            "Order ID",
+            "Order Date",
+            "Ship Date",
+            "Ship Mode",
+            "Customer ID",
+            "Customer Name",
+            "Segment",
+            "Country",
+            "City",
+            "Postal Code",
+            "Product ID",
+            "Category",
+            "Sub-Category",
+            "Product Name",
+            "File Paths"
+          ],
+          "fingerprint": "bd5b51157fbbeb6f"
+        },
+        {
+          "node_id": "bc7de39b-ec36-413f-aef4-0087f3e3f994",
+          "name": "returns_new",
+          "connection_type": "excel-direct",
+          "server": "",
+          "database": "",
+          "schema": "",
+          "table_name": "returns_new",
+          "filename": "C:\\Program Files\\Tableau\\Tableau Prep 2018.3\\help\\Samples\\en_US\\Superstore Files\\return reasons_new.xlsx",
+          "column_count": 9,
+          "column_names": [
+            "Row ID",
+            "Order Date",
+            "Order ID",
+            "Product ID",
+            "Sub-Category",
+            "Manufacturer",
+            "Product Name",
+            "Return Reason",
+            "Notes"
+          ],
+          "fingerprint": "eef9fa923301e032"
+        },
+        {
+          "node_id": "2fd52001-d1d5-4809-9a80-d2529515fb35",
+          "name": "Orders_West",
+          "connection_type": "textscan",
+          "server": "",
+          "database": "",
+          "schema": "",
+          "table_name": "Orders_West",
+          "filename": "C:\\Program Files\\Tableau\\Tableau Prep 2018.3\\help\\Samples\\en_US\\Superstore Files\\Orders_West.csv",
+          "column_count": 41,
+          "column_names": [
+            "Row ID",
+            "Order ID",
+            "Order Date",
+            "Ship Date",
+            "Ship Mode",
+            "Customer ID",
+            "Customer Name",
+            "Segment",
+            "Country",
+            "City",
+            "Postal Code",
+            "Region",
+            "Product ID",
+            "Category",
+            "Sub-Category",
+            "Product Name",
+            "Sales",
+            "Quantity",
+            "Discount",
+            "Profit",
+            "Right_Row ID",
+            "Right_Order Date",
+            "Right_Ship Date",
+            "Right_Ship Mode",
+            "Right_Customer ID",
+            "Right_Customer Name",
+            "Right_Segment",
+            "Right_Country",
+            "Right_City",
+            "Right_State2",
+            "Right_Postal Code",
+            "Right_Region",
+            "Right_Product ID",
+            "Right_Category",
+            "Right_Sub-Category",
+            "Right_Product Name",
+            "Right_Sales",
+            "Right_Quantity",
+            "Right_Discount",
+            "Right_Profit",
+            "State"
+          ],
+          "fingerprint": "312340c93f1b2ace"
+        }
+      ],
+      "outputs": [
+        {
+          "node_id": "6387ce44-ce5f-44ab-a9bd-8fb73065cede",
+          "name": "Output",
+          "output_type": "WriteToHyper",
+          "target_server": "",
+          "target_database": "",
+          "target_table": "Output",
+          "target_filename": "",
+          "column_count": 0,
+          "column_names": [],
+          "fingerprint": "dfc189fc900ebd31"
+        }
+      ],
+      "transforms": [],
+      "node_count": 10,
+      "edge_count": 9,
+      "dag_depth": 5,
+      "join_count": 0,
+      "union_count": 0,
+      "script_count": 0,
+      "calc_count": 0,
+      "complexity_score": 5,
+      "complexity_label": "Low",
+      "node_graph": {
+        "5fde9199-3e12-4811-9a47-cd7fb37a1c6b": [
+          "3412533b-c1f3-4a5a-a89b-3c4d4ae661e8"
+        ],
+        "3412533b-c1f3-4a5a-a89b-3c4d4ae661e8": [
+          "34f8e4e2-360f-435c-b9d4-3a6dea94ad54"
+        ],
+        "1057498c-093d-4dfc-86cc-2e6dc1ac8731": [
+          "5fde9199-3e12-4811-9a47-cd7fb37a1c6b"
+        ],
+        "34f8e4e2-360f-435c-b9d4-3a6dea94ad54": [
+          "8be41075-5be1-4c69-b75b-4be5d109ba9d"
+        ],
+        "92a40f62-e5e1-4660-99f8-008bcd03decc": [
+          "3412533b-c1f3-4a5a-a89b-3c4d4ae661e8"
+        ],
+        "bc7de39b-ec36-413f-aef4-0087f3e3f994": [
+          "4964e8db-6fbd-4592-8fd3-e1a997f70f93"
+        ],
+        "8be41075-5be1-4c69-b75b-4be5d109ba9d": [
+          "6387ce44-ce5f-44ab-a9bd-8fb73065cede"
+        ],
+        "2fd52001-d1d5-4809-9a80-d2529515fb35": [
+          "3412533b-c1f3-4a5a-a89b-3c4d4ae661e8"
+        ],
+        "6387ce44-ce5f-44ab-a9bd-8fb73065cede": [],
+        "4964e8db-6fbd-4592-8fd3-e1a997f70f93": [
+          "34f8e4e2-360f-435c-b9d4-3a6dea94ad54"
+        ]
+      },
+      "m_queries": {},
+      "assessment": {
+        "grade": "GREEN",
+        "items": [
+          {
+            "category": "datasource",
+            "status": "pass",
+            "detail": "4 input(s) — all connectors supported"
+          },
+          {
+            "category": "script",
+            "status": "pass",
+            "detail": "No Script nodes"
+          },
+          {
+            "category": "join",
+            "status": "pass",
+            "detail": "No joins"
+          },
+          {
+            "category": "output",
+            "status": "pass",
+            "detail": "1 output(s)"
+          }
+        ],
+        "pass_count": 4,
+        "warn_count": 0,
+        "fail_count": 0
+      }
+    }
+  ],
+  "edges": [],
+  "external_sources": [
+    {
+      "fingerprint": "c1f2f8eaf624a73b",
+      "connection_type": "textscan",
+      "server": "",
+      "database": "",
+      "table_name": "Orders_Central",
+      "filename": "C:\\Program Files\\Tableau\\Tableau Prep 2018.3\\help\\Samples\\en_US\\Superstore Files\\Orders_Central.csv",
+      "consumed_by": [
+        {
+          "flow": "tableau_prep_book",
+          "input": "Orders_Central"
+        }
+      ]
+    },
+    {
+      "fingerprint": "bd5b51157fbbeb6f",
+      "connection_type": "textscan",
+      "server": "",
+      "database": "",
+      "table_name": "orders_south_2015",
+      "filename": "C:\\Program Files\\Tableau\\Tableau Prep 2018.3\\help\\Samples\\en_US\\Superstore Files\\Orders South\\orders_south_2015.csv",
+      "consumed_by": [
+        {
+          "flow": "tableau_prep_book",
+          "input": "orders_south_2015"
+        }
+      ]
+    },
+    {
+      "fingerprint": "eef9fa923301e032",
+      "connection_type": "excel-direct",
+      "server": "",
+      "database": "",
+      "table_name": "returns_new",
+      "filename": "C:\\Program Files\\Tableau\\Tableau Prep 2018.3\\help\\Samples\\en_US\\Superstore Files\\return reasons_new.xlsx",
+      "consumed_by": [
+        {
+          "flow": "tableau_prep_book",
+          "input": "returns_new"
+        }
+      ]
+    },
+    {
+      "fingerprint": "312340c93f1b2ace",
+      "connection_type": "textscan",
+      "server": "",
+      "database": "",
+      "table_name": "Orders_West",
+      "filename": "C:\\Program Files\\Tableau\\Tableau Prep 2018.3\\help\\Samples\\en_US\\Superstore Files\\Orders_West.csv",
+      "consumed_by": [
+        {
+          "flow": "tableau_prep_book",
+          "input": "Orders_West"
+        }
+      ]
+    }
+  ],
+  "final_sinks": [
+    {
+      "fingerprint": "dfc189fc900ebd31",
+      "output_type": "WriteToHyper",
+      "target_table": "Output",
+      "target_filename": "",
+      "produced_by": {
+        "flow": "tableau_prep_book",
+        "output": "Output"
+      }
+    }
+  ],
+  "layers": [
+    [
+      "SampleFlow",
+      "tableau_prep_book"
+    ]
+  ],
+  "isolated_flows": [
+    "SampleFlow",
+    "tableau_prep_book"
+  ],
+  "chains": [],
+  "recommendations": [
+    {
+      "type": "isolated",
+      "flows": [
+        "SampleFlow"
+      ],
+      "description": "No cross-flow connections detected",
+      "impact": "Standalone migration — no merge needed",
+      "score": 0,
+      "level": "gray",
+      "label": "Keep separate"
+    },
+    {
+      "type": "isolated",
+      "flows": [
+        "tableau_prep_book"
+      ],
+      "description": "No cross-flow connections detected",
+      "impact": "Standalone migration — no merge needed",
+      "score": 0,
+      "level": "gray",
+      "label": "Keep separate"
+    }
+  ],
+  "timestamp": "2026-05-28T17:28:57.106086+00:00"
+}

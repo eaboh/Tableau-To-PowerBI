@@ -1,0 +1,43 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "d7b9ec8131b74c238b18",
+  "position": {
+    "x": 48,
+    "y": 604,
+    "z": 1000,
+    "height": 148,
+    "width": 645,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "<[Parameters].[Opportunity Owner Parameter]> Profile ",
+                    "textStyle": {
+                      "color": "#2b5c8a",
+                      "fontSize": "10.0pt"
+                    }
+                  },
+                  {
+                    "value": "over last <[Parameters].[Last x Days (copy)_1142225515621146627]> months",
+                    "textStyle": {
+                      "color": "#2b5c8a",
+                      "fontSize": "8.0pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,349 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "ba05a0d2df4f44c5adab",
+  "position": {
+    "x": 985,
+    "y": 332,
+    "z": 21000,
+    "height": 388,
+    "width": 295,
+    "tabOrder": 21000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Required attributes",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "color": "#2b5c8a",
+                      "fontSize": "10.0pt"
+                    }
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     -"
+                  },
+                  {
+                    "value": "Æ ",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "Opportunity Id",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "Æ ",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "(string)",
+                    "textStyle": {
+                      "fontStyle": "italic"
+                    }
+                  },
+                  {
+                    "value": ": Opportunity Unique Identifier"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Account",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "Æ "
+                  },
+                  {
+                    "value": "(string)",
+                    "textStyle": {
+                      "fontStyle": "italic"
+                    }
+                  },
+                  {
+                    "value": ": Customer/Prospect name"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Opportunity Owner",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "Æ "
+                  },
+                  {
+                    "value": "(string)",
+                    "textStyle": {
+                      "fontStyle": "italic"
+                    }
+                  },
+                  {
+                    "value": ": Owner of the opportunity"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Opportunity Type",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "Æ "
+                  },
+                  {
+                    "value": "(string)",
+                    "textStyle": {
+                      "fontStyle": "italic"
+                    }
+                  },
+                  {
+                    "value": ": Type of Opportunity"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     -"
+                  },
+                  {
+                    "value": " Opportunity Description",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "Æ "
+                  },
+                  {
+                    "value": "(string)",
+                    "textStyle": {
+                      "fontStyle": "italic"
+                    }
+                  },
+                  {
+                    "value": ": Opportunity Description"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     -"
+                  },
+                  {
+                    "value": " Opportunity Stage",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "Æ "
+                  },
+                  {
+                    "value": "(string)",
+                    "textStyle": {
+                      "fontStyle": "italic"
+                    }
+                  },
+                  {
+                    "value": ": Opportunity Stage (according to your standards)"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     -"
+                  },
+                  {
+                    "value": " Open Flag",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "Æ "
+                  },
+                  {
+                    "value": "(string)",
+                    "textStyle": {
+                      "fontStyle": "italic"
+                    }
+                  },
+                  {
+                    "value": " ← expected values: 'Y', 'N'. 'Y' means the opportunity is Open."
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     -"
+                  },
+                  {
+                    "value": " Won Flag",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "Æ "
+                  },
+                  {
+                    "value": "(string)",
+                    "textStyle": {
+                      "fontStyle": "italic"
+                    }
+                  },
+                  {
+                    "value": " ← expected values: 'Y', 'N'. 'Y' means the opportunity is Closed and Won."
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     -"
+                  },
+                  {
+                    "value": " Created Date",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "Æ "
+                  },
+                  {
+                    "value": "(date)",
+                    "textStyle": {
+                      "fontStyle": "italic"
+                    }
+                  },
+                  {
+                    "value": ": Opportunity Creation Date"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "(Estimated) Closed Date",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "Æ "
+                  },
+                  {
+                    "value": "(date)",
+                    "textStyle": {
+                      "fontStyle": "italic"
+                    }
+                  },
+                  {
+                    "value": ": Actual Closed Date is the opportunity is Closed, else Estimated Close Date"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Amount",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "Æ "
+                  },
+                  {
+                    "value": "(numeric)",
+                    "textStyle": {
+                      "fontStyle": "italic"
+                    }
+                  },
+                  {
+                    "value": ": Opportunity Amount"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     -"
+                  },
+                  {
+                    "value": " Probability %",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "Æ "
+                  },
+                  {
+                    "value": "(numeric)",
+                    "textStyle": {
+                      "fontStyle": "italic"
+                    }
+                  },
+                  {
+                    "value": ": Probability to win the opportunity (0.5 stands for 50%)"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

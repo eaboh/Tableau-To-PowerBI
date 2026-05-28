@@ -1612,6 +1612,24 @@ class TestPBIDesktopValidation(unittest.TestCase):
         issues = ArtifactValidator.validate_semantic_references(sm_dir)
         self.assertTrue(any('NonExistent' in i and 'Orders' in i for i in issues))
 
+    def test_validate_semantic_references_accepts_bracketed_special_names(self):
+        """Bracketed column/measure names with spaces/special chars should resolve."""
+        proj = self._create_model({
+            'sqlproxy': (
+                "table 'sqlproxy (EDH_OBSERVATION_UC80 (2))'\n"
+                "\tcolumn [Migrated Data]\n"
+                "\tcolumn [Ps Id]\n"
+                "\tmeasure [Stats Prog] = SUM('sqlproxy (EDH_OBSERVATION_UC80 (2))'[Migrated Data])\n"
+                "\tmeasure [Observables Type Total] = SUM('sqlproxy (EDH_OBSERVATION_UC80 (2))'[Ps Id])\n"
+            ),
+        })
+        sm_dir = os.path.join(proj, 'Test.SemanticModel')
+        issues = ArtifactValidator.validate_semantic_references(sm_dir)
+        self.assertFalse(
+            any('Unknown column/measure' in i for i in issues),
+            f"Unexpected unknown refs: {issues}",
+        )
+
     def test_validate_lookupvalue_ambiguity_flags_non_key(self):
         """LOOKUPVALUE on non-unique column is flagged."""
         proj = self._create_model(

@@ -1,0 +1,23 @@
+table pPlaceholder_1
+	lineageTag: 03d8a9f8-6389-44f5-abdb-441ead5c4d9b
+
+	measure pPlaceholder_1 = SELECTEDVALUE('pPlaceholder_1'[Value], 1.)
+		lineageTag: b2a2afb2-de9c-45a5-bbfb-ec4b760ea8d3
+		annotation Copilot_Description = DAX: SELECTEDVALUE('pPlaceholder_1'[Value], 1.)
+
+	column Value
+		dataType: double
+		lineageTag: 7d2e3f0e-760e-46ef-8601-323be107d947
+		summarizeBy: none
+		sourceColumn: Value
+		annotation displayFolder = Parameters
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'pPlaceholder_1-a74dcce9-4338-483b-8d3c-2589b014c3c4' = calculated
+		mode: import
+		source = DATATABLE("Value", DOUBLE, {{1.}})
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 1 columns and 1 measures: Value.
+

@@ -1,0 +1,32 @@
+table Rebounds
+	lineageTag: eb1da9a3-8072-47a3-9d23-3e6d9505deb3
+
+	measure Rebounds = SELECTEDVALUE('Rebounds'[Value], 1.0)
+		lineageTag: e6d0ceb1-4877-435b-9373-ef5c55797499
+		annotation Copilot_Description = DAX: SELECTEDVALUE('Rebounds'[Value], 1.0)
+
+	column Value
+		dataType: double
+		lineageTag: 8f982911-316f-460d-a3aa-ca424cf61082
+		summarizeBy: none
+		sourceColumn: Value
+		annotation displayFolder = Parameters
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: 5aecde98-1fd9-4441-8925-7b96f25b5dc4
+		summarizeBy: none
+		sourceColumn: Name
+		annotation displayFolder = Parameters
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Rebounds-17355bd5-7970-42d5-8df0-3c5acf622baa' = calculated
+		mode: import
+		source = DATATABLE("Value", DOUBLE, "Name", STRING, {{1.0, "Average Deffensive Rebounds per Game"}, {2.0, "Average Offensive Rebounds per Game"}, {3.0, "Average Rebound per Game"}})
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 2 columns and 1 measures: Value, Name.
+

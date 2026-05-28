@@ -11,7 +11,50 @@
       "pbi_table": "Calendar"
     }
   ],
-  "calculations": [],
+  "calculations": [
+    {
+      "tableau_calculation": "AVG([Salary])",
+      "pbi_table": "Employees",
+      "pbi_object": "Average Salary",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNT([EmployeeID])",
+      "pbi_table": "Employees",
+      "pbi_object": "Employee Count",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM([Salary]) * 1.25",
+      "pbi_table": "Employees",
+      "pbi_object": "Total Compensation",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Total Compensation Formatted",
+      "pbi_table": "Employees",
+      "pbi_object": "Total Compensation Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Year To Date",
+      "pbi_table": "Calendar",
+      "pbi_object": "Year To Date",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Previous Year",
+      "pbi_table": "Calendar",
+      "pbi_object": "Previous Year",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Year Over Year %",
+      "pbi_table": "Calendar",
+      "pbi_object": "Year Over Year %",
+      "pbi_type": "measure"
+    }
+  ],
   "relationships": [
     {
       "from": "Employees[HireDate]",
@@ -19,5 +62,22 @@
       "cardinality": "oneDirection"
     }
   ],
-  "worksheets": []
+  "worksheets": [
+    {
+      "tableau_worksheet": "Headcount by Department",
+      "pbi_page": "Headcount by Department"
+    },
+    {
+      "tableau_worksheet": "Salary Analysis",
+      "pbi_page": "Salary Analysis"
+    },
+    {
+      "tableau_worksheet": "Hiring Trend",
+      "pbi_page": "Hiring Trend"
+    },
+    {
+      "tableau_worksheet": "Performance Matrix",
+      "pbi_page": "Performance Matrix"
+    }
+  ]
 }

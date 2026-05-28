@@ -1,26 +1,31 @@
 table Employees
-	lineageTag: 30ba15fa-28c3-4e22-9a50-8ef54f009be9
+	lineageTag: 3bddcf69-23e2-410f-9a9a-74f128e7bbba
 
 	measure 'Average Salary' = AVERAGE('Employees'[Salary])
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: f7baadf7-4aa8-4ab6-a6f9-be5048903ab0
+		lineageTag: e59bd12a-5edc-473d-b0f2-8b05646cde64
 		annotation Copilot_Description = Migrated from Tableau: AVG([Salary]) | DAX: AVERAGE('Employees'[Salary])
 
 	measure 'Employee Count' = COUNT('Employees'[EmployeeID])
 		displayFolder: Measures
-		lineageTag: 0dad7350-da76-4009-96c3-795a9755a4c9
+		lineageTag: 927591ab-c64a-4cb4-998d-e0f48e87b65d
 		annotation Copilot_Description = Migrated from Tableau: COUNT([EmployeeID]) | DAX: COUNT('Employees'[EmployeeID])
 
 	measure 'Total Compensation' = SUM('Employees'[Salary]) * 1.25
 		formatString: #,0.00
 		displayFolder: Measures
-		lineageTag: d2a1b4b8-882a-4f1d-a1eb-6262e0910ffd
+		lineageTag: f2d04e84-7cb8-4929-8377-b9287914b398
 		annotation Copilot_Description = Migrated from Tableau: SUM([Salary]) * 1.25 | DAX: SUM('Employees'[Salary]) * 1.25
+
+	measure 'Total Compensation Formatted' = VAR _val = [Total Compensation] RETURN IF(ABS(_val) >= 1E9, FORMAT(_val / 1E9, "#,0.0") & "B", IF(ABS(_val) >= 1E6, FORMAT(_val / 1E6, "#,0.0") & "M", IF(ABS(_val) >= 1E3, FORMAT(_val / 1E3, "#,0.0") & "K", FORMAT(_val, "#,0.00"))))
+		displayFolder: Formatted
+		lineageTag: e5f3be29-0820-4572-9447-439de18188f9
+		annotation Copilot_Description = Dynamic numeric abbreviation for Total Compensation (K/M/B)
 
 	column EmployeeID
 		dataType: int64
-		lineageTag: 6db6b13b-7af2-42e7-b399-8927a5994e13
+		lineageTag: 7ea31bf7-8256-497e-8cda-d0c082a978cd
 		summarizeBy: sum
 		sourceColumn: EmployeeID
 		annotation Copilot_Hidden = true
@@ -29,7 +34,7 @@ table Employees
 
 	column FirstName
 		dataType: string
-		lineageTag: 46f85cc8-54f6-4a29-8181-4f65553afc4f
+		lineageTag: 01da214d-da68-4ec0-a497-fab2c322e95f
 		summarizeBy: none
 		sourceColumn: FirstName
 
@@ -37,7 +42,7 @@ table Employees
 
 	column LastName
 		dataType: string
-		lineageTag: fe3501ea-ff01-4041-8f58-2564a13cd0d2
+		lineageTag: 6f44fe70-8c30-4a3e-93f9-e685d20473b8
 		summarizeBy: none
 		sourceColumn: LastName
 
@@ -46,16 +51,15 @@ table Employees
 	column HireDate
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: e7d44303-0919-41b5-a9f8-1051bf83fdf3
+		lineageTag: 84f8a5b9-880f-4043-a16f-954dcc4056a5
 		summarizeBy: none
 		sourceColumn: HireDate
-		dataCategory: DateTime
 
 		annotation SummarizationSetBy = Automatic
 
 	column Department
 		dataType: string
-		lineageTag: 177849cb-6f01-4c98-bb92-4dfadd5c5166
+		lineageTag: b7067079-6ddd-4532-942b-93665f99de3d
 		summarizeBy: none
 		sourceColumn: Department
 
@@ -63,7 +67,7 @@ table Employees
 
 	column JobTitle
 		dataType: string
-		lineageTag: 04ea39e4-8629-4739-8ca7-70b7fbe608df
+		lineageTag: 95698503-c780-4995-af79-3a985d27e639
 		summarizeBy: none
 		sourceColumn: JobTitle
 
@@ -72,7 +76,7 @@ table Employees
 	column Salary
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 24669755-8ccc-43dc-869e-6d30e9ca31d1
+		lineageTag: 8c6710a1-f5c0-47b4-8d6e-a0024fe3c0d9
 		summarizeBy: sum
 		sourceColumn: Salary
 
@@ -80,7 +84,7 @@ table Employees
 
 	column Location
 		dataType: string
-		lineageTag: 392787b4-470f-4a62-babf-8868ce836080
+		lineageTag: 06897a97-8972-43d7-9981-dbaa7083e91f
 		summarizeBy: none
 		sourceColumn: Location
 
@@ -88,7 +92,7 @@ table Employees
 
 	column Age
 		dataType: int64
-		lineageTag: e4b9727b-362a-4ede-9bfc-e92462b9eecc
+		lineageTag: 7b0e923d-40a9-40f9-a98d-eee096ed7f03
 		summarizeBy: sum
 		sourceColumn: Age
 
@@ -96,7 +100,7 @@ table Employees
 
 	column YearsOfService
 		dataType: int64
-		lineageTag: 32601b0d-2caf-4287-820b-7b8c70be4a1c
+		lineageTag: b7479574-9c56-4af2-bd1f-099f2cc2bcce
 		summarizeBy: sum
 		sourceColumn: YearsOfService
 
@@ -104,7 +108,7 @@ table Employees
 
 	column PerformanceRating
 		dataType: string
-		lineageTag: 55f72086-f72e-4223-9aa1-e13e009ed5a9
+		lineageTag: 1e4616a1-86d9-4c7b-8168-972c909e3338
 		summarizeBy: none
 		sourceColumn: PerformanceRating
 
@@ -112,13 +116,13 @@ table Employees
 
 	column 'Tenure Category'
 		dataType: string
-		lineageTag: ffb5361d-f164-454d-b857-c29e091840a4
+		lineageTag: e6018add-0b88-4319-bf7d-1bd178f92a6b
 		summarizeBy: none
 		sourceColumn: 'Tenure Category'
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Employees-17a9e3ea-8d25-427f-b4dc-31158783a559' = m
+	partition 'Employees-ae810652-eb6b-481f-974a-bd5a3aacfe12' = m
 		mode: import
 		source =
 				let
@@ -142,5 +146,5 @@ table Employees
 				    Result
 
 	annotation PBI_ResultType = Table
-	annotation Copilot_TableDescription = Contains 12 columns and 3 measures: EmployeeID, FirstName, LastName, HireDate, Department, JobTitle, Salary, Location, ... (12 columns total).
+	annotation Copilot_TableDescription = Contains 12 columns and 4 measures: EmployeeID, FirstName, LastName, HireDate, Department, JobTitle, Salary, Location, ... (12 columns total).
 

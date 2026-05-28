@@ -2197,6 +2197,10 @@ def _apply_semantic_enrichments(model, extra_objects, main_table_name, column_ta
     _create_number_of_records_measure(model, extra_objects.get('_worksheets', []),
                                       main_table_name)
 
+    # Phase 9d: Guard against Number of Records name collision
+    # (measure + column with same name in same table), which Power BI rejects.
+    _remove_conflicting_number_of_records_measures(model)
+
     # Phase 10: Infer missing relationships from cross-table DAX references
     _infer_cross_table_relationships(model)
 
@@ -5047,7 +5051,8 @@ def _create_number_of_records_measure(model, worksheets, main_table_name):
     for table in model['model']['tables']:
         if table.get('name') == main_table_name:
             existing = {m.get('name') for m in table.get('measures', [])}
-            if 'Number of Records' not in existing:
+            existing_columns = {c.get('name') for c in table.get('columns', [])}
+            if 'Number of Records' not in existing and 'Number of Records' not in existing_columns:
                 table.setdefault('measures', []).append({
                     'name': 'Number of Records',
                     'expression': "COUNTROWS('" + main_table_name.replace("'", "''") + "')",
@@ -5058,6 +5063,23 @@ def _create_number_of_records_measure(model, worksheets, main_table_name):
                     ]
                 })
             break
+
+
+def _remove_conflicting_number_of_records_measures(model):
+    """Remove 'Number of Records' measures that collide with same-named columns.
+
+    Power BI does not allow a measure and a column with identical names in the
+    same table. Some Tableau sources contain both, so we keep the column and
+    drop only the conflicting measure.
+    """
+    for table in model.get('model', {}).get('tables', []):
+        columns = {c.get('name') for c in table.get('columns', [])}
+        if 'Number of Records' not in columns:
+            continue
+        measures = table.get('measures', [])
+        filtered = [m for m in measures if m.get('name') != 'Number of Records']
+        if len(filtered) != len(measures):
+            table['measures'] = filtered
 
 
 def _create_quick_table_calc_measures(model, worksheets, main_table_name, column_table_map):

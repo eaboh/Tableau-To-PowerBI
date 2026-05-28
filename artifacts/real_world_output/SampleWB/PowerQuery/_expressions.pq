@@ -1,1 +1,1 @@
-expression DataFolder = "C:\Users\pidoudet\OneDrive - Microsoft\Boulot\PBI SME\OracleToPostgre\TableauToPowerBI\artifacts\real_world_output\SampleWB\Data" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+expression DataFolder = "C:\\Users\\pidoudet\\OneDrive - Microsoft\\Boulot\\PBI SME\\OracleToPostgre\\TableauToPowerBI\\artifacts\\real_world_output\\SampleWB\\Data\\Tableau Samples" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]

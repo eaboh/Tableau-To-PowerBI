@@ -1,9 +1,9 @@
 table Returns
-	lineageTag: 31f4a9b3-c7b4-4a0b-bc84-0aa08ec6128e
+	lineageTag: 4438193f-9b47-4575-aa18-f5558ddd1424
 
 	column Returned
 		dataType: string
-		lineageTag: e6a22fe7-7999-43a0-9330-17fd353fd322
+		lineageTag: 81ba6e8c-824d-428f-a5e0-5d5b85a29968
 		summarizeBy: none
 		sourceColumn: Returned
 
@@ -11,23 +11,23 @@ table Returns
 
 	column 'Order ID'
 		dataType: string
-		lineageTag: 109a426a-ae87-43e6-9180-6f1fe8c8c55a
+		lineageTag: 14e7c0cc-898b-4f0e-949d-6c99f28f3c52
 		summarizeBy: none
 		sourceColumn: 'Order ID'
 		annotation Copilot_Hidden = true
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Returns-15eb4af7-ebba-4100-9256-4759bf6722ff' = m
+	partition 'Returns-b7801455-6c40-40dd-8ab2-338a92a5fcee' = m
 		mode: import
 		source =
 				let
-				    // Source Excel: /Users/mkorotchenkov/Documents/My Tableau Repository/Datasources/2021.2/en_US-US/Sample - Superstore.xls
+				    // Source Excel: Sample - Superstore.xls
 				    Source = try
 				
 				        let
 				
-				            _src = Excel.Workbook(File.Contents(DataFolder & "\\Users\mkorotchenkov\Documents\My Tableau Repository\Datasources\2021.2\en_US-US\Sample - Superstore.xls"), null, true),
+				            _src = Excel.Workbook(File.Contents(DataFolder & "\Sample - Superstore.xls"), null, true),
 				
 				            _nav = _src{[Item="Returns",Kind="Sheet"]}[Data]
 				

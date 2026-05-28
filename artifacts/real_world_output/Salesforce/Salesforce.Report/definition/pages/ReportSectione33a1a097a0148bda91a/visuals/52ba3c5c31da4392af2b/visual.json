@@ -1,0 +1,396 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "52ba3c5c31da4392af2b",
+  "position": {
+    "x": 220,
+    "y": 332,
+    "z": 20000,
+    "height": 388,
+    "width": 765,
+    "tabOrder": 20000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Monitor and improve KPIs",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "color": "#2b5c8a",
+                      "fontSize": "10.0pt"
+                    }
+                  },
+                  {
+                    "value": "Æ"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "  "
+                  },
+                  {
+                    "value": "Open opportunities",
+                    "textStyle": {
+                      "fontStyle": "italic",
+                      "color": "#2b5c8a"
+                    }
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Pipeline Value",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": <[Parameters].[KPI_NbOpenOpportunities_Description (copy)_1452692401309917187]>"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Weighted Pipeline Value",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": <[Parameters].[KPI_PipelineValue_Description (copy)_1452692401310101509]>"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Nb of Open Opportunities",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": <[Parameters].[Last x Days (copy)_1452692401309581312]>"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "  "
+                  },
+                  {
+                    "value": "All opportunities",
+                    "textStyle": {
+                      "fontStyle": "italic",
+                      "color": "#2b5c8a"
+                    }
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Total Closed Opportunities Amount",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": <[Parameters].[KPI_NbClosedOpportunities_Description (copy)_1358679765460369411]>"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Nb of Opportunities",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": <[Parameters].[KPI_NbOpenOpportunities_Description (copy)_1358679765464379397]>"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Avg Opportunity Size",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": <[Parameters].[KPI_AvgDealSizeWon_Description (copy)_1307169844765896713]>"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "  "
+                  },
+                  {
+                    "value": "Closed opportunities",
+                    "textStyle": {
+                      "fontStyle": "italic",
+                      "color": "#2b5c8a"
+                    }
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Total Closed Opportunities Amount",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": <[Parameters].[KPI_NbClosedOpportunities_Description (copy)_1358679765460369411]>"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Total Sales",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": <[Parameters].[KPI_SalesCycle_Description (copy)_1452692401318907919]>"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Nb of Closed Opportunities",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": <[Parameters].[KPI_NbOpenOpportunities_Description (copy)_1358679765455953921]>"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Nb of Won Opportunities",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": <[Parameters].[KPI_NbOpenOpportunities_Description (copy)_1452692401358135316]>"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Nb of Lost Opportunities",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": <[Parameters].[KPI_NbWonOpportunities_Description (copy)_1307169844763209729]> "
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Sales Cycle",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": <[Parameters].[KPI_PipelineValue_Description (copy)_1452692401316077579]>"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Sales Cycle (won)",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": <[Parameters].[KPI_SalesCycle_Description (copy)_1307169844763766787]>"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Sales Cycle (lost)",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": <[Parameters].[KPI_SalesCycleWon_Description (copy)_1307169844764229637]>"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Avg Deal Size (won)",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": <[Parameters].[KPI_ConversionRate_Description (copy)_1452692401317089293]>"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "  "
+                  },
+                  {
+                    "value": "Performance",
+                    "textStyle": {
+                      "fontStyle": "italic",
+                      "color": "#2b5c8a"
+                    }
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Won/Lost Rate",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": <[Parameters].[KPI_PipelineValue_Description (copy)_1452692401310478343]>"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Conversion Rate",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": <[Parameters].[KPI_WonLostRate_Description (copy)_1452692401310605321]>"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - "
+                  },
+                  {
+                    "value": "Sales Velocity",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": <[Parameters].[KPI_ConversionRate_Description (copy)_1307169844772745227]>"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

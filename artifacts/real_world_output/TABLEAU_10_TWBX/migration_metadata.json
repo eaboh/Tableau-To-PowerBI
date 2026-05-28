@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-24T21:46:15.387440",
+  "generated_at": "2026-05-28T19:28:44.289439",
   "source": "Tableau Migration",
   "report_name": "TABLEAU_10_TWBX",
   "objects_converted": {
@@ -29,10 +29,11 @@
   },
   "tmdl_stats": {
     "tables": 2,
-    "measures": 1,
+    "measures": 0,
     "columns": 7,
     "relationships": 0
   },
+  "dax_measure_names": [],
   "visual_type_mappings": {
     "Sheet 1": "Automatic"
   },
@@ -43,6 +44,7 @@
       "pbi_visual": "table",
       "dimensions": [],
       "measures": [],
+      "dax_measures": [],
       "field_count": 0
     }
   ],

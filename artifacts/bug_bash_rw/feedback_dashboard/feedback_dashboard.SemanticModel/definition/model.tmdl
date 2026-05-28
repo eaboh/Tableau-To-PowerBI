@@ -1,0 +1,22 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["customer_feedback_data.json","Extract","Calendar"]
+
+ref table 'customer_feedback_data.json'
+ref table Extract
+ref table Calendar
+
+ref relationship 4b926110-9583-4a97-aff6-3af182579d70
+ref relationship 9546a92b-40aa-4e43-b148-d4be64e69a57
+ref relationship 1374b679-a677-460a-80e5-9fe0e5135916
+
+ref expression DataFolder
+
+ref perspective 'Full Model'
+

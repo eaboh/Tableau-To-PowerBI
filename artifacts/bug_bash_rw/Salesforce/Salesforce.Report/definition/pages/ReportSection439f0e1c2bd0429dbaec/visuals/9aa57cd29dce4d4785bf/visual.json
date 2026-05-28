@@ -1,0 +1,75 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "9aa57cd29dce4d4785bf",
+  "position": {
+    "x": 985,
+    "y": 47,
+    "z": 19000,
+    "height": 285,
+    "width": 295,
+    "tabOrder": 19000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Answer key business questions",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "color": "#2b5c8a",
+                      "fontSize": "10.0pt"
+                    }
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - What is the size of our sales pipeline: overdue, short, medium, and long term?"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - What was our ability to convert opportunities?"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - Which opportunities do we have in our sales pipeline? Which opportunities do we win the most?"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - How is our sales pipeline composed?"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "     - Which account(s) drive our ability to convert opportunities?"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,15 @@
+artifact_name,artifact_type,sources_count,tables_count,measures_count,visuals_count,visuals_with_measures_count
+01_Raw_Orders_Clean,prep_flow,1,1,0,0,0
+02_Raw_Products_Clean,prep_flow,1,1,0,0,0
+03_Raw_Returns_Clean,prep_flow,1,1,0,0,0
+04_Customer_Enrichment,prep_flow,2,1,0,0,0
+05_Sales_Analytics,prep_flow,3,1,0,0,0
+06_Returns_Analytics,prep_flow,2,1,0,0,0
+07_Executive_Dashboard,prep_flow,2,1,0,0,0
+08_Inventory_Tracker,prep_flow,2,1,0,0,0
+09_HR_Attrition_Analysis,prep_flow,3,2,0,0,0
+10_Food_Delivery_ETL,prep_flow,3,3,0,0,0
+11_Energy_Consumption,prep_flow,3,2,0,0,0
+12_Real_Estate_Valuation,prep_flow,4,2,0,0,0
+13_Financial_Reconciliation,prep_flow,3,2,0,0,0
+14_Healthcare_Patient_Flow,prep_flow,4,3,0,0,0

@@ -1,9 +1,9 @@
 table People
-	lineageTag: 0c4d5d60-a454-4366-aea4-e22c31fbca72
+	lineageTag: 38653c37-4e4d-4ccf-b86e-d7e1034a0c72
 
 	column 'Regional Manager'
 		dataType: string
-		lineageTag: 9e1a07c9-2bca-4e82-861f-41476948a63a
+		lineageTag: 6a5d11d2-9441-4947-bdf7-860c9af12075
 		summarizeBy: none
 		sourceColumn: 'Regional Manager'
 		dataCategory: StateOrProvince
@@ -12,23 +12,23 @@ table People
 
 	column Region
 		dataType: string
-		lineageTag: 64716a5e-3ef5-4f89-8342-7befd01d633c
+		lineageTag: 2f1c6fab-4688-4173-8c4a-e159ff71856c
 		summarizeBy: none
 		sourceColumn: Region
 		dataCategory: StateOrProvince
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'People-e7c0528d-14a1-48b1-b2b5-c3b84eeac33b' = m
+	partition 'People-a75275d1-7c58-46d3-82c5-23b072b2e169' = m
 		mode: import
 		source =
 				let
-				    // Source Excel: /Users/mkorotchenkov/Documents/My Tableau Repository/Datasources/2021.2/en_US-US/Sample - Superstore.xls
+				    // Source Excel: Sample - Superstore.xls
 				    Source = try
 				
 				        let
 				
-				            _src = Excel.Workbook(File.Contents(DataFolder & "\\Users\mkorotchenkov\Documents\My Tableau Repository\Datasources\2021.2\en_US-US\Sample - Superstore.xls"), null, true),
+				            _src = Excel.Workbook(File.Contents(DataFolder & "\Sample - Superstore.xls"), null, true),
 				
 				            _nav = _src{[Item="People",Kind="Sheet"]}[Data]
 				

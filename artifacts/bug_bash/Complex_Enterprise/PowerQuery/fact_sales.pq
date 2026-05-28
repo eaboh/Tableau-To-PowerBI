@@ -16,7 +16,8 @@ let
     #"SALES" = Source{[Name="SALES"]}[Data],
     #"fact_sales Table" = #"SALES"{[Name="fact_sales"]}[Data],
     #"Renamed Columns" = Table.RenameColumns(#"fact_sales Table", {{"sale_id", "Sale ID"}, {"channel", "Channel"}, {"region", "Region"}, {"territory", "Territory"}, {"country", "Country"}, {"state", "State"}, {"city", "City"}, {"postal_code", "Postal Code"}, {"latitude", "Latitude"}, {"longitude", "Longitude"}, {"quantity", "Quantity"}, {"unit_price", "Unit Price"}, {"unit_cost", "Unit Cost"}, {"discount_pct", "Discount %"}, {"tax_rate", "Tax Rate"}, {"shipping_cost", "Shipping Cost"}, {"currency_code", "Currency"}, {"order_status", "Order Status"}, {"payment_method", "Payment Method"}, {"sales_rep", "Sales Rep"}, {"promotion_code", "Promotion Code"}, {"is_returned", "Returned?"}}),
-    #"Added Safe Discount" = Table.AddColumn(#"Renamed Columns", "Safe Discount", each if ([discount_pct] = null) then 0 else [discount_pct], type number),
+    #"Added Discount Category" = Table.AddColumn(#"Renamed Columns", "Discount Category", each /* TODO: DAX conversion validation failed for C_DiscCat: invalid literal token detected in DAX output */ null, type text),
+    #"Added Safe Discount" = Table.AddColumn(#"Added Discount Category", "Safe Discount", each if ([discount_pct] = null) then 0 else [discount_pct], type number),
     Result = #"Added Safe Discount"
 in
     Result

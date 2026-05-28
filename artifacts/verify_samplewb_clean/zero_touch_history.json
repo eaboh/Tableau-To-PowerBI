@@ -1,0 +1,20 @@
+{
+  "updated_at": "2026-05-28T17:25:51.597172",
+  "summary": {
+    "total": 1,
+    "success": 1,
+    "failed": 0,
+    "zero_touch_rate": 100.0,
+    "top_failure_modes": []
+  },
+  "records": [
+    {
+      "workbook": "SampleWB",
+      "timestamp": "2026-05-28T17:25:51.596273",
+      "success": true,
+      "failure_mode": "",
+      "verdict_severity": "warning",
+      "issues_count": 1
+    }
+  ]
+}

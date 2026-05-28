@@ -1,13 +1,14 @@
 table xy
-	lineageTag: d86b64c2-ea56-454b-ba31-c0d162ab17e5
+	lineageTag: ce467c8d-3fb8-40bc-8b6b-25f1f5583e7c
 
-	measure '[Number of Records]' = 1
+	measure 'Number of Records' = 1
 		displayFolder: Measures
-		lineageTag: f9119e6b-7a1f-4702-b247-02b1d6b8daa6
+		lineageTag: 69e6f3ec-aec6-44ee-bcd2-c7037098bb84
+		annotation Copilot_Description = Migrated from Tableau: 1 | DAX: 1
 
 	column a
 		dataType: string
-		lineageTag: 254b55b4-aa3a-4a4c-9413-6736c3fb6b56
+		lineageTag: d6ce98e3-8a22-4ac0-9bf9-b99e63ea92fc
 		summarizeBy: none
 		sourceColumn: a
 
@@ -15,7 +16,7 @@ table xy
 
 	column x
 		dataType: int64
-		lineageTag: cb856f2d-03df-434f-9950-2332b7cec2fd
+		lineageTag: 6faa70ca-7884-4a6e-a554-693c71a1b1db
 		summarizeBy: sum
 		sourceColumn: x
 
@@ -23,13 +24,13 @@ table xy
 
 	column y
 		dataType: int64
-		lineageTag: cd668d09-b50e-4d2b-a203-7a6360942d8c
+		lineageTag: 1c62ad0d-3629-490b-892f-c23359d71471
 		summarizeBy: sum
 		sourceColumn: y
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'xy-d48679eb-7f86-4a1c-9328-b294c58af43e' = m
+	partition 'xy-9b845f83-94da-44cf-9447-e9adc4bc5476' = m
 		mode: import
 		source =
 				let

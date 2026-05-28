@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-02T13:39:16.423568",
+  "generated_at": "2026-05-28T17:00:19.361386",
   "source": "Tableau Migration",
   "report_name": "Complex_Enterprise",
   "objects_converted": {
@@ -20,7 +20,7 @@
   },
   "generated_output": {
     "pages": 3,
-    "visuals": 19,
+    "visuals": 16,
     "theme_applied": false,
     "theme_detail": {
       "status": "skipped",
@@ -29,8 +29,8 @@
   },
   "tmdl_stats": {
     "tables": 6,
-    "measures": 33,
-    "columns": 66,
+    "measures": 49,
+    "columns": 67,
     "relationships": 2
   },
   "visual_type_mappings": {

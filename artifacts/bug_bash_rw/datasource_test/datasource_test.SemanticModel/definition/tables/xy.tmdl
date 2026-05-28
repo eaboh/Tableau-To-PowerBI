@@ -1,0 +1,58 @@
+table xy
+	lineageTag: 47e26ad2-ae20-447c-99e4-791c5260bd8d
+
+	measure 'Number of Records' = 1
+		displayFolder: Measures
+		lineageTag: b502270b-3f30-47de-a9d9-b2122e63166e
+		annotation Copilot_Description = Migrated from Tableau: 1 | DAX: 1
+
+	column a
+		dataType: string
+		lineageTag: 911c0348-0800-4d01-a3b4-e972e346dca0
+		summarizeBy: none
+		sourceColumn: a
+
+		annotation SummarizationSetBy = Automatic
+
+	column x
+		dataType: int64
+		lineageTag: 3af56036-81dc-402c-b78f-4bfea277bf07
+		summarizeBy: sum
+		sourceColumn: x
+
+		annotation SummarizationSetBy = Automatic
+
+	column y
+		dataType: int64
+		lineageTag: c60d5159-1376-4321-b8d2-48ccc7087a61
+		summarizeBy: sum
+		sourceColumn: y
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'xy-ad7db8bf-875e-40b3-8eeb-248d35f79896' = m
+		mode: import
+		source =
+				let
+				    // Source PostgreSQL
+				    Source = try
+				
+				        let
+				
+				            _src = PostgreSQL.Database("postgres91.test.tsi.lan:5432", "TestV1"),
+				
+				            _nav = _src{[Schema="public", Item="xy"]}[Data]
+				
+				        in _nav
+				
+				    otherwise
+				
+				        #table({"a", "x", "y"}, {}),
+				    #"Renamed Columns" = Table.RenameColumns(Source, {{"a", "A"}, {"x", "X"}, {"y", "Y"}}),
+				    Result = #"Renamed Columns"
+				in
+				    Result
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 3 columns and 1 measures: a, x, y.
+

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-02T13:39:17.080145",
+  "generated_at": "2026-05-28T17:00:46.653069",
   "source": "Tableau Migration",
   "report_name": "Financial_Report",
   "objects_converted": {
@@ -29,7 +29,7 @@
   },
   "tmdl_stats": {
     "tables": 4,
-    "measures": 11,
+    "measures": 16,
     "columns": 18,
     "relationships": 0
   },

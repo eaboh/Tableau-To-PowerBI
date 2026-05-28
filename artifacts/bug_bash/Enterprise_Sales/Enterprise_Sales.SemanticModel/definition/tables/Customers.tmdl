@@ -1,9 +1,9 @@
 table Customers
-	lineageTag: 2ec91f65-c537-4a7a-a6ce-e07bf0b1a15e
+	lineageTag: 22f76e4b-9904-498d-a790-7148b08d6b47
 
 	column customer_id
 		dataType: int64
-		lineageTag: 8de80cfc-9f83-4846-8493-9b1077fef663
+		lineageTag: 0fec29f4-a028-4e08-b458-b55fe025bd29
 		summarizeBy: sum
 		sourceColumn: customer_id
 		annotation Copilot_Hidden = true
@@ -12,7 +12,7 @@ table Customers
 
 	column customer_name
 		dataType: string
-		lineageTag: 38cb4114-f068-455a-88fe-ff45225278f6
+		lineageTag: 2166b357-87a4-4c82-9d10-0948af5d13a5
 		summarizeBy: none
 		sourceColumn: customer_name
 
@@ -20,7 +20,7 @@ table Customers
 
 	column segment
 		dataType: string
-		lineageTag: 3c0effd5-20b6-40ef-968c-8f401323f7ec
+		lineageTag: fb8e01cc-1cf8-4aeb-8be6-da7d79f1ce76
 		summarizeBy: none
 		sourceColumn: segment
 
@@ -28,7 +28,7 @@ table Customers
 
 	column city
 		dataType: string
-		lineageTag: a4f6fe42-796b-4c28-997c-51dfcfa18581
+		lineageTag: 6d30ad57-cb07-40c5-b424-1604b4c28cfc
 		summarizeBy: none
 		sourceColumn: city
 		dataCategory: City
@@ -37,7 +37,7 @@ table Customers
 
 	column state
 		dataType: string
-		lineageTag: 6f92009c-4177-4397-90a3-d6bb73aa3403
+		lineageTag: 91b471ad-a675-4638-a8b8-b87cc544ca09
 		summarizeBy: none
 		sourceColumn: state
 		dataCategory: StateOrProvince
@@ -46,7 +46,7 @@ table Customers
 
 	column country
 		dataType: string
-		lineageTag: eb339120-f8d1-4c75-80fe-1df52147cbb5
+		lineageTag: 685c6e3d-d0b5-4628-877a-2fe1b64c0c0b
 		summarizeBy: none
 		sourceColumn: country
 		dataCategory: Country
@@ -55,7 +55,7 @@ table Customers
 
 	column postal_code
 		dataType: string
-		lineageTag: 0210c6d1-882c-4175-909c-f643e6864163
+		lineageTag: 290f0904-1149-49fd-b7cd-04d891c73542
 		summarizeBy: none
 		sourceColumn: postal_code
 		dataCategory: PostalCode
@@ -65,7 +65,7 @@ table Customers
 	column latitude
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 1a7918d2-610c-424e-8dbc-304834eb4520
+		lineageTag: 3c35af88-41a9-4df8-b4a6-84ef0577de55
 		summarizeBy: sum
 		sourceColumn: latitude
 		dataCategory: Latitude
@@ -75,7 +75,7 @@ table Customers
 	column longitude
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 2a4df4d0-a107-400d-a7ad-57266a9db8eb
+		lineageTag: bc020741-8c3a-4c66-86db-4110191d8832
 		summarizeBy: sum
 		sourceColumn: longitude
 		dataCategory: Longitude
@@ -84,7 +84,7 @@ table Customers
 
 	column customer_email
 		dataType: string
-		lineageTag: 7e49fe34-ab7a-4c02-82ce-1f9422b00c13
+		lineageTag: a8aa0895-f548-496d-9894-8342590078f8
 		summarizeBy: none
 		sourceColumn: customer_email
 
@@ -93,14 +93,13 @@ table Customers
 	column first_purchase_date
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: e5e66403-04b3-4a4a-987d-c606c9e5d22b
+		lineageTag: 4dac0bb5-b77e-4279-93a3-03f39727a4cc
 		summarizeBy: none
 		sourceColumn: first_purchase_date
-		dataCategory: DateTime
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Customers-40312581-aea4-4abb-a5dd-635d224944b7' = m
+	partition 'Customers-a525fa48-29d7-4367-b574-bdf03e16de6d' = m
 		mode: import
 		source =
 				let

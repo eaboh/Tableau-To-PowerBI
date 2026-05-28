@@ -21,7 +21,68 @@
       "pbi_table": "Calendar"
     }
   ],
-  "calculations": [],
+  "calculations": [
+    {
+      "tableau_calculation": "SUM([Sales])",
+      "pbi_table": "Orders",
+      "pbi_object": "Total Sales",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM([Profit])",
+      "pbi_table": "Orders",
+      "pbi_object": "Total Profit",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM([Profit]) / SUM([Sales])",
+      "pbi_table": "Orders",
+      "pbi_object": "Profit Ratio",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD([Order ID])",
+      "pbi_table": "Orders",
+      "pbi_object": "Number of Orders",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Total Sales Formatted",
+      "pbi_table": "Orders",
+      "pbi_object": "Total Sales Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Total Profit Formatted",
+      "pbi_table": "Orders",
+      "pbi_object": "Total Profit Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Profit Ratio Formatted",
+      "pbi_table": "Orders",
+      "pbi_object": "Profit Ratio Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Year To Date",
+      "pbi_table": "Calendar",
+      "pbi_object": "Year To Date",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Previous Year",
+      "pbi_table": "Calendar",
+      "pbi_object": "Previous Year",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Year Over Year %",
+      "pbi_table": "Calendar",
+      "pbi_object": "Year Over Year %",
+      "pbi_type": "measure"
+    }
+  ],
   "relationships": [
     {
       "from": "Orders[Region]",
@@ -39,5 +100,18 @@
       "cardinality": "oneDirection"
     }
   ],
-  "worksheets": []
+  "worksheets": [
+    {
+      "tableau_worksheet": "Sales by Region",
+      "pbi_page": "Sales by Region"
+    },
+    {
+      "tableau_worksheet": "Profit by Category",
+      "pbi_page": "Profit by Category"
+    },
+    {
+      "tableau_worksheet": "Sales Trend",
+      "pbi_page": "Sales Trend"
+    }
+  ]
 }

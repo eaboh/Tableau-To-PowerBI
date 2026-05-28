@@ -1,0 +1,14 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "ReportSectiond88f1977c49b4d138a10",
+  "displayName": "Story 1",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "annotations": [
+    {
+      "name": "MigrationNote_EmptyPage",
+      "value": "Page has no visuals — review migration output"
+    }
+  ]
+}

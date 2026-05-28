@@ -1,0 +1,68 @@
+table xy
+	lineageTag: 67c0cf45-2373-48d9-abdd-e258b862df51
+
+	measure 'Number of Records' = 1
+		displayFolder: Measures
+		lineageTag: bcf1ddc5-41e4-40e7-9eb6-0f62819df5d4
+		annotation Copilot_Description = Migrated from Tableau: 1 | DAX: 1
+
+	measure 'SUM(X) + SUM(Y)' = SUM('xy'[x]) + SUM('xy'[y])
+		displayFolder: Measures
+		lineageTag: 494b52d6-f3c5-4c84-81fc-833f36512f41
+		annotation Copilot_Description = Migrated from Tableau: SUM([x]) + SUM([y]) | DAX: SUM('xy'[x]) + SUM('xy'[y])
+
+	measure 'SUM(X) + SUM(Y) Formatted' = VAR _val = [SUM(X) + SUM(Y)] RETURN IF(ABS(_val) >= 1E9, FORMAT(_val / 1E9, "#,0.0") & "B", IF(ABS(_val) >= 1E6, FORMAT(_val / 1E6, "#,0.0") & "M", IF(ABS(_val) >= 1E3, FORMAT(_val / 1E3, "#,0.0") & "K", FORMAT(_val, "0"))))
+		displayFolder: Formatted
+		lineageTag: 97f1a782-6879-416e-a71f-f130f72312b7
+		annotation Copilot_Description = Dynamic numeric abbreviation for SUM(X) + SUM(Y) (K/M/B)
+
+	column a
+		dataType: string
+		lineageTag: 44a3d010-038d-4023-b00f-33c4aba96f4b
+		summarizeBy: none
+		sourceColumn: a
+
+		annotation SummarizationSetBy = Automatic
+
+	column x
+		dataType: int64
+		lineageTag: b2e03204-94df-43ea-9ae3-3650ca349016
+		summarizeBy: sum
+		sourceColumn: x
+
+		annotation SummarizationSetBy = Automatic
+
+	column y
+		dataType: int64
+		lineageTag: b388c1a2-b1bb-44a5-8db5-e874474d254c
+		summarizeBy: sum
+		sourceColumn: y
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'xy-ec22a251-5b30-4505-b7c4-724b7720e5e2' = m
+		mode: import
+		source =
+				let
+				    // Source PostgreSQL
+				    Source = try
+				
+				        let
+				
+				            _src = PostgreSQL.Database("postgres91.test.tsi.lan:5432", "TestV1"),
+				
+				            _nav = _src{[Schema="public", Item="xy"]}[Data]
+				
+				        in _nav
+				
+				    otherwise
+				
+				        #table({"a", "x", "y"}, {}),
+				    #"Renamed Columns" = Table.RenameColumns(Source, {{"a", "A"}, {"x", "X"}, {"y", "Y"}}),
+				    Result = #"Renamed Columns"
+				in
+				    Result
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 3 columns and 3 measures: a, x, y.
+

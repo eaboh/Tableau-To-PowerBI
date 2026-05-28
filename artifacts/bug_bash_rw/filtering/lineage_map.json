@@ -1,0 +1,28 @@
+{
+  "tables": [
+    {
+      "tableau_datasource": "federated.1df63xu0j2dvhd1e3sooz18pbrcc",
+      "tableau_table": "TestData",
+      "pbi_table": "TestData"
+    }
+  ],
+  "calculations": [
+    {
+      "tableau_calculation": "Number of Records",
+      "pbi_table": "TestData",
+      "pbi_object": "Number of Records",
+      "pbi_type": "measure"
+    }
+  ],
+  "relationships": [],
+  "worksheets": [
+    {
+      "tableau_worksheet": "Sheet 1",
+      "pbi_page": "Sheet 1"
+    },
+    {
+      "tableau_worksheet": "Sheet 2",
+      "pbi_page": "Sheet 2"
+    }
+  ]
+}

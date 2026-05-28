@@ -1,0 +1,169 @@
+{
+  "generated_at": "2026-05-28T17:25:50.456178",
+  "source": "Tableau Migration",
+  "report_name": "SampleWB",
+  "objects_converted": {
+    "worksheets": 7,
+    "dashboards": 1,
+    "datasources": 1,
+    "calculations": 4,
+    "parameters": 0,
+    "filters": 16,
+    "stories": 0,
+    "sets": 0,
+    "groups": 5,
+    "bins": 0,
+    "hierarchies": 0,
+    "user_filters": 0,
+    "actions": 6,
+    "custom_sql": 0
+  },
+  "generated_output": {
+    "pages": 1,
+    "visuals": 3,
+    "theme_applied": false,
+    "theme_detail": {
+      "status": "skipped",
+      "reason": "no dashboard colors detected"
+    }
+  },
+  "tmdl_stats": {
+    "tables": 2,
+    "measures": 7,
+    "columns": 26,
+    "relationships": 0
+  },
+  "dax_measure_names": [
+    "GDP % of Total",
+    "GDP per capita (weighted)",
+    "GDP per capita (weighted) Formatted",
+    "Previous Year",
+    "Rate spread (difference)",
+    "Year Over Year %",
+    "Year To Date"
+  ],
+  "visual_type_mappings": {
+    "Country ranks": "Automatic",
+    "GDP per capita": "Automatic",
+    "GDP per capita by region": "Automatic",
+    "GDP per capita map": "Automatic",
+    "Health spending vs life expectancy": "Automatic",
+    "Interest rates": "Automatic",
+    "Share of World GDP": "Automatic"
+  },
+  "visual_details": [
+    {
+      "worksheet": "Country ranks",
+      "tableau_mark": "Automatic",
+      "pbi_visual": "clusteredBarChart",
+      "dimensions": [
+        "Country / Region"
+      ],
+      "measures": [
+        "H: Life exp (years)",
+        "F: GDP (curr $)",
+        "F: GDP per capita (curr $)",
+        "P: Population (count)"
+      ],
+      "dax_measures": [],
+      "field_count": 5
+    },
+    {
+      "worksheet": "GDP per capita",
+      "tableau_mark": "Automatic",
+      "pbi_visual": "clusteredBarChart",
+      "dimensions": [
+        "Country / Region",
+        "Region"
+      ],
+      "measures": [
+        "F: GDP per capita (curr $)",
+        "Calculation1",
+        "F: GDP per capita (curr $)"
+      ],
+      "dax_measures": [],
+      "field_count": 5
+    },
+    {
+      "worksheet": "GDP per capita by region",
+      "tableau_mark": "Automatic",
+      "pbi_visual": "lineChart",
+      "dimensions": [
+        "Date",
+        "Region"
+      ],
+      "measures": [
+        "Calculation_1590906174513693",
+        "F: GDP (curr $)"
+      ],
+      "dax_measures": [],
+      "field_count": 4
+    },
+    {
+      "worksheet": "GDP per capita map",
+      "tableau_mark": "Automatic",
+      "pbi_visual": "azureMap",
+      "dimensions": [
+        "Region",
+        "Subregion",
+        "Country / Region"
+      ],
+      "measures": [
+        "F: GDP per capita (curr $)",
+        "Calculation1"
+      ],
+      "dax_measures": [],
+      "field_count": 5
+    },
+    {
+      "worksheet": "Health spending vs life expectancy",
+      "tableau_mark": "Automatic",
+      "pbi_visual": "clusteredBarChart",
+      "dimensions": [
+        "Region",
+        "Country / Region"
+      ],
+      "measures": [
+        "H: Health exp/cap (curr $)",
+        "H: Life exp (years)"
+      ],
+      "dax_measures": [],
+      "field_count": 4
+    },
+    {
+      "worksheet": "Interest rates",
+      "tableau_mark": "Automatic",
+      "pbi_visual": "clusteredBarChart",
+      "dimensions": [
+        "Region",
+        "Subregion"
+      ],
+      "measures": [
+        "F: Deposit interest rate (%)",
+        "F: Lending interest rate (%)",
+        "F: GDP (curr $)",
+        "Calculation_1590906174513693",
+        "Calculation_8570907072742130"
+      ],
+      "dax_measures": [],
+      "field_count": 7
+    },
+    {
+      "worksheet": "Share of World GDP",
+      "tableau_mark": "Automatic",
+      "pbi_visual": "table",
+      "dimensions": [
+        "Region",
+        "Country / Region",
+        "pcto:sum:F: GDP (curr $):qk:1"
+      ],
+      "measures": [
+        "F: GDP (curr $)",
+        "F: GDP (curr $)"
+      ],
+      "dax_measures": [],
+      "field_count": 5
+    }
+  ],
+  "approximations": []
+}

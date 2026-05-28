@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-02T13:39:19.238039",
+  "generated_at": "2026-05-28T17:01:49.829340",
   "source": "Tableau Migration",
   "report_name": "Superstore_Sales",
   "objects_converted": {
@@ -29,7 +29,7 @@
   },
   "tmdl_stats": {
     "tables": 4,
-    "measures": 7,
+    "measures": 10,
     "columns": 33,
     "relationships": 2
   },

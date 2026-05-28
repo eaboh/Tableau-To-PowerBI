@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-24T17:46:26.437532",
+  "generated_at": "2026-05-28T19:28:54.759162",
   "source": "Tableau Migration",
   "report_name": "vishnu_dashboard",
   "objects_converted": {
@@ -29,10 +29,20 @@
   },
   "tmdl_stats": {
     "tables": 4,
-    "measures": 7,
+    "measures": 8,
     "columns": 36,
     "relationships": 0
   },
+  "dax_measure_names": [
+    "Number of Records",
+    "Previous Year",
+    "Profit Bin Size",
+    "Profit Ratio",
+    "Profit Ratio Formatted",
+    "Top Customers",
+    "Year Over Year %",
+    "Year To Date"
+  ],
   "visual_type_mappings": {
     "Sheet 1": "Automatic",
     "Sheet 2": "Automatic",
@@ -51,6 +61,7 @@
       "measures": [
         "Sales"
       ],
+      "dax_measures": [],
       "field_count": 2
     },
     {
@@ -63,6 +74,7 @@
       "measures": [
         "Sales"
       ],
+      "dax_measures": [],
       "field_count": 2
     },
     {
@@ -71,6 +83,7 @@
       "pbi_visual": "table",
       "dimensions": [],
       "measures": [],
+      "dax_measures": [],
       "field_count": 0
     },
     {
@@ -81,9 +94,11 @@
         "Sub-Category"
       ],
       "measures": [
-        "Profit"
+        "Profit",
+        "Sales"
       ],
-      "field_count": 2
+      "dax_measures": [],
+      "field_count": 3
     },
     {
       "worksheet": "Sheet 5",
@@ -95,6 +110,7 @@
       "measures": [
         "Sales"
       ],
+      "dax_measures": [],
       "field_count": 2
     }
   ],

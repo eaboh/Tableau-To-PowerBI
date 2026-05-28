@@ -1,23 +1,23 @@
-relationship 2033e500-1ce0-4efb-964b-c6046e14e288
+relationship bfc46675-68cf-4a85-b794-e63794398611
 	fromColumn: Sensors.machine_id
 	toColumn: Maintenance.machine_id
 	fromCardinality: many
 	toCardinality: many
 	crossFilteringBehavior: bothDirections
 
-relationship 294eab58-490c-47e1-98bf-f02129ec2487
+relationship d355dcda-22db-40d4-8dcf-c214363759df
 	fromColumn: Sensors.machine_id
 	toColumn: Machines.machine_id
 	fromCardinality: many
 	toCardinality: many
 	crossFilteringBehavior: bothDirections
 
-relationship 01a4b2bd-cdfb-4b29-aa13-a9fc57cd0d12
+relationship ef9a44d7-8865-4878-83e1-43c386379bf3
 	fromColumn: Sensors.reading_time
 	toColumn: Calendar.Date
-	crossFilteringBehavior: oneDirection
+	crossFilteringBehavior: bothDirections
 
-relationship 0d11976a-73b4-4337-a399-4aa7d2ab83fb
+relationship 8aa1118e-607b-4179-9412-194827bcab55
 	fromColumn: Machines.install_date
 	toColumn: Calendar.Date
 	fromCardinality: many
@@ -25,7 +25,7 @@ relationship 0d11976a-73b4-4337-a399-4aa7d2ab83fb
 	crossFilteringBehavior: bothDirections
 	isActive: false
 
-relationship 9320686c-4fe6-49e8-a98b-12fd893615cb
+relationship a8ce668b-99ec-41e4-920a-bda3beae55b5
 	fromColumn: Maintenance.maint_date
 	toColumn: Calendar.Date
 	fromCardinality: many
@@ -33,7 +33,7 @@ relationship 9320686c-4fe6-49e8-a98b-12fd893615cb
 	crossFilteringBehavior: bothDirections
 	isActive: false
 
-relationship 553b4d35-771c-4599-97f6-faa8ee5c7e66
+relationship 036ad0ab-f80d-4c26-832b-ed2ff6371d29
 	fromColumn: Maintenance.machine_id
 	toColumn: Machines.machine_id
 	fromCardinality: many

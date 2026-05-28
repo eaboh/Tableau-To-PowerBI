@@ -1,0 +1,45 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	discourageImplicitMeasures
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Opportunities","Owned By","Created By","Account","Account Owned By","Account Created By","Calendar","Select Dimension","Select Indicator","pPlaceholder","pPlaceholder_1","Last x Days","Next x Days","Select Indicator CalcGroup","Select Dimension FieldParam"]
+
+ref table Opportunities
+ref table 'Owned By'
+ref table 'Created By'
+ref table Account
+ref table 'Account Owned By'
+ref table 'Account Created By'
+ref table Calendar
+ref table 'Select Dimension'
+ref table 'Select Indicator'
+ref table pPlaceholder
+ref table pPlaceholder_1
+ref table 'Last x Days'
+ref table 'Next x Days'
+ref table 'Select Indicator CalcGroup'
+ref table 'Select Dimension FieldParam'
+
+ref relationship bfdc03cc-d951-44e3-95d6-146dc2bd49e8
+ref relationship 8101029e-b58d-4efe-a922-58e786b1fe9e
+ref relationship 9299ad00-7ac0-4b3f-b09f-09bbff045fb6
+ref relationship 8de5e035-16ef-4dc9-a869-04971a83cdc9
+ref relationship ffd84831-53bf-4ecc-bb83-5f50ef9fd194
+ref relationship c54cf35c-44c2-4aa0-a050-18bbb4b0ae51
+ref relationship b982bae6-091e-4c3e-896a-3f16a49b002c
+ref relationship 01639025-dd7f-497e-bacc-4faef980f88d
+ref relationship 56c060cc-d236-406d-89e1-19a7070310c8
+ref relationship 3d1eb09c-044c-433c-94a1-f8e5cc0fc445
+ref relationship e1af0e73-4343-4721-8297-790e770798ac
+ref relationship 2c61608b-dd2b-4752-b57f-1c78be5950da
+ref relationship 819eb4ac-e4a9-49b7-98dd-50e3f40ffed0
+
+ref expression DataFolder
+
+ref perspective 'Full Model'
+

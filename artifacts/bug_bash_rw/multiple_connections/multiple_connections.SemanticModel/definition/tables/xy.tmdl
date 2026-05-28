@@ -1,0 +1,36 @@
+table xy
+	lineageTag: 44fc6e4d-e409-4e4c-bec5-a370eeb0e4d2
+
+	column a
+		dataType: string
+		lineageTag: e954685e-2767-4c1f-9309-1c7744247550
+		summarizeBy: none
+		sourceColumn: a
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'xy-7dea7092-7b7a-40da-8c92-812be95c5b30' = m
+		mode: import
+		source =
+				let
+				    // Source MySQL: mysql55:
+				    Source = try
+				
+				        let
+				
+				            _src = MySQL.Database("mysql55:", "testv1"),
+				
+				            _nav = _src{[Schema="testv1", Item="xy"]}[Data]
+				
+				        in _nav
+				
+				    otherwise
+				
+				        #table({"a"}, {}),
+				    Result = Source
+				in
+				    Result
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 1 columns: a.
+

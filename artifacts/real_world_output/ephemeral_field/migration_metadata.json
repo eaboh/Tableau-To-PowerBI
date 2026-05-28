@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-24T21:47:14.213672",
+  "generated_at": "2026-05-28T19:28:45.276261",
   "source": "Tableau Migration",
   "report_name": "ephemeral_field",
   "objects_converted": {
@@ -29,10 +29,15 @@
   },
   "tmdl_stats": {
     "tables": 1,
-    "measures": 2,
+    "measures": 3,
     "columns": 3,
     "relationships": 0
   },
+  "dax_measure_names": [
+    "Number of Records",
+    "SUM(X) + SUM(Y)",
+    "SUM(X) + SUM(Y) Formatted"
+  ],
   "visual_type_mappings": {
     "Sheet 1": "Automatic",
     "Sheet 2": "Automatic"
@@ -46,6 +51,7 @@
         "a"
       ],
       "measures": [],
+      "dax_measures": [],
       "field_count": 1
     },
     {
@@ -59,6 +65,7 @@
         "x",
         "Calculation_3002775091869110273"
       ],
+      "dax_measures": [],
       "field_count": 3
     }
   ],

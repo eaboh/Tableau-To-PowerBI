@@ -573,6 +573,24 @@ class TestDataflowGenerator:
         stats = gen.generate(sample_extracted_data)
         assert stats['queries'] >= 3  # 2 tables + 1 custom SQL
 
+    def test_mashup_shared_name_quoted_when_contains_space(self, temp_dir):
+        from powerbi_import.dataflow_generator import DataflowGenerator
+        gen = DataflowGenerator(temp_dir, 'TestProject')
+        queries = [{'name': 'Sales Orders', 'm_query': 'let S=1 in S'}]
+        doc = gen._build_dataflow_definition(queries)['mashupDocument']
+        assert 'shared #"Sales Orders" = let S=1 in S;' in doc
+
+    def test_mashup_shared_name_quoted_in_file(self, temp_dir):
+        from powerbi_import.dataflow_generator import DataflowGenerator
+        gen = DataflowGenerator(temp_dir, 'TestProject')
+        queries = [{'name': 'Équipe Ventes', 'm_query': 'let Source=1 in Source'}]
+        gen._write_mashup_document(queries)
+        mashup_path = os.path.join(temp_dir, 'TestProject.Dataflow', 'mashup.pq')
+        with open(mashup_path, encoding='utf-8') as f:
+            content = f.read()
+        # Unicode/accent-safe and space-safe declaration form.
+        assert 'shared #"Équipe Ventes" = let Source=1 in Source;' in content
+
 
 # ════════════════════════════════════════════════════════════════════
 #  NotebookGenerator

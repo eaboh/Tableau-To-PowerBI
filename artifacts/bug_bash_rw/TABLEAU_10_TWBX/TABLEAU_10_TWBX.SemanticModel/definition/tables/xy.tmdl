@@ -1,0 +1,53 @@
+table xy
+	lineageTag: 9f33b262-ac17-4958-9edf-a0e16eb86a14
+
+	column a
+		dataType: string
+		lineageTag: 36bdfb49-7aaf-414d-8ab4-b4f9921d2c65
+		summarizeBy: none
+		sourceColumn: a
+
+		annotation SummarizationSetBy = Automatic
+
+	column x
+		dataType: int64
+		lineageTag: cc8bcc23-0382-4d51-a6d0-54727d17fe39
+		summarizeBy: sum
+		sourceColumn: x
+
+		annotation SummarizationSetBy = Automatic
+
+	column y
+		dataType: int64
+		lineageTag: 0b03c9d6-0b55-48d3-8ec4-cd445bb8fc0a
+		summarizeBy: sum
+		sourceColumn: y
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'xy-95bd34ee-1b06-48ff-89fd-16bd28aa84d1' = m
+		mode: import
+		source =
+				let
+				    // Source SQL Server
+				    Source = try
+				
+				        let
+				
+				            _src = Sql.Database("mssql2012.test.tsi.lan", "TestV1"),
+				
+				            _nav = _src{[Schema="dbo", Item="xy"]}[Data]
+				
+				        in _nav
+				
+				    otherwise
+				
+				        #table({"a", "x", "y"}, {}),
+				    #"Renamed Columns" = Table.RenameColumns(Source, {{"a", "A"}, {"x", "X"}, {"y", "Y"}}),
+				    Result = #"Renamed Columns"
+				in
+				    Result
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 3 columns: a, x, y.
+

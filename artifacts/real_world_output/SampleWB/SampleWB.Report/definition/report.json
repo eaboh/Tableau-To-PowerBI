@@ -2,8 +2,8 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/2.0.0/schema.json",
   "themeCollection": {
     "baseTheme": {
-      "name": "CY24SU06",
-      "reportVersionAtImport": "5.55",
+      "name": "CY26SU04",
+      "reportVersionAtImport": "5.58",
       "type": "SharedResources"
     }
   },
@@ -13,8 +13,8 @@
       "type": "SharedResources",
       "items": [
         {
-          "name": "CY24SU06",
-          "path": "BaseThemes/CY24SU06.json",
+          "name": "CY26SU04",
+          "path": "BaseThemes/CY26SU04.json",
           "type": "BaseTheme"
         }
       ]
@@ -31,7 +31,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "Filter_0aff431a888c",
+        "name": "Filter_7630e9b97392",
         "type": "Advanced",
         "field": {
           "Column": {
@@ -40,7 +40,7 @@
                 "Entity": "Extract"
               }
             },
-            "Property": "World Indicators new.avg:F: GDP per capita (curr $):qk"
+            "Property": "F: GDP per capita (curr $)"
           }
         },
         "filter": {
@@ -64,12 +64,12 @@
                           "Source": "t"
                         }
                       },
-                      "Property": "World Indicators new.avg:F: GDP per capita (curr $):qk"
+                      "Property": "F: GDP per capita (curr $)"
                     }
                   },
                   "Right": {
                     "Literal": {
-                      "Value": "'199.0'"
+                      "Value": "199.0D"
                     }
                   }
                 }
@@ -86,12 +86,12 @@
                           "Source": "t"
                         }
                       },
-                      "Property": "World Indicators new.avg:F: GDP per capita (curr $):qk"
+                      "Property": "F: GDP per capita (curr $)"
                     }
                   },
                   "Right": {
                     "Literal": {
-                      "Value": "'104512.0'"
+                      "Value": "104512.0D"
                     }
                   }
                 }

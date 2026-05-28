@@ -1,47 +1,45 @@
 table Calendar
-	lineageTag: de5f49a8-69ea-4c82-994d-1ab80054e63d
+	lineageTag: b2d99f11-91ad-4a81-b841-a4ad5963fa14
 
 	measure 'Year To Date' = TOTALYTD([Budget Variance], 'Calendar'[Date])
 		formatString: #,0.00
 		displayFolder: Time Intelligence
-		lineageTag: af44efed-5cb4-449b-86f7-c146c751c9ca
+		lineageTag: 04e4d1f3-9bc1-478d-b558-5a8d68bd1b2d
 		annotation Copilot_Description = DAX: TOTALYTD([Budget Variance], 'Calendar'[Date])
 
 	measure 'Previous Year' = CALCULATE([Budget Variance], SAMEPERIODLASTYEAR('Calendar'[Date]))
 		formatString: #,0.00
 		displayFolder: Time Intelligence
-		lineageTag: cde73591-6a4d-40f0-97db-ead3596b55d1
+		lineageTag: 4af4429f-5410-47be-ac65-009ecb5535e1
 		annotation Copilot_Description = DAX: CALCULATE([Budget Variance], SAMEPERIODLASTYEAR('Calendar'[Date]))
 
 	measure 'Year Over Year %' = DIVIDE([Year To Date] - [Previous Year], [Previous Year], 0)
 		formatString: 0.00%
 		displayFolder: Time Intelligence
-		lineageTag: 1d9d094d-62c9-4b5b-b0c2-7364d009fcd1
+		lineageTag: 4c45e059-4051-4bd9-b9fc-b30a50fbcf06
 		annotation Copilot_Description = DAX: DIVIDE([Year To Date] - [Previous Year], [Previous Year], 0)
 
 	column Date
 		dataType: dateTime
 		formatString: dd/mm/yyyy
-		lineageTag: 3bb558f1-d4fc-47aa-9c55-93c178185d6f
+		lineageTag: 53e71d5f-e152-4f09-adc5-098b1f4f5655
 		summarizeBy: none
 		sourceColumn: Date
 		isKey
-		dataCategory: DateTime
 
 		annotation SummarizationSetBy = Automatic
 
 	column Year
 		dataType: int64
-		lineageTag: c51facc1-3512-4ba3-90e3-569954a7a259
+		lineageTag: ced76aeb-f259-4ffa-b1b8-07a2031a1c5d
 		summarizeBy: none
 		sourceColumn: Year
-		dataCategory: Years
 
 		annotation SummarizationSetBy = Automatic
 
 	column Quarter
 		dataType: string
-		lineageTag: a35263b7-78cc-4e95-b52f-730e4fb31c7f
+		lineageTag: c5a4198c-faf7-4903-b9ed-f9f16f6194ce
 		summarizeBy: none
 		sourceColumn: Quarter
 
@@ -49,16 +47,15 @@ table Calendar
 
 	column Month
 		dataType: int64
-		lineageTag: 77260c30-f9a8-460b-84fa-469b4417c539
+		lineageTag: 5953a73c-fcde-4e8a-a869-d74ffcfdcf7b
 		summarizeBy: none
 		sourceColumn: Month
-		dataCategory: Months
 
 		annotation SummarizationSetBy = Automatic
 
 	column MonthName
 		dataType: string
-		lineageTag: b2203664-e455-4ac6-9bbd-b414cff374ec
+		lineageTag: 2c15d93b-803c-4aea-9906-dad77a3930a1
 		summarizeBy: none
 		sourceColumn: MonthName
 		sortByColumn: Month
@@ -67,16 +64,15 @@ table Calendar
 
 	column Day
 		dataType: int64
-		lineageTag: df493434-fd4e-4bac-84d8-58e759585dea
+		lineageTag: cee9d439-83ac-418d-bd70-d01babe374e4
 		summarizeBy: none
 		sourceColumn: Day
-		dataCategory: Days
 
 		annotation SummarizationSetBy = Automatic
 
 	column DayOfWeek
 		dataType: int64
-		lineageTag: 6f1ec181-8daa-4674-95a4-90e1614ea164
+		lineageTag: 69fbe26c-9e72-411f-94ec-69d10c710e52
 		summarizeBy: none
 		sourceColumn: DayOfWeek
 
@@ -84,7 +80,7 @@ table Calendar
 
 	column DayName
 		dataType: string
-		lineageTag: 87d94ed5-26ce-40d8-ac28-a03bbb545762
+		lineageTag: 3b5ec83b-2cd9-4c9a-aaa5-09f6f21e5f04
 		summarizeBy: none
 		sourceColumn: DayName
 		sortByColumn: DayOfWeek
@@ -92,30 +88,30 @@ table Calendar
 		annotation SummarizationSetBy = Automatic
 
 	hierarchy 'Date Hierarchy'
-		lineageTag: 62e51241-0fa8-4d0d-aa0f-f2d6642e93ee
+		lineageTag: f13b9009-5c0b-4629-a092-ddacff7e1784
 
 		level Year
 			ordinal: 0
 			column: Year
-			lineageTag: 30d2ac97-e1ec-40e4-8553-50ee5a71dc2b
+			lineageTag: 57080d88-c696-4a5e-b0d4-2944f0615656
 
 		level Quarter
 			ordinal: 1
 			column: Quarter
-			lineageTag: cd6f9cc0-08f5-4bd4-997c-515700496c96
+			lineageTag: b05a362f-d3db-42e2-9f78-4940361de444
 
 		level Month
 			ordinal: 2
 			column: MonthName
-			lineageTag: 5b66bf6e-3fef-4742-8df6-245cf6632119
+			lineageTag: a7f26aa7-a0cc-40fe-a977-9f684ea53bf8
 
 		level Day
 			ordinal: 3
 			column: Day
-			lineageTag: 3cc4cdef-d1c1-4d9b-8a54-5ed9cdd94498
+			lineageTag: 4691c874-9ab4-47be-bdc9-13f41973b7d4
 
 
-	partition 'Calendar-f469bc1b-66e9-4546-85b8-b7da1c5ed9de' = m
+	partition 'Calendar-0c423260-144c-41a8-bd07-6d6082722fed' = m
 		mode: import
 		source =
 				let

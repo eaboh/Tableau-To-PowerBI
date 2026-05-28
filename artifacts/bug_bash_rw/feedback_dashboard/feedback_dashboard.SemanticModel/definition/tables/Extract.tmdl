@@ -1,0 +1,102 @@
+table Extract
+	lineageTag: f8355d70-baf8-471e-be42-c3498cce89bd
+
+	column 'Document Index (generated)'
+		dataType: int64
+		lineageTag: edbf099f-329f-4041-81ee-e4c539e5e57e
+		summarizeBy: sum
+		sourceColumn: 'Document Index (generated)'
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		lineageTag: 7c9a483d-5d92-4305-899a-c56f8fa6a3a2
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: string
+		lineageTag: ce77c622-3605-4340-b33e-8fac33ad5a39
+		summarizeBy: none
+		sourceColumn: customer_id
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 400efa56-39f1-4150-9a10-7de21b45fce0
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+	column email
+		dataType: string
+		lineageTag: 70016dab-f1a3-4ec6-8c08-5b275f672a4f
+		summarizeBy: none
+		sourceColumn: email
+
+		annotation SummarizationSetBy = Automatic
+
+	column feedback_score
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 5cf7a8c5-b5bd-4238-bbf7-6e7cf1b847d0
+		summarizeBy: sum
+		sourceColumn: feedback_score
+
+		annotation SummarizationSetBy = Automatic
+
+	column feedback_text
+		dataType: string
+		lineageTag: f4df88ee-effd-42d9-934e-950c15f10478
+		summarizeBy: none
+		sourceColumn: feedback_text
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: 9c0585c4-ac59-4a5c-805a-3b0c13538624
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column sentiment
+		dataType: string
+		lineageTag: 9fd22c75-5fe4-46fc-a54a-81c6f93f7bd7
+		summarizeBy: none
+		sourceColumn: sentiment
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Extract-fc474453-7176-4936-81aa-30ccb9e19326' = m
+		mode: import
+		source =
+				let
+				    // TODO: Configure the data source for connector type: SEMISTRUCTPASSIVESTORE-DIRECT
+				    // Replace the sample table below with the actual source expression.
+				    Source = try
+				        #table(
+				            {"Document Index (generated)", "category", "customer_id", "date", "email", "feedback_score", "feedback_text", "name", "sentiment"},
+				            {
+				                {1, "Sample 2", "Sample 3", 4, "Sample 5", 6, "Sample 7", "Sample 8", "Sample 9"},
+				                {2, "Sample 3", "Sample 4", 5, "Sample 6", 7, "Sample 8", "Sample 9", "Sample 10"}
+				            }
+				        )
+				    otherwise
+				        #table({"Document Index (generated)", "category", "customer_id", "date", "email", "feedback_score", "feedback_text", "name", "sentiment"}, {}),
+				    #"Renamed Columns" = Table.RenameColumns(Source, {{"category", "Category"}, {"customer_id", "Customer Id"}, {"date", "Date"}, {"email", "Email"}, {"feedback_score", "Feedback Score"}, {"feedback_text", "Feedback Text"}, {"name", "Name"}, {"sentiment", "Sentiment"}}),
+				    Result = #"Renamed Columns"
+				in
+				    Result
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 9 columns: Document Index (generated), category, customer_id, date, email, feedback_score, feedback_text, name, ... (9 columns total).
+

@@ -1,9 +1,9 @@
 table Produits
-	lineageTag: 7dff47d1-d249-45da-8d45-89bf275e4176
+	lineageTag: 810b3c64-237b-45dc-ab81-46749da90f1c
 
 	column produit_id
 		dataType: int64
-		lineageTag: c8090316-75c3-455d-b70e-877951ee124d
+		lineageTag: c8b92f51-11b3-4533-8a30-ac0e859bf2b8
 		summarizeBy: sum
 		sourceColumn: produit_id
 		annotation Copilot_Hidden = true
@@ -12,7 +12,7 @@ table Produits
 
 	column nom_produit
 		dataType: string
-		lineageTag: d8856bcc-93c0-4576-a00b-acf017408cde
+		lineageTag: df9d1fa2-d01c-4bf3-bb1b-63d11cc273a0
 		summarizeBy: none
 		sourceColumn: nom_produit
 
@@ -20,7 +20,7 @@ table Produits
 
 	column categorie
 		dataType: string
-		lineageTag: 61b5e82e-e223-4f71-9452-3d398fff01bd
+		lineageTag: 1969be6f-95a0-4b27-b4d2-e4146d2bea10
 		summarizeBy: none
 		sourceColumn: categorie
 
@@ -28,7 +28,7 @@ table Produits
 
 	column sous_categorie
 		dataType: string
-		lineageTag: 429c8e7f-c50a-4f06-945f-d7df878df9c7
+		lineageTag: d911d23b-2268-4198-a974-ba3e3a052e84
 		summarizeBy: none
 		sourceColumn: sous_categorie
 
@@ -36,7 +36,7 @@ table Produits
 
 	column marque
 		dataType: string
-		lineageTag: e38dd410-1871-4fd4-8281-b153bf4c0ba4
+		lineageTag: 293b1c74-eaff-4099-afda-a6bea7f48f75
 		summarizeBy: none
 		sourceColumn: marque
 
@@ -45,13 +45,13 @@ table Produits
 	column cout_achat
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 84676981-bc16-41a6-9f07-9ce4bbfc393b
+		lineageTag: 4cb63812-cd2d-4764-b85c-056be935cd5b
 		summarizeBy: sum
 		sourceColumn: cout_achat
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Produits-04a1f243-7d41-48de-8bab-0a2b82f93adf' = m
+	partition 'Produits-4f24a7e0-91ed-426a-b69b-1b80ed6c3c58' = m
 		mode: import
 		source =
 				let

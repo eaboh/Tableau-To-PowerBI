@@ -1,0 +1,59 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "d9327b670dec46ffb788",
+  "position": {
+    "x": 0,
+    "y": 125,
+    "z": 0,
+    "height": 595,
+    "width": 1280,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "<",
+                    "textStyle": {
+                      "fontSize": "8.0pt"
+                    }
+                  },
+                  {
+                    "value": "[Parameters].[LinPack_629783440225818023]",
+                    "textStyle": {
+                      "fontSize": "8.0pt"
+                    }
+                  },
+                  {
+                    "value": "> | <",
+                    "textStyle": {
+                      "fontSize": "8.0pt"
+                    }
+                  },
+                  {
+                    "value": "[Parameters].[LinPack_763983446793242599]",
+                    "textStyle": {
+                      "fontSize": "8.0pt"
+                    }
+                  },
+                  {
+                    "value": ">",
+                    "textStyle": {
+                      "fontSize": "8.0pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

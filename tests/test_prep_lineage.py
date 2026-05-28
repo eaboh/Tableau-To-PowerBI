@@ -22,6 +22,7 @@ import json
 import os
 import sys
 import tempfile
+import csv
 import unittest
 import zipfile
 from unittest.mock import patch, MagicMock
@@ -1647,6 +1648,24 @@ class TestGenerateHTMLReport(unittest.TestCase):
             self.assertIn('Flow Inventory', html)
             self.assertIn('Source Inventory', html)
             self.assertIn('Merge Recommendations', html)
+
+    def test_generates_summary_csv_file(self):
+        with tempfile.TemporaryDirectory() as td:
+            path = os.path.join(td, 'report.html')
+            generate_prep_lineage_report(self.graph, self.recs, path)
+
+            csv_path = os.path.join(td, 'report_summary.csv')
+            self.assertTrue(os.path.exists(csv_path))
+            with open(csv_path, newline='', encoding='utf-8') as f:
+                rows = list(csv.DictReader(f))
+
+            self.assertEqual(len(rows), len(self.graph.flows))
+            self.assertIn('artifact_name', rows[0])
+            self.assertIn('artifact_type', rows[0])
+            self.assertIn('sources_count', rows[0])
+            self.assertIn('tables_count', rows[0])
+            self.assertIn('visuals_with_measures_count', rows[0])
+            self.assertTrue(all(r['artifact_type'] == 'prep_flow' for r in rows))
 
     def test_html_contains_mermaid(self):
         with tempfile.TemporaryDirectory() as td:

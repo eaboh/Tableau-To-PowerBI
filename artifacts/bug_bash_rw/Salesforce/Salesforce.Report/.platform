@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Salesforce"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "109f37da-eaef-4f0d-8878-039b2dbb128b"
+  }
+}

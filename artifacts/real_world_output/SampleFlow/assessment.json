@@ -1,0 +1,37 @@
+{
+  "flow_name": "SampleFlow",
+  "grade": "RED",
+  "inputs": 0,
+  "outputs": 0,
+  "transforms": 0,
+  "m_queries": 0,
+  "sources": 0,
+  "assessment": {
+    "grade": "RED",
+    "items": [
+      {
+        "category": "datasource",
+        "status": "pass",
+        "detail": "0 input(s) — all connectors supported"
+      },
+      {
+        "category": "script",
+        "status": "pass",
+        "detail": "No Script nodes"
+      },
+      {
+        "category": "join",
+        "status": "pass",
+        "detail": "No joins"
+      },
+      {
+        "category": "output",
+        "status": "fail",
+        "detail": "No outputs detected — flow may be incomplete"
+      }
+    ],
+    "pass_count": 3,
+    "warn_count": 0,
+    "fail_count": 1
+  }
+}

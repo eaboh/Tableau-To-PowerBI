@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "ReportSection45219d1dc5714d668b9f",
+  "displayName": "Sheet 2",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280
+}

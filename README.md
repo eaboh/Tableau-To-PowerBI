@@ -43,6 +43,29 @@ pip install tableauhyperapi           # .hyper extract file reading (v2+ format)
 
 ### More ways to migrate
 
+#### 🖥️ Light end-user UI (no extra libraries)
+
+```bash
+powershell -ExecutionPolicy Bypass -File .\run_light_ui.ps1
+```
+
+Fallback (direct):
+
+```bash
+python web/light_ui.py
+```
+
+Built with Tkinter (standard library), this UI is intended for non-technical users:
+- choose a batch folder (batch-only workflow)
+- choose output folder
+- run migration and follow logs live
+- pick one task from: Assess, Migrate, Lineage
+- use KPI-only view for a clean summary-focused screen
+- auto-open HTML report when migration completes (optional toggle)
+- open generated HTML report/comparison and summary CSV in one click
+
+![Light UI batch workflow](docs/images/light_ui_batch.png)
+
 #### 📄 Single workbook
 
 ```bash

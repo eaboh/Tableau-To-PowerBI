@@ -1,0 +1,66 @@
+table xy
+	lineageTag: 447c4c41-a16c-4581-8ae0-567cff84c78e
+
+	measure 'Number of Records' = 1
+		displayFolder: Measures
+		lineageTag: 1960ea52-3d8c-4ea2-a005-4cc15f929b36
+		annotation Copilot_Description = Migrated from Tableau: 1 | DAX: 1
+
+	column a
+		dataType: string
+		lineageTag: 08a6d8d9-e377-4d3b-ab69-04fd589c1355
+		summarizeBy: none
+		sourceColumn: a
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Today''s Date'
+		dataType: string
+		lineageTag: dfe239f8-4875-4076-b869-9807c080ddd6
+		summarizeBy: none
+		sourceColumn: 'Today''s Date'
+
+		annotation SummarizationSetBy = Automatic
+
+	column x
+		dataType: int64
+		lineageTag: 8a2b2f31-b20b-4dc5-8d08-681149a5aa44
+		summarizeBy: sum
+		sourceColumn: x
+
+		annotation SummarizationSetBy = Automatic
+
+	column y
+		dataType: int64
+		lineageTag: 7cd4b4e7-104e-45eb-b3e5-16414b9f74b3
+		summarizeBy: sum
+		sourceColumn: y
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'xy-566f5e56-3c39-427e-abc9-40b9a92bfa4a' = m
+		mode: import
+		source =
+				let
+				    // Source PostgreSQL
+				    Source = try
+				
+				        let
+				
+				            _src = PostgreSQL.Database("postgres91.test.tsi.lan:5432", "TestV1"),
+				
+				            _nav = _src{[Schema="public", Item="xy"]}[Data]
+				
+				        in _nav
+				
+				    otherwise
+				
+				        #table({"a", "Today's Date", "x", "y"}, {}),
+				    #"Renamed Columns" = Table.RenameColumns(Source, {{"a", "A"}, {"x", "X"}, {"y", "Y"}}),
+				    Result = #"Renamed Columns"
+				in
+				    Result
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 4 columns and 1 measures: a, Today's Date, x, y.
+

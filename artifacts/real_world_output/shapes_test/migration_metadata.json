@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-24T17:45:33.160903",
+  "generated_at": "2026-05-28T19:28:50.947838",
   "source": "Tableau Migration",
   "report_name": "shapes_test",
   "objects_converted": {
@@ -29,10 +29,19 @@
   },
   "tmdl_stats": {
     "tables": 6,
-    "measures": 6,
+    "measures": 7,
     "columns": 39,
     "relationships": 2
   },
+  "dax_measure_names": [
+    "Previous Year",
+    "Profit Bin Size",
+    "Profit Ratio",
+    "Profit Ratio Formatted",
+    "Top Customers",
+    "Year Over Year %",
+    "Year To Date"
+  ],
   "visual_type_mappings": {
     "Sheet 1": "Automatic"
   },
@@ -45,6 +54,7 @@
         "Category"
       ],
       "measures": [],
+      "dax_measures": [],
       "field_count": 1
     }
   ],

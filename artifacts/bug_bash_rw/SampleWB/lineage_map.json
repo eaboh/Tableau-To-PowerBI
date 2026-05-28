@@ -1,0 +1,101 @@
+{
+  "tables": [
+    {
+      "tableau_datasource": "World Indicators new",
+      "tableau_table": "Extract",
+      "pbi_table": "Extract"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Calendar",
+      "pbi_table": "Calendar"
+    }
+  ],
+  "calculations": [
+    {
+      "tableau_calculation": "AVG([F: GDP per capita (curr $)]) / TOTAL(AVG([F: GDP per capita (curr $)]))",
+      "pbi_table": "Extract",
+      "pbi_object": "GDP % of Total",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM([F: GDP (curr $)])\r\n/\r\nSUM([P: Population (count)])",
+      "pbi_table": "Extract",
+      "pbi_object": "GDP per capita (weighted)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "AVG([F: Lending interest rate (%)])-AVG([F: Deposit interest rate (%)])",
+      "pbi_table": "Extract",
+      "pbi_object": "Rate spread (difference)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "1",
+      "pbi_table": "Extract",
+      "pbi_object": "Number of Records",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "GDP per capita (weighted) Formatted",
+      "pbi_table": "Extract",
+      "pbi_object": "GDP per capita (weighted) Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Year To Date",
+      "pbi_table": "Calendar",
+      "pbi_object": "Year To Date",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Previous Year",
+      "pbi_table": "Calendar",
+      "pbi_object": "Previous Year",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Year Over Year %",
+      "pbi_table": "Calendar",
+      "pbi_object": "Year Over Year %",
+      "pbi_type": "measure"
+    }
+  ],
+  "relationships": [
+    {
+      "from": "Extract[Date]",
+      "to": "Calendar[Date]",
+      "cardinality": "oneDirection"
+    }
+  ],
+  "worksheets": [
+    {
+      "tableau_worksheet": "Country ranks",
+      "pbi_page": "Country ranks"
+    },
+    {
+      "tableau_worksheet": "GDP per capita",
+      "pbi_page": "GDP per capita"
+    },
+    {
+      "tableau_worksheet": "GDP per capita by region",
+      "pbi_page": "GDP per capita by region"
+    },
+    {
+      "tableau_worksheet": "GDP per capita map",
+      "pbi_page": "GDP per capita map"
+    },
+    {
+      "tableau_worksheet": "Health spending vs life expectancy",
+      "pbi_page": "Health spending vs life expectancy"
+    },
+    {
+      "tableau_worksheet": "Interest rates",
+      "pbi_page": "Interest rates"
+    },
+    {
+      "tableau_worksheet": "Share of World GDP",
+      "pbi_page": "Share of World GDP"
+    }
+  ]
+}

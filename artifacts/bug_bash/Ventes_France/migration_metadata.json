@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-02T13:39:19.781184",
+  "generated_at": "2026-05-28T17:02:08.529784",
   "source": "Tableau Migration",
   "report_name": "Ventes_France",
   "objects_converted": {
@@ -20,7 +20,7 @@
   },
   "generated_output": {
     "pages": 2,
-    "visuals": 9,
+    "visuals": 7,
     "theme_applied": false,
     "theme_detail": {
       "status": "skipped",
@@ -29,8 +29,8 @@
   },
   "tmdl_stats": {
     "tables": 6,
-    "measures": 19,
-    "columns": 45,
+    "measures": 29,
+    "columns": 47,
     "relationships": 3
   },
   "visual_type_mappings": {

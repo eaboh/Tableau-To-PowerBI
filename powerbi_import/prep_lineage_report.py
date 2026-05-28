@@ -26,6 +26,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import csv
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Dict, List, Optional, Tuple
@@ -831,7 +832,41 @@ def generate_prep_lineage_report(
     os.makedirs(os.path.dirname(output_path) or '.', exist_ok=True)
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(html)
+
+    # Export per-flow counters as CSV alongside the HTML report.
+    csv_path = os.path.splitext(output_path)[0] + '_summary.csv'
+    _save_prep_flow_summary_csv(graph, csv_path)
+
     logger.info("Lineage report saved to %s", output_path)
+    return output_path
+
+
+def _save_prep_flow_summary_csv(graph: PrepLineageGraph, output_path: str) -> str:
+    """Export one row per Prep flow with standardized counters."""
+    headers = [
+        'artifact_name',
+        'artifact_type',
+        'sources_count',
+        'tables_count',
+        'measures_count',
+        'visuals_count',
+        'visuals_with_measures_count',
+    ]
+    os.makedirs(os.path.dirname(output_path) or '.', exist_ok=True)
+    with open(output_path, 'w', encoding='utf-8', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=headers)
+        writer.writeheader()
+        for flow in sorted(graph.flows, key=lambda x: x.name):
+            writer.writerow({
+                'artifact_name': flow.name,
+                'artifact_type': 'prep_flow',
+                'sources_count': len(flow.inputs),
+                'tables_count': len(flow.outputs),
+                'measures_count': 0,
+                'visuals_count': 0,
+                'visuals_with_measures_count': 0,
+            })
+    logger.info("Lineage summary CSV saved to %s", output_path)
     return output_path
 
 

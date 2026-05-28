@@ -1,0 +1,131 @@
+table 'customer_feedback_data.json'
+	lineageTag: a04b064e-c5b8-4223-a6ca-2e09dd4127a0
+
+	column 'Document Index (generated)'
+		dataType: int64
+		lineageTag: 349af8ed-0555-49d1-b9ea-cb8586aa22f3
+		summarizeBy: sum
+		sourceColumn: 'Document Index (generated)'
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		lineageTag: 75f9e524-9ace-4587-a80e-c923af139984
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: string
+		lineageTag: 5a23ae67-9a19-43db-b4ca-78814c24ba2b
+		summarizeBy: none
+		sourceColumn: customer_id
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 13ea3511-dae5-47c3-870f-f7a490854d1f
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+	column email
+		dataType: string
+		lineageTag: 6d55a777-1ef2-4fbe-9297-04c6b9a91087
+		summarizeBy: none
+		sourceColumn: email
+
+		annotation SummarizationSetBy = Automatic
+
+	column feedback_score
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 98e16ec0-e193-4aa3-b678-47bacc99ec10
+		summarizeBy: sum
+		sourceColumn: feedback_score
+
+		annotation SummarizationSetBy = Automatic
+
+	column feedback_text
+		dataType: string
+		lineageTag: a568e403-63d0-437f-ad39-aac0ba02811b
+		summarizeBy: none
+		sourceColumn: feedback_text
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: 1515bcf5-8771-4019-beae-9dbc8e484b59
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column sentiment
+		dataType: string
+		lineageTag: fe577e29-9f9a-4078-9ee4-a4d199dd39ba
+		summarizeBy: none
+		sourceColumn: sentiment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Promoter
+		dataType: int64
+		lineageTag: e4da5f68-fe36-4357-88df-23d0cfeb9afe
+		summarizeBy: none
+		sourceColumn: Promoter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Action (Category)'
+		dataType: string
+		lineageTag: f86c753f-4657-4a50-b6c1-357bdd2fd2ce
+		summarizeBy: none
+		sourceColumn: 'Action (Category)'
+		displayFolder: Groups
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Action (Sentiment)'
+		dataType: string
+		lineageTag: 9e3ec4e9-4715-4105-b936-10afaf719014
+		summarizeBy: none
+		sourceColumn: 'Action (Sentiment)'
+		displayFolder: Groups
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'customer_feedback_data.json-af0463e7-0522-4432-a0b5-51941e0057d2' = m
+		mode: import
+		source =
+				let
+				    // TODO: Configure the data source for connector type: SEMISTRUCTPASSIVESTORE-DIRECT
+				    // Replace the sample table below with the actual source expression.
+				    Source = try
+				        #table(
+				            {"Document Index (generated)", "category", "customer_id", "date", "email", "feedback_score", "feedback_text", "name", "sentiment"},
+				            {
+				                {1, "Sample 2", "Sample 3", 4, "Sample 5", 6, "Sample 7", "Sample 8", "Sample 9"},
+				                {2, "Sample 3", "Sample 4", 5, "Sample 6", 7, "Sample 8", "Sample 9", "Sample 10"}
+				            }
+				        )
+				    otherwise
+				        #table({"Document Index (generated)", "category", "customer_id", "date", "email", "feedback_score", "feedback_text", "name", "sentiment"}, {}),
+				    #"Renamed Columns" = Table.RenameColumns(Source, {{"category", "Category"}, {"customer_id", "Customer Id"}, {"date", "Date"}, {"email", "Email"}, {"feedback_score", "Feedback Score"}, {"feedback_text", "Feedback Text"}, {"name", "Name"}, {"sentiment", "Sentiment"}}),
+				    #"Added Promoter" = Table.AddColumn(#"Renamed Columns", "Promoter", each if [feedback_score] >= 9 then 1 else 0, Int64.Type),
+				    #"Added Action (Category)" = Table.AddColumn(#"Added Promoter", "Action (Category)", each Text.From([#"category"]), type text),
+				    #"Added Action (Sentiment)" = Table.AddColumn(#"Added Action (Category)", "Action (Sentiment)", each Text.From([#"sentiment"]), type text),
+				    Result = #"Added Action (Sentiment)"
+				in
+				    Result
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 12 columns: Document Index (generated), category, customer_id, date, email, feedback_score, feedback_text, name, ... (12 columns total).
+

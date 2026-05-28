@@ -1,0 +1,1412 @@
+{
+  "tables": [
+    {
+      "tableau_datasource": "federated.0yaj0rm1ld7uq01glrp1l1po69cl",
+      "tableau_table": "Opportunities",
+      "pbi_table": "Opportunities"
+    },
+    {
+      "tableau_datasource": "federated.0yaj0rm1ld7uq01glrp1l1po69cl",
+      "tableau_table": "Owned By",
+      "pbi_table": "Owned By"
+    },
+    {
+      "tableau_datasource": "federated.0yaj0rm1ld7uq01glrp1l1po69cl",
+      "tableau_table": "Created By",
+      "pbi_table": "Created By"
+    },
+    {
+      "tableau_datasource": "federated.0yaj0rm1ld7uq01glrp1l1po69cl",
+      "tableau_table": "Account",
+      "pbi_table": "Account"
+    },
+    {
+      "tableau_datasource": "federated.0yaj0rm1ld7uq01glrp1l1po69cl",
+      "tableau_table": "Account Owned By",
+      "pbi_table": "Account Owned By"
+    },
+    {
+      "tableau_datasource": "federated.0yaj0rm1ld7uq01glrp1l1po69cl",
+      "tableau_table": "Account Created By",
+      "pbi_table": "Account Created By"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Calendar",
+      "pbi_table": "Calendar"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Select Dimension",
+      "pbi_table": "Select Dimension"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Select Indicator",
+      "pbi_table": "Select Indicator"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "pPlaceholder",
+      "pbi_table": "pPlaceholder"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "pPlaceholder_1",
+      "pbi_table": "pPlaceholder_1"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Last x Days",
+      "pbi_table": "Last x Days"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Next x Days",
+      "pbi_table": "Next x Days"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Select Indicator CalcGroup",
+      "pbi_table": "Select Indicator CalcGroup"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Select Dimension FieldParam",
+      "pbi_table": "Select Dimension FieldParam"
+    }
+  ],
+  "calculations": [
+    {
+      "tableau_calculation": "AVG(if [Calculation_1142225515624624133] then [LinPack_574638457904073940] end)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Avg Probability (Open Opp.)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "IF      [LinPack_858688450507045362]<=30  then str(ROUND([LinPack_858688450507045362])) + ' d'\r\nELSEIF  [LinPack_858688450507045362]<=365 then str(ROUND([LinPack_858688450507045362]/30.25,1)) + ' mo'\r\nELSE                                 str(ROUND([LinPack_858688450507045362]/30.25,0)) + ' mo'\r\nEND",
+      "pbi_table": "Owned By",
+      "pbi_object": "Sales Cycle Won (Display)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "avg([Calculation_680325065948213248])",
+      "pbi_table": "Owned By",
+      "pbi_object": "Days to Close (avg)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "max(1)",
+      "pbi_table": "Owned By",
+      "pbi_object": "One",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "REPLACE(SPACE([Pipeline Profile - Average Deal Size (description) (copy)_995858528069312525]),\" \",\"\u2605\")\r\n+\r\nREPLACE(SPACE(5-[Pipeline Profile - Average Deal Size (description) (copy)_995858528069312525]),\" \",\"\u2606\")",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Average Deal Size (Star)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "{fixed [Calculation_711568759570489345]: min (IF [Calculation_711568759572299783]=\"Y\" THEN [Calculation_822751375422500864]  END)}",
+      "pbi_table": "Owned By",
+      "pbi_object": "First Time Closed Won by Account",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "[Label DONE - Closed WON - Nb of Opp (copy)_614178463390113796] - [Label DONE - Closed WON - Nb of Clients (copy)_614178463392415753]",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label DONE - Closed WON - Nb of Clients (Existing)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "if {fixed [Calculation_711568759570489345]: [LinPack_345685562057570044]}>=1 then \"Existing Clients\" else \"Prospects\" end",
+      "pbi_table": "Owned By",
+      "pbi_object": "Client/Prospect by Account",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "IF [LinPack_574638457904073940]<0.25 THEN \"0-25%\"\r\nELSEIF [LinPack_574638457904073940]<0.50 THEN \"25-50%\"\r\nELSEIF [LinPack_574638457904073940]<0.75 THEN \"50-75%\"\r\nELSE \"75-100%\"\r\nEND",
+      "pbi_table": "Owned By",
+      "pbi_object": "Probability (bucket)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "// Count the distinct number of Opportunity Owner\r\n// where Opportunity Owner's [Sales Value] > Selected Opportunity Owner [Sales Value]\r\nCOUNTD(if {INCLUDE [Calculation_711568759570620418] : [LinPack_235739231649065059]} > {MAX((IF [Is Selected Opportunity Stage Flag (copy)_813744216047374336] THEN {INCLUDE [Calculation_711568759570620418] : ZN([LinPack_235739231649065059])} ELSE 0 END))}\r\n       and Not [Is Selected Opportunity Stage Flag (copy)_813744216047374336]\r\n       then [Calculation_711568759570620418]  end)+1",
+      "pbi_table": "Owned By",
+      "pbi_object": "Rank Sales Value (for selected Opp Owner)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "__MyToday",
+      "pbi_table": "Owned By",
+      "pbi_object": "Today",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "RUNNING_SUM([LinPack_235739231649065059])/RUNNING_SUM([LinPack_707557147340278467])",
+      "pbi_table": "Owned By",
+      "pbi_object": "Conversion Rate Average (for trends)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 2 (copy)_746190227239038988], \"Closing Overdue\") then [Calculation_711568759570227200] end)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label FOCUS - Closing Overdue - Nb of Opp",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "ZN({fixed [Calculation_711568759570620418]: [Pipeline Generation for Existing Clients (copy)_1243275034711019521]})",
+      "pbi_table": "Owned By",
+      "pbi_object": "_Per Customer: Pipeline Generation",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM(IF [Calculation_614178463385964547]=\"Existing Clients\" AND [Closed in Last x Days (copy)_1142225515614175234] then [LinPack_961643984189344200] END)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Total Sales for Existing Clients",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "IF      [Calculation_995858528061263872] <= {fixed: max([Calculation_995858528061263872])}/5 then \"1\" \r\nELSEIF  [Calculation_995858528061263872] <= {fixed: max([Calculation_995858528061263872])}/5*2 then \"2\" \r\nELSEIF  [Calculation_995858528061263872] <= {fixed: max([Calculation_995858528061263872])}/5*3 then \"3\" \r\nELSEIF  [Calculation_995858528061263872] <= {fixed: max([Calculation_995858528061263872])}/5*4 then \"4\" \r\nELSE \"5\"                                    \r\nEND",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Pipeline Generation",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], \"Closed\") and [Calculation_711568759572299783]=\"Y\" then [Calculation_711568759570227200] end)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label DONE - Closed WON - Nb of Opp",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], \"Closed\") and [Calculation_711568759572299783]<>\"Y\" then [Calculation_711568759570489345] end)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label DONE - Closed LOST - Nb of Accounts",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "sum(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], \"Closed\") and [Calculation_711568759572299783]<>\"Y\" then [LinPack_523892480737294295] end)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label DONE - Closed LOST - Opp Amount",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], \"New\") then [Calculation_711568759570227200] end)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label DONE - New - Nb of Opp",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], \"Closed\") and [Calculation_711568759572299783]=\"Y\" and [Calculation_614178463385661442] then [Calculation_711568759570489345] end)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label DONE - Closed WON - Nb of Clients (New)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], \"Closed\") and [Calculation_711568759572299783]=\"Y\" then [Calculation_711568759570489345] end)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label DONE - Closed WON - Nb of Clients",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], \"Closed\") and [Calculation_711568759572299783]<>\"Y\" then [Calculation_711568759570227200] end)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label DONE - Closed LOST - Nb of Opp",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], \"Closed\") and [Calculation_711568759572299783]=\"Y\" then [LinPack_523892480737294295] end)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label DONE - Closed WON - Opp Amount",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], \"New\") and [Calculation_614178463393964044]=\"Prospects\" then [Calculation_711568759570489345] end)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label DONE - New - Nb of Accounts (Prospect)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], \"New\") then [Calculation_711568759570489345] end)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label DONE - New - Nb of Accounts",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], \"New\") then [LinPack_523892480737294295] end)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label DONE - New - Opp Amount",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 1 (copy)_746190227238907913], \"New\") and [Calculation_614178463393964044]=\"Existing Clients\" then [Calculation_711568759570489345] end)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label DONE - New - Nb of Accounts (Client)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 2 (copy)_746190227239038988], \"Closing Next\") and [Calculation_614178463393964044]=\"Prospects\" then [Calculation_711568759570489345] end)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label FOCUS - Closing Next x days  - Nb of Accounts (Prospect)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 2 (copy)_746190227239038988], \"Closing Next\") and [Calculation_614178463393964044]=\"Existing Clients\" then [Calculation_711568759570489345] end)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label FOCUS - Closing Next x days  - Nb of Accounts (Client)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 2 (copy)_746190227239038988], \"Closing Next\") then [Calculation_711568759570489345] end)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label FOCUS - Closing Next x days  - Nb of Accounts",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 2 (copy)_746190227239038988], \"Closing Overdue\") and [Calculation_614178463393964044]=\"Existing Clients\" then [Calculation_711568759570489345] end)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label FOCUS - Closing Overdue - Nb of Accounts (Client)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 2 (copy)_746190227239038988], \"Closing Overdue\") and [Calculation_614178463393964044]=\"Prospects\" then [Calculation_711568759570489345] end)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label FOCUS - Closing Overdue - Nb of Accounts (Prospect)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 2 (copy)_746190227239038988], \"Closing Overdue\") then [Calculation_711568759570489345] end)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label FOCUS - Closing Overdue - Nb of Accounts",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD(if STARTSWITH([Pipeline Review - DONE - Cat 2 (copy)_746190227239038988], \"Closing Next\") then [Calculation_711568759570227200] end)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label FOCUS - Closing Next x days  - Nb of Opp",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM(if STARTSWITH([Pipeline Review - DONE - Cat 2 (copy)_746190227239038988], \"Closing Next\") then [LinPack_523892480737294295] end)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label FOCUS - Closing Next x days - Opp Amount",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM(if STARTSWITH([Pipeline Review - DONE - Cat 2 (copy)_746190227239038988], \"Closing Overdue\") then [LinPack_523892480737294295] end)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label FOCUS - Closing Overdue - Opp Amount",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM([LinPack_523892480737294295])",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Generated",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD([Calculation_711568759570620418])",
+      "pbi_table": "Owned By",
+      "pbi_object": "Nb of Owners",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "ZN([LinPack_345685562057570044]) / ZN([LinPack_945051434441023635])",
+      "pbi_table": "Owned By",
+      "pbi_object": "Won/Lost Rate",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM([LinPack_961643984189344200])",
+      "pbi_table": "Owned By",
+      "pbi_object": "Total Sales",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD(IF [Calculation_1142225515624624133] THEN [Calculation_711568759570227200] END)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Nb of Open Opportunities",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD(IF [Is Open Opportunity? (copy)_17451502251433984] THEN [Calculation_711568759570227200] END)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Nb of Won Opportunities",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "AVG([LinPack_760893960995960019])",
+      "pbi_table": "Owned By",
+      "pbi_object": "Avg Deal Size (won)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "(ZN([LinPack_260602485593130101]) * ZN([LinPack_416672484957473515]) * ZN([LinPack_037187737916244637])) / ZN([LinPack_451823525181570600])",
+      "pbi_table": "Owned By",
+      "pbi_object": "Sales Velocity",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "AVG(FLOAT(IF NOT [Calculation_1142225515624624133] THEN datediff(\"minute\", [Created Date], [Calculation_822751375422500864]) / (24*60) END))",
+      "pbi_table": "Owned By",
+      "pbi_object": "Sales Cycle",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "AVG([LinPack_574638457904073940])",
+      "pbi_table": "Owned By",
+      "pbi_object": "Avg Probability",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM(FLOAT(IF [Calculation_1142225515624624133] THEN [Calculation_711568759573139467]*[Amount] END))",
+      "pbi_table": "Owned By",
+      "pbi_object": "Weighted Pipeline Value",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD([Calculation_711568759570227200])",
+      "pbi_table": "Owned By",
+      "pbi_object": "Nb of Opportunities",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM([LinPack_808645294632541416])",
+      "pbi_table": "Owned By",
+      "pbi_object": "Total Closed Opportunities Amount",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "ZN([LinPack_235739231649065059]) / ZN([LinPack_707557147340278467])",
+      "pbi_table": "Owned By",
+      "pbi_object": "Conversion Rate",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM(FLOAT(IF [Calculation_1142225515624624133] THEN [Amount] END))",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Value",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "AVG(FLOAT(IF [Is Open Opportunity? (copy)_17451502251433984] THEN datediff(\"minute\", [Created Date], [Calculation_822751375422500864]) / (24*60) END))",
+      "pbi_table": "Owned By",
+      "pbi_object": "Sales Cycle (won)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD(IF NOT [Calculation_1142225515624624133] THEN [Calculation_711568759570227200] END)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Nb of Closed Opportunities",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "IF [Opportunity Owner Class Deal Size (copy)_995858528092102683]=[Parameters].[pOpportunityOwner_BigDeals (copy)_995858528093823004] THEN \"CHAMPIONS\"\r\nELSEIF [Opportunity Owner Class Deal Size (copy)_995858528092102683]=[Parameters].[pOpportunityOwner_Champions (copy)_995858528093941789] THEN \"CLOSERS\r\nGrowth Plan: Pipeline Generation\"\r\nELSEIF [Opportunity Owner Class Deal Size (copy)_995858528092102683]=[Parameters].[pOpportunityOwner_ImprovePipelineGen (copy)_995858528094035998] THEN \"HUNTERS/FARMERS\r\nGrowth Plan: Closing\"\r\nELSE \"REQUIRED IMPROVEMENTS\"\r\nEND",
+      "pbi_table": "Owned By",
+      "pbi_object": "Opportunity Owner Class - Title",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "IF [Opportunity Owner Class Deal Size (copy)_995858528092102683]=[Parameters].[pOpportunityOwner_BigDeals (copy)_995858528093823004] THEN 1\r\nELSEIF [Opportunity Owner Class Deal Size (copy)_995858528092102683]=[Parameters].[pOpportunityOwner_Champions (copy)_995858528093941789] THEN 2\r\nELSEIF [Opportunity Owner Class Deal Size (copy)_995858528092102683]=[Parameters].[pOpportunityOwner_ImprovePipelineGen (copy)_995858528094035998] THEN 3\r\nELSE 4\r\nEND",
+      "pbi_table": "Owned By",
+      "pbi_object": "Opportunity Owner Class (sort)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "IF [Pipeline Profile - Conversion Rate (description) (copy)_995858528072065042] >3 AND [Pipeline Profile - Pipeline Generation (description) (copy)_995858528072167443] >3 THEN [Parameters].[pOpportunityOwner_BigDeals (copy)_995858528093823004]\r\nELSEIF [Pipeline Profile - Conversion Rate (description) (copy)_995858528072065042] >3 AND [Pipeline Profile - Pipeline Generation (description) (copy)_995858528072167443] <=3 THEN [Parameters].[pOpportunityOwner_Champions (copy)_995858528093941789]\r\nELSEIF [Pipeline Profile - Conversion Rate (description) (copy)_995858528072065042] <=3 AND [Pipeline Profile - Pipeline Generation (description) (copy)_995858528072167443] >3 THEN [Parameters].[pOpportunityOwner_ImprovePipelineGen (copy)_995858528094035998]\r\nELSE [Parameters].[pOpportunityOwner_ImprovePipelineGen (copy)_995858528094134303]\r\nEND",
+      "pbi_table": "Owned By",
+      "pbi_object": "Opportunity Owner Class",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "CASE [Opportunity Owner Class Deal Size (copy)_995858528092102683]\r\nWHEN [Parameters].[pOpportunityOwner_BigDeals (copy)_995858528093823004]                      THEN \"Reward these elements, they can be a model for the other owners. Leverage their best-practices.\"\r\nWHEN [Parameters].[pOpportunityOwner_Champions (copy)_995858528093941789]   THEN \"Guide them on how to generate pipeline.\"\r\nWHEN [Parameters].[pOpportunityOwner_ImprovePipelineGen (copy)_995858528094035998]              THEN \"Provide these elements additional trainings to improve their ability to convince clients.\"\r\nWHEN [Parameters].[pOpportunityOwner_ImprovePipelineGen (copy)_995858528094134303]           THEN \"These opportunity owners need to improve their skills in both areas, to get more business and to win over clients. Train them quickly.\" \r\nEND",
+      "pbi_table": "Owned By",
+      "pbi_object": "Opportunity Owner Class - Action",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "CASE [Opportunity Owner Class Deal Size (copy)_995858528092102683]\r\nWHEN [Parameters].[pOpportunityOwner_BigDeals (copy)_995858528093823004]                      THEN \"Top performers in the team. They perform well in all areas and pull the team up.\"\r\nWHEN [Parameters].[pOpportunityOwner_Champions (copy)_995858528093941789]   THEN \"Effective at closing and winning deals, they can develop in Pipeline Generation (farming or hunting).\"\r\nWHEN [Parameters].[pOpportunityOwner_ImprovePipelineGen (copy)_995858528094035998]              THEN \"Good at developing pipeline, they will improve their performance by developing their ability to close and win the deals.\"\r\nWHEN [Parameters].[pOpportunityOwner_ImprovePipelineGen (copy)_995858528094134303]           THEN \"Underperforming in pipeline generation and deal closing.\r\n\"   \r\nEND",
+      "pbi_table": "Owned By",
+      "pbi_object": "Opportunity Owner Class - Description",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "[Pipeline Generation (Last N Months) (copy)_1243275034721849348]/[Total Sales (Last N Months) (copy)_1243275034722263045]",
+      "pbi_table": "Owned By",
+      "pbi_object": "Conversion Rate (Last N Months - Closed Date)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM(IF [Closed in Last x Days (copy)_1142225515614175234] then [LinPack_961643984189344200] END)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Total Sales (Last N Months - Closed Date)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM(IF [Last N months filter - Closed Date (copy)_1142225515621388292] then [LinPack_523892480737294295] END)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Generation (Last N Months - Created Date)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "REPLACE(SPACE([Pipeline Profile - Conversion Rate (description) (copy)_995858528072065042]),\" \",\"\u2605\")\r\n+\r\nREPLACE(SPACE(5-[Pipeline Profile - Conversion Rate (description) (copy)_995858528072065042]),\" \",\"\u2606\")",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Conversion Rate (Star)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "IF      [_Per Customer: Pipeline Generation (copy)_995858528061906945] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_995858528061906945])}/5 then \"1\" \r\nELSEIF  [_Per Customer: Pipeline Generation (copy)_995858528061906945] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_995858528061906945])}/5*2 then \"2\" \r\nELSEIF  [_Per Customer: Pipeline Generation (copy)_995858528061906945] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_995858528061906945])}/5*3 then \"3\" \r\nELSEIF  [_Per Customer: Pipeline Generation (copy)_995858528061906945] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_995858528061906945])}/5*4 then \"4\" \r\nELSE \"5\"                                    \r\nEND",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Conversion Rate",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "CASE [Pipeline Profile - Pipeline Generation (copy)_995858528067575816]\r\nWHEN \"1\" THEN \"VERY LOW\"\r\nWHEN \"2\" THEN \"LOW\"\r\nWHEN \"3\" THEN \"MEDIUM\"\r\nWHEN \"4\" THEN \"HIGH\"\r\nWHEN \"5\" THEN \"VERY HIGH\"\r\nEND\r\n+ \" Average Deal Size\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Average Deal Size (description)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "100",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Axis",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "int([Pipeline Profile - Pipeline Generation (copy)_995858528067575816])",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Average Deal Size (num)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "REPLACE(SPACE([Pipeline Profile - Pipeline Generation (description) (copy)_995858528072167443]),\" \",\"\u2605\")\r\n+\r\nREPLACE(SPACE(5-[Pipeline Profile - Pipeline Generation (description) (copy)_995858528072167443]),\" \",\"\u2606\")",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Pipeline Generation (Star)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "IF      [_Per Customer: Average Deal Size (copy)_995858528062611459] <= {fixed: max([_Per Customer: Average Deal Size (copy)_995858528062611459])}/5 then \"1\" \r\nELSEIF  [_Per Customer: Average Deal Size (copy)_995858528062611459] <= {fixed: max([_Per Customer: Average Deal Size (copy)_995858528062611459])}/5*2 then \"2\" \r\nELSEIF  [_Per Customer: Average Deal Size (copy)_995858528062611459] <= {fixed: max([_Per Customer: Average Deal Size (copy)_995858528062611459])}/5*3 then \"3\" \r\nELSEIF  [_Per Customer: Average Deal Size (copy)_995858528062611459] <= {fixed: max([_Per Customer: Average Deal Size (copy)_995858528062611459])}/5*4 then \"4\" \r\nELSE \"5\"                                    \r\nEND",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Total Sales to Existing Clients",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "CASE [Pipeline Profile - Average Deal Size (copy)_995858528067751945]\r\nWHEN \"1\" THEN \"VERY LOW\"\r\nWHEN \"2\" THEN \"LOW\"\r\nWHEN \"3\" THEN \"MEDIUM\"\r\nWHEN \"4\" THEN \"HIGH\"\r\nWHEN \"5\" THEN \"VERY HIGH\"\r\nEND\r\n+ \" Conversion Rate\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Conversion Rate (description)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "int([Pipeline Profile - Average Deal Size (copy)_995858528067751945])",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Conversion Rate (num)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "REPLACE(SPACE([Pipeline Profile - Total Sales to Existing Clients (num) (copy)_1849572132723974155]),\" \",\"\u2605\")\r\n+\r\nREPLACE(SPACE(5-[Pipeline Profile - Total Sales to Existing Clients (num) (copy)_1849572132723974155]),\" \",\"\u2606\")",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Pipeline Generation to Existing Clients (Star)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "IF      [_Per Customer: Pipeline Generation (copy)_995858528062124034] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_995858528062124034])}/5 then \"1\" \r\nELSEIF  [_Per Customer: Pipeline Generation (copy)_995858528062124034] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_995858528062124034])}/5*2 then \"2\" \r\nELSEIF  [_Per Customer: Pipeline Generation (copy)_995858528062124034] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_995858528062124034])}/5*3 then \"3\" \r\nELSEIF  [_Per Customer: Pipeline Generation (copy)_995858528062124034] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_995858528062124034])}/5*4 then \"4\" \r\nELSE \"5\"                                    \r\nEND",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Average Deal Size",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "CASE [Calculation_995858528066854919]\r\nWHEN \"1\" THEN \"VERY LOW\"\r\nWHEN \"2\" THEN \"LOW\"\r\nWHEN \"3\" THEN \"MEDIUM\"\r\nWHEN \"4\" THEN \"HIGH\"\r\nWHEN \"5\" THEN \"VERY HIGH\"\r\nEND\r\n+ \" Ability to generate pipeline\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Pipeline Generation (description)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "int([Calculation_995858528066854919])",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Pipeline Generation (num)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "REPLACE(SPACE([Pipeline Profile - Total Sales to Prospects (num) (copy)_1849572132723974157]),\" \",\"\u2605\")\r\n+\r\nREPLACE(SPACE(5-[Pipeline Profile - Total Sales to Prospects (num) (copy)_1849572132723974157]),\" \",\"\u2606\")",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Pipeline Generation to Prospects (Star)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "REPLACE(SPACE([Pipeline Profile - Total Sales to Prospects (num) (copy)_1849572132716658690]),\" \",\"\u2605\")\r\n+\r\nREPLACE(SPACE(5-[Pipeline Profile - Total Sales to Prospects (num) (copy)_1849572132716658690]),\" \",\"\u2606\")",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Total Sales (Star)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "REPLACE(SPACE([Pipeline Profile - Total Sales for Existing Clients (description) (copy)_995858528072245268]),\" \",\"\u2605\")\r\n+\r\nREPLACE(SPACE(5-[Pipeline Profile - Total Sales for Existing Clients (description) (copy)_995858528072245268]),\" \",\"\u2606\")",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Total Sales to Existing Clients (Star)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "IF      [_Per Customer: Total Sales on Client (copy)_995858528065740806] <= {fixed: max([_Per Customer: Total Sales on Client (copy)_995858528065740806])}/5 then \"1\" \r\nELSEIF  [_Per Customer: Total Sales on Client (copy)_995858528065740806] <= {fixed: max([_Per Customer: Total Sales on Client (copy)_995858528065740806])}/5*2 then \"2\" \r\nELSEIF  [_Per Customer: Total Sales on Client (copy)_995858528065740806] <= {fixed: max([_Per Customer: Total Sales on Client (copy)_995858528065740806])}/5*3 then \"3\" \r\nELSEIF  [_Per Customer: Total Sales on Client (copy)_995858528065740806] <= {fixed: max([_Per Customer: Total Sales on Client (copy)_995858528065740806])}/5*4 then \"4\" \r\nELSE \"5\"                                    \r\nEND",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Total Sales to Prospects",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "CASE [Pipeline Profile - Conversion Rate (copy)_995858528068132874]\r\nWHEN \"1\" THEN \"VERY LOW\"\r\nWHEN \"2\" THEN \"LOW\"\r\nWHEN \"3\" THEN \"MEDIUM\"\r\nWHEN \"4\" THEN \"HIGH\"\r\nWHEN \"5\" THEN \"VERY HIGH\"\r\nEND\r\n+ \" Ability to sell to existing clients\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Total Sales to Existing Clients (description)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "int([Pipeline Profile - Conversion Rate (copy)_995858528068132874])",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Total Sales to Existing Clients (num)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "CASE [Pipeline Profile - Total Sales for Existing Clients (copy)_995858528068710411]\r\nWHEN \"1\" THEN \"VERY LOW\"\r\nWHEN \"2\" THEN \"LOW\"\r\nWHEN \"3\" THEN \"MEDIUM\"\r\nWHEN \"4\" THEN \"HIGH\"\r\nWHEN \"5\" THEN \"VERY HIGH\"\r\nEND\r\n+ \" Ability to sell to prospects\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Total Sales to Prospects (description)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "int([Pipeline Profile - Total Sales for Existing Clients (copy)_995858528068710411])",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Total Sales to Prospects (num)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "REPLACE(SPACE([Pipeline Profile - Total Sales for Prospects (description) (copy)_995858528072331285]),\" \",\"\u2605\")\r\n+\r\nREPLACE(SPACE(5-[Pipeline Profile - Total Sales for Prospects (description) (copy)_995858528072331285]),\" \",\"\u2606\")",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Total Sales to Prospects (Star)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "IF      [_Per Customer: Pipeline Generation (copy)_1849572132719239174] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_1849572132719239174])}/5 then \"1\" \r\nELSEIF  [_Per Customer: Pipeline Generation (copy)_1849572132719239174] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_1849572132719239174])}/5*2 then \"2\" \r\nELSEIF  [_Per Customer: Pipeline Generation (copy)_1849572132719239174] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_1849572132719239174])}/5*3 then \"3\" \r\nELSEIF  [_Per Customer: Pipeline Generation (copy)_1849572132719239174] <= {fixed: max([_Per Customer: Pipeline Generation (copy)_1849572132719239174])}/5*4 then \"4\" \r\nELSE \"5\"                                    \r\nEND",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Pipeline Generation to Existing Clients",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "CASE [Pipeline Profile - Total Sales to Existing Clients (copy)_1849572132723974152]\r\nWHEN \"1\" THEN \"VERY LOW\"\r\nWHEN \"2\" THEN \"LOW\"\r\nWHEN \"3\" THEN \"MEDIUM\"\r\nWHEN \"4\" THEN \"HIGH\"\r\nWHEN \"5\" THEN \"VERY HIGH\"\r\nEND\r\n+ \" Ability to generate pipeline with existing clients\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Pipeline Generation to Existing Clients (description)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "int([Pipeline Profile - Total Sales to Existing Clients (copy)_1849572132723974152])",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Pipeline Generation to Existing Clients (num)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "IF      [_Per Customer: Total Sales for Prospects (copy)_1849572132717031427] <= {fixed: max([_Per Customer: Total Sales for Prospects (copy)_1849572132717031427])}/5 then \"1\" \r\nELSEIF  [_Per Customer: Total Sales for Prospects (copy)_1849572132717031427] <= {fixed: max([_Per Customer: Total Sales for Prospects (copy)_1849572132717031427])}/5*2 then \"2\" \r\nELSEIF  [_Per Customer: Total Sales for Prospects (copy)_1849572132717031427] <= {fixed: max([_Per Customer: Total Sales for Prospects (copy)_1849572132717031427])}/5*3 then \"3\" \r\nELSEIF  [_Per Customer: Total Sales for Prospects (copy)_1849572132717031427] <= {fixed: max([_Per Customer: Total Sales for Prospects (copy)_1849572132717031427])}/5*4 then \"4\" \r\nELSE \"5\"                                    \r\nEND",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Total Sales",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "IF      [_Per Customer: Pipeline Generation (copy) (copy)_1849572132719255559] <= {fixed: max([_Per Customer: Pipeline Generation (copy) (copy)_1849572132719255559])}/5 then \"1\" \r\nELSEIF  [_Per Customer: Pipeline Generation (copy) (copy)_1849572132719255559] <= {fixed: max([_Per Customer: Pipeline Generation (copy) (copy)_1849572132719255559])}/5*2 then \"2\" \r\nELSEIF  [_Per Customer: Pipeline Generation (copy) (copy)_1849572132719255559] <= {fixed: max([_Per Customer: Pipeline Generation (copy) (copy)_1849572132719255559])}/5*3 then \"3\" \r\nELSEIF  [_Per Customer: Pipeline Generation (copy) (copy)_1849572132719255559] <= {fixed: max([_Per Customer: Pipeline Generation (copy) (copy)_1849572132719255559])}/5*4 then \"4\" \r\nELSE \"5\"                                    \r\nEND",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Pipeline Generation to Prospects",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "CASE [Pipeline Profile - Total Sales to Prospects (copy)_1849572132716658688]\r\nWHEN \"1\" THEN \"VERY LOW\"\r\nWHEN \"2\" THEN \"LOW\"\r\nWHEN \"3\" THEN \"MEDIUM\"\r\nWHEN \"4\" THEN \"HIGH\"\r\nWHEN \"5\" THEN \"VERY HIGH\"\r\nEND\r\n+ \" Ability to sell\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Total Sales (description)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "CASE [Pipeline Profile - Total Sales to Prospects (copy)_1849572132723974153]\r\nWHEN \"1\" THEN \"VERY LOW\"\r\nWHEN \"2\" THEN \"LOW\"\r\nWHEN \"3\" THEN \"MEDIUM\"\r\nWHEN \"4\" THEN \"HIGH\"\r\nWHEN \"5\" THEN \"VERY HIGH\"\r\nEND\r\n+ \" Ability to generate pipeline with prospects\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Pipeline Generation to Prospects (description)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "int([Pipeline Profile - Total Sales to Prospects (copy)_1849572132716658688])",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Total Sales (num)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "int([Pipeline Profile - Total Sales to Prospects (copy)_1849572132723974153])",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Profile - Pipeline Generation to Prospects (num)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "IF [LinPack_574638457904073940]<0.25 THEN 10\r\nELSEIF [LinPack_574638457904073940]<0.50 THEN 20\r\nELSEIF [LinPack_574638457904073940]<0.75 THEN 30\r\nELSE 40\r\nEND",
+      "pbi_table": "Owned By",
+      "pbi_object": "Probability (bucket) (sort)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "MAX(IF [Is Selected Opportunity Stage Flag (copy)_813744216047374336] THEN {INCLUDE [Calculation_711568759570620418] : [LinPack_235739231649065059]} END)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Sales Value (for selected Opp Owner)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "// Count the distinct number of Opportunity Owner\r\n// where Opportunity Owner's [Conversion Rate] > Selected Opportunity Owner [Conversion Rate]\r\nCOUNTD(if {INCLUDE [Calculation_711568759570620418] : [LinPack_713531991123124037]} > {MAX((IF [Is Selected Opportunity Stage Flag (copy)_813744216047374336] THEN {INCLUDE [Calculation_711568759570620418] : ZN([LinPack_713531991123124037])} ELSE 0 END))}\r\n       and Not [Is Selected Opportunity Stage Flag (copy)_813744216047374336]\r\n       then [Calculation_711568759570620418]  end)+1",
+      "pbi_table": "Owned By",
+      "pbi_object": "Rank Conversion Rate (for selected Opp Owner)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "// Count the distinct number of Opportunity Owner\r\n// where Opportunity Owner's [Total Opp Amount] > Selected Opportunity Owner [Total Opp Amount]\r\nCOUNTD(if {INCLUDE [Calculation_711568759570620418] : [LinPack_017255839264062096]} > {MAX((IF [Is Selected Opportunity Stage Flag (copy)_813744216047374336] THEN {INCLUDE [Calculation_711568759570620418] : ZN([LinPack_017255839264062096])} ELSE 0 END))}\r\n       and Not [Is Selected Opportunity Stage Flag (copy)_813744216047374336]\r\n       then [Calculation_711568759570620418]  end)+1",
+      "pbi_table": "Owned By",
+      "pbi_object": "Rank Total Opp Amount (for selected Opp Owner)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "MAX(IF [Is Selected Opportunity Stage Flag (copy)_813744216047374336] THEN {INCLUDE [Calculation_711568759570620418] : [LinPack_713531991123124037]} END)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Conversion Rate (for selected Opp Owner)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "MAX(IF [Is Selected Opportunity Stage Flag (copy)_813744216047374336] THEN {INCLUDE [Calculation_711568759570620418] : [LinPack_017255839264062096]} END)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Total Opp Amount (for selected Opp Owner)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM(IF [Closed in Last x Days (copy)_1142225515614175234] then [LinPack_808645294632541416] END)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Total Closed Opportunities Amount (Last N Months - Closed Date)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM(IF [Closed in Last x Days (copy)_1142225515614175234] then [LinPack_760893960995960019] END)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Average Deal Size (Last N Months - Closed Date)",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM(IF [Calculation_614178463385964547]=\"Existing Clients\" and [Last N months filter - Closed Date (copy)_1142225515621388292] THEN [LinPack_523892480737294295] END)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Generation for Existing Clients",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM(IF [Calculation_614178463385964547]=\"Prospects\" AND [Closed in Last x Days (copy)_1142225515614175234] then [LinPack_961643984189344200] END)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Total Sales for Prospects",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM(IF [Calculation_614178463385964547]=\"Prospects\" and [Last N months filter - Closed Date (copy)_1142225515621388292] then [LinPack_523892480737294295] END)",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Generation for Prospects",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "ZN({fixed [Calculation_711568759570620418]: [Calculation_995858528063909892]})",
+      "pbi_table": "Owned By",
+      "pbi_object": "_Per Customer: Total Sales for Existing Clients",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "ZN({fixed [Calculation_711568759570620418]: [Total Sales for Prospects (copy)_1849572132718514181]})",
+      "pbi_table": "Owned By",
+      "pbi_object": "_Per Customer: Pipeline Generation for Prospects",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "ZN({fixed [Calculation_711568759570620418]: [Total Sales for Existing Clients (copy)_1849572132718333956]})",
+      "pbi_table": "Owned By",
+      "pbi_object": "_Per Customer: Pipeline Generation for Existing Clients",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "ZN({fixed [Calculation_711568759570620418]: [Pipeline Generation (Last N Months) (copy)_1243275034714406914]})",
+      "pbi_table": "Owned By",
+      "pbi_object": "_Per Customer: Conversion Rate",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "ZN({fixed [Calculation_711568759570620418]: [Total Sales (Last N Months) (copy)_1243275034742312966]})",
+      "pbi_table": "Owned By",
+      "pbi_object": "_Per Customer: Average Deal Size",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "ZN({fixed [Calculation_711568759570620418]: [Pipeline Generation (Last N Months) (copy)_1243275034721849348]})",
+      "pbi_table": "Owned By",
+      "pbi_object": "_Per Customer: Total Sales",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "ZN({fixed [Calculation_711568759570620418]: [Total Sales for Existing Clients (copy)_995858528065511429]})",
+      "pbi_table": "Owned By",
+      "pbi_object": "_Per Customer: Total Sales for Prospects",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "avg(FLOAT(datediff(\"minute\", [Created Date], [Calculation_822751375422500864]) / (24*60)))",
+      "pbi_table": "Owned By",
+      "pbi_object": "Days from Open to Close",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "MAKEDATE(2022,04,18)",
+      "pbi_table": "Owned By",
+      "pbi_object": "__MyToday",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "36",
+      "pbi_table": "Owned By",
+      "pbi_object": "Last N Months",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Average of [Opportunity Amount]\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_AvgOpportunitySize_Calculation",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Average amount of opportunities, whether they are open or closed (expressed in currency)\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_AvgOpportunitySize_Description",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Determines how fast you are making money (you bring back about that much every day) (expressed in currency)\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_SalesVelocity_Description",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Average amount of won opportunities (expressed in currency)\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_AvgDealSizeWon_Description",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Total amount of opportunities that are closed (expressed in currency)\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_TotalClosedOpportunitiesAmount_Description",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Count Distinct of [Opportunity Id]\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_NbOpportunities_Calculation",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Number of opportunities that are closed\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_NbClosedOpportunities_Description",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Total number of opportunities (open or closed)\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_NbOpportunities_Description",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Total amount of open opportunities (expressed in currency)\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_PipelineValue_Description",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Number of opportunities that were won\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_NbWonOpportunities_Description",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Number of opportunities that were lost\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_NbLostOpportunities_Description",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Average of TimeDifference([Opportunity Created Date], [Opportunity Closed Date])   (for closed opportunities only)\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_SalesCycle_Calculation",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Total amount of open opportunities, weighted by probability of closing (expressed in currency)\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_WeigthedPipelineValue_Description",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Share of the number of opportunities won in relation to the number of all closed opportunities (expressed in %)\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_WonLostRate_Description",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Average time it takes to close an opportunity (only considering won opportunities)\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_SalesCycle_Description",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Average of TimeDifference([Opportunity Created Date], [Opportunity Closed Date])   (for lost opportunities only)\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_SalesCycleLost_Calculation",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Average time it takes to close an opportunity (only considering lost opportunities)\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_SalesCycleLost_Description",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Average of TimeDifference([Opportunity Created Date], [Opportunity Closed Date])   (for won opportunities only)\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_SalesCycleWon_Calculation",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Average time it takes to win an opportunity\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_SalesCycleWon_Description",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Total amount of opportunities won (expressed in amount)\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_TotalSales_Description",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Sum of [Opportunity Amount]\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_TotalPipelineGeneration_Calculation",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Total amount of opportunities created (expressed in amount)\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_TotalPipelineGeneration_Description",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Share of the amount of opportunities won in relation to the amount of all closed opportunities (expressed in %)\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_ConversionRate_Description",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Number of opportunities that are currently open\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "KPI_NbOpenOpportunities_Description",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"$\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "Currency",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Salesforce\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "Organization Name",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Sales Pipeline\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "Accelerator Title",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"LinPack messages (view comment for details)\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "Accelerator Log",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Bellina Catmull\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "pSelectOpportunityOwner",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"CHAMPIONS\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "pOpportunityOwner_Champions",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"GROWTH PLAN Pipeline Generation\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "pOpportunityOwner_GrowthPlanPipelineGeneration",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"GROWTH PLAN Closing\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "pOpportunityOwner_GrowthPlanClosing",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"REQUIRED IMPROVEMENTS\"",
+      "pbi_table": "Owned By",
+      "pbi_object": "pOpportunityOwner_RequiredImprovements",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Probability (bucket) Formatted",
+      "pbi_table": "Owned By",
+      "pbi_object": "Probability (bucket) Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Total Sales for Existing Clients Formatted",
+      "pbi_table": "Owned By",
+      "pbi_object": "Total Sales for Existing Clients Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Label DONE - Closed LOST - Opp Amount Formatted",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label DONE - Closed LOST - Opp Amount Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Label DONE - Closed WON - Opp Amount Formatted",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label DONE - Closed WON - Opp Amount Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Label DONE - New - Opp Amount Formatted",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label DONE - New - Opp Amount Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Label FOCUS - Closing Next x days - Opp Amount Formatted",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label FOCUS - Closing Next x days - Opp Amount Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Label FOCUS - Closing Overdue - Opp Amount Formatted",
+      "pbi_table": "Owned By",
+      "pbi_object": "Label FOCUS - Closing Overdue - Opp Amount Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Pipeline Generated Formatted",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Generated Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Total Sales Formatted",
+      "pbi_table": "Owned By",
+      "pbi_object": "Total Sales Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Weighted Pipeline Value Formatted",
+      "pbi_table": "Owned By",
+      "pbi_object": "Weighted Pipeline Value Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Total Closed Opportunities Amount Formatted",
+      "pbi_table": "Owned By",
+      "pbi_object": "Total Closed Opportunities Amount Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Pipeline Value Formatted",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Value Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Total Sales (Last N Months - Closed Date) Formatted",
+      "pbi_table": "Owned By",
+      "pbi_object": "Total Sales (Last N Months - Closed Date) Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Pipeline Generation (Last N Months - Created Date) Formatted",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Generation (Last N Months - Created Date) Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Total Closed Opportunities Amount (Last N Months - Closed Date) Formatted",
+      "pbi_table": "Owned By",
+      "pbi_object": "Total Closed Opportunities Amount (Last N Months - Closed Date) Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Average Deal Size (Last N Months - Closed Date) Formatted",
+      "pbi_table": "Owned By",
+      "pbi_object": "Average Deal Size (Last N Months - Closed Date) Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Pipeline Generation for Existing Clients Formatted",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Generation for Existing Clients Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Total Sales for Prospects Formatted",
+      "pbi_table": "Owned By",
+      "pbi_object": "Total Sales for Prospects Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Pipeline Generation for Prospects Formatted",
+      "pbi_table": "Owned By",
+      "pbi_object": "Pipeline Generation for Prospects Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Year To Date",
+      "pbi_table": "Calendar",
+      "pbi_object": "Year To Date",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Previous Year",
+      "pbi_table": "Calendar",
+      "pbi_object": "Previous Year",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Year Over Year %",
+      "pbi_table": "Calendar",
+      "pbi_object": "Year Over Year %",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Account\"",
+      "pbi_table": "Select Dimension",
+      "pbi_object": "Select Dimension",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"Avg Deal Size (won)\"",
+      "pbi_table": "Select Indicator",
+      "pbi_object": "Select Indicator",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "0",
+      "pbi_table": "pPlaceholder",
+      "pbi_object": "pPlaceholder",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "1.",
+      "pbi_table": "pPlaceholder_1",
+      "pbi_object": "pPlaceholder_1",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"90\"",
+      "pbi_table": "Last x Days",
+      "pbi_object": "Last x Days",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "\"90\"",
+      "pbi_table": "Next x Days",
+      "pbi_object": "Next x Days",
+      "pbi_type": "measure"
+    }
+  ],
+  "relationships": [
+    {
+      "from": "Account[CreatedById (Account)]",
+      "to": "Account Created By[Id (Account Created By)]",
+      "cardinality": "bothDirections"
+    },
+    {
+      "from": "Account[OwnerId (Account)]",
+      "to": "Account Owned By[Id (Account Owned By)]",
+      "cardinality": "bothDirections"
+    },
+    {
+      "from": "Opportunities[AccountId]",
+      "to": "Account[Id (Account)]",
+      "cardinality": "bothDirections"
+    },
+    {
+      "from": "Opportunities[CreatedById]",
+      "to": "Created By[Id (Created By)]",
+      "cardinality": "bothDirections"
+    },
+    {
+      "from": "Opportunities[OwnerId]",
+      "to": "Owned By[Id]",
+      "cardinality": "bothDirections"
+    },
+    {
+      "from": "Opportunities[Close Date]",
+      "to": "Calendar[Date]",
+      "cardinality": "bothDirections"
+    },
+    {
+      "from": "Owned By[CreatedDate (Owned By)]",
+      "to": "Calendar[Date]",
+      "cardinality": "bothDirections"
+    },
+    {
+      "from": "Created By[CreatedDate (Created By)]",
+      "to": "Calendar[Date]",
+      "cardinality": "bothDirections"
+    },
+    {
+      "from": "Account[Application Date]",
+      "to": "Calendar[Date]",
+      "cardinality": "bothDirections"
+    },
+    {
+      "from": "Account Owned By[CreatedDate (Account Owned By)]",
+      "to": "Calendar[Date]",
+      "cardinality": "bothDirections"
+    },
+    {
+      "from": "Account Created By[CreatedDate (Account Created By)]",
+      "to": "Calendar[Date]",
+      "cardinality": "bothDirections"
+    },
+    {
+      "from": "Owned By[analyticsdemo_batch_id__c (Owned By)]",
+      "to": "Account[analyticsdemo_batch_id__c (Account)]",
+      "cardinality": "bothDirections"
+    },
+    {
+      "from": "Owned By[analyticsdemo_batch_id__c (Owned By)]",
+      "to": "Created By[analyticsdemo_batch_id__c (Created By)]",
+      "cardinality": "bothDirections"
+    }
+  ],
+  "worksheets": [
+    {
+      "tableau_worksheet": "Avg Deal Size (won)",
+      "pbi_page": "Avg Deal Size (won)"
+    },
+    {
+      "tableau_worksheet": "Closed Opp - LOST",
+      "pbi_page": "Closed Opp - LOST"
+    },
+    {
+      "tableau_worksheet": "Closed Opp - NEW",
+      "pbi_page": "Closed Opp - NEW"
+    },
+    {
+      "tableau_worksheet": "Closed Opp - Pipeline Review Achievements",
+      "pbi_page": "Closed Opp - Pipeline Review Achievements"
+    },
+    {
+      "tableau_worksheet": "Closed Opp - WON",
+      "pbi_page": "Closed Opp - WON"
+    },
+    {
+      "tableau_worksheet": "Conversion - Breakdown by Dimension",
+      "pbi_page": "Conversion - Breakdown by Dimension"
+    },
+    {
+      "tableau_worksheet": "Conversion KPIs",
+      "pbi_page": "Conversion KPIs"
+    },
+    {
+      "tableau_worksheet": "Conversion Rate",
+      "pbi_page": "Conversion Rate"
+    },
+    {
+      "tableau_worksheet": "Conversion Rate - Benchmark (for Selected Opp Owner)",
+      "pbi_page": "Conversion Rate - Benchmark (for Selected Opp Owner)"
+    },
+    {
+      "tableau_worksheet": "Conversion Rate - KPI Card (for Selected Opp Owner)",
+      "pbi_page": "Conversion Rate - KPI Card (for Selected Opp Owner)"
+    },
+    {
+      "tableau_worksheet": "Conversion Rate - Last N Months (for Selected Opp Owner)",
+      "pbi_page": "Conversion Rate - Last N Months (for Selected Opp Owner)"
+    },
+    {
+      "tableau_worksheet": "Conversion Rate - Ranking (for Selected Opp Owner)",
+      "pbi_page": "Conversion Rate - Ranking (for Selected Opp Owner)"
+    },
+    {
+      "tableau_worksheet": "Conversion Rate - Top Opp Types (for Selected Opp Owner)",
+      "pbi_page": "Conversion Rate - Top Opp Types (for Selected Opp Owner)"
+    },
+    {
+      "tableau_worksheet": "Conversion Rate - by Client/Prospect",
+      "pbi_page": "Conversion Rate - by Client/Prospect"
+    },
+    {
+      "tableau_worksheet": "Conversion by Deal Size",
+      "pbi_page": "Conversion by Deal Size"
+    },
+    {
+      "tableau_worksheet": "Open Opp - CLOSING",
+      "pbi_page": "Open Opp - CLOSING"
+    },
+    {
+      "tableau_worksheet": "Open Opp - Detail Table (for Selected Opp Owner)",
+      "pbi_page": "Open Opp - Detail Table (for Selected Opp Owner)"
+    },
+    {
+      "tableau_worksheet": "Open Opp - OVERDUE",
+      "pbi_page": "Open Opp - OVERDUE"
+    },
+    {
+      "tableau_worksheet": "Open Opp - Pipeline Review Focus",
+      "pbi_page": "Open Opp - Pipeline Review Focus"
+    },
+    {
+      "tableau_worksheet": "Open Opp - Top Opp Types Value (for Selected Opp Owner)",
+      "pbi_page": "Open Opp - Top Opp Types Value (for Selected Opp Owner)"
+    },
+    {
+      "tableau_worksheet": "Open Opp - Value KPI Card (for Selected Opp Owner)",
+      "pbi_page": "Open Opp - Value KPI Card (for Selected Opp Owner)"
+    },
+    {
+      "tableau_worksheet": "Open Opp - Value by Client/Prospect",
+      "pbi_page": "Open Opp - Value by Client/Prospect"
+    },
+    {
+      "tableau_worksheet": "Opp Owner Performance",
+      "pbi_page": "Opp Owner Performance"
+    },
+    {
+      "tableau_worksheet": "Opp Owner Performance Detail",
+      "pbi_page": "Opp Owner Performance Detail"
+    },
+    {
+      "tableau_worksheet": "Opportunity Owner Card (for Selected Opp Owner)",
+      "pbi_page": "Opportunity Owner Card (for Selected Opp Owner)"
+    },
+    {
+      "tableau_worksheet": "Owner Profile",
+      "pbi_page": "Owner Profile"
+    },
+    {
+      "tableau_worksheet": "Pipeline Bar Chart",
+      "pbi_page": "Pipeline Bar Chart"
+    },
+    {
+      "tableau_worksheet": "Pipeline Detail Table",
+      "pbi_page": "Pipeline Detail Table"
+    },
+    {
+      "tableau_worksheet": "Pipeline Funnel",
+      "pbi_page": "Pipeline Funnel"
+    },
+    {
+      "tableau_worksheet": "Pipeline Generated - Benchmark (for Selected Opp Owner)",
+      "pbi_page": "Pipeline Generated - Benchmark (for Selected Opp Owner)"
+    },
+    {
+      "tableau_worksheet": "Pipeline Generated - KPI Card (for Selected Opp Owner)",
+      "pbi_page": "Pipeline Generated - KPI Card (for Selected Opp Owner)"
+    },
+    {
+      "tableau_worksheet": "Pipeline Generated - Last N Months (for Selected Opp Owner)",
+      "pbi_page": "Pipeline Generated - Last N Months (for Selected Opp Owner)"
+    },
+    {
+      "tableau_worksheet": "Pipeline Generated - Ranking (for Selected Opp Owner)",
+      "pbi_page": "Pipeline Generated - Ranking (for Selected Opp Owner)"
+    },
+    {
+      "tableau_worksheet": "Pipeline Generated - Top Opp Types (for Selected Opp Owner)",
+      "pbi_page": "Pipeline Generated - Top Opp Types (for Selected Opp Owner)"
+    },
+    {
+      "tableau_worksheet": "Pipeline Generated - by Client/Prospect",
+      "pbi_page": "Pipeline Generated - by Client/Prospect"
+    },
+    {
+      "tableau_worksheet": "Pipeline Open Opportunities",
+      "pbi_page": "Pipeline Open Opportunities"
+    },
+    {
+      "tableau_worksheet": "Pipeline Review Achievements (for Selected Opp Owner)",
+      "pbi_page": "Pipeline Review Achievements (for Selected Opp Owner)"
+    },
+    {
+      "tableau_worksheet": "Pipeline Value",
+      "pbi_page": "Pipeline Value"
+    },
+    {
+      "tableau_worksheet": "Pipeline Weighted Value",
+      "pbi_page": "Pipeline Weighted Value"
+    },
+    {
+      "tableau_worksheet": "Pipeline Weighted Value 2",
+      "pbi_page": "Pipeline Weighted Value 2"
+    },
+    {
+      "tableau_worksheet": "Pipeline by Bucket",
+      "pbi_page": "Pipeline by Bucket"
+    },
+    {
+      "tableau_worksheet": "Pipeline by Bucket - Opp detail",
+      "pbi_page": "Pipeline by Bucket - Opp detail"
+    },
+    {
+      "tableau_worksheet": "Pipeline by Bucket and Dimension",
+      "pbi_page": "Pipeline by Bucket and Dimension"
+    },
+    {
+      "tableau_worksheet": "Pipeline by Bucket and Probability",
+      "pbi_page": "Pipeline by Bucket and Probability"
+    },
+    {
+      "tableau_worksheet": "Pipeline by Opportunity Size",
+      "pbi_page": "Pipeline by Opportunity Size"
+    },
+    {
+      "tableau_worksheet": "Sales Cycle",
+      "pbi_page": "Sales Cycle"
+    },
+    {
+      "tableau_worksheet": "Total Sales - Benchmark (for Selected Opp Owner)",
+      "pbi_page": "Total Sales - Benchmark (for Selected Opp Owner)"
+    },
+    {
+      "tableau_worksheet": "Total Sales - KPI Card (for Selected Opp Owner)",
+      "pbi_page": "Total Sales - KPI Card (for Selected Opp Owner)"
+    },
+    {
+      "tableau_worksheet": "Total Sales - Last N Months (for Selected Opp Owner)",
+      "pbi_page": "Total Sales - Last N Months (for Selected Opp Owner)"
+    },
+    {
+      "tableau_worksheet": "Total Sales - Ranking (for Selected Opp Owner)",
+      "pbi_page": "Total Sales - Ranking (for Selected Opp Owner)"
+    },
+    {
+      "tableau_worksheet": "Total Sales - Top Opp Types (for Selected Opp Owner)",
+      "pbi_page": "Total Sales - Top Opp Types (for Selected Opp Owner)"
+    },
+    {
+      "tableau_worksheet": "Total Sales - by Client/Prospect",
+      "pbi_page": "Total Sales - by Client/Prospect"
+    },
+    {
+      "tableau_worksheet": "Won/Lost Rate",
+      "pbi_page": "Won/Lost Rate"
+    }
+  ]
+}

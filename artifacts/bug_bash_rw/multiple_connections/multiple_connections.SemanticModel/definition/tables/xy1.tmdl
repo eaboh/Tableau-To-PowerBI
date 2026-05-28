@@ -1,0 +1,36 @@
+table xy1
+	lineageTag: adff1c7a-42f4-4168-aaea-2e87099166ce
+
+	column a
+		dataType: string
+		lineageTag: 98377fa7-e001-4cd4-86f8-fc085573920a
+		summarizeBy: none
+		sourceColumn: a
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'xy1-863230fa-26f6-4a66-b71d-0f7cc10bd130' = m
+		mode: import
+		source =
+				let
+				    // Source SQL Server
+				    Source = try
+				
+				        let
+				
+				            _src = Sql.Database("mssql2012", "TestV1"),
+				
+				            _nav = _src{[Schema="dbo", Item="xy1"]}[Data]
+				
+				        in _nav
+				
+				    otherwise
+				
+				        #table({"a"}, {}),
+				    Result = Source
+				in
+				    Result
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 1 columns: a.
+
