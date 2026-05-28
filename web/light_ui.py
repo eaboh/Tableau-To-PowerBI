@@ -219,26 +219,9 @@ class LightMigrationUI:
         tk.Label(mode_row, text="Mode", width=14, anchor="w", bg="#ffffff").pack(side=tk.LEFT)
         tk.Label(mode_row, text="Batch folder only", fg="#0f4c81", bg="#ffffff", font=("Segoe UI", 9, "bold")).pack(side=tk.LEFT)
 
-        preset_row = tk.Frame(setup_card, bg="#ffffff")
-        preset_row.pack(fill=tk.X, pady=4)
-        tk.Label(preset_row, text="Task", width=14, anchor="w", bg="#ffffff").pack(side=tk.LEFT)
-        self.preset_box = ttk.Combobox(
-            preset_row,
-            textvariable=self.preset_var,
-            state="readonly",
-            values=(
-                "Assess",
-                "Migrate",
-                "Lineage",
-            ),
-            width=28,
-        )
-        self.preset_box.pack(side=tk.LEFT)
-        self.preset_box.bind("<<ComboboxSelected>>", lambda _e: self._apply_preset())
-
         task_chip_row = tk.Frame(setup_card, bg="#ffffff")
         task_chip_row.pack(fill=tk.X, pady=(2, 6))
-        tk.Label(task_chip_row, text="Quick task", width=14, anchor="w", fg="#4b5563", bg="#ffffff").pack(side=tk.LEFT)
+        tk.Label(task_chip_row, text="Task", width=14, anchor="w", fg="#4b5563", bg="#ffffff").pack(side=tk.LEFT)
         for task in ("Assess", "Migrate", "Lineage"):
             btn = tk.Button(
                 task_chip_row,
