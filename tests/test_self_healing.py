@@ -218,8 +218,11 @@ class TestTMDLSelfHealBrokenRefs(unittest.TestCase):
         }])
         repairs = _self_heal_model(model)
         self.assertGreater(repairs, 0)
+        table = model['model']['tables'][0]
+        col_names = {c.get('name') for c in table.get('columns', [])}
+        self.assertIn('NonExistentColumn', col_names)
         measure = model['model']['tables'][0]['measures'][0]
-        self.assertTrue(measure.get('isHidden'))
+        self.assertFalse(measure.get('isHidden', False))
 
     def test_valid_ref_not_hidden(self):
         from powerbi_import.tmdl_generator import _self_heal_model
@@ -233,6 +236,50 @@ class TestTMDLSelfHealBrokenRefs(unittest.TestCase):
         }])
         repairs = _self_heal_model(model)
         measure = model['model']['tables'][0]['measures'][0]
+        self.assertFalse(measure.get('isHidden', False))
+
+    def test_missing_qualified_same_table_ref_creates_placeholder_column(self):
+        from powerbi_import.tmdl_generator import _self_heal_model
+        model = self._make_model([{
+            'name': 'sqlproxy',
+            'columns': [],
+            'measures': [{
+                'name': 'TP lancée',
+                'expression': "SUM('sqlproxy'[TP]) + SUM('sqlproxy'[TP réalisé])",
+            }],
+        }])
+        repairs = _self_heal_model(model)
+        self.assertGreater(repairs, 0)
+
+        table = model['model']['tables'][0]
+        col_names = {c.get('name') for c in table.get('columns', [])}
+        self.assertIn('TP', col_names)
+        self.assertIn('TP réalisé', col_names)
+
+        # Measure should remain visible: placeholders resolve semantic refs.
+        measure = table['measures'][0]
+        self.assertFalse(measure.get('isHidden', False))
+
+    def test_unicode_and_special_field_refs_create_placeholders(self):
+        from powerbi_import.tmdl_generator import _self_heal_model
+        model = self._make_model([{
+            'name': 'Équipe',
+            'columns': [],
+            'measures': [{
+                'name': 'KPI',
+                'expression': "SUM(Équipe[Montant réalisé]) + SUM([Écart %]) + SUM([CA/Qté])",
+            }],
+        }])
+        repairs = _self_heal_model(model)
+        self.assertGreater(repairs, 0)
+
+        table = model['model']['tables'][0]
+        col_names = {c.get('name') for c in table.get('columns', [])}
+        self.assertIn('Montant réalisé', col_names)
+        self.assertIn('Écart %', col_names)
+        self.assertIn('CA/Qté', col_names)
+
+        measure = table['measures'][0]
         self.assertFalse(measure.get('isHidden', False))
 
     def test_measure_ref_to_other_measure_valid(self):
@@ -257,8 +304,9 @@ class TestTMDLSelfHealBrokenRefs(unittest.TestCase):
             'measures': [{'name': 'M', 'expression': '[Ghost]'}],
         }])
         _self_heal_model(model)
-        measure = model['model']['tables'][0]['measures'][0]
-        notes = [a['value'] for a in measure.get('annotations', [])
+        table = model['model']['tables'][0]
+        col = next(c for c in table.get('columns', []) if c.get('name') == 'Ghost')
+        notes = [a['value'] for a in col.get('annotations', [])
                  if a.get('name') == 'MigrationNote']
         self.assertTrue(any('Self-heal' in n for n in notes))
 
@@ -1160,8 +1208,10 @@ class TestSelfHealCrossTableBrokenRefs(unittest.TestCase):
         }
         repairs = _self_heal_model(model)
         self.assertGreaterEqual(repairs, 1)
+        cols = {c.get('name') for c in model['model']['tables'][0].get('columns', [])}
+        self.assertIn('Missing', cols)
         m = model['model']['tables'][0]['measures'][0]
-        self.assertTrue(m.get('isHidden'))
+        self.assertFalse(m.get('isHidden', False))
 
     def test_valid_cross_table_ref_untouched(self):
         from powerbi_import.tmdl_generator import _self_heal_model

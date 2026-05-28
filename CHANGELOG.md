@@ -1,5 +1,35 @@
 # Changelog
 
+## v38.2.0 — Sprint 178 — Migration Diff & Comparison Tooling
+
+### Artifact Diff Engine
+- **powerbi_import/artifact_diff.py**: New module — structured diff between two .pbip project directories
+  - TMDL parsing: tables, columns (dataType/dataCategory/isHidden), measures (expression hash), partitions (content hash), relationships (signature-based), RLS roles
+  - PBIR parsing: pages (displayName, pageType), visuals (visualType, title, field count), report-level filters
+  - `diff_projects(old_dir, new_dir)` — full cross-layer comparison returning `DiffReport`
+  - `DiffReport` / `DiffEntry` data classes with `summary()`, `to_dict()`, `save()`, `by_category()`
+  - Baseline management: `save_baseline()` (copytree + manifest), `check_baseline()` (pass/fail + report)
+  - Interactive HTML report: `generate_diff_report()` with stat grid, donut chart, per-category tables, before/after panels for modified measures
+  - Standalone CLI: `python -m powerbi_import.artifact_diff old_dir new_dir`
+
+### CLI — New Diff Flags
+- **migrate.py**: 3 new flags
+  - `--diff PREVIOUS_DIR` — compare current migration output against a previous .pbip project
+  - `--save-baseline BASELINE_DIR` — snapshot output as a baseline for future comparison
+  - `--check-baseline BASELINE_DIR` — compare output against stored baseline (non-zero exit if changes detected, for CI)
+  - Integrated into `_run_post_generation_reports()` — runs after comparison report and autoplay
+
+### Tests
+- **tests/test_artifact_diff.py**: 70 tests across 14 test classes
+  - DiffEntry/DiffReport data structures (creation, serialization, summary formatting)
+  - TMDL parsing (tables, columns, measures, partitions, relationships, roles, edge cases)
+  - PBIR parsing (pages, visuals, filters, JSON loading, empty/missing dirs)
+  - Diff engine (added/removed/modified for all 9 categories, no-change detection)
+  - Full project diff (identical projects, table/column/measure/relationship/page/visual changes)
+  - Baseline management (save, check pass/fail, missing baseline, overwrite)
+  - HTML report generation (no-changes, with changes, donut chart, file output)
+  - CLI entry point (end-to-end with JSON and HTML output)
+
 ## v38.1.0 — Sprint 177 — Workspace Creation & Gateway Binding
 
 ### PBI Service Client — Workspace & Gateway APIs

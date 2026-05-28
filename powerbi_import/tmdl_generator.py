@@ -684,8 +684,104 @@ def _self_heal_model(model, recovery=None):
             expr = measure.get('expression', '')
             if not expr:
                 continue
-            # Check for references to columns using [ColumnName] pattern
+
+            # Self-heal: if a measure references missing fields that should be
+            # columns, materialize hidden placeholder columns so the model
+            # remains loadable in PBI Desktop.
+            qualified_refs = re.findall(r"'((?:[^']|'')+)'\[([^\]]+)\]", expr)
+            # Accept Unicode identifiers for unquoted table names (e.g. Équipe[Montant]).
+            bare_qualified_refs = re.findall(r"\b([^\W\d]\w*)\[([^\]]+)\]", expr)
+            foreign_qualified_cols = set()
+            unresolved_columns = []
+            for q_table, q_col in qualified_refs:
+                q_table = q_table.replace("''", "'")
+                if q_col in table_columns.get(tname, set()):
+                    continue
+                if q_col in measure_names_in_model:
+                    continue
+
+                if q_table != tname:
+                    # Do not synthesize local columns for references that
+                    # clearly target another table.
+                    foreign_qualified_cols.add(q_col)
+                    continue
+                unresolved_columns.append(q_col)
+
+            for q_table, q_col in bare_qualified_refs:
+                if q_col in table_columns.get(tname, set()):
+                    continue
+                if q_col in measure_names_in_model:
+                    continue
+
+                if q_table != tname:
+                    foreign_qualified_cols.add(q_col)
+                    continue
+                unresolved_columns.append(q_col)
+
             refs = re.findall(r'\[([^\]]+)\]', expr)
+            for ref in refs:
+                if ref in table_columns.get(tname, set()):
+                    continue
+                if ref in measure_names_in_model:
+                    continue
+                if ref.upper() in ('VALUE', 'FORMAT', 'YEAR', 'MONTH', 'DAY',
+                                   'HOUR', 'MINUTE', 'SECOND', 'DATE'):
+                    continue
+                if ref in foreign_qualified_cols:
+                    continue
+                unresolved_columns.append(ref)
+
+            if unresolved_columns:
+                existing_cols = {c.get('name', '') for c in t.get('columns', []) if c.get('name')}
+                created = []
+                for missing_col in sorted(set(unresolved_columns)):
+                    if missing_col in existing_cols:
+                        continue
+                    t.setdefault('columns', []).append({
+                        'name': missing_col,
+                        'dataType': 'string',
+                        'isHidden': True,
+                        'description': (
+                            'Self-heal placeholder column created from '
+                            f"measure reference [{missing_col}]"
+                        ),
+                        'annotations': [{
+                            'name': 'MigrationNote',
+                            'value': (
+                                'Self-heal: placeholder column created to '
+                                f"satisfy missing qualified reference '{tname}'[{missing_col}]."
+                            ),
+                        }],
+                    })
+                    table_columns.setdefault(tname, set()).add(missing_col)
+                    all_columns.add(missing_col)
+                    existing_cols.add(missing_col)
+                    created.append(missing_col)
+                    repairs += 1
+
+                if created:
+                    mname = measure.get('name', '?')
+                    print(
+                        f"  ⚕ Self-heal: Added {len(created)} placeholder column(s) "
+                        f"to '{tname}' for measure '{mname}'"
+                    )
+                    if recovery:
+                        recovery.record(
+                            'tmdl', 'placeholder_column_ref',
+                            item_name=mname,
+                            description=(
+                                'Missing qualified references in measure: '
+                                + ', '.join(f"'{tname}'[{c}]" for c in created)
+                            ),
+                            action=(
+                                'Created hidden placeholder column(s): '
+                                + ', '.join(f'[{c}]' for c in created)
+                            ),
+                            severity='warning',
+                            follow_up='Replace placeholders with actual source columns.',
+                        )
+
+            # Check for references to columns using [ColumnName] pattern
             broken = False
             for ref in refs:
                 # Skip if it's a known measure or known column
@@ -694,6 +790,9 @@ def _self_heal_model(model, recovery=None):
                 # Skip DAX keywords/functions
                 if ref.upper() in ('VALUE', 'FORMAT', 'YEAR', 'MONTH', 'DAY',
                                    'HOUR', 'MINUTE', 'SECOND', 'DATE'):
+                    continue
+                # Skip refs that are explicitly qualified to another table.
+                if ref in foreign_qualified_cols:
                     continue
                 # This reference doesn't resolve — mark as broken
                 broken = True

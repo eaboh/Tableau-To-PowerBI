@@ -29,7 +29,7 @@ The migration engine has reached **full-platform maturity** — single-workbook,
 | **v36.0.0** | Tableau Server Enterprise Migration | 139–145 | ✅ Shipped |
 | **v37.0.0** | Migration Completeness & Analytics Parity | 120–124 | ✅ Shipped |
 | **v37.1.0** | Bulk Assessment (`--bulk-assess`) | — | ✅ Shipped |
-| **v38.0.0** | Report Packaging & Developer Experience | 175–179 | Planned |
+| **v38.2.0** | Report Packaging & Developer Experience | 175–179 | Shipped |
 | **v39.0.0** | Data Blending & Advanced Connectivity | 180–184 | Planned |
 | **v40.0.0** | VS Code Extension & Interactive Tooling | 185–189 | Planned |
 | **v41.0.0** | Real-Time, Streaming & Paginated Reports | 190–194 | Planned |
@@ -1129,7 +1129,7 @@ Standalone `.tfl`/`.tflx` Tableau Prep flow files in `--batch` mode were incorre
 
 > v29.0.0 combines the remaining v28 Phase 2–3 items (Sprints 112–117) with the original v29 Phase 2–4 items (Sprints 120–127).
 > See [GAP_ANALYSIS.md §13](GAP_ANALYSIS.md) for the gap priority matrix driving this sprint order.
-> **Status:** Shipped across v29.0.0–v37.0.0. Sprint 115 (PDF Export) deferred to v38.0.0.
+> **Status:** Shipped across v29.0.0–v37.0.0. Sprint 115 (PDF Export) deferred to v38.2.0.
 
 ### Phase 1 — Intelligence & UX (Sprints 112–114)
 
@@ -1911,7 +1911,7 @@ Already implemented in `tableau_export/server_client.py`:
 
 ---
 
-## v38.0.0 — Report Packaging & Developer Experience (Sprints 175–179)
+## v38.2.0 — Report Packaging & Developer Experience (Sprints 175–179)
 
 **Theme:** Enterprise customers need polished deliverables for stakeholder communication. Developers need better tooling for iterative migration refinement. This version delivers **PDF/PPTX report export**, **REST API v2**, **Streamlit UI polish**, and **migration diff tooling**.
 
@@ -1986,19 +1986,19 @@ Already implemented in `tableau_export/server_client.py`:
 
 ---
 
-### Sprint 179 — v38.0.0 Release & Hardening (All Agents)
+### Sprint 179 — v38.2.0 Release & Hardening (All Agents)
 
 **Goal:** Version bump, cross-feature integration testing, documentation refresh, PyPI publish.
 
 | # | Item | Owner | File(s) | Est. | Details |
 |---|------|-------|---------|------|---------|
-| 179.1 | **Version bump** | @orchestrator | `pyproject.toml`, `CHANGELOG.md` | Low | `37.1.0` → `38.0.0`. Document Sprints 175–179. |
+| 179.1 | **Version bump** | @orchestrator | `pyproject.toml`, `CHANGELOG.md` | Low | `37.1.0` → `38.2.0`. Document Sprints 175–179. |
 | 179.2 | **Integration tests** | @tester | `tests/test_v38_e2e.py` (new) | High | E2E: migrate → report package → API batch → diff against baseline. 20+ tests. |
 | 179.3 | **Real-world re-validation** | @tester | `tests/test_real_world_e2e.py` | Medium | All 27+ workbooks pass with 0 regressions. |
 | 179.4 | **Docs refresh** | @orchestrator | `docs/*.md`, `README.md` | Medium | Update README with report packaging, API v2, UI screenshots. |
 | 179.5 | **Test baseline** | @tester | — | — | Target: **8,800+** tests. |
 
-### v38.0.0 Success Criteria
+### v38.2.0 Success Criteria
 
 | Metric | Target | Owner |
 |--------|--------|-------|
@@ -2008,7 +2008,7 @@ Already implemented in `tableau_export/server_client.py`:
 | Artifact diff | Structured diff between migration runs | @assessor |
 | Tests | **8,800+** | @tester |
 
-### v38.0.0 Agent Ownership Matrix
+### v38.2.0 Agent Ownership Matrix
 
 | Agent | Sprint 175 | Sprint 176 | Sprint 177 | Sprint 178 | Sprint 179 |
 |-------|-----------|-----------|-----------|-----------|-----------|
@@ -2407,7 +2407,7 @@ Already implemented in `tableau_export/server_client.py`:
 ## Sprint Sequencing (v38–v42)
 
 ```
-v38.0.0 — Report Packaging & Developer Experience
+v38.2.0 — Report Packaging & Developer Experience
   Sprint 175 (PDF/PPTX) ──→ Sprint 176 (REST API v2)
            ↓                        ↓
   Sprint 177 (Web UI Polish) ──→ Sprint 178 (Artifact Diff)
@@ -2467,7 +2467,7 @@ v42.0.0 — Ecosystem Maturity & GA Polish
 | v28.5.8 | 7,099 | 63 | 118 | 125 | 13 | 14 |
 | v30.0.0 | 8,008 | 63 | 118 | 125 | 85 | 14 |
 | v37.1.0 | 8,518 | 63 | 145 | 125+ | 85 | 14 |
-| **v38.0.0** | **8,800+** | 63 | 145 | 125+ | 85 | 14 |
+| **v38.2.0** | **8,738** | 63 | 145 | 125+ | 85 | 14 |
 | **v39.0.0** | **9,200+** | **75+** | 145 | 125+ | 85 | 14 |
 | **v40.0.0** | **9,500+** | 75+ | 145 | 125+ | 85 | 14 |
 | **v41.0.0** | **9,800+** | 75+ | 145+ | 125+ | 85 | 14 |

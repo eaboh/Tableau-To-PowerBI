@@ -4,8 +4,8 @@
 
 | | |
 |---|---|
-| 🏷️ **Version** | 38.1.0 |
-| ✅ **Tests** | 8,668 passed · 96.2 % coverage |
+| 🏷️ **Version** | 38.2.0 |
+| ✅ **Tests** | 8,738 passed · 96.2 % coverage |
 | 🐍 **Python** | 3.12+ · zero external dependencies |
 | 📜 **License** | MIT |
 

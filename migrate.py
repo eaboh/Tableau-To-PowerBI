@@ -1011,6 +1011,60 @@ def _run_check_hyper(args):
     return ExitCode.SUCCESS
 
 
+def _run_artifact_diff(project_dir, diff_dir, output_base):
+    """Run artifact diff between current and previous migration output."""
+    from powerbi_import.artifact_diff import diff_projects, generate_diff_report
+
+    print_header("ARTIFACT DIFF")
+    report = diff_projects(diff_dir, project_dir)
+    print(report.summary())
+
+    # Save JSON report
+    json_path = os.path.join(output_base, 'artifact_diff.json')
+    report.save(json_path)
+    print(f"\n  JSON report: {json_path}")
+
+    # Generate HTML report
+    html_path = os.path.join(output_base, 'artifact_diff_report.html')
+    generate_diff_report(report, html_path)
+    print(f"  HTML report: {html_path}")
+
+    return report
+
+
+def _run_save_baseline(project_dir, baseline_dir):
+    """Save migration output as a baseline snapshot."""
+    from powerbi_import.artifact_diff import save_baseline
+
+    print_header("SAVE BASELINE")
+    save_baseline(project_dir, baseline_dir)
+    print(f"  Baseline saved to {baseline_dir}")
+
+
+def _run_check_baseline(project_dir, baseline_dir, output_base):
+    """Compare migration output against a stored baseline."""
+    from powerbi_import.artifact_diff import check_baseline, generate_diff_report
+
+    print_header("CHECK BASELINE")
+    passed, report = check_baseline(project_dir, baseline_dir)
+    print(report.summary())
+
+    if not passed and report.has_changes:
+        json_path = os.path.join(output_base, 'baseline_diff.json')
+        report.save(json_path)
+        html_path = os.path.join(output_base, 'baseline_diff_report.html')
+        generate_diff_report(report, html_path)
+        print(f"\n  JSON report: {json_path}")
+        print(f"  HTML report: {html_path}")
+
+    if passed:
+        print("\n  ✓ Baseline check PASSED — no changes detected.")
+    else:
+        print("\n  ✗ Baseline check FAILED — unexpected changes detected.")
+
+    return passed
+
+
 def _run_check_drift(args):
     """Compare a Tableau source against a previous extraction snapshot."""
     from powerbi_import.schema_drift import detect_schema_drift, load_snapshot, save_snapshot
@@ -2210,6 +2264,28 @@ def _add_report_args(parser):
         action='store_true',
         default=False,
         help='Generate a paginated report layout alongside the interactive report'
+    )
+
+    parser.add_argument(
+        '--diff',
+        metavar='PREVIOUS_DIR',
+        default=None,
+        help='Compare current migration output against a previous .pbip project directory '
+             'and generate a structured diff report (HTML + JSON)'
+    )
+
+    parser.add_argument(
+        '--save-baseline',
+        metavar='BASELINE_DIR',
+        default=None,
+        help='After migration, save the output as a baseline snapshot for future --check-baseline comparisons'
+    )
+
+    parser.add_argument(
+        '--check-baseline',
+        metavar='BASELINE_DIR',
+        default=None,
+        help='Compare migration output against a stored baseline and exit with non-zero if changes detected (for CI)'
     )
 
 
@@ -5902,6 +5978,35 @@ def _run_post_generation_reports(args, source_basename, results):
             print(f"  Autoplay JSON: {autoplay_path}")
         except (ImportError, OSError, ValueError) as exc:
             logger.warning(f"Autoplay validation failed: {exc}")
+
+    # ── Artifact Diff (--diff flag) ────────────────────────
+    if getattr(args, 'diff', None) and results.get('generation') and not args.dry_run:
+        try:
+            out_base = args.output_dir or os.path.join('artifacts', 'powerbi_projects', 'migrated')
+            pbip_dir = os.path.join(out_base, source_basename)
+            _run_artifact_diff(pbip_dir, args.diff, out_base)
+        except (ImportError, OSError, ValueError) as exc:
+            logger.warning(f"Artifact diff failed: {exc}")
+
+    # ── Save Baseline (--save-baseline flag) ───────────────
+    if getattr(args, 'save_baseline', None) and results.get('generation') and not args.dry_run:
+        try:
+            out_base = args.output_dir or os.path.join('artifacts', 'powerbi_projects', 'migrated')
+            pbip_dir = os.path.join(out_base, source_basename)
+            _run_save_baseline(pbip_dir, args.save_baseline)
+        except (ImportError, OSError, ValueError) as exc:
+            logger.warning(f"Save baseline failed: {exc}")
+
+    # ── Check Baseline (--check-baseline flag) ─────────────
+    if getattr(args, 'check_baseline', None) and results.get('generation') and not args.dry_run:
+        try:
+            out_base = args.output_dir or os.path.join('artifacts', 'powerbi_projects', 'migrated')
+            pbip_dir = os.path.join(out_base, source_basename)
+            passed = _run_check_baseline(pbip_dir, args.check_baseline, out_base)
+            if not passed:
+                results['baseline_failed'] = True
+        except (ImportError, OSError, ValueError) as exc:
+            logger.warning(f"Check baseline failed: {exc}")
 
 
 def _run_deploy_to_pbi_service(args, source_basename):
