@@ -1,0 +1,103 @@
+{
+  "tables": [
+    {
+      "tableau_datasource": "federated.sales",
+      "tableau_table": "Orders",
+      "pbi_table": "Orders"
+    },
+    {
+      "tableau_datasource": "federated.sales",
+      "tableau_table": "Regions",
+      "pbi_table": "Regions"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Calendar",
+      "pbi_table": "Calendar"
+    }
+  ],
+  "calculations": [
+    {
+      "tableau_calculation": "[CustomerEmail] = USERNAME()",
+      "pbi_table": "Orders",
+      "pbi_object": "Is Current User",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "ISMEMBEROF(\"Managers\") OR ISMEMBEROF(\"Executives\")",
+      "pbi_table": "Orders",
+      "pbi_object": "Manager Access",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "[RegionManager] = FULLNAME()",
+      "pbi_table": "Orders",
+      "pbi_object": "Region Match",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM([Sales])",
+      "pbi_table": "Orders",
+      "pbi_object": "Total Sales",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM([Profit]) / SUM([Sales])",
+      "pbi_table": "Orders",
+      "pbi_object": "Profit Ratio",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Total Sales Formatted",
+      "pbi_table": "Orders",
+      "pbi_object": "Total Sales Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Profit Ratio Formatted",
+      "pbi_table": "Orders",
+      "pbi_object": "Profit Ratio Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Year To Date",
+      "pbi_table": "Calendar",
+      "pbi_object": "Year To Date",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Previous Year",
+      "pbi_table": "Calendar",
+      "pbi_object": "Previous Year",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Year Over Year %",
+      "pbi_table": "Calendar",
+      "pbi_object": "Year Over Year %",
+      "pbi_type": "measure"
+    }
+  ],
+  "relationships": [
+    {
+      "from": "Orders[OrderDate]",
+      "to": "Calendar[Date]",
+      "cardinality": "bothDirections"
+    },
+    {
+      "from": "Orders[Region]",
+      "to": "Regions[RegionName]",
+      "cardinality": "bothDirections"
+    }
+  ],
+  "worksheets": [
+    {
+      "tableau_worksheet": "Sales Overview",
+      "pbi_page": "Sales Overview"
+    },
+    {
+      "tableau_worksheet": "Profit Analysis",
+      "pbi_page": "Profit Analysis"
+    }
+  ]
+}

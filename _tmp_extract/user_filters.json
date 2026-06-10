@@ -1,0 +1,68 @@
+[
+  {
+    "type": "calculated_security",
+    "name": "User Access",
+    "raw_name": "Calculation_4330844423310061569",
+    "datasource": "EDH_OBSERVATION_UC80 (2)",
+    "formula": "LEN(USERNAME())<=6 \r\nOR USERNAME()=\"PP0F98CL\" \r\nOR USERNAME()=\"JD46C91L\"\r\nOR USERNAME()=\"AS3F7A7L\"\r\nOR USERNAME()=\"CJ4B116L\"\r\nOR USERNAME()=\"LT4312AL\"\r\n\r\n\r\n// Equipe visupilot migration PBI: \r\n\r\nOR USERNAME()= 'CE1659FL'\r\nOR USERNAME()= 'AH4D9B9L'\r\nOR USERNAME()= 'NG0B3B1L'\r\nOR USERNAME()= 'LB4F812L'\r\nOR USERNAME()= 'AB15559L'\r\nOR USERNAME()= 'CT32EDFL'\r\nOR USERNAME()= 'SA0E0F7L'\r\nOR USERNAME()= 'LT4312AL'\r\n\r\n\r\nAND USERNAME()!= \"Tous les utilisateurs\"",
+    "functions_used": [
+      "USERNAME"
+    ],
+    "ismemberof_groups": []
+  },
+  {
+    "type": "calculated_security",
+    "name": "User Access",
+    "raw_name": "Calculation_4330844423325691907",
+    "datasource": "EDH_PROGRAMMES_SURVEILLANCES_UC80 (2)",
+    "formula": "LEN(USERNAME())<=6 \r\nOR USERNAME()=\"PP0F98CL\" \r\nOR USERNAME()=\"JD46C91L\"\r\nOR USERNAME()=\"AS3F7A7L\"\r\nOR USERNAME()=\"CJ4B116L\"\r\nOR USERNAME()=\"LT4312AL\"\r\n\r\n\r\n// Equipe visupilot migration PBI: \r\n\r\nOR USERNAME()= 'CE1659FL'\r\nOR USERNAME()= 'AH4D9B9L'\r\nOR USERNAME()= 'NG0B3B1L'\r\nOR USERNAME()= 'LB4F812L'\r\nOR USERNAME()= 'AB15559L'\r\nOR USERNAME()= 'CT32EDFL'\r\nOR USERNAME()= 'SA0E0F7L'\r\nOR USERNAME()= 'LT4312AL'\r\n\r\n\r\nAND USERNAME()!= \"Tous les utilisateurs\"",
+    "functions_used": [
+      "USERNAME"
+    ],
+    "ismemberof_groups": []
+  },
+  {
+    "type": "calculated_security",
+    "name": "User Access",
+    "raw_name": "Calculation_4330844423325761540",
+    "datasource": "EDH_UTILISATION_CATALOGUE_NATIONAL_D_UC80 (2)",
+    "formula": "LEN(USERNAME())<=6 \r\nOR USERNAME()=\"PP0F98CL\" \r\nOR USERNAME()=\"JD46C91L\"\r\nOR USERNAME()=\"AS3F7A7L\"\r\nOR USERNAME()=\"CJ4B116L\"\r\nOR USERNAME()=\"LT4312AL\"\r\n\r\n\r\n// Equipe visupilot migration PBI: \r\n\r\nOR USERNAME()= 'CE1659FL'\r\nOR USERNAME()= 'AH4D9B9L'\r\nOR USERNAME()= 'NG0B3B1L'\r\nOR USERNAME()= 'LB4F812L'\r\nOR USERNAME()= 'AB15559L'\r\nOR USERNAME()= 'CT32EDFL'\r\nOR USERNAME()= 'SA0E0F7L'\r\nOR USERNAME()= 'LT4312AL'\r\n\r\n\r\nAND USERNAME()!= \"Tous les utilisateurs\"",
+    "functions_used": [
+      "USERNAME"
+    ],
+    "ismemberof_groups": []
+  },
+  {
+    "type": "calculated_security",
+    "name": "User Access",
+    "raw_name": "Calculation_4330844423325806597",
+    "datasource": "EDH_UTILISATION_CATALOGUE_NATIONAL_UC80 (2)",
+    "formula": "LEN(USERNAME())<=6 \r\nOR USERNAME()=\"PP0F98CL\" \r\nOR USERNAME()=\"JD46C91L\"\r\nOR USERNAME()=\"AS3F7A7L\"\r\nOR USERNAME()=\"CJ4B116L\"\r\nOR USERNAME()=\"LT4312AL\"\r\n\r\n\r\n// Equipe visupilot migration PBI: \r\n\r\nOR USERNAME()= 'CE1659FL'\r\nOR USERNAME()= 'AH4D9B9L'\r\nOR USERNAME()= 'NG0B3B1L'\r\nOR USERNAME()= 'LB4F812L'\r\nOR USERNAME()= 'AB15559L'\r\nOR USERNAME()= 'CT32EDFL'\r\nOR USERNAME()= 'SA0E0F7L'\r\nOR USERNAME()= 'LT4312AL'\r\n\r\n\r\nAND USERNAME()!= \"Tous les utilisateurs\"",
+    "functions_used": [
+      "USERNAME"
+    ],
+    "ismemberof_groups": []
+  },
+  {
+    "type": "calculated_security",
+    "name": "User Access",
+    "raw_name": "Calculation_4330844423325642754",
+    "datasource": "EDH_OBSERVABLES_UC80 (2)",
+    "formula": "LEN(USERNAME())<=6 \r\nOR USERNAME()=\"PP0F98CL\" \r\nOR USERNAME()=\"JD46C91L\"\r\nOR USERNAME()=\"AS3F7A7L\"\r\nOR USERNAME()=\"CJ4B116L\"\r\nOR USERNAME()=\"LT4312AL\"\r\n\r\n\r\n// Equipe visupilot migration PBI: \r\n\r\nOR USERNAME()= 'CE1659FL'\r\nOR USERNAME()= 'AH4D9B9L'\r\nOR USERNAME()= 'NG0B3B1L'\r\nOR USERNAME()= 'LB4F812L'\r\nOR USERNAME()= 'AB15559L'\r\nOR USERNAME()= 'CT32EDFL'\r\nOR USERNAME()= 'SA0E0F7L'\r\nOR USERNAME()= 'LT4312AL'\r\n\r\n\r\nAND USERNAME()!= \"Tous les utilisateurs\"",
+    "functions_used": [
+      "USERNAME"
+    ],
+    "ismemberof_groups": []
+  },
+  {
+    "type": "calculated_security",
+    "name": "User Access",
+    "raw_name": "Calculation_5687201956355026944",
+    "datasource": "EDH_UTILISATION_CATALOGUE_NATIONAL_HISTORIQUE_UC80",
+    "formula": "LEN(USERNAME())<=6 \nOR USERNAME()=\"PP0F98CL\" \nOR USERNAME()=\"JD46C91L\"\nOR USERNAME()=\"AS3F7A7L\"\nOR USERNAME()=\"CJ4B116L\"\nOR USERNAME()=\"LT4312AL\"\n\n\n// Equipe visupilot migration PBI: \n\nOR USERNAME()= 'CE1659FL'\nOR USERNAME()= 'AH4D9B9L'\nOR USERNAME()= 'NG0B3B1L'\nOR USERNAME()= 'LB4F812L'\nOR USERNAME()= 'AB15559L'\nOR USERNAME()= 'CT32EDFL'\nOR USERNAME()= 'SA0E0F7L'\nOR USERNAME()= 'LT4312AL'\n\n\nAND USERNAME()!= \"Tous les utilisateurs\"",
+    "functions_used": [
+      "USERNAME"
+    ],
+    "ismemberof_groups": []
+  }
+]

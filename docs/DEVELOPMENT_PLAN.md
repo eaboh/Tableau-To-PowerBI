@@ -1,11 +1,11 @@
 # Development Plan — Tableau to Power BI Migration Tool
 
-**Version:** v38.2.0  
-**Date:** 2026-05-26  
-**Current state:** v38.2.0 shipped — **8,738 tests** across 196 test files (+conftest.py), 0 failures. 133 DAX conversions, 190 visual type mappings, 49 connectors, 23 extracted object types.  
-**Previous baseline:** v3.5.0 — 887 → v4.0.0 — 1,387 → v5.0.0 — 1,543 → v5.1.0 — 1,595 → v5.5.0 — 1,777 → v6.0.0 — 1,889 → v6.1.0 — 1,997 → v7.0.0 — 2,057 → Sprint 21 — 2,066 → v8.0.0 — 2,275 → Sprint 27 — 2,542 → Sprint 28 — 2,616 → Sprint 29 — 2,666 → v9.0.0 — 3,196 → v10.0.0 — 3,342 → v11.0.0 — 3,459 → v12.0.0 — 3,729 → v13.0.0 — 3,847 → v14.0.0 — 3,925 → v15.0.0 — 3,988 → v15.0.1 — 3,996 → v16.0.0 — 4,131 → v17.0.0 — 4,219 → Sprint 63 — 4,762 → Sprint 64 — 4,813 → v19.0.0 — 4,923 → v21.0.0 — 5,170 → v22.0.0 — 5,683 → v23.0.0 — 5,782 → v24.0.0 — 5,927 → v25.0.0 — 6,192 → Sprint 97 — 6,251 → Sprint 98 — 6,263 → v26.0.0 — 6,400 → v27.0.0 — 6,454 → v27.1.0 — 6,532 → v28.0.0 — 6,714 → v28.1.0 — 6,831 → v28.1.1 — 6,831 → v28.2.0 — 6,988 → v28.3.0 — 7,072 → v28.4.0 — 7,072 → v28.5.0 — 7,067 → v28.5.7 — 7,099 → v28.5.8 — 7,099 → **v38.2.0 — 8,738**
+**Version:** v38.4.0  
+**Date:** 2026-06-10  
+**Current state:** v38.4.0 shipped — **8,746 tests** in latest full run, 0 failures. Includes v38.3 empty-visual recovery and v38.4 pixel-fidelity hardening (font cascade, visual background/border, Tableau line-break sentinel cleanup).  
+**Previous baseline:** v3.5.0 — 887 → v4.0.0 — 1,387 → v5.0.0 — 1,543 → v5.1.0 — 1,595 → v5.5.0 — 1,777 → v6.0.0 — 1,889 → v6.1.0 — 1,997 → v7.0.0 — 2,057 → Sprint 21 — 2,066 → v8.0.0 — 2,275 → Sprint 27 — 2,542 → Sprint 28 — 2,616 → Sprint 29 — 2,666 → v9.0.0 — 3,196 → v10.0.0 — 3,342 → v11.0.0 — 3,459 → v12.0.0 — 3,729 → v13.0.0 — 3,847 → v14.0.0 — 3,925 → v15.0.0 — 3,988 → v15.0.1 — 3,996 → v16.0.0 — 4,131 → v17.0.0 — 4,219 → Sprint 63 — 4,762 → Sprint 64 — 4,813 → v19.0.0 — 4,923 → v21.0.0 — 5,170 → v22.0.0 — 5,683 → v23.0.0 — 5,782 → v24.0.0 — 5,927 → v25.0.0 — 6,192 → Sprint 97 — 6,251 → Sprint 98 — 6,263 → v26.0.0 — 6,400 → v27.0.0 — 6,454 → v27.1.0 — 6,532 → v28.0.0 — 6,714 → v28.1.0 — 6,831 → v28.1.1 — 6,831 → v28.2.0 — 6,988 → v28.3.0 — 7,072 → v28.4.0 — 7,072 → v28.5.0 — 7,067 → v28.5.7 — 7,099 → v28.5.8 — 7,099 → v38.2.0 — 8,738 → v38.3.0 — 8,746 → **v38.4.0 — 8,746**
 
-**Next roadmap:** See [ROADMAP.md](ROADMAP.md) for v29.0.0 (Sprints 112–117, 120–127) — Migration Completeness & Enterprise Operations
+**Next roadmap:** See [ROADMAP.md](ROADMAP.md) for v38.5.0 planned work (floating overlay fidelity + real-world QA hardening).
 
 ---
 
@@ -95,14 +95,15 @@ See [ROADMAP.md](ROADMAP.md) for full sprint details (Sprints 108–111).
 
 ---
 
-## 12-Agent Architecture
+## 14-Agent Architecture
 
-This project uses a **12-agent specialization model** with scoped domain knowledge and file ownership. See [AGENTS.md](AGENTS.md) for the full architecture diagram, data flow, and handoff protocol.
+This project uses a **14-agent specialization model** with scoped domain knowledge and file ownership. See [AGENTS.md](AGENTS.md) for the full architecture diagram, data flow, and handoff protocol.
 
 | Agent | Scope | Key Files |
 |-------|-------|-----------|
 | **@orchestrator** | Pipeline, CLI, batch, wizard | `migrate.py`, `import_to_powerbi.py`, `wizard.py`, `progress.py`, `api_server.py` |
-| **@extractor** | Tableau XML parsing, Hyper, Prep, Server API | `tableau_export/*.py` |
+| **@extractor** | Tableau XML parsing, Hyper, Prep flow parsing | `tableau_export/*.py` |
+| **@tableau** | Tableau Server/Cloud REST API, topology, Prep flow analysis | `server_client.py`, `prep_flow_analyzer.py` |
 | **@dax** | DAX formula correctness, conversion (180+), optimization | `dax_converter.py`, `dax_optimizer.py` + DAX blocks in `tmdl_generator.py` |
 | **@wiring** | DAX↔M bridge, classification, M generation (43 transforms) | `m_query_builder.py`, `calc_column_utils.py` + M functions in `tmdl_generator.py` |
 | **@semantic** | TMDL model, relationships, Calendar, RLS, hierarchies, parameters | `tmdl_generator.py` (structural), `fabric_semantic_model_generator.py` |
@@ -112,7 +113,8 @@ This project uses a **12-agent specialization model** with scoped domain knowled
 | **@assessor** | Readiness scoring, strategy, diff reports, prep lineage | `assessment.py`, `server_assessment.py`, `strategy_advisor.py`, `schema_drift.py` |
 | **@merger** | Shared semantic model, fingerprint matching | `shared_model.py`, `merge_config.py` |
 | **@deployer** | Fabric/PBI deployment, auth, gateway | `deploy/*.py`, `gateway_config.py`, `telemetry.py` |
-| **@tester** | Tests (7,099), coverage, regression | `tests/*.py` |
+| **@reviewer** | Artifact quality review and preceptorship loop | `preceptor.py` |
+| **@tester** | Tests (8,746 latest full run), coverage, regression | `tests/*.py` |
 
 **Rules:** One owner per file. Read access is universal. @tester is cross-cutting (reads all source, writes only `tests/`). @dax, @wiring, @semantic co-own `tmdl_generator.py` functions.
 

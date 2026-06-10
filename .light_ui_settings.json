@@ -1,0 +1,8 @@
+{
+  "source": "C:/Tableau to Power BI/Tableau",
+  "output": "C:\\Tableau to Power BI\\PowerBI",
+  "preset": "Assess",
+  "verbose": true,
+  "notify": true,
+  "auto_open_report": true
+}

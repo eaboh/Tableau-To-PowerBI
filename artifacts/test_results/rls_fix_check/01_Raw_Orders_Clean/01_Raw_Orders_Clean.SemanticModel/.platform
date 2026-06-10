@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "01_Raw_Orders_Clean"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "4f898d27-f5d3-4938-9edd-31b768dfe55c"
+  }
+}

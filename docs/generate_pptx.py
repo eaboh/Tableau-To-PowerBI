@@ -154,10 +154,10 @@ def slide_title(prs):
 
     # Stats bar
     stats = [
-        ("8,668", "Tests Passed"),
+        ("8,746", "Tests Passed"),
         ("133+", "DAX Conversions"),
         ("190", "Visual Types"),
-        ("49", "Data Connectors"),
+        ("79", "Data Connectors"),
         ("100%", "Fidelity (27/27 WB)"),
     ]
     bar_left = Inches(1.0)

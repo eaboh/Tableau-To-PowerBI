@@ -1,0 +1,44 @@
+[
+  {
+    "name": "EDH_OBSERVATION_UC80 (2)",
+    "server": "IPE",
+    "path": "/t/IPE/datasources",
+    "id": "EDH_OBSERVATION_UC80",
+    "derived_from": "https://si-mytableau.edf.fr/t/IPE/datasources/EDH_OBSERVATION_UC80?rev=40.0"
+  },
+  {
+    "name": "EDH_PROGRAMMES_SURVEILLANCES_UC80 (2)",
+    "server": "IPE",
+    "path": "/t/IPE/datasources",
+    "id": "EDH_PROGRAMMES_SURVEILLANCES_UC80",
+    "derived_from": "https://si-mytableau.edf.fr/t/IPE/datasources/EDH_PROGRAMMES_SURVEILLANCES_UC80?rev=42.1"
+  },
+  {
+    "name": "EDH_UTILISATION_CATALOGUE_NATIONAL_D_UC80 (2)",
+    "server": "IPE",
+    "path": "/t/IPE/datasources",
+    "id": "EDH_UTILISATION_CATALOGUE_NATIONAL_D_UC80_17430993400250",
+    "derived_from": "https://si-mytableau.edf.fr/t/IPE/datasources/EDH_UTILISATION_CATALOGUE_NATIONAL_D_UC80_17430993400250?rev=40.2"
+  },
+  {
+    "name": "EDH_UTILISATION_CATALOGUE_NATIONAL_UC80 (2)",
+    "server": "IPE",
+    "path": "/t/IPE/datasources",
+    "id": "EDH_UTILISATION_CATALOGUE_NATIONAL_UC80",
+    "derived_from": "https://si-mytableau.edf.fr/t/IPE/datasources/EDH_UTILISATION_CATALOGUE_NATIONAL_UC80?rev=37.7"
+  },
+  {
+    "name": "EDH_OBSERVABLES_UC80 (2)",
+    "server": "IPE",
+    "path": "/t/IPE/datasources",
+    "id": "EDH_OBSERVABLES_UC80",
+    "derived_from": "https://si-mytableau.edf.fr/t/IPE/datasources/EDH_OBSERVABLES_UC80?rev=40.8"
+  },
+  {
+    "name": "EDH_UTILISATION_CATALOGUE_NATIONAL_HISTORIQUE_UC80",
+    "server": "IPE",
+    "path": "/t/IPE/datasources",
+    "id": "EDH_UTILISATION_CATALOGUE_NATIONAL_HISTORIQUE_UC80_17740180984560",
+    "derived_from": "https://si-mytableau.edf.fr/t/IPE/datasources/EDH_UTILISATION_CATALOGUE_NATIONAL_HISTORIQUE_UC80_17740180984560?rev=6.6"
+  }
+]

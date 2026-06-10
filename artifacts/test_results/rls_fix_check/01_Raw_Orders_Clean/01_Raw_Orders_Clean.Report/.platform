@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "01_Raw_Orders_Clean"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "0d2bc2c2-ddaf-4b8a-8456-8aa231a3e0dc"
+  }
+}

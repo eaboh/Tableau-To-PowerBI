@@ -1,0 +1,5149 @@
+[
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_4330844423325691907:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_4330844423325691907:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_4330844423325691907:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_4330844423325691907:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_4330844423325691907:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_4330844423325691907:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[:Measure Names]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_4929823121813565447:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_5810136167835385857:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.1ewvg4j1vjfzqc1g6duw70zmoz3s].[none:Calculation_9203457748406112291:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.1ewvg4j1vjfzqc1g6duw70zmoz3s].[none:Calculation_9203457748408811557:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.1ewvg4j1vjfzqc1g6duw70zmoz3s].[none:FLT Domaine PAR (copie)_9203457748409872422:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[Action (BOOL,PS_IS_PFI_HORS_AAP,Ps Site Trigramme)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[Action (BOOL,Ps Site Trigramme)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[Action (PS_IS_PFI_HORS_AAP,Ps Site Trigramme)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[Action (Ps Site Trigramme)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_1250382253722157062:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_1250382253722415111:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_4151192960228986892:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:FLT AIP 2 (copie)_7461831322297589774:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:FLT AIP [Indicateur nationaux]]]][detail]] (copie)_934778459520798722:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_4929823121804705798:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_8437071710690398219:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Surveillant:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Intervenants Charge De Surveillance:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Evaluation (copie) (copie)_1947454998598520833:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Surveillant:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Theme:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Intervenants Charge De Surveillance:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate (copie)_8437071710689431562:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Surveillant:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Intervenants Charge De Surveillance:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_9203457748058615815:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Surveillant:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Intervenants Charge De Surveillance:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Surveillant:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Intervenants Charge De Surveillance:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Surveillant:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0q7mpjx1xetx7w16fcrd10rhnyp3].[Action (Domaines (hors eFeP))]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0q7mpjx1xetx7w16fcrd10rhnyp3].[Action (Domaines (hors eFeP))]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0q7mpjx1xetx7w16fcrd10rhnyp3].[Action (Sous Domaine (hors eFeP))]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_6332272249650192393:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Intervenants Charge De Surveillance:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_6332272249650192393:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Surveillant:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Surveillant:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_9149273816559460358:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Evaluation (copie)_1947454998596571136:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Evaluation:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Surveillant:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Traitement Non Conformite Statut:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_9149273816559460358:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Evaluation (copie)_1947454998596571136:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Evaluation:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Surveillant:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Traitement Non Conformite Statut:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Intervenants Charge De Surveillance:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[:Measure Names]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Evaluation:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Intervenants Charge De Surveillance:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:AIP:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Evaluation:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Surveillant:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_2467057857140817934:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Surveillant:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[Action (Ps Site Trigramme)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_5810136167835385857:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_9203457747772366854:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0ysthz41a62tzq12v2vgq0hbrwyy].[none:Calculation_9203457748132532246:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0ysthz41a62tzq12v2vgq0hbrwyy].[none:Calculation_9203457748132532246:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_5181391402055880731:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_5810136167835385857:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Intervenants Charge De Surveillance:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_5810136167835385857:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Intervenants Charge De Surveillance:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[Action (AIP,Evaluation (copie),Evaluation)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[Action (Evaluation,Ps Service)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[Action (Evaluation,Ps Service,Traitement Non Conformite Statut)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[Action (Evaluation,Traitement Non Conformite Statut)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[Action (FLT Plan Action (ENS),Service ou Projet)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.1ewvg4j1vjfzqc1g6duw70zmoz3s].[Action (Domaines (hors eFeP),Nom de l'observable,Sous Domaine (hors eFeP))]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Traitement Non Conformite Statut:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_1683501873635172353:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Evaluation:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_1683501873635172353:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Evaluation:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_1683501873635172353:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_2840645492729888769:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Evaluation:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[Action (AT)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_1683501873635172353:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Evaluation:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[Action (AT)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[Action (IPE)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_1683501873635172353:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Evaluation:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_1683501873635172353:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Evaluation:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Theme:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Theme:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_1683501873635172353:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Evaluation:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[:Measure Names]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_1683501873635172353:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_1683501873635172353:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Evaluation:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_1683501873635172353:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Evaluation:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_1683501873635172353:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_8437071710682566665:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_8437071710682566665:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[Action (AT)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[Action (IPE)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_1683501873635172353:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_8437071710682566665:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_8437071710682566665:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_5810136167835385857:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_5810136167835385857:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.1ewvg4j1vjfzqc1g6duw70zmoz3s].[Action (Domaines (hors eFeP),Nom de l'observable,Sous Domaine (hors eFeP))]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.1ewvg4j1vjfzqc1g6duw70zmoz3s].[none:Calculation_9203457748406112291:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.1ewvg4j1vjfzqc1g6duw70zmoz3s].[none:Calculation_9203457748408811557:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.1ewvg4j1vjfzqc1g6duw70zmoz3s].[none:FLT Domaine PAR (copie)_9203457748409872422:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0q7mpjx1xetx7w16fcrd10rhnyp3].[Action (Domaines (hors eFeP))]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0q7mpjx1xetx7w16fcrd10rhnyp3].[Action (Sous Domaine (hors eFeP))]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0q7mpjx1xetx7w16fcrd10rhnyp3].[none:Calculation_5181391402065801253:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[Action (BOOL,PS_IS_PFI_HORS_AAP,Ps Site Trigramme)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[Action (BOOL,Ps Site Trigramme)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[Action (PS_IS_PFI_HORS_AAP,Ps Site Trigramme)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[Action (Ps Site Trigramme)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_1683501873635172353:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Evaluation:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:FLT AIP 2 (copie)_7461831322297589774:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:FLT AIP [Indicateur nationaux]]]][detail]] (copie)_934778459520798722:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_1683501873635172353:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[Action (AIP,Evaluation (copie),Evaluation)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_4929823121804705798:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_5181391402048401420:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_8437071710690398219:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_9149273816559460358:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0ysthz41a62tzq12v2vgq0hbrwyy].[usr:Calculation_1146729079403888647:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[Action (D_10 - Ps à finaliser BOOL)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[Action (D_9 - Ps repris en écriture BOOL)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[Action (FLT Plan Action (ENS),Service ou Projet)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[Action (Ps Etat,Ps Projet)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_4929823121813565447:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_5810136167835385857:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_1683501873635172353:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_2840645492729888769:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_2840645492729888769:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:AIP:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_1683501873635172353:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Evaluation:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:AIP:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_1683501873635172353:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Calculation_7501308196630573064:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Evaluation:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Inadequate:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.1epmaoy1cn1iq51b5ypvq10n9jq0].[none:Calculation_3377488666452111367:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.1epmaoy1cn1iq51b5ypvq10n9jq0].[none:Evaluation:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.1epmaoy1cn1iq51b5ypvq10n9jq0].[none:Calculation_3377488666452111367:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.1epmaoy1cn1iq51b5ypvq10n9jq0].[none:Evaluation:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.1epmaoy1cn1iq51b5ypvq10n9jq0].[Action (Domaines (hors eFeP),Evaluation)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.1epmaoy1cn1iq51b5ypvq10n9jq0].[none:Calculation_3377488666452111367:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.1epmaoy1cn1iq51b5ypvq10n9jq0].[none:Evaluation:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.1epmaoy1cn1iq51b5ypvq10n9jq0].[Action (Domaines (hors eFeP),Evaluation)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.1epmaoy1cn1iq51b5ypvq10n9jq0].[none:Calculation_3377488666452111367:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.1epmaoy1cn1iq51b5ypvq10n9jq0].[none:Evaluation:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.1epmaoy1cn1iq51b5ypvq10n9jq0].[Action (Domaines (hors eFeP),Evaluation)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.1epmaoy1cn1iq51b5ypvq10n9jq0].[none:Calculation_3377488666452111367:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.1ewvg4j1vjfzqc1g6duw70zmoz3s].[none:Calculation_9203457748406112291:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[none:Surveillant:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.1ewvg4j1vjfzqc1g6duw70zmoz3s].[Action (Domaines (hors eFeP),Evaluation)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.1ewvg4j1vjfzqc1g6duw70zmoz3s].[Action (Evaluation)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.1ewvg4j1vjfzqc1g6duw70zmoz3s].[none:Calculation_9203457748406112291:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.1ewvg4j1vjfzqc1g6duw70zmoz3s].[none:Evaluation:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.1ewvg4j1vjfzqc1g6duw70zmoz3s].[none:Calculation_9203457748406112291:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.1ewvg4j1vjfzqc1g6duw70zmoz3s].[none:Calculation_9203457748408811557:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Numéro d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[Action (Ps Site Trigramme)]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_1373597908919267330:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_5810136167835385857:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "filter_mode": "categorical"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  },
+  {
+    "field": "[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]",
+    "type": "",
+    "values": [],
+    "exclude": false,
+    "is_context": true,
+    "filter_mode": "context"
+  }
+]

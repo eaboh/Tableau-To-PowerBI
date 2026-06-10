@@ -29,7 +29,10 @@ The migration engine has reached **full-platform maturity** — single-workbook,
 | **v36.0.0** | Tableau Server Enterprise Migration | 139–145 | ✅ Shipped |
 | **v37.0.0** | Migration Completeness & Analytics Parity | 120–124 | ✅ Shipped |
 | **v37.1.0** | Bulk Assessment (`--bulk-assess`) | — | ✅ Shipped |
-| **v38.2.0** | Report Packaging & Developer Experience | 175–179 | Shipped |
+| **v38.2.0** | Report Packaging & Developer Experience | 175–179 | ✅ Shipped |
+| **v38.3.0** | Empty-Visual Recovery (UC80 patch) | — | ✅ Shipped |
+| **v38.4.0** | Pixel-Perfect Text & Format Fidelity | 200–203 | ✅ Shipped |
+| **v38.5.0** | Floating-Overlay Fidelity & Real-World QA | 204–208 | Planned (Next) |
 | **v39.0.0** | Data Blending & Advanced Connectivity | 180–184 | Planned |
 | **v40.0.0** | VS Code Extension & Interactive Tooling | 185–189 | Planned |
 | **v41.0.0** | Real-Time, Streaming & Paginated Reports | 190–194 | Planned |
@@ -2021,6 +2024,203 @@ Already implemented in `tableau_export/server_client.py`:
 
 ---
 
+## v38.3.0 — Empty-Visual Recovery (Patch — Shipped)
+
+**Theme:** Real-world QA of UC80 (the EDF ARGOS dashboard) surfaced 82 worksheet visuals that rendered as empty cards in Power BI Desktop after migration. v38.3.0 is a focused patch release that closes the gap between extraction and visual generation for these worksheets.
+
+**Shipped:**
+
+- Reworked the `worksheetReference` → visual container path so that worksheets with only filter/parameter shelves (no encoded fields) still emit a usable visual instead of an empty container.
+- Hardened the field-binding logic in `visual_generator.py` for shelves that mix calculated columns, parameters, and measure references — these used to drop silently.
+- Added unit coverage for the empty-visual regression in `tests/test_pbip_generator_coverage.py` and `tests/test_v51_features.py`.
+- Re-ran the full sample-workbook batch (`artifacts/tableau_samples_output/`) to lock in the fix.
+
+**Release commit:** `6298cdb1` — *Release v38.3.0: Fix 82 empty visuals in UC80 migration*.
+
+No new CLI flags. No schema changes. This patch is fully backward-compatible with v38.2.0 outputs.
+
+---
+
+## v38.4.0 — Pixel-Perfect Text & Format Fidelity (Sprints 200–203 — Shipped)
+
+**Theme:** Real-world dashboards (EDF UC80, internal "TDB Maintenance") exposed text-rendering and per-visual chrome (background, border) gaps that were invisible on synthetic samples but jarring on production-grade dashboards. v38.4.0 closes the **text run, font cascade, and visual chrome** loop end-to-end.
+
+**Motivation:** Two distinct classes of issue were observed on UC80:
+1. **Font cascade incomplete** — Tableau per-run font-family/size attributes (`fontname`, `fontsize`) on textboxes, annotations, and tooltips were dropped on the floor when the generator hit hard-coded `"Segoe UI" / 12pt` defaults.
+2. **Format zones ignored** — Tableau `<format>` blocks defining per-zone `background-color`, `border-color`, `border-width` on individual worksheets/textboxes were extracted but never applied to the corresponding PBI visual container.
+3. **Stray `Æ` glyphs** — Tableau Desktop emits a hidden `<run>Æ&#10;</run>` (sometimes with `fontalignment='1'`) as an internal soft line-break sentinel. Invisible in Tableau; rendered literally as `Æ` in PBI and browsers.
+
+---
+
+### Sprint 200 — Annotation & Textbox Font Cascade (@extractor, @generator) ✅ SHIPPED
+
+| # | Item | Owner | File(s) | Details |
+|---|------|-------|---------|---------|
+| 200.1 | **Annotation font-family extraction** | @extractor | `extract_tableau_data.py` | Capture `fontname`/`fontsize`/`fontcolor`/`bold`/`italic` per run on `<annotation>` and `<tooltip>` elements. Persist into `annotations.json`. |
+| 200.2 | **Annotation textbox font-family wiring** | @generator | `pbip_generator.py` (lines ~1170–1191) | Apply extracted font properties to the generated annotation/tooltip textbox runs. |
+| 200.3 | **Multi-paragraph fidelity** | @generator | `pbip_generator.py::_parse_rich_text_runs` (~line 1035) | Preserve hard line breaks (`\n`) inside text runs so multi-line headers (e.g. *"Tableau de bord"* / *"ARGOS"*) keep two paragraphs in PBI. |
+
+---
+
+### Sprint 201 — Data-Driven Font Overrides on Visuals (@generator) ✅ SHIPPED
+
+| # | Item | Owner | File(s) | Details |
+|---|------|-------|---------|---------|
+| 201.1 | **`_apply_tableau_font_overrides` helper** | @generator | `visual_generator.py` | Reads per-visual font metadata from extraction (`title.format`, `labels.format`, `axis.format`) and patches the corresponding PBI `formatProperties` instead of relying on hard-coded defaults. |
+| 201.2 | **Invocation at end of `_apply_visual_decorations`** | @generator | `visual_generator.py` | Ensures every visual container goes through the font-override pass before serialization. |
+| 201.3 | **Charts + tables + slicers covered** | @generator | `visual_generator.py` | Verified on `clusteredBarChart`, `tableEx`, `slicer`, `textbox`. |
+
+---
+
+### Sprint 202 — Per-Visual Background & Border (@generator) ✅ SHIPPED
+
+| # | Item | Owner | File(s) | Details |
+|---|------|-------|---------|---------|
+| 202.1 | **`_apply_tableau_background_border` helper** | @generator | `visual_generator.py` | Reads Tableau zone `<format attr='background-color'>` / `<format attr='border-*'>` and emits PBI `visualContainerObjects.background` + `border` blocks. |
+| 202.2 | **Border style normalization** | @generator | `visual_generator.py` | Tableau `none`/`solid`/`dotted`/`dashed` → PBI `lineStyle`. Width clamped to PBI valid range. |
+| 202.3 | **Color fallback chain** | @generator | `visual_generator.py` | zone format → dashboard theme → default white. Hex normalized to `#RRGGBB`. |
+
+---
+
+### Sprint 203 — Tableau Line-Break Sentinel (`Æ`) Fix (@extractor) ✅ SHIPPED
+
+| # | Item | Owner | File(s) | Details |
+|---|------|-------|---------|---------|
+| 203.1 | **Centralized helper** | @extractor | `extract_tableau_data.py` (~line 100) | New `_clean_tableau_run_text(run_elem)` + `_TABLEAU_LB_SENTINEL_RE = r'^[\s]*[\u00c6\u00a0]+[\s]*$'`. `fontalignment` deliberately excluded from `_TABLEAU_RUN_STYLE_ATTRS` so unstyled sentinel runs are still recognized. |
+| 203.2 | **Three application sites** | @extractor | `extract_tableau_data.py` | Dashboard text zone runs (~line 1450), `extract_tooltips` runs (~line 1370), `extract_annotations` runs (~line 2120). Sentinel runs become empty values; embedded `\n` is preserved so paragraph breaks survive. |
+| 203.3 | **Regression suite** | @tester | `tests/test_pixel_perfect_fidelity.py` (new) | New `TestTableauLineBreakSentinel` class — 7 dedicated tests. Total pixel-perfect suite: **28 tests**, all green. |
+
+**Validation:** UC80 regeneration shows zero stray `Æ` textRuns; *"Tableau de bord"* and *"ARGOS"* render as two separate paragraphs as in Tableau.
+
+---
+
+### v38.4.0 Success Criteria — Met
+
+| Metric | Target | Result |
+|--------|--------|--------|
+| Stray `Æ` glyphs in regenerated UC80 | 0 | ✅ 0 |
+| Multi-paragraph headers preserved | 100% | ✅ verified |
+| Annotation font cascade | font-family + size + color | ✅ all three |
+| Per-visual chrome | background + border | ✅ both |
+| Pixel-perfect regression suite | ≥28 tests | ✅ 28/28 green |
+| Cross-suite tests | no regressions in 759 affected tests | ✅ all green |
+| Real-world re-migration | 6 UC80-class workbooks | ✅ 100% extraction |
+
+---
+
+## v38.5.0 — Floating-Overlay Fidelity & Real-World QA (Sprints 204–208 — Planned, Next)
+
+**Theme:** The v38.4 sizing audit confirmed that page dimensions, direct-zone visuals (textbox/image), and per-axis scaling are all faithful. One layout caveat remains: **floating worksheet zones overlaid on top of tiled chart zones** (e.g. legends pinned to a chart's corner) are currently flattened to a side-by-side layout by `_build_zone_layout_map`. v38.5 closes this loop, codifies the manual UC80 QA into an automated suite, and adds per-workbook golden fixtures to lock in the v38.4 wins.
+
+**Motivation:**
+- UC80's `N_1`/`N_X`/`N_4`/`N_7` chart groups all have a chart at `x=2083 w=95834` with a legend floating at `x≈85k–89k w≈8.7k` — Tableau renders the legend overlaid on the chart's right corner, but the current grid layout puts them side-by-side, shrinking the chart from `~1880px → 1240px`.
+- Pixel-perfect regression coverage is currently spot-tested. Without per-workbook golden fixtures, future refactors can silently regress font/border/sentinel behaviour.
+- Manual QA of UC80 caught two real bugs (empty visuals, `Æ` glyphs). We need to run that QA as an automated step.
+
+---
+
+### Sprint 204 — Floating Zone Overlay Fidelity (@generator, @extractor)
+
+**Goal:** When a Tableau zone has `is-floating='true'` AND its position rectangle overlaps a sibling tiled zone, place the corresponding PBI visual on top using absolute coordinates instead of routing it through the grid layout map.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 204.1 | **Floating-overlap detector** | @generator | `pbip_generator.py::_build_zone_layout_map` (~line 535) | Medium | Pre-pass that scans the zone hierarchy and flags any zone with `is_floating=True` whose rect intersects (≥30% overlap) with any sibling's rect. Flagged zones are excluded from grid subdivision and resolved via absolute proportional mapping into the parent's pixel space. |
+| 204.2 | **Absolute-coord fallback** | @generator | `pbip_generator.py::_layout_zone` | Medium | Use the existing floating-children branch (already at ~line 638) for overlap-flagged zones. Increment z-order so the overlay sits on top. |
+| 204.3 | **Legend-on-chart heuristic** | @generator | `visual_generator.py` | Low | When a small worksheet (≤ 15% of page area) named `*_Legende` / `*_Legend` is detected as overlapping a larger sibling worksheet, automatically apply transparent background so the chart shows through. |
+| 204.4 | **Extractor signal** | @extractor | `extract_tableau_data.py::extract_zone_hierarchy` | Low | Persist the `is-floating` flag explicitly on every zone in `zone_hierarchy` so the generator does not need to re-parse. Today it lives on the flat `objects` list. |
+| 204.5 | **UC80 validation** | @tester | `tests/test_pixel_perfect_fidelity.py::TestFloatingOverlap` (new) | Medium | 12+ tests: overlap detection (≥30% rule, no false positives), absolute placement of overlay, z-order correctness, legend transparency heuristic, UC80 `N_1`/`N_X`/`N_4`/`N_7` zone fixture round-trip. |
+
+**Success:** After regenerating UC80, the `N_1 - Observables non conformes` chart spans `~1860 px` (matching Tableau's `~96%` of canvas width) with `N_1 Legende` overlaid on its right edge at the correct ~170×63 size.
+
+---
+
+### Sprint 205 — Per-Workbook Pixel-Perfect Golden Fixtures (@tester)
+
+**Goal:** Capture a deterministic snapshot of font/border/background/sentinel-handling output for each real-world workbook so future regressions are caught at PR time.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 205.1 | **Golden fixture format** | @tester | `tests/golden/<workbook>/` (new) | Low | Minimal JSON per visual: `{ font_family, font_size, bg_color, border_color, border_width, text_runs: [...] }`. Excludes positions (covered by `TestPositionFidelity`) and IDs (non-deterministic). |
+| 205.2 | **Fixture generator script** | @tester | `scripts/generate_pixel_fixtures.py` (new) | Medium | Walks a `.pbip` output and extracts the comparable subset to `tests/golden/<name>/<page>/<visual>.json`. Idempotent — diffable on PR. |
+| 205.3 | **Golden test runner** | @tester | `tests/test_pixel_golden.py` (new) | Medium | Parametrized over 6 workbooks (UC80, NBA, Superstore, TDB Maintenance, World Indicators, Salesforce). Asserts regenerated output matches fixture. Fails with structured diff on mismatch. |
+| 205.4 | **CI integration** | @tester | `.github/workflows/ci.yml` | Low | Add a `pixel-golden` job that runs after the standard test matrix. Failure marks the PR as needing fixture update review. |
+| 205.5 | **Update workflow doc** | @tester | `tests/golden/README.md` (new) | Low | One-pager: how to update fixtures (`python scripts/generate_pixel_fixtures.py --workbook X --apply`), when it's legitimate vs a real regression. |
+
+**Success:** 6 workbook golden fixture sets in `tests/golden/`, CI fails on any uncoordinated change to font/border/background/text-run output.
+
+---
+
+### Sprint 206 — Mixed-Alignment & Vertical-Anchor Text Runs (@extractor, @generator)
+
+**Goal:** Tableau supports per-run horizontal alignment (`fontalignment`) and per-textbox vertical anchor (`vertical-align: top/center/bottom`). These are currently dropped — paragraphs default to left/top. v38.5 round-trips both.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 206.1 | **Capture `fontalignment` per run** | @extractor | `extract_tableau_data.py` | Low | Add `fontalignment` to the persisted run dict. Map `1`→`left`, `2`→`center`, `3`→`right`, `4`→`justify`. Keep `_clean_tableau_run_text` ignoring it for sentinel detection. |
+| 206.2 | **Per-paragraph alignment in PBI** | @generator | `pbip_generator.py::_parse_rich_text_runs` | Medium | Emit `paragraph.horizontalAlignment` instead of single textbox-wide alignment. Group runs with the same alignment into one paragraph object. |
+| 206.3 | **Vertical anchor extraction** | @extractor | `extract_tableau_data.py` | Low | Capture `<format attr='vertical-align'>` from zone format blocks. |
+| 206.4 | **Vertical anchor application** | @generator | `pbip_generator.py::_create_visual_textbox` | Low | Map to PBI `verticalAlignment` on the textbox object. |
+| 206.5 | **Tests** | @tester | `tests/test_pixel_perfect_fidelity.py::TestTextAlignment` (new) | Medium | 15+ tests: per-run horizontal alignment (4 modes), mixed-alignment paragraph grouping, vertical anchor (3 modes), round-trip on UC80 header textbox. |
+
+---
+
+### Sprint 207 — Real-World Migration QA Suite (@assessor, @tester)
+
+**Goal:** Codify the manual UC80 QA we ran (zero stray `Æ`, sizing audit, empty-visual count, font cascade verification) into an automated end-to-end report card.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 207.1 | **QA suite engine** | @assessor | `powerbi_import/qa_suite.py` (new) | High | After migration completes, run a battery of automated checks against the output: (1) no stray `Æ`/`Œ`/`nbsp` chars in any textRun value, (2) zero empty visuals (no encoded fields AND no static content), (3) all visuals have non-null `formatProperties`, (4) every dashboard zone matched to a PBI visual, (5) no orphan filters. Returns `QAReport` with per-check pass/fail + sample evidence. |
+| 207.2 | **HTML report card** | @assessor | `powerbi_import/qa_suite.py` | Medium | Generates `<output>/qa_report.html` using `html_template.py`. Pass/fail badges per check, "evidence" panel with sample failed visuals, side-by-side Tableau ↔ PBI counts (worksheets, visuals, measures, columns). |
+| 207.3 | **CLI integration** | @orchestrator | `migrate.py` | Low | `--qa` flag (already exists — wire it to call the new module instead of the current ad-hoc check). `--qa-strict` exits non-zero on any check failure for CI. |
+| 207.4 | **Integration with `--autoplay`** | @assessor | `powerbi_import/qa_suite.py`, `scripts/autoplay.py` | Low | Autoplay surface includes QA report card summary alongside existing 5 checks. |
+| 207.5 | **Tests** | @tester | `tests/test_qa_suite.py` (new) | Medium | 25+ tests: each check has a positive + negative fixture; HTML report structure; `--qa-strict` exit code wiring. |
+
+**Success:** `python migrate.py UC80.twbx --qa` reports 6/6 checks pass (zero `Æ`, zero empty visuals, full format coverage, all zones matched, no orphan filters, fidelity ≥97).
+
+---
+
+### Sprint 208 — v38.5.0 Release & Hardening (All Agents)
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 208.1 | **Version bump** | @orchestrator | `pyproject.toml`, `CHANGELOG.md` | Low | `38.4.0` → `38.5.0`. Document Sprints 200–208 (200–203 retroactive for v38.4). |
+| 208.2 | **Real-world re-migration baseline** | @tester | — | Medium | Re-run all 6 real-world workbooks; commit refreshed golden fixtures; assert 0 visual regressions vs the v38.4 golden baseline. |
+| 208.3 | **Docs refresh** | @orchestrator | `README.md`, `docs/FAQ.md` | Low | Add a "Pixel-perfect fidelity" section with the 4-axis coverage matrix (fonts, chrome, sentinel, overlay). Document `--qa` / `--qa-strict`. |
+| 208.4 | **PyPI publish** | @deployer | `.github/workflows/publish.yml` | Low | Tag-triggered. |
+| 208.5 | **Test baseline** | @tester | — | — | Target: **9,000+** tests (current 8,746 + 28 already shipped + ~70 from Sprints 204/205/206/207). |
+
+### v38.5.0 Success Criteria
+
+| Metric | Target | Owner |
+|--------|--------|-------|
+| Floating-overlay fidelity | Legends on charts render at correct ~170×63 px overlay (UC80 N_1/N_X/N_4/N_7) | @generator |
+| Pixel-perfect golden fixtures | 6 workbooks captured, CI gate green | @tester |
+| Mixed-alignment text runs | Per-paragraph horizontal alignment + vertical anchor on textboxes | @generator |
+| Real-world QA suite | 6 automated checks, HTML report card, CI-strict mode | @assessor |
+| Tests | **9,000+** | @tester |
+
+### v38.5.0 Agent Ownership Matrix
+
+| Agent | Sprint 204 | Sprint 205 | Sprint 206 | Sprint 207 | Sprint 208 |
+|-------|-----------|-----------|-----------|-----------|-----------|
+| **@extractor** | 204.4 | — | 206.1, 206.3 | — | — |
+| **@generator** | 204.1–204.3 | — | 206.2, 206.4 | — | — |
+| **@assessor** | — | — | — | 207.1, 207.2, 207.4 | — |
+| **@orchestrator** | — | — | — | 207.3 | 208.1, 208.3 |
+| **@deployer** | — | — | — | — | 208.4 |
+| **@tester** | 204.5 | 205.1–205.5 | 206.5 | 207.5 | 208.2, 208.5 |
+
+### v38.5.0 CLI Flags Summary
+
+| Flag | Description |
+|------|-------------|
+| `--qa` | Run the real-world QA suite after migration; emit `qa_report.html` |
+| `--qa-strict` | Exit non-zero on any QA check failure (for CI gating) |
+
+---
+
 ## v39.0.0 — Data Blending & Advanced Connectivity (Sprints 180–184)
 
 **Theme:** Close the remaining **data blending gap** (federated cross-datasource queries) and expand connector coverage to handle **real-world enterprise data landscapes** — SAP BW, IBM Db2, Teradata, and cloud-native warehouses with advanced features.
@@ -2449,6 +2649,8 @@ v42.0.0 — Ecosystem Maturity & GA Polish
 
 | Risk | Impact | Mitigation |
 |------|--------|-----------|
+| **Floating-overlap detection false positives** (v38.5) | Medium | 30% overlap threshold is tunable; opt-in via `--qa` first, default-on only after 2 release cycles of green real-world QA. |
+| **Golden fixture churn on intentional changes** (v38.5) | Low | `scripts/generate_pixel_fixtures.py --apply` is one command; PR reviewer guidance lives in `tests/golden/README.md`. |
 | VS Code extension TypeScript adds new tech stack | Medium | Keep extension thin — delegate all logic to Python subprocess. Extension is presentation layer only. |
 | Paginated reports (RDL) is complex XML format | High | Start with tablix/chart only. Complex report items (sub-reports, drill-through) deferred. |
 | Data blending complexity explosion | High | Limit to 5 blended datasources per worksheet. Circular blends emit error + migration note. |
@@ -2467,7 +2669,10 @@ v42.0.0 — Ecosystem Maturity & GA Polish
 | v28.5.8 | 7,099 | 63 | 118 | 125 | 13 | 14 |
 | v30.0.0 | 8,008 | 63 | 118 | 125 | 85 | 14 |
 | v37.1.0 | 8,518 | 63 | 145 | 125+ | 85 | 14 |
-| **v38.2.0** | **8,738** | 63 | 145 | 125+ | 85 | 14 |
+| v38.2.0 | 8,738 | 63 | 145 | 125+ | 85 | 14 |
+| v38.3.0 | 8,750 | 63 | 145 | 125+ | 85 | 14 |
+| **v38.4.0** | **8,778** | 63 | 145 | 125+ | 85 | 14 |
+| **v38.5.0** | **9,000+** | 63 | 145 | 125+ | 85 | 14 |
 | **v39.0.0** | **9,200+** | **75+** | 145 | 125+ | 85 | 14 |
 | **v40.0.0** | **9,500+** | 75+ | 145 | 125+ | 85 | 14 |
 | **v41.0.0** | **9,800+** | 75+ | 145+ | 125+ | 85 | 14 |

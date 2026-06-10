@@ -2,7 +2,7 @@
 
 This document lists known limitations and approximations in the Tableau to Power BI migration tool.
 
-> **Last updated:** v28.5.8 — Code Optimization & Documentation Update — many previous limitations have been addressed in Sprints 27-111. See below for current status.
+> **Last updated:** v38.4.0 — Pixel-Perfect Text & Visual Fidelity update. Many previous limitations have been addressed in Sprints 27-203. See below for current status.
 >
 > **v28.5.x notes (bug fixes):** Metadata-record type resolution for cloud connector columns (Salesforce, ServiceNow) that lack `<column>` elements (v28.5.4). DATEADD scalar conversion — Tableau scalar DATEADD → DAX EDATE/arithmetic instead of table-function DATEADD (v28.5.3). Universal manyToMany calc column fix using CALCULATE(SELECTEDVALUE()) (v28.5.2). Bare calculation reference inlining — unresolved `[Calculation_xxx]` references now inline their DAX formulas (v28.5.5–v28.5.6). Comparison operator spacing — `]>EDATE` → `] > EDATE` prevents DAX misparse (v28.5.7). Performance optimizations in DAX converter, TMDL generator, and PBIR generator (v28.5.8). 7,099 tests across 141+ files.
 >
@@ -35,7 +35,7 @@ This document lists known limitations and approximations in the Tableau to Power
 
 | Area | Limitation | Impact |
 |------|-----------|--------|
-| **Visual positioning** | ✅ IMPROVED (v22/S76) — Grid-snapping layout engine replaces proportional scaling. Container hierarchy extraction, row/column grid cells, floating z-order, responsive breakpoints. Not pixel-perfect but preserves grid structure | Some manual layout adjustment may still be needed for deeply nested containers |
+| **Visual positioning** | ✅ IMPROVED (v22/S76, v38.4 validation) — Grid-snapping + scaled zone mapping preserve most real-world layout/sizing. | One known caveat remains: floating legend overlays can still render side-by-side instead of overlaying chart corners in some dashboards (tracked for v38.5). |
 | **Sparklines** | Table/matrix sparkline columns are generated as lineChart sparkline configs | Limited to basic line sparklines; area/bar sparklines not supported |
 | **Bump charts** | ✅ IMPROVED (Sprint 84) — Auto-generated RANKX measure injected for ranking semantics | Maps to lineChart; ranking is approximated via `RANKX(ALL(), [measure],, ASC, Dense)` |
 | **Fabric-native output** | ✅ NEW (v25/S91) — `--output-format fabric` generates Lakehouse, Dataflow Gen2, PySpark Notebook, DirectLake Semantic Model, and Data Pipeline. Activity IDs in pipelines are placeholders requiring workspace binding. | Fabric artifacts require Fabric workspace capacity to deploy and test |

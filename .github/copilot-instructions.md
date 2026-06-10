@@ -123,7 +123,7 @@ Automated migration of Tableau workbooks (.twb/.twbx) to Power BI projects (.pbi
     - `credential_vault.py`: Credential vault — secure credential storage and retrieval for deployment authentication
   - `config/`: Configuration subpackage
     - `migration_config.py`: Migration configuration — typed config objects for migration settings and feature flags
-- **tests/**: Unit and integration tests (8,668 tests across 195 test files + conftest.py shared fixtures)
+- **tests/**: Unit and integration tests (8,746 tests in latest full run)
 - **docs/**: FAQ, PBI project guide, mapping reference, **ROADMAP.md** (v22–v28 development roadmap per agent)
 - **.github/workflows/ci.yml**: CI/CD pipeline (lint → test → validate → deploy)
 - **.github/workflows/publish.yml**: PyPI auto-publish workflow (tag-triggered, OIDC trusted publisher)
@@ -489,7 +489,7 @@ See `docs/AGENTS.md` for the full architecture diagram, data flow, and handoff p
 | **@merger** | Shared semantic model, fingerprint matching | `shared_model.py`, `merge_config.py` |
 | **@deployer** | Fabric/PBI deployment, auth, gateway | `deploy/*.py`, `gateway_config.py`, `telemetry.py` |
 | **@reviewer** | Artifact quality review, preceptorship loop, coaching feedback | `preceptor.py` |
-| **@tester** | Tests (8,668), coverage, regression | `tests/*.py` |
+| **@tester** | Tests (8,746 latest full run), coverage, regression | `tests/*.py` |
 
 ### Rules
 

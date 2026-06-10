@@ -1,0 +1,2 @@
+artifact_name,artifact_type,sources_count,tables_count,measures_count,pages_count,visuals_count,visuals_with_values_count,visuals_with_dax_measures_count
+Security_Test,tableau_report,1,3,10,1,2,2,0

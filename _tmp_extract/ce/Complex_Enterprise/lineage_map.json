@@ -1,0 +1,397 @@
+{
+  "tables": [
+    {
+      "tableau_datasource": "federated.global",
+      "tableau_table": "fact_sales",
+      "pbi_table": "fact_sales"
+    },
+    {
+      "tableau_datasource": "federated.global",
+      "tableau_table": "dim_date",
+      "pbi_table": "dim_date"
+    },
+    {
+      "tableau_datasource": "federated.global",
+      "tableau_table": "dim_customer",
+      "pbi_table": "dim_customer"
+    },
+    {
+      "tableau_datasource": "federated.global",
+      "tableau_table": "dim_product",
+      "pbi_table": "dim_product"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Target Margin %",
+      "pbi_table": "Target Margin %"
+    },
+    {
+      "tableau_datasource": "",
+      "tableau_table": "Top N Items",
+      "pbi_table": "Top N Items"
+    }
+  ],
+  "calculations": [
+    {
+      "tableau_calculation": "SUM([quantity] * [unit_price])",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Gross Revenue",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM(IF [order_status] != \"Cancelled\" AND [is_returned] = FALSE THEN [quantity] * [unit_price] * (1 - [discount_pct]) ELSE 0 END)",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Net Revenue",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM([quantity] * [unit_cost])",
+      "pbi_table": "fact_sales",
+      "pbi_object": "COGS",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "[C_NetRev] - [C_COGS] - SUM([shipping_cost])",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Gross Profit",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "ZN([C_GrossProfit] / [C_NetRev])",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Gross Margin %",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM([quantity] * [unit_price] * (1 - [discount_pct]) * [tax_rate])",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Tax Amount",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "[C_NetRev] + [C_TaxAmt]",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Total Revenue incl Tax",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "SUM(IF [is_returned] = TRUE THEN 1 ELSE 0 END) / COUNT([sale_id])",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Return Rate",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "{FIXED [customer_id] : SUM([quantity] * [unit_price])}",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Revenue per Customer",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "{FIXED [product_id] : SUM([quantity] * [unit_price])}",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Revenue per Product",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "{FIXED [region], [channel] : SUM([quantity] * [unit_price])}",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Revenue by Region-Channel",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "{EXCLUDE [territory] : SUM([quantity] * [unit_price])}",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Revenue excl Territory",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "{INCLUDE [subcategory] : SUM([quantity] * [unit_price])}",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Revenue incl Subcategory",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "RUNNING_SUM(SUM([quantity] * [unit_price]))",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Running Total Revenue",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "RUNNING_AVG(SUM([quantity] * [unit_price]))",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Running Avg Revenue",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "RUNNING_COUNT(SUM([quantity]))",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Running Count",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "RANK(SUM([quantity] * [unit_price]))",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Revenue Rank",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "RANK_DENSE(SUM([quantity] * [unit_price]))",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Revenue Rank Dense",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "WINDOW_AVG(SUM([quantity] * [unit_price]), -2, 0)",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Moving Avg 3-Period",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "WINDOW_MAX(SUM([quantity] * [unit_price]))",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Window Max Revenue",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "STDEV(SUM([quantity] * [unit_price]))",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Revenue StdDev",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD([sale_id])",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Order Count",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD([customer_id])",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Unique Customers",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COUNTD([product_id])",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Unique Products Sold",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "IF [C_RevPerCust] > 100000 THEN \"Enterprise\" ELSEIF [C_RevPerCust] > 50000 THEN \"Mid-Market\" ELSEIF [C_RevPerCust] > 10000 THEN \"SMB\" ELSE \"Startup\" END",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Customer Tier",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "{FIXED : SUM(IF [year] = YEAR(TODAY()) AND [is_returned] = FALSE THEN [quantity] * [unit_price] ELSE 0 END)}",
+      "pbi_table": "fact_sales",
+      "pbi_object": "YTD Revenue",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "[email] = USERNAME()",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Is My Account",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "ISMEMBEROF(\"Regional Managers\")",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Manager Access",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Analysis Start Date",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Analysis Start Date",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Metric Selector",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Metric Selector",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Display Currency",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Display Currency",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Gross Revenue Formatted",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Gross Revenue Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Net Revenue Formatted",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Net Revenue Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "COGS Formatted",
+      "pbi_table": "fact_sales",
+      "pbi_object": "COGS Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Gross Profit Formatted",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Gross Profit Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Tax Amount Formatted",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Tax Amount Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Return Rate Formatted",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Return Rate Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Revenue per Customer Formatted",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Revenue per Customer Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Revenue per Product Formatted",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Revenue per Product Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Revenue by Region-Channel Formatted",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Revenue by Region-Channel Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Revenue excl Territory Formatted",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Revenue excl Territory Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Revenue incl Subcategory Formatted",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Revenue incl Subcategory Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Revenue Rank Formatted",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Revenue Rank Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Revenue Rank Dense Formatted",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Revenue Rank Dense Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Moving Avg 3-Period Formatted",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Moving Avg 3-Period Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Window Max Revenue Formatted",
+      "pbi_table": "fact_sales",
+      "pbi_object": "Window Max Revenue Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "YTD Revenue Formatted",
+      "pbi_table": "fact_sales",
+      "pbi_object": "YTD Revenue Formatted",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Target Margin %",
+      "pbi_table": "Target Margin %",
+      "pbi_object": "Target Margin %",
+      "pbi_type": "measure"
+    },
+    {
+      "tableau_calculation": "Top N Items",
+      "pbi_table": "Top N Items",
+      "pbi_object": "Top N Items",
+      "pbi_type": "measure"
+    }
+  ],
+  "relationships": [
+    {
+      "from": "fact_sales[product_key]",
+      "to": "dim_product[product_key]",
+      "cardinality": "bothDirections"
+    },
+    {
+      "from": "fact_sales[customer_key]",
+      "to": "dim_customer[customer_key]",
+      "cardinality": "bothDirections"
+    },
+    {
+      "from": "fact_sales[date_key]",
+      "to": "dim_date[date_key]",
+      "cardinality": "bothDirections"
+    }
+  ],
+  "worksheets": [
+    {
+      "tableau_worksheet": "Executive KPIs",
+      "pbi_page": "Executive KPIs"
+    },
+    {
+      "tableau_worksheet": "Revenue by Region",
+      "pbi_page": "Revenue by Region"
+    },
+    {
+      "tableau_worksheet": "Revenue Trend",
+      "pbi_page": "Revenue Trend"
+    },
+    {
+      "tableau_worksheet": "Sales Map",
+      "pbi_page": "Sales Map"
+    },
+    {
+      "tableau_worksheet": "Category Mix",
+      "pbi_page": "Category Mix"
+    },
+    {
+      "tableau_worksheet": "Customer Analysis",
+      "pbi_page": "Customer Analysis"
+    },
+    {
+      "tableau_worksheet": "Profit Waterfall",
+      "pbi_page": "Profit Waterfall"
+    },
+    {
+      "tableau_worksheet": "Monthly Heatmap",
+      "pbi_page": "Monthly Heatmap"
+    },
+    {
+      "tableau_worksheet": "Payment Distribution",
+      "pbi_page": "Payment Distribution"
+    },
+    {
+      "tableau_worksheet": "Order Funnel",
+      "pbi_page": "Order Funnel"
+    },
+    {
+      "tableau_worksheet": "Discount Distribution",
+      "pbi_page": "Discount Distribution"
+    },
+    {
+      "tableau_worksheet": "Customer Detail Tooltip",
+      "pbi_page": "Customer Detail Tooltip"
+    }
+  ]
+}

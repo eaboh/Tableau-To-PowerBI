@@ -208,6 +208,16 @@ The optimizer applies: nested IF→SWITCH, IF(ISBLANK)→COALESCE, redundant CAL
 3. Edit the source parameters in each query
 4. Close and Apply
 
+### Why did I sometimes see a stray `Ae`/odd glyph in textbox content after migration?
+
+Tableau can emit internal line-break sentinel runs in rich text XML. In older builds those sentinel runs could appear as literal glyph artifacts in generated Power BI textboxes. This was fixed in **v38.4.0** by cleaning sentinel-only runs during extraction while preserving actual paragraph breaks.
+
+If you still see this behavior, regenerate with the latest version and attach a minimal `.twb` snippet in your issue.
+
+### Is visual positioning pixel-perfect?
+
+Most direct zone-to-visual sizing now maps accurately (including UC80 validation work), but one known caveat remains: floating legend overlays in some dashboards can still be laid out side-by-side instead of overlaid on chart corners. This is tracked as planned work in `ROADMAP.md` (v38.5.0).
+
 ## Technical
 
 ### Why do I get "Invalid identifier" errors in Power Query M?

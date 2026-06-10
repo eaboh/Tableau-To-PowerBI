@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Domaines (hors eFeP) (groupe)",
+    "source_field": "",
+    "size": "10",
+    "datatype": "string"
+  },
+  {
+    "name": "Sous Domaine (hors eFeP) (groupe)",
+    "source_field": "",
+    "size": "10",
+    "datatype": "string"
+  }
+]

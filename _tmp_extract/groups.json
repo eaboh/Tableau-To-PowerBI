@@ -1,0 +1,1242 @@
+[
+  {
+    "name": "Action (\"AIP\")",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_774759935339900947"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (AIP,AT,Ps Site Trigramme)",
+    "group_type": "combined",
+    "source_fields": [
+      "AIP",
+      "Calculation_583779130127691783",
+      "Ps Site Trigramme"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (AIP,Evaluation (copie),Evaluation)",
+    "group_type": "combined",
+    "source_fields": [
+      "AIP",
+      "Evaluation (copie)_1947454998596571136",
+      "Evaluation"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (AIP,Evaluation)",
+    "group_type": "combined",
+    "source_fields": [
+      "AIP",
+      "Evaluation"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (AIP,FLT AIP,Thème complet)",
+    "group_type": "combined",
+    "source_fields": [
+      "AIP",
+      "Calculation_332703487935586308",
+      "Thème complet"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (AT)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_583779130127691783"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (AT,\"AIP\",Ps Site Trigramme)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_583779130127691783",
+      "Calculation_774759935339900947",
+      "Ps Site Trigramme"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (AT,Ps Site Trigramme)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_583779130127691783",
+      "Ps Site Trigramme"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (A_10_1)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_2467057856732385290"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (A_10_1,Evaluation,Theme)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_2467057856732385290",
+      "Evaluation",
+      "Theme"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (A_10_5 - Ps non AIP avec une observation AIP)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_9203457748058615815"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (A_9_1 CFSI (copie),Evaluation)",
+    "group_type": "combined",
+    "source_fields": [
+      "A_9_1 CFSI (copie)_3228729099774640134",
+      "Evaluation"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (A_9_1 CFSI BOOL,Evaluation)",
+    "group_type": "combined",
+    "source_fields": [
+      "A_9_1 CFSI (copie)_3228729099774640134",
+      "Evaluation"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (A_X - Ps non AIP avec une observation AIP)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_9203457748058615815"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (BOOL A_9_3)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_2467057857140817934"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (BOOL,PS_IS_PFI_HORS_AAP,Ps Site Trigramme)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_1248693403880132612",
+      "Calculation_2840645492729888769",
+      "Ps Site Trigramme"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (BOOL,Ps Site Trigramme)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_1248693403880132612",
+      "Ps Site Trigramme"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Domaines (hors eFeP) (groupe))",
+    "group_type": "combined",
+    "source_fields": [
+      "Domaines (hors eFeP) (groupe)"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Domaines (hors eFeP) (groupe),Domaines (hors eFeP))",
+    "group_type": "combined",
+    "source_fields": [
+      "Domaines (hors eFeP) (groupe)",
+      "Domaines (hors eFeP)"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Domaines (hors eFeP) (groupe),Domaines (hors eFeP),Evaluation,FLT Semaine N-1,TITRE Semaine N - 1 PAR Semaine N)",
+    "group_type": "combined",
+    "source_fields": [
+      "Domaines (hors eFeP) (groupe)",
+      "Domaines (hors eFeP)",
+      "Evaluation",
+      "FLT Semaine N (copie)_5107644980642430991",
+      "Semaine N PAR Semaine N (copie)_221802336685588481"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Domaines (hors eFeP))",
+    "group_type": "combined",
+    "source_fields": [
+      "Domaines (hors eFeP)"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Domaines (hors eFeP),Evaluation)",
+    "group_type": "combined",
+    "source_fields": [
+      "Domaines (hors eFeP)",
+      "Evaluation"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Domaines (hors eFeP),Observable Type)",
+    "group_type": "combined",
+    "source_fields": [
+      "Domaines (hors eFeP)",
+      "Observable Type"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Domaines (hors eFeP),Sous Domaine (hors eFeP))",
+    "group_type": "combined",
+    "source_fields": [
+      "Domaines (hors eFeP)",
+      "Sous Domaine (hors eFeP)"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (EC CNEPE DIPDE,Ps Site Trigramme)",
+    "group_type": "combined",
+    "source_fields": [
+      "EC (copie)_5216153571747307527",
+      "Ps Site Trigramme"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Entreprise,Evaluation)",
+    "group_type": "combined",
+    "source_fields": [
+      "Entreprise",
+      "Evaluation"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Etat Projet)",
+    "group_type": "combined",
+    "source_fields": [
+      "Etat Projet"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Evaluation)",
+    "group_type": "combined",
+    "source_fields": [
+      "Evaluation"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Evaluation,FLT Semaine N-1,TITRE Semaine N - 1 PAR Semaine N,Sous Domaine (hors eFeP) (groupe),Sous Domaine (hors eFeP))",
+    "group_type": "combined",
+    "source_fields": [
+      "Evaluation",
+      "FLT Semaine N (copie)_5107644980642430991",
+      "Semaine N PAR Semaine N (copie)_221802336685588481",
+      "Sous Domaine (hors eFeP) (groupe)",
+      "Sous Domaine (hors eFeP)"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Evaluation,Inopine Cree Sur Tablette,Theme)",
+    "group_type": "combined",
+    "source_fields": [
+      "Evaluation",
+      "Inopine Cree Sur Tablette",
+      "Theme"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Evaluation,Ps Service)",
+    "group_type": "combined",
+    "source_fields": [
+      "Evaluation",
+      "Ps Service"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Evaluation,Ps Service,Traitement Non Conformite Statut)",
+    "group_type": "combined",
+    "source_fields": [
+      "Evaluation",
+      "Ps Service",
+      "Traitement Non Conformite Statut"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Evaluation,Sous Domaine (hors eFeP) (groupe),Sous Domaine (hors eFeP))",
+    "group_type": "combined",
+    "source_fields": [
+      "Evaluation",
+      "Sous Domaine (hors eFeP) (groupe)",
+      "Sous Domaine (hors eFeP)"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Evaluation,Sous Domaine (hors eFeP))",
+    "group_type": "combined",
+    "source_fields": [
+      "Evaluation",
+      "Sous Domaine (hors eFeP)"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Evaluation,Theme)",
+    "group_type": "combined",
+    "source_fields": [
+      "Evaluation",
+      "Theme"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Evaluation,Traitement Non Conformite Statut)",
+    "group_type": "combined",
+    "source_fields": [
+      "Evaluation",
+      "Traitement Non Conformite Statut"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (FLT AIP,Evaluation,Theme)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_332703487935586308",
+      "Evaluation",
+      "Theme"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (FLT AIP,Evaluation,Thème complet)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_332703487935586308",
+      "Evaluation",
+      "Thème complet"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (FLT AIP,Thème complet)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_332703487935586308",
+      "Thème complet"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (FLT Ps Etat (ENS),Entreprise,Evaluation)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_5181391402051989529",
+      "Entreprise",
+      "Evaluation"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (FLT Ps Etat (ENS),Evaluation,Ps Service)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_5181391402051989529",
+      "Evaluation",
+      "Ps Service"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (IPE)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_1683501873699049477"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (IPE,Ps Site Trigramme)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_1683501873699049477",
+      "Ps Site Trigramme"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Inadequate (copie))",
+    "group_type": "combined",
+    "source_fields": [
+      "Inadequate (copie)_8437071710689431562"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Inadequate)",
+    "group_type": "combined",
+    "source_fields": [
+      "Inadequate"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Inopine Cree Sur Tablette (alias),Inopine Cree Sur Tablette)",
+    "group_type": "combined",
+    "source_fields": [
+      "Inopine Cree Sur Tablette (copie)_669910448041578496",
+      "Inopine Cree Sur Tablette"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Inopine Cree Sur Tablette (alias),Libéllé du thème)",
+    "group_type": "combined",
+    "source_fields": [
+      "Inopine Cree Sur Tablette (copie)_669910448041578496",
+      "Thème complet"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Inopine Cree Sur Tablette (alias),Thème complet)",
+    "group_type": "combined",
+    "source_fields": [
+      "Inopine Cree Sur Tablette (copie)_669910448041578496",
+      "Thème complet"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Inopine Cree Sur Tablette)",
+    "group_type": "combined",
+    "source_fields": [
+      "Inopine Cree Sur Tablette"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Inopine Cree Sur Tablette,Theme)",
+    "group_type": "combined",
+    "source_fields": [
+      "Inopine Cree Sur Tablette",
+      "Theme"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Inopine Cree Sur Tablette,Thème complet)",
+    "group_type": "combined",
+    "source_fields": [
+      "Inopine Cree Sur Tablette",
+      "Thème complet"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Libéllé du thème)",
+    "group_type": "combined",
+    "source_fields": [
+      "Thème complet"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Observable,Sous Domaine (hors eFeP))",
+    "group_type": "combined",
+    "source_fields": [
+      "Observable",
+      "Sous Domaine (hors eFeP)"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (PS_IS_PFI_HORS_AAP)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_2840645492729888769"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (PS_IS_PFI_HORS_AAP,Ps Site Trigramme)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_2840645492729888769",
+      "Ps Site Trigramme"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Ps - Adhérence aux procédures et DSI en cours de réalisation,Ps Site Trigramme)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_8437071710682566665",
+      "Ps Site Trigramme"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Ps Etat,Ps Projet)",
+    "group_type": "combined",
+    "source_fields": [
+      "Ps Etat",
+      "Ps Projet"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Ps Site Trigramme)",
+    "group_type": "combined",
+    "source_fields": [
+      "Ps Site Trigramme"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Ps Site Trigramme,Theme)",
+    "group_type": "combined",
+    "source_fields": [
+      "Ps Site Trigramme",
+      "Theme"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (SPL Flags,Evaluation)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_5107644980630061067",
+      "Evaluation"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Semaine N PAR Semaine N,Domaines (hors eFeP),Evaluation)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_221802336685105152",
+      "Domaines (hors eFeP)",
+      "Evaluation"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Semaine N PAR Semaine N,SPL Flags,Evaluation)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_221802336685105152",
+      "Calculation_5107644980630061067",
+      "Evaluation"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Service ou Entreprise,Evaluation)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_5345139495278407692",
+      "Evaluation"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Sous Domaine (hors eFeP))",
+    "group_type": "combined",
+    "source_fields": [
+      "Sous Domaine (hors eFeP)"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (TITRE Semaine N PAR Semaine N,FLT Semaine N,Domaines (hors eFeP) (groupe),Domaines (hors eFeP),Evaluation)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_221802336685105152",
+      "Calculation_5107644980641263630",
+      "Domaines (hors eFeP) (groupe)",
+      "Domaines (hors eFeP)",
+      "Evaluation"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (TITRE Semaine N PAR Semaine N,FLT Semaine N,Evaluation,Sous Domaine (hors eFeP) (groupe),Sous Domaine (hors eFeP))",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_221802336685105152",
+      "Calculation_5107644980641263630",
+      "Evaluation",
+      "Sous Domaine (hors eFeP) (groupe)",
+      "Sous Domaine (hors eFeP)"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Theme)",
+    "group_type": "combined",
+    "source_fields": [
+      "Theme"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Thème complet)",
+    "group_type": "combined",
+    "source_fields": [
+      "Thème complet"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Traitement Non Conformite Statut)",
+    "group_type": "combined",
+    "source_fields": [
+      "Traitement Non Conformite Statut"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Ensemble AIP",
+    "group_type": "member",
+    "source_field": "",
+    "source_fields": [],
+    "members": {}
+  },
+  {
+    "name": "Infobulle (Ps Site Trigramme)",
+    "group_type": "combined",
+    "source_fields": [
+      "Ps Site Trigramme"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Assistance_sollen)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_388154018214371328"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (D_10 - Ps à finaliser BOOL)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_9203457747772366854"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (D_9 - Ps repris en écriture BOOL)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_9203457747770744837"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (FLT Plan Action (ENS),Ps Etat,Ps Service)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_5181391402055880731",
+      "Ps Etat",
+      "Ps Service"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (FLT Plan Action (ENS),Ps Service)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_5181391402055880731",
+      "Ps Service"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (FLT Plan Action (ENS),Service ou Projet)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_5181391402055880731",
+      "Calculation_7461831322280120322"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (FLT Plan Action (ENS),Service ou Projet,Ps Etat)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_5181391402055880731",
+      "Calculation_7461831322280120322",
+      "Ps Etat"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Info)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_1373597908919267330"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Lien Argos,Cloture Numero Fep,Intervenants Redacteur,Numéro d'affaire,PS AIP,MJA(Ps Date Modification),Ps Etat,Ps Id,Ps Libelle Prestation,Ps Projet,Ps Service,Ps Site,Type d'affaire)",
+    "group_type": "combined",
+    "source_fields": [
+      "Calculation_4580583095548968974",
+      "Cloture Numero Fep",
+      "Intervenants Redacteur",
+      "Numéro d'affaire",
+      "Prestation Contient Des Aip",
+      "Ps Date Modification",
+      "Ps Etat",
+      "Ps Id",
+      "Ps Libelle Prestation",
+      "Ps Projet",
+      "Ps Service",
+      "Ps Site",
+      "Type d'affaire"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Plan Action,Ps Service)",
+    "group_type": "combined",
+    "source_fields": [
+      "Plan Action",
+      "Ps Service"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Ps Etat)",
+    "group_type": "combined",
+    "source_fields": [
+      "Ps Etat"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Ps Etat,Ps Projet)",
+    "group_type": "combined",
+    "source_fields": [
+      "Ps Etat",
+      "Ps Projet"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Ps Etat,Ps Projet,Ps Service)",
+    "group_type": "combined",
+    "source_fields": [
+      "Ps Etat",
+      "Ps Projet",
+      "Ps Service"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Ps Etat,Ps Service)",
+    "group_type": "combined",
+    "source_fields": [
+      "Ps Etat",
+      "Ps Service"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Ps Service)",
+    "group_type": "combined",
+    "source_fields": [
+      "Ps Service"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Ps Site Trigramme)",
+    "group_type": "combined",
+    "source_fields": [
+      "Ps Site Trigramme"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Ensemble Plan Action",
+    "group_type": "level-members",
+    "source_field": "",
+    "source_fields": [],
+    "members": {}
+  },
+  {
+    "name": "Action (AIP,Evaluation)",
+    "group_type": "combined",
+    "source_fields": [
+      "AIP",
+      "Evaluation"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (AIP,Theme)",
+    "group_type": "combined",
+    "source_fields": [
+      "AIP",
+      "Theme"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Domaines (hors eFeP))",
+    "group_type": "combined",
+    "source_fields": [
+      "Domaines (hors eFeP)"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Domaines (hors eFeP),Evaluation)",
+    "group_type": "combined",
+    "source_fields": [
+      "Domaines (hors eFeP)",
+      "Evaluation"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Domaines (hors eFeP),Evaluation,Sous Domaine (hors eFeP))",
+    "group_type": "combined",
+    "source_fields": [
+      "Domaines (hors eFeP)",
+      "Evaluation",
+      "Sous Domaine (hors eFeP)"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Domaines (hors eFeP),Nom de l'observable,Sous Domaine (hors eFeP))",
+    "group_type": "combined",
+    "source_fields": [
+      "Domaines (hors eFeP)",
+      "Nom de l'observable",
+      "Sous Domaine (hors eFeP)"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Evaluation)",
+    "group_type": "combined",
+    "source_fields": [
+      "Evaluation"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Evaluation,Ps Site)",
+    "group_type": "combined",
+    "source_fields": [
+      "Evaluation",
+      "Ps Site"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Nom de l'observable)",
+    "group_type": "combined",
+    "source_fields": [
+      "Nom de l'observable"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Domaines (hors eFeP))",
+    "group_type": "combined",
+    "source_fields": [
+      "Domaines (hors eFeP)"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Domaines (hors eFeP),Nom de l'observable,Sous Domaine (hors eFeP))",
+    "group_type": "combined",
+    "source_fields": [
+      "Domaines (hors eFeP)",
+      "Nom de l'observable",
+      "Sous Domaine (hors eFeP)"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Domaines (hors eFeP),Sous Domaine (hors eFeP))",
+    "group_type": "combined",
+    "source_fields": [
+      "Domaines (hors eFeP)",
+      "Sous Domaine (hors eFeP)"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Sous Domaine (hors eFeP))",
+    "group_type": "combined",
+    "source_fields": [
+      "Sous Domaine (hors eFeP)"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Ensemble Domaines (hors eFeP)",
+    "group_type": "level-members",
+    "source_field": "",
+    "source_fields": [],
+    "members": {}
+  },
+  {
+    "name": "Ensemble Sous Domaine (hors eFeP)",
+    "group_type": "level-members",
+    "source_field": "",
+    "source_fields": [],
+    "members": {}
+  },
+  {
+    "name": "Action (Ps Etat)",
+    "group_type": "combined",
+    "source_fields": [
+      "Ps Etat"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Domaines (hors eFeP))",
+    "group_type": "combined",
+    "source_fields": [
+      "Domaines (hors eFeP)"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Action (Domaines (hors eFeP),Evaluation)",
+    "group_type": "combined",
+    "source_fields": [
+      "Domaines (hors eFeP)",
+      "Evaluation"
+    ],
+    "source_field": "",
+    "members": {}
+  },
+  {
+    "name": "Domaines (hors eFeP) (groupe)",
+    "group_type": "values",
+    "source_field": "Domaines (hors eFeP)",
+    "source_fields": [],
+    "members": {
+      "Electricité-Essais,Environnement,Génie Civil et 9 de plus": [
+        "Electricité-Essais",
+        "Environnement",
+        "Génie Civil",
+        "Mécanique",
+        "Moyens Mis en Œuvre",
+        "PFI",
+        "Qualité",
+        "Radioprotection",
+        "Relations technico -commerciales",
+        "Sécurité Classique",
+        "Sécurité Règles vitales",
+        "Sûreté"
+      ],
+      "Non classé": [
+        "Non classé"
+      ]
+    }
+  },
+  {
+    "name": "Sous Domaine (hors eFeP) (groupe)",
+    "group_type": "values",
+    "source_field": "Sous Domaine (hors eFeP)",
+    "source_fields": [],
+    "members": {
+      "AIP,Activités en Zone Contrôlée RP1,Activités en Zone Contrôlée RP2 et 143 de plus": [
+        "Activités en Zone Contrôlée RP1",
+        "Activités en Zone Contrôlée RP2",
+        "Activités en Zone Orange",
+        "Activités en Zone Surveillée",
+        "Adhérence aux procédures",
+        "Aéro-réfrigérant (Expertise du Génie Civil)",
+        "Aéro-réfrigérant (Reprise des défauts GC)",
+        "AIP",
+        "Ambiance chaude",
+        "Ancrages - Chevilles",
+        "Anoxie",
+        "Assemblages boulonnés",
+        "Auto-Contrôle",
+        "Batteries",
+        "Béton",
+        "Bruit",
+        "C-BAT",
+        "Câblage (BT)",
+        "Câblage (Contrôles - Mesures)",
+        "Câblage (Fibre optique)",
+        "Câblage (HTA)",
+        "Calage - Arrimage",
+        "Calorifuge",
+        "Canal",
+        "Carottage",
+        "Certification - Habilitation - Qualification",
+        "Chargement-Déchargement",
+        "Charpente",
+        "Chatières",
+        "Chemins de câbles",
+        "Cintrage",
+        "CND Tir Radiographique",
+        "Communication sécurisée",
+        "Confinement liquide (rétentions)",
+        "Connectiques (Bornes à couteaux)",
+        "Controbloc",
+        "Contrôle croisé",
+        "Contrôle dimensionnel",
+        "Contrôle technique (HN2)",
+        "Contrôle visuel",
+        "Contronic E",
+        "Cosses FASTON",
+        "Covid-19",
+        "Culture environnementale",
+        "Culture sécurité",
+        "Débriefing",
+        "DSI à l'état final",
+        "DSI en cours de réalisation",
+        "Entreposage",
+        "Epreuve Hydraulique",
+        "Exposition amiante",
+        "Exposition au radon",
+        "Ferraillage",
+        "FME",
+        "Gestion des Critères I et S dans les REE",
+        "Gestion des déchets conventionnels",
+        "Gestion des déchets pathogènes",
+        "Gestion des déchets radiologiques",
+        "Gestion des MTI/DMP",
+        "Gestion des ressources",
+        "Gestion outillage",
+        "Groupe Electrogène",
+        "Groupe Froid",
+        "Heures d'attente",
+        "Incendie",
+        "Intervention en milieu ATEX",
+        "irrégularité",
+        "ITV",
+        "Joints ",
+        "Laser",
+        "Levage",
+        "MALT",
+        "Manutention Manuelle et Mécanique",
+        "Matériel K1, K2, K3",
+        "MEEI et PV O/F de Chantier",
+        "Métrologie - Mesurage",
+        "Minute d'arrêt",
+        "Montage de Tableaux BT-HTA",
+        "Moteurs Asynchrones BT",
+        "Moteurs Asynchrones HTA",
+        "Onduleurs",
+        "Parades post aléa fuite",
+        "Parements et coffrages",
+        "PBMP",
+        "Peau Composite",
+        "Peinture avant réalisation des travaux",
+        "Peinture: Application Peinture / Revêtement",
+        "Peinture: Après activité",
+        "Peinture: Contrôles / Mesures / Essais après application",
+        "Peinture: Préparation de surface Béton / Acier",
+        "PJB",
+        "Plain Pied",
+        "Plan de Prévention",
+        "Plomb",
+        "Port du HV",
+        "Portes",
+        "Pression",
+        "Produits chimiques",
+        "Produits chimiques / Produits CMR",
+        "Produits dangereux",
+        "Propreté radiologique",
+        "Protection de site - Sûreté des installations",
+        "Protections biologiques",
+        "Protections passives",
+        "Puisards",
+        "Qualité du Geste Professionnel",
+        "Réalisation des essais",
+        "Redresseurs",
+        "Régime - Consignation",
+        "Régime de travail radiologique",
+        "Rejets gazeux",
+        "Relayage",
+        "Respect de la démarche ALARA",
+        "Respect Organisation",
+        "Ressuage",
+        "RFI",
+        "Risque Electrique",
+        "Risque pathogène amibe/légionelle (aéro-réfrigérants)",
+        "Risques liés au soudage",
+        "Robinetterie",
+        "RSEM",
+        "Sas et confinement RP",
+        "Sécurité informatique",
+        "Séisme-Evènement",
+        "Serrage au couple",
+        "Sertissage",
+        "Soudage Manuel",
+        "Supportage",
+        "Terrassement",
+        "Tirs Radiographiques",
+        "TOCE",
+        "Toiture",
+        "Travailleur détaché",
+        "Travaux d'ouverture de sols et activité en fouille",
+        "Travaux en hauteur (Echafaudage)",
+        "Travaux en hauteur (Ouverture de Plancher)",
+        "Travaux en hauteur (Port du Harnais, Lignes de Vie)",
+        "Travaux en hauteur (Utilisation d'une PIRL ou d'une Echelle)",
+        "Traversées Coupe-Feu",
+        "Trémies",
+        "Tuyauterie",
+        "Usinage",
+        "Utilisation de sources radioactives",
+        "Utilisation Torche Plasma",
+        "Ventilation",
+        "Vérification (HN3)"
+      ],
+      "Non classé": [
+        "Non classé"
+      ]
+    }
+  }
+]

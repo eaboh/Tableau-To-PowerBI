@@ -1,0 +1,3 @@
+artifact_name,artifact_type,sources_count,tables_count,measures_count,pages_count,visuals_count,visuals_with_values_count,visuals_with_dax_measures_count
+Superstore_Sales,tableau_report,1,3,4,1,3,3,3
+Ventes_France,tableau_report,1,3,22,2,6,6,6

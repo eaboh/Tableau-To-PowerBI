@@ -1,0 +1,51 @@
+{
+  "Paramètre 11": {
+    "1": "Nombre d'observations",
+    "2": "% d'observations non conformes"
+  },
+  "Paramètre 12": {
+    "1": "Service",
+    "2": "Entreprise titulaire du PS"
+  },
+  "Paramètre 13": {
+    "1": "Classement",
+    "2": "Répartition"
+  },
+  "Paramètre 14": {
+    "\"\\% total\"": "% d'observables utilisés",
+    "\"Nbr d'appel\"": "Nombres d'observables utilisés"
+  },
+  "Paramètre 17": {
+    "false": "Sous domaine",
+    "true": "Domaine"
+  },
+  "Service ou Entreprise (copie)_7461831322279616513": {
+    "\"Ps Projet\"": "projet",
+    "\"Ps Service\"": "service"
+  },
+  ":Measure Names": {
+    "\"[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[sum:A_9_1 ASN BOOL (copie)_3567695340737757184:qk]\"": "ASN",
+    "\"[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[usr:A_1 (copie)_564779608506990599:qk:1]\"": "Tout",
+    "\"[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[usr:A_1 Date PAR (copie)_6332272249588625415:qk]\"": "NC"
+  },
+  "Calculation_2467057856732385290": {
+    "false": "Non",
+    "true": "Oui"
+  },
+  "Evaluation (copie)_1947454998596571136": {
+    "\"BP\"": "'bonne pratique' ",
+    "\"C\"": "conformes",
+    "\"NC\"": "non conformes",
+    "\"NO\"": "non observés"
+  },
+  "Inopine Cree Sur Tablette (copie)_669910448041578496": {
+    "\"false\"": "Programmée",
+    "\"true\"": "Inopinée"
+  },
+  "Calculation_824510598383579146": {
+    "\"BP\"": "'bonne pratique'",
+    "\"C\"": "conformes",
+    "\"NC\"": "non conformes",
+    "\"NO\"": "non observées"
+  }
+}

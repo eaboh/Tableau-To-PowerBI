@@ -1,0 +1,82 @@
+============================================================
+WS: 'Assistance_sollen'
+============================================================
+  encodings/shape  attrs={'column': '[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_388154018214371328:nk]'}
+  slices/column  text='[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_4330844423325691907:nk]'
+  slices/column  text='[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[Action (Ps Site Trigramme)]'
+  ds-dep ds='sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8': 3 columns, 2 col-instances
+    ci col='[Calculation_388154018214371328]' deriv='None' type='nominal'
+    ci col='[Calculation_4330844423325691907]' deriv='None' type='nominal'
+  mark class='Shape'
+============================================================
+WS: 'D_10 - Ps en cours'
+============================================================
+  encodings/text  attrs={'column': '[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[cnt:Ps Id:qk]'}
+  slices/column  text='[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_4330844423325691907:nk]'
+  slices/column  text='[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_524739787394945033:nk]'
+  slices/column  text='[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Entreprises Titulaire:nk]'
+  slices/column  text="[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:NumΘro d'affaire:nk]"
+  slices/column  text='[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Etat:nk]'
+  slices/column  text='[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Projet:nk]'
+  slices/column  text='[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Service:nk]'
+  slices/column  text='[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Site:nk]'
+  slices/column  text='[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Ps Specialite:nk]'
+  slices/column  text="[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Type d'affaire:nk]"
+  slices/column  text='[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_5810136167835385857:nk]'
+  slices/column  text='[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_9203457747772366854:nk]'
+  ds-dep ds='Parameters': 2 columns, 0 col-instances
+  ds-dep ds='sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8': 17 columns, 13 col-instances
+    ci col='[Ps Id]' deriv='Count' type='quantitative'
+    ci col='[Calculation_4330844423325691907]' deriv='None' type='nominal'
+    ci col='[Calculation_524739787394945033]' deriv='None' type='nominal'
+    ci col='[Calculation_5810136167835385857]' deriv='None' type='nominal'
+    ci col='[Calculation_9203457747772366854]' deriv='None' type='nominal'
+    ci col='[Entreprises Titulaire]' deriv='None' type='nominal'
+    ci col="[NumΘro d'affaire]" deriv='None' type='nominal'
+    ci col='[Ps Etat]' deriv='None' type='nominal'
+    ci col='[Ps Projet]' deriv='None' type='nominal'
+    ci col='[Ps Service]' deriv='None' type='nominal'
+    ci col='[Ps Site]' deriv='None' type='nominal'
+    ci col='[Ps Specialite]' deriv='None' type='nominal'
+    ci col="[Type d'affaire]" deriv='None' type='nominal'
+  ds-dep ds='sqlproxy.103ekax0erob871al9eyl0bq5wh0': 2 columns, 0 col-instances
+  mark class='Text'
+============================================================
+WS: 'Date derniΦre MAJ - Observations'
+============================================================
+  encodings/text  attrs={'column': '[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[max:Date Maj:ok]'}
+  slices/column  text='[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_4330844423325691907:nk]'
+  slices/column  text='[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[Action (Evaluation,Traitement Non Conformite Statut)]'
+  slices/column  text='[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[Action (Evaluation,Ps Service,Traitement Non Conformite Sta'
+  slices/column  text='[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[Action (Evaluation,Ps Service)]'
+  slices/column  text='[sqlproxy.103ekax0erob871al9eyl0bq5wh0].[Action (AIP,Evaluation (copie),Evaluation)]'
+  ds-dep ds='sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8': 1 columns, 1 col-instances
+    ci col='[Calculation_4330844423325691907]' deriv='None' type='nominal'
+  ds-dep ds='sqlproxy.103ekax0erob871al9eyl0bq5wh0': 7 columns, 2 col-instances
+    ci col='[Date Maj]' deriv='Max' type='ordinal'
+    ci col='[Calculation_4330844423310061569]' deriv='None' type='nominal'
+  mark class='Automatic'
+============================================================
+WS: 'Info_observation_eFep_droite'
+============================================================
+  encodings/lod  attrs={'column': '[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[attr:Calculation_1373597908919267330:nk'}
+  slices/column  text='[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_4330844423325691907:nk]'
+  ds-dep ds='sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8': 2 columns, 2 col-instances
+    ci col='[Calculation_1373597908919267330]' deriv='Attribute' type='nominal'
+    ci col='[Calculation_4330844423325691907]' deriv='None' type='nominal'
+  mark class='Shape'
+============================================================
+WS: 'ParamΦtre_erreur'
+============================================================
+  encodings/tooltip  attrs={'column': '[sqlproxy.0ysthz41a62tzq12v2vgq0hbrwyy].[usr:Calculation_1687161034744160260:nk]'}
+  encodings/text  attrs={'column': '[sqlproxy.0ysthz41a62tzq12v2vgq0hbrwyy].[usr:Calculation_1146729079403888647:nk]'}
+  slices/column  text='[sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8].[none:Calculation_4330844423325691907:nk]'
+  ds-dep ds='sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8': 2 columns, 1 col-instances
+    ci col='[Calculation_4330844423325691907]' deriv='None' type='nominal'
+  ds-dep ds='sqlproxy.0q7mpjx1xetx7w16fcrd10rhnyp3': 1 columns, 0 col-instances
+  ds-dep ds='sqlproxy.0ysthz41a62tzq12v2vgq0hbrwyy': 4 columns, 2 col-instances
+    ci col='[Calculation_1146729079403888647]' deriv='User' type='nominal'
+    ci col='[Calculation_1687161034744160260]' deriv='User' type='nominal'
+  ds-dep ds='sqlproxy.103ekax0erob871al9eyl0bq5wh0': 1 columns, 0 col-instances
+  ds-dep ds='sqlproxy.1ewvg4j1vjfzqc1g6duw70zmoz3s': 1 columns, 0 col-instances
+  mark class='Text'

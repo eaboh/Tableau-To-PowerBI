@@ -1,0 +1,79 @@
+Extracting C:\Tableau to Power BI\Tableau\UC80.twbx...
+  Γ£ô 84 worksheets extracted
+  Γ£ô 12 dashboards extracted
+  Γ£ô 7 datasources extracted (filtered from 277 raw)
+  Γ£ô 167 calculations extracted
+  Γ£ô 22 parameters extracted
+  Γ£ô 670 filters extracted
+  Γ£ô 0 stories extracted
+  Γ£ô 27 actions extracted
+  Γ£ô 0 sets extracted
+  Γ£ô 108 groups extracted
+  Γ£ô 2 bins extracted
+  Γ£ô 0 hierarchies extracted
+  Γ£ô 0 sort orders extracted
+  Γ£ô 11 columns with aliases extracted
+  Γ£ô 0 custom SQL queries extracted
+  Γ£ô 6 user filters/security rules extracted
+  [OK] 0 datasource-level filters extracted
+  Γ£ô 0 custom geocoding refs extracted
+  Γ£ô 6 published datasource refs extracted
+  Γ£ô 35 data blending links extracted
+  Γ£ô 0 table extensions extracted
+  Γ£ô 183 linguistic synonyms extracted
+  ΓåÆ _tmp_extract\worksheets.json
+  ΓåÆ _tmp_extract\dashboards.json
+  ΓåÆ _tmp_extract\datasources.json
+  ΓåÆ _tmp_extract\calculations.json
+  ΓåÆ _tmp_extract\parameters.json
+  ΓåÆ _tmp_extract\filters.json
+  ΓåÆ _tmp_extract\stories.json
+  ΓåÆ _tmp_extract\actions.json
+  ΓåÆ _tmp_extract\sets.json
+  ΓåÆ _tmp_extract\groups.json
+  ΓåÆ _tmp_extract\bins.json
+  ΓåÆ _tmp_extract\hierarchies.json
+  ΓåÆ _tmp_extract\sort_orders.json
+  ΓåÆ _tmp_extract\aliases.json
+  ΓåÆ _tmp_extract\custom_sql.json
+  ΓåÆ _tmp_extract\user_filters.json
+  ΓåÆ _tmp_extract\datasource_filters.json
+  ΓåÆ _tmp_extract\custom_geocoding.json
+  ΓåÆ _tmp_extract\published_datasources.json
+  ΓåÆ _tmp_extract\data_blending.json
+  ΓåÆ _tmp_extract\hyper_files.json
+  ΓåÆ _tmp_extract\table_extensions.json
+  ΓåÆ _tmp_extract\linguistic_schema.json
+Γ£ô Extraction complete
+Total worksheets extracted: 84
+============================================================
+NAME: 'Assistance_sollen'
+  chart_type: 'scatterChart'
+  fields: 0
+============================================================
+NAME: 'D_10 - Ps en cours'
+  chart_type: 'tableEx'
+  fields: 1
+    - {'name': 'Ps Id', 'shelf': 'text', 'datasource': 'sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8'}
+============================================================
+NAME: 'Date derni├¿re MAJ - Observations'
+  chart_type: 'table'
+  fields: 1
+    - {'name': 'Date Maj', 'shelf': 'text', 'datasource': 'sqlproxy.103ekax0erob871al9eyl0bq5wh0'}
+============================================================
+NAME: 'Info_observation_eFep_droite'
+  chart_type: 'scatterChart'
+  fields: 1
+    - {'name': 'Calculation_1373597908919267330', 'shelf': 'detail', 'datasource': 'sqlproxy.0eyxewb0pf14j71gzy2bc0thivm8'}
+============================================================
+NAME: 'Observations dans la s├⌐lection national'
+  chart_type: 'table'
+  fields: 1
+    - {'name': 'ID', 'shelf': 'text', 'datasource': 'sqlproxy.103ekax0erob871al9eyl0bq5wh0'}
+============================================================
+NAME: 'Param├¿tre_erreur'
+  chart_type: 'tableEx'
+  fields: 3
+    - {'name': 'Calculation_1146729079403888647', 'shelf': 'rows', 'datasource': 'sqlproxy.0ysthz41a62tzq12v2vgq0hbrwyy'}
+    - {'name': 'Calculation_1687161034744160260', 'shelf': 'tooltip', 'datasource': 'sqlproxy.0ysthz41a62tzq12v2vgq0hbrwyy'}
+    - {'name': 'Calculation_1146729079403888647', 'shelf': 'text', 'datasource': 'sqlproxy.0ysthz41a62tzq12v2vgq0hbrwyy'}

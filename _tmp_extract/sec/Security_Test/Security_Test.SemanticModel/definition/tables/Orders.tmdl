@@ -1,0 +1,130 @@
+table Orders
+	lineageTag: 9edf398d-ee25-4912-8ad8-7ef335dc18a4
+
+	measure 'Is Current User' = MAX('Orders'[CustomerEmail]) = USERPRINCIPALNAME()
+		formatString: True/False
+		displayFolder: Dimensions
+		lineageTag: a093f344-8713-4297-8fb4-f468f4f8e160
+		annotation Copilot_Description = Migrated from Tableau: [CustomerEmail] = USERNAME() | DAX: MAX('Orders'[CustomerEmail]) = USERPRINCIPALNAME()
+
+	measure 'Manager Access' = TRUE() /* ISMEMBEROF("Managers"): implement via RLS role */ || TRUE() /* ISMEMBEROF("Executives"): implement via RLS role */
+		formatString: True/False
+		displayFolder: Dimensions
+		lineageTag: 20c9ef05-bef3-412b-8a03-5253c27397df
+		annotation Copilot_Description = Migrated from Tableau: ISMEMBEROF("Managers") OR ISMEMBEROF("Executives") | DAX: TRUE() /* ISMEMBEROF("Managers"): implement via RLS role */ || TRUE() /* ISMEMBEROF("Executives"): implement via RLS role */
+
+	measure 'Region Match' = SUM('Regions'[RegionManager]) = USERPRINCIPALNAME()
+		formatString: True/False
+		displayFolder: Dimensions
+		lineageTag: f70587e5-703b-4128-80a8-c841b703e265
+		annotation Copilot_Description = Migrated from Tableau: [RegionManager] = FULLNAME() | DAX: SUM('Regions'[RegionManager]) = USERPRINCIPALNAME()
+
+	measure 'Total Sales' = SUM('Orders'[Sales])
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: 7caa5915-6c6c-40a0-a99d-2160a8614099
+		annotation Copilot_Description = Migrated from Tableau: SUM([Sales]) | DAX: SUM('Orders'[Sales])
+
+	measure 'Profit Ratio' = SUM('Orders'[Profit]) / SUM('Orders'[Sales])
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: 549aee59-bdc2-4702-bf7c-776161d2a604
+		annotation Copilot_Description = Migrated from Tableau: SUM([Profit]) / SUM([Sales]) | DAX: SUM('Orders'[Profit]) / SUM('Orders'[Sales])
+
+	measure 'Total Sales Formatted' = VAR _val = [Total Sales] RETURN IF(ABS(_val) >= 1E9, FORMAT(_val / 1E9, "#,0.0") & "B", IF(ABS(_val) >= 1E6, FORMAT(_val / 1E6, "#,0.0") & "M", IF(ABS(_val) >= 1E3, FORMAT(_val / 1E3, "#,0.0") & "K", FORMAT(_val, "#,0.00"))))
+		displayFolder: Formatted
+		lineageTag: 166e8b03-f3d2-46ca-b43b-df7816a38174
+		annotation Copilot_Description = Dynamic numeric abbreviation for Total Sales (K/M/B)
+
+	measure 'Profit Ratio Formatted' = VAR _val = [Profit Ratio] RETURN IF(ABS(_val) >= 1E9, FORMAT(_val / 1E9, "#,0.0") & "B", IF(ABS(_val) >= 1E6, FORMAT(_val / 1E6, "#,0.0") & "M", IF(ABS(_val) >= 1E3, FORMAT(_val / 1E3, "#,0.0") & "K", FORMAT(_val, "#,0.00"))))
+		displayFolder: Formatted
+		lineageTag: b67091e1-5715-43a9-abcd-dc4d627f8371
+		annotation Copilot_Description = Dynamic numeric abbreviation for Profit Ratio (K/M/B)
+
+	column OrderID
+		dataType: int64
+		lineageTag: e0ff3cca-4306-4be1-8fc5-83ad7bb3c3a9
+		summarizeBy: sum
+		sourceColumn: OrderID
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: c19a6798-c11a-4e8b-8941-209822dedfb4
+		summarizeBy: none
+		sourceColumn: Region
+		dataCategory: StateOrProvince
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sales
+		dataType: double
+		formatString: #,0.00
+		lineageTag: f931b144-ee31-4e1b-949d-91d46dc3aa0d
+		summarizeBy: sum
+		sourceColumn: Sales
+
+		annotation SummarizationSetBy = Automatic
+
+	column Profit
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 3de32036-9eb1-40ff-b6dd-7c213c965734
+		summarizeBy: sum
+		sourceColumn: Profit
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerEmail
+		dataType: string
+		lineageTag: fe7a20b1-7033-452e-a4f3-9b0e7653c0a6
+		summarizeBy: none
+		sourceColumn: CustomerEmail
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: 85b7579d-9704-47b7-af72-12fc90c6f615
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1fae8ac8-fd4b-451b-a306-37cf67ec05de
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Orders-0c38c4c9-6db7-47c0-a4c2-7e7eae9f748b' = m
+		mode: import
+		source =
+				let
+				    
+				    Source = try
+				
+				        let
+				
+				            _src = Sql.Database("localhost", "SalesDB"),
+				
+				            _nav = _src{[Schema="dbo", Item="Orders"]}[Data]
+				
+				        in _nav
+				
+				    otherwise
+				
+				        #table({"OrderID", "Region", "Sales", "Profit", "CustomerEmail", "Category", "OrderDate"}, {}),
+				    #"Renamed Columns" = Table.RenameColumns(Source, {{"OrderID", "Order ID"}, {"CustomerEmail", "Customer Email"}, {"OrderDate", "Order Date"}}),
+				    Result = #"Renamed Columns"
+				in
+				    Result
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 7 columns and 7 measures: OrderID, Region, Sales, Profit, CustomerEmail, Category, OrderDate.
+

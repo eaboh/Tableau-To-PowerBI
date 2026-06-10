@@ -1,0 +1,20 @@
+{
+  "updated_at": "2026-06-09T08:53:38.436103",
+  "summary": {
+    "total": 1,
+    "success": 1,
+    "failed": 0,
+    "zero_touch_rate": 100.0,
+    "top_failure_modes": []
+  },
+  "records": [
+    {
+      "workbook": "Complex_Enterprise",
+      "timestamp": "2026-06-09T08:53:38.435751",
+      "success": true,
+      "failure_mode": "",
+      "verdict_severity": "warning",
+      "issues_count": 11
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "total_workbooks": 2,
+  "total_tables": 6,
+  "total_measures": 38,
+  "merge_clusters": [],
+  "isolated_workbooks": [
+    "Superstore_Sales",
+    "Ventes_France"
+  ],
+  "pairwise_scores": [
+    {
+      "workbook_a": "Superstore_Sales",
+      "workbook_b": "Ventes_France",
+      "merge_score": 20,
+      "shared_tables": 0,
+      "recommendation": "separate"
+    }
+  ],
+  "workbook_profiles": [
+    {
+      "name": "Superstore_Sales",
+      "tables": 3,
+      "columns": 25,
+      "measures": 8,
+      "calc_columns": 0,
+      "relationships": 2,
+      "worksheets": 3,
+      "dashboards": 1,
+      "parameters": 0,
+      "connection_types": [
+        "Excel"
+      ],
+      "table_names": [
+        "Orders",
+        "Returns",
+        "People"
+      ]
+    },
+    {
+      "name": "Ventes_France",
+      "tables": 3,
+      "columns": 29,
+      "measures": 30,
+      "calc_columns": 14,
+      "relationships": 2,
+      "worksheets": 6,
+      "dashboards": 2,
+      "parameters": 3,
+      "connection_types": [
+        "PostgreSQL"
+      ],
+      "table_names": [
+        "Commandes",
+        "Produits",
+        "Clients"
+      ]
+    }
+  ],
+  "timestamp": "2026-05-29T05:49:50.893458+00:00"
+}

@@ -1,0 +1,47 @@
+table Regions
+	lineageTag: a2f0fbb1-958e-4e41-9230-47984a278014
+
+	column RegionName
+		dataType: string
+		lineageTag: 22170238-c22b-4203-a380-0ad1e4516aa7
+		summarizeBy: none
+		sourceColumn: RegionName
+		dataCategory: StateOrProvince
+
+		annotation SummarizationSetBy = Automatic
+
+	column RegionManager
+		dataType: string
+		lineageTag: 20f2a842-a41d-4506-8798-17a062c54581
+		summarizeBy: none
+		sourceColumn: RegionManager
+		dataCategory: StateOrProvince
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Regions-4948cab7-6dfc-445c-a897-1f341d7eeb00' = m
+		mode: import
+		source =
+				let
+				    
+				    Source = try
+				
+				        let
+				
+				            _src = Sql.Database("localhost", "SalesDB"),
+				
+				            _nav = _src{[Schema="dbo", Item="Regions"]}[Data]
+				
+				        in _nav
+				
+				    otherwise
+				
+				        #table({"RegionName", "RegionManager"}, {}),
+				    #"Renamed Columns" = Table.RenameColumns(Source, {{"RegionName", "Region Name"}, {"RegionManager", "Region Manager"}}),
+				    Result = #"Renamed Columns"
+				in
+				    Result
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 2 columns: RegionName, RegionManager.
+

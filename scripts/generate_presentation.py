@@ -680,9 +680,9 @@ def build_presentation():
         ('133+', 'DAX\nConversions', TABLEAU_ORANGE),
         ('190', 'Visual Type\nMappings', PBI_YELLOW),
         ('43', 'M Query\nTransforms', AZURE_BLUE),
-        ('49', 'Data Source\nConnectors', GREEN),
+        ('79', 'Data Source\nConnectors', GREEN),
         ('23', 'Extracted\nObject Types', ACCENT_PURPLE),
-        ('8,668', 'Automated\nTests', RGBColor(0xEF, 0x44, 0x44)),
+        ('8,746', 'Automated\nTests', RGBColor(0xEF, 0x44, 0x44)),
     ]
     for i, (num, label, color) in enumerate(stats):
         x = Inches(0.7) + Inches(i * 2.1)
@@ -761,7 +761,7 @@ def build_presentation():
                  'python migrate.py workbook.twbx', font_size=20,
                  color=PBI_YELLOW, alignment=PP_ALIGN.CENTER, font_name='Cascadia Code')
     _add_textbox(slide, Inches(1), Inches(5.5), Inches(11), Inches(0.4),
-                 'v38.1.0 · 8,668 tests · 133+ DAX conversions · 190 visual mappings',
+                 'v38.4.0 · 8,746 tests · 133+ DAX conversions · 190 visual mappings',
                  font_size=14, color=MID_GRAY, alignment=PP_ALIGN.CENTER)
 
     # ── Save ──

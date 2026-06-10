@@ -1,5 +1,22 @@
 # Changelog
 
+## v38.4.0 — Pixel-Perfect Text & Visual Fidelity
+
+### Highlights
+- **Annotation/textbox font fidelity**: run-level font attributes are now preserved more consistently from Tableau rich text into PBIR textbox payloads.
+- **Per-visual chrome fidelity**: visual-level Tableau format zones (background + border) are now applied in generated visual configuration.
+- **Line-break sentinel cleanup**: Tableau soft line-break sentinel runs (`Ae`/NBSP artifacts from Tableau XML runs) are cleaned during extraction to avoid stray glyphs in Power BI output.
+
+### Affected Areas
+- `tableau_export/extract_tableau_data.py`
+- `powerbi_import/pbip_generator.py`
+- `powerbi_import/visual_generator.py`
+- `tests/test_pixel_perfect_fidelity.py`
+
+### Validation
+- Pixel-fidelity regression suite added/expanded (including sentinel handling).
+- Real-world UC80 re-migration verified: no empty visuals regression, no stray sentinel glyphs.
+
 ## v38.3.0 — Empty Visual Fix — Marks-Only Worksheets & Shape Encoding
 
 ### Problem

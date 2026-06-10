@@ -1,0 +1,20 @@
+{
+  "updated_at": "2026-06-09T08:53:36.308729",
+  "summary": {
+    "total": 1,
+    "success": 1,
+    "failed": 0,
+    "zero_touch_rate": 100.0,
+    "top_failure_modes": []
+  },
+  "records": [
+    {
+      "workbook": "Security_Test",
+      "timestamp": "2026-06-09T08:53:36.308224",
+      "success": true,
+      "failure_mode": "",
+      "verdict_severity": "info",
+      "issues_count": 0
+    }
+  ]
+}

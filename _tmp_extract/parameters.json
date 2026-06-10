@@ -1,0 +1,313 @@
+[
+  {
+    "name": "[AIP 2 (copie)_7461831322297262093]",
+    "caption": "AIP [Indicateur nationaux][detail]",
+    "datatype": "string",
+    "value": "\"AIP\"",
+    "domain_type": "list",
+    "allowable_values": [
+      {
+        "value": "AIP",
+        "alias": "AIP"
+      },
+      {
+        "value": "Tout",
+        "alias": "Tout"
+      }
+    ]
+  },
+  {
+    "name": "[AIP [Indicateur nationaux]][detail]] (copie)_774759935293652994]",
+    "caption": "Date Modif PAR [Indicateur nationaux][detail]",
+    "datatype": "string",
+    "value": "\"Tout\"",
+    "domain_type": "list",
+    "allowable_values": [
+      {
+        "value": "True",
+        "alias": "True"
+      },
+      {
+        "value": "Tout",
+        "alias": "Tout"
+      }
+    ]
+  },
+  {
+    "name": "[AIP [Indicateur nationaux]][detail]] (copie)_934778459520655361]",
+    "caption": "Evaluation NC [Indicateur nationaux][detail] ",
+    "datatype": "string",
+    "value": "\"Tout\"",
+    "domain_type": "list",
+    "allowable_values": [
+      {
+        "value": "NC",
+        "alias": "NC"
+      },
+      {
+        "value": "Tout",
+        "alias": "Tout"
+      }
+    ]
+  },
+  {
+    "name": "[Paramètre 10]",
+    "caption": "Inadequate",
+    "datatype": "string",
+    "value": "\"false\"",
+    "domain_type": "list",
+    "allowable_values": [
+      {
+        "value": "true",
+        "alias": "true"
+      },
+      {
+        "value": "false",
+        "alias": "false"
+      }
+    ]
+  },
+  {
+    "name": "[Paramètre 11]",
+    "caption": "Choix Total ou % NC",
+    "datatype": "integer",
+    "value": "2",
+    "domain_type": "list",
+    "allowable_values": [
+      {
+        "value": "1",
+        "alias": "Nombre d'observations"
+      },
+      {
+        "value": "2",
+        "alias": "% d'observations non conformes"
+      }
+    ]
+  },
+  {
+    "name": "[Paramètre 12]",
+    "caption": "Service ou Entreprise",
+    "datatype": "integer",
+    "value": "2",
+    "domain_type": "list",
+    "allowable_values": [
+      {
+        "value": "1",
+        "alias": "Service"
+      },
+      {
+        "value": "2",
+        "alias": "Entreprise titulaire du PS"
+      }
+    ]
+  },
+  {
+    "name": "[Paramètre 13]",
+    "caption": "Vue Total ou %",
+    "datatype": "integer",
+    "value": "2",
+    "domain_type": "list",
+    "allowable_values": [
+      {
+        "value": "1",
+        "alias": "Classement"
+      },
+      {
+        "value": "2",
+        "alias": "Répartition"
+      }
+    ]
+  },
+  {
+    "name": "[Paramètre 14]",
+    "caption": "% ou Nombre d 'appel",
+    "datatype": "string",
+    "value": "\"Nbr d'appel\"",
+    "domain_type": "list",
+    "allowable_values": [
+      {
+        "value": "\\% total",
+        "alias": "% d'observables utilisés"
+      },
+      {
+        "value": "Nbr d'appel",
+        "alias": "Nombres d'observables utilisés"
+      }
+    ]
+  },
+  {
+    "name": "[Paramètre 15]",
+    "caption": "PFI_HORS_AAP",
+    "datatype": "boolean",
+    "value": "false",
+    "domain_type": "list",
+    "allowable_values": [
+      {
+        "value": "true",
+        "alias": "true"
+      },
+      {
+        "value": "false",
+        "alias": "false"
+      }
+    ]
+  },
+  {
+    "name": "[Paramètre 16]",
+    "caption": "AAP_DSI",
+    "datatype": "boolean",
+    "value": "false",
+    "domain_type": "list",
+    "allowable_values": [
+      {
+        "value": "true",
+        "alias": "true"
+      },
+      {
+        "value": "false",
+        "alias": "false"
+      }
+    ]
+  },
+  {
+    "name": "[Paramètre 17]",
+    "caption": "[Surveillance IPE Historique]vision_domaine",
+    "datatype": "boolean",
+    "value": "true",
+    "domain_type": "list",
+    "allowable_values": [
+      {
+        "value": "true",
+        "alias": "Domaine"
+      },
+      {
+        "value": "false",
+        "alias": "Sous domaine"
+      }
+    ]
+  },
+  {
+    "name": "[Paramètre 18]",
+    "caption": "COMMENTAIRE",
+    "datatype": "boolean",
+    "value": "false",
+    "domain_type": "list",
+    "allowable_values": [
+      {
+        "value": "true",
+        "alias": "true"
+      },
+      {
+        "value": "false",
+        "alias": "false"
+      }
+    ]
+  },
+  {
+    "name": "[Paramètre 1]",
+    "caption": "Mesure choisie",
+    "datatype": "string",
+    "value": "\"Tout\"",
+    "domain_type": "any",
+    "allowable_values": []
+  },
+  {
+    "name": "[Paramètre 2]",
+    "caption": "Etat choisi",
+    "datatype": "string",
+    "value": "\"Tout\"",
+    "domain_type": "any",
+    "allowable_values": []
+  },
+  {
+    "name": "[Paramètre 3]",
+    "caption": "Date début",
+    "datatype": "date",
+    "value": "#2025-01-03#",
+    "domain_type": "any",
+    "allowable_values": []
+  },
+  {
+    "name": "[Paramètre 4]",
+    "caption": "Date fin",
+    "datatype": "date",
+    "value": "#2026-05-29#",
+    "domain_type": "any",
+    "allowable_values": []
+  },
+  {
+    "name": "[Paramètre 5]",
+    "caption": "Evaluation choisie",
+    "datatype": "string",
+    "value": "\"Tout\"",
+    "domain_type": "any",
+    "allowable_values": []
+  },
+  {
+    "name": "[Paramètre 6]",
+    "caption": "Domaine",
+    "datatype": "string",
+    "value": "\"Tout\"",
+    "domain_type": "any",
+    "allowable_values": []
+  },
+  {
+    "name": "[Paramètre 7]",
+    "caption": "Sous Domaine",
+    "datatype": "string",
+    "value": "\"Tout\"",
+    "domain_type": "any",
+    "allowable_values": []
+  },
+  {
+    "name": "[Paramètre 8]",
+    "caption": "AIP",
+    "datatype": "string",
+    "value": "\"Tout\"",
+    "domain_type": "list",
+    "allowable_values": [
+      {
+        "value": "Tout",
+        "alias": "Tout"
+      },
+      {
+        "value": "AIP",
+        "alias": "AIP"
+      }
+    ]
+  },
+  {
+    "name": "[Paramètre 9]",
+    "caption": "AIP 2",
+    "datatype": "string",
+    "value": "\"Tout\"",
+    "domain_type": "list",
+    "allowable_values": [
+      {
+        "value": "AIP",
+        "alias": "AIP"
+      },
+      {
+        "value": "Tout",
+        "alias": "Tout"
+      }
+    ]
+  },
+  {
+    "name": "[Service ou Entreprise (copie)_7461831322279616513]",
+    "caption": "Service ou Projet",
+    "datatype": "string",
+    "value": "\"Ps Service\"",
+    "domain_type": "list",
+    "allowable_values": [
+      {
+        "value": "Ps Service",
+        "alias": "service"
+      },
+      {
+        "value": "Ps Projet",
+        "alias": "projet"
+      }
+    ]
+  }
+]

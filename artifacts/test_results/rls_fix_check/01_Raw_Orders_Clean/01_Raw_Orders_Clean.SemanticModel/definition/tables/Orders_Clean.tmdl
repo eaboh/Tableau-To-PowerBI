@@ -1,0 +1,138 @@
+table Orders_Clean
+	lineageTag: 4361859a-99eb-4a7c-b72d-51c48d2ee436
+
+	column Order_ID
+		dataType: string
+		lineageTag: f2080a14-8819-412a-84b8-a8987fa95b68
+		summarizeBy: none
+		sourceColumn: Order_ID
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order_Date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a82502f8-e325-4e39-9135-ed1b68973d68
+		summarizeBy: none
+		sourceColumn: Order_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Customer_ID
+		dataType: string
+		lineageTag: 280902c0-c978-4c01-980c-72aa6cfb35cd
+		summarizeBy: none
+		sourceColumn: Customer_ID
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product_ID
+		dataType: string
+		lineageTag: b8eeb7e7-c10d-42f8-8130-5d01e8927ccd
+		summarizeBy: none
+		sourceColumn: Product_ID
+		annotation Copilot_Hidden = true
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: 4ac0edc4-b36b-4188-93b7-bc789efdf645
+		summarizeBy: none
+		sourceColumn: Region
+		dataCategory: StateOrProvince
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sales
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 92af196c-ffac-4269-abda-4bed2c8befbd
+		summarizeBy: sum
+		sourceColumn: Sales
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantity
+		dataType: int64
+		lineageTag: b5ed736d-2e1f-4861-91de-1a4d80918ff6
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Discount
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 88fcb5a2-a7ed-4fbf-9a72-77091aa81db0
+		summarizeBy: sum
+		sourceColumn: Discount
+
+		annotation SummarizationSetBy = Automatic
+
+	column Profit
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 40b51c2c-72c1-41b0-8f37-5da96722165d
+		summarizeBy: sum
+		sourceColumn: Profit
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ship_Mode
+		dataType: string
+		lineageTag: 35d0dd74-8c11-4f92-8780-fe64f016315a
+		summarizeBy: none
+		sourceColumn: Ship_Mode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: 0075ccc6-6271-4432-b9b3-2335f39d01ce
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column _temp_col
+		dataType: string
+		lineageTag: c2a44c87-25fe-4c0d-9260-8f79f006a492
+		summarizeBy: none
+		sourceColumn: _temp_col
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Orders_Clean-415888bd-e41a-4a79-8869-dc65e7d70c46' = m
+		mode: import
+		source =
+				let
+				    // TODO: Configure the data source for connector type: textscan
+				    // Replace the sample table below with the actual source expression.
+				    Source = try
+				        #table(
+				            {"Order_ID", "Order_Date", "Customer_ID", "Product_ID", "Region", "Sales", "Quantity", "Discount", "Profit", "Ship_Mode", "Status", "_temp_col"},
+				            {
+				                {"Sample 1", 2, "Sample 3", "Sample 4", "Sample 5", 6, 7, 8, 9, "Sample 10", "Sample 11", "Sample 12"},
+				                {"Sample 2", 3, "Sample 4", "Sample 5", "Sample 6", 7, 8, 9, 10, "Sample 11", "Sample 12", "Sample 13"}
+				            }
+				        )
+				    otherwise
+				        #table({"Order_ID", "Order_Date", "Customer_ID", "Product_ID", "Region", "Sales", "Quantity", "Discount", "Profit", "Ship_Mode", "Status", "_temp_col"}, {}),
+				    #"Removed Columns" = Table.RemoveColumns(Source, {"_temp_col"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns", {{"Order_ID", "OrderID"}, {"Order_Date", "OrderDate"}, {"Customer_ID", "CustomerID"}, {"Product_ID", "ProductID"}}),
+				    #"Trimmed Text" = Table.TransformColumns(#"Renamed Columns", {{"Region", Text.Trim}}),
+				    #"Filtered Rows" = Table.SelectRows(#"Trimmed Text", each [Status] <> "Cancelled"),
+				    #"Removed Columns 2" = Table.RemoveColumns(#"Filtered Rows", {"Status"}),
+				    #"Replaced Nulls in Discount" = Table.ReplaceValue(#"Removed Columns 2", null, "0", Replacer.ReplaceValue, {"Discount"}),
+				    #"Added Revenue" = Table.AddColumn(#"Replaced Nulls in Discount", "Revenue", each [Sales] * (1 - [Discount])),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Revenue", {{"OrderDate", type date}}),
+				    Result = #"Changed Type"
+				in
+				    Result
+
+	annotation PBI_ResultType = Table
+	annotation Copilot_TableDescription = Contains 12 columns: Order_ID, Order_Date, Customer_ID, Product_ID, Region, Sales, Quantity, Discount, ... (12 columns total).
+

@@ -1,0 +1,2 @@
+artifact_name,artifact_type,sources_count,tables_count,measures_count,pages_count,visuals_count,visuals_with_values_count,visuals_with_dax_measures_count
+Complex_Enterprise,tableau_report,2,6,49,3,16,12,0

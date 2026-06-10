@@ -1,17 +1,17 @@
 # Comprehensive Gap Analysis — Tableau to Power BI Migration Tool
 
-**Date:** 2026-04-23 — updated through v28.5.8  
+**Date:** 2026-06-10 — updated through v38.4.0  
 **Scope:** Every source file, test file, CI/CD, docs, config, and cross-project comparison with TableauToFabric  
-**Status:** 7,099 tests passing across 141+ test files · 45,600+ source lines (tableau_export + powerbi_import)
+**Status:** 8,746 tests passing across 141+ test files · 45,600+ source lines (tableau_export + powerbi_import)
 
 ### Implementation Coverage
 
 ```
  EXTRACTION          GENERATION         INFRA / CI         DOCUMENTATION
 +----------------+  +----------------+  +----------------+  +----------------+
-| 20 object types|  | PBIR v4.0      |  | 5-stage CI/CD  |  | 19 doc files   |
-| .twb/.twbx/.tfl|  | TMDL semantic  |  | 7,099 tests   |  | DAX reference  |
-| 125+ DAX conv  |  | 145 visuals    |  | Artifact valid |  | M query ref    |
+| 23 object types|  | PBIR v4.0      |  | 5-stage CI/CD  |  | 19 doc files   |
+| .twb/.twbx/.tfl|  | TMDL semantic  |  | 8,746 tests   |  | DAX reference  |
+| 79 connectors  |  | 190 visuals    |  | Artifact valid |  | M query ref    |
 | 63 connectors  |  | 7 slicer modes |  | Fabric deploy  |  | Prep ref       |
 | 47+ transforms |  | 4 cond format  |  | Env configs    |  | Architecture   |
 | Prep flow DAG  |  | Grid layout    |  | Settings valid |  | Gap analysis   |
@@ -448,7 +448,7 @@
 | **Test Coverage** | **6,831 tests across 141 files** (+conftest.py), **27 workbooks at 100% fidelity** (10 samples + 17 real-world), **layout regression**, **performance regression**, **Fabric-native**, **DAX optimizer**, **cross-platform validation** | 55 conditional skips (sample availability) | — | Low |
 | **CI/CD** | **5-stage pipeline** (lint+ruff, test, **strict validate+twbx**, **staging deploy**, production deploy), **pip caching**, **PyPI auto-publish workflow**, **plugin system**, **REST API server** | Windows CI, PR diff preview | — | Medium |
 | **Deployment** | **Fabric REST API**, **PBI Service REST API**, **bundle deployer**, **multi-tenant**, **gateway config**, **rolling deployment** (canary + rollback), **.pbix packager** | — | — | Low |
-| **Documentation** | **19 docs** + copilot instructions + PPTX presentation, **auto-generated API docs** (54 modules), **12-agent specialization model** | — | — | Low |
+| **Documentation** | **19 docs** + copilot instructions + PPTX presentation, **auto-generated API docs** (54 modules), **14-agent specialization model** | — | — | Low |
 | **Config** | 11 env vars, 3 environments, **settings validation**, **dry-run**, **calendar/culture CLI**, **.env.example**, **config.json** | — | — | Low |
 | **Security** | **Path validation** (null byte, traversal, extension whitelist), **ZIP slip defense**, **XXE protection**, **credential detection/redaction** (10 patterns), **M query credential scrubbing**, **template substitution sanitization**, **rate limiting** (API server), **concurrent job cap**, **job TTL cleanup** | — | — | Low |
 

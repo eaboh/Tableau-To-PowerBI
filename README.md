@@ -4,12 +4,18 @@
 
 | | |
 |---|---|
-| 🏷️ **Version** | 38.2.0 |
-| ✅ **Tests** | 8,738 passed · 96.2 % coverage |
+| 🏷️ **Version** | 38.4.0 |
+| ✅ **Tests** | 8,746 passed (latest full run) |
 | 🐍 **Python** | 3.12+ · zero external dependencies |
 | 📜 **License** | MIT |
 
-| 🎯 **Capabilities** | 133+ DAX conversions · 190 visual types · 49 connectors · 23 object types |
+| 🎯 **Capabilities** | 133+ DAX conversions · 190 visual types · 79 connectors · 23 object types |
+
+### What is new in v38.4.0
+
+- v38.3.0 fixed UC80 empty visuals (82 empty visuals -> 0).
+- v38.4.0 shipped pixel-fidelity fixes for annotation/textbox fonts, per-visual background/border mapping, and Tableau line-break sentinel cleanup (`Ae`/NBSP run artifacts).
+- Remaining fidelity caveat (planned next): floating legend overlays on chart corners in some dashboards. See `docs/ROADMAP.md` (v38.5.0).
 
 ---
 
@@ -674,7 +680,7 @@ TableauToPowerBI/
 │   ├── schema_drift.py                        #   Schema drift detection (v28)
 │   └── deploy/                                #   Deploy to PBI Service / Fabric
 ├── Dockerfile                                 # Docker image for API server
-├── tests/                                     # 8,668 tests across 195 files
+├── tests/                                     # 8,746 tests in latest full run
 ├── docs/                                      # 18 documentation files
 └── examples/                                  # Sample Tableau workbooks
 ```
@@ -869,7 +875,7 @@ python -m pytest tests/ --cov --cov-report=html      # Coverage report
 
 ```mermaid
 flowchart LR
-    L["🔍 Lint\nflake8 + ruff"] --> T["🧪 Test\n8,668 tests\nPy 3.9–3.14"]
+    L["🔍 Lint\nflake8 + ruff"] --> T["🧪 Test\n8,746 tests\nPy 3.9–3.14"]
     T --> V["✅ Validate\nStrict .twbx\nmigrations"]
     V --> S["📦 Staging\nFabric deploy"]
     S --> P["🚀 Production\nManual approval"]
@@ -916,7 +922,7 @@ The report shows for each migrated workbook:
 | 🔗 [Shared Model Plan](docs/SHARED_SEMANTIC_MODEL_PLAN.md) | Multi-workbook merge architecture |
 | � [Enterprise Guide](docs/ENTERPRISE_GUIDE.md) | 8-phase enterprise migration guide |
 | 📈 [Roadmap](docs/ROADMAP.md) | Development roadmap |
-| 🤖 [Agents](docs/AGENTS.md) | 12-agent specialization model |
+| 🤖 [Agents](docs/AGENTS.md) | 14-agent specialization model |
 | �🌐 Global Assessment | Cross-workbook merge analysis with HTML heatmap (`--global-assess`) |
 | 🚀 Bundle Deployment | Deploy shared model + reports to Fabric (`--deploy-bundle`) |
 
