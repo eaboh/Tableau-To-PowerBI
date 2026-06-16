@@ -394,6 +394,8 @@ def _check_datasources(extracted: Dict) -> CategoryResult:
             "Review the generated Power Query M for SQL compatibility "
             "with the target database.",
         ))
+        # Sprint 182: per-query depth analysis (joins, subqueries, parameters)
+        _assess_custom_sql_depth(cat, custom_sql)
     else:
         cat.checks.append(CheckItem(
             cat.name, "Custom SQL", PASS,
@@ -401,6 +403,59 @@ def _check_datasources(extracted: Dict) -> CategoryResult:
         ))
 
     return cat
+
+
+def _assess_custom_sql_depth(cat, custom_sql):
+    """Sprint 182: grade each custom SQL query for migration complexity.
+
+    Uses the regex SQL analyzer to surface subqueries, multi-join queries,
+    SELECT * projections and embedded parameters. Falls back silently if the
+    analyzer is unavailable.
+    """
+    try:
+        from sql_analyzer import analyze_sql
+    except Exception:  # pragma: no cover - analyzer optional
+        try:
+            from powerbi_import.sql_analyzer import analyze_sql
+        except Exception:
+            return
+
+    severity_map = {"GREEN": PASS, "YELLOW": WARN, "RED": FAIL}
+    red = yellow = 0
+    dialects = set()
+    param_total = 0
+    subquery_count = 0
+    for entry in custom_sql:
+        query = entry.get("query", "") if isinstance(entry, dict) else str(entry)
+        if not query.strip():
+            continue
+        try:
+            analysis = analyze_sql(query)
+        except Exception:
+            continue
+        dialects.add(analysis.dialect)
+        param_total += len(analysis.parameters)
+        if analysis.has_subquery:
+            subquery_count += 1
+        if analysis.grade == "RED":
+            red += 1
+        elif analysis.grade == "YELLOW":
+            yellow += 1
+
+    overall = "RED" if red else ("YELLOW" if yellow else "GREEN")
+    detail_bits = [f"{len(custom_sql)} query/queries analyzed"]
+    if subquery_count:
+        detail_bits.append(f"{subquery_count} with subqueries (manual review)")
+    if param_total:
+        detail_bits.append(f"{param_total} embedded parameter(s) → Value.NativeQuery binds")
+    if dialects:
+        detail_bits.append("dialect(s): " + ", ".join(sorted(dialects)))
+    cat.checks.append(CheckItem(
+        cat.name, "Custom SQL Depth", severity_map[overall],
+        "; ".join(detail_bits) + ".",
+        "Complex queries (subqueries / 3+ joins) may need manual tuning "
+        "for query folding in Power Query." if overall != "GREEN" else "",
+    ))
 
 
 def _check_calculations(extracted: Dict) -> CategoryResult:
