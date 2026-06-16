@@ -574,13 +574,25 @@ def _heal_visual_query_no_select(state, recovery=None) -> int:
 # ════════════════════════════════════════════════════════════════════
 
 
+def _overlap_sort_key(visual: Dict[str, Any]) -> tuple:
+    """Stable ordering for overlap healing: lowest z-order (backdrop) first so
+    it stays anchored, higher z-order (foreground) visuals get staggered.
+    Visual directory names are random UUIDs, so relying on listdir order makes
+    the nudge target non-deterministic; this key restores determinism."""
+    vj = visual.get('json', {})
+    pos = vj.get('position') if isinstance(vj.get('position'), dict) else {}
+    return (pos.get('z', 0), pos.get('tabOrder', 0), visual.get('name', ''))
+
+
 def _heal_visual_overlap_full(state, recovery=None) -> int:
     """Two visuals with identical (x, y, width, height) on the same page →
-    stagger the second by 32 px on both axes so PBI Desktop doesn't hide one."""
+    stagger the higher z-order one by 32 px on both axes so PBI Desktop doesn't
+    hide one. Visuals are processed in a deterministic z-order (not random UUID
+    directory order) so the staggered visual is always the same across runs."""
     repairs = 0
     for page in state['pages']:
         seen: Dict[tuple, Dict[str, Any]] = {}  # (x,y,w,h) → first visual json
-        for visual in page['visuals']:
+        for visual in sorted(page['visuals'], key=_overlap_sort_key):
             vj = visual['json']
             pos = vj.get('position') if isinstance(vj.get('position'), dict) else None
             if pos is None:

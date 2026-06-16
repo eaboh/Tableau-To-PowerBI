@@ -41,13 +41,14 @@ from powerbi_import.qa_suite import (  # noqa: E402
 )
 
 # ── Curated fixture workbooks (committed under examples/tableau_samples/) ──
-# NOTE: Enterprise_Sales is intentionally excluded — it contains two heavily
-# overlapping zones (a textbox backdrop behind a tableEx) whose layout
-# coordinates are assigned non-deterministically by the generator. Stabilising
-# that overlap is tracked under Sprint 204 (floating zone overlay fidelity);
-# re-add it to the golden set once the layout order is deterministic.
+# NOTE: Enterprise_Sales contains two heavily overlapping zones (a textbox
+# backdrop behind a tableEx). Sprint 204 made the overlap-stagger healing
+# deterministic (z-order keyed, not random UUID directory order), so it is now
+# part of the golden set — the backdrop textbox stays anchored and the
+# foreground worksheet is staggered by a stable +32 px.
 GOLDEN_WORKBOOKS = {
     "BigQuery_Analytics": "BigQuery_Analytics.twb",
+    "Enterprise_Sales": "Enterprise_Sales.twb",
     "Financial_Report": "Financial_Report.twb",
     "HR_Analytics": "HR_Analytics.twb",
     "Manufacturing_IoT": "Manufacturing_IoT.twb",

@@ -2116,11 +2116,11 @@ No new CLI flags. No schema changes. This patch is fully backward-compatible wit
 
 | Sprint | Title | Status |
 |--------|-------|--------|
-| 204 | Floating Zone Overlay Fidelity | ⬜ Planned |
-| 205 | Per-Workbook Pixel-Perfect Golden Fixtures | ✅ Done (6 deterministic fixtures; Enterprise_Sales excluded pending 204) |
+| 204 | Floating Zone Overlay Fidelity | ✅ Done (deterministic z-order overlap stagger) |
+| 205 | Per-Workbook Pixel-Perfect Golden Fixtures | ✅ Done (7 deterministic fixtures incl. Enterprise_Sales) |
 | 206 | Mixed-Alignment & Vertical-Anchor Text Runs | ✅ Done (per-run h-align + zone v-align; 19 tests) |
 | 207 | Real-World Migration QA Suite | ✅ Done (incl. 207.4 autoplay QA report card) |
-| 208 | v38.5.0 Release & Hardening | ⬜ Blocked on 204 |
+| 208 | v38.5.0 Release & Hardening | ⬜ Planned (Next) |
 
 **Motivation:**
 - UC80's `N_1`/`N_X`/`N_4`/`N_7` chart groups all have a chart at `x=2083 w=95834` with a legend floating at `x≈85k–89k w≈8.7k` — Tableau renders the legend overlaid on the chart's right corner, but the current grid layout puts them side-by-side, shrinking the chart from `~1880px → 1240px`.

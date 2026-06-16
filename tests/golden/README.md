@@ -51,8 +51,9 @@ means the generator output drifted.
 
 ## Excluded workbooks
 
-- **Enterprise_Sales** — contains two heavily overlapping zones (a textbox
-  backdrop behind a `tableEx`) whose layout coordinates are currently assigned
-  non-deterministically by the generator. Stabilising that overlap is tracked
-  under **Sprint 204 (floating zone overlay fidelity)**; the workbook will be
-  re-added to the golden set once layout ordering is deterministic.
+_None._ As of **Sprint 204 (floating zone overlay fidelity)**, the previously
+excluded **Enterprise_Sales** workbook is part of the golden set. It contains
+two heavily overlapping zones (a textbox backdrop behind a `tableEx`); the
+report-side overlap healer now staggers the duplicate deterministically by
+z-order (lowest z stays anchored, higher z moves +32 px) instead of relying on
+random UUID directory ordering, so its snapshot is stable across runs.

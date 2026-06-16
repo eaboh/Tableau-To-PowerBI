@@ -695,5 +695,135 @@ class TestTextAlignment(unittest.TestCase):
             shutil.rmtree(tmpdir, ignore_errors=True)
 
 
+class TestFloatingOverlap(unittest.TestCase):
+    """Sprint 204 — floating zone overlay fidelity.
+
+    When two dashboard zones occupy the same rectangle (e.g. a textbox
+    backdrop behind a worksheet tableEx, as in Enterprise_Sales), the
+    report-side healer ``_heal_visual_overlap_full`` staggers one of them
+    by +32 px so PBI Desktop does not hide the duplicate. The choice of
+    WHICH visual moves must be deterministic — keyed by z-order, not by
+    the random UUID directory names that ``os.listdir`` returns.
+    """
+
+    @staticmethod
+    def _visual(name, x, y, w, h, z, vtype='table'):
+        return {
+            'dir': f'/fake/visuals/{name}',
+            'name': name,
+            'json': {
+                'visual': {'visualType': vtype},
+                'position': {'x': x, 'y': y, 'width': w, 'height': h,
+                             'z': z, 'tabOrder': z},
+            },
+        }
+
+    def _state(self, visuals):
+        return {'pages': [{'visuals': visuals}], '_dirty_files': set()}
+
+    def _heal(self):
+        from powerbi_import.self_healing_report import _heal_visual_overlap_full
+        return _heal_visual_overlap_full
+
+    def test_backdrop_stays_foreground_staggers(self):
+        # Backdrop textbox z=0, foreground worksheet z=1000, same rect.
+        backdrop = self._visual('aaa', 0, 108, 960, 540, 0, 'textbox')
+        worksheet = self._visual('zzz', 0, 108, 960, 540, 1000, 'tableEx')
+        state = self._state([backdrop, worksheet])
+        repairs = self._heal()(state)
+        self.assertEqual(repairs, 1)
+        self.assertEqual(backdrop['json']['position']['x'], 0)
+        self.assertEqual(backdrop['json']['position']['y'], 108)
+        self.assertEqual(worksheet['json']['position']['x'], 32)
+        self.assertEqual(worksheet['json']['position']['y'], 140)
+
+    def test_deterministic_regardless_of_list_order(self):
+        # Same visuals, reversed input order → identical outcome.
+        b1 = self._visual('aaa', 0, 108, 960, 540, 0, 'textbox')
+        w1 = self._visual('zzz', 0, 108, 960, 540, 1000, 'tableEx')
+        self._heal()(self._state([b1, w1]))
+
+        b2 = self._visual('aaa', 0, 108, 960, 540, 0, 'textbox')
+        w2 = self._visual('zzz', 0, 108, 960, 540, 1000, 'tableEx')
+        self._heal()(self._state([w2, b2]))  # reversed order
+
+        self.assertEqual(b1['json']['position'], b2['json']['position'])
+        self.assertEqual(w1['json']['position'], w2['json']['position'])
+
+    def test_lowest_z_is_always_anchored(self):
+        # The visual with the lowest z stays put; higher z moves.
+        low = self._visual('mmm', 10, 20, 100, 100, 5)
+        high = self._visual('nnn', 10, 20, 100, 100, 99)
+        self._heal()(self._state([high, low]))  # higher z listed first
+        self.assertEqual((low['json']['position']['x'], low['json']['position']['y']),
+                         (10, 20))
+        self.assertEqual((high['json']['position']['x'], high['json']['position']['y']),
+                         (42, 52))
+
+    def test_no_overlap_no_repair(self):
+        a = self._visual('aaa', 0, 0, 100, 100, 0)
+        b = self._visual('bbb', 200, 200, 100, 100, 1000)
+        state = self._state([a, b])
+        repairs = self._heal()(state)
+        self.assertEqual(repairs, 0)
+        self.assertEqual(a['json']['position']['x'], 0)
+        self.assertEqual(b['json']['position']['x'], 200)
+
+    def test_three_way_overlap_staggers_two(self):
+        a = self._visual('a', 0, 0, 100, 100, 0)
+        b = self._visual('b', 0, 0, 100, 100, 100)
+        c = self._visual('c', 0, 0, 100, 100, 200)
+        state = self._state([c, a, b])
+        repairs = self._heal()(state)
+        self.assertEqual(repairs, 2)
+        # Lowest z anchored; both higher staggered by +32.
+        self.assertEqual((a['json']['position']['x'], a['json']['position']['y']),
+                         (0, 0))
+        self.assertEqual((b['json']['position']['x'], b['json']['position']['y']),
+                         (32, 32))
+        self.assertEqual((c['json']['position']['x'], c['json']['position']['y']),
+                         (32, 32))
+
+    def test_visual_marked_dirty_when_staggered(self):
+        a = self._visual('a', 5, 5, 50, 50, 0)
+        b = self._visual('b', 5, 5, 50, 50, 1000)
+        state = self._state([a, b])
+        self._heal()(state)
+        self.assertIn(os.path.join(b['dir'], 'visual.json'), state['_dirty_files'])
+        self.assertNotIn(os.path.join(a['dir'], 'visual.json'), state['_dirty_files'])
+
+    def test_tie_on_z_breaks_on_name(self):
+        # Equal z → name decides which is anchored (deterministic).
+        a = self._visual('alpha', 0, 0, 100, 100, 0)
+        b = self._visual('beta', 0, 0, 100, 100, 0)
+        self._heal()(self._state([b, a]))  # reversed
+        # 'alpha' < 'beta' → alpha anchored, beta staggered.
+        self.assertEqual((a['json']['position']['x'], a['json']['position']['y']),
+                         (0, 0))
+        self.assertEqual((b['json']['position']['x'], b['json']['position']['y']),
+                         (32, 32))
+
+    def test_missing_position_skipped(self):
+        a = self._visual('a', 0, 0, 100, 100, 0)
+        b = {'dir': '/fake/visuals/b', 'name': 'b',
+             'json': {'visual': {'visualType': 'table'}}}  # no position
+        state = self._state([a, b])
+        repairs = self._heal()(state)
+        self.assertEqual(repairs, 0)
+
+    def test_sort_key_orders_by_z(self):
+        from powerbi_import.self_healing_report import _overlap_sort_key
+        low = self._visual('z', 0, 0, 1, 1, 0)
+        high = self._visual('a', 0, 0, 1, 1, 500)
+        self.assertLess(_overlap_sort_key(low), _overlap_sort_key(high))
+
+    def test_sort_key_handles_missing_position(self):
+        from powerbi_import.self_healing_report import _overlap_sort_key
+        v = {'name': 'x', 'json': {}}
+        # Should not raise; returns a tuple with default z=0.
+        key = _overlap_sort_key(v)
+        self.assertEqual(key[0], 0)
+
+
 if __name__ == '__main__':
     unittest.main()
