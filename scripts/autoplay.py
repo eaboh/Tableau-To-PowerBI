@@ -443,6 +443,45 @@ def run_autoplay(pbip_dir, extract_dir=None, open_pbi=False, verbose=False):
                 results["overall_pass"] = False
     results["steps"]["5_fidelity"] = step5
 
+    # ── Step 6: Real-world QA report card (Sprint 207) ──
+    step6 = {"status": "skip", "message": ""}
+    try:
+        from powerbi_import.qa_suite import run_qa_suite
+        qa = run_qa_suite(
+            pbip_dir,
+            extraction_dir=extract_dir if extract_dir and os.path.isdir(extract_dir) else None,
+            workbook=os.path.basename(os.path.normpath(pbip_dir)),
+        )
+        failures = [
+            f"{c.name}: {c.summary}"
+            for c in qa.checks if not c.passed and not c.skipped
+        ]
+        if qa.passed:
+            qa_status = "pass"
+        elif qa.has_error_failure:
+            qa_status = "fail"
+        else:
+            qa_status = "warn"
+        step6 = {
+            "status": qa_status,
+            "pass_count": qa.pass_count,
+            "fail_count": qa.fail_count,
+            "skip_count": qa.skip_count,
+            "total": qa.total,
+            "failures": failures,
+        }
+        if qa.has_error_failure:
+            results["overall_pass"] = False
+            results["total_errors"] += sum(
+                1 for c in qa.checks
+                if not c.passed and not c.skipped and c.severity == "error"
+            )
+        else:
+            results["total_warnings"] += qa.fail_count
+    except ImportError as exc:
+        step6 = {"status": "skip", "message": f"QA suite unavailable: {exc}"}
+    results["steps"]["6_qa_report"] = step6
+
     return results
 
 
@@ -527,6 +566,19 @@ def print_autoplay(results, verbose=False):
         print(f"         Calculations: {s5.get('calculations_matched', 0)}/{s5.get('calculations_total', 0)}")
     elif "message" in s5:
         print(f"         {s5['message']}")
+
+    # ── Step 6 ──
+    s6 = results["steps"].get("6_qa_report")
+    if s6:
+        icon = step_icons.get(s6["status"], "")
+        print(f"\n  {icon} Step 6: Real-World QA Report Card")
+        if "total" in s6:
+            print(f"         Checks: {s6.get('pass_count', 0)}/{s6.get('total', 0)} passed "
+                  f"({s6.get('skip_count', 0)} skipped)")
+            for f in s6.get("failures", [])[:10]:
+                print(f"           - {f}")
+        elif "message" in s6:
+            print(f"         {s6['message']}")
 
     # ── Summary ──
     overall = results["overall_pass"]

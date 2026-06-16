@@ -82,6 +82,13 @@ jobs:
       - name: Run snapshot tests
         run: python -m pytest tests/test_snapshot.py -v --tb=short
 
+      - name: Run pixel-perfect golden tests
+        run: python -m pytest tests/test_pixel_golden.py tests/test_qa_suite.py -v --tb=short
+
+      - name: Verify golden fixtures are in sync
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
+        run: python scripts/generate_pixel_fixtures.py --check
+
       - name: Run integration tests
         run: python -m pytest tests/test_integration.py -v --tb=short
 

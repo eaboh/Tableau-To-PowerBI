@@ -389,5 +389,35 @@ class TestQAHtml(_ProjectFixture):
         self.assertIn("sentinel", html.lower())
 
 
+# ── Autoplay integration (Sprint 207.4) ─────────────────────────────
+
+class TestAutoplayQAStep(_ProjectFixture):
+
+    def _make_pbip(self):
+        # A .pbip file + SemanticModel so autoplay's earlier steps don't crash.
+        with open(os.path.join(self.tmp, f"{self.name}.pbip"), "w",
+                  encoding="utf-8") as fh:
+            fh.write("{}")
+
+    def test_autoplay_includes_qa_step(self):
+        from scripts.autoplay import run_autoplay
+        self._make_pbip()
+        self.add_visual("p1", "v1", _chart_visual(2))
+        results = run_autoplay(self.tmp)
+        self.assertIn("6_qa_report", results["steps"])
+        s6 = results["steps"]["6_qa_report"]
+        self.assertIn(s6["status"], ("pass", "warn", "fail", "skip"))
+        self.assertEqual(s6.get("total"), 4)
+
+    def test_autoplay_qa_error_fails_overall(self):
+        from scripts.autoplay import run_autoplay
+        self._make_pbip()
+        self.add_visual("p1", "v1", _textbox_visual("Bad\u00c6"))
+        results = run_autoplay(self.tmp)
+        s6 = results["steps"]["6_qa_report"]
+        self.assertEqual(s6["status"], "fail")
+        self.assertFalse(results["overall_pass"])
+
+
 if __name__ == "__main__":
     unittest.main()
