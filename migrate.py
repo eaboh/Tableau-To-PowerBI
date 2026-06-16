@@ -2202,6 +2202,14 @@ def _add_report_args(parser):
     )
 
     parser.add_argument(
+        '--qa-strict',
+        action='store_true',
+        default=False,
+        help='Implies --qa. Exit non-zero when any error-severity real-world QA check fails '
+             '(stray sentinel glyphs, empty visuals). For CI gating.'
+    )
+
+    parser.add_argument(
         '--compare',
         action='store_true',
         default=True,
@@ -4737,6 +4745,10 @@ def main():
     parser = _build_argument_parser()
     args = parser.parse_args()
 
+    # --qa-strict implies --qa
+    if getattr(args, 'qa_strict', False):
+        args.qa = True
+
     # Load configuration file if specified
     _apply_config_file(args)
 
@@ -5412,6 +5424,29 @@ def _run_qa_suite(args, source_basename):
         print(f"  QA Report: ✓ {qa_path}")
     except OSError as exc:
         logger.warning("QA report write failed: %s", exc)
+
+    # 6. Real-world output QA suite (Sprint 207): stray sentinels, empty visuals,
+    #    format coverage, zone matching, orphan filters → qa_report.html
+    try:
+        from powerbi_import.qa_suite import run_qa_suite, generate_qa_html
+        extract_dir = _get_extract_dir()
+        rw_report = run_qa_suite(
+            project_dir,
+            extraction_dir=extract_dir if os.path.isdir(extract_dir) else None,
+            workbook=source_basename,
+        )
+        html_path = os.path.join(project_dir, 'qa_report.html')
+        generate_qa_html(rw_report, html_path)
+        status = '✓' if rw_report.passed else '✗'
+        print(f"  QA Report Card: {status} {rw_report.pass_count}/{rw_report.total} "
+              f"checks passed → {html_path}")
+        for chk in rw_report.checks:
+            if not chk.passed and not chk.skipped:
+                print(f"      ✗ {chk.name}: {chk.summary}")
+        if getattr(args, 'qa_strict', False) and rw_report.has_error_failure:
+            args._qa_strict_failed = True
+    except (ImportError, OSError) as exc:
+        logger.warning("QA report card failed: %s", exc)
 
 
 def _export_power_query_files(project_dir, source_basename):
@@ -6596,6 +6631,9 @@ def _run_single_migration(args):
     # Step 3f: Unified QA suite (--qa flag)
     if getattr(args, 'qa', False) and results.get('generation') and not args.dry_run:
         _run_qa_suite(args, source_basename)
+        if getattr(args, 'qa_strict', False) and getattr(args, '_qa_strict_failed', False):
+            progress.fail("QA strict: real-world QA checks failed")
+            return ExitCode.VALIDATION_FAILED
 
     # Step 3g: Auto-rollback quality gate (Phase 9)
     rollback_result = None
