@@ -1,8 +1,8 @@
-# Development Roadmap — v22.0.0 → v42.0.0
+# Development Roadmap — v22.0.0 → v43.0.0
 
-**Date:** 2026-06-16
-**Baseline:** v38.4.0 — 8,874 tests across 200 test files, 0 collection errors
-**Current state:** v38.4.0 shipped. All core migration, enterprise server, self-healing, Fabric-native, analytics parity, pixel-perfect text/format fidelity, and report-packaging features complete. 15-agent specialization model. Migration Confidence Score: ≥97/100 (Grade A+).
+**Date:** 2026-06-17
+**Baseline:** v40.0.0 — 9,156 tests (Python) + 38 extension unit tests, 0 collection errors
+**Current state:** v40.0.0 shipped (VS Code extension, interactive notebook API v2, plugin SDK v2 + marketplace v2). All core migration, enterprise server, self-healing, Fabric-native, analytics parity, pixel-perfect text/format fidelity, report-packaging, and developer-tooling features complete. 15-agent specialization model. Migration Confidence Score: ≥97/100 (Grade A+). **Next focus (v43.0.0): self-healing maturity & Tableau→Power BI functionality parity.**
 
 ---
 
@@ -35,9 +35,9 @@ The migration engine has reached **full-platform maturity** — single-workbook,
 | **v38.5.0** | Floating-Overlay Fidelity & Real-World QA | 204–208 | ✅ Shipped |
 | **v39.0.0** | Data Blending & Advanced Connectivity | 180–184 | ✅ Shipped |
 | **v40.0.0** | VS Code Extension & Interactive Tooling | 185–189 | ✅ Shipped |
-| **v40.0.0** | VS Code Extension & Interactive Tooling | 185–189 | Planned |
 | **v41.0.0** | Real-Time, Streaming & Paginated Reports | 190–194 | Planned |
 | **v42.0.0** | Ecosystem Maturity & GA Polish | 195–199 | Planned |
+| **v43.0.0** | Self-Healing Maturity & Functionality Parity | 209–214 | 🎯 Next |
 
 ---
 
@@ -2617,7 +2617,141 @@ No new CLI flags. No schema changes. This patch is fully backward-compatible wit
 
 ---
 
+## v43.0.0 — Self-Healing Maturity & Functionality Parity (Sprints 209–214)
+
+**Theme:** Make the migration engine **self-correcting by default** and close the remaining **Tableau → Power BI functionality gaps**. Where v30–v34 made migrations *zero-error*, v43 makes them *zero-gap*: every Tableau feature either maps exactly, is auto-healed into a faithful equivalent, or is explicitly documented as unsupported with a remediation path — never silently dropped.
+
+**Motivation:** Real-world portfolios (Salesforce 217 visuals, UC80 377 visuals, TDB Maintenance 76 visuals) confirm extraction fidelity is 100%, but *functional* fidelity still varies: some LOD/table-calc edge cases approximate, a few analytics-pane features (forecast, clustering, reference distributions) have no native PBI target, and self-healing repairs are recorded per-subsystem rather than unified. v43 establishes a **single parity ledger**, expands the healer catalogue from 85 to 120+, and adds a **confidence-scored healing report** so every auto-repair is auditable.
+
+**Guiding principles:**
+1. **Parity is measurable** — every Tableau feature has a tracked coverage status (exact / approximated / healed / unsupported) in a versioned registry.
+2. **Healing is auditable** — every auto-repair records category, severity, confidence, before/after, and a follow-up recommendation.
+3. **No silent loss** — an unsupported feature produces a migration note + assessment finding, never a missing artifact.
+4. **Regression-guarded** — heals are idempotent and never degrade already-valid content (verified by golden snapshots).
+
+---
+
+### Sprint 209 — Functionality Parity Ledger & Gap Registry (@assessor, @reviewer)
+
+**Goal:** Build a single source of truth for Tableau → Power BI feature coverage, and surface it as a per-workbook parity scorecard.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 209.1 | **Parity registry** | @assessor | `powerbi_import/parity_registry.py` (new) | High | Versioned registry mapping every supported Tableau feature (calculations, table calcs, LODs, filters, actions, analytics-pane items, visual marks, formatting) to a coverage status: `exact` / `approximated` / `healed` / `unsupported`, with a target mechanism and remediation note. Loadable as data; queryable by category. |
+| 209.2 | **Per-workbook parity scan** | @assessor | `powerbi_import/assessment.py` | Medium | New assessment category "Functionality Parity": for each feature actually used in the workbook, resolve its registry status and compute a parity score (% exact + healed). Emit findings for every approximated/unsupported feature in use. |
+| 209.3 | **Parity scorecard report** | @reviewer | `powerbi_import/parity_registry.py` | Medium | HTML + JSON scorecard: feature-by-feature coverage, parity score, list of gaps with remediation. Reuses `html_template.py` components. Written to output dir as `parity_scorecard.html`/`.json`. |
+| 209.4 | **CLI integration** | @orchestrator | `migrate.py` | Low | `--parity` flag emits the scorecard; `--parity-strict` fails migration if any in-use feature is `unsupported`. |
+| 209.5 | **Tests** | @tester | `tests/test_parity_registry.py` (new) | Medium | 30+ tests: registry lookups, per-category scoring, scorecard generation, strict-mode failure, real-world UC80/Salesforce parity scan. |
+
+**Success:** Every migrated workbook reports a parity score and an itemized gap list; no in-use feature is unaccounted for.
+
+---
+
+### Sprint 210 — DAX & Calculation Parity Healing (@dax, @wiring)
+
+**Goal:** Close the remaining calculation gaps and auto-heal the most common DAX/M defects so calculation parity approaches 100%.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 210.1 | **LOD edge-case parity** | @dax | `tableau_export/dax_converter.py` | High | Close nested-LOD and mixed-grain gaps: `{FIXED}` inside `{INCLUDE}`, LOD referencing table calcs, conditional aggregation inside LOD. Each converts to a verified DAX pattern or, if impossible, emits a parity note. |
+| 210.2 | **Table-calc parity** | @dax | `tableau_export/dax_converter.py` | High | Fill gaps in `WINDOW_*` variants (WINDOW_MEDIAN, WINDOW_VAR/STDEV, WINDOW_CORR), `FIRST()`/`LAST()`/`INDEX()`/`SIZE()` addressing, and `LOOKUP()` with offset → DAX `OFFSET`/`INDEX` (PBI 2024+) with fallback. |
+| 210.3 | **DAX self-healing v2** | @dax | `powerbi_import/repair_strategies.py`, `powerbi_import/self_healing_v3.py` | High | New healers: unbalanced parens/brackets, dangling commas, `SUM(measure)` → measure, bare column in measure → wrapped aggregate, unresolved `[Param]` → inlined value, RELATED across missing relationship → LOOKUPVALUE. Each records confidence. |
+| 210.4 | **M expression healing** | @wiring | `tableau_export/m_query_builder.py`, `powerbi_import/calc_column_utils.py` | Medium | Heal common M defects: unquoted identifiers with special chars, unbalanced `if/then/else`, type-mismatch in `Table.AddColumn`, broken step chaining after injection. |
+| 210.5 | **Tests** | @tester | `tests/test_dax_parity_healing.py` (new) | Medium | 35+ tests: each new LOD/table-calc pattern, each DAX healer (idempotent + confidence), M healers, no-regression on valid formulas. |
+
+**Success:** Calculation parity score ≥98% on real-world workbooks; common DAX/M defects auto-repaired with recorded confidence.
+
+---
+
+### Sprint 211 — Visual & Analytics-Pane Parity Healing (@visual)
+
+**Goal:** Close visual/analytics-pane gaps and auto-heal malformed visual containers so report parity approaches 100%.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 211.1 | **Analytics-pane parity** | @visual | `powerbi_import/visual_generator.py` | High | Map Tableau analytics-pane items to nearest PBI equivalent: trend line → analytics trend line, average/median/constant lines → reference lines, distribution band → shaded band (where supported), forecast → migration note + nearest approximation, cluster → migration note. Every item resolves to a target or a documented gap. |
+| 211.2 | **Dual-axis & combo parity** | @visual | `powerbi_import/visual_generator.py` | Medium | Robust dual-axis synchronization (shared vs independent axis), combo chart ordering, secondary-axis formatting fidelity. |
+| 211.3 | **Visual self-healing** | @visual | `powerbi_import/pbip_generator.py` | High | New PBIR healers: visual with no data roles → recover from source shelf or downgrade to table; orphaned field references → drop + note; invalid encoding (measure on category role) → reassign; empty-config visual → minimal valid config. Records each repair. |
+| 211.4 | **Conditional-format & reference-line parity** | @visual | `powerbi_import/visual_generator.py` | Medium | Multi-rule conditional formatting (gradient + rules + field-based), per-mark color overrides, and reference-line label/format fidelity. |
+| 211.5 | **Tests** | @tester | `tests/test_visual_parity_healing.py` (new) | Medium | 35+ tests: each analytics-pane mapping, dual-axis sync, each visual healer, conditional-format rules, real-world Salesforce/UC80 visual parity. |
+
+**Success:** Report parity score ≥97% on real-world workbooks; malformed visuals auto-recovered instead of dropped.
+
+---
+
+### Sprint 212 — Semantic-Model Parity Healing (@semantic)
+
+**Goal:** Auto-heal model-level defects (relationships, RLS, hierarchies) and close parity for calculation groups, field parameters, and sets/groups/bins.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 212.1 | **Relationship self-healing v2** | @semantic | `powerbi_import/tmdl_generator.py`, `powerbi_import/self_healing_v3.py` | High | Heal ambiguous/circular relationships: break ambiguity by activity (active vs inactive), resolve many-to-many via bridge table suggestion, repair dangling FK references by column-name inference, fix cardinality mismatches. Each repair recorded with rationale. |
+| 212.2 | **RLS parity & healing** | @semantic | `powerbi_import/tmdl_generator.py` | Medium | Place `tablePermission` on the correct table when the filter references another table; heal RLS roles whose DAX references missing columns; ISMEMBEROF group-per-role expansion completeness. |
+| 212.3 | **Calc-group / field-parameter parity** | @semantic | `powerbi_import/tmdl_generator.py` | Medium | Close gaps in param-swap → calculation group and dimension-switch → field parameter conversion (precedence, ordinal ordering, default selection). |
+| 212.4 | **Hierarchy & sort parity** | @semantic | `powerbi_import/tmdl_generator.py` | Low | Multi-level drill-path fidelity, `sortByColumn` completeness for all month/day/period columns, key column detection. |
+| 212.5 | **Tests** | @tester | `tests/test_semantic_parity_healing.py` (new) | Medium | 30+ tests: relationship healers (ambiguous/circular/dangling), RLS placement/healing, calc-group/field-param parity, hierarchy/sort, no-regression on valid models. |
+
+**Success:** Model-level parity score ≥98%; relationship/RLS defects auto-healed with recorded rationale.
+
+---
+
+### Sprint 213 — Unified Healing Observability & Confidence (@deployer, @assessor)
+
+**Goal:** Consolidate every subsystem's repairs into one confidence-scored healing report, and guard against regressions.
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 213.1 | **Unified healing ledger** | @assessor | `powerbi_import/recovery_report.py`, `powerbi_import/self_healing_report.py` | High | Merge DAX, M, visual, and semantic repairs into one ledger entry schema: `{subsystem, category, severity, confidence, before, after, recommendation}`. Single `healing_report.html`/`.json` per migration. |
+| 213.2 | **Healing confidence scoring** | @assessor | `powerbi_import/recovery_report.py` | Medium | Per-repair confidence (high/medium/low) based on heal determinism; aggregate a workbook "healing confidence" metric. Surface low-confidence heals for manual review. |
+| 213.3 | **Healing regression guard** | @tester | `powerbi_import/regression_suite.py` | Medium | Golden-snapshot guard: assert heals are idempotent (running twice = no further change) and never alter already-valid artifacts. Drift detection on heal output. |
+| 213.4 | **Monitoring & telemetry hooks** | @deployer | `powerbi_import/monitoring.py`, `powerbi_import/telemetry.py` | Low | Emit per-subsystem heal counts and confidence distribution as metrics/events for the observability dashboard and SLA tracker. |
+| 213.5 | **Tests** | @tester | `tests/test_healing_observability.py` (new) | Medium | 25+ tests: unified ledger schema, confidence scoring, idempotency guard, no-degradation guard, telemetry emission. |
+
+**Success:** One auditable healing report per migration; every repair carries a confidence score; heals proven idempotent and non-degrading.
+
+---
+
+### Sprint 214 — v43.0.0 Release & Hardening (All Agents)
+
+| # | Item | Owner | File(s) | Est. | Details |
+|---|------|-------|---------|------|---------|
+| 214.1 | **Version bump** | @orchestrator | `pyproject.toml`, `powerbi_import/__init__.py`, `CHANGELOG.md` | Low | `40.0.0` → `43.0.0` (skips planned 41/42 if shipped out of order; otherwise sequential). |
+| 214.2 | **Parity + healing E2E** | @tester | `tests/test_v43_e2e.py` (new) | High | E2E across real-world portfolio: extract → migrate → parity scorecard ≥ target → unified healing report present → idempotency verified. 25+ tests. |
+| 214.3 | **Docs** | @orchestrator | `docs/FUNCTIONALITY_PARITY.md` (new), `docs/SELF_HEALING.md` (new) | Medium | Parity ledger reference (feature-by-feature coverage table) and self-healing catalogue (every healer, trigger, confidence). |
+| 214.4 | **ROADMAP / CHANGELOG** | @orchestrator | `docs/ROADMAP.md`, `CHANGELOG.md` | Low | Mark v43.0.0 ✅ Shipped; prepend changelog entry. |
+| 214.5 | **Test baseline** | @tester | — | — | Target: **9,500+** tests; healer catalogue **120+**. |
+
+### v43.0.0 Success Criteria
+
+| Metric | Target | Owner |
+|--------|--------|-------|
+| Functionality parity ledger | Every Tableau feature tracked (exact/approx/healed/unsupported) | @assessor |
+| Calculation parity | ≥98% on real-world workbooks | @dax, @wiring |
+| Report (visual) parity | ≥97% on real-world workbooks | @visual |
+| Model parity | ≥98% on real-world workbooks | @semantic |
+| Healers | **120+** (from 85), all confidence-scored | All |
+| Healing report | Single unified, auditable, idempotency-guarded report | @assessor |
+| No silent loss | Every unsupported feature → migration note + finding | @reviewer |
+| **Tests** | **9,500+** | @tester |
+
+### v43.0.0 Agent Ownership Matrix
+
+| Agent | Sprints |
+|-------|---------|
+| **@assessor** | 209, 213 |
+| **@reviewer** | 209, 214 |
+| **@dax** | 210 |
+| **@wiring** | 210 |
+| **@visual** | 211 |
+| **@semantic** | 212 |
+| **@deployer** | 213 |
+| **@orchestrator** | 209, 214 |
+| **@tester** | 209–214 (cross-cutting) |
+
+---
+
 ## Sprint Sequencing (v38–v42)
+
 
 ```
 v38.2.0 — Report Packaging & Developer Experience
@@ -2654,6 +2788,13 @@ v42.0.0 — Ecosystem Maturity & GA Polish
   Sprint 197 (Telemetry) ──→ Sprint 198 (Cross-Platform CI)
                                        ↓
                              Sprint 199 (GA Release)
+
+v43.0.0 — Self-Healing Maturity & Functionality Parity
+  Sprint 209 (Parity Ledger) ──→ Sprint 210 (DAX/Calc Healing)
+           ↓                            ↓
+  Sprint 211 (Visual Healing) ──→ Sprint 212 (Semantic Healing)
+           ↓                            ↓
+  Sprint 213 (Healing Observability) ──→ Sprint 214 (Release)
 ```
 
 ---
@@ -2672,6 +2813,9 @@ v42.0.0 — Ecosystem Maturity & GA Polish
 | Plugin API stability across versions | Medium | Semantic versioning for plugin SDK. Deprecation warnings for changed hooks. |
 | Cross-platform path handling (Windows backslash) | Medium | Use `pathlib.Path` consistently. CI matrix catches regressions. |
 | Community marketplace quality control | Medium | Require passing tests for submitted patterns. Automated validation on merge. |
+| **Aggressive healing degrades valid content** (v43) | High | Idempotency + no-degradation golden-snapshot guards (Sprint 213); every heal confidence-scored, low-confidence heals flagged for review. |
+| **Parity registry drifts from actual coverage** (v43) | Medium | Registry is the single source of truth consumed by assessment + tests; a CI test asserts every converter/healer has a registry entry. |
+| **Unsupported features silently dropped** (v43) | High | Parity scan emits a finding for every unsupported in-use feature; `--parity-strict` fails the build. |
 
 ---
 
@@ -2690,3 +2834,4 @@ v42.0.0 — Ecosystem Maturity & GA Polish
 | **v40.0.0** | **9,500+** | 75+ | 145 | 125+ | 85 | 14 |
 | **v41.0.0** | **9,800+** | 75+ | 145+ | 125+ | 85 | 14 |
 | **v42.0.0** | **10,000+** | 75+ | 145+ | 125+ | 85 | 14 |
+| **v43.0.0** | **9,500+** (post-v40 baseline) | 75+ | 145+ | **133+** | **120+** | 14 |
