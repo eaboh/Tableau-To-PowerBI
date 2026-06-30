@@ -88,6 +88,7 @@ profile_results/
 # Tableau temp
 ~*.twbr
 # Squad: ignore runtime state (logs, inbox, sessions)
+.squad/
 .squad/orchestration-log/
 .squad/log/
 .squad/decisions/inbox/
@@ -95,3 +96,4 @@ profile_results/
 .squad/.scratch/
 # Squad: SubSquad activation file (local to this machine)
 .squad-workstream
+
