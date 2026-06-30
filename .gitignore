@@ -94,6 +94,10 @@ profile_results/
 .squad/decisions/inbox/
 .squad/sessions/
 .squad/.scratch/
+.github/agent/squad*
+.github/workflows/squad*
+.github/workflows/sync-squad*
+.copilot/skills/squad*
 # Squad: SubSquad activation file (local to this machine)
 .squad-workstream
 
