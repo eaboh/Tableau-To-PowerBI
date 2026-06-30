@@ -94,7 +94,7 @@ profile_results/
 .squad/decisions/inbox/
 .squad/sessions/
 .squad/.scratch/
-.github/agent/squad*
+.github/agents/squad*
 .github/workflows/squad*
 .github/workflows/sync-squad*
 .copilot/skills/squad*
